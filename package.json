@@ -37,9 +37,10 @@
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.x",
-    "secure-password": "4.0.0",
+    "secure-password": "4.x",
     "zod": "1.x",
-    "formik": "2.x"
+    "final-form": "4.x",
+    "react-final-form": "6.x"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.x",

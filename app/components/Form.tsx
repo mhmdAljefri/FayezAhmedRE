@@ -1,6 +1,7 @@
-import React, { useState, ReactNode, PropsWithoutRef } from "react"
-import { Formik, FormikProps } from "formik"
+import React, { ReactNode, PropsWithoutRef } from "react"
+import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
+export { FORM_ERROR } from "final-form"
 
 type FormProps<S extends z.ZodType<any, any>> = {
   /** All your form fields */
@@ -8,16 +9,9 @@ type FormProps<S extends z.ZodType<any, any>> = {
   /** Text to display in the submit button */
   submitText: string
   schema?: S
-  onSubmit: (values: z.infer<S>) => Promise<void | OnSubmitResult>
-  initialValues?: FormikProps<z.infer<S>>["initialValues"]
+  onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
+  initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
 } & Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit">
-
-type OnSubmitResult = {
-  FORM_ERROR?: string
-  [prop: string]: any
-}
-
-export const FORM_ERROR = "FORM_ERROR"
 
 export function Form<S extends z.ZodType<any, any>>({
   children,
@@ -27,10 +21,9 @@ export function Form<S extends z.ZodType<any, any>>({
   onSubmit,
   ...props
 }: FormProps<S>) {
-  const [formError, setFormError] = useState<string | null>(null)
   return (
-    <Formik
-      initialValues={initialValues || {}}
+    <FinalForm
+      initialValues={initialValues}
       validate={(values) => {
         if (!schema) return
         try {
@@ -39,30 +32,19 @@ export function Form<S extends z.ZodType<any, any>>({
           return error.formErrors.fieldErrors
         }
       }}
-      onSubmit={async (values, { setErrors }) => {
-        const { FORM_ERROR, ...otherErrors } = (await onSubmit(values)) || {}
-
-        if (FORM_ERROR) {
-          setFormError(FORM_ERROR)
-        }
-
-        if (Object.keys(otherErrors).length > 0) {
-          setErrors(otherErrors)
-        }
-      }}
-    >
-      {({ handleSubmit, isSubmitting }) => (
+      onSubmit={onSubmit}
+      render={({ handleSubmit, submitting, submitError }) => (
         <form onSubmit={handleSubmit} className="form" {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
 
-          {formError && (
+          {submitError && (
             <div role="alert" style={{ color: "red" }}>
-              {formError}
+              {submitError}
             </div>
           )}
 
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={submitting}>
             {submitText}
           </button>
 
@@ -73,7 +55,7 @@ export function Form<S extends z.ZodType<any, any>>({
           `}</style>
         </form>
       )}
-    </Formik>
+    />
   )
 }
 
