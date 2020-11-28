@@ -2,6 +2,7 @@ import { AppProps, ErrorComponent, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
+import { Suspense } from "react"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -17,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         queryCache.resetErrorBoundaries()
       }}
     >
-      {getLayout(<Component {...pageProps} />)}
+      <Suspense fallback="...">{getLayout(<Component {...pageProps} />)}</Suspense>
     </ErrorBoundary>
   )
 }

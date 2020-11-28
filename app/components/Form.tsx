@@ -1,5 +1,10 @@
 import React, { ReactNode, PropsWithoutRef } from "react"
-import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
+import {
+  Form as FinalForm,
+  FormProps as FinalFormProps,
+  FormRenderProps as FinalFormRenderProps,
+} from "react-final-form"
+import { Button, SxStyleProp } from "theme-ui"
 import * as z from "zod"
 export { FORM_ERROR } from "final-form"
 
@@ -7,8 +12,14 @@ type FormProps<S extends z.ZodType<any, any>> = {
   /** All your form fields */
   children: ReactNode
   /** Text to display in the submit button */
-  submitText: string
+  submitText?: string
+  buttonProps?: {
+    sx: SxStyleProp
+  }
   schema?: S
+
+  mutators?: any
+  getValues?: (values: FinalFormRenderProps<z.infer<S>>["values"]) => void
   onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
   initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
 } & Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit">
@@ -19,6 +30,9 @@ export function Form<S extends z.ZodType<any, any>>({
   schema,
   initialValues,
   onSubmit,
+  mutators,
+  getValues,
+  buttonProps,
   ...props
 }: FormProps<S>) {
   return (
@@ -32,9 +46,11 @@ export function Form<S extends z.ZodType<any, any>>({
           return error.formErrors.fieldErrors
         }
       }}
+      mutators={mutators}
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, submitError }) => (
+      render={({ handleSubmit, submitting, submitError, values }) => (
         <form onSubmit={handleSubmit} className="form" {...props}>
+          {getValues?.(values)}
           {/* Form fields supplied as children are rendered here */}
           {children}
 
@@ -44,9 +60,11 @@ export function Form<S extends z.ZodType<any, any>>({
             </div>
           )}
 
-          <button type="submit" disabled={submitting}>
-            {submitText}
-          </button>
+          {submitText && (
+            <Button {...buttonProps} type="submit" disabled={submitting}>
+              {submitText}
+            </Button>
+          )}
 
           <style global jsx>{`
             .form > * + * {

@@ -9,3 +9,10 @@ declare module "blitz" {
     userId: User["id"]
   }
 }
+
+declare global {
+  export interface Window {
+    // add you custom properties and methods
+    cloudinary: any
+  }
+}
