@@ -1,11 +1,12 @@
 import React from "react"
 import { Field } from "react-final-form"
 import { Icon } from "react-icons-kit"
-import { Box, Button, Flex, Heading, Input, Select, Textarea } from "theme-ui"
+import { Box, Button, Grid, Heading, Input, Label, Slider } from "theme-ui"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import Form from "../Form"
+import { MenuField } from "app/admin/components/LabeledMenuField"
 
-export default function Filter() {
+export default function Filter({ cities, rooms }) {
   return (
     <Box
       sx={{
@@ -13,55 +14,53 @@ export default function Filter() {
         borderRadius: "lg",
         boxShadow: "default",
         paddingX: 4,
+        paddingBottom: 5,
       }}
     >
-      <Heading sx={{ fontSize: 6, paddingY: 5, color: "white" }}>اطلب استشارتك</Heading>
+      <Heading sx={{ fontSize: 6, paddingY: 5, color: "white" }}>فلتر</Heading>
       <Form onSubmit={() => {}}>
-        <Field required name="name" component={Input} placeholder="الاسم واللقب" />
-        <Field required name="mobile" component={Input} type="number" placeholder="الجوال" />
-        <Field
-          required
-          name="description"
-          component={Textarea}
-          type="number"
-          placeholder="الجوال"
-        />
-        <Flex sx={{ justifyContent: "space-between" }}>
-          <Flex>
-            <Field sx={{ minWidth: 250 }} component={Select} name="time">
-              <option>وقت الاتصال (إختياري)</option>
-              <option value="9-12">9-12am</option>
-              <option value="12-3">12-3pm</option>
-              <option value="3-6">3-6pm</option>
-              <option value="6-9">6-9pm</option>
-              <option value="anytime">اي وقت</option>
-              <option value="now">الان</option>
-            </Field>
-            <Field sx={{ minWidth: 250, marginRight: 20 }} component={Select} name="budget">
-              <option>الميزانية (إختياري)</option>
-              <option value="9-12">9-12am</option>
-              <option value="12-3">12-3pm</option>
-              <option value="3-6">3-6pm</option>
-              <option value="6-9">6-9pm</option>
-              <option value="anytime">اي وقت</option>
-              <option value="now">الان</option>
-            </Field>
-          </Flex>
+        <Grid columns={[1, null, 3]}>
+          <Field required name="search" component={Input} placeholder="البحث" />
+          <MenuField
+            getLabel={(i) => i.name}
+            getValue={(i) => i.id}
+            options={[{ name: "المدينة", id: "" }, ...cities]}
+            name="city"
+          />
 
-          <Button
-            sx={{
-              variant: "forms.field",
-              display: "flex",
-              backgroundColor: "white",
-              justifyContent: "space-between",
-              color: "primary",
-              borderRadius: "md",
-              minWidth: 120,
-            }}
-          >
-            إرسال <Icon icon={arrowLeft} />
-          </Button>
-        </Flex>
+          <Field required name="description" component={Input} placeholder="بيع" />
+        </Grid>
+
+        <Grid columns={[1, null, 3]}>
+          <MenuField options={["نوع الغرفة", ...rooms]} name="room" />
+          <Box>
+            <Label>السعر</Label>
+            <Field name="price" component={Slider} />
+          </Box>
+          <MenuField
+            name="status"
+            getLabel={(i) => i.name}
+            getValue={(i) => i.id}
+            options={[
+              { id: "completed", name: "مكتمل" },
+              { id: "inprogress", name: "قيد التطوير" },
+            ]}
+          />
+        </Grid>
+
+        <Button
+          sx={{
+            variant: "forms.field",
+            display: "flex",
+            backgroundColor: "white",
+            justifyContent: "space-between",
+            color: "primary",
+            borderRadius: "md",
+            minWidth: 120,
+          }}
+        >
+          إرسال <Icon icon={arrowLeft} />
+        </Button>
       </Form>
     </Box>
   )

@@ -1,6 +1,5 @@
 import React from "react"
 import { Box, Flex, Heading, Text } from "theme-ui"
-import Wrapper from "./Wrapper"
 
 type SlideProps = {}
 
@@ -28,24 +27,22 @@ const Slide = (props: SlideProps) => {
         },
       }}
     >
-      <Wrapper>
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 222,
-            maxWidth: 500,
-            textShadow: "1px 1px 5px #000",
-            marginX: [2, null, null, 3, 5],
-          }}
-        >
-          <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>العنوان</Heading>
-          <Text sx={{ color: "white" }}>
-            النص النص النصالنصالنص النصالنصالنص النص النصالنصالنصالنصالنص النصالنصال نصالنصالنصالنص
-            نصالنصالنصالنصنصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص
-            النص النص النص
-          </Text>
-        </Box>
-      </Wrapper>
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 222,
+          maxWidth: 500,
+          textShadow: "1px 1px 5px #000",
+          marginX: [2, null, null, 3, 5],
+        }}
+      >
+        <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>العنوان</Heading>
+        <Text sx={{ color: "white", fontSize: 3, fontWeight: "900" }}>
+          النص النص النصالنصالنص النصالنصالنص النص النصالنصالنصالنصالنص النصالنصال نصالنصالنصالنص
+          نصالنصالنصالنصنصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص
+          النص النص النص
+        </Text>
+      </Box>
     </Flex>
   )
 }

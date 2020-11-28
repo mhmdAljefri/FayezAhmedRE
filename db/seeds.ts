@@ -11,6 +11,7 @@ import db from "./index"
 const COUNTRIES = [
   {
     name: "تركيا",
+    nameEN: "turkey",
     rooms: [
       "0 + 1",
       "1 + 1",
@@ -23,17 +24,22 @@ const COUNTRIES = [
       "5 + 2",
       "6 + 2",
     ],
+    isTurkey: true,
   },
   {
     name: "قطر",
+    nameEN: "qatar",
+    isTurkey: false,
     rooms: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   },
 ]
 const seed = async () => {
   for (let i = 0; i < COUNTRIES.length; i++) {
-    const { name, rooms } = COUNTRIES[i]
+    const { name, nameEN, rooms, isTurkey } = COUNTRIES[i]
     await db.country.create({
       data: {
+        isTurkey,
+        nameEN,
         name,
         image: "",
         rooms,

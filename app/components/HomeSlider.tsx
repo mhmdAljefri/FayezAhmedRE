@@ -29,10 +29,11 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
           sx={{
             top: active && top ? top - 5 : top,
             left: active && left ? left - 5 : left,
+            // left: active ? 45 : 50,
             position: "absolute",
-            boxShadow: "default",
+            boxShadow: active && "default",
             backgroundColor: active ? "primary" : "transparent",
-            borderColor: active ? "primary" : "#fefefe",
+            borderColor: active ? "primary" : "#fefefe33",
             borderWidth: 2,
             borderStyle: "solid",
             borderRadius: size,
@@ -60,22 +61,25 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
       <Box sx={{ position: "absolute", top: "50%", width: half * 2 * 25, left: 100 }}>
         <Box sx={{ position: "relative", marginLeft: 100 }}>{renderedDots}</Box>
         <Flex sx={{ position: "relative", marginLeft: 250, minWidth: 150 }}>
-          <Text sx={{ fontSize: 4, color: "white" }}>{activeSlideRef.current + 1} \ </Text>
-          <Text sx={{ fontSize: 6, fontWeight: "bolder", color: "primary" }}>{dots.length}</Text>
+          <Text sx={{ fontSize: 0, color: "white" }}>0{dots.length} \ </Text>
+          <Text sx={{ fontSize: 6, fontWeight: "bolder", color: "primary" }}>
+            0{activeSlideRef.current + 1}
+          </Text>
         </Flex>
       </Box>
     )
   }
   return (
     <Carousel
+      autoplay
       slideStyle={slideStyle}
       nextArrow={
-        <Box sx={{ color: "primary", position: "absolute", left: 50 }}>
+        <Box sx={{ color: "primary", position: "absolute", left: 100 }}>
           <Icon size={50} icon={chevronCircleLeft} />
         </Box>
       }
       prevArrow={
-        <Box sx={{ color: "primary", position: "absolute", left: 7 * 25 + 250 }}>
+        <Box sx={{ color: "primary", position: "absolute", left: 7 * 25 + 200 }}>
           <Icon size={50} icon={chevronCircleRight} />
         </Box>
       }

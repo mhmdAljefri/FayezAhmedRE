@@ -62,19 +62,18 @@ function ServicesCard(props: ServicesCardProps) {
   )
 }
 
-type OurServicesSectionProps = {}
+type OurServicesSectionProps = {
+  data: any[]
+}
 export default function OurServicesSection(props: OurServicesSectionProps) {
   return (
     <Box>
       <Wrapper>
-        <Heading>خدماتنا</Heading>
+        <Heading sx={{ marginY: 5, fontSize: 6 }}>خدماتنا</Heading>
         <Grid columns={[1, 2, 2, 3]} sx={{ justifyContent: "center", alignItems: "center" }}>
-          <ServicesCard />
-          <ServicesCard />
-          <ServicesCard />
-          <ServicesCard />
-          <ServicesCard />
-          <ServicesCard />
+          {props.data.map((_, index) => (
+            <ServicesCard key={index} />
+          ))}
         </Grid>
       </Wrapper>
     </Box>

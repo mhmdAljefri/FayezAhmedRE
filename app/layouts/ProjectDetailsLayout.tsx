@@ -193,7 +193,9 @@ export default function ProjectDetailsLayout() {
             <Heading>بالجوار</Heading>
           </Wrapper>
         </Box>
-        <Contact />
+        <Wrapper>
+          <Contact />
+        </Wrapper>
       </div>
     </Layout>
   )

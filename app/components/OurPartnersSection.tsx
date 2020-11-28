@@ -12,19 +12,18 @@ function PartnersCard(props: PartnersCardProps) {
   )
 }
 
-type OurPartnersSectionProps = {}
+type OurPartnersSectionProps = {
+  data: any[]
+}
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
     <Box sx={{ paddingY: 5, marginTop: 6, backgroundColor: "light" }}>
       <Wrapper>
-        <Heading sx={{ marginBottom: 5 }}>شركائنا</Heading>
+        <Heading sx={{ marginBottom: 5, fontSize: 6 }}>شركائنا</Heading>
         <Grid columns={[1, 2, 2, 4]} sx={{ justifyContent: "center", alignItems: "center" }}>
-          <PartnersCard />
-          <PartnersCard />
-          <PartnersCard />
-          <PartnersCard />
-          <PartnersCard />
-          <PartnersCard />
+          {props.data.map((_, index) => (
+            <PartnersCard key={index} />
+          ))}
         </Grid>
       </Wrapper>
     </Box>

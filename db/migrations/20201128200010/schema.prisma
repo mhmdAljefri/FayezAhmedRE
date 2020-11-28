@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -80,7 +80,6 @@ model Country {
   updatedAt DateTime @updatedAt
 
   name      String   @unique
-  nameEN    String?
   image     String
   gallery   Json?
   isTurkey  Boolean @default(false)

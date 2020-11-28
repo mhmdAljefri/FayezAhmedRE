@@ -2,22 +2,18 @@ import React from "react"
 import { Field } from "react-final-form"
 import { Label, Select } from "theme-ui"
 
-type LabeledMenuFieldType = {
+type MenuFieldType = {
   name: string
-  label: string
   options: any[]
 
   getLabel?: (option: any) => string
   getValue?: (option: any) => string | number
 }
 
-export default function LabeledMenuField({
-  getValue,
-  getLabel,
-  name,
-  label,
-  options,
-}: LabeledMenuFieldType) {
+type LabeledMenuFieldType = MenuFieldType & {
+  label: string
+}
+export function MenuField({ getValue, getLabel, name, options }: MenuFieldType) {
   const dropDownOption = options.map((option: any) => {
     const value = getValue ? getValue(option) : option
     const name = getLabel ? getLabel(option) : option
@@ -27,10 +23,14 @@ export default function LabeledMenuField({
       </option>
     )
   })
+  return <Field render={({ input }) => <Select {...input}>{dropDownOption}</Select>} name={name} />
+}
+
+export default function LabeledMenuField({ label, ...props }: LabeledMenuFieldType) {
   return (
     <div>
       <Label>{label}</Label>
-      <Field render={({ input }) => <Select {...input}>{dropDownOption}</Select>} name={name} />
+      <MenuField {...props} />
     </div>
   )
 }
