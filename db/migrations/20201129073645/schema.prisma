@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -155,24 +155,8 @@ model Carousel {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  position  Int      @unique @default(autoincrement())
+  position  Int @unique
   title     String
   text      String
   url       String
-  image     String
-}
-
-model Request {
-  id        Int      @default(autoincrement()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  type      REQUEST_TYPES @default(flights)
-  data      Json
-}
-
-enum REQUEST_TYPES {
-  flights
-  hotels
-  cars
 }

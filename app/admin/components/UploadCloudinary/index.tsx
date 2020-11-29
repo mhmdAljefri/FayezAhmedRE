@@ -75,6 +75,10 @@ function MyDropzone({ onSuccess, multiple, accept }: MyDropzoneType) {
   )
 }
 
+MyDropzone.defaultProps = {
+  accept: "image/*",
+}
+
 const END_POINT = `https://api.cloudinary.com/v1_1/${
   process.env.NEXT_PUBLIC_CLOUDINARY_NAME as string
 }/upload`

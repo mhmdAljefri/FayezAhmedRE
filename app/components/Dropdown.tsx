@@ -34,8 +34,8 @@ const Dropdown = ({ options, defaultValue }: DropdownProps) => {
           boxShadow: "default",
         }}
       >
-        {options.map((option) => (
-          <Box sx={{ paddingX: 2 }} onClick={() => setSelected(option)}>
+        {options.map((option, index) => (
+          <Box key={index} sx={{ paddingX: 2 }} onClick={() => setSelected(option)}>
             {option.node || option.value}
           </Box>
         ))}

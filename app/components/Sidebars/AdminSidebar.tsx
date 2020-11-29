@@ -3,10 +3,12 @@ import { Link, useRouter } from "blitz"
 import { Box, Button, Image, Link as ThemeLink } from "theme-ui"
 
 const links = [
-  { name: "الميزات", url: "/features" },
-  { name: "الشركاء", url: "/partners" },
-  { name: "المشاريع", url: "/projects" },
-  { name: "العروض", url: "/offers" },
+  { name: "الميزات", url: "/admin/features" },
+  { name: "الشركاء", url: "/admin/partners" },
+  { name: "المشاريع", url: "/admin/projects" },
+  { name: "انواع المفروشات", url: "/admin/furnish-categories" },
+  { name: "المفروشات", url: "/admin/furnishes" },
+  { name: "المعرض", url: "/admin/carousels" },
 ]
 
 type ActiveLinkProps = {
