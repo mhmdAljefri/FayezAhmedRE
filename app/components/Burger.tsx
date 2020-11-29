@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, css } from "theme-ui"
+import { Box } from "theme-ui"
 
 type BurgerProps = {
   open: Boolean

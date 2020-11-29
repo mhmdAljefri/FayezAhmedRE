@@ -1,16 +1,16 @@
 import { BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
-import CountriesSection from "app/components/CountriesSection"
+import CountriesSection, { CountryCardProps } from "app/components/CountriesSection"
 import OurServicesSection from "app/components/OurServicesSection"
 import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
-import { CountryCreateInput, FeatureCreateInput, PartnerCreateInput } from "@prisma/client"
+import { FeatureCreateInput, PartnerCreateInput } from "@prisma/client"
 
 type HomeProps = {
-  countries: Pick<CountryCreateInput, "name" | "image">[]
+  countries: CountryCardProps[]
   features: Pick<FeatureCreateInput, "image" | "name">[]
   partners: Pick<PartnerCreateInput, "name" | "image">[]
 }

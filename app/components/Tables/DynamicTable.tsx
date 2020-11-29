@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import get from "lodash/get"
-import { Box, Button, Card, Flex, Styled } from "theme-ui"
+import { Button, Card, Flex, Styled } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { chevronRight } from "react-icons-kit/fa/chevronRight"
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft"

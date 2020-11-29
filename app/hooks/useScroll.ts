@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function useScroll() {
-  const prevScroll = useRef(0)
   const [scroll, setScroll] = useState(0)
 
   useEffect(() => {

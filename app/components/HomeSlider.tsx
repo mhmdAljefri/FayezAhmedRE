@@ -58,7 +58,15 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
     })
 
     return (
-      <Box sx={{ position: "absolute", top: "50%", width: half * 2 * 25, left: 100 }}>
+      <Box
+        sx={{
+          display: ["none", null, "block"],
+          position: "absolute",
+          top: "50%",
+          width: half * 2 * 25,
+          left: 100,
+        }}
+      >
         <Box sx={{ position: "relative", marginLeft: 100 }}>{renderedDots}</Box>
         <Flex sx={{ position: "relative", marginLeft: 250, minWidth: 150 }}>
           <Text sx={{ fontSize: 0, color: "white" }}>0{dots.length} \ </Text>

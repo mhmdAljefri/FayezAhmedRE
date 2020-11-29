@@ -1,5 +1,5 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useMutation, BlitzPage } from "blitz"
+import { Link, useMutation, BlitzPage } from "blitz"
 import createProject from "app/admin/projects/mutations/createProject"
 import ProjectForm from "app/admin/projects/components/ProjectForm"
 

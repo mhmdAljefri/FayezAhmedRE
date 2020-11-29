@@ -1,18 +1,17 @@
-import { CountryCreateInput } from "@prisma/client"
 import { Link } from "blitz"
 import React from "react"
 import { Icon } from "react-icons-kit"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import { Box, Flex, Heading, Text } from "theme-ui"
 
-type CountryCardProps = {
+export type CountryCardProps = {
   name: string
   nameEN: string
   id: number
   image: string
 }
 
-function CountryCard({ name, nameEN, id, image }: CountryCardProps) {
+function CountryCard({ name, id, image }: CountryCardProps) {
   return (
     <Flex
       sx={{
@@ -75,7 +74,7 @@ function CountryCard({ name, nameEN, id, image }: CountryCardProps) {
 }
 
 type CountriesSectionProps = {
-  data: Pick<CountryCreateInput, "name" | "image">[]
+  data: CountryCardProps[]
 }
 export default function CountriesSection(props: CountriesSectionProps) {
   return (

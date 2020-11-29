@@ -1,6 +1,6 @@
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
 import React from "react"
-import { Box, Button, Card, Flex, Grid, Heading } from "theme-ui"
+import { Box, Button, Card, Grid, Heading } from "theme-ui"
 import Form from "../Form"
 import LabeledTextField from "../LabeledTextField"
 

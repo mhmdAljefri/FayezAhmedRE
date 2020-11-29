@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from "react"
+import React, { ReactNode, useState } from "react"
 import { Box, Flex } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
