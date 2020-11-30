@@ -14,10 +14,10 @@ export const LoginForm = (props: LoginFormProps) => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>تسجيل الدخول</h1>
 
       <Form
-        submitText="Log In"
+        submitText="تسجيل الدخول"
         schema={LoginInput}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {

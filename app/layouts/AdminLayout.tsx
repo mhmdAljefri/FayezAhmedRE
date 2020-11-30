@@ -1,5 +1,5 @@
 import { ReactNode, Suspense } from "react"
-import { Head, useMutation } from "blitz"
+import { AuthorizationError, Head, useMutation, useSession } from "blitz"
 import { Box, Flex, SxStyleProp, ThemeProvider } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import AdminSidebar from "app/components/Sidebars/AdminSidebar"
@@ -7,6 +7,7 @@ import logout from "app/auth/mutations/logout"
 
 import adminTheme from "app/theme/admin"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
+import { BarLoader } from "react-spinners"
 
 type AdminLayoutProps = {
   title?: string
@@ -17,6 +18,7 @@ type AdminLayoutProps = {
 }
 
 const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
+  const sesstion = useSession()
   const [logoutMutation] = useMutation(logout)
 
   const handleLogout = async () => {
@@ -27,6 +29,11 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
       console.error(error)
     }
   }
+
+  console.log(sesstion)
+  if (sesstion.isLoading) return <BarLoader />
+
+  if (!sesstion.roles.includes("admin")) throw AuthorizationError
 
   return (
     <>
