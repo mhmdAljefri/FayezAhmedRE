@@ -1,7 +1,7 @@
 import React from "react"
 import { Field } from "react-final-form"
 import { Icon } from "react-icons-kit"
-import { Box, Button, Flex, Heading, Input, Select, Textarea } from "theme-ui"
+import { Box, Button, Flex, Grid, Heading, Image, Input, Select, Textarea } from "theme-ui"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import Form from "../Form"
 
@@ -9,25 +9,28 @@ export default function Contact() {
   return (
     <Box
       sx={{
+        maxWidth: 1000,
+        marginX: "auto",
         backgroundColor: "primary",
         borderRadius: "lg",
         boxShadow: "default",
         paddingX: 4,
       }}
     >
-      <Heading sx={{ fontSize: 6, paddingY: 5, color: "white" }}>اطلب استشارتك</Heading>
+      <Heading sx={{ fontSize: 6, paddingTop: 5, paddingBottom: 4, color: "white" }}>
+        اطلب استشارتك
+      </Heading>
       <Form onSubmit={() => {}}>
         <Field required name="name" component={Input} placeholder="الاسم واللقب" />
         <Field required name="mobile" component={Input} type="number" placeholder="الجوال" />
         <Field
           required
           name="description"
-          component={Textarea}
-          type="number"
-          placeholder="الجوال"
+          component={Input}
+          placeholder="المنازل الافضل في قطر وتركيا"
         />
-        <Flex sx={{ justifyContent: "space-between" }}>
-          <Flex>
+        <Grid columns={[1, null, 3]} sx={{ justifyContent: "space-between" }}>
+          <Grid columns={[1, null, 2]} sx={{ gridColumn: ["auto", null, "span 2"] }}>
             <Field sx={{ minWidth: 250 }} component={Select} name="time">
               <option>وقت الاتصال (إختياري)</option>
               <option value="9-12">9-12am</option>
@@ -37,7 +40,7 @@ export default function Contact() {
               <option value="anytime">اي وقت</option>
               <option value="now">الان</option>
             </Field>
-            <Field sx={{ minWidth: 250, marginRight: 20 }} component={Select} name="budget">
+            <Field sx={{ minWidth: 250 }} component={Select} name="budget">
               <option>الميزانية (إختياري)</option>
               <option value="9-12">9-12am</option>
               <option value="12-3">12-3pm</option>
@@ -46,7 +49,7 @@ export default function Contact() {
               <option value="anytime">اي وقت</option>
               <option value="now">الان</option>
             </Field>
-          </Flex>
+          </Grid>
 
           <Button
             sx={{
@@ -61,7 +64,7 @@ export default function Contact() {
           >
             إرسال <Icon icon={arrowLeft} />
           </Button>
-        </Flex>
+        </Grid>
       </Form>
     </Box>
   )

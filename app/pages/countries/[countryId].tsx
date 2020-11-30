@@ -13,6 +13,7 @@ import { CityCreateInput } from "@prisma/client"
 import { Link } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import Contact from "app/components/Forms/Contact"
+import getCarousels from "app/public/carousels/queries/getCarousels"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
@@ -30,9 +31,10 @@ function HeadingWithMoreLink({ heading, href }) {
 }
 type CountryPropsType = {
   country: { name: string; cities: CityCreateInput[]; rooms: string[] }
+  carousels: []
 }
 
-export default function Country(props: CountryPropsType) {
+export default function Country({ carousels, country }: CountryPropsType) {
   return (
     <Layout
       headerProps={{
@@ -50,6 +52,8 @@ export default function Country(props: CountryPropsType) {
       />
       <Wrapper sx={{ marginTop: -50 }}>
         <HomeSlider
+          data={carousels}
+          onlyImages
           slideStyle={{
             borderRadius: "lg",
             overflow: "hidden",
@@ -65,16 +69,16 @@ export default function Country(props: CountryPropsType) {
           marginBottom: 5,
         }}
       >
-        <Filter {...props.country} />
+        <Filter {...country} />
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
         <Grid columns={[1, null, 2]}>
           <Box>
             <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
-            <Heading sx={{ fontSize: 6, padding: 4, color: "text" }}>{props.country.name}</Heading>
+            <Heading sx={{ fontSize: 6, padding: 4, color: "text" }}>{country.name}</Heading>
           </Box>
-          <Carousel>
+          <Carousel nextArrow prevArrow>
             {[...Array(3)].map(() => (
               <Box>
                 <Box
@@ -234,9 +238,12 @@ export default function Country(props: CountryPropsType) {
 // }
 
 export async function getServerSideProps(context) {
-  const country = await getCountry({ where: { id: parseInt(context.params.countryId) } })
+  const countryId = parseInt(context.params.countryId)
+  const country = await getCountry({ where: { id: countryId } })
+
+  const { carousels } = await getCarousels({})
 
   return {
-    props: { country }, // will be passed to the page component as props
+    props: { country, carousels }, // will be passed to the page component as props
   }
 }

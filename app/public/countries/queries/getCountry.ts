@@ -10,6 +10,12 @@ export default async function getCountry({ where }: GetCountryInput) {
       name: true,
       rooms: true,
       cities: true,
+      projects: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
     },
   })
 

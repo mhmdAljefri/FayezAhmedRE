@@ -14,6 +14,7 @@ const theme = {
     lightText: "#999",
     background: "#fff",
     primary: "#ccb87d",
+    input: "#d8c07a",
     light: "#fff8ea",
     dark: "#051e1e",
     dark2: "#202020",
@@ -88,7 +89,7 @@ const theme = {
       color: "white",
       borderWidth: "2px",
       borderColor: "white",
-      backgroundColor: "primary",
+      backgroundColor: "input",
       boxShadow: "default",
       marginBottom: 2,
       "&::placeholder": {

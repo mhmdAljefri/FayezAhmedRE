@@ -37,8 +37,8 @@ function CountryCard({ name, id, image }: CountryCardProps) {
           bottom: 40,
           right: 50,
           left: 50,
-          backgroundColor: "rgba(0,0,0,0.5)",
-          boxShadow: "2px 4px 22px black",
+          backgroundColor: "rgba(0,0,0,0.1)",
+          boxShadow: "2px 4px 22px rgba(0,0,0,0.1)",
           zIndex: 0,
         },
       }}

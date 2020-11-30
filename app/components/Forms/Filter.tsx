@@ -35,7 +35,7 @@ export default function Filter({ cities, rooms }) {
           <MenuField options={["نوع الغرفة", ...rooms]} name="room" />
           <Box>
             <Label>السعر</Label>
-            <Field name="price" component={Slider} />
+            <Field name="price" sx={{ backgroundColor: "white" }} component={Slider} />
           </Box>
           <MenuField
             name="status"

@@ -8,17 +8,20 @@ import getCountries from "app/public/countries/queries/getCountries"
 import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
 import { FeatureCreateInput, PartnerCreateInput } from "@prisma/client"
+import getCarousels from "app/public/carousels/queries/getCarousels"
+import { SlideProps } from "app/components/Slide"
 
 type HomeProps = {
   countries: CountryCardProps[]
+  carousels: SlideProps[]
   features: Pick<FeatureCreateInput, "image" | "name">[]
   partners: Pick<PartnerCreateInput, "name" | "image">[]
 }
 
-const Home: BlitzPage<HomeProps> = ({ countries, features, partners }) => {
+const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }) => {
   return (
     <>
-      <HomeSlider />
+      <HomeSlider data={carousels} />
       <CountriesSection data={countries} />
       <OurServicesSection data={features} />
       <OurPartnersSection data={partners} />
@@ -30,9 +33,10 @@ export async function getStaticProps(context) {
   const { countries } = await getCountries({})
   const { features } = await getFeatures({})
   const { partners } = await getPartners({})
+  const { carousels } = await getCarousels({})
 
   return {
-    props: { countries, features, partners }, // will be passed to the page component as props
+    props: { countries, features, partners, carousels }, // will be passed to the page component as props
   }
 }
 

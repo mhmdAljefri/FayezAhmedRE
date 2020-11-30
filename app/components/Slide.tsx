@@ -1,14 +1,17 @@
 import React from "react"
 import { Box, Flex, Heading, Text } from "theme-ui"
 
-type SlideProps = {}
+export type SlideProps = { title: string; text: string; image: string }
+type SlideTypeProps = SlideProps & {
+  onlyImages?: boolean
+}
 
-const Slide = (props: SlideProps) => {
+const Slide = ({ title, text, image, onlyImages }: SlideTypeProps) => {
   return (
     <Flex
       sx={{
         alignItems: "center",
-        backgroundImage: "url(/slide1.png)",
+        backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         height: 700,
         maxHeight: "90vh",
@@ -22,27 +25,23 @@ const Slide = (props: SlideProps) => {
           left: 100,
           right: 100,
           bottom: 100,
-          backgroundColor: "rgba(0,0,0,0.3)",
-          boxShadow: "0 0 30px 30px rgba(0,0,0,0.3)",
         },
       }}
     >
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 222,
-          maxWidth: 500,
-          textShadow: "1px 1px 5px #000",
-          marginX: [2, null, null, 3, 5],
-        }}
-      >
-        <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>العنوان</Heading>
-        <Text sx={{ color: "white", fontSize: 3, fontWeight: "900" }}>
-          النص النص النصالنصالنص النصالنصالنص النص النصالنصالنصالنصالنص النصالنصال نصالنصالنصالنص
-          نصالنصالنصالنصنصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص نصالنصالنصالنص
-          النص النص النص
-        </Text>
-      </Box>
+      {!onlyImages && (
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 222,
+            maxWidth: 500,
+            textShadow: "1px 1px 5px #000",
+            marginX: [2, null, null, 3, 5],
+          }}
+        >
+          <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>{title}</Heading>
+          <Text sx={{ color: "white", fontSize: 3, fontWeight: "900" }}>{text}</Text>
+        </Box>
+      )}
     </Flex>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import Carousel from "app/components/Slider"
-import Slide from "app/components/Slide"
+import Slide, { SlideProps } from "app/components/Slide"
 import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 
 import { Icon } from "react-icons-kit"
@@ -9,9 +9,11 @@ import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight"
 
 type HomeSliderProps = {
   slideStyle?: SxStyleProp
+  onlyImages?: boolean
+  data: SlideProps[]
 }
 
-const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
+const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
   const activeSlideRef = useRef(0)
   const renderDots = (dots) => {
     const half = Math.floor(dots.length / 2)
@@ -23,6 +25,7 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
 
       return (
         <Box
+          key={index}
           role="button"
           onClick={onClick}
           aria-label={`dots-${index + 1}`}
@@ -62,6 +65,7 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
         sx={{
           display: ["none", null, "block"],
           position: "absolute",
+          textShadow: "1px 1px 2px #000",
           top: "50%",
           width: half * 2 * 25,
           left: 100,
@@ -69,7 +73,7 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
       >
         <Box sx={{ position: "relative", marginLeft: 100 }}>{renderedDots}</Box>
         <Flex sx={{ position: "relative", marginLeft: 250, minWidth: 150 }}>
-          <Text sx={{ fontSize: 0, color: "white" }}>0{dots.length} \ </Text>
+          <Text sx={{ fontSize: 3, color: "white" }}>0{dots.length} \ </Text>
           <Text sx={{ fontSize: 6, fontWeight: "bolder", color: "primary" }}>
             0{activeSlideRef.current + 1}
           </Text>
@@ -93,8 +97,8 @@ const HomeSlider = ({ slideStyle }: HomeSliderProps) => {
       }
       renderDots={renderDots}
     >
-      {[...Array(7)].map((_, index) => (
-        <Slide key={index} />
+      {data.map((item, index) => (
+        <Slide onlyImages={onlyImages} {...item} key={index} />
       ))}
     </Carousel>
   )
