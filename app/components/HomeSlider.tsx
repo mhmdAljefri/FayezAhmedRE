@@ -86,12 +86,12 @@ const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
       autoplay
       slideStyle={slideStyle}
       nextArrow={
-        <Box sx={{ color: "primary", position: "absolute", left: 100 }}>
+        <Box sx={{ color: "primary", position: "absolute", left: [0, null, 100] }}>
           <Icon size={50} icon={chevronCircleLeft} />
         </Box>
       }
       prevArrow={
-        <Box sx={{ color: "primary", position: "absolute", left: 7 * 25 + 200 }}>
+        <Box sx={{ color: "primary", position: "absolute", left: [100, null, 7 * 25 + 200] }}>
           <Icon size={50} icon={chevronCircleRight} />
         </Box>
       }

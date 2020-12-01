@@ -5,6 +5,7 @@ const defaultProps = {
   rtl: true,
   slidesToShow: 4,
   slidesToScroll: 4,
+  centerMode: false,
   initialSlide: 0,
   className: "slick-with-padding",
   responsive: [

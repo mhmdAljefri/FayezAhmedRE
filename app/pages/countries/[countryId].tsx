@@ -115,7 +115,14 @@ export default function Country({ carousels, country, furnishCategories }: Count
         </Grid>
         <Box>
           <Image
-            sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
+            sx={{
+              borderRadius: "lg",
+              width: "100%",
+              maxHeight: 500,
+              objectFit: "cover",
+              overflow: "hidden",
+              boxShadow: "default",
+            }}
             src="/istanbul.jpg"
             alt="..."
           />

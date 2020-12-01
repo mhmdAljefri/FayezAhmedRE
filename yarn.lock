@@ -3928,6 +3928,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+country-flag-icons@^1.0.2:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.2.7.tgz#48485ed377e2bb674f9d83ce808d39efb420aeb5"
+  integrity sha512-Dh1OA6QHeSXs75B7oBeOrccxQhjAtb2gGFF1iGAdhfB0X15wSJgpjYpPb/ZEiqQawJ19W1GvenG6BG/ua/41TQ==
+
 crc32-stream@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/crc32-stream/-/crc32-stream-3.0.1.tgz#cae6eeed003b0e44d739d279de5ae63b171b4e85"
@@ -6268,6 +6273,13 @@ ink@3.0.7:
     ws "^7.2.5"
     yoga-layout-prebuilt "^1.9.6"
 
+input-format@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/input-format/-/input-format-0.3.0.tgz#f662b1667b6d067769f44c717bcfcc92554bee75"
+  integrity sha512-7ipaXJ5Hnd2o62IxLRTCMcl7AOPzxU2PTfDunPDIaaAjq+Q8DcjI4/nmPo3fXJUvdTCX97BlW8d+7ArUhVTxAA==
+  dependencies:
+    prop-types "^15.7.2"
+
 internal-slot@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/internal-slot/-/internal-slot-1.0.2.tgz#9c2e9fb3cd8e5e4256c6f45fe310067fcfa378a3"
@@ -7493,6 +7505,11 @@ levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+libphonenumber-js@^1.9.4:
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.5.tgz#f71ea73e19880aa8adb86778ae37d6c8675a29b3"
+  integrity sha512-ub6+UW6G+IjEd0RXE3He9NPfIegv4t62/6k5IfAvzO5uFWeqsnuMfQaoOxKaRDMLYWsOAGpsrlACH7hg0F5guw==
 
 line-column@^1.0.2:
   version "1.0.2"
@@ -9475,6 +9492,17 @@ react-move@^6.1.0:
   dependencies:
     "@babel/runtime" "^7.10.3"
     kapellmeister "^3.0.1"
+    prop-types "^15.7.2"
+
+react-phone-number-input@3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.1.6.tgz#36f813db76f40c2828ae93e4eeb73694b60da0a0"
+  integrity sha512-7wukQ6HOG0/Kzf3Lkwuqz8mJeP7AFHztRXUOL+UtXIT3S33qHqGAPG2zw2bwGj0MFx/Lhr3wNXXuIX4UFOSQUQ==
+  dependencies:
+    classnames "^2.2.5"
+    country-flag-icons "^1.0.2"
+    input-format "^0.3.0"
+    libphonenumber-js "^1.9.4"
     prop-types "^15.7.2"
 
 react-query@2.5.12:

@@ -6,6 +6,7 @@ import { Suspense } from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "app/styles/slick-modifier.css"
+import "react-phone-number-input/style.css"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)

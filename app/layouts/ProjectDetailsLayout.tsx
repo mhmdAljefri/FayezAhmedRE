@@ -12,6 +12,7 @@ import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
+import SlickSlider from "app/components/SlickSlider"
 
 export default function ProjectDetailsLayout({
   name,
@@ -126,12 +127,12 @@ export default function ProjectDetailsLayout({
         </Wrapper>
         <Box sx={{ paddingY: 6, backgroundColor: "dark" }}>
           <Wrapper>
-            <Heading sx={{ color: "white" }}>المعرض</Heading>
+            <Heading sx={{ color: "white", fontSize: [5, null, 6] }}>المعرض</Heading>
           </Wrapper>
         </Box>
 
         <Wrapper sx={{ marginTop: -5 }}>
-          <Flex sx={{ justifyContent: "center" }}>
+          <Flex sx={{ justifyContent: "center", overflow: "auto" }}>
             {gallery.map((item, index) => (
               <Image
                 key={item + "_" + index}
@@ -152,9 +153,22 @@ export default function ProjectDetailsLayout({
         </Wrapper>
         {constructingUpdateVideo && (
           <Wrapper sx={{ marginY: 5 }}>
-            <Heading sx={{ marginBottom: 4 }}>حالة المشروع</Heading>
-            <Box>
-              <video width="100%" poster={constructingUpdatePrview} controls>
+            <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>حالة المشروع</Heading>
+            <Box
+              sx={{
+                marginX: [1, null, 6],
+                borderRadius: "default",
+                boxShadow: "card",
+                height: [250, 300, 350, 450],
+              }}
+            >
+              <video
+                width="100%"
+                height="100%"
+                poster={constructingUpdatePrview}
+                // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+                controls
+              >
                 <track kind="captions" />
                 <source src={constructingUpdateVideo} type="video/mp4" />
                 <source src={constructingUpdateVideo} type="video/ogg" />
@@ -167,19 +181,22 @@ export default function ProjectDetailsLayout({
           </Wrapper>
         )}
         <Wrapper sx={{ marginY: 6 }}>
-          <Heading sx={{ paddingBottom: 5 }}>المخطوطات</Heading>
-          <Flex sx={{ justifyContent: "space-evenly" }}>
+          <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
+          <Flex sx={{ justifyContent: "space-evenly", overflow: "auto" }}>
             {floorplan.map((item, index) => (
               <Image
                 key={item + "_" + index}
                 sx={{
                   borderColor: "primary",
+                  objectFit: "cover",
+                  marginX: 2,
+                  width: ["90vw", 350],
+                  minWidth: ["90vw", 300],
                   borderWidth: 2,
                   borderStyle: "solid",
-                  width: 300,
                   borderRadius: 15,
                   boxShadow: "default",
-                  height: 300,
+                  height: [300, 350],
                 }}
                 src={item}
               />
@@ -189,18 +206,24 @@ export default function ProjectDetailsLayout({
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>
             <Box>
-              <Heading>وسائل الراحة والمزايا</Heading>
-              <Text>عالم من الراحة الجمال في التصميم</Text>
+              <Heading sx={{ fontSize: [5, null, 6] }}>وسائل الراحة والمزايا</Heading>
+              <Text sx={{ fontSize: 3, marginBottom: 5 }}>عالم من الراحة الجمال في التصميم</Text>
             </Box>
 
-            <Flex sx={{ justifyContent: "center", marginY: 3 }}>
+            <SlickSlider
+              slidesToShow={3}
+              slidesToScroll={3}
+              sx={{ justifyContent: "center", marginY: 3 }}
+            >
               {features.map((feat) => (
                 <Text
                   sx={{
                     margin: 2,
                     backgroundColor: "primary",
+                    textAlign: "center",
+                    fontWeight: 700,
                     paddingX: 3,
-                    paddingY: 4,
+                    paddingY: 5,
                     fontSize: 5,
                     color: "white",
                     boxShadow: "default",
@@ -211,7 +234,7 @@ export default function ProjectDetailsLayout({
                   {feat}
                 </Text>
               ))}
-            </Flex>
+            </SlickSlider>
             <Link
               download={name}
               target="_blank"
@@ -227,7 +250,7 @@ export default function ProjectDetailsLayout({
                 border: "primary",
                 borderColor: "primary",
                 marginX: "auto",
-                marginBottom: 3,
+                marginY: 5,
                 paddingY: 1,
                 paddingX: 2,
                 textAlign: "center",
@@ -239,6 +262,29 @@ export default function ProjectDetailsLayout({
 
           <Wrapper>
             <Heading>بالجوار</Heading>
+            <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
+              {nearBy.map((item) => (
+                <Box sx={{ textAlign: "center" }}>
+                  <Image
+                    sx={{
+                      marginX: "auto",
+                      width: [200, 300, 350],
+                      height: [200, 300, 350],
+                      borderRadius: 350,
+                      borderWidth: 2,
+                      borderColor: "primary",
+                      borderStyle: "solid",
+                    }}
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
+                    {item.name}
+                  </Heading>
+                  <Text>{item.description}</Text>
+                </Box>
+              ))}
+            </SlickSlider>
           </Wrapper>
         </Box>
         <Wrapper>

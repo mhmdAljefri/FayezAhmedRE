@@ -4,6 +4,7 @@ import { Icon } from "react-icons-kit"
 import { Box, Button, Grid, Heading, Input, Select } from "theme-ui"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import Form from "../Form"
+import PhoneInput from "../PhoneInput"
 
 export default function Contact() {
   return (
@@ -22,7 +23,15 @@ export default function Contact() {
       </Heading>
       <Form onSubmit={() => {}}>
         <Field required name="name" component={Input} placeholder="الاسم واللقب" />
-        <Field required name="mobile" component={Input} type="number" placeholder="الجوال" />
+        <Field
+          required
+          name="mobile"
+          render={({ input, ...props }) => (
+            <PhoneInput placeholder="رقم الجوال" {...props} {...input} />
+          )}
+          type="number"
+          placeholder="الجوال"
+        />
         <Field
           required
           name="description"
