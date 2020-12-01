@@ -5,13 +5,13 @@ import { SignupForm } from "app/auth/components/SignupForm"
 import Wrapper from "app/components/Wrapper"
 
 const SignupPage: BlitzPage = () => {
-  const router = useRouter()
+const router = useRouter()
 
-  return (
-    <Wrapper>
-      <SignupForm onSuccess={() => router.push("/")} />
-    </Wrapper>
-  )
+return (
+<Wrapper>
+<SignupForm onSuccess={() => router.push("/")} />
+</Wrapper>
+)
 }
 
 SignupPage.getLayout = (page) => <Layout title="Sign Up">{page}</Layout>

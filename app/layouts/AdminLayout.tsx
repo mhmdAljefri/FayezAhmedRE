@@ -1,5 +1,5 @@
 import { ReactNode, Suspense } from "react"
-import { AuthorizationError, Head, useMutation, useSession } from "blitz"
+import { AuthenticationError, AuthorizationError, Head, useMutation, useSession } from "blitz"
 import { Box, Flex, SxStyleProp, ThemeProvider } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import AdminSidebar from "app/components/Sidebars/AdminSidebar"
@@ -30,10 +30,9 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
     }
   }
 
-  console.log(sesstion)
   if (sesstion.isLoading) return <BarLoader />
-
-  if (!sesstion.roles.includes("admin")) throw AuthorizationError
+  if (!sesstion.userId) throw new AuthenticationError("يرجى تسجيل الدخول")
+  if (!sesstion.roles.includes("admin")) throw new AuthorizationError("غير مخول لك بالدخول")
 
   return (
     <>
