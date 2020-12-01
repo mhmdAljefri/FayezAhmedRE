@@ -23,7 +23,17 @@ export function MenuField({ getValue, getLabel, name, options }: MenuFieldType) 
       </option>
     )
   })
-  return <Field render={({ input }) => <Select {...input}>{dropDownOption}</Select>} name={name} />
+  return (
+    <Field
+      render={({ input }) => (
+        <Select {...input}>
+          <option>اختر عنصر</option>
+          {dropDownOption}
+        </Select>
+      )}
+      name={name}
+    />
+  )
 }
 
 export default function LabeledMenuField({ label, ...props }: LabeledMenuFieldType) {

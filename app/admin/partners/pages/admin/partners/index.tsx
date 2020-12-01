@@ -48,7 +48,7 @@ const PartnersPage: BlitzPage = () => {
   return (
     <div>
       <p>
-        <Link href="/partners/new">
+        <Link href="/admin/partners/new">
           <Button>اضافة شريك</Button>
         </Link>
       </p>

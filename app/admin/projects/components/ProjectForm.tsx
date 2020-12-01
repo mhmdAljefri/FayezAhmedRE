@@ -147,6 +147,8 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         <LabeledTextField required name="subTitle" label="العنوان الفرعي" />
         <LabeledTextField required name="details" label="التفاصيل" />
 
+        <MediaWidthTextField name="image" label="صورة المشروع" />
+
         <LabeledMenuField
           getLabel={(country) => country.name}
           getValue={(country) => country.id as number}

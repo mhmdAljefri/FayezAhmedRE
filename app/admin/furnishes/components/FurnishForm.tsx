@@ -30,7 +30,15 @@ type FurnishFormProps = {
 const CategoryField = () => {
   const [{ furnishCategories }] = usePaginatedQuery(getFurnishCategories, {})
 
-  return <LabeledMenuField label="الصمف" name="categoryId" options={furnishCategories} />
+  return (
+    <LabeledMenuField
+      getLabel={(i) => i.name}
+      getValue={(i) => i.id}
+      label="الصمف"
+      name="furnishCategory.connect.id"
+      options={[...furnishCategories]}
+    />
+  )
 }
 
 const FurnishForm = ({ initialValues, onSubmit }: FurnishFormProps) => {

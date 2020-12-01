@@ -1,5 +1,5 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useMutation, BlitzPage } from "blitz"
+import { useRouter, useMutation, BlitzPage } from "blitz"
 import createFurnish from "app/admin/furnishes/mutations/createFurnish"
 import FurnishForm from "app/admin/furnishes/components/FurnishForm"
 
@@ -9,7 +9,7 @@ const NewFurnishPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Create New Furnish</h1>
+      <h1>اضافة اثاث</h1>
 
       <FurnishForm
         initialValues={{}}
@@ -23,12 +23,6 @@ const NewFurnishPage: BlitzPage = () => {
           }
         }}
       />
-
-      <p>
-        <Link href="/furnishes">
-          <a>Furnishes</a>
-        </Link>
-      </p>
     </div>
   )
 }

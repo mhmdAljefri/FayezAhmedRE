@@ -2,7 +2,7 @@ import { Ctx } from "blitz"
 import db from "db"
 import * as z from "zod"
 
-export const CreateProjectInput = z.object({
+export const ProjectInput = z.object({
   data: z.object({
     name: z.string(),
     details: z.string().min(10).max(100),
@@ -21,7 +21,7 @@ export const CreateProjectInput = z.object({
   }),
 })
 
-export type CreateProjectInputType = z.infer<typeof CreateProjectInput>
+export type CreateProjectInputType = z.infer<typeof ProjectInput>
 
 export default async function createProject({ data }: CreateProjectInputType, ctx: Ctx) {
   ctx.session.authorize("admin")

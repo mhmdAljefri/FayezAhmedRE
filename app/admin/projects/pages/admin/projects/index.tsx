@@ -45,8 +45,8 @@ const ProjectsPage: BlitzPage = () => {
   return (
     <div>
       <p>
-        <Link href="/projects/new">
-          <a>Create Project</a>
+        <Link href="/admin/projects/new">
+          <a>اضافة مشروع</a>
         </Link>
       </p>
 

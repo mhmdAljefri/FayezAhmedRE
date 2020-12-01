@@ -35,7 +35,7 @@ const CarouselsPage: BlitzPage = () => {
     <div>
       <p>
         <Link href="/admin/carousels/new">
-          <a>انشاء شريحة للمعرض</a>
+          <a>اضافة شريحة للمعرض</a>
         </Link>
       </p>
 

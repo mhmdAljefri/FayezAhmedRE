@@ -14,6 +14,8 @@ import { Link } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import Contact from "app/components/Forms/Contact"
 import getCarousels from "app/public/carousels/queries/getCarousels"
+import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
+import SlickSlider from "app/components/SlickSlider"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
@@ -30,11 +32,22 @@ function HeadingWithMoreLink({ heading, href }) {
   )
 }
 type CountryPropsType = {
-  country: { name: string; cities: CityCreateInput[]; rooms: string[] }
+  country: {
+    name: string
+    cities: CityCreateInput[]
+    rooms: string[]
+    id: number
+    projects: {
+      name: string
+      image: string
+      subTitle?: string
+    }[]
+  }
+  furnishCategories: { name: string; image: string }[]
   carousels: []
 }
 
-export default function Country({ carousels, country }: CountryPropsType) {
+export default function Country({ carousels, country, furnishCategories }: CountryPropsType) {
   return (
     <Layout
       headerProps={{
@@ -78,15 +91,24 @@ export default function Country({ carousels, country }: CountryPropsType) {
             <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
             <Heading sx={{ fontSize: 6, padding: 4, color: "text" }}>{country.name}</Heading>
           </Box>
-          <Carousel nextArrow prevArrow>
-            {[...Array(3)].map(() => (
-              <Box>
+          <Carousel autoplay nextArrow prevArrow>
+            {country.projects.map((project, index) => (
+              <Box sx={{ marginBottom: 4 }} key={project.name + index}>
                 <Box
-                  sx={{ borderRadius: "lg", margin: 4, overflow: "hidden", boxShadow: "default" }}
+                  sx={{
+                    borderRadius: "lg",
+                    marginTop: 4,
+                    overflow: "hidden",
+                    boxShadow: "default",
+                  }}
                 >
-                  <Image src="/istanbul.jpg" alt="..." />
+                  <Link passHref href={`/countries/${country.id}/projects/${project.name}`}>
+                    <a>
+                      <Image src={project.image} alt={project.name} />
+                    </a>
+                  </Link>
                 </Box>
-                <Text>text</Text>
+                <Text sx={{ textAlign: "center" }}>{project.name}</Text>
               </Box>
             ))}
           </Carousel>
@@ -153,14 +175,21 @@ export default function Country({ carousels, country }: CountryPropsType) {
 
       <Wrapper sx={{ paddingY: 5 }}>
         <HeadingWithMoreLink href="/" heading="اثث منزلك" />
-        <Grid columns={3}>
-          {[...Array(3)].map(() => (
-            <Box sx={{ borderRadius: "lg", margin: 4, overflow: "hidden", boxShadow: "default" }}>
-              <Image src="/istanbul.jpg" alt="..." />
-              <Text sx={{ paddingY: 4, paddingX: 3 }}>Category</Text>
+        <SlickSlider>
+          {furnishCategories.map((furnishCategory) => (
+            <Box
+              key={furnishCategory.name}
+              sx={{
+                borderRadius: "lg",
+                overflow: "hidden",
+                boxShadow: "default",
+              }}
+            >
+              <Image src={furnishCategory.image} alt={furnishCategory.name} />
+              <Text sx={{ paddingY: 4, paddingX: 3 }}>{furnishCategory.name}</Text>
             </Box>
           ))}
-        </Grid>
+        </SlickSlider>
       </Wrapper>
 
       <Wrapper
@@ -177,30 +206,30 @@ export default function Country({ carousels, country }: CountryPropsType) {
           backgroundColor: "light",
           paddingY: 350,
           marginTop: -250,
-          zIndex: 0,
-          position: "relative",
         }}
       >
         <Wrapper>
           <HeadingWithMoreLink href="/" heading="الاكثر مشاهدة" />
-          <Grid columns={3}>
-            <Box sx={{ borderRadius: "lg", margin: 4, overflow: "hidden", boxShadow: "default" }}>
-              <Image src="/istanbul.jpg" alt="..." />
-              <Text sx={{ paddingTop: 2, paddingX: 3 }}>Category</Text>
-              <Text sx={{ paddingY: 2, paddingX: 3 }}>Category</Text>
-            </Box>
-            <Box sx={{ borderRadius: "lg", margin: 4, overflow: "hidden", boxShadow: "default" }}>
-              <Image src="/istanbul.jpg" alt="..." />
-              <Text sx={{ paddingTop: 2, paddingX: 3 }}>Category</Text>
-              <Text sx={{ paddingY: 2, paddingX: 3 }}>Category</Text>
-            </Box>
-            <Box sx={{ borderRadius: "lg", margin: 4, overflow: "hidden", boxShadow: "default" }}>
-              <Image src="/istanbul.jpg" alt="..." />
-              <Text sx={{ paddingTop: 2, paddingX: 3 }}>Category</Text>
-              <Text sx={{ paddingY: 2, paddingX: 3 }}>Category</Text>
-            </Box>
-          </Grid>
         </Wrapper>
+        <Grid sx={{ paddingX: 4 }} columns={[1, 2, 3]}>
+          {country.projects.map((project) => (
+            <Box
+              key={project.name}
+              sx={{
+                minWidth: 200,
+                margin: 4,
+                borderRadius: "lg",
+                backgroundColor: "background",
+                overflow: "hidden",
+                boxShadow: "default",
+              }}
+            >
+              <Image src={project.image} alt={project.name} />
+              <Text sx={{ paddingTop: 2, paddingX: 3 }}>{project.name}</Text>
+              <Text sx={{ paddingY: 2, paddingX: 3 }}>{project.subTitle}</Text>
+            </Box>
+          ))}
+        </Grid>
       </Box>
 
       <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
@@ -240,10 +269,10 @@ export default function Country({ carousels, country }: CountryPropsType) {
 export async function getServerSideProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
-
+  const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
   const { carousels } = await getCarousels({})
 
   return {
-    props: { country, carousels }, // will be passed to the page component as props
+    props: { country, carousels, furnishCategories }, // will be passed to the page component as props
   }
 }

@@ -5,7 +5,21 @@ type CreateFurnishInput = Pick<FurnishCreateArgs, "data">
 export default async function createFurnish({ data }: CreateFurnishInput, ctx: Ctx) {
   ctx.session.authorize()
 
-  const furnish = await db.furnish.create({ data })
+  // furnishCategory: {
+  //   +     create?: FurnishCategoryCreateWithoutFurnishesInput,
+  //   +     connect?:
+
+  console.log({ data })
+  const furnish = await db.furnish.create({
+    data: {
+      ...data,
+      furnishCategory: {
+        connect: {
+          id: parseInt(`${data.furnishCategory.connect?.id}`),
+        },
+      },
+    },
+  })
 
   return furnish
 }

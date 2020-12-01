@@ -3,7 +3,7 @@ import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Button } from "theme-ui"
+import { Box, Button } from "theme-ui"
 
 type FurnishCategoryFormProps = {
   initialValues: any
@@ -22,11 +22,20 @@ type FurnishCategoryFormProps = {
 
 const FurnishCategoryForm = ({ initialValues, onSubmit }: FurnishCategoryFormProps) => {
   return (
-    <Form initialValues={initialValues} onSubmit={onSubmit}>
-      <LabeledTextField name="name" label="الاسم" />
-      <MediaWidthTextField name="image" label="الصورة" />
-      <Button>تاكيد</Button>
-    </Form>
+    <Box
+      sx={{
+        backgroundColor: "background",
+        boxShadow: "card",
+        borderRadius: "default",
+        padding: 5,
+      }}
+    >
+      <Form initialValues={initialValues} onSubmit={onSubmit}>
+        <LabeledTextField name="name" label="الاسم" />
+        <MediaWidthTextField name="image" label="الصورة" />
+        <Button>تاكيد</Button>
+      </Form>
+    </Box>
   )
 }
 

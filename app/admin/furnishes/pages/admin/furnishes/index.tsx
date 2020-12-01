@@ -41,7 +41,7 @@ const FurnishesPage: BlitzPage = () => {
     <div>
       <p>
         <Link href="/admin/furnishes/new">
-          <a>Create Furnish</a>
+          <a>اضافة اثاث</a>
         </Link>
       </p>
 

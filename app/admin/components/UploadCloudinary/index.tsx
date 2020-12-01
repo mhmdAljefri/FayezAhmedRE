@@ -98,8 +98,10 @@ export default function UploadCloudinary({
   multiple,
 }: UploadCloudinaryType) {
   const handleUpload = (body: FormData) => {
+    const payload = body
+    accept === ".pdf" && payload.append("format", "pdf")
     return fetch(END_POINT, {
-      body: body,
+      body: payload,
       method: "POST",
     })
       .then((res) => res.json())

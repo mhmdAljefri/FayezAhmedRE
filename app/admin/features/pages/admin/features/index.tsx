@@ -39,7 +39,7 @@ const FeaturesPage: BlitzPage = () => {
   return (
     <div>
       <p>
-        <Link href="/features/new">
+        <Link href="/admin/features/new">
           <Button>اضافة ميزة</Button>
         </Link>
       </p>

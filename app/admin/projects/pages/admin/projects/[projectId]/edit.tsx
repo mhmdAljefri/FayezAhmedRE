@@ -18,6 +18,8 @@ export const EditProject = () => {
       <ProjectForm
         initialValues={project}
         onSubmit={async (values) => {
+          delete values.countryId
+          delete values.id
           try {
             const updated = await updateProjectMutation({
               where: { id: project.id },

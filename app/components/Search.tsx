@@ -22,7 +22,8 @@ const Search = (props: SearchProps) => {
         sx={{
           position: "relative",
           overflow: "hidden",
-          backgroundColor: "background",
+          backgroundColor: "text",
+          color: "background",
 
           width: open ? 180 : 40,
           transitionDuration: "0.4s",
@@ -30,7 +31,6 @@ const Search = (props: SearchProps) => {
           transitionTimingFunction: "ease-in-out",
           height: 40,
           borderRadius: 40,
-          boxShadow: "default",
           alignItems: "center",
         }}
       >

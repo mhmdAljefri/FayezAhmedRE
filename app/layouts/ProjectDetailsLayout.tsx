@@ -1,16 +1,41 @@
 import BigIconText from "app/components/BigIconBox"
-import SelectionBox from "app/components/SelectionBox"
+// import SelectionBox from "app/components/SelectionBox"
 import Wrapper from "app/components/Wrapper"
-import React from "react"
-import { Box, Flex, Heading, Image, Text } from "theme-ui"
+import React, { useState } from "react"
+import { Box, Button, Flex, Heading, Image, Link, Text } from "theme-ui"
 import Layout from "./Layout"
 
 import { building } from "react-icons-kit/fa/building"
 import { money } from "react-icons-kit/fa/money"
-import { dollar } from "react-icons-kit/fa/dollar"
+import { minusSquare } from "react-icons-kit/fa/minusSquare"
+import { mapMarker } from "react-icons-kit/fa/mapMarker"
+import { key } from "react-icons-kit/fa/key"
+import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
 
-export default function ProjectDetailsLayout() {
+export default function ProjectDetailsLayout({
+  name,
+  details,
+  subTitle,
+  status,
+  image,
+  gallery,
+  floorplan,
+  brochure,
+  country,
+  features,
+  constructingUpdateVideo,
+  constructingUpdatePrview,
+  nearBy,
+  roomsWithPrices,
+  location,
+}) {
+  const isCompleted = status === "completed"
+  const statusText = isCompleted ? "مكتمل" : "قيد البناء"
+
+  const [room, setRoom] = useState(0)
+  const roomWithPrice = roomsWithPrices[room]
+
   return (
     <Layout
       headerProps={{
@@ -29,15 +54,22 @@ export default function ProjectDetailsLayout() {
           }}
         />
         <Wrapper>
-          <Image sx={{ borderRadius: 15, marginTop: -6 }} src="/slide1.png" />
-          <Heading sx={{ fontSize: 6, marginY: 3 }}>فهفمث</Heading>
-          <Text sx={{ fontSize: 4 }}>نص هنا</Text>
+          <Image sx={{ borderRadius: 15, marginTop: -6, width: "100%" }} src="/slide1.png" />
+          <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
+          <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
 
+          <Flex sx={{ marginBottom: 2, marginTop: 4 }}>
+            {roomsWithPrices.map((item, index) => (
+              <Button onClick={() => setRoom(index)} variant="link">
+                {item.room}
+              </Button>
+            ))}
+          </Flex>
           <Flex>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{
-                  fontSize: 4,
+                  fontSize: 5,
                   color: "primary",
                   borderBottom: "2px solid #eee",
                   borderColor: "primary",
@@ -45,28 +77,25 @@ export default function ProjectDetailsLayout() {
               >
                 AED price
               </Text>
-              <Text>السعر يبداء من</Text>
+              <Text sx={{ paddingY: 3, fontSize: 3 }}>
+                السعر يبداء من <span>{roomWithPrice?.price}</span>
+              </Text>
             </Box>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{
-                  fontSize: 4,
+                  fontSize: 5,
                   color: "primary",
                   borderBottom: "2px solid #eee",
                   borderColor: "primary",
                 }}
               >
-                AED price
+                <span>{statusText}</span>
               </Text>
-              <Text>السعر يبداء من</Text>
+              <Text sx={{ paddingY: 3, fontSize: 3 }}>حالة المشروع</Text>
             </Box>
           </Flex>
-          <Text sx={{ marginY: 5 }}>الوصف يكون هنا</Text>
-
-          <Flex sx={{ justifyContent: "space-between", maxWidth: 600 }}>
-            <SelectionBox />
-            <SelectionBox />
-          </Flex>
+          <Text sx={{ marginY: 5 }}>{details}</Text>
 
           <Box
             sx={{
@@ -83,13 +112,15 @@ export default function ProjectDetailsLayout() {
               zIndex: 2,
             }}
           >
-            <Heading sx={{ fontSize: 6, color: "white", marginBottom: 4 }}>title</Heading>
+            <Heading sx={{ fontSize: 6, color: "white", marginBottom: 4, marginTop: 3 }}>
+              {name}
+            </Heading>
             <Flex sx={{ justifyContent: "space-evenly" }}>
-              <BigIconText icon={building} text="text" />
-              <BigIconText icon={money} text="text" />
-              <BigIconText icon={dollar} text="text" />
-              <BigIconText icon={dollar} text="text" />
-              <BigIconText icon={dollar} text="text" />
+              <BigIconText icon={building} text="شقق وفلل" />
+              <BigIconText icon={money} text="كاش" />
+              <BigIconText icon={mapMarker} text={country.name} />
+              <BigIconText icon={key} text={new Date().getFullYear()} />
+              <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
             </Flex>
           </Box>
         </Wrapper>
@@ -100,51 +131,62 @@ export default function ProjectDetailsLayout() {
         </Box>
 
         <Wrapper sx={{ marginTop: -5 }}>
-          <Flex sx={{ justifyContent: "space-evenly" }}>
-            <Image
-              sx={{ width: 280, borderRadius: 15, boxShadow: "default", height: 280 }}
-              src="/slide1.png"
-            />
-            <Image
-              sx={{ width: 280, borderRadius: 15, boxShadow: "default", height: 280 }}
-              src="/slide2.png"
-            />
-            <Image
-              sx={{ width: 280, borderRadius: 15, boxShadow: "default", height: 280 }}
-              src="/slide1.png"
-            />
+          <Flex sx={{ justifyContent: "center" }}>
+            {gallery.map((item, index) => (
+              <Image
+                key={item + "_" + index}
+                sx={{
+                  width: "30%",
+                  maxWidth: 350,
+                  minWidth: 280,
+                  borderRadius: 15,
+                  margin: 3,
+                  boxShadow: "default",
+                  height: "30vw",
+                  maxHeight: 350,
+                }}
+                src={item}
+              />
+            ))}
           </Flex>
         </Wrapper>
+        {constructingUpdateVideo && (
+          <Wrapper sx={{ marginY: 5 }}>
+            <Heading sx={{ marginBottom: 4 }}>حالة المشروع</Heading>
+            <Box>
+              <video width="100%" poster={constructingUpdatePrview} controls>
+                <track kind="captions" />
+                <source src={constructingUpdateVideo} type="video/mp4" />
+                <source src={constructingUpdateVideo} type="video/ogg" />
+                <source src={constructingUpdateVideo} type="video/webm" />
+                <object data={constructingUpdateVideo}>
+                  <embed src={constructingUpdateVideo} />
+                </object>
+              </video>
+            </Box>
+          </Wrapper>
+        )}
         <Wrapper sx={{ marginY: 6 }}>
           <Heading sx={{ paddingBottom: 5 }}>المخطوطات</Heading>
           <Flex sx={{ justifyContent: "space-evenly" }}>
-            <Image
-              sx={{
-                borderColor: "primary",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: 300,
-                borderRadius: 15,
-                boxShadow: "default",
-                height: 300,
-              }}
-              src="/slide2.png"
-            />
-            <Image
-              sx={{
-                borderColor: "primary",
-                borderWidth: 2,
-                borderStyle: "solid",
-                width: 300,
-                borderRadius: 15,
-                boxShadow: "default",
-                height: 300,
-              }}
-              src="/slide1.png"
-            />
+            {floorplan.map((item, index) => (
+              <Image
+                key={item + "_" + index}
+                sx={{
+                  borderColor: "primary",
+                  borderWidth: 2,
+                  borderStyle: "solid",
+                  width: 300,
+                  borderRadius: 15,
+                  boxShadow: "default",
+                  height: 300,
+                }}
+                src={item}
+              />
+            ))}
           </Flex>
         </Wrapper>
-        <Box sx={{ backgroundColor: "light", paddingY: 3 }}>
+        <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>
             <Box>
               <Heading>وسائل الراحة والمزايا</Heading>
@@ -152,7 +194,7 @@ export default function ProjectDetailsLayout() {
             </Box>
 
             <Flex sx={{ justifyContent: "center", marginY: 3 }}>
-              {[...Array(3)].map(() => (
+              {features.map((feat) => (
                 <Text
                   sx={{
                     margin: 2,
@@ -166,16 +208,22 @@ export default function ProjectDetailsLayout() {
                     borderRadius: "default",
                   }}
                 >
-                  الميزة
+                  {feat}
                 </Text>
               ))}
             </Flex>
-            <Box
+            <Link
+              download={name}
+              target="_blank"
+              rel="noopener "
+              href={brochure}
               sx={{
+                opacity: brochure ? 1 : 0.3,
                 backgroundColor: "background",
                 color: "heading",
                 borderRadius: "md",
                 maxWidth: 250,
+                display: "block",
                 border: "primary",
                 borderColor: "primary",
                 marginX: "auto",
@@ -186,7 +234,7 @@ export default function ProjectDetailsLayout() {
               }}
             >
               تنزيل البروشور
-            </Box>
+            </Link>
           </Wrapper>
 
           <Wrapper>

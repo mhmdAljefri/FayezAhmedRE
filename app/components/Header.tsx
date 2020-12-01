@@ -1,4 +1,4 @@
-import { Box, Flex, Image, SxStyleProp } from "theme-ui"
+import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
 import React from "react"
 import Wrapper from "./Wrapper"
 import Nav from "./Nav"
@@ -17,6 +17,9 @@ const Header = ({ sx }: HeaderProps) => {
           <Box sx={{ maxWidth: 70, paddingY: 2 }}>
             <Image src="/logo.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
           </Box>
+          <Text sx={{ fontSize: 3, paddingX: 2, color: "primary", fontWeight: "700" }}>
+            فائز احمد العقارية
+          </Text>
         </Flex>
         <Flex sx={{ alignItems: "center" }}>
           <Search />

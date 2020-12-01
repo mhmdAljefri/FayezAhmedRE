@@ -1,7 +1,7 @@
 import React from "react"
 import { Field } from "react-final-form"
 import { Icon } from "react-icons-kit"
-import { Box, Button, Flex, Grid, Heading, Image, Input, Select, Textarea } from "theme-ui"
+import { Box, Button, Grid, Heading, Input, Select } from "theme-ui"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import Form from "../Form"
 

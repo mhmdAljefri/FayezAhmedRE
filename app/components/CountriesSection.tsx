@@ -14,6 +14,7 @@ export type CountryCardProps = {
 function CountryCard({ name, id, image }: CountryCardProps) {
   return (
     <Flex
+      key={id}
       sx={{
         borderRadius: 15,
         backgroundImage: `url(${image})`,

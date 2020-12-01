@@ -9,7 +9,7 @@ const NewFurnishCategoryPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Create New FurnishCategory</h1>
+      <h1>انشاء صنف للمفروشات</h1>
 
       <FurnishCategoryForm
         initialValues={{}}
@@ -25,12 +25,6 @@ const NewFurnishCategoryPage: BlitzPage = () => {
           }
         }}
       />
-
-      <p>
-        <Link href="/furnishCategories">
-          <a>FurnishCategories</a>
-        </Link>
-      </p>
     </div>
   )
 }
