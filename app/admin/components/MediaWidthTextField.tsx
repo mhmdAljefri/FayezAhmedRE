@@ -48,7 +48,7 @@ export default function MediaWidthTextField({
                   }}
                 />
                 <Flex>
-                  {fields.value.map((url, index) => (
+                  {fields.value?.map((url, index) => (
                     <Box sx={{ position: "relative" }}>
                       <Icon
                         icon={close}
