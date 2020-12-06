@@ -6,7 +6,7 @@ export default async function createFurnishCategory(
   { data }: CreateFurnishCategoryInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.authorize("admin")
 
   const furnishCategory = await db.furnishCategory.create({ data })
 

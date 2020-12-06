@@ -5,12 +5,23 @@ import getCountries from "app/admin/countries/queries/getCountries"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import Action from "app/admin/components/Action"
 import { Country } from "@prisma/client"
+import { Box, Link as ThemeLink } from "theme-ui"
 
 const ITEMS_PER_PAGE = 100
 
 const HEADERS = [
   { name: "", key: "id" },
   { name: "الدولة", key: "name" },
+  {
+    name: "",
+    render: ({ id }: Country) => (
+      <Box>
+        <Link passHref href={`/admin/countries/${id}/cities`}>
+          <ThemeLink>المدن</ThemeLink>
+        </Link>
+      </Box>
+    ),
+  },
   {
     name: "",
     render: ({ id }: Country) => <Action id={id} />,

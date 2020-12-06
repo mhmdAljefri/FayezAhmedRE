@@ -3,7 +3,7 @@ import db, { FurnishCreateArgs } from "db"
 
 type CreateFurnishInput = Pick<FurnishCreateArgs, "data">
 export default async function createFurnish({ data }: CreateFurnishInput, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.authorize("admin")
 
   // furnishCategory: {
   //   +     create?: FurnishCategoryCreateWithoutFurnishesInput,

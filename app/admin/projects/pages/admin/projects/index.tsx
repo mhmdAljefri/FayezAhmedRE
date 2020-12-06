@@ -17,7 +17,9 @@ export const ProjectsList = () => {
     { name: "اسم المشروع", key: "name" },
     {
       name: "",
-      render: (item) => <Action id={item.id} onDelete={deleteProjectMutation} />,
+      render: (item) => (
+        <Action id={item.id} onDelete={() => deleteProjectMutation({ where: { id: item.id } })} />
+      ),
     },
   ]
   const router = useRouter()

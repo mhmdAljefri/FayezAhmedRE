@@ -7,7 +7,7 @@ export default async function getCarousels(
   { where, orderBy, skip = 0, take }: GetCarouselsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.authorize("admin")
 
   const carousels = await db.carousel.findMany({
     where,

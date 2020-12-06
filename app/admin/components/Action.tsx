@@ -15,8 +15,8 @@ type ActonPropsType = {
 
 export default function Action({ id, onDelete }: ActonPropsType) {
   const [open, setOpen] = useState(false)
-  const { pathname } = useRouter()
-  const editLink = `${pathname}/${id}/edit`
+  const { asPath } = useRouter()
+  const editLink = `${asPath}/${id}/edit`
 
   const handleDelete = async () => {
     if (!onDelete) return
@@ -37,11 +37,16 @@ export default function Action({ id, onDelete }: ActonPropsType) {
     <>
       <ToastContainer />
       <Box sx={{ width: 120, marginRight: "auto" }}>
-        <Button type="button" onClick={handleToggle} sx={{ color: "red" }} variant="link">
+        <Button
+          type="button"
+          onClick={handleToggle}
+          sx={{ color: "red", visibility: onDelete ? "visible" : "hidden" }}
+          variant="link"
+        >
           <Icon icon={remove} />
         </Button>
         <Alert text="هل تريد حذف العنصر" title="تاكيد الحذف" open={open} onToggle={handleDelete} />
-        <ThemeLink as={Link} href={editLink} type="button" sx={{ color: "text" }} variant="link">
+        <ThemeLink as={Link} href={editLink} type="button" sx={{ color: "heading" }} variant="link">
           <Icon icon={pencilSquare} />
         </ThemeLink>
       </Box>

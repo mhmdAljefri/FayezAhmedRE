@@ -27,7 +27,7 @@ export const EditCountry = () => {
             })
             await setQueryData(updated)
             alert("Success!" + JSON.stringify(updated))
-            router.push(`/countries/${updated.id}`)
+            router.push(`/admin/countries/${updated.id}`)
           } catch (error) {
             console.log(error)
             alert("Error creating country ")

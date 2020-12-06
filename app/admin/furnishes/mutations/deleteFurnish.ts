@@ -4,7 +4,7 @@ import db, { FurnishDeleteArgs } from "db"
 type DeleteFurnishInput = Pick<FurnishDeleteArgs, "where">
 
 export default async function deleteFurnish({ where }: DeleteFurnishInput, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.authorize("admin")
 
   const furnish = await db.furnish.delete({ where })
 
