@@ -21,7 +21,6 @@ type FormProps<S extends z.ZodType<any, any>> = {
   schema?: S
 
   mutators?: any
-  getValues?: (values: FinalFormRenderProps<z.infer<S>>["values"]) => void
   onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
   initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
 } & Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit">
@@ -33,7 +32,6 @@ export function Form<S extends z.ZodType<any, any>>({
   initialValues,
   onSubmit,
   mutators,
-  getValues,
   buttonProps,
   ...props
 }: FormProps<S>) {
@@ -48,26 +46,22 @@ export function Form<S extends z.ZodType<any, any>>({
           return error.formErrors.fieldErrors
         }
       }}
-      mutators={{ ...arrayMutators, ...mutators }}
+      mutators={{ ...arrayMutators }}
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, submitError, values }) => (
+      render={({ handleSubmit, submitting, submitError }) => (
         <form onSubmit={handleSubmit} className="form" {...props}>
-          {getValues?.(values)}
           {/* Form fields supplied as children are rendered here */}
           {children}
-
           {submitError && (
             <div role="alert" style={{ color: "red" }}>
               {submitError}
             </div>
           )}
-
           {submitText && (
             <Button {...buttonProps} type="submit" disabled={submitting}>
               {submitText}
             </Button>
           )}
-
           <style global jsx>{`
             .form > * + * {
               margin-top: 1rem;

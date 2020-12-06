@@ -111,7 +111,7 @@ export default function MySlider({
             }}
             sx={{ justifyContent: "space-between" }}
           >
-            <div
+            <Box
               sx={prevArrowStyle}
               role="button"
               aria-label="prev arrow"
@@ -120,8 +120,8 @@ export default function MySlider({
               onClick={handlePrevPress}
             >
               {prevArrow || <Icon size={27} icon={arrowRight} />}
-            </div>
-            <div
+            </Box>
+            <Box
               sx={nextArrowStyle}
               role="button"
               araia-label="next arrow"
@@ -130,7 +130,7 @@ export default function MySlider({
               onClick={handleNextPress}
             >
               {nextArrow || <Icon size={27} icon={arrowLeft} />}
-            </div>
+            </Box>
           </Flex>
         ) : null}
         {dots}
