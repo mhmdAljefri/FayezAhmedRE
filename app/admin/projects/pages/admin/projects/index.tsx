@@ -5,6 +5,7 @@ import getProjects from "app/admin/projects/queries/getProjects"
 import deleteProject from "app/admin/projects/mutations/deleteProject"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import Action from "app/admin/components/Action"
+import { Button } from "theme-ui"
 
 const ITEMS_PER_PAGE = 100
 
@@ -46,7 +47,7 @@ const ProjectsPage: BlitzPage = () => {
     <div>
       <p>
         <Link href="/admin/projects/new">
-          <a>اضافة مشروع</a>
+          <Button>اضافة مشروع</Button>
         </Link>
       </p>
 

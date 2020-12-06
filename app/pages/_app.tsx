@@ -7,6 +7,10 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "app/styles/slick-modifier.css"
 import "react-phone-number-input/style.css"
+import "react-toastify/dist/ReactToastify.css"
+
+import { ToastContainer } from "react-toastify"
+import PriceProvider from "app/context/price"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
@@ -22,7 +26,14 @@ export default function App({ Component, pageProps }: AppProps) {
         queryCache.resetErrorBoundaries()
       }}
     >
-      <Suspense fallback="...">{getLayout(<Component {...pageProps} />)}</Suspense>
+      <Suspense fallback="...">
+        <PriceProvider>
+          <>
+            <ToastContainer />
+            {getLayout(<Component {...pageProps} />)}
+          </>
+        </PriceProvider>
+      </Suspense>
     </ErrorBoundary>
   )
 }

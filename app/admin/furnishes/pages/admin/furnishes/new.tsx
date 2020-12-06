@@ -2,6 +2,7 @@ import AdminLayout from "app/layouts/AdminLayout"
 import { useRouter, useMutation, BlitzPage } from "blitz"
 import createFurnish from "app/admin/furnishes/mutations/createFurnish"
 import FurnishForm from "app/admin/furnishes/components/FurnishForm"
+import { toast } from "react-toastify"
 
 const NewFurnishPage: BlitzPage = () => {
   const router = useRouter()
@@ -15,8 +16,8 @@ const NewFurnishPage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async (data) => {
           try {
-            const furnish = await createFurnishMutation({ data })
-            alert("Success!" + JSON.stringify(furnish))
+            await createFurnishMutation({ data })
+            toast.success("تمت العملية بنجاح!")
             router.push(`/admin/furnishes/`)
           } catch (error) {
             alert("Error creating furnish " + JSON.stringify(error, null, 2))

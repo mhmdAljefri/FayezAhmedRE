@@ -13,6 +13,7 @@ export default async function getCountries({ where, orderBy, skip = 0, take }: G
       image: true,
       rooms: true,
       nameEN: true,
+      isTurkey: true,
     },
     skip,
   })

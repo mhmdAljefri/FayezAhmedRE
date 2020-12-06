@@ -12,10 +12,24 @@ type HeaderProps = {
 
 const Header = ({ sx }: HeaderProps) => {
   return (
-    <Box sx={sx} as="header">
+    <Box
+      sx={{
+        position: "sticky",
+        zIndex: 9999,
+        top: 0,
+        left: 0,
+        right: 0,
+        ...sx,
+      }}
+      as="header"
+    >
       <Wrapper sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Link href="/" passHref>
-          <a>
+          <a
+            style={{
+              textDecoration: "none",
+            }}
+          >
             <Flex sx={{ alignItems: "center" }}>
               <Box sx={{ maxWidth: 70, paddingY: 2 }}>
                 <Image src="/logo.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
@@ -27,7 +41,6 @@ const Header = ({ sx }: HeaderProps) => {
                   paddingX: 2,
                   color: "primary",
                   fontWeight: "700",
-                  textDecoration: "none",
                 }}
               >
                 فائز احمد العقارية

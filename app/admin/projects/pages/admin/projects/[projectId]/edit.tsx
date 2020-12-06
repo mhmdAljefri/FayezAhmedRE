@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getProject from "app/admin/projects/queries/getProject"
 import updateProject from "app/admin/projects/mutations/updateProject"
 import ProjectForm from "app/admin/projects/components/ProjectForm"
+import { toast } from "react-toastify"
 
 export const EditProject = () => {
   const router = useRouter()
@@ -20,17 +21,18 @@ export const EditProject = () => {
         onSubmit={async (values) => {
           delete values.countryId
           delete values.id
+          delete values.propertyTypeId
           try {
             const updated = await updateProjectMutation({
               where: { id: project.id },
               data: values,
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
+            toast.success("تم التعديل بنجاح!")
             router.push(`/admin/projects/`)
           } catch (error) {
             console.log(error)
-            alert("Error creating project " + JSON.stringify(error, null, 2))
+            toast.error("فشل في عملية التعديل!")
           }
         }}
       />

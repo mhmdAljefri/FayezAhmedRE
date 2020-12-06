@@ -1,0 +1,45 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "PAYMENT_TYPES",
+      "values": [
+        "cash",
+        "installment"
+      ]
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "paymentType",
+      "type": "PAYMENT_TYPES",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "paymentType"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "paymentType"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cash"
+    }
+  ]
+}

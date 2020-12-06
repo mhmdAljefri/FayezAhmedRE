@@ -51,13 +51,27 @@ model Project {
   floorplan                 String[]
   features                  String[]
   brochure                  String?
+  paymentType               PAYMENT_TYPES @default(cash)
   constructingUpdateVideo   String?
   constructingUpdatePrview  String?
   nearBy                    Json?
   roomsWithPrices           RoomWithPrice[]
   location                  Json?
+  installmentPlan           Json?
+  locationText              String?
   country                   Country  @relation(fields: [countryId], references: [id])
-  countryId                 Int      
+  countryId                 Int
+  propertyType              PropertyType? @relation(fields: [propertyTypeId], references: [id])
+  propertyTypeId            Int?
+} 
+
+model PropertyType {
+    id             Int      @default(autoincrement()) @id
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    name           String
+
+    projects       Project[]
 }
 
 model RoomWithPrice {
@@ -65,6 +79,7 @@ model RoomWithPrice {
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
     room           String
+    value          Int      @default(autoincrement())
 
     price          String
     priceQatar     String
@@ -76,18 +91,22 @@ model RoomWithPrice {
 }
 
 model Country {
-  id        Int      @default(autoincrement()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                    Int      @default(autoincrement()) @id
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
-  name      String   @unique
-  nameEN    String?
-  image     String
-  gallery   Json?
-  isTurkey  Boolean @default(false)
-  rooms     String[]
-  cities    City[]
-  projects  Project[]
+  name                  String   @unique
+  nameEN                String?
+  image                 String
+  gallery               Json?
+  isTurkey              Boolean @default(false)
+  rooms                 String[]
+
+  dontMissitGallery     String[]
+  getInspiredGallery    String[]
+  exploreGallery        String[]
+  cities                City[]
+  projects              Project[]
 }
 
 model City {
@@ -131,6 +150,15 @@ model FurnishCategory {
 enum STATUS {
   completed
   inprogress
+  resell
+  installment
+  compatible_installment
+  ocean_view
+  granted_by_gov
+}
+enum PAYMENT_TYPES {
+  cash
+  installment
 }
 
 model Feature {
@@ -176,4 +204,5 @@ enum REQUEST_TYPES {
   flights
   hotels
   cars
+  consultings
 }

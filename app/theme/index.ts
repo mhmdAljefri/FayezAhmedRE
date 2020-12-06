@@ -34,9 +34,10 @@ const theme = {
     },
   },
   shadows: {
-    card: `0 0 4px #cccccca6`,
-    default: `0 0 10px #cccccca6`,
-    countryCard: `0 20px 50px #cccccca6`,
+    card: `0 0 4px #a5a5a5a6`,
+    input: `0 2px 2px #a5a5a5a6`,
+    default: `0 0 10px #a5a5a5a6`,
+    countryCard: `0 20px 50px #a5a5a5a6`,
   },
   text: {
     heading: {
@@ -90,7 +91,7 @@ const theme = {
       borderWidth: "2px",
       borderColor: "white",
       backgroundColor: "input",
-      boxShadow: "default",
+      boxShadow: "input",
       marginBottom: 2,
       "&::placeholder": {
         color: "white",
@@ -111,6 +112,10 @@ const theme = {
       "&+svg": {
         marginRight: -28,
         marginLeft: "auto",
+      },
+      option: {
+        backgroundColor: "background",
+        color: "text",
       },
     },
   },

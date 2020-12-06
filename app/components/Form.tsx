@@ -4,6 +4,8 @@ import {
   FormProps as FinalFormProps,
   FormRenderProps as FinalFormRenderProps,
 } from "react-final-form"
+import arrayMutators from "final-form-arrays"
+
 import { Button, SxStyleProp } from "theme-ui"
 import * as z from "zod"
 export { FORM_ERROR } from "final-form"
@@ -46,7 +48,7 @@ export function Form<S extends z.ZodType<any, any>>({
           return error.formErrors.fieldErrors
         }
       }}
-      mutators={mutators}
+      mutators={{ ...arrayMutators, ...mutators }}
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, submitError, values }) => (
         <form onSubmit={handleSubmit} className="form" {...props}>

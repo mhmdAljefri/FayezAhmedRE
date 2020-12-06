@@ -1,7 +1,8 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useMutation, BlitzPage } from "blitz"
+import { useRouter, useMutation, BlitzPage } from "blitz"
 import createFurnishCategory from "app/admin/furnish-categories/mutations/createFurnishCategory"
 import FurnishCategoryForm from "app/admin/furnish-categories/components/FurnishCategoryForm"
+import { toast } from "react-toastify"
 
 const NewFurnishCategoryPage: BlitzPage = () => {
   const router = useRouter()
@@ -9,7 +10,7 @@ const NewFurnishCategoryPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>انشاء صنف للمفروشات</h1>
+      <h1>اضافة صنف للمفروشات</h1>
 
       <FurnishCategoryForm
         initialValues={{}}
@@ -18,10 +19,10 @@ const NewFurnishCategoryPage: BlitzPage = () => {
             const furnishCategory = await createFurnishCategoryMutation({
               data,
             })
-            alert("Success!" + JSON.stringify(furnishCategory))
+            toast.success("تمت عملية الاضافة بنجاح" + JSON.stringify(furnishCategory))
             router.push(`/admin/furnish-categories/`)
           } catch (error) {
-            alert("Error creating furnishCategory " + JSON.stringify(error, null, 2))
+            toast.success("فشل في عملية الاضافة " + JSON.stringify(error, null, 2))
           }
         }}
       />

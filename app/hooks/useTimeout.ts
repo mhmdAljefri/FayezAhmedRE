@@ -1,21 +1,28 @@
 import { useEffect, useRef } from "react"
 
-export default function useTimeout(callback, delay) {
+export default function useTimeout(callback: () => any, delay: number, reseterValue?: any) {
   const savedCallback = useRef(() => {})
+  const reseterValueRef = useRef<any>()
 
   // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback
-  }, [callback])
+  }, [callback, reseterValue])
 
   // Set up the Timeout.
   useEffect(() => {
     function tick() {
       savedCallback.current?.()
     }
-    if (delay !== null) {
-      let id = setTimeout(tick, delay)
-      return () => clearTimeout(id)
+    let id = setTimeout(tick, delay)
+
+    console.log(reseterValueRef, reseterValue)
+
+    // reset timer based on reseter values changes
+    if (reseterValueRef.current !== reseterValueRef) {
+      if (!reseterValueRef.current) clearTimeout(id) // if initlized
+      reseterValueRef.current = reseterValueRef
     }
-  }, [delay])
+    return () => clearTimeout(id)
+  }, [delay, reseterValue])
 }

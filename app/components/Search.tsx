@@ -1,4 +1,6 @@
 import useOnClickout from "app/hooks/useOnClickout"
+import useTimeout from "app/hooks/useTimeout"
+import { useRouter } from "blitz"
 import React, { useState } from "react"
 import { Icon } from "react-icons-kit"
 import { search } from "react-icons-kit/fa/search"
@@ -8,7 +10,10 @@ type SearchProps = {}
 
 const Search = (props: SearchProps) => {
   const [value, setValue] = useState<string>("")
+  const { push } = useRouter()
   const { ref, open, setOpen } = useOnClickout()
+
+  useTimeout(() => push("/search?q=" + value), 4000, value)
 
   return (
     <Box

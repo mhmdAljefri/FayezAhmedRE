@@ -1,28 +1,69 @@
 import React from "react"
 import { Field } from "react-final-form"
-import { Label } from "theme-ui"
+import { Box, Flex, Image, Label } from "theme-ui"
 import UploadCloudinary from "./UploadCloudinary"
+import Slide from "react-reveal/Slide"
+import { FieldArray } from "react-final-form-arrays"
+import { Icon } from "react-icons-kit"
+import { close } from "react-icons-kit/fa/close"
 
 type MediaWidthTextFieldType = {
   name: string
   label: string
+  multiple?: boolean
   accept?: "image/*" | "video/*" | ".pdf"
 }
 
-export default function MediaWidthTextField({ name, label, accept }: MediaWidthTextFieldType) {
+export default function MediaWidthTextField({
+  multiple,
+  name,
+  label,
+  accept,
+}: MediaWidthTextFieldType) {
   return (
-    <div>
-      <Label>{label}</Label>
-      <Field
-        render={({ input }) => (
-          <UploadCloudinary
-            {...input}
-            accept={accept}
-            onChange={(data) => input.onChange(data?.url)}
+    <Slide bottom>
+      <div>
+        <Label>{label}</Label>
+        {!multiple ? (
+          <Field
+            render={({ input }) => (
+              <UploadCloudinary
+                {...input}
+                accept={accept}
+                onChange={(data) => input.onChange(data)}
+              />
+            )}
+            name={name}
+          />
+        ) : (
+          <FieldArray
+            name={name}
+            render={({ fields }) => (
+              <>
+                <UploadCloudinary
+                  multiple={multiple}
+                  accept={accept}
+                  onChange={(data: string[]) => {
+                    data.map((url) => fields.push(url))
+                  }}
+                />
+                <Flex>
+                  {fields.value.map((url, index) => (
+                    <Box sx={{ position: "relative" }}>
+                      <Icon
+                        icon={close}
+                        style={{ position: "absolute", top: 5, left: 5, color: "red" }}
+                        onClick={() => fields.remove(index)}
+                      />
+                      <Image sx={{ width: 80 }} key={index} src={url} alt="..." />
+                    </Box>
+                  ))}
+                </Flex>
+              </>
+            )}
           />
         )}
-        name={name}
-      />
-    </div>
+      </div>
+    </Slide>
   )
 }

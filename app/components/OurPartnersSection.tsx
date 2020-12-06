@@ -1,14 +1,17 @@
 import React from "react"
 import { Box, Grid, Heading, Image } from "theme-ui"
 import Wrapper from "./Wrapper"
+import Slide from "react-reveal/Slide"
 
 type PartnersCardProps = {}
 
 function PartnersCard(props: PartnersCardProps) {
   return (
-    <Box sx={{ textAlign: "center", margin: 2 }}>
-      <Image src="/logo.png" />
-    </Box>
+    <Slide bottom>
+      <Box sx={{ textAlign: "center", margin: 2 }}>
+        <Image src="/logo.png" />
+      </Box>
+    </Slide>
   )
 }
 

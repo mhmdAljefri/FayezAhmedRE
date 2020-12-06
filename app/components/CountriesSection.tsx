@@ -2,7 +2,8 @@ import { Link } from "blitz"
 import React from "react"
 import { Icon } from "react-icons-kit"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
-import { Box, Flex, Heading, Text } from "theme-ui"
+import { Box, Flex, Heading, Link as ThemeLink, Text } from "theme-ui"
+import Fade from "react-reveal/Fade"
 
 export type CountryCardProps = {
   name: string
@@ -14,7 +15,11 @@ export type CountryCardProps = {
 function CountryCard({ name, id, image }: CountryCardProps) {
   return (
     <Link passHref href={`/countries/${id}`}>
-      <a>
+      <ThemeLink
+        sx={{
+          textDecoration: "none",
+        }}
+      >
         <Flex
           key={id}
           sx={{
@@ -47,7 +52,9 @@ function CountryCard({ name, id, image }: CountryCardProps) {
             },
           }}
         >
-          <Text sx={{ filter: "drop-shadow(2px 4px 2px black)" }}>المشاريع العقارية</Text>
+          <Text sx={{ filter: "drop-shadow(2px 4px 2px black)", fontWeight: 900, fontSize: 3 }}>
+            المشاريع العقارية
+          </Text>
           <Flex>
             <Heading
               sx={{ fontSize: 6, color: "white", filter: "drop-shadow(2px 4px 22px black)" }}
@@ -74,7 +81,7 @@ function CountryCard({ name, id, image }: CountryCardProps) {
             </Box>
           </Flex>
         </Flex>
-      </a>
+      </ThemeLink>
     </Link>
   )
 }
@@ -94,7 +101,9 @@ export default function CountriesSection(props: CountriesSectionProps) {
       }}
     >
       {props.data.map((counry) => (
-        <CountryCard {...counry} />
+        <Fade>
+          <CountryCard {...counry} />
+        </Fade>
       ))}
     </Flex>
   )

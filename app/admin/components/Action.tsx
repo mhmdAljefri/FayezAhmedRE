@@ -10,7 +10,7 @@ import { Link, useRouter } from "blitz"
 
 type ActonPropsType = {
   id: number
-  onDelete: () => Promise<any>
+  onDelete?: () => Promise<any>
 }
 
 export default function Action({ id, onDelete }: ActonPropsType) {
@@ -19,6 +19,7 @@ export default function Action({ id, onDelete }: ActonPropsType) {
   const editLink = `${pathname}/${id}/edit`
 
   const handleDelete = async () => {
+    if (!onDelete) return
     try {
       await onDelete()
       toast.success("تم الحذف بنجاح")

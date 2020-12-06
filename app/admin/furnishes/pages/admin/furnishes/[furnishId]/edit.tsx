@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getFurnish from "app/admin/furnishes/queries/getFurnish"
 import updateFurnish from "app/admin/furnishes/mutations/updateFurnish"
 import FurnishForm from "app/admin/furnishes/components/FurnishForm"
+import { toast } from "react-toastify"
 
 export const EditFurnish = () => {
   const router = useRouter()
@@ -18,18 +19,18 @@ export const EditFurnish = () => {
 
       <FurnishForm
         initialValues={furnish}
-        onSubmit={async () => {
+        onSubmit={async (values) => {
           try {
             const updated = await updateFurnishMutation({
               where: { id: furnish.id },
-              data: { name: "MyNewName" },
+              data: { name: values.name, price: values.price, image: values.image },
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
+            toast.success("تمت العملية بنجاح!")
             router.push(`/admin/furnishes/`)
           } catch (error) {
             console.log(error)
-            alert("Error creating furnish " + JSON.stringify(error, null, 2))
+            toast.error("فشلت العملية ")
           }
         }}
       />

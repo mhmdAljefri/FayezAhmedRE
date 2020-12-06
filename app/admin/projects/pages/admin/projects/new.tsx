@@ -1,11 +1,11 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useMutation, BlitzPage } from "blitz"
+import { Link, useMutation, BlitzPage, useRouter } from "blitz"
 import createProject from "app/admin/projects/mutations/createProject"
 import ProjectForm from "app/admin/projects/components/ProjectForm"
 
 const NewProjectPage: BlitzPage = () => {
   const [createProjectMutation] = useMutation(createProject)
-
+  const router = useRouter()
   return (
     <div>
       <h1>انشاء مشروع</h1>
@@ -14,8 +14,8 @@ const NewProjectPage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async (values) => {
           try {
-            const project = await createProjectMutation({ data: values })
-            alert("Success!" + JSON.stringify(project))
+            await createProjectMutation({ data: values })
+            router.push("/admin/projects")
           } catch (error) {
             alert("Error creating project " + JSON.stringify(error, null, 2))
           }

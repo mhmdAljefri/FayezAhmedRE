@@ -7,10 +7,6 @@ export default async function getCountry({ where }: GetCountryInput) {
   const country = await db.country.findFirst({
     where,
     select: {
-      name: true,
-      rooms: true,
-      cities: true,
-      id: true,
       projects: {
         take: 3,
         orderBy: {
@@ -22,6 +18,13 @@ export default async function getCountry({ where }: GetCountryInput) {
           image: true,
         },
       },
+      cities: true,
+      rooms: true,
+      isTurkey: true,
+      name: true,
+      dontMissitGallery: true,
+      getInspiredGallery: true,
+      exploreGallery: true,
     },
   })
 

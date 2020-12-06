@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getCarousel from "app/admin/carousels/queries/getCarousel"
 import updateCarousel from "app/admin/carousels/mutations/updateCarousel"
 import CarouselForm from "app/admin/carousels/components/CarouselForm"
+import { toast } from "react-toastify"
 
 export const EditCarousel = () => {
   const router = useRouter()
@@ -13,7 +14,7 @@ export const EditCarousel = () => {
 
   return (
     <div>
-      <h1>Edit Carousel {carousel.id}</h1>
+      <h1>تعديل على التفاصيل {carousel.id}</h1>
       <pre>{JSON.stringify(carousel)}</pre>
 
       <CarouselForm
@@ -25,11 +26,10 @@ export const EditCarousel = () => {
               data,
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
+            toast.success("تمت عملية التعديل بنجاح")
             router.push(`/admin/carousels/`)
           } catch (error) {
-            console.log(error)
-            alert("Error creating carousel " + JSON.stringify(error, null, 2))
+            toast.error("فشل في عملية التعديل " + JSON.stringify(error, null, 2))
           }
         }}
       />

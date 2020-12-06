@@ -1,19 +1,59 @@
 import React from "react"
-import { Button, SxStyleProp, useColorMode } from "theme-ui"
+import { Icon } from "react-icons-kit"
+import { sunO } from "react-icons-kit/fa/sunO"
+import { moonO } from "react-icons-kit/fa/moonO"
+import { Box, Flex, SxStyleProp, useColorMode } from "theme-ui"
 
 type ChangeColorsModeProps = {
   sx?: SxStyleProp
 }
 
+const iconStyle: SxStyleProp = {
+  width: 25,
+  lineHeight: "27 px",
+  textAlign: "center",
+  height: 25,
+  borderRadius: 40,
+}
+
 export default function ChangeColorsMode({ sx }: ChangeColorsModeProps) {
   const [mode, changeColorsMode] = useColorMode()
-  const newMode = mode === "dark" ? "light" : "dark"
+  const isDark = mode === "dark"
+  const newMode = isDark ? "light" : "dark"
 
   const handleChangeMode = () => changeColorsMode(newMode)
 
   return (
-    <Button variant="link" onClick={handleChangeMode} sx={sx}>
-      الوضع اليلي
-    </Button>
+    <Flex
+      onClick={handleChangeMode}
+      sx={{
+        width: 100,
+        marginBottom: 3,
+        justifyContent: "space-between",
+        borderRadius: 25,
+        boxShadow: "default",
+      }}
+    >
+      <Box
+        sx={{
+          color: isDark ? "text" : "primary",
+          backgroundColor: !isDark ? "text" : "primary",
+          boxShadow: isDark ? undefined : "card",
+          ...iconStyle,
+        }}
+      >
+        <Icon icon={sunO} />
+      </Box>
+      <Box
+        sx={{
+          color: isDark ? "primary" : "text",
+          backgroundColor: !isDark ? "primary" : "text",
+          boxShadow: isDark ? "card" : undefined,
+          ...iconStyle,
+        }}
+      >
+        <Icon icon={moonO} />
+      </Box>
+    </Flex>
   )
 }

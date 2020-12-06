@@ -57,7 +57,13 @@ export default function DynamicTable({
 }: DynamicTableProps) {
   return (
     <Card
-      sx={{ backgroundColor: "background", borderRadius: "default", padding: 3, boxShadow: "card" }}
+      sx={{
+        backgroundColor: "background",
+        borderRadius: "default",
+        padding: 3,
+        boxShadow: "card",
+        overflow: "auto",
+      }}
     >
       <Card className="border-0 d-flex justify-content-between">
         <h3 className="mb-0">{tableHeader}</h3>

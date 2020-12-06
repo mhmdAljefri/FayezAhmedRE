@@ -1,8 +1,6 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import UploadCloudinary from "app/admin/components/UploadCloudinary"
-import { Field, useFormState } from "react-final-form"
 import arrayMutators from "final-form-arrays"
 
 import { Button, Card } from "theme-ui"
@@ -11,84 +9,8 @@ import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
 import getCountries from "app/admin/countries/queries/getCountries"
 import { usePaginatedQuery } from "blitz"
-
-function RoomsField(props) {
-  const [{ countries }] = usePaginatedQuery(getCountries, {})
-  const { values } = useFormState()
-
-  const country = countries.find((c) => c.id.toString() === values.country?.connect.id)
-
-  return (
-    <FieldArray name="roomsWithPrices.create">
-      {({ fields }) => (
-        <div>
-          {fields.map((name, index) => (
-            <div key={name}>
-              <LabeledMenuField
-                options={country?.rooms || []}
-                name={`${name}.room`}
-                label="نوع الغرفة"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.price`}
-                label="القيمة المبدئية دولار امريكي"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceQatar`}
-                label="القيمة المبدئية ريال قطري"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceTurkey`}
-                label="القيمة المبدئية ليرة تركي"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceKSA`}
-                label="القيمة المبدئية ريال سعودي"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceUAE`}
-                label="القيمة المبدئية درهم امارتي"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceKuwait`}
-                label="القيمة المبدئية دينار كويتي"
-              />
-              <LabeledTextField
-                type="number"
-                required
-                name={`${name}.priceOman`}
-                label="القيمة المبدئية ريال عمان"
-              />
-              <Button
-                variant="link"
-                sx={{ marginY: 2 }}
-                type="button"
-                onClick={() => fields.remove(index)}
-              >
-                حدف نوع الغرفة
-              </Button>
-            </div>
-          ))}
-          <Button variant="link" sx={{ marginY: 2 }} type="button" onClick={() => fields.push({})}>
-            اضافة نوع غرفة
-          </Button>
-        </div>
-      )}
-    </FieldArray>
-  )
-}
+import UploadVideo from "./UploadVideo"
+import RoomsField from "./RoomsFiels"
 
 type ProjectFormProps = {
   initialValues: any
@@ -132,7 +54,6 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
     >
       <Form
         mutators={arrayMutators}
-        getValues={(val) => console.log(val)}
         onSubmit={onSubmit}
         initialValues={{
           status: "inprogress",
@@ -152,7 +73,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         <LabeledMenuField
           getLabel={(country) => country.name}
           getValue={(country) => country.id as number}
-          options={[{ name: "اختر الدولة", id: "" }, ...countries]}
+          options={countries}
           name="country.connect.id"
           label="الدولة"
         />
@@ -171,13 +92,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           label="حالة المشروع"
         />
 
-        <MediaWidthTextField
-          name="constructingUpdateVideo"
-          accept="video/*"
-          label="فيديو حالة المشروع"
-        />
-
-        <MediaWidthTextField name="constructingUpdatePrview" label="صورة عرض لفيديو حالة المشروع" />
+        <UploadVideo />
 
         <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
 
@@ -244,70 +159,9 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             </div>
           )}
         </FieldArray>
-        <FieldArray name="gallery">
-          {({ fields }) => (
-            <div>
-              {fields.map((name, index) => (
-                <div key={name}>
-                  <Field
-                    render={({ input }) => (
-                      <UploadCloudinary {...input} onChange={(data) => input.onChange(data.url)} />
-                    )}
-                    name={name}
-                  />
-                  <Button
-                    variant="link"
-                    sx={{ marginY: 2 }}
-                    type="button"
-                    onClick={() => fields.remove(index)}
-                  >
-                    حدف الصورة من المعرض
-                  </Button>
-                </div>
-              ))}
-              <Button
-                variant="link"
-                sx={{ marginY: 2 }}
-                type="button"
-                onClick={() => fields.push("")}
-              >
-                اضافة صورة لمعرض الصور
-              </Button>
-            </div>
-          )}
-        </FieldArray>
-        <FieldArray name="floorplan">
-          {({ fields }) => (
-            <div>
-              {fields.map((name, index) => (
-                <div key={name}>
-                  <Field
-                    render={({ input }) => (
-                      <UploadCloudinary {...input} onChange={(data) => input.onChange(data.url)} />
-                    )}
-                    name={name}
-                  />
-                  <Button
-                    variant="link"
-                    sx={{ marginY: 2 }}
-                    type="button"
-                    onClick={() => fields.remove(index)}
-                  >
-                    حدف الصورة من الاسقاط
-                  </Button>
-                </div>
-              ))}
-              <Button
-                variant="link"
-                sx={{ marginY: 2 }}
-                type="button"
-                onClick={() => fields.push("")}
-              >
-                اضافة صورة الاسقاط
-              </Button>
-            </div>
-          )}
-        </FieldArray>
+        <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
+        <MediaWidthTextField multiple name="floorplan" label="صور الاسقاط" />
+
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد
         </Button>

@@ -12,9 +12,7 @@ const Burger = ({ open, onClick }: BurgerProps) => {
       role="button"
       onClick={onClick}
       sx={{
-        position: "absolute",
-        top: "0",
-        left: "2rem",
+        position: "relative",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
@@ -25,7 +23,6 @@ const Burger = ({ open, onClick }: BurgerProps) => {
         cursor: "pointer",
         padding: 1,
         boxSizing: "content-box",
-        zIndex: 10,
         span: {
           width: "1.5rem",
           height: "1px",

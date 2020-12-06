@@ -47,13 +47,18 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
         />
       </Head>
       <ThemeProvider theme={adminTheme}>
-        <Flex>
+        <Flex
+          sx={{
+            backgroundColor: "light",
+          }}
+        >
           <Suspense fallback="...">
             <AdminSidebar logout={handleLogout} />
           </Suspense>
           <Box
             sx={{
               position: "relative",
+              width: "100%",
               paddingX: 4,
               ":before": {
                 content: '""',
@@ -63,15 +68,14 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
                 left: 0,
                 right: 0,
                 height: 200,
-                backgroundImage: "linear-gradient(to right, #e8ddc2, #ccb87d)",
               },
             }}
           >
-            <Box>
+            <Flex sx={{ justifyContent: "flex-end", width: "100%", paddingY: 4 }}>
               <ChangeColorsMode />
-            </Box>
+            </Flex>
             <Suspense fallback="...">
-              <Wrapper sx={{ marginTop: 5 }}>{children}</Wrapper>
+              <Wrapper sx={{ marginTop: 5, width: "100%" }}>{children}</Wrapper>
             </Suspense>
           </Box>
         </Flex>

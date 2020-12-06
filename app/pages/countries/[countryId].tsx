@@ -4,50 +4,81 @@ import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
 import Carousel from "app/components/Slider"
 
-import React from "react"
-import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
-import { Icon } from "react-icons-kit"
-import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
+import React, { useState } from "react"
+import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { CityCreateInput } from "@prisma/client"
-import { Link } from "blitz"
+import { City, Country, RoomWithPrice } from "@prisma/client"
+import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
-import Contact from "app/components/Forms/Contact"
 import getCarousels from "app/public/carousels/queries/getCarousels"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/SlickSlider"
+import Contact from "app/components/Forms/Contact"
+import Fade from "react-reveal/Fade"
+import Slide from "react-reveal/Slide"
+import FurnishCategoryCard from "app/components/FurnishCategoryCard"
+import ArrowIcon from "app/components/ArrowIcon"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
-    <Flex sx={{ justifyContent: "space-between" }}>
-      <Heading sx={{ fontSize: 6 }}>{heading}</Heading>
+    <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
+      <Heading sx={{ fontSize: 6, padding: 0 }}>{heading}</Heading>
 
-      <Link href={href}>
-        <Flex sx={{ color: "primary" }}>
-          <Text sx={{ color: "text" }}>المزيد</Text>
-          <Icon style={{ marginRight: 15 }} icon={arrowLeft} />
-        </Flex>
+      <Link passHref href={href}>
+        <ThemeLink
+          sx={{
+            paddingX: 3,
+            paddingY: 2,
+            textDecoration: "none",
+            ":hover": {
+              backgroundColor: "light",
+              borderRadius: "lg",
+              boxShadow: "default",
+            },
+          }}
+        >
+          <Flex sx={{ color: "primary", alignItems: "center" }}>
+            <Text sx={{ color: "text" }}>المزيد</Text>
+            <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
+          </Flex>
+        </ThemeLink>
       </Link>
     </Flex>
   )
 }
-type CountryPropsType = {
-  country: {
-    name: string
-    cities: CityCreateInput[]
-    rooms: string[]
-    id: number
+
+export type CountryPropsType = {
+  country: Country & {
     projects: {
       name: string
       image: string
       subTitle?: string
     }[]
+    cities: City[]
   }
   furnishCategories: { name: string; image: string }[]
   carousels: []
 }
 
-export default function Country({ carousels, country, furnishCategories }: CountryPropsType) {
+type inpirationGallery = "dontMissitGallery" | "getInspiredGallery" | "exploreGallery"
+
+export default function CountryPage({
+  carousels,
+  country,
+  furnishCategories,
+  ...props
+}: CountryPropsType) {
+  const { push, asPath } = useRouter()
+  const handleFilter = (filter) => {
+    push({ pathname: `${asPath}/projects`, query: filter })
+  }
+
+  const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
+    "dontMissitGallery"
+  )
+  const projectsUrl = `/countries/${country.id}/projects`
+
+  console.log(showInspirationGallery, country.getInspiredGallery, country[showInspirationGallery])
   return (
     <Layout
       headerProps={{
@@ -82,7 +113,7 @@ export default function Country({ carousels, country, furnishCategories }: Count
           marginBottom: 5,
         }}
       >
-        <Filter {...country} />
+        <Filter {...country} onFilter={handleFilter} />
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
@@ -99,16 +130,19 @@ export default function Country({ carousels, country, furnishCategories }: Count
                     borderRadius: "lg",
                     marginTop: 4,
                     overflow: "hidden",
+                    maxWidth: 350,
+                    maxHeight: 350,
+                    marginInlineStart: "auto",
                     boxShadow: "default",
                   }}
                 >
-                  <Link passHref href={`/countries/${country.id}/projects/${project.name}`}>
+                  <Link passHref href={`${projectsUrl}/${project.name}`}>
                     <a>
                       <Image src={project.image} alt={project.name} />
                     </a>
                   </Link>
+                  <Text sx={{ textAlign: "center" }}>{project.name}</Text>
                 </Box>
-                <Text sx={{ textAlign: "center" }}>{project.name}</Text>
               </Box>
             ))}
           </Carousel>
@@ -129,37 +163,57 @@ export default function Country({ carousels, country, furnishCategories }: Count
           <Text sx={{ fontSize: 4, textAlign: "center" }}>شقة فاخرة بمناظر جذابة</Text>
         </Box>
       </Wrapper>
-      <Box sx={{ backgroundColor: "dark", paddingTop: 350, marginTop: -200, paddingBottom: 100 }}>
+      <Box
+        sx={{
+          backgroundColor: "dark",
+          paddingTop: 350,
+          marginTop: -200,
+          paddingBottom: 100,
+        }}
+      >
         <Wrapper>
-          <Flex sx={{ justifyContent: "space-evenly" }}>
+          <Flex
+            sx={{
+              justifyContent: "space-evenly",
+              borderBottomWidth: 3,
+              borderBlockColor: "primary",
+              borderBottomStyle: "solid",
+              paddingBottom: 3,
+            }}
+          >
             <Box
+              onClick={() => setShowInspirationGallery("exploreGallery")}
               sx={{
                 paddingY: 2,
                 width: 200,
                 textAlign: "center",
-                backgroundColor: "primary",
+                backgroundColor: showInspirationGallery === "exploreGallery" ? "primary" : "dark",
                 borderRadius: "md",
               }}
             >
               إستكشف
             </Box>
             <Box
+              onClick={() => setShowInspirationGallery("getInspiredGallery")}
               sx={{
                 paddingY: 2,
                 width: 200,
                 textAlign: "center",
-                backgroundColor: "primary",
+                backgroundColor:
+                  showInspirationGallery === "getInspiredGallery" ? "primary" : "dark",
                 borderRadius: "md",
               }}
             >
               احصل على الإلهام
             </Box>
             <Box
+              onClick={() => setShowInspirationGallery("dontMissitGallery")}
               sx={{
                 paddingY: 2,
                 width: 200,
                 textAlign: "center",
-                backgroundColor: "primary",
+                backgroundColor:
+                  showInspirationGallery === "dontMissitGallery" ? "primary" : "dark",
                 borderRadius: "md",
               }}
             >
@@ -168,36 +222,30 @@ export default function Country({ carousels, country, furnishCategories }: Count
           </Flex>
         </Wrapper>
       </Box>
-      <Wrapper sx={{ marginTop: -80 }}>
+      <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <Grid columns={3}>
-          {[...Array(9)].map(() => (
-            <Image
-              sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
-              src="/istanbul.jpg"
-              alt="..."
-            />
+          {country[showInspirationGallery]?.map((image, index) => (
+            <Fade key={index} delay={200 + index * 100} bottom>
+              <Image
+                sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
+                src={image}
+                alt="..."
+              />
+            </Fade>
           ))}
         </Grid>
       </Wrapper>
 
-      <Wrapper sx={{ paddingY: 5 }}>
-        <HeadingWithMoreLink href="/" heading="اثث منزلك" />
-        <SlickSlider>
-          {furnishCategories.map((furnishCategory) => (
-            <Box
-              key={furnishCategory.name}
-              sx={{
-                borderRadius: "lg",
-                overflow: "hidden",
-                boxShadow: "default",
-              }}
-            >
-              <Image src={furnishCategory.image} alt={furnishCategory.name} />
-              <Text sx={{ paddingY: 4, paddingX: 3 }}>{furnishCategory.name}</Text>
-            </Box>
-          ))}
-        </SlickSlider>
-      </Wrapper>
+      <Slide right>
+        <Wrapper sx={{ paddingY: 5 }}>
+          <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
+          <SlickSlider>
+            {furnishCategories.map((furnishCategory) => (
+              <FurnishCategoryCard {...furnishCategory} />
+            ))}
+          </SlickSlider>
+        </Wrapper>
+      </Slide>
 
       <Wrapper
         sx={{
@@ -216,27 +264,27 @@ export default function Country({ carousels, country, furnishCategories }: Count
         }}
       >
         <Wrapper>
-          <HeadingWithMoreLink href="/" heading="الاكثر مشاهدة" />
+          <HeadingWithMoreLink href={projectsUrl} heading="الاكثر مشاهدة" />
+          <Grid sx={{ paddingX: 4 }} columns={[1, 2, 3]}>
+            {country.projects.map((project) => (
+              <Box
+                key={project.name}
+                sx={{
+                  minWidth: 200,
+                  margin: 4,
+                  borderRadius: "lg",
+                  backgroundColor: "background",
+                  overflow: "hidden",
+                  boxShadow: "default",
+                }}
+              >
+                <Image src={project.image} alt={project.name} />
+                <Text sx={{ paddingTop: 2, paddingX: 3 }}>{project.name}</Text>
+                <Text sx={{ paddingY: 2, paddingX: 3 }}>{project.subTitle}</Text>
+              </Box>
+            ))}
+          </Grid>
         </Wrapper>
-        <Grid sx={{ paddingX: 4 }} columns={[1, 2, 3]}>
-          {country.projects.map((project) => (
-            <Box
-              key={project.name}
-              sx={{
-                minWidth: 200,
-                margin: 4,
-                borderRadius: "lg",
-                backgroundColor: "background",
-                overflow: "hidden",
-                boxShadow: "default",
-              }}
-            >
-              <Image src={project.image} alt={project.name} />
-              <Text sx={{ paddingTop: 2, paddingX: 3 }}>{project.name}</Text>
-              <Text sx={{ paddingY: 2, paddingX: 3 }}>{project.subTitle}</Text>
-            </Box>
-          ))}
-        </Grid>
       </Box>
 
       <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>

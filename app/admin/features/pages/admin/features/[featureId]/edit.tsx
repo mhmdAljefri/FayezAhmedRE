@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getFeature from "app/admin/features/queries/getFeature"
 import updateFeature from "app/admin/features/mutations/updateFeature"
 import FeatureForm from "app/admin/features/components/FeatureForm"
+import { toast } from "react-toastify"
 
 export const EditFeature = () => {
   const router = useRouter()
@@ -24,11 +25,10 @@ export const EditFeature = () => {
               data,
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
+            toast.success("تمت عملية التعديل بنجاح" + JSON.stringify(updated))
             router.push(`/admin/features/`)
           } catch (error) {
-            console.log(error)
-            alert("Error creating feature " + JSON.stringify(error, null, 2))
+            toast.error("فشل في عملية التعديل " + JSON.stringify(error, null, 2))
           }
         }}
       />

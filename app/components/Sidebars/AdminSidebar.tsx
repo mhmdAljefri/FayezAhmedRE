@@ -6,6 +6,7 @@ const links = [
   { name: "الميزات", url: "/admin/features" },
   { name: "الشركاء", url: "/admin/partners" },
   { name: "المشاريع", url: "/admin/projects" },
+  { name: "الدول", url: "/admin/ciuntries" },
   { name: "انواع المفروشات", url: "/admin/furnish-categories" },
   { name: "المفروشات", url: "/admin/furnishes" },
   { name: "المعرض", url: "/admin/carousels" },
@@ -44,9 +45,22 @@ const ActiveLink = React.forwardRef<HTMLInputElement, ActiveLinkProps>(
 
 export default function AdminSidebar({ logout }) {
   return (
-    <Box sx={{ minWidth: 250, boxShadow: "default", minHeight: "100vh", paddingBottom: 150 }}>
-      <Box sx={{ width: 100, paddingX: 3, paddingY: 1 }}>
-        <Image src="/logo.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
+    <Box
+      sx={{
+        width: [100, null, 250],
+        paddingX: 2,
+        backgroundColor: "dark",
+        minHeight: "100vh",
+        position: "relative",
+        paddingBottom: 150,
+      }}
+    >
+      <Box sx={{ width: 100, paddingX: [0, null, 3], paddingY: 3 }}>
+        <Image
+          sx={{ objectFit: "contain" }}
+          src="/logo.png"
+          alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
+        />
       </Box>
 
       <Box sx={{ marginTop: 5 }} as="nav">
@@ -57,9 +71,9 @@ export default function AdminSidebar({ logout }) {
         ))}
       </Box>
 
-      <Box sx={{ position: "fixed", bottom: 0, width: 250 }}>
+      <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
         <Button onClick={logout} sx={{ width: "100%" }} variant="link">
-          logout
+          الخروج
         </Button>
       </Box>
     </Box>

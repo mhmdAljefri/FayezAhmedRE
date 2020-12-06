@@ -9,11 +9,12 @@ type Option = { key: String; value: String; node?: ReactNode }
 type DropdownProps = {
   options: Option[]
   defaultValue: String
+  onChange: (value: any) => void
 }
 
 // TODO add Price hooks and context
 
-const Dropdown = ({ options, defaultValue }: DropdownProps) => {
+const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
   const defaultOption = options.find((option) => option.value === defaultValue)
   const [selected, setSelected] = useState(defaultOption)
   const { ref, open, setOpen } = useOnClickout()
@@ -22,7 +23,9 @@ const Dropdown = ({ options, defaultValue }: DropdownProps) => {
     <Box ref={ref} sx={{ position: "relative", zIndex: 1111 }}>
       <Flex sx={{ alignItems: "center", color: "primary" }} onMouseEnter={() => setOpen(true)}>
         <Box sx={{ paddingX: 2, marginInlineEnd: 5 }}>{selected?.node || selected?.value}</Box>
-        <Icon icon={chevronDown} />
+        <Box sx={{ position: "absolute", left: 23, top: 0 }}>
+          <Icon icon={chevronDown} />
+        </Box>
       </Flex>
       <Box
         sx={{
@@ -35,7 +38,14 @@ const Dropdown = ({ options, defaultValue }: DropdownProps) => {
         }}
       >
         {options.map((option, index) => (
-          <Box key={index} sx={{ paddingX: 2 }} onClick={() => setSelected(option)}>
+          <Box
+            key={index}
+            sx={{ paddingX: 2 }}
+            onClick={() => {
+              setSelected(option)
+              onChange(option)
+            }}
+          >
             {option.node || option.value}
           </Box>
         ))}
