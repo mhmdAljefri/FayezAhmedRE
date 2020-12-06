@@ -53,16 +53,9 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
       }}
     >
       <Form
-        mutators={arrayMutators}
+        // mutators={arrayMutators}
         onSubmit={onSubmit}
-        initialValues={{
-          status: "inprogress",
-          location: {
-            latitude: "",
-            longitude: "",
-          },
-          ...initialValues,
-        }}
+        initialValues={initialValues}
       >
         <LabeledTextField required name="name" label="العنوان" />
         <LabeledTextField required name="subTitle" label="العنوان الفرعي" />
