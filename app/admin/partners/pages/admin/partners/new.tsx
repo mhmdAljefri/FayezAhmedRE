@@ -2,6 +2,7 @@ import AdminLayout from "app/layouts/AdminLayout"
 import { Link, useMutation, BlitzPage } from "blitz"
 import createPartner from "app/admin/partners/mutations/createPartner"
 import PartnerForm from "app/admin/partners/components/PartnerForm"
+import { toast } from "react-toastify"
 
 const NewPartnerPage: BlitzPage = () => {
   const [createPartnerMutation] = useMutation(createPartner)
@@ -14,17 +15,17 @@ const NewPartnerPage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async (data) => {
           try {
-            const partner = await createPartnerMutation({ data })
-            alert("Success!" + JSON.stringify(partner))
+            await createPartnerMutation({ data })
+            toast.success("تمت العملية بنجاح!")
           } catch (error) {
-            alert("Error creating partner " + JSON.stringify(error, null, 2))
+            toast.error("فشلت العملية ")
           }
         }}
       />
 
       <p>
-        <Link href="/partners">
-          <a>Partners</a>
+        <Link href="/admin/partners">
+          <a>العودة لقائمة الشركاء</a>
         </Link>
       </p>
     </div>

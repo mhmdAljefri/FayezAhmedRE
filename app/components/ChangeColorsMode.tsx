@@ -27,7 +27,7 @@ export default function ChangeColorsMode({ sx }: ChangeColorsModeProps) {
     <Flex
       onClick={handleChangeMode}
       sx={{
-        width: 100,
+        width: 70,
         marginBottom: 3,
         justifyContent: "space-between",
         borderRadius: 25,

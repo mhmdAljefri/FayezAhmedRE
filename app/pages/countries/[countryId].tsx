@@ -14,7 +14,6 @@ import getCarousels from "app/public/carousels/queries/getCarousels"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/SlickSlider"
 import Contact from "app/components/Forms/Contact"
-import Fade from "react-reveal/Fade"
 import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -76,9 +75,8 @@ export default function CountryPage({
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
-  const projectsUrl = `/countries/${country.id}/projects`
+  const projectsUrl = `${asPath}/projects`
 
-  console.log(showInspirationGallery, country.getInspiredGallery, country[showInspirationGallery])
   return (
     <Layout
       headerProps={{
@@ -225,13 +223,13 @@ export default function CountryPage({
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <Grid columns={3}>
           {country[showInspirationGallery]?.map((image, index) => (
-            <Fade key={index} delay={200 + index * 100} bottom>
+            <Slide key={index} bottom>
               <Image
                 sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
                 src={image}
                 alt="..."
               />
-            </Fade>
+            </Slide>
           ))}
         </Grid>
       </Wrapper>

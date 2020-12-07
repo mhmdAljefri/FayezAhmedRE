@@ -6,6 +6,7 @@ import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
 import SubmitButton from "../SubmitButton"
 import Fade from "react-reveal/Fade"
+import LabeledMenuField from "app/admin/components/LabeledMenuField"
 
 export default function Contact() {
   const { run, fetching } = useRequestsMutation("consultings")
@@ -61,24 +62,31 @@ export default function Contact() {
           />
           <Grid columns={[1, null, 3]} sx={{ justifyContent: "space-between" }}>
             <Grid columns={[1, null, 2]} sx={{ gridColumn: ["auto", null, "span 2"] }}>
-              <Field sx={{ minWidth: 250 }} component={Select} name="time">
-                <option>وقت الاتصال (إختياري)</option>
-                <option value="9-12">9-12am</option>
-                <option value="12-3">12-3pm</option>
-                <option value="3-6">3-6pm</option>
-                <option value="6-9">6-9pm</option>
-                <option value="anytime">اي وقت</option>
-                <option value="now">الان</option>
-              </Field>
-              <Field sx={{ minWidth: 250 }} component={Select} name="budget">
-                <option>الميزانية (إختياري)</option>
-                <option value="9-12"></option>
-                <option value="12-3">12-3pm</option>
-                <option value="3-6">3-6pm</option>
-                <option value="6-9">6-9pm</option>
-                <option value="anytime">اي وقت</option>
-                <option value="now">الان</option>
-              </Field>
+              <LabeledMenuField
+                label="وقت الاتصال (اختياري)"
+                name="callingTime"
+                options={[
+                  { id: "9-12", name: "9-12am" },
+                  { id: "12-3", name: "12-3am" },
+                  { id: "3-6", name: "3-6am" },
+                  { id: "6-9", name: "6-9am" },
+                  { id: "now", name: "now" },
+                ]}
+                getLabel={(t) => t.name}
+                getValue={(t) => t.id}
+              />
+              <LabeledMenuField
+                label="الميزانية (اختياري)"
+                name="budget"
+                options={[
+                  { id: "1 مليون", name: "مليون" },
+                  { id: "2 مليون", name: "2 مليون" },
+                  { id: "4 مليون", name: "4 مليون" },
+                  { id: "اكثر من 4 مليون", name: "اكثر من 4 مليون" },
+                ]}
+                getLabel={(t) => t.name}
+                getValue={(t) => t.id}
+              />
             </Grid>
             <SubmitButton fetching={fetching} />
           </Grid>

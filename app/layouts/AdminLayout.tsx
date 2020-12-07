@@ -1,5 +1,12 @@
 import { ReactNode, Suspense } from "react"
-import { AuthenticationError, AuthorizationError, Head, useMutation, useSession } from "blitz"
+import {
+  AuthenticationError,
+  AuthorizationError,
+  Head,
+  useMutation,
+  usePaginatedQuery,
+  useSession,
+} from "blitz"
 import { Box, Flex, SxStyleProp, ThemeProvider } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import AdminSidebar from "app/components/Sidebars/AdminSidebar"
@@ -8,6 +15,7 @@ import logout from "app/auth/mutations/logout"
 import adminTheme from "app/theme/admin"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
 import { BarLoader } from "react-spinners"
+import getNewRequestsCount from "app/admin/requests/queries/getNewRequestsCount"
 
 type AdminLayoutProps = {
   title?: string
@@ -20,6 +28,7 @@ type AdminLayoutProps = {
 const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
   const sesstion = useSession()
   const [logoutMutation] = useMutation(logout)
+  const [{ count }] = usePaginatedQuery(getNewRequestsCount, {})
 
   const handleLogout = async () => {
     try {
@@ -53,7 +62,7 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
           }}
         >
           <Suspense fallback="...">
-            <AdminSidebar logout={handleLogout} />
+            <AdminSidebar newRequestsCount={count} logout={handleLogout} />
           </Suspense>
           <Box
             sx={{

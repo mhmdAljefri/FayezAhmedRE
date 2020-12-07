@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import { Link, useRouter } from "blitz"
-import { Box, Button, Image, Link as ThemeLink } from "theme-ui"
+import { Badge, Box, Button, Image, Link as ThemeLink } from "theme-ui"
 
 const links = [
   { name: "الميزات", url: "/admin/features" },
@@ -43,7 +43,7 @@ const ActiveLink = React.forwardRef<HTMLInputElement, ActiveLinkProps>(
   }
 )
 
-export default function AdminSidebar({ logout }) {
+export default function AdminSidebar({ logout, newRequestsCount }) {
   return (
     <Box
       sx={{
@@ -69,6 +69,13 @@ export default function AdminSidebar({ logout }) {
             <ActiveLink>{name}</ActiveLink>
           </Link>
         ))}
+      </Box>
+      <Box sx={{ marginTop: 4 }}>
+        <Link passHref href={`/admin/requests`}>
+          <ActiveLink>
+            الطلبات <Badge>{newRequestsCount}</Badge>
+          </ActiveLink>
+        </Link>
       </Box>
 
       <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>

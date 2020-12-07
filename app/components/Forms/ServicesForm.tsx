@@ -49,7 +49,7 @@ function CarsForm() {
     <Form onSubmit={run}>
       <LabeledTextField name="name" label="الاسم" />
       <LabeledTextField name="mobile" label="الجوال" />
-      <LabeledTextField type="number" name="count" label="عدد الركاب" />
+      <LabeledTextField name="count" type="number" label="عدد الركاب" />
       <LabeledTextField name="arrivalDate" label="تاريخ الوصول" />
       <LabeledTextField name="departureDate" label="تاريخ المغادرة" />
       <SubmitButton fetching={fetching} />

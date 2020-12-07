@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getPartner from "app/admin/partners/queries/getPartner"
 import updatePartner from "app/admin/partners/mutations/updatePartner"
 import PartnerForm from "app/admin/partners/components/PartnerForm"
+import { toast } from "react-toastify"
 
 export const EditPartner = () => {
   const router = useRouter()
@@ -24,11 +25,10 @@ export const EditPartner = () => {
               data,
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
+            toast.success("Success!")
             router.push(`/admin/partners/`)
           } catch (error) {
-            console.log(error)
-            alert("Error creating partner " + JSON.stringify(error, null, 2))
+            toast.error("فشلت العملية")
           }
         }}
       />
@@ -44,7 +44,7 @@ const EditPartnerPage: BlitzPage = () => {
       </Suspense>
 
       <p>
-        <Link href="/partners">
+        <Link href="/admin/partners">
           <a>العودة لقائمة الشركاء</a>
         </Link>
       </p>
