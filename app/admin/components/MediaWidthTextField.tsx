@@ -27,11 +27,14 @@ export default function MediaWidthTextField({
         {!multiple ? (
           <Field
             render={({ input }) => (
-              <UploadCloudinary
-                {...input}
-                accept={accept}
-                onChange={(data) => input.onChange(data)}
-              />
+              <>
+                <UploadCloudinary
+                  {...input}
+                  accept={accept}
+                  onChange={(data) => input.onChange(data)}
+                />
+                {input.value && <Image sx={{ width: 80 }} alt="uploaded" src={input.value} />}
+              </>
             )}
             name={name}
           />

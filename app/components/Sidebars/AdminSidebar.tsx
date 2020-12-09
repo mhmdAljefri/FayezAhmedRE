@@ -6,6 +6,7 @@ const links = [
   { name: "الميزات", url: "/admin/features" },
   { name: "الشركاء", url: "/admin/partners" },
   { name: "المشاريع", url: "/admin/projects" },
+  { name: "العروض", url: "/admin/offers" },
   { name: "الدول", url: "/admin/countries" },
   { name: "انواع المفروشات", url: "/admin/furnish-categories" },
   { name: "المفروشات", url: "/admin/furnishes" },

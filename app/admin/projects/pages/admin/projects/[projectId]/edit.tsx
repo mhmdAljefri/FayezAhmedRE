@@ -9,25 +9,32 @@ import { toast } from "react-toastify"
 export const EditProject = () => {
   const router = useRouter()
   const projectId = useParam("projectId", "number")
-  const [project, { setQueryData }] = useQuery(getProject, { where: { id: projectId } })
+  const [project] = useQuery(getProject, { where: { id: projectId } })
   const [updateProjectMutation] = useMutation(updateProject)
+
+  const initialValues = { ...project, countryId: project.country.id }
 
   return (
     <div>
       <h1>تعديل المشروع {project.name}</h1>
 
       <ProjectForm
-        initialValues={project}
+        initialValues={initialValues}
         onSubmit={async (values) => {
-          delete values.countryId
+          const countryId = parseInt(values.countryId)
+          const roomsWithPrices = values.roomsWithPrices
           delete values.id
+          delete values.countryId
           delete values.propertyTypeId
+          delete values.roomsWithPrices
+
           try {
-            const updated = await updateProjectMutation({
+            await updateProjectMutation({
               where: { id: project.id },
               data: values,
+              countryId,
+              roomsWithPrices,
             })
-            await setQueryData(updated)
             toast.success("تم التعديل بنجاح!")
             router.push(`/admin/projects/`)
           } catch (error) {

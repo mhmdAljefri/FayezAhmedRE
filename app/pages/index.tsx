@@ -7,15 +7,15 @@ import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
-import { FeatureCreateInput, PartnerCreateInput } from "@prisma/client"
+import { Feature, Partner } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
 import { SlideProps } from "app/components/Slide"
 
 type HomeProps = {
   countries: CountryCardProps[]
   carousels: SlideProps[]
-  features: Pick<FeatureCreateInput, "image" | "name">[]
-  partners: Pick<PartnerCreateInput, "name" | "image">[]
+  features: Feature[]
+  partners: Partner[]
 }
 
 const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }) => {

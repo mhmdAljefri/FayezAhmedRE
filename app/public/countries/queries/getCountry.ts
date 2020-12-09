@@ -1,7 +1,7 @@
 import { NotFoundError } from "blitz"
-import db, { FindFirstCountryArgs } from "db"
+import db, { Prisma } from "db"
 
-type GetCountryInput = Pick<FindFirstCountryArgs, "where">
+type GetCountryInput = Pick<Prisma.FindFirstCountryArgs, "where">
 
 export default async function getCountry({ where }: GetCountryInput) {
   const country = await db.country.findFirst({
@@ -19,6 +19,7 @@ export default async function getCountry({ where }: GetCountryInput) {
         },
       },
       cities: true,
+      offers: true,
       rooms: true,
       isTurkey: true,
       name: true,

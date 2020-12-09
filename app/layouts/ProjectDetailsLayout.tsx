@@ -263,7 +263,7 @@ export default function ProjectDetailsLayout({
           <Wrapper>
             <Heading>بالجوار</Heading>
             <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
-              {nearBy.map((item) => (
+              {nearBy?.map((item) => (
                 <Box sx={{ textAlign: "center" }}>
                   <Image
                     sx={{

@@ -38,20 +38,25 @@ model Session {
 }
 
 model Project {
-  id                        Int      @default(autoincrement()) @id
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
+  id                        Int             @default(autoincrement()) @id
+  createdAt                 DateTime        @default(now())
+  updatedAt                 DateTime        @updatedAt
+
+  paymentType               PAYMENT_TYPES   @default(cash)
+  status                    STATUS          @default(inprogress)
+  country                   Country         @relation(fields: [countryId], references: [id])
+  countryId                 Int
+  propertyType              PropertyType?   @relation(fields: [propertyTypeId], references: [id])
+  propertyTypeId            Int?
 
   name                      String
   subTitle                  String
   details                   String
-  status                    STATUS
   image                     String?
   gallery                   String[]
   floorplan                 String[]
   features                  String[]
   brochure                  String?
-  paymentType               PAYMENT_TYPES @default(cash)
   constructingUpdateVideo   String?
   constructingUpdatePrview  String?
   nearBy                    Json?
@@ -59,11 +64,23 @@ model Project {
   location                  Json?
   installmentPlan           Json?
   locationText              String?
-  country                   Country  @relation(fields: [countryId], references: [id])
-  countryId                 Int
-  propertyType              PropertyType? @relation(fields: [propertyTypeId], references: [id])
-  propertyTypeId            Int?
 } 
+
+model Offer {
+  id                        Int             @default(autoincrement()) @id
+  createdAt                 DateTime        @default(now())
+  updatedAt                 DateTime        @updatedAt
+
+  reachText                 String
+  title                     String
+  image                     String
+  subTitle                  String
+
+  project                   Project          @relation(fields: [projectId], references: [id])
+  projectId                 Int
+  country                   Country          @relation(fields: [countryId], references: [id])
+  countryId                 Int
+}
 
 model PropertyType {
     id             Int      @default(autoincrement()) @id
@@ -107,6 +124,7 @@ model Country {
   exploreGallery        String[]
   cities                City[]
   projects              Project[]
+  offers                Offer[]
 }
 
 model City {

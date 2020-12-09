@@ -11,6 +11,7 @@ import getCountries from "app/admin/countries/queries/getCountries"
 import { usePaginatedQuery } from "blitz"
 import UploadVideo from "./UploadVideo"
 import RoomsField from "./RoomsFiels"
+import InstallmentPalnField from "./InstallmentPalnField"
 
 type ProjectFormProps = {
   initialValues: any
@@ -67,7 +68,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           getLabel={(country) => country.name}
           getValue={(country) => country.id as number}
           options={countries}
-          name="country.connect.id"
+          name="countryId"
           label="الدولة"
         />
 
@@ -84,6 +85,21 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           getValue={(item) => item.id}
           label="حالة المشروع"
         />
+        <LabeledMenuField
+          options={[
+            {
+              id: "cash",
+              name: "كاش",
+            },
+            { id: "installment", name: "تقسيط" },
+          ]}
+          name="paymentType"
+          getLabel={(item) => item.name}
+          getValue={(item) => item.id}
+          label="نوع الدفع"
+        />
+
+        <InstallmentPalnField />
 
         <UploadVideo />
 

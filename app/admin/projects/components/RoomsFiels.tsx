@@ -11,10 +11,11 @@ export default function RoomsField(props) {
   const [{ countries }] = usePaginatedQuery(getCountries, {})
   const { values } = useFormState()
 
-  const country = countries.find((c) => c.id.toString() === values.country?.connect.id)
+  console.log({ values })
+  const country = countries.find((c) => c.id.toString() === values.countryId?.toString())
 
   return (
-    <FieldArray name="roomsWithPrices.create">
+    <FieldArray name="roomsWithPrices">
       {({ fields }) => (
         <Flex sx={{ flexWrap: "wrap" }}>
           {fields.map((name, index) => (

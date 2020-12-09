@@ -13,8 +13,17 @@ const NewProjectPage: BlitzPage = () => {
       <ProjectForm
         initialValues={{}}
         onSubmit={async (values) => {
+          const countryId = parseInt(values.countryId)
+          const roomsWithPrices = values.roomsWithPrices
+          delete values.countryId
+          delete values.roomsWithPrices
+
           try {
-            await createProjectMutation({ data: values })
+            await createProjectMutation({
+              data: values,
+              countryId,
+              roomsWithPrices,
+            })
             router.push("/admin/projects")
           } catch (error) {
             alert("Error creating project " + JSON.stringify(error, null, 2))

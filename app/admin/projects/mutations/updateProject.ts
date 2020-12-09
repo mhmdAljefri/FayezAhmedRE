@@ -1,19 +1,31 @@
 import { Ctx } from "blitz"
-import db, { ProjectUpdateArgs } from "db"
+import db, { Prisma, RoomWithPrice } from "db"
 
-type CountryID = {
-  data: {
-    countryId?: string
-  }
+type UpdateProjectInput = Pick<Prisma.ProjectUpdateArgs, "where" | "data"> & {
+  countryId: number
+  roomsWithPrices: RoomWithPrice[]
 }
-type UpdateProjectInput = Pick<ProjectUpdateArgs, "where" | "data"> & CountryID
 
-export default async function updateProject({ where, data }: UpdateProjectInput, ctx: Ctx) {
+export default async function updateProject(
+  { where, data, countryId, roomsWithPrices }: UpdateProjectInput,
+  ctx: Ctx
+) {
   ctx.session.authorize("admin")
 
-  delete data.countryId
+  // todo fide removed room and delete it from database
+  // todo fide new room and create it with relation
 
-  const project = await db.project.update({ where, data: { ...data } })
+  const project = await db.project.update({
+    where,
+    data: {
+      ...data,
+      country: {
+        connect: {
+          id: countryId,
+        },
+      },
+    },
+  })
 
   return project
 }

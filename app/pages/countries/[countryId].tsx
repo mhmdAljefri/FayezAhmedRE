@@ -7,7 +7,7 @@ import Carousel from "app/components/Slider"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { City, Country, RoomWithPrice } from "@prisma/client"
+import { City, Country, Offer, RoomWithPrice } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getCarousels from "app/public/carousels/queries/getCarousels"
@@ -17,6 +17,7 @@ import Contact from "app/components/Forms/Contact"
 import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ArrowIcon from "app/components/ArrowIcon"
+import { OfferCard } from "app/layouts/OfferssList"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
@@ -54,6 +55,7 @@ export type CountryPropsType = {
       subTitle?: string
     }[]
     cities: City[]
+    offers: Offer[]
   }
   furnishCategories: { name: string; image: string }[]
   carousels: []
@@ -76,6 +78,7 @@ export default function CountryPage({
     "dontMissitGallery"
   )
   const projectsUrl = `${asPath}/projects`
+  const offersUrl = `${asPath}/offers`
 
   return (
     <Layout
@@ -112,6 +115,15 @@ export default function CountryPage({
         }}
       >
         <Filter {...country} onFilter={handleFilter} />
+      </Wrapper>
+      <Wrapper>
+        <HeadingWithMoreLink href={offersUrl} heading="جديدنا" />
+
+        <Grid sx={{ my: 5 }} columns={[1, null, 3]}>
+          {country.offers.map((offer) => (
+            <OfferCard {...offer} />
+          ))}
+        </Grid>
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
