@@ -50,8 +50,10 @@ const Header = ({ sx }: HeaderProps) => {
         </Link>
         <Flex sx={{ alignItems: "center" }}>
           <Search />
-          <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
-          <PriceType />
+          <Box sx={{ display: ["none", null, "flex"] }}>
+            <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
+            <PriceType />
+          </Box>
           <Nav />
         </Flex>
       </Wrapper>

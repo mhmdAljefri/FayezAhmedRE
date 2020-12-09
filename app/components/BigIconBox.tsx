@@ -10,10 +10,22 @@ interface BigIconTextProps extends IconProp {
 export default function BigIconText({ text, icon, sx }: BigIconTextProps) {
   return (
     <Box sx={{ color: "white", textAlign: "center", ...sx }}>
-      <Icon size={60} icon={icon} />
+      <Box
+        sx={{
+          height: 60,
+          borderRadius: 60,
+          width: 60,
+          backgroundColor: "background",
+          color: "primary",
+        }}
+      >
+        <Icon style={{ marginTop: 15 }} size={30} icon={icon} />
+      </Box>
       <Text
         sx={{
           marginTop: 35,
+          fontWeight: 700,
+          fontSize: [3, 4],
         }}
       >
         {text}

@@ -3,7 +3,7 @@ import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
 import arrayMutators from "final-form-arrays"
 
-import { Button, Card } from "theme-ui"
+import { Box, Button, Card, Heading } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
@@ -102,6 +102,15 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         <InstallmentPalnField />
 
         <UploadVideo />
+
+        <Box sx={{ py: 4, backgroundColor: "muted", px: 4, my: 4 }}>
+          <Heading sx={{ marginBottom: 4 }}>الشركات العاملة في المشروع</Heading>
+          <LabeledTextField name="oprationCompanies.owner" label="مالك المشروع" />
+          <LabeledTextField name="oprationCompanies.developer" label="مطور المشروع" />
+          <LabeledTextField name="oprationCompanies.contractor" label="مقاول المشروع" />
+          <LabeledTextField name="oprationCompanies.principalConsultant" label="مستشار المشروع" />
+          <LabeledTextField name="oprationCompanies.design" label="تصميم المشروع" />
+        </Box>
 
         <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
 

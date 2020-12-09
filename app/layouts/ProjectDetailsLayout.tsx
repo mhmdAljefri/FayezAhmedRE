@@ -2,17 +2,53 @@ import BigIconText from "app/components/BigIconBox"
 // import SelectionBox from "app/components/SelectionBox"
 import Wrapper from "app/components/Wrapper"
 import React, { useState } from "react"
-import { Box, Button, Flex, Heading, Image, Link, Text } from "theme-ui"
+import { Box, Button, Flex, Grid, Heading, Image, Link as ThemeLink, Text } from "theme-ui"
 import Layout from "./Layout"
 
-import { building } from "react-icons-kit/fa/building"
-import { money } from "react-icons-kit/fa/money"
+import { buildingO } from "react-icons-kit/fa/buildingO"
+import { dollar } from "react-icons-kit/fa/dollar"
 import { minusSquare } from "react-icons-kit/fa/minusSquare"
 import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
 import SlickSlider from "app/components/SlickSlider"
+import usePriceType from "app/hooks/usePriceType"
+import { Link } from "blitz"
+
+type ConstractingCardProps = {
+  label: string
+  text?: string
+}
+function ConstractingCard({ label, text }: ConstractingCardProps) {
+  if (!text) return <div />
+  return (
+    <Box sx={{ marginBottom: 3 }}>
+      <Heading
+        as="h3"
+        sx={{
+          fontSize: 5,
+          color: "primary",
+          pb: 3,
+          position: "relative",
+          ":after": {
+            content: '""',
+            position: "absolute",
+            display: "block",
+            right: 0,
+            width: "90%",
+            maxWidth: 200,
+            height: 2,
+            backgroundColor: "primary",
+          },
+        }}
+      >
+        {text}
+      </Heading>
+      <Text sx={{ fontSize: 4 }}>{label}</Text>
+    </Box>
+  )
+}
 
 export default function ProjectDetailsLayout({
   name,
@@ -28,13 +64,17 @@ export default function ProjectDetailsLayout({
   constructingUpdateVideo,
   constructingUpdatePrview,
   nearBy,
+  oprationCompanies,
   roomsWithPrices,
   location,
 }) {
+  const { owner, developer, contractor, principalConsultant, design } = oprationCompanies || {}
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
 
   const [room, setRoom] = useState(0)
+  const { priceType, priceTypeSuffix } = usePriceType()
+
   const roomWithPrice = roomsWithPrices[room]
 
   return (
@@ -76,10 +116,10 @@ export default function ProjectDetailsLayout({
                   borderColor: "primary",
                 }}
               >
-                AED price
+                {priceTypeSuffix}
               </Text>
               <Text sx={{ paddingY: 3, fontSize: 3 }}>
-                السعر يبداء من <span>{roomWithPrice?.price}</span>
+                السعر يبداء من <span>{roomWithPrice?.[priceType]}</span>
               </Text>
             </Box>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
@@ -117,8 +157,8 @@ export default function ProjectDetailsLayout({
               {name}
             </Heading>
             <Flex sx={{ justifyContent: "space-evenly" }}>
-              <BigIconText icon={building} text="شقق وفلل" />
-              <BigIconText icon={money} text="كاش" />
+              <BigIconText icon={buildingO} text="شقق وفلل" />
+              <BigIconText icon={dollar} text="كاش" />
               <BigIconText icon={mapMarker} text={country.name} />
               <BigIconText icon={key} text={new Date().getFullYear()} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
@@ -235,29 +275,22 @@ export default function ProjectDetailsLayout({
                 </Text>
               ))}
             </SlickSlider>
-            <Link
+            <ThemeLink
               download={name}
               target="_blank"
               rel="noopener "
               href={brochure}
               sx={{
+                variant: "links.outline",
                 opacity: brochure ? 1 : 0.3,
-                backgroundColor: "background",
-                color: "heading",
-                borderRadius: "md",
                 maxWidth: 250,
-                display: "block",
-                border: "primary",
-                borderColor: "primary",
                 marginX: "auto",
                 marginY: 5,
-                paddingY: 1,
-                paddingX: 2,
                 textAlign: "center",
               }}
             >
               تنزيل البروشور
-            </Link>
+            </ThemeLink>
           </Wrapper>
 
           <Wrapper>
@@ -287,8 +320,31 @@ export default function ProjectDetailsLayout({
             </SlickSlider>
           </Wrapper>
         </Box>
+        <Box>
+          <Wrapper>
+            <Heading sx={{ fontSize: 6, marginBottom: 4, marginTop: 5 }}>
+              تفاصيل الشركات المقاولة
+            </Heading>
+            <Grid sx={{ marginBottom: 5 }} columns={[1, 2]}>
+              <ConstractingCard label="الشركة المالكة" text={owner} />
+              <ConstractingCard label="شركة المقاولات" text={contractor} />
+              <ConstractingCard label="شركة التطوير" text={developer} />
+              <ConstractingCard label="شركة الاستشارة" text={principalConsultant} />
+              <ConstractingCard label="شركة التصميم" text={design} />
+            </Grid>
+          </Wrapper>
+        </Box>
         <Wrapper>
           <Contact />
+
+          <Link href="/furniture">
+            <ThemeLink
+              sx={{ marginBottom: 5, maxWidth: 200, textAlign: "center", marginX: "auto" }}
+              variant="outline"
+            >
+              اثث منزلك
+            </ThemeLink>
+          </Link>
         </Wrapper>
       </div>
     </Layout>

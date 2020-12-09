@@ -63,6 +63,18 @@ const theme = {
       textDecoration: "none",
       fontWeight: "bold",
     },
+    outline: {
+      variant: "links.default",
+
+      backgroundColor: "background",
+      color: "heading",
+      display: "block",
+      border: "primary",
+      borderRadius: "md",
+      paddingY: 1,
+      paddingX: 2,
+      borderColor: "primary",
+    },
     dashboard: {
       variant: "links.default",
 
@@ -88,7 +100,7 @@ const theme = {
     field: {
       borderRadius: "md",
       color: "white",
-      borderWidth: "2px",
+      borderWidth: "1px",
       borderColor: "white",
       backgroundColor: "input",
       boxShadow: "input",

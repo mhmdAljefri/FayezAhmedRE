@@ -3,7 +3,7 @@ import Filter, { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import getCountry from "app/public/countries/queries/getCountry"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
-import { useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
+import { Link, useInfiniteQuery, useParam, useQuery, useRouter, useRouterQuery } from "blitz"
 import React, { useRef, useState } from "react"
 import { Button, Flex, Grid, Image, Box, Heading, Text } from "theme-ui"
 
@@ -52,6 +52,8 @@ function ProjectCardIconsText({ icon, text, width }: ProjectCardIconsTextProps) 
 
 function SelectRoom({ roomWithPrices, selected, onChange }) {
   const { open, setOpen, ref } = useOnClickout()
+
+  if (!selected) return <div />
   return (
     <Box ref={ref} sx={{ position: "relative" }}>
       <Button sx={{ height: 40, padding: 0 }} variant="link" onClick={() => setOpen(true)}>
@@ -87,7 +89,8 @@ function ProjectCard({
   const { priceType } = usePriceType()
   const [selected, setSelected] = useState(roomWithPrices[0])
 
-  const price = selected[priceType]
+  const price = selected?.[priceType]
+  const projectPath = useRouter().asPath + `/${name}`
   return (
     <Fade bottom>
       <Box
@@ -100,7 +103,14 @@ function ProjectCard({
         }}
       >
         <Box sx={{}}>
-          <Image sx={{ height: 240, width: "100%", objectFit: "cover" }} src={image as string} />
+          <Link passHref href={projectPath}>
+            <a>
+              <Image
+                sx={{ height: 240, width: "100%", objectFit: "cover" }}
+                src={image as string}
+              />
+            </a>
+          </Link>
         </Box>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{name}</Heading>
@@ -119,12 +129,11 @@ function ProjectCard({
 }
 
 type ProjectListTypes = {
-  orderBy?: Prisma.ProjectOrderByInput
   title: string
   subTitle: string
 }
 
-export default function ProjectsList({ orderBy, title, subTitle }: ProjectListTypes) {
+export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
@@ -134,9 +143,8 @@ export default function ProjectsList({ orderBy, title, subTitle }: ProjectListTy
     { isFetching, refetch, fetchMore, canFetchMore, isFetchingMore },
   ] = useInfiniteQuery(
     getProjectsInfinite,
-    (page = { take: 3, skip: 0 }) => ({
+    (page = { take: 9, skip: 0 }) => ({
       ...page,
-      orderBy,
       where: {
         countryId,
         OR: [
@@ -150,6 +158,8 @@ export default function ProjectsList({ orderBy, title, subTitle }: ProjectListTy
       getFetchMore: (lastGroup) => lastGroup.nextPage,
     }
   )
+
+  console.log({ groupedProjects })
 
   return (
     <div>

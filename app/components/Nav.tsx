@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Box, Flex, Link as ThemeLink } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "./Burger"
@@ -60,13 +60,26 @@ const Nav = (props: NavProps) => {
               <Burger onClick={() => setOpen(false)} open={open} />
 
               <Link href="/">
-                <ThemeLink sx={{ marginTop: 5, fontSize: [3, null, 4, 5] }}>الرئيسية</ThemeLink>
+                <ThemeLink
+                  sx={{
+                    marginTop: 5,
+                    color: "heading",
+                    fontWeight: 700,
+                    fontSize: [3, null, 5, 6],
+                  }}
+                >
+                  الرئيسية
+                </ThemeLink>
               </Link>
               <Link href="/furniture">
-                <ThemeLink sx={{ fontSize: [3, null, 4, 5] }}>الاثاث</ThemeLink>
+                <ThemeLink sx={{ color: "heading", fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                  الاثاث
+                </ThemeLink>
               </Link>
               <Link href="/search">
-                <ThemeLink sx={{ fontSize: [3, null, 4, 5] }}>البحث</ThemeLink>
+                <ThemeLink sx={{ color: "heading", fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                  البحث
+                </ThemeLink>
               </Link>
             </Flex>
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
