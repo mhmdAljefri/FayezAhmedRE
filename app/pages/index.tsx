@@ -7,13 +7,12 @@ import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
-import { Feature, Partner } from "@prisma/client"
+import { Carousel, Feature, Partner } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
-import { SlideProps } from "app/components/Slide"
 
 type HomeProps = {
   countries: CountryCardProps[]
-  carousels: SlideProps[]
+  carousels: Carousel[]
   features: Feature[]
   partners: Partner[]
 }
