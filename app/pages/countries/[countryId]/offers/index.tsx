@@ -3,7 +3,7 @@ import Layout from "app/layouts/Layout"
 import OfferssList from "app/layouts/OfferssList"
 
 function WhatsNew() {
-  return <OfferssList title="جديدنا" subTitle="" orderBy={{ id: "desc" }} />
+  return <OfferssList name="جديدنا" details="" />
 }
 
 WhatsNew.getLayout = (page) => (

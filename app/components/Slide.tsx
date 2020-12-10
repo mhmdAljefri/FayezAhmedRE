@@ -1,7 +1,8 @@
+import { Carousel } from "@prisma/client"
 import React from "react"
 import { Box, Flex, Heading, Text } from "theme-ui"
 
-export type SlideProps = { title: string; text: string; image: string }
+export type SlideProps = Carousel
 type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
 }

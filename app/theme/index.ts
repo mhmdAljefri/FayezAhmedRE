@@ -21,6 +21,7 @@ const theme = {
     shadow: "rgba(0, 0, 0, .125)",
     modes: {
       dark: {
+        muted: "#111",
         text: "#eee",
         heading: "#fff",
         lightText: "#555",

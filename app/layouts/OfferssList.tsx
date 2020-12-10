@@ -1,8 +1,7 @@
 import { Offer, Prisma } from "@prisma/client"
-import Filter, { filterValues } from "app/components/Forms/Filter"
+import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import getCountry from "app/public/countries/queries/getCountry"
-import { Link, useInfiniteQuery, useParam, useQuery, useRouter, useRouterQuery } from "blitz"
+import { Link, useInfiniteQuery, useParam, useRouter, useRouterQuery } from "blitz"
 import React, { useRef } from "react"
 import { Grid, Image, Box, Heading, Text } from "theme-ui"
 
@@ -10,22 +9,24 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
 
-type OfferCardProps = Pick<Offer, "title" | "image" | "subTitle">
+type OfferCardProps = Pick<Offer, "name" | "image" | "details"> & {
+  prefixPath?: string
+}
 
-export function OfferCard({ image, subTitle, title }: OfferCardProps) {
+export function OfferCard({ image, details, name, prefixPath = "" }: OfferCardProps) {
   const { asPath } = useRouter()
   return (
     <Fade bottom>
       <Box
         sx={{
           width: ["90vw", null, 370],
-          backgroundColor: "white",
+          backgroundColor: "background",
           marginX: "auto",
           boxShadow: "default",
           marginBottom: 2,
         }}
       >
-        <Link href={asPath + "/" + title}>
+        <Link href={asPath + "/" + prefixPath + name}>
           <a>
             <Box sx={{ position: "relative" }}>
               <Image
@@ -50,6 +51,10 @@ export function OfferCard({ image, subTitle, title }: OfferCardProps) {
                   height: 40,
                   backgroundColor: "dark",
                   color: "white",
+                  transition: "all 0.5s linear",
+                  ":hover": {
+                    backgroundColor: "primary",
+                  },
                 }}
               >
                 العرض الحالي
@@ -58,38 +63,31 @@ export function OfferCard({ image, subTitle, title }: OfferCardProps) {
           </a>
         </Link>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
-          <Heading>{title}</Heading>
-          <Text>{subTitle}</Text>
+          <Heading>{name}</Heading>
+          <Text>{details}</Text>
         </Box>
       </Box>
     </Fade>
   )
 }
 
-type ProjectListTypes = {
-  orderBy?: Prisma.ProjectOrderByInput
-  title: string
-  subTitle: string
-}
-
-export default function ProjectsList({ orderBy, title, subTitle }: ProjectListTypes) {
+type ProjectListTypes = Pick<Offer, "name" | "details">
+export default function ProjectsList({ name, details }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const [country] = useQuery(getCountry, { where: { id: countryId } })
   const [
     groupedProjects,
-    { isFetching, refetch, fetchMore, canFetchMore, isFetchingMore },
+    { isFetching, fetchMore, canFetchMore, isFetchingMore },
   ] = useInfiniteQuery(
     getInfiniteOffersI,
     (page = { take: 3, skip: 0 }) => ({
       ...page,
-      orderBy,
       where: {
         countryId,
         OR: [
-          { title: { contains: filterRef.current?.search } },
-          { subTitle: { contains: filterRef.current?.search } },
+          { name: { contains: filterRef.current?.search } },
+          { details: { contains: filterRef.current?.search } },
           { reachText: { contains: filterRef.current?.search } },
         ],
       },
@@ -105,30 +103,18 @@ export default function ProjectsList({ orderBy, title, subTitle }: ProjectListTy
         sx={{
           paddingTop: 3,
           paddingBottom: 7,
-          color: "white",
+          color: "background",
           backgroundColor: "dark",
           marginBottom: 4,
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: 7, color: "white" }}>
-            {title}
+          <Heading as="h1" sx={{ fontSize: 7, color: "background" }}>
+            {name}
           </Heading>
-          <Text>{subTitle}</Text>
+          <Text>{details}</Text>
         </Wrapper>
       </Box>
-      {/* <Wrapper sx={{ marginTop: -7, marginBottom: 5 }}>
-        <Filter
-          initialValues={filter}
-          isTurkey={country.isTurkey}
-          rooms={country.rooms}
-          cities={country.cities}
-          onFilter={(data) => {
-            filterRef.current = data
-            refetch()
-          }}
-        />
-      </Wrapper> */}
       <Box>
         <Wrapper>
           <Grid sx={{ marginBottom: 5, justifyContent: "center" }} columns={[1, null, 2, 3]}>

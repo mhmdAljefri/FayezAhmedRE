@@ -7,7 +7,7 @@ export default async function getOffers(
   { where, orderBy, skip = 0, take }: GetOffersInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize()
 
   const offers = await db.offer.findMany({
     where,

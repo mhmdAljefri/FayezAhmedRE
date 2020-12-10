@@ -1,17 +1,31 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
-import getOffers from "app/admin/offers/queries/getOffers"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, useMutation } from "blitz"
+import getProjects from "app/admin/projects/queries/getProjects"
+import deleteProject from "app/admin/projects/mutations/deleteProject"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import Action from "app/admin/components/Action"
+import { Button } from "theme-ui"
 
 const ITEMS_PER_PAGE = 100
 
-export const OffersList = () => {
+export const ProjectsList = () => {
+  const [deleteProjectMutation] = useMutation(deleteProject)
+
+  const HEADERS = [
+    { name: "", key: "id" },
+    { name: "اسم العرض", key: "name" },
+    {
+      name: "",
+      render: (item) => (
+        <Action id={item.id} onDelete={() => deleteProjectMutation({ where: { id: item.id } })} />
+      ),
+    },
+  ]
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ offers, hasMore }] = usePaginatedQuery(getOffers, {
-    orderBy: { id: "asc" },
+  const [{ projects, hasMore }] = usePaginatedQuery(getProjects, {
+    orderBy: { id: "desc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
@@ -21,39 +35,31 @@ export const OffersList = () => {
 
   return (
     <DynamicTable
-      data={offers}
-      headers={[
-        {
-          name: "",
-          key: "id",
-        },
-        { name: "العنوان", key: "title" },
-        { name: "وصف", key: "subTitle" },
-        { name: "", render: ({ id }) => <Action id={id} /> },
-      ]}
+      headers={HEADERS}
       hasMore={hasMore}
+      data={projects || []}
       onNext={goToNextPage}
       onPrev={goToPreviousPage}
     />
   )
 }
 
-const OffersPage: BlitzPage = () => {
+const ProjectsPage: BlitzPage = () => {
   return (
     <div>
       <p>
-        <Link href="/admin/offers/new">
-          <a>اضافة عرض</a>
+        <Link href="/admin/projects/new">
+          <Button>اضافة عرض</Button>
         </Link>
       </p>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <OffersList />
+        <ProjectsList />
       </Suspense>
     </div>
   )
 }
 
-OffersPage.getLayout = (page) => <AdminLayout title={"Offers"}>{page}</AdminLayout>
+ProjectsPage.getLayout = (page) => <AdminLayout title={"Projects"}>{page}</AdminLayout>
 
-export default OffersPage
+export default ProjectsPage

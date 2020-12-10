@@ -6,7 +6,7 @@ type GetOfferInput = Pick<Prisma.FindFirstOfferArgs, "where">
 export default async function getOffer({ where }: GetOfferInput, ctx: Ctx) {
   ctx.session.authorize("admin")
 
-  const offer = await db.offer.findFirst({ where })
+  const offer = await db.offer.findFirst({ where, include: { country: true } })
 
   if (!offer) throw new NotFoundError()
 

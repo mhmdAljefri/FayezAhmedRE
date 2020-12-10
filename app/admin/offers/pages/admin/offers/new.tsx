@@ -1,39 +1,45 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useMutation, BlitzPage } from "blitz"
-import createOffer from "app/admin/offers/mutations/createOffer"
-import OfferForm from "app/admin/offers/components/OfferForm"
-import { toast } from "react-toastify"
+import { Link, useMutation, BlitzPage, useRouter } from "blitz"
+import createProject from "app/admin/projects/mutations/createProject"
+import ProjectForm from "app/admin/projects/components/ProjectForm"
 
-const NewOfferPage: BlitzPage = () => {
-  const [createOfferMutation] = useMutation(createOffer)
-
+const NewProjectPage: BlitzPage = () => {
+  const [createProjectMutation] = useMutation(createProject)
+  const router = useRouter()
   return (
     <div>
-      <h1>Create New Offer</h1>
+      <h1>انشاء عرض</h1>
 
-      <OfferForm
+      <ProjectForm
         initialValues={{}}
-        onSubmit={async (data) => {
-          const projectId = parseInt(data.projectId.toString())
-          delete (data as any).projectId
+        onSubmit={async (values) => {
+          const countryId = parseInt(values.countryId)
+          const roomsWithPrices = values.roomsWithPrices
+          delete values.countryId
+          delete values.roomsWithPrices
+
           try {
-            await createOfferMutation({ data, projectId })
-            toast.success("Success!")
+            await createProjectMutation({
+              data: values,
+              countryId,
+              roomsWithPrices,
+            })
+            router.push("/admin/projects")
           } catch (error) {
-            alert("Error creating offer " + JSON.stringify(error, null, 2))
+            alert("Error creating project " + JSON.stringify(error, null, 2))
           }
         }}
       />
 
       <p>
-        <Link href="/admin/offers">
-          <a>العودة للعروض</a>
+        <Link href="/projects">
+          <a>المشاريع</a>
         </Link>
       </p>
     </div>
   )
 }
 
-NewOfferPage.getLayout = (page) => <AdminLayout title={"Create New Offer"}>{page}</AdminLayout>
+NewProjectPage.getLayout = (page) => <AdminLayout title={"Create New Project"}>{page}</AdminLayout>
 
-export default NewOfferPage
+export default NewProjectPage

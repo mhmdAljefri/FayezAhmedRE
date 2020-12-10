@@ -1,16 +1,17 @@
 import React, { useRef } from "react"
 import Carousel from "app/components/Slider"
-import Slide, { SlideProps } from "app/components/Slide"
+import Slide from "app/components/Slide"
 import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 
 import { Icon } from "react-icons-kit"
 import { chevronCircleLeft } from "react-icons-kit/fa/chevronCircleLeft"
 import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight"
+import { Carousel as CarouselProps } from "@prisma/client"
 
 type HomeSliderProps = {
   slideStyle?: SxStyleProp
   onlyImages?: boolean
-  data: SlideProps[]
+  data: CarouselProps[]
 }
 
 const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {

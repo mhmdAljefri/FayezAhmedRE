@@ -5,21 +5,37 @@ import getCountries from "app/admin/countries/queries/getCountries"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import Action from "app/admin/components/Action"
 import { Country } from "@prisma/client"
-import { Box, Link as ThemeLink } from "theme-ui"
+import { Flex, Link as ThemeLink } from "theme-ui"
+import { EXPLOARE_TYPES_TEXT } from "app/constants"
 
 const ITEMS_PER_PAGE = 100
 
+// dontMissitGallery
+// getInspiredGallery
+// exploreGallery
 const HEADERS = [
   { name: "", key: "id" },
   { name: "الدولة", key: "name" },
   {
     name: "",
     render: ({ id }: Country) => (
-      <Box>
+      <Flex>
         <Link passHref href={`/admin/countries/${id}/cities`}>
-          <ThemeLink>المدن</ThemeLink>
+          <ThemeLink sx={{ marginX: 2 }}>المدن</ThemeLink>
         </Link>
-      </Box>
+        <Link passHref href={`/admin/countries/${id}/types/dontMissitGallery/explores/`}>
+          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.dontMissitGallery}</ThemeLink>
+        </Link>
+        <Link passHref href={`/admin/countries/${id}/types/exploreGallery/explores/`}>
+          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.exploreGallery}</ThemeLink>
+        </Link>
+        <Link passHref href={`/admin/countries/${id}/types/getInspiredGallery/explores/`}>
+          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.getInspiredGallery}</ThemeLink>
+        </Link>
+        <Link passHref href={`/admin/countries/${id}/opration-company-pages/`}>
+          <ThemeLink sx={{ marginX: 2 }}>صفحة الشركات العاملة</ThemeLink>
+        </Link>
+      </Flex>
     ),
   },
   {

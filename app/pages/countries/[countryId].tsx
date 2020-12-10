@@ -7,7 +7,7 @@ import Carousel from "app/components/Slider"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { City, Country, Offer, RoomWithPrice } from "@prisma/client"
+import { City, Country, Explore, Offer, RoomWithPrice } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getCarousels from "app/public/carousels/queries/getCarousels"
@@ -56,12 +56,13 @@ export type CountryPropsType = {
     }[]
     cities: City[]
     offers: Offer[]
+    explores: Explore[]
   }
   furnishCategories: { name: string; image: string }[]
   carousels: []
 }
 
-type inpirationGallery = "dontMissitGallery" | "getInspiredGallery" | "exploreGallery"
+type inpirationGallery = Explore["type"]
 
 export default function CountryPage({
   carousels,
@@ -77,6 +78,10 @@ export default function CountryPage({
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
+  const explores = country.explores.filter(
+    (explore: Explore) => explore.type === showInspirationGallery
+  )
+
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
 
@@ -121,7 +126,7 @@ export default function CountryPage({
 
         <Grid sx={{ my: 5 }} columns={[1, null, 3]}>
           {country.offers.map((offer) => (
-            <OfferCard {...offer} />
+            <OfferCard {...offer} prefixPath="offers/" />
           ))}
         </Grid>
       </Wrapper>
@@ -234,13 +239,15 @@ export default function CountryPage({
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <Grid columns={3}>
-          {country[showInspirationGallery]?.map((image, index) => (
+          {explores.map(({ image, title }, index) => (
             <Slide key={index} bottom>
-              <Image
-                sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
-                src={image}
-                alt="..."
-              />
+              <Link href={`${asPath}/explore/${title}`}>
+                <Image
+                  sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
+                  src={image}
+                  alt="..."
+                />
+              </Link>
             </Slide>
           ))}
         </Grid>

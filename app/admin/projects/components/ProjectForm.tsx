@@ -1,8 +1,6 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import arrayMutators from "final-form-arrays"
-
 import { Box, Button, Card, Heading } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
@@ -70,6 +68,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           options={countries}
           name="countryId"
           label="الدولة"
+          required
         />
 
         <LabeledMenuField
@@ -172,7 +171,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
                 type="button"
                 onClick={() => fields.push({})}
               >
-                اضافة مكان بالقرب من المشروع{" "}
+                اضافة مكان بالقرب من المشروع
               </Button>
             </div>
           )}

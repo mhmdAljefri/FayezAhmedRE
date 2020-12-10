@@ -23,9 +23,7 @@ export default async function getCountry({ where }: GetCountryInput) {
       rooms: true,
       isTurkey: true,
       name: true,
-      dontMissitGallery: true,
-      getInspiredGallery: true,
-      exploreGallery: true,
+      explores: true,
     },
   })
 

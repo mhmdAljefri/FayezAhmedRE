@@ -8,7 +8,7 @@ type MenuFieldType = {
   sx?: SxStyleProp
   options: any[]
   emptyOptionText?: string
-
+  required?: boolean
   getLabel?: (option: any) => string
   getValue?: (option: any) => string | number
 }
@@ -23,6 +23,7 @@ export function MenuField({
   sx,
   name,
   options,
+  required,
 }: MenuFieldType) {
   const dropDownOption = options.map((option: any) => {
     const value = getValue ? getValue(option) : option
@@ -36,7 +37,7 @@ export function MenuField({
   return (
     <Field
       render={({ input }) => (
-        <Select sx={sx} {...input}>
+        <Select sx={sx} required={required} {...input}>
           <option>{emptyOptionText || "اختر عنصر"}</option>
           {dropDownOption}
         </Select>

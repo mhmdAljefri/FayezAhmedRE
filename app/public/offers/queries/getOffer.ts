@@ -8,6 +8,7 @@ export default async function getOffer({ where }: GetProjectInput) {
     where,
     include: {
       project: true,
+      country: true,
     },
   })
 

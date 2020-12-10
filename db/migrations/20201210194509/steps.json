@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Country",
+      "field": "explores",
+      "type": "Explore",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Country",
+      "field": "explore"
+    }
+  ]
+}
