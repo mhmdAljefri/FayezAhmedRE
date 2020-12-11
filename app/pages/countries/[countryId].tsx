@@ -7,10 +7,9 @@ import Carousel from "app/components/Slider"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { City, Country, Explore, Offer, RoomWithPrice } from "@prisma/client"
+import { City, Country, Explore, Offer, OprationCompanyPage, RoomWithPrice } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
-import getCarousels from "app/public/carousels/queries/getCarousels"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/SlickSlider"
 import Contact from "app/components/Forms/Contact"
@@ -54,22 +53,17 @@ export type CountryPropsType = {
       image: string
       subTitle?: string
     }[]
+    oprationCompanyPages: OprationCompanyPage[]
     cities: City[]
     offers: Offer[]
     explores: Explore[]
   }
   furnishCategories: { name: string; image: string }[]
-  carousels: []
 }
 
 type inpirationGallery = Explore["type"]
 
-export default function CountryPage({
-  carousels,
-  country,
-  furnishCategories,
-  ...props
-}: CountryPropsType) {
+export default function CountryPage({ country, furnishCategories, ...props }: CountryPropsType) {
   const { push, asPath } = useRouter()
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
@@ -102,8 +96,8 @@ export default function CountryPage({
       />
       <Wrapper sx={{ marginTop: -50 }}>
         <HomeSlider
-          data={carousels}
           onlyImages
+          data={country.oprationCompanyPages}
           slideStyle={{
             borderRadius: "lg",
             overflow: "hidden",
@@ -342,9 +336,11 @@ export async function getServerSideProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
   const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
-  const { carousels } = await getCarousels({})
 
   return {
-    props: { country, carousels, furnishCategories }, // will be passed to the page component as props
+    props: {
+      country,
+      furnishCategories,
+    },
   }
 }

@@ -24,6 +24,7 @@ export default async function getCountry({ where }: GetCountryInput) {
       isTurkey: true,
       name: true,
       explores: true,
+      oprationCompanyPages: true,
     },
   })
 

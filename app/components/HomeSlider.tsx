@@ -1,17 +1,16 @@
 import React, { useRef } from "react"
 import Carousel from "app/components/Slider"
-import Slide from "app/components/Slide"
+import Slide, { SlideProps } from "app/components/Slide"
 import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 
 import { Icon } from "react-icons-kit"
 import { chevronCircleLeft } from "react-icons-kit/fa/chevronCircleLeft"
 import { chevronCircleRight } from "react-icons-kit/fa/chevronCircleRight"
-import { Carousel as CarouselProps } from "@prisma/client"
 
 type HomeSliderProps = {
   slideStyle?: SxStyleProp
   onlyImages?: boolean
-  data: CarouselProps[]
+  data: SlideProps[]
 }
 
 const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
@@ -73,7 +72,14 @@ const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
         }}
       >
         <Box sx={{ position: "relative", marginLeft: 100 }}>{renderedDots}</Box>
-        <Flex sx={{ position: "relative", marginLeft: 250, minWidth: 150 }}>
+        <Flex
+          sx={{
+            visibility: ["hidden", "visible"],
+            position: "relative",
+            marginLeft: 250,
+            minWidth: 150,
+          }}
+        >
           <Text sx={{ fontSize: 3, color: "white" }}>0{dots.length} \ </Text>
           <Text sx={{ fontSize: 6, fontWeight: "bolder", color: "primary" }}>
             0{activeSlideRef.current + 1}

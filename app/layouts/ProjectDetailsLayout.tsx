@@ -50,6 +50,96 @@ function ConstractingCard({ label, text }: ConstractingCardProps) {
   )
 }
 
+export function ConstractiongVideo({ constructingUpdatePrview, constructingUpdateVideo }) {
+  if (!constructingUpdateVideo) return <div />
+  return (
+    <Wrapper sx={{ marginY: 5 }}>
+      <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>حالة المشروع</Heading>
+      <Box
+        sx={{
+          marginX: [1, null, 6],
+          borderRadius: "default",
+          boxShadow: "card",
+          height: [250, 300, 350, 450],
+        }}
+      >
+        <video
+          width="100%"
+          height="100%"
+          poster={constructingUpdatePrview}
+          // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+          controls
+        >
+          <track kind="captions" />
+          <source src={constructingUpdateVideo} type="video/mp4" />
+          <source src={constructingUpdateVideo} type="video/ogg" />
+          <source src={constructingUpdateVideo} type="video/webm" />
+          <object data={constructingUpdateVideo}>
+            <embed src={constructingUpdateVideo} />
+          </object>
+        </video>
+      </Box>
+    </Wrapper>
+  )
+}
+
+export function GalleryView({ gallery }) {
+  return (
+    <>
+      <Box sx={{ paddingY: 6, backgroundColor: "dark" }}>
+        <Wrapper>
+          <Heading sx={{ color: "white", fontSize: [5, null, 6] }}>المعرض</Heading>
+        </Wrapper>
+      </Box>
+
+      <Wrapper sx={{ marginTop: -5 }}>
+        <Flex sx={{ justifyContent: "center", overflow: "auto" }}>
+          {gallery.map((item, index) => (
+            <Image
+              key={item + "_" + index}
+              sx={{
+                width: "30%",
+                maxWidth: 350,
+                minWidth: 280,
+                borderRadius: 15,
+                margin: 3,
+                boxShadow: "default",
+                height: "30vw",
+                maxHeight: 350,
+              }}
+              src={item}
+            />
+          ))}
+        </Flex>
+      </Wrapper>
+    </>
+  )
+}
+
+export function ContructionCompaniesDetails({
+  owner,
+  contractor,
+  developer,
+  principalConsultant,
+  design,
+}) {
+  return (
+    <Box>
+      <Wrapper>
+        <Heading sx={{ fontSize: 6, marginBottom: 4, marginTop: 5 }}>
+          تفاصيل الشركات المقاولة
+        </Heading>
+        <Grid sx={{ marginBottom: 5 }} columns={[1, 2]}>
+          <ConstractingCard label="الشركة المالكة" text={owner} />
+          <ConstractingCard label="شركة المقاولات" text={contractor} />
+          <ConstractingCard label="شركة التطوير" text={developer} />
+          <ConstractingCard label="شركة الاستشارة" text={principalConsultant} />
+          <ConstractingCard label="شركة التصميم" text={design} />
+        </Grid>
+      </Wrapper>
+    </Box>
+  )
+}
 export default function ProjectDetailsLayout({
   name,
   details,
@@ -68,7 +158,6 @@ export default function ProjectDetailsLayout({
   roomsWithPrices,
   location,
 }) {
-  const { owner, developer, contractor, principalConsultant, design } = oprationCompanies || {}
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
 
@@ -95,7 +184,7 @@ export default function ProjectDetailsLayout({
           }}
         />
         <Wrapper>
-          <Image sx={{ borderRadius: 15, marginTop: -6, width: "100%" }} src="/slide1.png" />
+          <Image sx={{ borderRadius: 15, marginTop: -6, width: "100%" }} src={image} />
           <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
 
@@ -165,61 +254,11 @@ export default function ProjectDetailsLayout({
             </Flex>
           </Box>
         </Wrapper>
-        <Box sx={{ paddingY: 6, backgroundColor: "dark" }}>
-          <Wrapper>
-            <Heading sx={{ color: "white", fontSize: [5, null, 6] }}>المعرض</Heading>
-          </Wrapper>
-        </Box>
-
-        <Wrapper sx={{ marginTop: -5 }}>
-          <Flex sx={{ justifyContent: "center", overflow: "auto" }}>
-            {gallery.map((item, index) => (
-              <Image
-                key={item + "_" + index}
-                sx={{
-                  width: "30%",
-                  maxWidth: 350,
-                  minWidth: 280,
-                  borderRadius: 15,
-                  margin: 3,
-                  boxShadow: "default",
-                  height: "30vw",
-                  maxHeight: 350,
-                }}
-                src={item}
-              />
-            ))}
-          </Flex>
-        </Wrapper>
-        {constructingUpdateVideo && (
-          <Wrapper sx={{ marginY: 5 }}>
-            <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>حالة المشروع</Heading>
-            <Box
-              sx={{
-                marginX: [1, null, 6],
-                borderRadius: "default",
-                boxShadow: "card",
-                height: [250, 300, 350, 450],
-              }}
-            >
-              <video
-                width="100%"
-                height="100%"
-                poster={constructingUpdatePrview}
-                // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
-                controls
-              >
-                <track kind="captions" />
-                <source src={constructingUpdateVideo} type="video/mp4" />
-                <source src={constructingUpdateVideo} type="video/ogg" />
-                <source src={constructingUpdateVideo} type="video/webm" />
-                <object data={constructingUpdateVideo}>
-                  <embed src={constructingUpdateVideo} />
-                </object>
-              </video>
-            </Box>
-          </Wrapper>
-        )}
+        <GalleryView gallery={gallery} />
+        <ConstractiongVideo
+          constructingUpdatePrview={constructingUpdatePrview}
+          constructingUpdateVideo={constructingUpdateVideo}
+        />
         <Wrapper sx={{ marginY: 6 }}>
           <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
           <Flex sx={{ justifyContent: "space-evenly", overflow: "auto" }}>
@@ -320,20 +359,8 @@ export default function ProjectDetailsLayout({
             </SlickSlider>
           </Wrapper>
         </Box>
-        <Box>
-          <Wrapper>
-            <Heading sx={{ fontSize: 6, marginBottom: 4, marginTop: 5 }}>
-              تفاصيل الشركات المقاولة
-            </Heading>
-            <Grid sx={{ marginBottom: 5 }} columns={[1, 2]}>
-              <ConstractingCard label="الشركة المالكة" text={owner} />
-              <ConstractingCard label="شركة المقاولات" text={contractor} />
-              <ConstractingCard label="شركة التطوير" text={developer} />
-              <ConstractingCard label="شركة الاستشارة" text={principalConsultant} />
-              <ConstractingCard label="شركة التصميم" text={design} />
-            </Grid>
-          </Wrapper>
-        </Box>
+
+        <ContructionCompaniesDetails {...oprationCompanies} />
         <Wrapper>
           <Contact />
 

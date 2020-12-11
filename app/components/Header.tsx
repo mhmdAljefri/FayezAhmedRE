@@ -5,12 +5,15 @@ import Nav from "./Nav"
 import PriceType from "./PriceType"
 import Search from "./Search"
 import { Link } from "blitz"
+import useScroll from "app/hooks/useScroll"
 
 type HeaderProps = {
   sx?: SxStyleProp
 }
 
 const Header = ({ sx }: HeaderProps) => {
+  const scroll = useScroll()
+  const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
   return (
     <Box
       sx={{
@@ -20,6 +23,7 @@ const Header = ({ sx }: HeaderProps) => {
         left: 0,
         right: 0,
         ...sx,
+        backgroundColor,
       }}
       as="header"
     >

@@ -12,7 +12,7 @@ type NavProps = {}
 const Nav = (props: NavProps) => {
   const { open, setOpen, ref } = useOnClickout()
   return (
-    <Box sx={{ minWidth: 100, position: "relative", zIndex: 999999, minHeight: 35 }}>
+    <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Burger onClick={() => setOpen(true)} open={open} />
       {open && (
         <Global

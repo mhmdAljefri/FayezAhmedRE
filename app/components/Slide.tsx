@@ -1,8 +1,7 @@
-import { Carousel } from "@prisma/client"
 import React from "react"
 import { Box, Flex, Heading, Text } from "theme-ui"
 
-export type SlideProps = Carousel
+export type SlideProps = { image: string; title?: string | null; text?: string | null }
 type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
 }
@@ -14,8 +13,7 @@ const Slide = ({ title, text, image, onlyImages }: SlideTypeProps) => {
         alignItems: "center",
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
-        height: 700,
-        maxHeight: "90vh",
+        minHeight: 700,
         backgroundColor: "#eee",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
@@ -35,8 +33,9 @@ const Slide = ({ title, text, image, onlyImages }: SlideTypeProps) => {
             position: "relative",
             zIndex: 222,
             maxWidth: 500,
+            paddingY: 7,
             textShadow: "1px 1px 5px #000",
-            marginX: [2, null, null, 3, 5],
+            marginX: [3, null, 5],
           }}
         >
           <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>{title}</Heading>
