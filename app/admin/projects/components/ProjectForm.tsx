@@ -14,6 +14,7 @@ import * as z from "zod"
 import { Field, useFormState } from "react-final-form"
 import getCities from "app/admin/cities/queries/getCities"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
+import DatePicker from "react-datepicker"
 
 type ProjectFormProps = {
   initialValues: any
@@ -101,6 +102,16 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             <>
               <Label>التفاصيل</Label>
               <ReactReachTextEditor {...input} />
+            </>
+          )}
+        />
+
+        <Field
+          name="details"
+          render={({ input }) => (
+            <>
+              <Label>تاريخ التسليم</Label>
+              <DatePicker selected={input.value} {...input} />
             </>
           )}
         />

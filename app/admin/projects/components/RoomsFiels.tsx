@@ -8,11 +8,11 @@ import { FieldArray } from "react-final-form-arrays"
 import { Button, Flex, Grid } from "theme-ui"
 
 export default function RoomsField(props) {
-  const [{ countries }] = usePaginatedQuery(getCountries, {})
-  const { values } = useFormState()
+  // const [{ countries }] = usePaginatedQuery(getCountries, {})
+  // const { values } = useFormState()
 
-  console.log({ values })
-  const country = countries.find((c) => c.id.toString() === values.countryId?.toString())
+  // console.log({ values })
+  // const country = countries.find((c) => c.id.toString() === values.countryId?.toString())
 
   return (
     <FieldArray name="roomsWithPrices">
@@ -22,11 +22,7 @@ export default function RoomsField(props) {
             <>
               <div key={name}>
                 <Grid columns={[2, 3, 4]}>
-                  <LabeledMenuField
-                    options={country?.rooms || []}
-                    name={`${name}.room`}
-                    label="نوع الغرفة"
-                  />
+                  <LabeledTextField name={`${name}.room`} label="نوع الغرفة" />
                   <LabeledTextField
                     type="number"
                     required
