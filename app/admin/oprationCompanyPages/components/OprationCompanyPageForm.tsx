@@ -1,9 +1,12 @@
 import { OprationCompanyPage } from "@prisma/client"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
+import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Box, Button, Heading } from "theme-ui"
+import { Field } from "react-final-form"
+import { Box, Button, Heading, Label } from "theme-ui"
+import * as z from "zod"
 
 type OprationCompanyPageFormProps = {
   initialValues: any
@@ -18,11 +21,26 @@ type OprationCompanyPageFormProps = {
 // constructingUpdateVideo   String?
 // constructingUpdatePrview  String?
 // oprationCompanies         Json?
+
+const Schema = z.object({
+  title: z.string(),
+  description: z.string(),
+  image: z.string(),
+})
+
 const OprationCompanyPageForm = ({ initialValues, onSubmit }: OprationCompanyPageFormProps) => {
   return (
-    <Form initialValues={initialValues} onSubmit={onSubmit}>
+    <Form schema={Schema} initialValues={initialValues} onSubmit={onSubmit}>
       <LabeledTextField label="العنوان" name="title" />
-      <LabeledTextField label="التفاصيل (نبذة)" name="description" />
+      <Field
+        name="description"
+        render={({ input }) => (
+          <>
+            <Label>التفاصيل</Label>
+            <ReactReachTextEditor {...input} />
+          </>
+        )}
+      />
       <MediaWidthTextField label="الصورة الرئيسية" name="image" />
       <MediaWidthTextField multiple label="المعرض" name="gallery" />
 

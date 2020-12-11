@@ -6,13 +6,13 @@ import Dropdown from "./Dropdown"
 type PriceTypeProps = {}
 
 const prices = [
-  ["price", "", "دولار امريكي"],
-  ["priceQatar", "", "ريال قطري"],
-  ["priceTurkey", "", "ليرة تركية"],
-  ["priceKSA", "", "ريال سعودي"],
-  ["priceKuwait", "", "دينار كويتي"],
-  ["priceUAE", "", "درهم إمراتي"],
-  ["priceOman", "", "ريال عماني"],
+  ["price", "/icons/united-states.png", "دولار امريكي"],
+  ["priceQatar", "/icons/qatar.png", "ريال قطري"],
+  ["priceTurkey", "/icons/turkey.png", "ليرة تركية"],
+  ["priceKSA", "/icons/saudi-arabia.png", "ريال سعودي"],
+  ["priceKuwait", "/icons/kuwait.png", "دينار كويتي"],
+  ["priceUAE", "/icons/united-arab-emirates.png", "درهم إمراتي"],
+  ["priceOman", "/icons/oman.png", "ريال عماني"],
 ]
 
 const PriceType = (props: PriceTypeProps) => {
@@ -27,7 +27,7 @@ const PriceType = (props: PriceTypeProps) => {
         value: price[0],
         node: (
           <Flex sx={{ width: 150 }} key={price[0]}>
-            <Avatar sx={{ boxShadow: "card", marginInlineEnd: 10 }} size={30} src="/logo.png" />{" "}
+            <Avatar sx={{ boxShadow: "card", marginInlineEnd: 10 }} size={30} src={price[1]} />{" "}
             {price[2]}
           </Flex>
         ),

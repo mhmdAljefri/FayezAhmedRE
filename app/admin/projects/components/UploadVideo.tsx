@@ -27,19 +27,19 @@ export default function UploadVideo(props) {
         <LabeledTextField
           placeholder="https://www.youtube.com/embed/XN5p4EWnOEk"
           name="constructingUpdateVideo"
-          label="نص مشاركة فيديو اليوتيوب"
+          label="نص مشاركة فيديو اليوتيوب  لتحديثات المشروع "
         />
       ) : (
         <>
           <MediaWidthTextField
             name="constructingUpdateVideo"
             accept="video/*"
-            label="فيديو حالة المشروع"
+            label="فيديو تحديثات المشروع"
           />
 
           <MediaWidthTextField
             name="constructingUpdatePrview"
-            label="صورة عرض لفيديو حالة المشروع"
+            label="صورة عرض لفيديو تحديثات المشروع"
           />
         </>
       )}

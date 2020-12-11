@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -158,8 +158,8 @@ model City {
   updatedAt DateTime @updatedAt
 
   name      String   @unique
-  latituade String?
-  longitude String?
+  latituade String
+  longitude String
 
   country   Country  @relation(fields: [countryId], references: [id])
   countryId Int      
@@ -243,7 +243,6 @@ model Explore {
   type        EXPLOAR_TYPES @default(dontMissitGallery)
   description String
   image       String
-  videoUrl    String?
   country     Country?       @relation(fields: [countryId], references: [id])
   countryId   Int?
 }

@@ -15,8 +15,17 @@ const NewFurnishPage: BlitzPage = () => {
       <FurnishForm
         initialValues={{}}
         onSubmit={async (data) => {
+          const furnishCategoryId = parseInt((data as any).furnishCategoryId)
+          delete (data as any).furnishCategoryId
+
           try {
-            await createFurnishMutation({ data })
+            await createFurnishMutation({
+              data: {
+                ...data,
+                furnishCategory: {},
+              },
+              furnishCategoryId,
+            })
             toast.success("تمت العملية بنجاح!")
             router.push(`/admin/furnishes/`)
           } catch (error) {

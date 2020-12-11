@@ -1,16 +1,26 @@
-import { FurnishCreateInput } from "@prisma/client"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
+import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import getFurnishCategories from "app/admin/furnish-categories/queries/getFurnishCategories"
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import { usePaginatedQuery } from "blitz"
 import React from "react"
-import { Button } from "theme-ui"
+import { Field } from "react-final-form"
+import { Button, Label } from "theme-ui"
+import * as z from "zod"
+
+const Schema = z.object({
+  name: z.string(),
+  description: z.string(),
+  price: z.string(),
+  image: z.string(),
+  furnishCategoryId: z.string(),
+})
 
 type FurnishFormProps = {
   initialValues: any
-  onSubmit: (data: FurnishCreateInput) => Promise<any>
+  onSubmit: (data: z.infer<typeof Schema>) => Promise<any>
 }
 
 // model Furnish {
@@ -34,8 +44,8 @@ const CategoryField = () => {
     <LabeledMenuField
       getLabel={(i) => i.name}
       getValue={(i) => i.id}
-      label="الصمف"
-      name="furnishCategory.connect.id"
+      label="الصنف"
+      name="furnishCategoryId"
       options={[...furnishCategories]}
     />
   )
@@ -43,9 +53,17 @@ const CategoryField = () => {
 
 const FurnishForm = ({ initialValues, onSubmit }: FurnishFormProps) => {
   return (
-    <Form initialValues={initialValues} onSubmit={onSubmit}>
+    <Form schema={Schema} initialValues={initialValues} onSubmit={onSubmit}>
       <LabeledTextField name="name" label="الاسم" />
-      <LabeledTextField name="description" label="التفاصيل" />
+      <Field
+        name="description"
+        render={({ input }) => (
+          <>
+            <Label>التفاصيل</Label>
+            <ReactReachTextEditor {...input} />
+          </>
+        )}
+      />
       <LabeledTextField name="price" label="السعر" type="number" />
       <MediaWidthTextField name="image" label="الصوره" />
       <CategoryField />

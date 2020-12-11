@@ -12,7 +12,7 @@ export const EditProject = () => {
   const [offfer] = useQuery(getOffer, { where: { id: offerId } })
   const [updateOfferMutation] = useMutation(updateOffer)
 
-  const initialValues = { ...offfer, countryId: offfer.country.id }
+  const initialValues = { ...offfer, countryId: offfer.country.id.toString() }
 
   return (
     <div>

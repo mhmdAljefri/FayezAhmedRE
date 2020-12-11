@@ -15,6 +15,8 @@ import Contact from "app/components/Forms/Contact"
 import SlickSlider from "app/components/SlickSlider"
 import usePriceType from "app/hooks/usePriceType"
 import { Link } from "blitz"
+import ArrowIcon from "app/components/ArrowIcon"
+import DynamicTable from "app/components/Tables/DynamicTable"
 
 type ConstractingCardProps = {
   label: string
@@ -50,8 +52,15 @@ function ConstractingCard({ label, text }: ConstractingCardProps) {
   )
 }
 
-export function ConstractiongVideo({ constructingUpdatePrview, constructingUpdateVideo }) {
+export function ConstractiongVideo({
+  constructingUpdatePrview,
+  constructingUpdateVideo,
+}: {
+  constructingUpdateVideo?: string | null
+  constructingUpdatePrview?: string | null
+}) {
   if (!constructingUpdateVideo) return <div />
+  const isYoutube = constructingUpdateVideo.startsWith("https://www.youtube")
   return (
     <Wrapper sx={{ marginY: 5 }}>
       <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>حالة المشروع</Heading>
@@ -63,21 +72,25 @@ export function ConstractiongVideo({ constructingUpdatePrview, constructingUpdat
           height: [250, 300, 350, 450],
         }}
       >
-        <video
-          width="100%"
-          height="100%"
-          poster={constructingUpdatePrview}
-          // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
-          controls
-        >
-          <track kind="captions" />
-          <source src={constructingUpdateVideo} type="video/mp4" />
-          <source src={constructingUpdateVideo} type="video/ogg" />
-          <source src={constructingUpdateVideo} type="video/webm" />
-          <object data={constructingUpdateVideo}>
-            <embed src={constructingUpdateVideo} />
-          </object>
-        </video>
+        {isYoutube ? (
+          <iframe width="100%" height="100%" title="any" src={constructingUpdateVideo}></iframe>
+        ) : (
+          <video
+            width="100%"
+            height="100%"
+            poster={constructingUpdatePrview || "any"}
+            // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+            controls
+          >
+            <track kind="captions" />
+            <source src={constructingUpdateVideo} type="video/mp4" />
+            <source src={constructingUpdateVideo} type="video/ogg" />
+            <source src={constructingUpdateVideo} type="video/webm" />
+            <object data={constructingUpdateVideo}>
+              <embed src={constructingUpdateVideo} />
+            </object>
+          </video>
+        )}
       </Box>
     </Wrapper>
   )
@@ -113,6 +126,17 @@ export function GalleryView({ gallery }) {
         </Flex>
       </Wrapper>
     </>
+  )
+}
+
+export function PaymentPlan() {
+  return (
+    <Button variant="links.outline">
+      <Flex sx={{ alignItems: "center" }}>
+        <Text sx={{ width: 200 }}>خطة السداد</Text>
+        <ArrowIcon />
+      </Flex>
+    </Button>
   )
 }
 
@@ -225,8 +249,9 @@ export default function ProjectDetailsLayout({
               <Text sx={{ paddingY: 3, fontSize: 3 }}>حالة المشروع</Text>
             </Box>
           </Flex>
-          <Text sx={{ marginY: 5 }}>{details}</Text>
+          <Text sx={{ marginY: 5 }} dangerouslySetInnerHTML={{ __html: details }} />
 
+          <PaymentPlan />
           <Box
             sx={{
               maxWidth: 800,

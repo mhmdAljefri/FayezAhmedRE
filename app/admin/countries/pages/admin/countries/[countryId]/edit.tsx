@@ -1,10 +1,9 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+import { useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getCountry from "app/admin/countries/queries/getCountry"
 import updateCountry from "app/admin/countries/mutations/updateCountry"
 import CountryForm from "app/admin/countries/components/CountryForm"
-import { CountryUpdateInput } from "@prisma/client"
 
 export const EditCountry = () => {
   const router = useRouter()
@@ -18,8 +17,6 @@ export const EditCountry = () => {
       <CountryForm
         initialValues={country}
         onSubmit={async (values) => {
-          const data: CountryUpdateInput & { id?: number } = values
-          delete data.id
           try {
             const updated = await updateCountryMutation({
               where: { id: country.id },

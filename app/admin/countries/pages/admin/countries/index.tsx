@@ -21,19 +21,27 @@ const HEADERS = [
     render: ({ id }: Country) => (
       <Flex>
         <Link passHref href={`/admin/countries/${id}/cities`}>
-          <ThemeLink sx={{ marginX: 2 }}>المدن</ThemeLink>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>المدن</ThemeLink>
         </Link>
         <Link passHref href={`/admin/countries/${id}/types/dontMissitGallery/explores/`}>
-          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.dontMissitGallery}</ThemeLink>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>
+            {EXPLOARE_TYPES_TEXT.dontMissitGallery}
+          </ThemeLink>
         </Link>
         <Link passHref href={`/admin/countries/${id}/types/exploreGallery/explores/`}>
-          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.exploreGallery}</ThemeLink>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>
+            {EXPLOARE_TYPES_TEXT.exploreGallery}
+          </ThemeLink>
         </Link>
         <Link passHref href={`/admin/countries/${id}/types/getInspiredGallery/explores/`}>
-          <ThemeLink sx={{ marginX: 2 }}>{EXPLOARE_TYPES_TEXT.getInspiredGallery}</ThemeLink>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>
+            {EXPLOARE_TYPES_TEXT.getInspiredGallery}
+          </ThemeLink>
         </Link>
         <Link passHref href={`/admin/countries/${id}/opration-company-pages/`}>
-          <ThemeLink sx={{ marginX: 2 }}>صفحة الشركات العاملة</ThemeLink>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>
+            صفحة الشركات العاملة
+          </ThemeLink>
         </Link>
       </Flex>
     ),

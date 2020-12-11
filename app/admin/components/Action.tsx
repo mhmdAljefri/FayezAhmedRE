@@ -19,7 +19,7 @@ export default function Action({ id, onDelete }: ActonPropsType) {
   const editLink = `${asPath}/${id}/edit`
 
   const handleDelete = async () => {
-    if (!onDelete) return
+    if (!onDelete) return false
     try {
       await onDelete()
       toast.success("تم الحذف بنجاح")

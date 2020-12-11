@@ -44,7 +44,7 @@ const Search: BlitzPage<furnishesProps> = ({ furnish }) => {
               </Text>
               {furnish.price}
             </Text>
-            <Text sx={{ fontSize: 3 }}>{furnish.description}</Text>
+            <Text sx={{ fontSize: 3 }} dangerouslySetInnerHTML={{ __html: furnish.description }} />
           </Box>
         </Flex>
       </Wrapper>

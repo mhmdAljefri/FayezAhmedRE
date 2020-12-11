@@ -1,6 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form"
-import { Label, Select, SxStyleProp } from "theme-ui"
+import { Box, Label, Select, SxStyleProp } from "theme-ui"
 import Slide from "react-reveal/Slide"
 
 type MenuFieldType = {
@@ -36,11 +36,14 @@ export function MenuField({
   })
   return (
     <Field
-      render={({ input }) => (
-        <Select sx={sx} required={required} {...input}>
-          <option>{emptyOptionText || "اختر عنصر"}</option>
-          {dropDownOption}
-        </Select>
+      render={({ input, meta }) => (
+        <>
+          <Select sx={sx} required={required} {...input}>
+            <option>{emptyOptionText || "اختر عنصر"}</option>
+            {dropDownOption}
+          </Select>
+          {meta.touched && meta.error && <Box sx={{ color: "red" }}>{meta.error}</Box>}
+        </>
       )}
       name={name}
     />

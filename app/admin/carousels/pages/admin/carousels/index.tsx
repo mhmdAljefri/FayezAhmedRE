@@ -3,6 +3,8 @@ import AdminLayout from "app/layouts/AdminLayout"
 import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
 import getCarousels from "app/admin/carousels/queries/getCarousels"
 import DynamicTable from "app/components/Tables/DynamicTable"
+import Action from "app/admin/components/Action"
+import { Image } from "theme-ui"
 
 const ITEMS_PER_PAGE = 100
 
@@ -21,7 +23,11 @@ export const CarouselsList = () => {
 
   return (
     <DynamicTable
-      headers={[{ name: "", key: "id" }]}
+      headers={[
+        { name: "", key: "id" },
+        { name: "", render: ({ image }) => <Image sx={{ width: 120 }} src={image} /> },
+        { name: "", render: ({ id }) => <Action id={id} /> },
+      ]}
       onPrev={goToPreviousPage}
       onNext={goToNextPage}
       data={carousels}

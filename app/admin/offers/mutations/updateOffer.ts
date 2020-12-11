@@ -8,6 +8,12 @@ type UpdateOfferInput = Pick<Prisma.OfferUpdateArgs, "where" | "data"> & {
 export default async function updateOffer({ where, data, countryId }: UpdateOfferInput, ctx: Ctx) {
   ctx.session.authorize("admin")
 
+  const projectId = parseInt((data as any).projectId)
+  delete (data as any).projectId
+  if (projectId)
+    data.project = {
+      connect: { id: projectId },
+    }
   // todo fide removed room and delete it from database
   // todo fide new room and create it with relation
 

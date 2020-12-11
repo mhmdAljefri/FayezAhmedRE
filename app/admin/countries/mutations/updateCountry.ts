@@ -6,6 +6,8 @@ type UpdateCountryInput = Pick<CountryUpdateArgs, "where" | "data">
 export default async function updateCountry({ where, data }: UpdateCountryInput, ctx: Ctx) {
   ctx.session.authorize("admin")
 
+  delete (data as any).id
+
   const country = await db.country.update({ where, data })
 
   return country

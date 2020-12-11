@@ -1,21 +1,25 @@
 import { Ctx } from "blitz"
-import db, { FurnishCreateArgs } from "db"
+import db, { Prisma } from "db"
 
-type CreateFurnishInput = Pick<FurnishCreateArgs, "data">
-export default async function createFurnish({ data }: CreateFurnishInput, ctx: Ctx) {
+type CreateFurnishInput = Pick<Prisma.FurnishCreateArgs, "data"> & {
+  furnishCategoryId: number
+}
+export default async function createFurnish(
+  { data, furnishCategoryId }: CreateFurnishInput,
+  ctx: Ctx
+) {
   ctx.session.authorize("admin")
 
   // furnishCategory: {
   //   +     create?: FurnishCategoryCreateWithoutFurnishesInput,
   //   +     connect?:
 
-  console.log({ data })
   const furnish = await db.furnish.create({
     data: {
       ...data,
       furnishCategory: {
         connect: {
-          id: parseInt(`${data.furnishCategory.connect?.id}`),
+          id: furnishCategoryId,
         },
       },
     },

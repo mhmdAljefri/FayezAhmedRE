@@ -1,7 +1,7 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Box, Button, Card, Heading } from "theme-ui"
+import { Box, Button, Card, Heading, Label } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
@@ -10,6 +10,10 @@ import { usePaginatedQuery } from "blitz"
 import UploadVideo from "./UploadVideo"
 import RoomsField from "./RoomsFiels"
 import InstallmentPalnField from "./InstallmentPalnField"
+import * as z from "zod"
+import { Field, useFormState } from "react-final-form"
+import getCities from "app/admin/cities/queries/getCities"
+import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 
 type ProjectFormProps = {
   initialValues: any
@@ -17,26 +21,63 @@ type ProjectFormProps = {
 }
 
 // model Project {
-//   id                         Int      @default(autoincrement()) @id
-//   createdAt                  DateTime @default(now())
-//   updatedAt                  DateTime @updatedAt
+//   id                        Int             @default(autoincrement()) @id
+//   createdAt                 DateTime        @default(now())
+//   updatedAt                 DateTime        @updatedAt
+//   paymentType               PAYMENT_TYPES   @default(cash)
+//   status                    STATUS          @default(inprogress)
+//   country                   Country         @relation(fields: [countryId], references: [id])
+//   countryId                 Int
+//   propertyType              PropertyType?   @relation(fields: [propertyTypeId], references: [id])
+//   propertyTypeId            Int?
 
-//   name                      String   @unique
+//   name                      String
 //   subTitle                  String
 //   details                   String
-//   status                    STATUS
+//   complationDate            DateTime?
+//   image                     String?
 //   gallery                   String[]
 //   floorplan                 String[]
 //   features                  String[]
 //   brochure                  String?
 //   constructingUpdateVideo   String?
 //   constructingUpdatePrview  String?
-//   nearBy                    Json[]
-//   roomsWithPrices           Json[]
-//   location                  Json
-//   country                   Country  @relation(fields: [countryId], references: [id])
-//   countryId                 Int
+//   nearBy                    Json?
+//   roomsWithPrices           RoomWithPrice[]
+//   location                  Json?
+//   installmentPlan           Json?
+//   locationText              String?
+//   oprationCompanies         Json?
 // }
+
+const Schema = z.object({
+  name: z.string(),
+  subTitle: z.string(),
+  details: z.string(),
+  image: z.string(),
+  countryId: z.string(),
+  cityId: z.string(),
+})
+
+const CitiesListField = () => {
+  const {
+    values: { countryId },
+  } = useFormState()
+  const parsedId = countryId ? parseInt(countryId) : undefined
+  const [{ cities }] = usePaginatedQuery(getCities, {
+    where: { countryId: parsedId },
+  })
+  if (!countryId) return <div />
+  return (
+    <LabeledMenuField
+      getLabel={(country) => country.name}
+      getValue={(country) => country.id as number}
+      options={cities}
+      name="cityId"
+      label="المدينة"
+    />
+  )
+}
 
 const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
   const [{ countries }] = usePaginatedQuery(getCountries, {})
@@ -51,14 +92,18 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         borderRadius: "xxl",
       }}
     >
-      <Form
-        // mutators={arrayMutators}
-        onSubmit={onSubmit}
-        initialValues={initialValues}
-      >
+      <Form schema={Schema} onSubmit={onSubmit} initialValues={initialValues}>
         <LabeledTextField required name="name" label="العنوان" />
         <LabeledTextField required name="subTitle" label="العنوان الفرعي" />
-        <LabeledTextField required name="details" label="التفاصيل" />
+        <Field
+          name="details"
+          render={({ input }) => (
+            <>
+              <Label>التفاصيل</Label>
+              <ReactReachTextEditor {...input} />
+            </>
+          )}
+        />
 
         <MediaWidthTextField name="image" label="صورة المشروع" />
 
@@ -70,6 +115,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           label="الدولة"
           required
         />
+        <CitiesListField />
 
         <LabeledMenuField
           options={[
@@ -177,7 +223,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           )}
         </FieldArray>
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
-        <MediaWidthTextField multiple name="floorplan" label="صور الاسقاط" />
+        <MediaWidthTextField multiple name="floorplan" label="مخططات الشقق" />
 
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد

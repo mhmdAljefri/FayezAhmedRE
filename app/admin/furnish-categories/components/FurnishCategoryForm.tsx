@@ -4,6 +4,7 @@ import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
 import { Box, Button } from "theme-ui"
+import * as z from "zod"
 
 type FurnishCategoryFormProps = {
   initialValues: any
@@ -20,6 +21,11 @@ type FurnishCategoryFormProps = {
 //   furnish     Furnish[]
 // }
 
+const Sechma = z.object({
+  name: z.string(),
+  image: z.string(),
+})
+
 const FurnishCategoryForm = ({ initialValues, onSubmit }: FurnishCategoryFormProps) => {
   return (
     <Box
@@ -30,7 +36,7 @@ const FurnishCategoryForm = ({ initialValues, onSubmit }: FurnishCategoryFormPro
         padding: 5,
       }}
     >
-      <Form initialValues={initialValues} onSubmit={onSubmit}>
+      <Form schema={Sechma} initialValues={initialValues} onSubmit={onSubmit}>
         <LabeledTextField name="name" label="الاسم" />
         <MediaWidthTextField name="image" label="الصورة" />
         <Button>تاكيد</Button>

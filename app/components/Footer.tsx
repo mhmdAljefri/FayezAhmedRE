@@ -74,23 +74,14 @@ export default function Footer() {
         <Box>
           <Heading sx={{ paddingBottom: 4, color: "white" }}>تحميل التطبيق عبر</Heading>
         </Box>
-        <HR />
-        <Box>
-          <Heading sx={{ paddingBottom: 4, color: "white" }}>نحن دائماً جاهزون لمساعدتك</Heading>
-          <Grid columns={[1, 2, 3, 4]}>
-            <SupportBox title="موقع الدعم" linkText="support.fayezahmed.com" href="" />
-            <SupportBox title="بريد الدعم" linkText="support@fayezahmed.com" href="" />
-            <SupportBox title="هاتف الدعم" linkText="support@fayezahmed.com" href="" />
-          </Grid>
-        </Box>
       </Wrapper>
       <Box sx={{ backgroundColor: "dark2" }}>
         <Wrapper>
           <Grid columns={[2, null, 4]}>
-            <CallUSButton icon={envelope}>استعلام</CallUSButton>
-            <CallUSButton icon={phone}>اتصال</CallUSButton>
+            <CallUSButton icon={envelope}>استفسر الان</CallUSButton>
+            <CallUSButton icon={phone}>مكالمة</CallUSButton>
             <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
-            <CallUSButton icon={addressBook}>ارقام التواصل</CallUSButton>
+            <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
           </Grid>
         </Wrapper>
       </Box>

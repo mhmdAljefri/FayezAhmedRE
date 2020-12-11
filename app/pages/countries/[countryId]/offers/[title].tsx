@@ -5,6 +5,7 @@ import Wrapper from "app/components/Wrapper"
 import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import ArrowIcon from "app/components/ArrowIcon"
+import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 
 const WhatsNew: BlitzPage = () => {
   const offerTitle = useParam("title", "string")
@@ -21,6 +22,10 @@ const WhatsNew: BlitzPage = () => {
           <Box dangerouslySetInnerHTML={{ __html: offer.details }} />
         </Wrapper>
       </Box>
+      <ConstractiongVideo
+        constructingUpdateVideo={offer.constructingUpdateVideo}
+        constructingUpdatePrview={offer.constructingUpdatePrview}
+      />
       {offer.project && (
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>

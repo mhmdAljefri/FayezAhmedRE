@@ -20,10 +20,18 @@ export const EditFurnish = () => {
       <FurnishForm
         initialValues={furnish}
         onSubmit={async (values) => {
+          const furnishCategoryId = parseInt((values as any).furnishCategoryId)
+          delete (values as any).furnishCategoryId
           try {
             const updated = await updateFurnishMutation({
               where: { id: furnish.id },
-              data: { name: values.name, price: values.price, image: values.image },
+              data: {
+                name: values.name,
+                price: values.price,
+                image: values.image,
+                description: values.description,
+              },
+              furnishCategoryId,
             })
             await setQueryData(updated)
             toast.success("تمت العملية بنجاح!")

@@ -13,6 +13,9 @@ export default async function createProject(
 ) {
   ctx.session.authorize("admin")
 
+  const cityId = (data as any).cityId
+  delete (data as any).cityId
+
   try {
     const project = await db.project.create({
       data: {
@@ -23,6 +26,11 @@ export default async function createProject(
         country: {
           connect: {
             id: countryId,
+          },
+        },
+        city: {
+          connect: {
+            id: parseInt(cityId),
           },
         },
       },

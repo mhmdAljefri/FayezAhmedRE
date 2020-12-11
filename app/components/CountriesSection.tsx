@@ -53,7 +53,7 @@ function CountryCard({ name, id, image }: CountryCardProps) {
           }}
         >
           <Text sx={{ filter: "drop-shadow(2px 4px 2px black)", fontWeight: 900, fontSize: 3 }}>
-            المشاريع العقارية
+            مشاريع وعقارات
           </Text>
           <Flex>
             <Heading

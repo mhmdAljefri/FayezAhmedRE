@@ -4,6 +4,7 @@ import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Heading, Image } from "theme-ui"
 import getExplore from "app/public/explores/queries/getExplore"
+import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 
 const WhatsNew: BlitzPage = () => {
   const exploreTitle = useParam("exploreTitle", "string")
@@ -13,7 +14,14 @@ const WhatsNew: BlitzPage = () => {
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
-          <Image src={offer.image} alt={offer.title} />
+          {offer.videoUrl ? (
+            <ConstractiongVideo
+              constructingUpdatePrview={offer.image}
+              constructingUpdateVideo={offer.videoUrl}
+            />
+          ) : (
+            <Image src={offer.image} alt={offer.title} />
+          )}
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700, textAlign: "center", marginY: 5 }}>

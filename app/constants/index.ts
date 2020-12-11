@@ -3,3 +3,7 @@ export const EXPLOARE_TYPES_TEXT = {
   getInspiredGallery: "استمد الالهام",
   exploreGallery: "أكتشف",
 }
+
+export const ZOD_MESSAGES_TRANSLATIONS = {
+  Required: "الحقل مطلوب",
+}

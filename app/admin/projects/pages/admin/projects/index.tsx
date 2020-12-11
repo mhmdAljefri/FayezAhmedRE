@@ -12,19 +12,9 @@ const ITEMS_PER_PAGE = 100
 export const ProjectsList = () => {
   const [deleteProjectMutation] = useMutation(deleteProject)
 
-  const HEADERS = [
-    { name: "", key: "id" },
-    { name: "اسم المشروع", key: "name" },
-    {
-      name: "",
-      render: (item) => (
-        <Action id={item.id} onDelete={() => deleteProjectMutation({ where: { id: item.id } })} />
-      ),
-    },
-  ]
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ projects, hasMore }] = usePaginatedQuery(getProjects, {
+  const [{ projects, hasMore }, { refetch }] = usePaginatedQuery(getProjects, {
     orderBy: { id: "desc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
@@ -35,7 +25,21 @@ export const ProjectsList = () => {
 
   return (
     <DynamicTable
-      headers={HEADERS}
+      headers={[
+        { name: "", key: "id" },
+        { name: "اسم المشروع", key: "name" },
+        {
+          name: "",
+          render: (item) => (
+            <Action
+              id={item.id}
+              onDelete={() =>
+                deleteProjectMutation({ where: { id: item.id } }).then(() => refetch())
+              }
+            />
+          ),
+        },
+      ]}
       hasMore={hasMore}
       data={projects || []}
       onNext={goToNextPage}

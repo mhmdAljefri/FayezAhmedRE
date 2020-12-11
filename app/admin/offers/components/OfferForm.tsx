@@ -1,7 +1,7 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Button, Card } from "theme-ui"
+import { Button, Card, Label } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
@@ -10,7 +10,9 @@ import { usePaginatedQuery } from "blitz"
 import UploadVideo from "./UploadVideo"
 import InstallmentPalnField from "./InstallmentPalnField"
 import getProjects from "app/admin/projects/queries/getProjects"
-import { useFormState } from "react-final-form"
+import { Field, useFormState } from "react-final-form"
+import * as z from "zod"
+import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 
 type OfferFormProps = {
   initialValues: any
@@ -39,12 +41,34 @@ type OfferFormProps = {
 //   countryId                 Int
 // }
 
-const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
+const Schema = z.object({
+  name: z.string(),
+  details: z.string(),
+  image: z.string(),
+  countryId: z.string(),
+})
+
+const ProjectsListField = () => {
   const {
     values: { countryId },
   } = useFormState()
+  const parsedId = countryId ? parseInt(countryId) : undefined
+  const [{ projects }] = usePaginatedQuery(getProjects, {
+    where: { countryId: parsedId },
+  })
+  if (!countryId) return <div />
+  return (
+    <LabeledMenuField
+      getLabel={(country) => country.name}
+      getValue={(country) => country.id as number}
+      options={projects}
+      name="projectId"
+      label="المشروع"
+    />
+  )
+}
+const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
   const [{ countries }] = usePaginatedQuery(getCountries, {})
-  const [{ projects }] = usePaginatedQuery(getProjects, { where: { countryId: countryId } })
 
   return (
     <Card
@@ -58,12 +82,20 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
     >
       <Form
         // mutators={arrayMutators}
+        schema={Schema}
         onSubmit={onSubmit}
         initialValues={initialValues}
       >
         <LabeledTextField required name="name" label="العنوان" />
-        <LabeledTextField required name="details" label="التفاصيل" />
-
+        <Field
+          name="details"
+          render={({ input }) => (
+            <>
+              <Label>التفاصيل</Label>
+              <ReactReachTextEditor {...input} />
+            </>
+          )}
+        />
         <MediaWidthTextField name="image" label="صورة المشروع" />
 
         <LabeledMenuField
@@ -74,15 +106,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           label="الدولة"
           required
         />
-        {countryId && (
-          <LabeledMenuField
-            getLabel={(country) => country.name}
-            getValue={(country) => country.id as number}
-            options={projects}
-            name="projectId"
-            label="المشروع"
-          />
-        )}
+        <ProjectsListField />
         <LabeledMenuField
           options={[
             {
@@ -166,7 +190,6 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           )}
         </FieldArray> */}
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
-        <MediaWidthTextField multiple name="floorplan" label="صور الاسقاط" />
 
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد
