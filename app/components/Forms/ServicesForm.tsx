@@ -5,24 +5,43 @@ import Form from "../Form"
 import SubmitButton from "../SubmitButton"
 import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
+import { useParam, useQuery } from "blitz"
+import getCities from "app/public/cities/queries/getCities"
+
+function Destination() {
+  const countryId = useParam("countryId", "number")
+  const [{ cities }] = useQuery(getCities, { where: { countryId } })
+  return (
+    <LabeledMenuField
+      options={cities}
+      getLabel={(t) => t.name}
+      getValue={(t) => t.name}
+      name="destination"
+      label="الوجهة"
+    />
+  )
+}
 
 function FlightsForm() {
   const { run, fetching } = useRequestsMutation("flights")
 
   return (
     <Form onSubmit={run}>
-      <LabeledTextField name="name" label="الاسم" />
-      <LabeledTextField name="mobile" label="الجوال" />
-      <LabeledTextField name="destination" label="الوجهة" />
+      <LabeledTextField required name="name" label="الاسم" />
+      <LabeledTextField required name="mobile" label="الجوال" />
+      <Destination />
       <Grid columns={2}>
-        <LabeledTextField name="arrivalDate" label="تاريخ الوصول" />
-        <LabeledTextField name="arrivalAirport" label="مطار الوصول" />
+        <LabeledTextField required name="arrivalDate" label="تاريخ الوصول" />
+        <LabeledTextField required name="arrivalAirport" label="مطار الوصول" />
       </Grid>
-      <LabeledTextField name="departureDate" label="تاريخ المغادرة" />
+      <Grid columns={2}>
+        <LabeledTextField required name="departureDate" label="تاريخ المغادرة" />
+        <LabeledTextField required name="departureAirport" label="مطار المغادرة" />
+      </Grid>
       <LabeledMenuField
         name="guests"
         options={["1", "2", "3", "4", "5", "6", "+7"]}
-        label="الزوار"
+        label="المسافرون"
       />
       <SubmitButton fetching={fetching} />
     </Form>
@@ -33,12 +52,12 @@ function HotelsForm() {
 
   return (
     <Form onSubmit={run}>
-      <LabeledTextField name="name" label="الاسم" />
-      <LabeledTextField name="mobile" label="الجوال" />
-      <LabeledTextField name="destination" label="الوجهة" />
-      <LabeledTextField name="arrivalDate" label="تاريخ الوصول" />
-      <LabeledTextField name="departureDate" label="تاريخ المغادرة" />
-      <LabeledTextField name="count" label="الأشغال" />
+      <LabeledTextField required name="name" label="الاسم" />
+      <LabeledTextField required name="mobile" label="الجوال" />
+      <Destination />
+      <LabeledTextField required name="arrivalDate" label="تاريخ الوصول" />
+      <LabeledTextField required name="departureDate" label="تاريخ المغادرة" />
+      <LabeledTextField required name="count" label="الأشغال" />
       <SubmitButton fetching={fetching} />
     </Form>
   )
@@ -47,11 +66,11 @@ function CarsForm() {
   const { run, fetching } = useRequestsMutation("cars")
   return (
     <Form onSubmit={run}>
-      <LabeledTextField name="name" label="الاسم" />
-      <LabeledTextField name="mobile" label="الجوال" />
-      <LabeledTextField name="count" type="number" label="عدد الركاب" />
-      <LabeledTextField name="arrivalDate" label="تاريخ الوصول" />
-      <LabeledTextField name="departureDate" label="تاريخ المغادرة" />
+      <LabeledTextField required name="name" label="الاسم" />
+      <LabeledTextField required name="mobile" label="الجوال" />
+      <LabeledTextField required name="count" type="number" label="عدد الركاب" />
+      <LabeledTextField required name="arrivalDate" label="من تاريخ" />
+      <LabeledTextField required name="departureDate" label="الى تاريخ" />
       <SubmitButton fetching={fetching} />
     </Form>
   )
@@ -103,8 +122,8 @@ export default function ServicesForm() {
         backgroundColor: "primary",
       }}
     >
-      <Grid sx={{ marginBottom: 5, alignItems: "center" }} columns={2}>
-        <Heading sx={{ marginTop: 4, fontSize: 6, color: "white" }}>خطط لرحلتك</Heading>
+      <Grid sx={{ marginBottom: 5, alignItems: "center" }} columns={[1, null, 2]}>
+        <Heading sx={{ marginTop: 4, fontSize: 6, color: "white" }}>خطط لرحلتك معنا</Heading>
         <Grid columns={[1, null, 3]}>
           {OPTIONS.map((option) => (
             <TripButton

@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
 import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getOffer from "app/admin/offers/queries/getOffer"
-import updateProject from "app/admin/offers/mutations/updateProject"
+import updateOffer from "app/admin/offers/mutations/updateOffer"
 import OfferForm from "app/admin/offers/components/OfferForm"
 import { toast } from "react-toastify"
 
@@ -10,7 +10,7 @@ export const EditProject = () => {
   const router = useRouter()
   const offerId = useParam("offerId", "number")
   const [offfer] = useQuery(getOffer, { where: { id: offerId } })
-  const [updateProjectMutation] = useMutation(updateProject)
+  const [updateOfferMutation] = useMutation(updateOffer)
 
   const initialValues = { ...offfer, countryId: offfer.country.id }
 
@@ -22,18 +22,16 @@ export const EditProject = () => {
         initialValues={initialValues}
         onSubmit={async (values) => {
           const countryId = parseInt(values.countryId)
-          const roomsWithPrices = values.roomsWithPrices
           delete values.id
           delete values.countryId
           delete values.propertyTypeId
           delete values.roomsWithPrices
 
           try {
-            await updateProjectMutation({
+            await updateOfferMutation({
               where: { id: offfer.id },
               data: values,
               countryId,
-              roomsWithPrices,
             })
             toast.success("تم التعديل بنجاح!")
             router.push(`/admin/offers/`)

@@ -1,8 +1,8 @@
-import { RequestCreateInput } from "@prisma/client"
+import { Prisma } from "@prisma/client"
 import { useState } from "react"
 import { toast } from "react-toastify"
 
-type requestsTypes = RequestCreateInput["type"]
+type requestsTypes = Prisma.RequestCreateInput["type"]
 
 export default function useRequestsMutation(type: requestsTypes) {
   const [fetching, setFetching] = useState(false)

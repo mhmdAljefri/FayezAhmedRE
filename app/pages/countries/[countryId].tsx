@@ -96,8 +96,11 @@ export default function CountryPage({ country, furnishCategories, ...props }: Co
       />
       <Wrapper sx={{ marginTop: -50 }}>
         <HomeSlider
-          onlyImages
-          data={country.oprationCompanyPages}
+          data={country.oprationCompanyPages.map(({ image, title, id }) => ({
+            title,
+            image,
+            path: `${asPath}/oprationCompanies/${id}`,
+          }))}
           slideStyle={{
             borderRadius: "lg",
             overflow: "hidden",

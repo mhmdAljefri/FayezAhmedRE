@@ -33,6 +33,7 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
           position: "absolute",
           backgroundColor: "background",
           opacity: open ? 1 : 0,
+          visibility: open ? "visible" : "hidden",
           borderRadius: 15,
           boxShadow: "default",
         }}
@@ -40,7 +41,7 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
         {options.map((option, index) => (
           <Box
             key={index}
-            sx={{ paddingX: 2 }}
+            sx={{ paddingX: 2, cursor: "pointer" }}
             onClick={() => {
               setSelected(option)
               onChange(option)

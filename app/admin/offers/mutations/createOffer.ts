@@ -1,25 +1,18 @@
 import { Ctx } from "blitz"
-import db, { Prisma, RoomWithPrice } from "db"
+import db, { Prisma } from "db"
 
 export type CreateProjectInputType = {
   data: Omit<Prisma.ProjectCreateArgs["data"], "country">
   countryId: number
-  roomsWithPrices?: RoomWithPrice[]
 }
 
-export default async function createProject(
-  { data, countryId, roomsWithPrices }: CreateProjectInputType,
-  ctx: Ctx
-) {
+export default async function createProject({ data, countryId }: CreateProjectInputType, ctx: Ctx) {
   ctx.session.authorize("admin")
 
   try {
-    const project = await db.project.create({
+    const offer = await db.offer.create({
       data: {
         ...data,
-        roomsWithPrices: {
-          create: roomsWithPrices,
-        },
         country: {
           connect: {
             id: countryId,
@@ -27,7 +20,7 @@ export default async function createProject(
         },
       },
     })
-    return project
+    return offer
   } catch (error) {
     console.error(error)
   }

@@ -17,7 +17,6 @@ const prices = [
 
 const PriceType = (props: PriceTypeProps) => {
   const { priceType, changePriceType } = usePriceType()
-  console.log({ priceType })
 
   return (
     <Dropdown

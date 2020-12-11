@@ -1,7 +1,7 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Box, Button, Card, Heading } from "theme-ui"
+import { Button, Card } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
@@ -9,6 +9,8 @@ import getCountries from "app/admin/countries/queries/getCountries"
 import { usePaginatedQuery } from "blitz"
 import UploadVideo from "./UploadVideo"
 import InstallmentPalnField from "./InstallmentPalnField"
+import getProjects from "app/admin/projects/queries/getProjects"
+import { useFormState } from "react-final-form"
 
 type OfferFormProps = {
   initialValues: any
@@ -38,7 +40,11 @@ type OfferFormProps = {
 // }
 
 const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
+  const {
+    values: { countryId },
+  } = useFormState()
   const [{ countries }] = usePaginatedQuery(getCountries, {})
+  const [{ projects }] = usePaginatedQuery(getProjects, { where: { countryId: countryId } })
 
   return (
     <Card
@@ -55,6 +61,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         onSubmit={onSubmit}
         initialValues={initialValues}
       >
+        <LabeledTextField required name="name" label="العنوان" />
         <LabeledTextField required name="details" label="التفاصيل" />
 
         <MediaWidthTextField name="image" label="صورة المشروع" />
@@ -67,20 +74,15 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           label="الدولة"
           required
         />
-
-        <LabeledMenuField
-          options={[
-            {
-              id: "inprogress",
-              name: "قيد الانشاء",
-            },
-            { id: "completed", name: "مكتمل" },
-          ]}
-          name="status"
-          getLabel={(item) => item.name}
-          getValue={(item) => item.id}
-          label="حالة المشروع"
-        />
+        {countryId && (
+          <LabeledMenuField
+            getLabel={(country) => country.name}
+            getValue={(country) => country.id as number}
+            options={projects}
+            name="projectId"
+            label="المشروع"
+          />
+        )}
         <LabeledMenuField
           options={[
             {
@@ -98,15 +100,6 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         <InstallmentPalnField />
 
         <UploadVideo />
-
-        <Box sx={{ py: 4, backgroundColor: "muted", px: 4, my: 4 }}>
-          <Heading sx={{ marginBottom: 4 }}>الشركات العاملة في المشروع</Heading>
-          <LabeledTextField name="oprationCompanies.owner" label="مالك المشروع" />
-          <LabeledTextField name="oprationCompanies.developer" label="مطور المشروع" />
-          <LabeledTextField name="oprationCompanies.contractor" label="مقاول المشروع" />
-          <LabeledTextField name="oprationCompanies.principalConsultant" label="مستشار المشروع" />
-          <LabeledTextField name="oprationCompanies.design" label="تصميم المشروع" />
-        </Box>
 
         <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
 
@@ -138,7 +131,8 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
             </div>
           )}
         </FieldArray>
-        <FieldArray name="nearBy">
+
+        {/* <FieldArray name="nearBy">
           {({ fields }) => (
             <div>
               {fields.map((name, index) => (
@@ -170,7 +164,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
               </Button>
             </div>
           )}
-        </FieldArray>
+        </FieldArray> */}
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
         <MediaWidthTextField multiple name="floorplan" label="صور الاسقاط" />
 

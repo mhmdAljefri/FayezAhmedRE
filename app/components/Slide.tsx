@@ -1,12 +1,18 @@
+import { Link } from "blitz"
 import React from "react"
-import { Box, Flex, Heading, Text } from "theme-ui"
+import { Box, Button, Flex, Heading, Text } from "theme-ui"
 
-export type SlideProps = { image: string; title?: string | null; text?: string | null }
+export type SlideProps = {
+  image: string
+  title?: string | null
+  text?: string | null
+  path?: string
+}
 type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
 }
 
-const Slide = ({ title, text, image, onlyImages }: SlideTypeProps) => {
+const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
   return (
     <Flex
       sx={{
@@ -40,6 +46,11 @@ const Slide = ({ title, text, image, onlyImages }: SlideTypeProps) => {
         >
           <Heading sx={{ marginBottom: 50, color: "primary", fontSize: 7 }}>{title}</Heading>
           <Text sx={{ color: "white", fontSize: 3, fontWeight: "900" }}>{text}</Text>
+          {path && (
+            <Link href={path}>
+              <Button>التفاصيل </Button>
+            </Link>
+          )}
         </Box>
       )}
     </Flex>
