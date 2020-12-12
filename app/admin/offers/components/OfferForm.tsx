@@ -1,18 +1,18 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Button, Card, Label } from "theme-ui"
+import { Button, Card, Label, Text } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
 import getCountries from "app/admin/countries/queries/getCountries"
 import { usePaginatedQuery } from "blitz"
-import UploadVideo from "./UploadVideo"
 import InstallmentPalnField from "./InstallmentPalnField"
 import getProjects from "app/admin/projects/queries/getProjects"
 import { Field, useFormState } from "react-final-form"
 import * as z from "zod"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
+import UploadVideo from "./UploadVideo"
 
 type OfferFormProps = {
   initialValues: any
@@ -96,7 +96,9 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
             </>
           )}
         />
-        <MediaWidthTextField name="image" label="صورة المشروع" />
+        <MediaWidthTextField name="image" label="صورة العرض" />
+        <MediaWidthTextField name="mainViedo" label="فيديو الرئيسية للعرض" />
+        <Text as="small">هذا الفيديو سيظهر في بداية الصفحة بديل للصورة</Text>
 
         <LabeledMenuField
           getLabel={(country) => country.name}
@@ -123,8 +125,6 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
 
         <InstallmentPalnField />
 
-        <UploadVideo />
-
         <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
 
         <FieldArray name="features">
@@ -150,47 +150,15 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
                 type="button"
                 onClick={() => fields.push("")}
               >
-                اضافة ميزة للمشروع
+                اضافة ميزة
               </Button>
             </div>
           )}
         </FieldArray>
 
-        {/* <FieldArray name="nearBy">
-          {({ fields }) => (
-            <div>
-              {fields.map((name, index) => (
-                <div key={name}>
-                  <LabeledTextField
-                    name={`${name}.name`}
-                    label="اسم المكان"
-                    placeholder="على سبيل المثال (شاطئ)"
-                  />
-                  <LabeledTextField name={`${name}.description`} label="الوصف" />
-                  <MediaWidthTextField name={`${name}.image`} label="" />
-                  <Button
-                    variant="link"
-                    sx={{ marginY: 2 }}
-                    type="button"
-                    onClick={() => fields.remove(index)}
-                  >
-                    حدف المكان
-                  </Button>
-                </div>
-              ))}
-              <Button
-                variant="link"
-                sx={{ marginY: 2 }}
-                type="button"
-                onClick={() => fields.push({})}
-              >
-                اضافة مكان بالقرب من المشروع
-              </Button>
-            </div>
-          )}
-        </FieldArray> */}
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
 
+        <UploadVideo />
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد
         </Button>

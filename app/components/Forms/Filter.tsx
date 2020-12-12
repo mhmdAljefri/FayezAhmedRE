@@ -6,7 +6,7 @@ import { MenuField } from "app/admin/components/LabeledMenuField"
 import SubmitButton from "../SubmitButton"
 import DomainSlider from "../DomainSlider"
 import Slide from "react-reveal/Slide"
-import { City, Country } from "@prisma/client"
+import { City, Country, PropertyType } from "@prisma/client"
 
 export type filterValues = {
   search?: string
@@ -21,9 +21,17 @@ type filterProps = Pick<Country, "isTurkey" | "rooms"> & {
   onFilter: (filter: filterValues) => any
   initialValues?: filterValues
   cities: City[]
+  propertyTypes: PropertyType[]
 }
 
-export default function Filter({ cities, initialValues, rooms, isTurkey, onFilter }: filterProps) {
+export default function Filter({
+  cities,
+  propertyTypes,
+  initialValues,
+  rooms,
+  isTurkey,
+  onFilter,
+}: filterProps) {
   const sortedRooms = isTurkey ? [] : rooms?.map((item) => parseInt(item)).sort()
   if (!rooms) return null
   return (
@@ -43,25 +51,17 @@ export default function Filter({ cities, initialValues, rooms, isTurkey, onFilte
             <Field
               required
               name="search"
-              component={({ input }) => <Input {...input} />}
+              component={({ input }) => <Input placeholder="البحث" {...input} />}
               sx={{ borderColor: "primary" }}
-              placeholder="البحث"
             />
             <MenuField
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               options={[...cities]}
+              emptyOptionText="المدينة"
               name="city"
             />
-
-            <Field
-              disabled
-              required
-              name="type"
-              initialValue="بيع"
-              component={({ input }) => <Input disabled {...input} />}
-              placeholder="بيع"
-            />
+            <MenuField options={["بيع", "تاجير"]} emptyOptionText="القرض" name="purpose" />
           </Grid>
 
           <Grid
@@ -105,11 +105,7 @@ export default function Filter({ cities, initialValues, rooms, isTurkey, onFilte
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               emptyOptionText="نوع المبنى"
-              options={[
-                { id: "completed", name: "شقق فندقية" },
-                { id: "inprogress", name: "مكاتب" },
-                { id: "inprogress", name: "فلل" },
-              ]}
+              options={propertyTypes}
             />
           </Grid>
           <Flex sx={{ justifyContent: "center", flexWrap: ["wrap", null, "nowrap"], marginTop: 3 }}>
@@ -122,6 +118,11 @@ export default function Filter({ cities, initialValues, rooms, isTurkey, onFilte
               options={[
                 { id: "completed", name: "مكتمل" },
                 { id: "inprogress", name: "قيد التطوير" },
+                { id: "resell", name: "اعادة بيع" },
+                { id: "installment", name: "جاهز وتقسيط" },
+                { id: "compatible_installment", name: "تقسيط مريح" },
+                { id: "ocean_view", name: "اطلالات بحرية" },
+                { id: "granted_by_gov", name: "بضمان حكومي" },
               ]}
             />
 

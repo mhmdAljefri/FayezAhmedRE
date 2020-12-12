@@ -7,7 +7,7 @@ import Carousel from "app/components/Slider"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { City, Country, Explore, Offer, OprationCompanyPage } from "@prisma/client"
+import { City, Country, Explore, Offer, OprationCompanyPage, PropertyType } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
@@ -17,6 +17,7 @@ import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ArrowIcon from "app/components/ArrowIcon"
 import { OfferCard } from "app/layouts/OfferssList"
+import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
@@ -59,11 +60,17 @@ export type CountryPropsType = {
     explores: Explore[]
   }
   furnishCategories: { name: string; image: string }[]
+  propertyTypes: PropertyType[]
 }
 
 type inpirationGallery = Explore["type"]
 
-export default function CountryPage({ country, furnishCategories, ...props }: CountryPropsType) {
+export default function CountryPage({
+  country,
+  propertyTypes,
+  furnishCategories,
+  ...props
+}: CountryPropsType) {
   const { push, asPath } = useRouter()
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
@@ -116,7 +123,7 @@ export default function CountryPage({ country, furnishCategories, ...props }: Co
           marginBottom: 5,
         }}
       >
-        <Filter {...country} onFilter={handleFilter} />
+        <Filter {...country} propertyTypes={propertyTypes} onFilter={handleFilter} />
       </Wrapper>
       <Wrapper>
         <HeadingWithMoreLink href={offersUrl} heading="جديدنا" />
@@ -338,12 +345,14 @@ export default function CountryPage({ country, furnishCategories, ...props }: Co
 export async function getServerSideProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
+  const { propertyTypes } = await getPropertyTypes({})
   const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
 
   return {
     props: {
       country,
       furnishCategories,
+      propertyTypes,
     },
   }
 }

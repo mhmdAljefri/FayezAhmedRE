@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, ReactNode } from "react"
+import React, { ReactNode } from "react"
 import { Icon as RIconKit, IconProp } from "react-icons-kit"
 import { instagram } from "react-icons-kit/fa/instagram"
 import { facebook } from "react-icons-kit/fa/facebook"
@@ -9,7 +9,7 @@ import { envelope } from "react-icons-kit/fa/envelope"
 import { phone } from "react-icons-kit/fa/phone"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { addressBook } from "react-icons-kit/fa/addressBook"
-import { Box, Flex, Grid, Heading, Link, Text } from "theme-ui"
+import { Box, Image, Flex, Grid, Heading, Link, Text } from "theme-ui"
 import Wrapper from "./Wrapper"
 
 function Icon(props: IconProp) {
@@ -38,19 +38,6 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
   )
 }
 
-type SupportBoxProp = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  title: string
-  linkText: string
-}
-function SupportBox({ title, href, linkText }: SupportBoxProp) {
-  return (
-    <Box sx={{ paddingY: 3 }}>
-      <Text>{title}</Text>
-      <Link href={href}>{linkText}</Link>
-    </Box>
-  )
-}
-
 type HRProps = {}
 function HR(props: HRProps) {
   return <Box sx={{ marginY: 4, height: 1, backgroundColor: "white" }} />
@@ -72,7 +59,45 @@ export default function Footer() {
         </Box>
         <HR />
         <Box>
-          <Heading sx={{ paddingBottom: 4, color: "white" }}>تحميل التطبيق عبر</Heading>
+          <Heading sx={{ paddingBottom: 2, color: "white" }}>تحميل التطبيق عبر</Heading>
+          <Flex sx={{ marginBottom: 4 }}>
+            <Link>
+              <Box
+                sx={{
+                  width: 200,
+                  m: 1,
+                  borderRadius: 5,
+                  height: 56,
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
+                <Image
+                  sx={{ position: "absolute", top: 0, transform: "scale(1.03)" }}
+                  src="/app-store.jpg"
+                  alt="apple"
+                />
+              </Box>
+            </Link>{" "}
+            <Link>
+              <Box
+                sx={{
+                  width: 200,
+                  m: 1,
+                  borderRadius: 5,
+                  height: 56,
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
+                <Image
+                  sx={{ position: "absolute", bottom: -1, transform: "scale(1.03)" }}
+                  src="/app-store.jpg"
+                  alt="apple"
+                />
+              </Box>
+            </Link>
+          </Flex>
         </Box>
       </Wrapper>
       <Box sx={{ backgroundColor: "dark2" }}>

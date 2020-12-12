@@ -1,13 +1,15 @@
 import { Ctx } from "blitz"
-import db, { PropertyTypeUpdateArgs } from "db"
+import db, { Prisma } from "db"
 
-type UpdatePropertyTypeInput = Pick<PropertyTypeUpdateArgs, "where" | "data">
+type UpdatePropertyTypeInput = Pick<Prisma.PropertyTypeUpdateArgs, "where" | "data">
 
 export default async function updatePropertyType(
   { where, data }: UpdatePropertyTypeInput,
   ctx: Ctx
 ) {
   ctx.session.authorize("admin")
+
+  delete (data as any).id
 
   const propertyType = await db.propertyType.update({ where, data })
 

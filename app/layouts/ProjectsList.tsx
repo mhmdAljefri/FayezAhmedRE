@@ -17,6 +17,7 @@ import usePriceType from "app/hooks/usePriceType"
 import useOnClickout from "app/hooks/useOnClickout"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
+import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 
 interface ProjectCardIconsTextProps extends IconProp {
   width?: number
@@ -138,6 +139,8 @@ export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
   const [country] = useQuery(getCountry, { where: { id: countryId } })
+  const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
+
   const [
     groupedProjects,
     { isFetching, refetch, fetchMore, canFetchMore, isFetchingMore },
@@ -181,6 +184,7 @@ export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
       </Box>
       <Wrapper sx={{ marginTop: -7, marginBottom: 5 }}>
         <Filter
+          propertyTypes={propertyTypes}
           initialValues={filter}
           isTurkey={country.isTurkey}
           rooms={country.rooms}

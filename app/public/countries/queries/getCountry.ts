@@ -19,7 +19,9 @@ export default async function getCountry({ where }: GetCountryInput) {
         },
       },
       cities: true,
-      offers: true,
+      offers: {
+        take: 3,
+      },
       rooms: true,
       isTurkey: true,
       name: true,

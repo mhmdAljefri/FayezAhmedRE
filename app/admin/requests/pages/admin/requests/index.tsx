@@ -26,6 +26,10 @@ export const RequestsList = () => {
     take: ITEMS_PER_PAGE,
   })
 
+  const [{ requests: allRequests }] = usePaginatedQuery(getRequests, {
+    orderBy: { id: "desc" },
+  })
+
   const types: Request["type"][] = ["cars", "consultings", "flights", "hotels"]
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
@@ -37,9 +41,12 @@ export const RequestsList = () => {
           <Button
             onClick={() => setType(t)}
             sx={{ margin: 3 }}
-            variant={t === type ? "link" : undefined}
+            variant={t === type ? "links.outline" : undefined}
           >
             {translations[t]}
+            <Badge sx={{ marginX: 2 }}>
+              {allRequests.filter(({ isNew, type }) => isNew && t === type).length}
+            </Badge>
           </Button>
         ))}
       </Flex>

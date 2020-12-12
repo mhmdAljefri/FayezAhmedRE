@@ -69,6 +69,8 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
               position: "relative",
               width: "100%",
               paddingX: 4,
+              maxHeight: "100vh",
+              overflow: "auto",
               ":before": {
                 content: '""',
                 position: "absolute",

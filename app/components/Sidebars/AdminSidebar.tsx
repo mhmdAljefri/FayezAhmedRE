@@ -15,6 +15,7 @@ const links = [
   { icon: star, name: "الميزات", url: "/admin/features" },
   { icon: handshakeO, name: "الشركاء", url: "/admin/partners" },
   { icon: industry, name: "المشاريع", url: "/admin/projects" },
+  { icon: industry, name: "انواع العقارات", url: "/admin/propert-types" },
   { icon: newspaperO, name: "العروض", url: "/admin/offers" },
   { icon: flagO, name: "الدول", url: "/admin/countries" },
   { icon: certificate, name: "انواع المفروشات", url: "/admin/furnish-categories" },
@@ -88,7 +89,7 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
         paddingBottom: 150,
         transition: "all 0.4s linear",
         ":hover": {
-          minWidth: 250,
+          width: 250,
         },
       }}
     >

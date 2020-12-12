@@ -1,25 +1,25 @@
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useMutation, BlitzPage } from "blitz"
-import createFurnishCategory from "app/admin/furnish-categories/mutations/createFurnishCategory"
-import FurnishCategoryForm from "app/admin/furnish-categories/components/FurnishCategoryForm"
+import { useRouter, useMutation, BlitzPage } from "blitz"
+import createPropertyType from "app/admin/propert-types/mutations/createPropertType"
+import PropertyTypeForm from "app/admin/propert-types/components/PropertTypeForm"
 
-const NewFurnishCategoryPage: BlitzPage = () => {
+const NewPropertyTypePage: BlitzPage = () => {
   const router = useRouter()
-  const [createFurnishCategoryMutation] = useMutation(createFurnishCategory)
+  const [createPropertyTypeMutation] = useMutation(createPropertyType)
 
   return (
     <div>
       <h1>انشاء صنف للمفروشات</h1>
 
-      <FurnishCategoryForm
+      <PropertyTypeForm
         initialValues={{}}
         onSubmit={async (data) => {
           try {
-            const furnishCategory = await createFurnishCategoryMutation({
+            const furnishCategory = await createPropertyTypeMutation({
               data,
             })
             alert("Success!" + JSON.stringify(furnishCategory))
-            router.push(`/admin/furnish-categories/`)
+            router.push(`/admin/propert-types/`)
           } catch (error) {
             alert("Error creating furnishCategory " + JSON.stringify(error, null, 2))
           }
@@ -29,8 +29,8 @@ const NewFurnishCategoryPage: BlitzPage = () => {
   )
 }
 
-NewFurnishCategoryPage.getLayout = (page) => (
-  <AdminLayout title={"Create New FurnishCategory"}>{page}</AdminLayout>
+NewPropertyTypePage.getLayout = (page) => (
+  <AdminLayout title={"Create New PropertyType"}>{page}</AdminLayout>
 )
 
-export default NewFurnishCategoryPage
+export default NewPropertyTypePage

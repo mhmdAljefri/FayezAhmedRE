@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -97,10 +97,9 @@ model Offer {
   project                   Project?        @relation(fields: [projectId], references: [id])
   projectId                 Int?
 
-  name                      String          @unique
+  name                      String
   details                   String
   image                     String?
-  mainVideo                 String?
   gallery                   String[]
   features                  String[]
   brochure                  String?

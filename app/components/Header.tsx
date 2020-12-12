@@ -35,8 +35,8 @@ const Header = ({ sx }: HeaderProps) => {
             }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Box sx={{ maxWidth: 70, paddingY: 2 }}>
-                <Image src="/logo.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
+              <Box sx={{ maxWidth: 50, paddingY: 2 }}>
+                <Image src="/FAYEZ.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
               </Box>
               <Text
                 sx={{

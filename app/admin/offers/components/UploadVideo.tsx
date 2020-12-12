@@ -34,13 +34,10 @@ export default function UploadVideo(props) {
           <MediaWidthTextField
             name="constructingUpdateVideo"
             accept="video/*"
-            label="فيديو حالة المشروع"
+            label="فيديو العرض"
           />
 
-          <MediaWidthTextField
-            name="constructingUpdatePrview"
-            label="صورة عرض لفيديو حالة المشروع"
-          />
+          <MediaWidthTextField name="constructingUpdatePrview" label="صورة عرض لفيديو العرض" />
         </>
       )}
     </>

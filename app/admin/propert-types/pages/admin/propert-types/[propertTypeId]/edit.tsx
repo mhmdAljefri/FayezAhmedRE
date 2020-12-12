@@ -1,34 +1,34 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
 import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
-import getFurnishCategory from "app/admin/furnish-categories/queries/getFurnishCategory"
-import updateFurnishCategory from "app/admin/furnish-categories/mutations/updateFurnishCategory"
-import FurnishCategoryForm from "app/admin/furnish-categories/components/FurnishCategoryForm"
+import getPropertType from "app/admin/propert-types/queries/getPropertType"
+import updatePropertType from "app/admin/propert-types/mutations/updatePropertType"
+import PropertTypeForm from "app/admin/propert-types/components/PropertTypeForm"
 
-export const EditFurnishCategory = () => {
+export const EditPropertType = () => {
   const router = useRouter()
   const propertyTypeId = useParam("propertyTypeId", "number")
-  const [furnishCategory, { setQueryData }] = useQuery(getFurnishCategory, {
+  const [furnishCategory, { setQueryData }] = useQuery(getPropertType, {
     where: { id: propertyTypeId },
   })
-  const [updateFurnishCategoryMutation] = useMutation(updateFurnishCategory)
+  const [updatePropertTypeMutation] = useMutation(updatePropertType)
 
   return (
     <div>
-      <h1>Edit FurnishCategory {furnishCategory.id}</h1>
+      <h1>Edit PropertType {furnishCategory.id}</h1>
       <pre>{JSON.stringify(furnishCategory)}</pre>
 
-      <FurnishCategoryForm
+      <PropertTypeForm
         initialValues={furnishCategory}
         onSubmit={async (data) => {
           try {
-            const updated = await updateFurnishCategoryMutation({
+            const updated = await updatePropertTypeMutation({
               where: { id: furnishCategory.id },
               data,
             })
             await setQueryData(updated)
             alert("Success!" + JSON.stringify(updated))
-            router.push(`/admin/furnish-categories/`)
+            router.push(`/admin/propert-types/`)
           } catch (error) {
             console.log(error)
             alert("Error creating furnishCategory " + JSON.stringify(error, null, 2))
@@ -39,11 +39,11 @@ export const EditFurnishCategory = () => {
   )
 }
 
-const EditFurnishCategoryPage: BlitzPage = () => {
+const EditPropertTypePage: BlitzPage = () => {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        <EditFurnishCategory />
+        <EditPropertType />
       </Suspense>
 
       <p>
@@ -55,8 +55,8 @@ const EditFurnishCategoryPage: BlitzPage = () => {
   )
 }
 
-EditFurnishCategoryPage.getLayout = (page) => (
-  <AdminLayout title={"Edit FurnishCategory"}>{page}</AdminLayout>
+EditPropertTypePage.getLayout = (page) => (
+  <AdminLayout title={"Edit PropertType"}>{page}</AdminLayout>
 )
 
-export default EditFurnishCategoryPage
+export default EditPropertTypePage

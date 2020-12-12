@@ -1,15 +1,16 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
 import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
-import getFurnishCategories from "app/admin/furnish-categories/queries/getFurnishCategories"
 import DynamicTable from "app/components/Tables/DynamicTable"
+import getPropertyTypes from "app/admin/propert-types/queries/getPropertTypes"
+import Action from "app/admin/components/Action"
 
 const ITEMS_PER_PAGE = 100
 
-export const FurnishCategoriesList = () => {
+export const PropertyTypesList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ furnishCategories, hasMore }] = usePaginatedQuery(getFurnishCategories, {
+  const [{ propertyTypes, hasMore }] = usePaginatedQuery(getPropertyTypes, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
@@ -25,9 +26,10 @@ export const FurnishCategoriesList = () => {
           name: "",
           key: "id",
         },
-        { name: "الصنف", key: "name" },
+        { name: "النوع", key: "name" },
+        { name: "النوع", render: ({ id }) => <Action id={id} /> },
       ]}
-      data={furnishCategories}
+      data={propertyTypes}
       onNext={goToNextPage}
       hasMore={hasMore}
       onPrev={goToPreviousPage}
@@ -35,24 +37,22 @@ export const FurnishCategoriesList = () => {
   )
 }
 
-const FurnishCategoriesPage: BlitzPage = () => {
+const PropertyTypesPage: BlitzPage = () => {
   return (
     <div>
       <p>
-        <Link href="/admin/furnish-categories/new">
+        <Link href="/admin/propert-types/new">
           <a>اضافة صنف</a>
         </Link>
       </p>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <FurnishCategoriesList />
+        <PropertyTypesList />
       </Suspense>
     </div>
   )
 }
 
-FurnishCategoriesPage.getLayout = (page) => (
-  <AdminLayout title={"FurnishCategories"}>{page}</AdminLayout>
-)
+PropertyTypesPage.getLayout = (page) => <AdminLayout title={"PropertyTypes"}>{page}</AdminLayout>
 
-export default FurnishCategoriesPage
+export default PropertyTypesPage

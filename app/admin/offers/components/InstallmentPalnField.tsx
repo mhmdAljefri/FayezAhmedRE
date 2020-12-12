@@ -10,7 +10,7 @@ export default function InstallmentPalnField(props) {
   if (values.paymentType !== "installment") return <div />
 
   return (
-    <FieldArray name="installmentPlan">
+    <FieldArray defaultValue={[{}, {}, {}]} name="installmentPlan">
       {({ fields }) => (
         <Flex sx={{ flexWrap: "wrap" }}>
           {fields.map((name, index) => (
