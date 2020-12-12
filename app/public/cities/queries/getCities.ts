@@ -1,14 +1,8 @@
-import { Ctx } from "blitz"
 import db, { Prisma } from "db"
 
 type GetCitiesInput = Pick<Prisma.FindManyCityArgs, "where" | "orderBy" | "skip" | "take">
 
-export default async function getCities(
-  { where, orderBy, skip = 0, take }: GetCitiesInput,
-  ctx: Ctx
-) {
-  ctx.session.authorize()
-
+export default async function getCities({ where, orderBy, skip = 0, take }: GetCitiesInput) {
   const cities = await db.city.findMany({
     where,
     orderBy,
