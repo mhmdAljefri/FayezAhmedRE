@@ -43,6 +43,11 @@ const HEADERS = [
             صفحة الشركات العاملة
           </ThemeLink>
         </Link>
+        <Link passHref href={`/admin/countries/${id}/contacts/`}>
+          <ThemeLink sx={{ color: "text", fontWeight: 700, marginX: 2 }}>
+            معلومات جهات الاتصال
+          </ThemeLink>
+        </Link>
       </Flex>
     ),
   },

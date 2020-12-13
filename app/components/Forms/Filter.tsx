@@ -7,6 +7,7 @@ import SubmitButton from "../SubmitButton"
 import DomainSlider from "../DomainSlider"
 import Slide from "react-reveal/Slide"
 import { City, Country, PropertyType } from "@prisma/client"
+import { PROJECT_STATUS } from "app/constants"
 
 export type filterValues = {
   search?: string
@@ -115,15 +116,7 @@ export default function Filter({
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               emptyOptionText="الكل"
-              options={[
-                { id: "completed", name: "مكتمل" },
-                { id: "inprogress", name: "قيد التطوير" },
-                { id: "resell", name: "اعادة بيع" },
-                { id: "installment", name: "جاهز وتقسيط" },
-                { id: "compatible_installment", name: "تقسيط مريح" },
-                { id: "ocean_view", name: "اطلالات بحرية" },
-                { id: "granted_by_gov", name: "بضمان حكومي" },
-              ]}
+              options={PROJECT_STATUS}
             />
 
             <SubmitButton sx={{ width: 200, marginX: 2 }} fetching={false} />

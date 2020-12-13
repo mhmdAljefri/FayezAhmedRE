@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -55,8 +55,6 @@ model Project {
   details                   String
   complationDate            DateTime?
   image                     String?
-  mainVideo                 String?
-  mainVideoPreview          String?
   gallery                   String[]
   floorplan                 String[]
   features                  String[]

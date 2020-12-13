@@ -4,15 +4,11 @@ import { Icon } from "react-icons-kit"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
 import { Box, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Fade from "react-reveal/Fade"
+import { Country } from "@prisma/client"
 
-export type CountryCardProps = {
-  name: string
-  nameEN: string
-  id: number
-  image: string
-}
+export type CountryCardProps = Country
 
-function CountryCard({ name, id, image }: CountryCardProps) {
+function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
   return (
     <Link passHref href={`/countries/${id}`}>
       <ThemeLink
@@ -37,11 +33,11 @@ function CountryCard({ name, id, image }: CountryCardProps) {
               content: '""',
               position: "absolute",
               display: "block",
-              height: 80,
-              bottom: 40,
-              right: 50,
-              left: 50,
-              backgroundColor: "rgba(0,0,0,0.1)",
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              backgroundColor: isTurkey ? "#051e1e94" : "#98000091",
               boxShadow: "2px 4px 22px rgba(0,0,0,0.1)",
               zIndex: 0,
             },

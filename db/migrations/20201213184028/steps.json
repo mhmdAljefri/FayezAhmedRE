@@ -1,0 +1,22 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Contact",
+      "field": "locationObject",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Contact",
+      "field": "latitude"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Contact",
+      "field": "longitude"
+    }
+  ]
+}

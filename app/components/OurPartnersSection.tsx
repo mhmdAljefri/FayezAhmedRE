@@ -9,7 +9,7 @@ type PartnersCardProps = Partner
 function PartnersCard({ image, name }: PartnersCardProps) {
   return (
     <Slide bottom>
-      <Box sx={{ textAlign: "center", margin: 2 }}>
+      <Box sx={{ textAlign: "center", margin: 2, padding: 2, maxWidth: 200 }}>
         <Image src={image} alt={name} />
       </Box>
     </Slide>

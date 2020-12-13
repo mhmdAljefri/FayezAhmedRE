@@ -4,7 +4,7 @@ import Wrapper from "./Wrapper"
 import Nav from "./Nav"
 import PriceType from "./PriceType"
 import Search from "./Search"
-import { Link } from "blitz"
+import { Link, useParam } from "blitz"
 import useScroll from "app/hooks/useScroll"
 
 type HeaderProps = {
@@ -13,6 +13,7 @@ type HeaderProps = {
 
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
+  const countryId = useParam("countryId", "number")
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
   return (
     <Box
@@ -43,21 +44,34 @@ const Header = ({ sx }: HeaderProps) => {
                   visibility: ["hidden", "visible"],
                   fontSize: [2, 3],
                   paddingX: 2,
+                  lineHeight: "23px",
+                  paddingY: 0,
                   color: "primary",
-                  fontWeight: "700",
                 }}
               >
-                فائز احمد العقارية
+                فائز احمد
+                <Text
+                  sx={{
+                    p: 0,
+                    fontWeight: "700",
+                  }}
+                >
+                  العقـــارية
+                </Text>
               </Text>
             </Flex>
           </a>
         </Link>
         <Flex sx={{ alignItems: "center" }}>
-          <Search />
-          <Box sx={{ display: ["none", null, "flex"] }}>
-            <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
-            <PriceType />
-          </Box>
+          {countryId && (
+            <>
+              <Search />
+              <Box sx={{ display: ["none", null, "flex"] }}>
+                <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
+                <PriceType />
+              </Box>
+            </>
+          )}
           <Nav />
         </Flex>
       </Wrapper>

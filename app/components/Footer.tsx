@@ -9,8 +9,9 @@ import { envelope } from "react-icons-kit/fa/envelope"
 import { phone } from "react-icons-kit/fa/phone"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { addressBook } from "react-icons-kit/fa/addressBook"
-import { Box, Image, Flex, Grid, Heading, Link, Text } from "theme-ui"
+import { Box, Image, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Wrapper from "./Wrapper"
+import { Link } from "blitz"
 
 function Icon(props: IconProp) {
   return <RIconKit {...props} size={24} style={{ marginInlineEnd: 20, ...props.style }} />
@@ -24,9 +25,11 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
     <Box
       sx={{
         textAlign: "center",
+        textDecoration: "none",
         paddingY: 3,
         paddingX: [1, null, 3],
         marginX: 2,
+        color: "primary",
         marginY: 3,
         boxShadow: "0 1px 15px #111",
         borderRadius: 15,
@@ -44,6 +47,7 @@ function HR(props: HRProps) {
 }
 
 export default function Footer() {
+  const mobileNumber = "97470040087"
   return (
     <Box sx={{ backgroundColor: "dark", paddingTop: 5, color: "white" }}>
       <Wrapper>
@@ -61,7 +65,7 @@ export default function Footer() {
         <Box>
           <Heading sx={{ paddingBottom: 2, color: "white" }}>تحميل التطبيق عبر</Heading>
           <Flex sx={{ marginBottom: 4 }}>
-            <Link>
+            <ThemeLink>
               <Box
                 sx={{
                   width: 200,
@@ -78,8 +82,8 @@ export default function Footer() {
                   alt="apple"
                 />
               </Box>
-            </Link>{" "}
-            <Link>
+            </ThemeLink>{" "}
+            <ThemeLink>
               <Box
                 sx={{
                   width: 200,
@@ -96,7 +100,7 @@ export default function Footer() {
                   alt="apple"
                 />
               </Box>
-            </Link>
+            </ThemeLink>
           </Flex>
         </Box>
       </Wrapper>
@@ -104,9 +108,25 @@ export default function Footer() {
         <Wrapper>
           <Grid columns={[2, null, 4]}>
             <CallUSButton icon={envelope}>استفسر الان</CallUSButton>
-            <CallUSButton icon={phone}>مكالمة</CallUSButton>
-            <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
-            <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
+            <ThemeLink
+              sx={{ textDecoration: "none" }}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={"tel:00" + mobileNumber}
+            >
+              <CallUSButton icon={phone}>مكالمة</CallUSButton>
+            </ThemeLink>
+            <ThemeLink
+              sx={{ textDecoration: "none" }}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={"https://api.whatsapp.com/send?phone=" + mobileNumber}
+            >
+              <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
+            </ThemeLink>
+            <Link href="/contacts">
+              <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
+            </Link>
           </Grid>
         </Wrapper>
       </Box>

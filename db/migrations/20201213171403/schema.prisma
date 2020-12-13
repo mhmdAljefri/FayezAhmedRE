@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -55,8 +55,6 @@ model Project {
   details                   String
   complationDate            DateTime?
   image                     String?
-  mainVideo                 String?
-  mainVideoPreview          String?
   gallery                   String[]
   floorplan                 String[]
   features                  String[]
@@ -170,18 +168,19 @@ model City {
 }
 
 model Contact {
-  id             Int      @default(autoincrement()) @id
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id        Int      @default(autoincrement()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  name           String   @unique
-  location       String
-  phones         String[]
-  mobiles        String[]
-  locationObject Json
+  name      String   @unique
+  location  String
+  phones    String[]
+  mobiles   String[]
+  latitude  Float
+  longitude Float
 
-  country        Country  @relation(fields: [countryId], references: [id])
-  countryId      Int
+  country   Country  @relation(fields: [countryId], references: [id])
+  countryId Int
 }
 
 model Furnish {

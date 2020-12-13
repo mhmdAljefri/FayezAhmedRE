@@ -9,6 +9,8 @@ import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
 import { Carousel, Feature, Partner } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
+import { Box, Heading } from "theme-ui"
+import Wrapper from "app/components/Wrapper"
 
 type HomeProps = {
   countries: CountryCardProps[]
@@ -20,7 +22,19 @@ type HomeProps = {
 const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }) => {
   return (
     <>
-      <HomeSlider data={carousels} />
+      <Box>
+        <HomeSlider data={carousels} />
+        <Box sx={{ position: "absolute", bottom: 50, left: 0, right: 0 }}>
+          <Wrapper>
+            <Heading sx={{ fontSize: [5, 6], color: "primary", textShadow: "1px 2px 52px #000" }}>
+              الارتقاء بالحياة
+            </Heading>
+            <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>
+              يتلاقى مع اهتمامنا
+            </Heading>
+          </Wrapper>
+        </Box>
+      </Box>
       <CountriesSection data={countries} />
       <OurServicesSection data={features} />
       <OurPartnersSection data={partners} />
@@ -36,9 +50,14 @@ export async function getStaticProps(context) {
 
   return {
     props: { countries, features, partners, carousels }, // will be passed to the page component as props
+    revalidate: 60 * 30, // every a half hour
   }
 }
 
-Home.getLayout = (page) => <Layout title="الرئيسية">{page}</Layout>
+Home.getLayout = (page) => (
+  <Layout headerProps={{ sx: { position: "fixed" } }} title="الرئيسية">
+    {page}
+  </Layout>
+)
 
 export default Home

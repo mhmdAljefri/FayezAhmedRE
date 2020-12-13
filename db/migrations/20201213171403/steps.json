@@ -1,0 +1,19 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Contact",
+      "field": "latitude",
+      "type": "Float",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Contact",
+      "field": "longitude",
+      "type": "Float",
+      "arity": "Required"
+    }
+  ]
+}
