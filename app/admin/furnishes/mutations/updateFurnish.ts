@@ -9,7 +9,7 @@ export default async function updateFurnish(
   { where, data, furnishCategoryId }: UpdateFurnishInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const furnish = await db.furnish.update({
     where,

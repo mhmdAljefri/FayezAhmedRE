@@ -6,7 +6,7 @@ type CreateCityInput = {
   countryId: number
 }
 export default async function createCity({ data, countryId }: CreateCityInput, ctx: Ctx) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const city = await db.city.create({
     data: { ...data, country: { connect: { id: countryId } } },

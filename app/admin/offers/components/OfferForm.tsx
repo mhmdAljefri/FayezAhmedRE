@@ -159,6 +159,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
 
         <UploadVideo />
+
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد
         </Button>

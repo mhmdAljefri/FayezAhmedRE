@@ -7,7 +7,7 @@ export default async function getCities(
   { where, orderBy, skip = 0, take }: GetCitiesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const cities = await db.city.findMany({
     where,

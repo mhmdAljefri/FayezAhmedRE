@@ -7,7 +7,7 @@ export default async function getFurnishes(
   { where, orderBy, skip = 0, take }: GetFurnishesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const furnishes = await db.furnish.findMany({
     where,

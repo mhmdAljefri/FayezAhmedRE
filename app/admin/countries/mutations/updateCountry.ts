@@ -4,7 +4,7 @@ import db, { CountryUpdateArgs } from "db"
 type UpdateCountryInput = Pick<CountryUpdateArgs, "where" | "data">
 
 export default async function updateCountry({ where, data }: UpdateCountryInput, ctx: Ctx) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   delete (data as any).id
 

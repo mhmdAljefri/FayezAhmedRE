@@ -79,6 +79,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
     </Box>
   )
 }
+
 function ProjectCard({
   image,
   name,
@@ -161,8 +162,6 @@ export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
       getFetchMore: (lastGroup) => lastGroup.nextPage,
     }
   )
-
-  console.log({ groupedProjects })
 
   return (
     <div>

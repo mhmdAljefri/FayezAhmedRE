@@ -7,7 +7,7 @@ export default async function getCountries(
   { where, orderBy, skip = 0, take }: GetCountriesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const countries = await db.country.findMany({
     where,

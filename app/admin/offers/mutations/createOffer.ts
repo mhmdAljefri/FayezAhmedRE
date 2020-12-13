@@ -8,7 +8,7 @@ export type CreateOfferInputType = {
 }
 
 export default async function createOffer({ data, countryId }: CreateOfferInputType, ctx: Ctx) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const projectId = parseInt((data as any).projectId)
   delete (data as any).projectId

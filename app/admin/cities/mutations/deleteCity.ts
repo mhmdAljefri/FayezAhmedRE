@@ -4,7 +4,7 @@ import db, { Prisma } from "db"
 type DeleteCityInput = Pick<Prisma.CityDeleteArgs, "where">
 
 export default async function deleteCity({ where }: DeleteCityInput, ctx: Ctx) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const city = await db.city.delete({ where })
 

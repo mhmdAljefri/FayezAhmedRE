@@ -8,7 +8,7 @@ export default async function createFurnish(
   { data, furnishCategoryId }: CreateFurnishInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   // furnishCategory: {
   //   +     create?: FurnishCategoryCreateWithoutFurnishesInput,

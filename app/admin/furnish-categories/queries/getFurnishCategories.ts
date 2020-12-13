@@ -10,7 +10,7 @@ export default async function getFurnishCategories(
   { where, orderBy, skip = 0, take }: GetFurnishCategoriesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const furnishCategories = await db.furnishCategory.findMany({
     where,

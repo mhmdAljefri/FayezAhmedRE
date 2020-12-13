@@ -10,7 +10,7 @@ export default async function updateProject(
   { where, data, countryId, roomsWithPrices }: UpdateProjectInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   // todo fide removed room and delete it from database
   // todo fide new room and create it with relation

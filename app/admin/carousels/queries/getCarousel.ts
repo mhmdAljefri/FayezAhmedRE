@@ -4,7 +4,7 @@ import db, { FindFirstCarouselArgs } from "db"
 type GetCarouselInput = Pick<FindFirstCarouselArgs, "where">
 
 export default async function getCarousel({ where }: GetCarouselInput, ctx: Ctx) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const carousel = await db.carousel.findFirst({ where })
 

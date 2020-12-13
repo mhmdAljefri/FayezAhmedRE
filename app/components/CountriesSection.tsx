@@ -2,7 +2,7 @@ import { Link } from "blitz"
 import React from "react"
 import { Icon } from "react-icons-kit"
 import { arrowLeft } from "react-icons-kit/fa/arrowLeft"
-import { Box, Flex, Heading, Link as ThemeLink, Text } from "theme-ui"
+import { Box, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Fade from "react-reveal/Fade"
 
 export type CountryCardProps = {
@@ -23,7 +23,6 @@ function CountryCard({ name, id, image }: CountryCardProps) {
         <Flex
           key={id}
           sx={{
-            borderRadius: 15,
             backgroundImage: `url(${image})`,
             backgroundSize: "cover",
             flexDirection: "column",
@@ -31,11 +30,7 @@ function CountryCard({ name, id, image }: CountryCardProps) {
             color: "white",
             textShadow: "5px 5px 50px #000",
             padding: 4,
-            width: 300,
-            maxWidth: "95vw",
             height: 300,
-            marginX: [1, null, 5],
-            marginBottom: 5,
             boxShadow: "default",
             position: "relative",
             ":before": {
@@ -91,20 +86,12 @@ type CountriesSectionProps = {
 }
 export default function CountriesSection(props: CountriesSectionProps) {
   return (
-    <Flex
-      sx={{
-        flexWrap: "wrap",
-        justifyContent: "center",
-        marginTop: -100,
-        zIndex: 1000,
-        position: "relative",
-      }}
-    >
+    <Grid gap={0} columns={[1, null, 2]}>
       {props.data.map((counry) => (
         <Fade>
           <CountryCard {...counry} />
         </Fade>
       ))}
-    </Flex>
+    </Grid>
   )
 }

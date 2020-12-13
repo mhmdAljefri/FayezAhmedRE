@@ -7,7 +7,7 @@ export default async function getPropertyTypes(
   { where, orderBy, skip = 0, take }: GetPropertyTypesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   const propertyTypes = await db.propertyType.findMany({
     where,

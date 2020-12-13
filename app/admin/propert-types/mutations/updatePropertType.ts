@@ -7,7 +7,7 @@ export default async function updatePropertyType(
   { where, data }: UpdatePropertyTypeInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize("admin")
+  ctx.session.authorize(["admin", "superadmin"])
 
   delete (data as any).id
 
