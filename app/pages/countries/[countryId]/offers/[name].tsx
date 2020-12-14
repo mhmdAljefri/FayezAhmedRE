@@ -4,14 +4,14 @@ import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
+import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
 import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
+import { Offer, Project } from "@prisma/client"
 
-const WhatsNew: BlitzPage = () => {
-  const offerTitle = useParam("title", "string")
-  const [offer] = useQuery(getOffer, { where: { name: offerTitle } })
+const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
   return (
-    <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={offerTitle}>
+    <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={offer.name}>
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
@@ -49,6 +49,32 @@ const WhatsNew: BlitzPage = () => {
       )}
     </Layout>
   )
+}
+
+export async function getStaticPaths() {
+  const { offers } = await getOffers({})
+  const paths = offers.map((offer: Offer) => ({
+    params: {
+      name: `${offer.name}`,
+    },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export async function getStaticProps(context) {
+  const offerTitle = context.params.name
+  const offer = await getOffer({ where: { name: offerTitle } })
+
+  return {
+    props: {
+      offer,
+    },
+    revalidate: 60 * 60,
+  }
 }
 
 export default WhatsNew

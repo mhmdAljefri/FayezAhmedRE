@@ -88,7 +88,6 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
         OR: [
           { name: { contains: filterRef.current?.search } },
           { details: { contains: filterRef.current?.search } },
-          { reachText: { contains: filterRef.current?.search } },
         ],
       },
     }),

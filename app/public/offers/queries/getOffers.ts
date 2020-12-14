@@ -1,17 +1,17 @@
 import db, { Prisma } from "db"
 
-type GetProjectsInput = Pick<
+type GetOffersInput = Pick<
   Prisma.FindManyOfferArgs,
   "where" | "orderBy" | "skip" | "take" | "select"
 >
 
-export default async function getProjects({
+export default async function getOffers({
   where,
   select,
   orderBy,
   skip = 0,
   take,
-}: GetProjectsInput) {
+}: GetOffersInput) {
   const offers = await db.offer.findMany({
     where,
     orderBy,

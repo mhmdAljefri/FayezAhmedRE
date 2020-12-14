@@ -18,6 +18,7 @@ import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ArrowIcon from "app/components/ArrowIcon"
 import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
+import getCountries from "app/public/countries/queries/getCountries"
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
@@ -315,34 +316,21 @@ export default function CountryPage({
   )
 }
 
-// export async function getStaticPaths() {
-//   const { countries } = await getCountries({})
-//   const paths = countries.map((c) => ({
-//     params: {
-//       countryId: `${c.id}`,
-//     },
-//   }))
+export async function getStaticPaths() {
+  const { countries } = await getCountries({})
+  const paths = countries.map((c) => ({
+    params: {
+      countryId: `${c.id}`,
+    },
+  }))
 
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
+  return {
+    paths,
+    fallback: false,
+  }
+}
 
-// export async function getStaticProps({ params }) {
-//   // You can fetch external data here
-//   return {
-//     props: {
-//       countryId: params.countryId,
-//       updatedAt: Date.now(),
-//     },
-//     notFound: true,
-
-//     revalidate: 10,
-//   }
-// }
-
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
   const { propertyTypes } = await getPropertyTypes({})
@@ -354,5 +342,6 @@ export async function getServerSideProps(context) {
       furnishCategories,
       propertyTypes,
     },
+    revalidate: 60 * 60,
   }
 }
