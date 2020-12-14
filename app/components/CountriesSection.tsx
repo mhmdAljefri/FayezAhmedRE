@@ -43,7 +43,15 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
             },
           }}
         >
-          <Text sx={{ filter: "drop-shadow(2px 4px 2px black)", fontWeight: 900, fontSize: 3 }}>
+          <Text
+            sx={{
+              filter: "drop-shadow(2px 4px 2px black)",
+              fontWeight: 900,
+              margin: 0,
+              padding: 0,
+              fontSize: 3,
+            }}
+          >
             مشاريع وعقارات
           </Text>
           <Flex>
