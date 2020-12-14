@@ -42,7 +42,7 @@ const Nav = (props: NavProps) => {
             sx={{
               paddingX: 4,
               height: "100vh",
-              backgroundColor: "background",
+              backgroundColor: "dark",
 
               direction: "rtl",
               paddingY: 2,
@@ -63,7 +63,6 @@ const Nav = (props: NavProps) => {
                 <ThemeLink
                   sx={{
                     marginTop: 5,
-                    color: "heading",
                     fontWeight: 700,
                     fontSize: [3, null, 5, 6],
                   }}
@@ -72,14 +71,10 @@ const Nav = (props: NavProps) => {
                 </ThemeLink>
               </Link>
               <Link href="/furniture">
-                <ThemeLink sx={{ color: "heading", fontWeight: 700, fontSize: [3, null, 5, 6] }}>
-                  الاثاث
-                </ThemeLink>
+                <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>الاثاث</ThemeLink>
               </Link>
               <Link href="/search">
-                <ThemeLink sx={{ color: "heading", fontWeight: 700, fontSize: [3, null, 5, 6] }}>
-                  البحث
-                </ThemeLink>
+                <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>البحث</ThemeLink>
               </Link>
             </Flex>
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />

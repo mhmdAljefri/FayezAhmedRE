@@ -14,29 +14,32 @@ export default async function createProject(
   ctx.session.authorize(["admin", "superadmin"])
 
   const cityId = (data as any).cityId
+  const propertyTypeId = (data as any).propertyTypeId
   delete (data as any).cityId
+  delete (data as any).propertyTypeId
 
-  try {
-    const project = await db.project.create({
-      data: {
-        ...data,
-        roomsWithPrices: {
-          create: roomsWithPrices,
-        },
-        country: {
-          connect: {
-            id: countryId,
-          },
-        },
-        city: {
-          connect: {
-            id: parseInt(cityId),
-          },
+  const project = await db.project.create({
+    data: {
+      ...data,
+      propertyType: {
+        connect: {
+          id: propertyTypeId,
         },
       },
-    })
-    return project
-  } catch (error) {
-    console.error(error)
-  }
+      roomsWithPrices: {
+        create: roomsWithPrices,
+      },
+      country: {
+        connect: {
+          id: countryId,
+        },
+      },
+      city: {
+        connect: {
+          id: parseInt(cityId),
+        },
+      },
+    },
+  })
+  return project
 }

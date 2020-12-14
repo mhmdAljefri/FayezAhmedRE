@@ -9,7 +9,7 @@ const NewPropertyTypePage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>انشاء صنف للمفروشات</h1>
+      <h1>انشاء نوع عقار</h1>
 
       <PropertyTypeForm
         initialValues={{}}

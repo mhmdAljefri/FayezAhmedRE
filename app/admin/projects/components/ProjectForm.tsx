@@ -17,6 +17,7 @@ import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import DatePicker from "react-datepicker"
 import UploadMainVideo from "./UploadMainVideo"
 import { PROJECT_STATUS } from "app/constants"
+import PropertyTypesField from "./PropertyTypesField"
 
 type ProjectFormProps = {
   initialValues: any
@@ -120,6 +121,8 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
 
         <MediaWidthTextField name="image" label="صورة المشروع" />
         <UploadMainVideo />
+
+        <PropertyTypesField />
         <LabeledMenuField
           getLabel={(country) => country.name}
           getValue={(country) => country.id as number}

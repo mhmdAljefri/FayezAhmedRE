@@ -1,0 +1,26 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateEnum",
+      "enum": "REQUEST_TYPES",
+      "createdValues": [
+        "enquire"
+      ]
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "mainVideo",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "mainVideoPreview",
+      "type": "String",
+      "arity": "Optional"
+    }
+  ]
+}

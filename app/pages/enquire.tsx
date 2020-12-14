@@ -1,7 +1,8 @@
 import { BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
-import { Box, Flex, Grid, Heading, Link, Text } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
+import EnquireForm from "app/components/Forms/Enquire"
 
 const EnquirePage: BlitzPage = () => {
   return (
@@ -11,7 +12,9 @@ const EnquirePage: BlitzPage = () => {
           <Heading sx={{ fontSize: 6, color: "primary" }}>استفسر الان</Heading>
         </Wrapper>
       </Box>
-      <Wrapper>شيشيش</Wrapper>
+      <Wrapper sx={{ paddingY: 5 }}>
+        <EnquireForm />
+      </Wrapper>
     </>
   )
 }

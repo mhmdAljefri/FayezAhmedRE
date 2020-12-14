@@ -19,7 +19,7 @@ const Header = ({ sx }: HeaderProps) => {
     <Box
       sx={{
         position: "sticky",
-        zIndex: 9999,
+        zIndex: 10,
         top: 0,
         left: 0,
         right: 0,

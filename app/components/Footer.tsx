@@ -26,6 +26,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
       sx={{
         textAlign: "center",
         textDecoration: "none",
+        cursor: "pointer",
         paddingY: 3,
         paddingX: [1, null, 3],
         marginX: 2,
@@ -107,7 +108,11 @@ export default function Footer() {
       <Box sx={{ backgroundColor: "dark2" }}>
         <Wrapper>
           <Grid columns={[2, null, 4]}>
-            <CallUSButton icon={envelope}>استفسر الان</CallUSButton>
+            <Link passHref href="/enquire">
+              <ThemeLink sx={{ textDecoration: "none" }}>
+                <CallUSButton icon={envelope}>استفسر الان</CallUSButton>
+              </ThemeLink>
+            </Link>
             <ThemeLink
               sx={{ textDecoration: "none" }}
               target="_blank"
@@ -125,7 +130,9 @@ export default function Footer() {
               <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
             </ThemeLink>
             <Link href="/contacts">
-              <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
+              <ThemeLink sx={{ textDecoration: "none" }}>
+                <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
+              </ThemeLink>
             </Link>
           </Grid>
         </Wrapper>
