@@ -18,7 +18,7 @@ const Schema = z.object({
 const FeatureForm = ({ initialValues, onSubmit }: FeatureFormProps) => {
   return (
     <Form initialValues={initialValues} schema={Schema} onSubmit={onSubmit}>
-      <LabeledTextField name="name" label="عنوان الميزة" />
+      <LabeledTextField name="name" label="عنوان الخدمة" />
       <MediaWidthTextField name="image" label="الصورة" />
       <Button>تاكيد</Button>
     </Form>

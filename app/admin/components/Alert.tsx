@@ -1,9 +1,7 @@
-import React from "react"
-const isBrowser = typeof window !== "undefined"
-
-const withSwalInstance = isBrowser ? require("sweetalert2-react").withSwalInstance : () => {}
-const swal = isBrowser ? require("sweetalert2") : () => {}
-const SweetAlert = isBrowser ? withSwalInstance(swal) : <div />
+import React, { useEffect } from "react"
+import sweetalert2 from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+const SweetAlert = withReactContent(sweetalert2)
 
 type AlertType = {
   title: string
@@ -12,6 +10,17 @@ type AlertType = {
   onToggle: () => any
 }
 export default function Alert({ title, text, onToggle, open }: AlertType) {
-  if (!isBrowser) return null
-  return <SweetAlert show={open} title={title} text={text} onConfirm={onToggle} />
+  useEffect(() => {
+    if (open)
+      SweetAlert.fire({
+        title: title,
+        html: text,
+        confirmButtonText: "تاكيد",
+        click: () => onToggle(),
+      })
+
+    return () => {}
+  }, [open, onToggle, title, text])
+
+  return <div />
 }

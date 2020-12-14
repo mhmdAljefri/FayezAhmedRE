@@ -39,13 +39,15 @@ export default function Action({ id, onDelete }: ActonPropsType) {
       <Box sx={{ width: 120, marginRight: "auto" }}>
         <Button
           type="button"
-          onClick={handleToggle}
+          onClick={() => {
+            const isApproved = window.confirm("هل تريد حذف العنصر")
+            isApproved && onDelete?.()
+          }}
           sx={{ color: "red", visibility: onDelete ? "visible" : "hidden" }}
           variant="link"
         >
           <Icon icon={remove} />
         </Button>
-        <Alert text="هل تريد حذف العنصر" title="تاكيد الحذف" open={open} onToggle={handleDelete} />
         <ThemeLink as={Link} href={editLink} type="button" sx={{ color: "heading" }} variant="link">
           <Icon icon={pencilSquare} />
         </ThemeLink>

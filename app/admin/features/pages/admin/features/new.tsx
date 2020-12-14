@@ -17,7 +17,7 @@ const NewFeaturePage: BlitzPage = () => {
         boxShadow: "default",
       }}
     >
-      <h1>إضافة ميزة</h1>
+      <h1>إضافة خدمة</h1>
 
       <FeatureForm
         initialValues={{}}
@@ -33,7 +33,7 @@ const NewFeaturePage: BlitzPage = () => {
 
       <p>
         <Link href="/features">
-          <a>الميزات</a>
+          <a>الخدمات</a>
         </Link>
       </p>
     </Box>

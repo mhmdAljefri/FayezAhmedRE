@@ -15,5 +15,9 @@ export const PROJECT_STATUS = [
   { id: "installment", name: "جاهز وتقسيط" },
   { id: "compatible_installment", name: "تقسيط مريح" },
   { id: "ocean_view", name: "اطلالات بحرية" },
+]
+
+export const TURKEY_PROJECT_STATUS = [
+  ...PROJECT_STATUS,
   { id: "granted_by_gov", name: "بضمان حكومي" },
 ]

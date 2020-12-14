@@ -12,7 +12,7 @@ import { bed } from "react-icons-kit/fa/bed"
 import { image } from "react-icons-kit/fa/image"
 
 const links = [
-  { icon: star, name: "الميزات", url: "/admin/features" },
+  { icon: star, name: "الخدمات", url: "/admin/features" },
   { icon: handshakeO, name: "الشركاء", url: "/admin/partners" },
   { icon: industry, name: "المشاريع", url: "/admin/projects" },
   { icon: industry, name: "انواع العقارات", url: "/admin/propert-types" },

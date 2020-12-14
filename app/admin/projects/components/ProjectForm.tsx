@@ -16,7 +16,7 @@ import getCities from "app/admin/cities/queries/getCities"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import DatePicker from "react-datepicker"
 import UploadMainVideo from "./UploadMainVideo"
-import { PROJECT_STATUS } from "app/constants"
+import { PROJECT_STATUS, TURKEY_PROJECT_STATUS } from "app/constants"
 import PropertyTypesField from "./PropertyTypesField"
 
 type ProjectFormProps = {
@@ -83,6 +83,25 @@ const CitiesListField = () => {
   )
 }
 
+const StatusField = ({ countries }) => {
+  const {
+    values: { countryId },
+  } = useFormState()
+  const selectedCountry = countries.find(
+    (country) => country.id.toString() === countryId.toString()
+  )
+
+  return (
+    <LabeledMenuField
+      options={selectedCountry?.isTurkey ? TURKEY_PROJECT_STATUS : PROJECT_STATUS}
+      name="status"
+      getLabel={(item) => item.name}
+      getValue={(item) => item.id}
+      label="حالة المشروع"
+    />
+  )
+}
+
 const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
   const [{ countries }] = usePaginatedQuery(getCountries, {})
 
@@ -133,13 +152,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         />
         <CitiesListField />
 
-        <LabeledMenuField
-          options={PROJECT_STATUS}
-          name="status"
-          getLabel={(item) => item.name}
-          getValue={(item) => item.id}
-          label="حالة المشروع"
-        />
+        <StatusField countries={countries} />
         <LabeledMenuField
           options={[
             {

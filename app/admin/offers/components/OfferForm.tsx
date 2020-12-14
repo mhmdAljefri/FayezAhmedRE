@@ -132,7 +132,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
             <div>
               {fields.map((name, index) => (
                 <div key={name}>
-                  <LabeledTextField name={name} label="الميزة" />
+                  <LabeledTextField name={name} label="الخدمة" />
 
                   <Button
                     variant="link"
@@ -140,7 +140,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
                     type="button"
                     onClick={() => fields.remove(index)}
                   >
-                    حدف الميزة
+                    حدف الخدمة
                   </Button>
                 </div>
               ))}
@@ -150,7 +150,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
                 type="button"
                 onClick={() => fields.push("")}
               >
-                اضافة ميزة
+                اضافة خدمة
               </Button>
             </div>
           )}
