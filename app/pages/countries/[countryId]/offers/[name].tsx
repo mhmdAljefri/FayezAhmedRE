@@ -1,5 +1,5 @@
 import React from "react"
-import { BlitzPage, Link, useParam, useQuery } from "blitz"
+import { BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
@@ -73,7 +73,7 @@ export async function getStaticProps(context) {
     props: {
       offer,
     },
-    revalidate: 60 * 60,
+    revalidate: 60 * 2,
   }
 }
 

@@ -342,6 +342,6 @@ export async function getStaticProps(context) {
       furnishCategories,
       propertyTypes,
     },
-    revalidate: 60 * 60,
+    revalidate: 60 * 2,
   }
 }

@@ -50,7 +50,7 @@ export async function getStaticProps(context) {
 
   return {
     props: { countries, features, partners, carousels }, // will be passed to the page component as props
-    revalidate: 60 * 30, // every a half hour
+    revalidate: 60 * 2,
   }
 }
 
