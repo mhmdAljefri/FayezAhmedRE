@@ -26,7 +26,7 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
             color: "white",
             textShadow: "5px 5px 50px #000",
             padding: 4,
-            height: 300,
+            height: 200,
             boxShadow: "default",
             position: "relative",
             ":before": {
