@@ -88,7 +88,7 @@ const StatusField = ({ countries }) => {
     values: { countryId },
   } = useFormState()
   const selectedCountry = countries.find(
-    (country) => country.id.toString() === countryId.toString()
+    (country) => country.id.toString() === countryId?.toString()
   )
 
   return (
