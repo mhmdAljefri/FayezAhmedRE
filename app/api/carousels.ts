@@ -5,7 +5,7 @@ const CarouselsApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const carousels = await db.carousel.findMany({
     where: {},
     orderBy: {},
-    select: { image: true },
+    select: { image: true, id: true },
   })
   res.status(200).json({
     message: "message",
