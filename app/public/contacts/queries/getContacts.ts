@@ -2,7 +2,12 @@ import db, { Prisma } from "db"
 
 type GetContactsInput = Pick<Prisma.FindManyContactArgs, "where" | "orderBy" | "skip" | "take">
 
-export default async function getContacts({ where, orderBy, skip = 0, take }: GetContactsInput) {
+export default async function getContacts({
+  where,
+  orderBy = { countryId: "desc" },
+  skip = 0,
+  take,
+}: GetContactsInput) {
   const contacts = await db.contact.findMany({
     where,
     orderBy,
