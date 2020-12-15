@@ -24,7 +24,16 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
     <>
       <Box>
         <HomeSlider data={carousels} />
-        <Box sx={{ position: "absolute", bottom: 50, left: 0, right: 0 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            paddingY: 50,
+            backgroundImage: "linear-gradient(0deg, #000000c7, transparent)",
+          }}
+        >
           <Wrapper>
             <Heading sx={{ fontSize: [5, 6], color: "primary", textShadow: "1px 2px 52px #000" }}>
               الارتقاء بالحياة
