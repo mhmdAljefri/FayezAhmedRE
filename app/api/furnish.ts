@@ -8,7 +8,6 @@ const FurnishApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
       furnishCategoryId: parseInt(furnishCategoryId),
     },
     orderBy: {},
-    select: { name: true, image: true, id: true },
   })
   res.status(200).json({
     message: "message",
