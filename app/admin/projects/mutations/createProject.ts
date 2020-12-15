@@ -23,7 +23,7 @@ export default async function createProject(
       ...data,
       propertyType: {
         connect: {
-          id: propertyTypeId,
+          id: parseInt(propertyTypeId),
         },
       },
       roomsWithPrices: {

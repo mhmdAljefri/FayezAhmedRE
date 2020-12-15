@@ -1,15 +1,12 @@
-import { useState } from "react"
 // import RichTextEditor from "react-rte"
 import SunEditor from "suneditor-react"
 
 type ReactReachTextEditorProps = {
   onChange: (value: string) => any
+  value?: any
 }
-export default function ReactReachTextEditor({ onChange }: ReactReachTextEditorProps) {
-  const [value, setValue] = useState("")
-
+export default function ReactReachTextEditor({ onChange, value }: ReactReachTextEditorProps) {
   const handleChange = (textValue) => {
-    setValue(textValue)
     if (onChange) {
       // Send the changes up to the parent component as an HTML string.
       // This is here to demonstrate using `.toString()` but in a real app it

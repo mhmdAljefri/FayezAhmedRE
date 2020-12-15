@@ -60,6 +60,7 @@ const Schema = z.object({
   details: z.string(),
   image: z.string(),
   countryId: z.string(),
+  propertyTypeId: z.string(),
   cityId: z.string(),
 })
 
@@ -129,7 +130,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         />
 
         <Field
-          name="details"
+          name="complationDate"
           render={({ input }) => (
             <>
               <Label>تاريخ التسليم</Label>
