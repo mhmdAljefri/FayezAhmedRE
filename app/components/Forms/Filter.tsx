@@ -58,11 +58,11 @@ export default function Filter({
             <MenuField
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
-              options={[...cities]}
+              options={cities || []}
               emptyOptionText="المدينة"
               name="city"
             />
-            <MenuField options={["بيع", "تاجير"]} emptyOptionText="القرض" name="purpose" />
+            <MenuField options={["بيع", "تاجير"]} emptyOptionText="حالات المشروع" name="purpose" />
           </Grid>
 
           <Grid
@@ -115,7 +115,7 @@ export default function Filter({
               name="status"
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
-              emptyOptionText="الكل"
+              emptyOptionText="حالات المشروع"
               options={PROJECT_STATUS}
             />
 

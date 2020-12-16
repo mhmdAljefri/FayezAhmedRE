@@ -18,7 +18,7 @@ export default function InstallmentPalnField(props) {
               <div key={name}>
                 <Grid columns={[1, 3]}>
                   <LabeledTextField required name={`${name}.instalment`} label="عنوان الدفعة" />
-                  <LabeledTextField required name={`${name}.milestone`} label="موعد الدفع" />
+                  <LabeledTextField name={`${name}.milestone`} label="موعد الدفع" />
                   <LabeledTextField
                     type="number"
                     required

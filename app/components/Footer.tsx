@@ -65,7 +65,7 @@ export default function Footer() {
         <HR />
         <Box>
           <Heading sx={{ paddingBottom: 2, color: "white" }}>تحميل التطبيق عبر</Heading>
-          <Flex sx={{ marginBottom: 4 }}>
+          <Flex sx={{ marginBottom: 4, flexWrap: "wrap" }}>
             <ThemeLink>
               <Box
                 sx={{

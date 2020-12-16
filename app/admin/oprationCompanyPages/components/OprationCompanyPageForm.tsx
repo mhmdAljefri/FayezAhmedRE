@@ -42,7 +42,7 @@ const OprationCompanyPageForm = ({ initialValues, onSubmit }: OprationCompanyPag
         )}
       />
       <MediaWidthTextField label="الصورة الرئيسية" name="image" />
-      <MediaWidthTextField multiple label="المعرض" name="gallery" />
+      <MediaWidthTextField multiple label="المعرض" name="galleryImages" />
 
       <Box sx={{ py: 4, backgroundColor: "muted", px: 4, my: 4 }}>
         <MediaWidthTextField accept="video/*" label="الفيديو" name="video" />
