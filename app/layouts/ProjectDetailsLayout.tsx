@@ -214,11 +214,11 @@ export default function ProjectDetailsLayout({
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
 
           <Flex sx={{ marginBottom: 2, marginTop: 4 }}>
-            {roomsWithPrices.map((item, index) => (
+            {/* {roomsWithPrices.map((item, index) => (
               <Button onClick={() => setRoom(index)} variant="link">
                 {item.room}
               </Button>
-            ))}
+            ))} */}
           </Flex>
           <Flex>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
