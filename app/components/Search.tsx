@@ -25,12 +25,15 @@ const Search = (props: SearchProps) => {
     >
       <Flex
         sx={{
-          position: "relative",
+          position: open ? "fixed" : "relative",
+          left: open ? 50 : undefined,
+          right: open ? 50 : undefined,
+          zIndex: open ? 50 : undefined,
           overflow: "hidden",
           backgroundColor: "text",
           color: "background",
 
-          width: open ? 180 : 40,
+          width: open ? undefined : 40,
           transitionDuration: "0.4s",
           transitionProperty: "width",
           transitionTimingFunction: "ease-in-out",

@@ -29,7 +29,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
         cursor: "pointer",
         paddingY: 3,
         paddingX: [1, null, 3],
-        marginX: 2,
+        marginX: [0, 2],
         color: "primary",
         marginY: 3,
         boxShadow: "0 1px 15px #111",
@@ -37,7 +37,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
       }}
     >
       <Icon style={{ marginInlineEnd: 0 }} icon={icon} />
-      <Text>{children}</Text>
+      <Text sx={{ fontSize: [0, null, 2] }}>{children}</Text>
     </Box>
   )
 }
@@ -107,7 +107,7 @@ export default function Footer() {
       </Wrapper>
       <Box sx={{ backgroundColor: "dark2" }}>
         <Wrapper>
-          <Grid columns={[2, null, 4]}>
+          <Grid gap={[0, 1, 2]} columns={[4]}>
             <Link passHref href="/enquire">
               <ThemeLink sx={{ textDecoration: "none" }}>
                 <CallUSButton icon={envelope}>استفسر الان</CallUSButton>

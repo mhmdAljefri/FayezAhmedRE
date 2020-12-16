@@ -106,7 +106,7 @@ export function GalleryView({ gallery }) {
       </Box>
 
       <Wrapper sx={{ marginTop: -5 }}>
-        <Flex sx={{ justifyContent: "center", overflow: "auto" }}>
+        <SlickSlider sx={{ justifyContent: "center", overflow: "auto" }}>
           {gallery.map((item, index) => (
             <Image
               key={item + "_" + index}
@@ -123,7 +123,7 @@ export function GalleryView({ gallery }) {
               src={item}
             />
           ))}
-        </Flex>
+        </SlickSlider>
       </Wrapper>
     </>
   )
@@ -181,6 +181,7 @@ export default function ProjectDetailsLayout({
   oprationCompanies,
   roomsWithPrices,
   location,
+  complationDate,
 }) {
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
@@ -274,7 +275,7 @@ export default function ProjectDetailsLayout({
               <BigIconText icon={buildingO} text="شقق وفلل" />
               <BigIconText icon={dollar} text="كاش" />
               <BigIconText icon={mapMarker} text={country.name} />
-              <BigIconText icon={key} text={new Date().getFullYear()} />
+              <BigIconText icon={key} text={complationDate} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
             </Flex>
           </Box>

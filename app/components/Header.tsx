@@ -41,8 +41,7 @@ const Header = ({ sx }: HeaderProps) => {
               </Box>
               <Text
                 sx={{
-                  visibility: ["hidden", "visible"],
-                  fontSize: [2, 3],
+                  fontSize: [1, 3],
                   paddingX: 2,
                   lineHeight: "23px",
                   paddingY: 0,

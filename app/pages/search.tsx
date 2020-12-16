@@ -81,8 +81,8 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
           )}
           {projects.map((item) => {
             return (
-              <Flex sx={{ maxWidth: 500, margin: 3 }}>
-                <Box sx={{ width: 200, height: 200, boxShadow: "card" }}>
+              <Flex sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}>
+                <Box sx={{ width: ["100%", 200], boxShadow: "card" }}>
                   <Image
                     sx={{
                       objectFit: "cover",
@@ -93,22 +93,22 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
                 </Box>
                 <Flex
                   sx={{
-                    width: "100%",
+                    width: ["100%", 300],
                     flexDirection: "column",
                     justifyContent: "space-between",
                     padding: 3,
                   }}
                 >
                   <Box>
-                    <Heading sx={{ fontSize: 6 }}>{item.name}</Heading>
-                    <Text>{item.details}</Text>
+                    <Heading sx={{ fontSize: [4, 6] }}>{item.name}</Heading>
+                    <Text dangerouslySetInnerHTML={{ __html: item.details }} />
                   </Box>
                   <Link passHref href={`/countries/${item.countryId}/projects/${item.name}`}>
                     <ThemeLink>
                       <Flex
                         sx={{
                           fontWeight: 700,
-                          fontSize: 4,
+                          fontSize: [3, 4],
                           alignItems: "center",
                           textDecoration: "none",
                           justifyContent: "space-between",

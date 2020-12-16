@@ -64,7 +64,7 @@ export function OfferCard({ image, details, name, prefixPath = "" }: OfferCardPr
         </Link>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{name}</Heading>
-          <Text>{details}</Text>
+          <Text dangerouslySetInnerHTML={{ __html: details }} />
         </Box>
       </Box>
     </Fade>
