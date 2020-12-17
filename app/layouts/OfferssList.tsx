@@ -1,4 +1,4 @@
-import { Offer, Prisma } from "@prisma/client"
+import { Offer } from "@prisma/client"
 import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import { Link, useInfiniteQuery, useParam, useRouter, useRouterQuery } from "blitz"
@@ -11,9 +11,16 @@ import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
 
 type OfferCardProps = Pick<Offer, "name" | "image" | "details"> & {
   prefixPath?: string
+  hideOfferLabel?: boolean
 }
 
-export function OfferCard({ image, details, name, prefixPath = "" }: OfferCardProps) {
+export function OfferCard({
+  image,
+  hideOfferLabel,
+  details,
+  name,
+  prefixPath = "",
+}: OfferCardProps) {
   const { asPath } = useRouter()
   return (
     <Fade bottom>
@@ -40,25 +47,27 @@ export function OfferCard({ image, details, name, prefixPath = "" }: OfferCardPr
                 }}
                 src={image as string}
               />
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  textAlign: "center",
-                  left: 0,
-                  right: 0,
-                  lineHeight: "40px",
-                  height: 40,
-                  backgroundColor: "dark",
-                  color: "white",
-                  transition: "all 0.5s linear",
-                  ":hover": {
-                    backgroundColor: "primary",
-                  },
-                }}
-              >
-                العرض الحالي
-              </Box>
+              {!hideOfferLabel && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    textAlign: "center",
+                    left: 0,
+                    right: 0,
+                    lineHeight: "40px",
+                    height: 40,
+                    backgroundColor: "dark",
+                    color: "white",
+                    transition: "all 0.5s linear",
+                    ":hover": {
+                      backgroundColor: "primary",
+                    },
+                  }}
+                >
+                  العرض الحالي
+                </Box>
+              )}
             </Box>
           </a>
         </Link>
@@ -120,7 +129,7 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
             {groupedProjects.map((group, i) => (
               <React.Fragment key={i}>
                 {group.offers.map((offer) => (
-                  <OfferCard {...offer} key={offer.id} />
+                  <OfferCard hideOfferLabel {...offer} key={offer.id} />
                 ))}
               </React.Fragment>
             ))}
