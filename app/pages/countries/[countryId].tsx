@@ -275,7 +275,7 @@ export default function CountryPage({
           position: "relative",
         }}
       >
-        <ServicesForm />
+        <ServicesForm cities={country.cities} />
       </Wrapper>
 
       <Box

@@ -21,7 +21,6 @@ export default function InstallmentPalnField(props) {
                   <LabeledTextField name={`${name}.milestone`} label="موعد الدفع" />
                   <LabeledTextField
                     type="number"
-                    required
                     name={`${name}.payment`}
                     label="النسبة الموئية للدفعة"
                   />

@@ -5,12 +5,8 @@ import Form from "../Form"
 import SubmitButton from "../SubmitButton"
 import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
-import { useParam, useQuery } from "blitz"
-import getCities from "app/public/cities/queries/getCities"
 
-function Destination() {
-  const countryId = useParam("countryId", "number")
-  const [{ cities }] = useQuery(getCities, { where: { countryId } })
+function Destination({ cities }) {
   return (
     <LabeledMenuField
       options={cities}
@@ -22,14 +18,14 @@ function Destination() {
   )
 }
 
-function FlightsForm() {
+function FlightsForm({ cities }) {
   const { run, fetching } = useRequestsMutation("flights")
 
   return (
     <Form onSubmit={run}>
       <LabeledTextField required name="name" label="الاسم" />
       <LabeledTextField required name="mobile" label="الجوال" />
-      <Destination />
+      <Destination cities={cities} />
       <Grid columns={2}>
         <LabeledTextField required name="arrivalDate" label="تاريخ الوصول" />
         <LabeledTextField required name="arrivalAirport" label="مطار الوصول" />
@@ -47,14 +43,14 @@ function FlightsForm() {
     </Form>
   )
 }
-function HotelsForm() {
+function HotelsForm({ cities }) {
   const { run, fetching } = useRequestsMutation("hotels")
 
   return (
     <Form onSubmit={run}>
       <LabeledTextField required name="name" label="الاسم" />
       <LabeledTextField required name="mobile" label="الجوال" />
-      <Destination />
+      <Destination cities={cities} />
       <LabeledTextField required name="arrivalDate" label="تاريخ الوصول" />
       <LabeledTextField required name="departureDate" label="تاريخ المغادرة" />
       <LabeledTextField required name="count" label="الأشغال" />
@@ -101,12 +97,20 @@ function TripButton({ children, isSelected, onClick }) {
   )
 }
 
-const HOTELS = { id: "hotels", name: "الفنادق", render: () => <HotelsForm /> }
-const CARS = { id: "cars", name: "السيارات", render: () => <CarsForm /> }
-const FLIGHTS = { id: "flights", name: "الطيران", render: () => <FlightsForm /> }
+const HOTELS = {
+  id: "hotels",
+  name: "الفنادق",
+  render: ({ cities }) => <HotelsForm cities={cities} />,
+}
+const CARS = { id: "cars", name: "السيارات", render: ({}) => <CarsForm /> }
+const FLIGHTS = {
+  id: "flights",
+  name: "الطيران",
+  render: ({ cities }) => <FlightsForm cities={cities} />,
+}
 const OPTIONS = [FLIGHTS, HOTELS, CARS]
 
-export default function ServicesForm() {
+export default function ServicesForm({ cities }) {
   const [selected, setSelected] = useState(OPTIONS[0])
 
   return (
@@ -136,7 +140,7 @@ export default function ServicesForm() {
           ))}
         </Grid>
       </Grid>
-      {selected.render()}
+      {selected.render({ cities })}
     </Card>
   )
 }
