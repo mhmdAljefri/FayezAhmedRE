@@ -14,8 +14,8 @@ const Project: BlitzPage<ProjectProps> = ({ project }) => {
 export default Project
 
 export async function getServerSideProps(context) {
-  const { projectName } = context.params
-  const project = await getProject({ where: { name: projectName } })
+  const { projectId } = context.params
+  const project = await getProject({ where: { id: projectId } })
 
   return {
     props: { project }, // will be passed to the page component as props

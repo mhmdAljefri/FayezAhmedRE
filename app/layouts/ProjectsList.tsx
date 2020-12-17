@@ -26,7 +26,7 @@ interface ProjectCardIconsTextProps extends IconProp {
 
 type ProjectCardProps = Pick<
   Project,
-  "name" | "image" | "locationText" | "subTitle" | "paymentType"
+  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType"
 > & {
   roomWithPrices: Pick<
     RoomWithPrice,
@@ -83,6 +83,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
 function ProjectCard({
   image,
   name,
+  id,
   subTitle,
   locationText,
   paymentType,
@@ -92,7 +93,7 @@ function ProjectCard({
   const [selected, setSelected] = useState(roomWithPrices[0])
 
   const price = selected?.[priceType]
-  const projectPath = useRouter().asPath + `/${name}`
+  const projectPath = useRouter().asPath + `/${id}`
   return (
     <Fade bottom>
       <Box

@@ -9,7 +9,7 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
 
-type OfferCardProps = Pick<Offer, "name" | "image" | "details"> & {
+type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "details"> & {
   prefixPath?: string
   hideOfferLabel?: boolean
 }
@@ -18,6 +18,7 @@ export function OfferCard({
   image,
   hideOfferLabel,
   details,
+  id,
   name,
   prefixPath = "",
 }: OfferCardProps) {
@@ -33,7 +34,7 @@ export function OfferCard({
           marginBottom: 2,
         }}
       >
-        <Link href={asPath + "/" + prefixPath + name}>
+        <Link href={asPath + "/" + prefixPath + id}>
           <a>
             <Box sx={{ position: "relative" }}>
               <Image
