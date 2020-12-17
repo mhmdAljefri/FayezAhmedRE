@@ -56,7 +56,7 @@ export async function getStaticPaths() {
   const paths = offers.map((offer: Offer) => ({
     params: {
       countryId: `${offer.countryId}`,
-      name: `${offer.name}`,
+      offerId: `${offer.id}`,
     },
   }))
 
@@ -67,8 +67,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const offerTitle = context.params.name
-  const offer = await getOffer({ where: { name: offerTitle } })
+  const offerId = context.params.offerId
+  const offer = await getOffer({ where: { id: offerId } })
 
   return {
     props: {

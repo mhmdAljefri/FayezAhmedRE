@@ -14,28 +14,20 @@ export default function InstallmentPalnField(props) {
       {({ fields }) => (
         <Flex sx={{ flexWrap: "wrap" }}>
           {fields.map((name, index) => (
-            <>
-              <div key={name}>
-                <Grid columns={[1, 3]}>
-                  <LabeledTextField required name={`${name}.instalment`} label="عنوان الدفعة" />
-                  <LabeledTextField name={`${name}.milestone`} label="موعد الدفع" />
-                  <LabeledTextField
-                    type="number"
-                    name={`${name}.payment`}
-                    label="النسبة الموئية للدفعة"
-                  />
-                </Grid>
-              </div>
-
-              <Button
-                variant="link"
-                sx={{ marginY: 2 }}
-                type="button"
-                onClick={() => fields.remove(index)}
-              >
-                حدف خطة الدفع
-              </Button>
-            </>
+            <div key={name}>
+              <Grid columns={[1, 3]}>
+                <LabeledTextField required name={`${name}.instalment`} label="عنوان الدفعة" />
+                <LabeledTextField name={`${name}.milestone`} label="موعد الدفع" />
+                <Button
+                  variant="link"
+                  sx={{ marginY: 2 }}
+                  type="button"
+                  onClick={() => fields.remove(index)}
+                >
+                  حدف خطة الدفع
+                </Button>
+              </Grid>
+            </div>
           ))}
           <Button
             variant="link"
