@@ -14,7 +14,7 @@ const Project: BlitzPage<ProjectProps> = ({ project }) => {
 export default Project
 
 export async function getServerSideProps(context) {
-  const { projectId } = context.params
+  const projectId = parseInt(context.params.projectId)
   const project = await getProject({ where: { id: projectId } })
 
   return {

@@ -67,7 +67,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const offerId = context.params.offerId
+  const offerId = parseInt(context.params.offerId)
   const offer = await getOffer({ where: { id: offerId } })
 
   return {
