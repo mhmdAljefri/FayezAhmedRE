@@ -16,7 +16,7 @@ import SlickSlider from "app/components/SlickSlider"
 import usePriceType from "app/hooks/usePriceType"
 import { Link } from "blitz"
 import ArrowIcon from "app/components/ArrowIcon"
-import DynamicTable from "app/components/Tables/DynamicTable"
+import Drawer from "app/components/Drawer"
 
 type ConstractingCardProps = {
   label: string
@@ -129,14 +129,33 @@ export function GalleryView({ gallery }) {
   )
 }
 
-export function PaymentPlan() {
+export function PaymentPlan({ installmentPlan }) {
+  const [open, setOpen] = useState(false)
+
+  if (!installmentPlan) return <div />
   return (
-    <Button variant="links.outline">
-      <Flex sx={{ alignItems: "center" }}>
-        <Text sx={{ width: 200 }}>خطة السداد</Text>
-        <ArrowIcon />
-      </Flex>
-    </Button>
+    <>
+      <Button onClick={() => setOpen(true)} variant="links.outline">
+        <Flex sx={{ alignItems: "center" }}>
+          <Text sx={{ width: 200 }}>خطة السداد</Text>
+          <ArrowIcon />
+        </Flex>
+      </Button>
+      <Drawer onClose={() => setOpen(false)} open={open}>
+        <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark" }}>
+          <Box>
+            <Grid>
+              {installmentPlan.map(({ instalment, milestone }, index) => (
+                <React.Fragment key={index}>
+                  <Box>{instalment}</Box>
+                  <Box>{milestone}</Box>
+                </React.Fragment>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
+      </Drawer>
+    </>
   )
 }
 
@@ -178,6 +197,7 @@ export default function ProjectDetailsLayout({
   constructingUpdateVideo,
   constructingUpdatePrview,
   nearBy,
+  installmentPlan,
   oprationCompanies,
   roomsWithPrices,
   location,
@@ -252,7 +272,7 @@ export default function ProjectDetailsLayout({
           </Flex>
           <Text sx={{ marginY: 5 }} dangerouslySetInnerHTML={{ __html: details }} />
 
-          <PaymentPlan />
+          <PaymentPlan installmentPlan={installmentPlan} />
           <Box
             sx={{
               maxWidth: 800,
@@ -287,26 +307,32 @@ export default function ProjectDetailsLayout({
         />
         <Wrapper sx={{ marginY: 6 }}>
           <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-          <Flex sx={{ justifyContent: "space-evenly", overflow: "auto" }}>
+          <SlickSlider
+            slidesToShow={3}
+            slidesToScroll={3}
+            sx={{ justifyContent: "center", marginY: 3 }}
+          >
             {floorplan.map((item, index) => (
-              <Image
-                key={item + "_" + index}
-                sx={{
-                  borderColor: "primary",
-                  objectFit: "cover",
-                  marginX: 2,
-                  width: ["90vw", 350],
-                  minWidth: ["90vw", 300],
-                  borderWidth: 2,
-                  borderStyle: "solid",
-                  borderRadius: 15,
-                  boxShadow: "default",
-                  height: [300, 350],
-                }}
-                src={item}
-              />
+              <div>
+                <Image
+                  key={item + "_" + index}
+                  sx={{
+                    borderColor: "primary",
+                    objectFit: "cover",
+                    marginX: 2,
+                    width: ["90vw", 350],
+                    minWidth: ["90vw", 300],
+                    borderWidth: 2,
+                    borderStyle: "solid",
+                    borderRadius: 15,
+                    boxShadow: "default",
+                    height: [300, 350],
+                  }}
+                  src={item}
+                />
+              </div>
             ))}
-          </Flex>
+          </SlickSlider>
         </Wrapper>
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>

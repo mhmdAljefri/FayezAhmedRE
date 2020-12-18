@@ -10,6 +10,7 @@ import "react-phone-number-input/style.css"
 import "react-toastify/dist/ReactToastify.css"
 import "suneditor/dist/css/suneditor.min.css" // Import Sun Editor's CSS File
 import "react-datepicker/dist/react-datepicker.css"
+import "rc-drawer/assets/index.css"
 
 import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"

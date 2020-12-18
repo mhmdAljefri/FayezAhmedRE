@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client"
 import Filter, { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import getCountry from "app/public/countries/queries/getCountry"
