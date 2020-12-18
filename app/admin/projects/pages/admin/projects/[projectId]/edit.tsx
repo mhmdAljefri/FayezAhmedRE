@@ -16,6 +16,7 @@ export const EditProject = () => {
     ...project,
     countryId: project.country.id.toString(),
     cityId: project.cityId?.toString(),
+    propertyTypeId: project.propertyTypeId?.toString(),
   }
 
   return (
@@ -29,7 +30,6 @@ export const EditProject = () => {
           const roomsWithPrices = values.roomsWithPrices
           delete values.id
           delete values.countryId
-          delete values.propertyTypeId
           delete values.roomsWithPrices
 
           try {

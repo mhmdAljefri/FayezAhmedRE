@@ -19,6 +19,34 @@ export default async function updateProject(
   delete (data as any).cityId
   delete (data as any).propertyTypeId
 
+  const oldProject = await db.project.findFirst({ where, select: { roomsWithPrices: true } })
+
+  // compare project roomsWithPrices with new roomsWithPrices
+  const oldRoomsIds: number[] = []
+  const allRoomsIds: number[] = []
+  const removableOldRoomsIds: number[] = [] // to be removed
+  const oldRooms: RoomWithPrice[] = [] // to be updated
+  const newRooms: RoomWithPrice[] = [] // to be created
+  oldProject?.roomsWithPrices.forEach(({ id }) => {
+    allRoomsIds.push(id)
+  })
+  roomsWithPrices.forEach(({ id, ...room }) => {
+    if (id) {
+      oldRooms.push({ ...room, id })
+      oldRoomsIds.push(id)
+    } else {
+      newRooms.push({ ...room, id })
+    }
+  })
+  allRoomsIds.forEach((id) => {
+    if (oldRoomsIds.includes(id)) removableOldRoomsIds.push(id)
+  })
+
+  console.log(oldProject?.roomsWithPrices, roomsWithPrices)
+  // remove unfounded ids
+  // update exist data
+  // create new data
+
   const project = await db.project.update({
     where,
     data: {
@@ -27,6 +55,14 @@ export default async function updateProject(
         connect: {
           id: countryId,
         },
+      },
+      roomsWithPrices: {
+        delete: removableOldRoomsIds,
+        updateMany: oldRooms.map(({ id, ...rest }) => ({
+          where: { id },
+          data: { ...rest },
+        })),
+        create: newRooms,
       },
       propertyType: {
         connect: { id: parseInt(propertyTypeId) },
