@@ -13,6 +13,7 @@ export default async function getCountry({ where }: GetCountryInput) {
           id: "desc",
         },
         select: {
+          id: true,
           name: true,
           subTitle: true,
           image: true,

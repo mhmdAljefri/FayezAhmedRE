@@ -185,8 +185,8 @@ export default function ProjectDetailsLayout({
 }) {
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
-
-  const [room, setRoom] = useState(0)
+  const date = new Intl.DateTimeFormat("en-US").format(complationDate)
+  const room = 0
   const { priceType, priceTypeSuffix } = usePriceType()
 
   const roomWithPrice = roomsWithPrices[room]
@@ -271,13 +271,13 @@ export default function ProjectDetailsLayout({
             <Heading sx={{ fontSize: 6, color: "white", marginBottom: 4, marginTop: 3 }}>
               {name}
             </Heading>
-            <Flex sx={{ justifyContent: "space-evenly" }}>
+            <Grid columns={5} sx={{ justifyContent: "space-evenly" }}>
               <BigIconText icon={buildingO} text="شقق وفلل" />
               <BigIconText icon={dollar} text="كاش" />
               <BigIconText icon={mapMarker} text={country.name} />
-              <BigIconText icon={key} text={complationDate} />
+              <BigIconText icon={key} text={`${date}`} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
-            </Flex>
+            </Grid>
           </Box>
         </Wrapper>
         <GalleryView gallery={gallery} />

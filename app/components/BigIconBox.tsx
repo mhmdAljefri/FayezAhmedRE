@@ -15,6 +15,7 @@ export default function BigIconText({ text, icon, sx }: BigIconTextProps) {
           height: 60,
           borderRadius: 60,
           width: 60,
+          marginX: "auto",
           backgroundColor: "background",
           color: "primary",
         }}
@@ -25,7 +26,7 @@ export default function BigIconText({ text, icon, sx }: BigIconTextProps) {
         sx={{
           marginTop: 35,
           fontWeight: 700,
-          fontSize: [3, 4],
+          fontSize: [1, 4],
         }}
       >
         {text}

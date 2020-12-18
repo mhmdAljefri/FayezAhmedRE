@@ -7,7 +7,15 @@ import Carousel from "app/components/Slider"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
-import { City, Country, Explore, Offer, OprationCompanyPage, PropertyType } from "@prisma/client"
+import {
+  City,
+  Country,
+  Explore,
+  Offer,
+  OprationCompanyPage,
+  Project,
+  PropertyType,
+} from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
@@ -51,6 +59,7 @@ function HeadingWithMoreLink({ heading, href }) {
 export type CountryPropsType = {
   country: Country & {
     projects: {
+      id: number
       name: string
       image: string
       subTitle?: string
@@ -156,12 +165,14 @@ export default function CountryPage({
                     boxShadow: "default",
                   }}
                 >
-                  <Link passHref href={`${projectsUrl}/${project.name}`}>
+                  <Link passHref href={`${projectsUrl}/${project.id}`}>
                     <a>
-                      <Image src={project.image} alt={project.name} />
+                      <Image src={project.image || ""} alt={project.name} />
                     </a>
                   </Link>
-                  <Text sx={{ textAlign: "center" }}>{project.name}</Text>
+                  <Link passHref href={`${projectsUrl}/${project.id}`}>
+                    <Text sx={{ textAlign: "center" }}>{project.name}</Text>
+                  </Link>
                 </Box>
               </Box>
             ))}
