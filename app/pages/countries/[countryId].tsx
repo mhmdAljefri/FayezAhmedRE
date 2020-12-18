@@ -5,7 +5,7 @@ import Filter from "app/components/Forms/Filter"
 import Carousel from "app/components/Slider"
 
 import React, { useState } from "react"
-import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink } from "theme-ui"
+import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
@@ -15,6 +15,7 @@ import {
   OprationCompanyPage,
   Project,
   PropertyType,
+  RoomWithPrice,
 } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
@@ -27,43 +28,56 @@ import ArrowIcon from "app/components/ArrowIcon"
 import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
+import { ProjectCard } from "app/layouts/ProjectsList"
+
+type showMoreButton = {
+  sx?: SxStyleProp
+  href: string
+}
+function ShowMoreButton({ sx, href }: showMoreButton) {
+  return (
+    <Link passHref href={href}>
+      <ThemeLink
+        sx={{
+          ...sx,
+          paddingX: 3,
+          paddingY: 2,
+          textDecoration: "none",
+          ":hover": {
+            backgroundColor: "light",
+            borderRadius: "lg",
+            boxShadow: "default",
+          },
+        }}
+      >
+        <Flex sx={{ color: "primary", alignItems: "center" }}>
+          <Text sx={{ color: "text" }}>المزيد</Text>
+          <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
+        </Flex>
+      </ThemeLink>
+    </Link>
+  )
+}
 
 function HeadingWithMoreLink({ heading, href }) {
   return (
     <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
       <Heading sx={{ fontSize: 6, padding: 0 }}>{heading}</Heading>
 
-      <Link passHref href={href}>
-        <ThemeLink
-          sx={{
-            paddingX: 3,
-            paddingY: 2,
-            textDecoration: "none",
-            ":hover": {
-              backgroundColor: "light",
-              borderRadius: "lg",
-              boxShadow: "default",
-            },
-          }}
-        >
-          <Flex sx={{ color: "primary", alignItems: "center" }}>
-            <Text sx={{ color: "text" }}>المزيد</Text>
-            <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
-          </Flex>
-        </ThemeLink>
-      </Link>
+      <ShowMoreButton
+        href={href}
+        sx={{
+          display: ["none", "unset"],
+        }}
+      />
     </Flex>
   )
 }
 
+type ProjectWitRooms = Project & { roomsWithPrices: RoomWithPrice[] }
 export type CountryPropsType = {
   country: Country & {
-    projects: {
-      id: number
-      name: string
-      image: string
-      subTitle?: string
-    }[]
+    projects: ProjectWitRooms[]
     oprationCompanyPages: OprationCompanyPage[]
     cities: City[]
     offers: Offer[]
@@ -138,61 +152,38 @@ export default function CountryPage({
       <Wrapper>
         <HeadingWithMoreLink href={offersUrl} heading="جديدنا" />
 
-        <Grid sx={{ my: 5 }} columns={[1, null, 3]}>
+        <Grid sx={{ my: 5 }} columns={[1, 1, 2, 3]}>
           {country.offers.map((offer) => (
             <OfferCard {...offer} prefixPath="offers/" />
           ))}
         </Grid>
+        <ShowMoreButton
+          href={offersUrl}
+          sx={{
+            display: ["auto", "none"],
+          }}
+        />
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
         <Grid columns={[1, null, 2]}>
           <Box>
             <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
-            <Heading sx={{ fontSize: 6, padding: 4, color: "text" }}>{country.name}</Heading>
           </Box>
           <Carousel autoplay nextArrow prevArrow>
             {country.projects.map((project, index) => (
               <Box sx={{ marginBottom: 4 }} key={project.name + index}>
-                <Box
-                  sx={{
-                    borderRadius: "lg",
-                    marginTop: 4,
-                    overflow: "hidden",
-                    maxWidth: 350,
-                    maxHeight: 350,
-                    marginInlineStart: "auto",
-                    boxShadow: "default",
-                  }}
-                >
-                  <Link passHref href={`${projectsUrl}/${project.id}`}>
-                    <a>
-                      <Image src={project.image || ""} alt={project.name} />
-                    </a>
-                  </Link>
-                  <Link passHref href={`${projectsUrl}/${project.id}`}>
-                    <Text sx={{ textAlign: "center" }}>{project.name}</Text>
-                  </Link>
-                </Box>
+                <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
               </Box>
             ))}
           </Carousel>
-        </Grid>
-        <Box>
-          <Image
+          <ShowMoreButton
+            href={projectsUrl}
             sx={{
-              borderRadius: "lg",
-              width: "100%",
-              maxHeight: 500,
-              objectFit: "cover",
-              overflow: "hidden",
-              boxShadow: "default",
+              display: ["auto", "none"],
             }}
-            src="/istanbul.jpg"
-            alt="..."
           />
-          <Text sx={{ fontSize: 4, textAlign: "center" }}>شقة فاخرة بمناظر جذابة</Text>
-        </Box>
+        </Grid>
       </Wrapper>
       <Box
         sx={{
@@ -298,25 +289,29 @@ export default function CountryPage({
       >
         <Wrapper>
           <HeadingWithMoreLink href={projectsUrl} heading="الاكثر مشاهدة" />
-          <Grid sx={{ paddingX: 4 }} columns={[1, 2, 3]}>
+          <Grid sx={{ paddingX: [1, 2, 4] }} columns={[1, 2, 3]}>
             {country.projects.map((project) => (
               <Box
                 key={project.name}
                 sx={{
                   minWidth: 200,
-                  margin: 4,
+                  margin: [1, 1, 2],
                   borderRadius: "lg",
                   backgroundColor: "background",
                   overflow: "hidden",
                   boxShadow: "default",
                 }}
               >
-                <Image src={project.image} alt={project.name} />
-                <Text sx={{ paddingTop: 2, paddingX: 3 }}>{project.name}</Text>
-                <Text sx={{ paddingY: 2, paddingX: 3 }}>{project.subTitle}</Text>
+                <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
               </Box>
             ))}
           </Grid>
+          <ShowMoreButton
+            href={projectsUrl}
+            sx={{
+              display: ["auto", "none"],
+            }}
+          />
         </Wrapper>
       </Box>
 

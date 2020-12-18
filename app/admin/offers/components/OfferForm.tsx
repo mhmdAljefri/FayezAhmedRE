@@ -13,6 +13,7 @@ import { Field, useFormState } from "react-final-form"
 import * as z from "zod"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import UploadVideo from "./UploadVideo"
+import MapField from "app/admin/components/MapField"
 
 type OfferFormProps = {
   initialValues: any
@@ -109,6 +110,9 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           required
         />
         <ProjectsListField />
+
+        <MapField name="location" />
+
         <LabeledMenuField
           options={[
             {

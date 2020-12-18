@@ -108,6 +108,7 @@ model Offer {
   brochure                  String?
   constructingUpdateVideo   String?
   constructingUpdatePrview  String?
+  location                  Json?
   installmentPlan           Json?
 } 
 

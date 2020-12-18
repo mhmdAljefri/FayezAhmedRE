@@ -17,6 +17,7 @@ import usePriceType from "app/hooks/usePriceType"
 import { Link } from "blitz"
 import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
+import GoogleMap from "app/components/GoogleMap"
 
 type ConstractingCardProps = {
   label: string
@@ -144,11 +145,15 @@ export function PaymentPlan({ installmentPlan }) {
       <Drawer onClose={() => setOpen(false)} open={open}>
         <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark" }}>
           <Box>
-            <Grid>
+            <Text sx={{ paddingTop: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
+              خطة السداد
+            </Text>
+
+            <Grid columns={2}>
               {installmentPlan.map(({ instalment, milestone }, index) => (
                 <React.Fragment key={index}>
-                  <Box>{instalment}</Box>
-                  <Box>{milestone}</Box>
+                  <Box sx={{ fontWeight: 700, fontSize: 3, color: "white" }}>{instalment}</Box>
+                  <Box sx={{ fontWeight: 700, fontSize: 3, color: "white" }}>{milestone}</Box>
                 </React.Fragment>
               ))}
             </Grid>
@@ -414,6 +419,7 @@ export default function ProjectDetailsLayout({
 
         <ContructionCompaniesDetails {...oprationCompanies} />
         <Wrapper>
+          <GoogleMap center={location || undefined} />
           <Contact />
 
           <Link href="/furniture">

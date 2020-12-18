@@ -6,7 +6,7 @@ import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
-import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
+import { ConstractiongVideo, GalleryView, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
 import { Offer, Project } from "@prisma/client"
 
 const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
@@ -17,15 +17,35 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         <Wrapper sx={{ textAlign: "center" }}>
           <Image src={offer.image || ""} alt={offer.name} />
         </Wrapper>
-        <Wrapper sx={{ paddingBottom: 5 }}>
+        <Wrapper sx={{ paddingY: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{offer.name}</Heading>
           <Box dangerouslySetInnerHTML={{ __html: offer.details }} />
         </Wrapper>
       </Box>
+      <Wrapper>
+        <PaymentPlan installmentPlan={offer.installmentPlan} />
+      </Wrapper>
       <ConstractiongVideo
         constructingUpdateVideo={offer.constructingUpdateVideo}
         constructingUpdatePrview={offer.constructingUpdatePrview}
       />
+
+      <ThemeLink
+        download={offer.name}
+        target="_blank"
+        rel="noopener "
+        href={offer.brochure || ""}
+        sx={{
+          variant: "links.outline",
+          opacity: offer.brochure ? 1 : 0.3,
+          maxWidth: 250,
+          marginX: "auto",
+          marginY: 5,
+          textAlign: "center",
+        }}
+      >
+        تنزيل البروشور
+      </ThemeLink>
       {offer.project && (
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>
@@ -47,6 +67,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
           </Wrapper>
         </Box>
       )}
+      <GalleryView gallery={offer.gallery} />
     </Layout>
   )
 }

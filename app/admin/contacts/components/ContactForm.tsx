@@ -1,9 +1,8 @@
+import React from "react"
 import { Contact } from "@prisma/client"
+import MapField from "app/admin/components/MapField"
 import Form from "app/components/Form"
-import GoogleMap from "app/components/GoogleMap"
 import LabeledTextField from "app/components/LabeledTextField"
-import React, { useEffect, useState } from "react"
-import { Field } from "react-final-form"
 import { FieldArray } from "react-final-form-arrays"
 import { Button, Text } from "theme-ui"
 import * as z from "zod"
@@ -23,26 +22,6 @@ const Schema = z.object({
 })
 
 const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
-  const [coords, setCoords] = useState({ lat: 0, lng: 0 })
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      navigator.geolocation.getCurrentPosition(
-        (res) => {
-          setCoords({
-            lat: res.coords.latitude,
-            lng: res.coords.longitude,
-          })
-          console.log(res)
-        },
-        (error) => {
-          console.error(error)
-        }
-      )
-
-      return () => {}
-    }
-  }, [])
-
   return (
     <Form schema={Schema} initialValues={initialValues} onSubmit={onSubmit}>
       <LabeledTextField label="اسم الحساب" name="name" />
@@ -108,20 +87,7 @@ const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
         )}
       </FieldArray>
 
-      <Field
-        name="locationObject"
-        render={({ input }) => (
-          <GoogleMap
-            center={{ lat: input.value?.lat || coords.lat, lng: input.value?.lng || coords.lng }}
-            onDragEnd={(map) => {
-              input.onChange({
-                lat: map.center.lat(),
-                lng: map.center.lng(),
-              })
-            }}
-          />
-        )}
-      />
+      <MapField name="locationObject" />
       <Button>تاكيد</Button>
     </Form>
   )

@@ -30,8 +30,8 @@ export default function Contact() {
             top: -50,
             left: 50,
             padding: 3,
-            width: 150,
-            height: 150,
+            width: [100, 150],
+            height: [100, 150],
             backgroundColor: "background",
             borderRadius: 1000,
           }}

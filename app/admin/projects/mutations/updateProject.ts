@@ -15,7 +15,9 @@ export default async function updateProject(
   // todo fide removed room and delete it from database
   // todo fide new room and create it with relation
   const cityId = (data as any).cityId
+  const propertyTypeId = (data as any).propertyTypeId
   delete (data as any).cityId
+  delete (data as any).propertyTypeId
 
   const project = await db.project.update({
     where,
@@ -25,6 +27,9 @@ export default async function updateProject(
         connect: {
           id: countryId,
         },
+      },
+      propertyType: {
+        connect: { id: parseInt(propertyTypeId) },
       },
       city: {
         connect: { id: parseInt(cityId) },

@@ -18,6 +18,7 @@ import DatePicker from "react-datepicker"
 import UploadMainVideo from "./UploadMainVideo"
 import { PROJECT_STATUS, TURKEY_PROJECT_STATUS } from "app/constants"
 import PropertyTypesField from "./PropertyTypesField"
+import MapField from "app/admin/components/MapField"
 
 type ProjectFormProps = {
   initialValues: any
@@ -152,6 +153,8 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           required
         />
         <CitiesListField />
+
+        <MapField name="location" />
 
         <StatusField countries={countries} />
         <LabeledMenuField

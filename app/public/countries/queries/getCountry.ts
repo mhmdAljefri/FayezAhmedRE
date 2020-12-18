@@ -12,11 +12,8 @@ export default async function getCountry({ where }: GetCountryInput) {
         orderBy: {
           id: "desc",
         },
-        select: {
-          id: true,
-          name: true,
-          subTitle: true,
-          image: true,
+        include: {
+          roomsWithPrices: true,
         },
       },
       cities: true,

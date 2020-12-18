@@ -2,7 +2,7 @@ import Filter, { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import getCountry from "app/public/countries/queries/getCountry"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
-import { Link, useInfiniteQuery, useParam, useQuery, useRouter, useRouterQuery } from "blitz"
+import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
 import React, { useRef, useState } from "react"
 import { Button, Flex, Grid, Image, Box, Heading, Text } from "theme-ui"
 
@@ -10,6 +10,7 @@ import Icon, { IconProp } from "react-icons-kit"
 import { building } from "react-icons-kit/fa/building"
 import { money } from "react-icons-kit/fa/money"
 import { dollar } from "react-icons-kit/fa/dollar"
+import { chevronCircleDown } from "react-icons-kit/fa/chevronCircleDown"
 import { ic_format_paint } from "react-icons-kit/md/ic_format_paint"
 import { Project, RoomWithPrice } from "@prisma/client"
 import usePriceType from "app/hooks/usePriceType"
@@ -25,7 +26,7 @@ interface ProjectCardIconsTextProps extends IconProp {
 
 type ProjectCardProps = Pick<
   Project,
-  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType"
+  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType" | "countryId"
 > & {
   roomWithPrices: Pick<
     RoomWithPrice,
@@ -56,12 +57,25 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
   if (!selected) return <div />
   return (
     <Box ref={ref} sx={{ position: "relative" }}>
-      <Button sx={{ height: 40, padding: 0 }} variant="link" onClick={() => setOpen(true)}>
+      <Button
+        sx={{ height: 40, padding: 0, display: "flex" }}
+        variant="link"
+        onClick={() => setOpen(true)}
+      >
         <ProjectCardIconsText text={selected.room} icon={building} />
+        <Box sx={{ marginInlineStart: 5 }}>
+          <Icon icon={chevronCircleDown} />
+        </Box>
       </Button>
 
       {open && (
-        <Box sx={{ position: "absolute", width: 80, boxShadow: "default" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            boxShadow: "default",
+            backgroundColor: "background",
+          }}
+        >
           {roomWithPrices.map((room) => (
             <div
               role="button"
@@ -79,10 +93,11 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
   )
 }
 
-function ProjectCard({
+export function ProjectCard({
   image,
   name,
   id,
+  countryId,
   subTitle,
   locationText,
   paymentType,
@@ -92,7 +107,7 @@ function ProjectCard({
   const [selected, setSelected] = useState(roomWithPrices[0])
 
   const price = selected?.[priceType]
-  const projectPath = useRouter().asPath + `/${id}`
+  const projectPath = `/countries/${countryId}/projects/${id}`
   return (
     <Fade bottom>
       <Box
