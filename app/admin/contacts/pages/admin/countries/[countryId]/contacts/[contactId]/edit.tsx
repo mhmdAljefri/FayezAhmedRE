@@ -4,6 +4,7 @@ import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "bli
 import getContact from "app/admin/contacts/queries/getContact"
 import updateContact from "app/admin/contacts/mutations/updateContact"
 import ContactForm from "app/admin/contacts/components/ContactForm"
+import { toast } from "react-toastify"
 
 export const EditContact = () => {
   const router = useRouter()
@@ -28,8 +29,8 @@ export const EditContact = () => {
               countryId,
             })
             await setQueryData(updated)
-            alert("Success!" + JSON.stringify(updated))
-            router.push(`/admin/countries/${countryId}/contacts/${updated.id}`)
+            toast.success("Success!")
+            router.push(`/admin/countries/${countryId}/contacts/`)
           } catch (error) {
             console.log(error)
             alert("Error editing contact " + JSON.stringify(error, null, 2))

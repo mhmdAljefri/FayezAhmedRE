@@ -59,7 +59,7 @@ export default async function updateProject(
       },
       roomsWithPrices: {
         delete: removableOldRoomsIds.map((id) => ({ id })),
-        updateMany: oldRooms.map(({ id, projectId: _unusedParamater, ...rest }) => ({
+        update: oldRooms.map(({ id, projectId: _unusedParamater, ...rest }) => ({
           where: { id },
           data: { ...rest },
         })),
