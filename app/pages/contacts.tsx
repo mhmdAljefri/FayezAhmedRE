@@ -73,7 +73,7 @@ const ContactsPage: BlitzPage<ContactsPageProps> = ({ contacts }) => {
                     <Icon size={30} icon={phone} />
                   </Box>
                   <Box sx={{ marginX: 3 }}>
-                    {contact.mobiles.map((phone) => (
+                    {contact.phones.map((phone) => (
                       <Box>
                         <Link sx={{ textDecoration: "none" }} href={"tel:" + phone}>
                           {phone}

@@ -4,7 +4,7 @@ import MapField from "app/admin/components/MapField"
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import { FieldArray } from "react-final-form-arrays"
-import { Button, Text } from "theme-ui"
+import { Button, Grid, Text } from "theme-ui"
 import * as z from "zod"
 
 type ContactFormProps = {
@@ -31,7 +31,7 @@ const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
         {({ fields, meta }) => (
           <div>
             {fields.map((name, index) => (
-              <div key={name}>
+              <Grid columns={[2, 3]} key={name}>
                 <LabeledTextField type="number" name={name} label="رقم الجوال" />
 
                 <Button
@@ -42,7 +42,7 @@ const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
                 >
                   حدف الرقم
                 </Button>
-              </div>
+              </Grid>
             ))}
             <Button
               variant="link"
@@ -61,7 +61,7 @@ const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
         {({ fields, meta }) => (
           <div>
             {fields.map((name, index) => (
-              <div key={name}>
+              <Grid columns={[2, 3]} key={name}>
                 <LabeledTextField type="number" name={name} label="رقم الهاتف" />
 
                 <Button
@@ -72,7 +72,7 @@ const ContactForm = ({ initialValues, onSubmit }: ContactFormProps) => {
                 >
                   حدف الرقم
                 </Button>
-              </div>
+              </Grid>
             ))}
             <Button
               variant="link"

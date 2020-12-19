@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+import { useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getProject from "app/admin/projects/queries/getProject"
 import updateProject from "app/admin/projects/mutations/updateProject"
 import ProjectForm from "app/admin/projects/components/ProjectForm"
