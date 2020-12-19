@@ -53,7 +53,7 @@ export default function Footer() {
     <Box sx={{ backgroundColor: "dark", paddingTop: 5, color: "white" }}>
       <Wrapper>
         <Box>
-          <Heading sx={{ paddingBottom: 4, color: "white" }}>حسابات التواصل</Heading>
+          <Heading sx={{ paddingBottom: 4, color: "white" }}>تابعنا</Heading>
           <Flex>
             <Icon icon={instagram} />
             <Icon icon={youtube} />
@@ -64,42 +64,16 @@ export default function Footer() {
         </Box>
         <HR />
         <Box>
-          <Heading sx={{ paddingBottom: 2, color: "white" }}>تحميل التطبيق عبر</Heading>
+          <Heading sx={{ paddingBottom: 2, color: "white" }}>حمل تطبيقنا</Heading>
           <Flex sx={{ marginBottom: 4, flexWrap: "wrap" }}>
             <ThemeLink>
-              <Box
-                sx={{
-                  width: 200,
-                  m: 1,
-                  borderRadius: 5,
-                  height: 56,
-                  overflow: "hidden",
-                  position: "relative",
-                }}
-              >
-                <Image
-                  sx={{ position: "absolute", top: 0, transform: "scale(1.03)" }}
-                  src="/app-store.jpg"
-                  alt="apple"
-                />
+              <Box sx={{ m: 1 }}>
+                <Image src="/google_play_badge.png" alt="apple" />
               </Box>
-            </ThemeLink>{" "}
+            </ThemeLink>
             <ThemeLink>
-              <Box
-                sx={{
-                  width: 200,
-                  m: 1,
-                  borderRadius: 5,
-                  height: 56,
-                  overflow: "hidden",
-                  position: "relative",
-                }}
-              >
-                <Image
-                  sx={{ position: "absolute", bottom: -1, transform: "scale(1.03)" }}
-                  src="/app-store.jpg"
-                  alt="apple"
-                />
+              <Box sx={{ m: 1 }}>
+                <Image src="/appstore_badge.png" alt="apple" />
               </Box>
             </ThemeLink>
           </Flex>

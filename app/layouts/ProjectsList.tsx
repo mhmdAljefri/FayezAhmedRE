@@ -132,7 +132,14 @@ export function ProjectCard({
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{name}</Heading>
           <Text>{locationText}</Text>
-          <Text>{subTitle}</Text>
+          <Link passHref href={projectPath}>
+            <Text
+              as="a"
+              sx={{ textDecoration: "none", color: "text", ":hover": { color: "primary" } }}
+            >
+              {subTitle}
+            </Text>
+          </Link>
         </Box>
         <Flex sx={{ paddingX: 3, justifyContent: "space-between" }}>
           <ProjectCardIconsText text={"جاهز"} icon={ic_format_paint} />

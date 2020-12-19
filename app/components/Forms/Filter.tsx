@@ -62,7 +62,7 @@ export default function Filter({
               emptyOptionText="المدينة"
               name="city"
             />
-            <MenuField options={["بيع", "تاجير"]} emptyOptionText="حالات المشروع" name="purpose" />
+            <MenuField options={["بيع", "تاجير"]} emptyOptionText="الغرض" name="purpose" />
           </Grid>
 
           <Grid
@@ -105,7 +105,7 @@ export default function Filter({
               name="propertyType"
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
-              emptyOptionText="نوع المبنى"
+              emptyOptionText="نوع العقار"
               options={propertyTypes}
             />
           </Grid>

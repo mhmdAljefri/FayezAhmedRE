@@ -50,7 +50,7 @@ function ShowMoreButton({ sx, href }: showMoreButton) {
           },
         }}
       >
-        <Flex sx={{ color: "primary", alignItems: "center" }}>
+        <Flex sx={{ color: "primary", alignItems: "center", justifyContent: "center" }}>
           <Text sx={{ color: "text" }}>المزيد</Text>
           <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
         </Flex>
@@ -59,17 +59,12 @@ function ShowMoreButton({ sx, href }: showMoreButton) {
   )
 }
 
-function HeadingWithMoreLink({ heading, href }) {
+function HeadingWithMoreLink({ heading, href, sx }: showMoreButton & { heading: string }) {
   return (
     <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
       <Heading sx={{ fontSize: 6, padding: 0 }}>{heading}</Heading>
 
-      <ShowMoreButton
-        href={href}
-        sx={{
-          display: ["none", "unset"],
-        }}
-      />
+      <ShowMoreButton href={href} sx={sx} />
     </Flex>
   )
 }
@@ -143,16 +138,22 @@ export default function CountryPage({
           paddingX: [2, null, null, 6],
           marginTop: -5,
           position: "relative",
-          zIndex: 222,
+          zIndex: 1,
           marginBottom: 5,
         }}
       >
         <Filter {...country} propertyTypes={propertyTypes} onFilter={handleFilter} />
       </Wrapper>
-      <Wrapper>
-        <HeadingWithMoreLink href={offersUrl} heading="جديدنا" />
+      <Wrapper sx={{ mb: 5 }}>
+        <HeadingWithMoreLink
+          sx={{
+            display: ["none", "none", "unset"],
+          }}
+          href={offersUrl}
+          heading="جديدنا"
+        />
 
-        <Grid sx={{ my: 5 }} columns={[1, 1, 2, 3]}>
+        <Grid sx={{ mt: 5 }} columns={[1, 1, 2, 3]}>
           {country.offers.map((offer) => (
             <OfferCard {...offer} prefixPath="offers/" />
           ))}
@@ -160,7 +161,7 @@ export default function CountryPage({
         <ShowMoreButton
           href={offersUrl}
           sx={{
-            display: ["auto", "none"],
+            display: ["auto", "auto", "none"],
           }}
         />
       </Wrapper>
@@ -226,7 +227,7 @@ export default function CountryPage({
                 borderRadius: "md",
               }}
             >
-              احصل على الإلهام
+              استمد الإلهام
             </Box>
             <Box
               onClick={() => setShowInspirationGallery("dontMissitGallery")}
@@ -239,21 +240,53 @@ export default function CountryPage({
                 borderRadius: "md",
               }}
             >
-              لا تسنى
+              لا يفوتك
             </Box>
           </Flex>
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
-        <Grid columns={3}>
-          {explores.map(({ image, title }, index) => (
-            <Slide key={index} bottom>
+        <Grid columns={[1, 1, 3]}>
+          {explores.map(({ image, title, id }, index) => (
+            <Slide key={id} bottom>
               <Link href={`${asPath}/explore/${title}`}>
-                <Image
-                  sx={{ borderRadius: "lg", overflow: "hidden", boxShadow: "default" }}
-                  src={image}
-                  alt="..."
-                />
+                <Box
+                  sx={{
+                    height: 200,
+                    borderRadius: "lg",
+                    overflow: "hidden",
+                    position: "relative",
+                    boxShadow: "default",
+                  }}
+                >
+                  <Image
+                    sx={{ objectFit: "cover", width: "100%", minHeight: "100%" }}
+                    src={image}
+                    alt={title}
+                  />
+                  <Flex
+                    sx={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: "primary",
+                      color: "white",
+                      fontSize: 3,
+                      fontWeight: 700,
+                      opacity: 0,
+                      transition: "all 500ms linear",
+                      ":hover": {
+                        opacity: 1,
+                      },
+                    }}
+                  >
+                    {title}
+                  </Flex>
+                </Box>
               </Link>
             </Slide>
           ))}
@@ -289,19 +322,9 @@ export default function CountryPage({
       >
         <Wrapper>
           <HeadingWithMoreLink href={projectsUrl} heading="الاكثر مشاهدة" />
-          <Grid sx={{ paddingX: [1, 2, 4] }} columns={[1, 2, 3]}>
+          <Grid sx={{ paddingX: [1, 1, 4] }} columns={[1, 1, 3]}>
             {country.projects.map((project) => (
-              <Box
-                key={project.name}
-                sx={{
-                  minWidth: 200,
-                  margin: [1, 1, 2],
-                  borderRadius: "lg",
-                  backgroundColor: "background",
-                  overflow: "hidden",
-                  boxShadow: "default",
-                }}
-              >
+              <Box key={project.name}>
                 <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
               </Box>
             ))}

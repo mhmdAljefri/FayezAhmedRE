@@ -4,11 +4,11 @@ import ProjectsList from "app/layouts/ProjectsList"
 import { BlitzPage } from "blitz"
 
 const Projects: BlitzPage = () => {
-  return <ProjectsList title="المشاريع" subTitle="" />
+  return <ProjectsList title="مشاريعنا" subTitle="" />
 }
 
 Projects.getLayout = (page) => (
-  <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title="المشاريع">
+  <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title="مشاريعنا">
     {page}
   </Layout>
 )
