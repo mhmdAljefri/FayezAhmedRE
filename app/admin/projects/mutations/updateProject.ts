@@ -39,7 +39,8 @@ export default async function updateProject(
     }
   })
   allRoomsIds.forEach((id) => {
-    if (oldRoomsIds.includes(id)) removableOldRoomsIds.push(id)
+    console.log({ id, oldRoomsIds }, !oldRoomsIds.includes(id))
+    if (!oldRoomsIds.includes(id)) removableOldRoomsIds.push(id)
   })
 
   console.log(oldProject?.roomsWithPrices, roomsWithPrices)
@@ -57,8 +58,8 @@ export default async function updateProject(
         },
       },
       roomsWithPrices: {
-        delete: removableOldRoomsIds,
-        updateMany: oldRooms.map(({ id, ...rest }) => ({
+        delete: removableOldRoomsIds.map((id) => ({ id })),
+        updateMany: oldRooms.map(({ id, projectId: _unusedParamater, ...rest }) => ({
           where: { id },
           data: { ...rest },
         })),
