@@ -125,7 +125,7 @@ export default function CountryPage({
           data={country.oprationCompanyPages.map(({ image, title, id }) => ({
             title,
             image,
-            path: `${asPath}/oprationCompanies/${id}`,
+            path: `${asPath}/opration-companies/${id}`,
           }))}
           slideStyle={{
             borderRadius: "lg",

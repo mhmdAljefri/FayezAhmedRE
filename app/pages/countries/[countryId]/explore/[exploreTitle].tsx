@@ -16,6 +16,7 @@ const WhatsNew: BlitzPage = () => {
         <Wrapper sx={{ textAlign: "center" }}>
           {offer.videoUrl ? (
             <ConstractiongVideo
+              heading=""
               constructingUpdatePrview={offer.image}
               constructingUpdateVideo={offer.videoUrl}
             />

@@ -55,8 +55,10 @@ function ConstractingCard({ label, text }: ConstractingCardProps) {
 
 export function ConstractiongVideo({
   constructingUpdatePrview,
+  heading,
   constructingUpdateVideo,
 }: {
+  heading: string
   constructingUpdateVideo?: string | null
   constructingUpdatePrview?: string | null
 }) {
@@ -64,7 +66,7 @@ export function ConstractiongVideo({
   const isYoutube = constructingUpdateVideo.startsWith("https://www.youtube")
   return (
     <Wrapper sx={{ marginY: 5 }}>
-      <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>حالة المشروع</Heading>
+      <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>{heading}</Heading>
       <Box
         sx={{
           marginX: [1, null, 6],
@@ -307,6 +309,7 @@ export default function ProjectDetailsLayout({
         </Wrapper>
         <GalleryView gallery={gallery} />
         <ConstractiongVideo
+          heading="حالة المشروع"
           constructingUpdatePrview={constructingUpdatePrview}
           constructingUpdateVideo={constructingUpdateVideo}
         />

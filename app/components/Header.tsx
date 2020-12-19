@@ -4,7 +4,7 @@ import Wrapper from "./Wrapper"
 import Nav from "./Nav"
 import PriceType from "./PriceType"
 import Search from "./Search"
-import { Link, useParam } from "blitz"
+import { Link, useParam, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
 
 type HeaderProps = {
@@ -14,6 +14,9 @@ type HeaderProps = {
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const countryId = useParam("countryId", "number")
+  const { pathname } = useRouter()
+  const hasProjects = pathname === "/countries/[countryId]" || pathname.includes("projects")
+  console.log({ pathname })
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
   const backgroundImage = "linear-gradient(180deg,#0f0f0fb5,#3837374a,transparent)"
   return (
@@ -64,15 +67,15 @@ const Header = ({ sx }: HeaderProps) => {
           </a>
         </Link>
         <Flex sx={{ alignItems: "center" }}>
-          {countryId && (
-            <>
-              <Search />
+          <>
+            {countryId && <Search />}
+            {hasProjects && (
               <Box sx={{ display: ["none", null, "flex"] }}>
                 <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
                 <PriceType />
               </Box>
-            </>
-          )}
+            )}
+          </>
           <Nav />
         </Flex>
       </Wrapper>

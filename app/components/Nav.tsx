@@ -3,7 +3,7 @@ import { Box, Flex, Link as ThemeLink } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "./Burger"
 import ChangeColorsMode from "./ChangeColorsMode"
-import { Link } from "blitz"
+import { Link, useParam } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
 import Slide from "react-reveal/Slide"
 
@@ -11,6 +11,7 @@ type NavProps = {}
 
 const Nav = (props: NavProps) => {
   const { open, setOpen, ref } = useOnClickout()
+  const countryId = useParam("countryId")
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Burger onClick={() => setOpen(true)} open={open} />
@@ -73,9 +74,20 @@ const Nav = (props: NavProps) => {
               <Link href="/furniture">
                 <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>الاثاث</ThemeLink>
               </Link>
-              <Link href="/search">
-                <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>البحث</ThemeLink>
-              </Link>
+              {countryId && (
+                <>
+                  <Link passHref href={`/countries/${countryId}/projects`}>
+                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                      المشاريع
+                    </ThemeLink>
+                  </Link>
+                  <Link passHref href={`/countries/${countryId}/offers`}>
+                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                      العروض
+                    </ThemeLink>
+                  </Link>
+                </>
+              )}
             </Flex>
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
           </Flex>

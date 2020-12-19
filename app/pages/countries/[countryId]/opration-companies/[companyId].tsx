@@ -29,6 +29,7 @@ const OprationCompanyPage: BlitzPage = () => {
       <GalleryView gallery={oprationCompanyPage.galleryImages} />
 
       <ConstractiongVideo
+        heading=""
         constructingUpdateVideo={oprationCompanyPage.constructingUpdateVideo}
         constructingUpdatePrview={oprationCompanyPage.constructingUpdatePrview}
       />

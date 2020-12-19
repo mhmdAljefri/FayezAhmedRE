@@ -26,6 +26,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         <PaymentPlan installmentPlan={offer.installmentPlan} />
       </Wrapper>
       <ConstractiongVideo
+        heading=""
         constructingUpdateVideo={offer.constructingUpdateVideo}
         constructingUpdatePrview={offer.constructingUpdatePrview}
       />
