@@ -15,6 +15,7 @@ const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const countryId = useParam("countryId", "number")
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
+  const backgroundImage = "linear-gradient(180deg,#0f0f0fb5,#3837374a,transparent)"
   return (
     <Box
       sx={{
@@ -23,6 +24,7 @@ const Header = ({ sx }: HeaderProps) => {
         top: 0,
         left: 0,
         right: 0,
+        backgroundImage,
         ...sx,
         backgroundColor,
       }}
