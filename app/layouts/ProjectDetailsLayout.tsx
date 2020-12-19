@@ -203,6 +203,8 @@ export default function ProjectDetailsLayout({
   features,
   constructingUpdateVideo,
   constructingUpdatePrview,
+  mainVideo,
+  mainVideoPreview,
   nearBy,
   installmentPlan,
   oprationCompanies,
@@ -309,7 +311,7 @@ export default function ProjectDetailsLayout({
         </Wrapper>
         <GalleryView gallery={gallery} />
         <ConstractiongVideo
-          heading="حالة المشروع"
+          heading="فيديو المشروع"
           constructingUpdatePrview={constructingUpdatePrview}
           constructingUpdateVideo={constructingUpdateVideo}
         />
@@ -419,6 +421,12 @@ export default function ProjectDetailsLayout({
             </SlickSlider>
           </Wrapper>
         </Box>
+
+        <ConstractiongVideo
+          heading="تحديثات البناء"
+          constructingUpdatePrview={constructingUpdatePrview}
+          constructingUpdateVideo={constructingUpdateVideo}
+        />
 
         <ContructionCompaniesDetails {...oprationCompanies} />
         <Wrapper>
