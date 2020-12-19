@@ -24,8 +24,8 @@ const Marker = ({ lat, lng }: { lat?: number; lng?: number }) => (
       ":after": {
         content: '""',
         position: "absolute",
-        top: 20,
-        left: 20,
+        top: 10,
+        left: 10,
         width: "5px",
         height: "5px",
         backgroundColor: "background",

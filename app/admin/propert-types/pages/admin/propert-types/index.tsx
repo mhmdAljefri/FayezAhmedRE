@@ -1,16 +1,18 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, useMutation } from "blitz"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import getPropertyTypes from "app/admin/propert-types/queries/getPropertTypes"
 import Action from "app/admin/components/Action"
+import deletePropertyType from "app/admin/propert-types/mutations/deletePropertType"
 
 const ITEMS_PER_PAGE = 100
 
 export const PropertyTypesList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ propertyTypes, hasMore }] = usePaginatedQuery(getPropertyTypes, {
+  const [deletePropertyMutation] = useMutation(deletePropertyType)
+  const [{ propertyTypes, hasMore }, { refetch }] = usePaginatedQuery(getPropertyTypes, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
@@ -27,7 +29,15 @@ export const PropertyTypesList = () => {
           key: "id",
         },
         { name: "النوع", key: "name" },
-        { name: "النوع", render: ({ id }) => <Action id={id} /> },
+        {
+          name: "النوع",
+          render: ({ id }) => (
+            <Action
+              id={id}
+              onDelete={() => deletePropertyMutation({ where: { id } }).then(() => refetch())}
+            />
+          ),
+        },
       ]}
       data={propertyTypes}
       onNext={goToNextPage}

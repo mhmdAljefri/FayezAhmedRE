@@ -14,8 +14,9 @@ export const EditContact = () => {
 
   return (
     <div>
-      <h1>Edit Contact {contact.id}</h1>
-      <pre>{JSON.stringify(contact)}</pre>
+      <h1>
+        تعديل بيانات <small>{contact.name}</small>
+      </h1>
 
       <ContactForm
         initialValues={contact}
@@ -49,8 +50,8 @@ const EditContactPage: BlitzPage = () => {
       </Suspense>
 
       <p>
-        <Link href={`/countries/${countryId}/contacts`}>
-          <a>Contacts</a>
+        <Link href={`/admin/countries/${countryId}/contacts`}>
+          <a>العودة</a>
         </Link>
       </p>
     </div>

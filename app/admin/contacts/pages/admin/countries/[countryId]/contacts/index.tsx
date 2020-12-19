@@ -1,7 +1,11 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage } from "blitz"
+import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage, useMutation } from "blitz"
 import getContacts from "app/admin/contacts/queries/getContacts"
+import DynamicTable from "app/components/Tables/DynamicTable"
+import { Button } from "theme-ui"
+import Action from "app/admin/components/Action"
+import deleteContact from "app/admin/contacts/mutations/deleteContact"
 
 const ITEMS_PER_PAGE = 100
 
@@ -9,7 +13,8 @@ export const ContactsList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
   const countryId = useParam("countryId", "number")
-  const [{ contacts, hasMore }] = usePaginatedQuery(getContacts, {
+  const [deleteContactMutation] = useMutation(deleteContact)
+  const [{ contacts, hasMore }, { refetch }] = usePaginatedQuery(getContacts, {
     where: { country: { id: countryId } },
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
@@ -21,22 +26,25 @@ export const ContactsList = () => {
 
   return (
     <div>
-      <ul>
-        {contacts.map((contact) => (
-          <li key={contact.id}>
-            <Link href={`/admin/countries/${countryId}/contacts/${contact.id}`}>
-              <a>{contact.name}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
+      <DynamicTable
+        headers={[
+          { key: "id", name: "" },
+          { key: "name", name: "الاسم" },
+          {
+            render: ({ id }) => (
+              <Action
+                id={id}
+                onDelete={() => deleteContactMutation({ where: { id } }).then(() => refetch())}
+              />
+            ),
+            name: "",
+          },
+        ]}
+        data={contacts}
+        onNext={goToNextPage}
+        onPrev={goToPreviousPage}
+        hasMore={hasMore}
+      />
     </div>
   )
 }
@@ -48,7 +56,7 @@ const ContactsPage: BlitzPage = () => {
     <div>
       <p>
         <Link href={`/admin/countries/${countryId}/contacts/new`}>
-          <a>Create Contact</a>
+          <Button>اضافة جهة اتصال</Button>
         </Link>
       </p>
 
