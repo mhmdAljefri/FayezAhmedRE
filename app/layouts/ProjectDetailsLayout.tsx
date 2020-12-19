@@ -199,7 +199,7 @@ export default function ProjectDetailsLayout({
   gallery,
   floorplan,
   brochure,
-  country,
+  city,
   features,
   constructingUpdateVideo,
   constructingUpdatePrview,
@@ -214,7 +214,9 @@ export default function ProjectDetailsLayout({
 }) {
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
-  const date = new Intl.DateTimeFormat("en-US").format(complationDate)
+  const date = `${new Date(complationDate).getFullYear()} - ${
+    new Date(complationDate).getMonth() + 1
+  }`
   const room = 0
   const { priceType, priceTypeSuffix } = usePriceType()
 
@@ -303,7 +305,7 @@ export default function ProjectDetailsLayout({
             <Grid columns={5} sx={{ justifyContent: "space-evenly" }}>
               <BigIconText icon={buildingO} text="شقق وفلل" />
               <BigIconText icon={dollar} text="كاش" />
-              <BigIconText icon={mapMarker} text={country.name} />
+              <BigIconText icon={mapMarker} text={city.name} />
               <BigIconText icon={key} text={`${date}`} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
             </Grid>
