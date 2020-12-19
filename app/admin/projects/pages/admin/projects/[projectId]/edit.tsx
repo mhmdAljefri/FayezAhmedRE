@@ -14,7 +14,7 @@ export const EditProject = () => {
 
   const initialValues = {
     ...project,
-    countryId: project.country.id.toString(),
+    countryId: project.countryId.toString(),
     cityId: project.cityId?.toString(),
     propertyTypeId: project.propertyTypeId?.toString(),
   }

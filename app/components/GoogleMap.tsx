@@ -14,7 +14,24 @@ const defaultProps = {
 type GoogleMapProps = MapProps & typeof defaultProps
 
 const Marker = ({ lat, lng }: { lat?: number; lng?: number }) => (
-  <Box sx={{ width: 25, height: 25, borderRadius: 25, backgroundColor: "primary" }}></Box>
+  <Box
+    sx={{
+      width: 25,
+      height: 25,
+      borderRadius: 25,
+      backgroundColor: "primary",
+      position: "relative",
+      ":after": {
+        content: '""',
+        position: "absolute",
+        top: 20,
+        left: 20,
+        width: "5px",
+        height: "5px",
+        backgroundColor: "background",
+      },
+    }}
+  ></Box>
 )
 
 export default function GoogleMap(props: GoogleMapProps) {
