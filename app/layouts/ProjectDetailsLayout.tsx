@@ -176,9 +176,11 @@ export function ContructionCompaniesDetails({
   return (
     <Box>
       <Wrapper>
-        <Heading sx={{ fontSize: 6, marginBottom: 4, marginTop: 5 }}>
-          تفاصيل الشركات المقاولة
-        </Heading>
+        {contractor && (
+          <Heading sx={{ fontSize: 6, marginBottom: 4, marginTop: 5 }}>
+            تفاصيل الشركات المقاولة
+          </Heading>
+        )}
         <Grid sx={{ marginBottom: 5 }} columns={[1, 2]}>
           <ConstractingCard label="الشركة المالكة" text={owner} />
           <ConstractingCard label="شركة المقاولات" text={contractor} />
