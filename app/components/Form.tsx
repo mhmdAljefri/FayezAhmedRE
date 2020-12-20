@@ -1,9 +1,5 @@
 import React, { ReactNode, PropsWithoutRef } from "react"
-import {
-  Form as FinalForm,
-  FormProps as FinalFormProps,
-  FormRenderProps as FinalFormRenderProps,
-} from "react-final-form"
+import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import arrayMutators from "final-form-arrays"
 
 import { Button, SxStyleProp } from "theme-ui"

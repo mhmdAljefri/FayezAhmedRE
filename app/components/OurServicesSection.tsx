@@ -1,6 +1,4 @@
 import React from "react"
-import Icon from "react-icons-kit"
-import { rocket } from "react-icons-kit/fa/rocket"
 import { Box, Grid, Heading, Image } from "theme-ui"
 import Wrapper from "./Wrapper"
 import Fade from "react-reveal/Fade"

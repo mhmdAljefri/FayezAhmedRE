@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { ReactNode } from "react"
 import get from "lodash/get"
 import { Button, Card, Flex, Styled } from "theme-ui"

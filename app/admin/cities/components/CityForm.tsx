@@ -1,4 +1,4 @@
-import { City, Prisma } from "@prisma/client"
+import { Prisma } from "@prisma/client"
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"

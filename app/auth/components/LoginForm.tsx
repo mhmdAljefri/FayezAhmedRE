@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useMutation } from "blitz"
+import { useMutation } from "blitz"
 import { LabeledTextField } from "app/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/components/Form"
 import login from "app/auth/mutations/login"

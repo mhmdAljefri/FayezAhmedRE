@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import { BlitzPage, Link, useQuery, useRouter } from "blitz"

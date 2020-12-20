@@ -2,10 +2,8 @@ import React from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import { BlitzPage, useParam } from "blitz"
-import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
+import { Box, Flex, Heading, Image, Text } from "theme-ui"
 import { Furnish } from "@prisma/client"
-import FurnishCard from "app/components/FurnishCard"
-import getFurnishes from "app/public/furnishes/queries/getFurnishes"
 import getFurnish from "app/public/furnishes/queries/getFurnish"
 
 type furnishesProps = {

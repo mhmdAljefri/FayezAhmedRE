@@ -102,7 +102,7 @@ const HOTELS = {
   name: "الفنادق",
   render: ({ cities }) => <HotelsForm cities={cities} />,
 }
-const CARS = { id: "cars", name: "السيارات", render: ({}) => <CarsForm /> }
+const CARS = { id: "cars", name: "السيارات", render: () => <CarsForm /> }
 const FLIGHTS = {
   id: "flights",
   name: "الطيران",
