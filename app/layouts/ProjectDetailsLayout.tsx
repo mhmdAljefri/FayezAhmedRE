@@ -314,8 +314,8 @@ export default function ProjectDetailsLayout({
         <GalleryView gallery={gallery} />
         <ConstractiongVideo
           heading="فيديو المشروع"
-          constructingUpdatePrview={constructingUpdatePrview}
-          constructingUpdateVideo={constructingUpdateVideo}
+          constructingUpdatePrview={mainVideoPreview}
+          constructingUpdateVideo={mainVideo}
         />
         <Wrapper sx={{ marginY: 6 }}>
           <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>

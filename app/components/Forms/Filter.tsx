@@ -62,7 +62,7 @@ export default function Filter({
               emptyOptionText="المدينة"
               name="city"
             />
-            <MenuField options={["بيع", "تاجير"]} emptyOptionText="الغرض" name="purpose" />
+            <MenuField options={["شراء", "تاجير"]} emptyOptionText="الغرض" name="purpose" />
           </Grid>
 
           <Grid
