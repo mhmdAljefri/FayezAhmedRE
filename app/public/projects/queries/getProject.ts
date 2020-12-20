@@ -12,6 +12,7 @@ export default async function getProject({ where }: GetProjectInput) {
           name: true,
         },
       },
+      propertyType: true,
       city: true,
       roomsWithPrices: true,
     },

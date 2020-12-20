@@ -210,7 +210,9 @@ export default function ProjectDetailsLayout({
   oprationCompanies,
   roomsWithPrices,
   location,
+  propertyType,
   complationDate,
+  paymentType,
 }) {
   const isCompleted = status === "completed"
   const statusText = isCompleted ? "مكتمل" : "قيد البناء"
@@ -303,8 +305,8 @@ export default function ProjectDetailsLayout({
               {name}
             </Heading>
             <Grid columns={5} sx={{ justifyContent: "space-evenly" }}>
-              <BigIconText icon={buildingO} text="شقق وفلل" />
-              <BigIconText icon={dollar} text="كاش" />
+              <BigIconText icon={buildingO} text={propertyType?.name} />
+              <BigIconText icon={dollar} text={paymentType === "cash" ? "كاش" : "تقسيط"} />
               <BigIconText icon={mapMarker} text={city.name} />
               <BigIconText icon={key} text={`${date}`} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
