@@ -27,6 +27,11 @@ blitz-log.log
 logs
 *.log
 
+
+# Sqls
+sqls
+*.sql
+
 # Runtime data
 pids
 *.pid
