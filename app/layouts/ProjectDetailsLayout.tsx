@@ -21,7 +21,7 @@ import GoogleMap from "app/components/GoogleMap"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { City, Project, PropertyType, RoomWithPrice } from "@prisma/client"
 import { format } from "date-fns"
-import { ar } from "date-fns/locale"
+import { arSA } from "date-fns/locale"
 
 type ConstractingCardProps = {
   label: string
@@ -226,7 +226,7 @@ export default function ProjectDetailsLayout({
 }) {
   const isCompleted = status === "completed"
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
-  const date = format(complationDate || new Date(), "MMM/yyyy", { locale: ar })
+  const date = format(complationDate || new Date(), "MMM/yyyy", { locale: arSA })
   const room = 0
   const { priceType, priceTypeSuffix } = usePriceType()
 
