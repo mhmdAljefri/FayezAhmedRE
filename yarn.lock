@@ -8931,6 +8931,11 @@ npmlog@^4.0.1, npmlog@^4.1.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
+nprogress@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
+
 nuka-carousel@4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.7.2.tgz#62ee8c8d66f9c15bd9bc54bb3949172d123e39d3"

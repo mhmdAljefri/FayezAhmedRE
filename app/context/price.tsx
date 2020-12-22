@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-
+import { prices } from "../components/PriceType"
 type priceTypes =
   | "price"
   | "priceQatar"
@@ -12,6 +12,7 @@ type priceTypes =
 export const PriceContext = React.createContext({
   priceType: "price",
   priceTypeSuffix: "دولار امريكي",
+  priceTypeSign: "$",
   changePriceType: (priceTypeValue: priceTypes) => {},
 })
 
@@ -34,15 +35,25 @@ function getPriceTypeSuffix(priceType: priceTypes) {
       return "دولار امريكي"
   }
 }
+
+// todo use currancy list
+function getPriceTypeSign(priceType: priceTypes) {
+  return prices.find((price) => price[0] === priceType)?.[3]
+}
+
 export default function PriceProvider(props) {
   const [priceType, setPriceType] = useState<priceTypes>("price")
 
   const priceTypeSuffix = getPriceTypeSuffix(priceType)
+  const priceTypeSign = getPriceTypeSign(priceType)
 
   const changePriceType = (priceTypeValue: priceTypes) => {
     setPriceType(priceTypeValue)
   }
   return (
-    <PriceContext.Provider value={{ priceType, changePriceType, priceTypeSuffix }} {...props} />
+    <PriceContext.Provider
+      value={{ priceType, priceTypeSign, changePriceType, priceTypeSuffix }}
+      {...props}
+    />
   )
 }

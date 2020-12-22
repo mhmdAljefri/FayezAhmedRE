@@ -72,6 +72,13 @@ interface ITickProps {
   count: number
 }
 
+const norlizer = (num: number) => {
+  let norlizedNumber: string = num.toString()
+
+  if (num >= 1000000) norlizedNumber = num / 1000000 + "M"
+  else if (num >= 1000) norlizedNumber = num / 1000000 + "K"
+  return norlizedNumber
+}
 export const Tick: React.FC<ITickProps> = ({ tick, count }) => (
   <Box>
     <Box
@@ -90,12 +97,14 @@ export const Tick: React.FC<ITickProps> = ({ tick, count }) => (
         marginTop: 22,
         fontSize: 10,
         textAlign: "center",
+        fontWeight: 700,
+        color: "background",
         marginLeft: `${-(100 / count) / 2}%`,
         width: `${100 / count}%`,
         left: `${tick.percent}%`,
       }}
     >
-      {tick.value}
+      {norlizer(tick.value)}
     </Box>
   </Box>
 )

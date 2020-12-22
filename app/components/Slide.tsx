@@ -29,7 +29,7 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
           content: '""',
           position: "absolute",
           backgroundColor: "heading",
-          opacity: 0.8,
+          opacity: 0.5,
           top: 0,
           left: 0,
           right: 0,

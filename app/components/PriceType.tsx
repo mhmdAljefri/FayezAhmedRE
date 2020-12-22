@@ -5,14 +5,14 @@ import Dropdown from "./Dropdown"
 
 type PriceTypeProps = {}
 
-const prices = [
-  ["price", "/icons/united-states.png", "دولار امريكي"],
-  ["priceQatar", "/icons/qatar.png", "ريال قطري"],
-  ["priceTurkey", "/icons/turkey.png", "ليرة تركية"],
-  ["priceKSA", "/icons/saudi-arabia.png", "ريال سعودي"],
-  ["priceKuwait", "/icons/kuwait.png", "دينار كويتي"],
-  ["priceUAE", "/icons/united-arab-emirates.png", "درهم إمراتي"],
-  ["priceOman", "/icons/oman.png", "ريال عماني"],
+export const prices = [
+  ["price", "/icons/united-states.png", "دولار امريكي", "$"],
+  ["priceQatar", "/icons/qatar.png", "ريال قطري", "QAR"],
+  ["priceTurkey", "/icons/turkey.png", "ليرة تركية", "LT"],
+  ["priceKSA", "/icons/saudi-arabia.png", "ريال سعودي", "SAR"],
+  ["priceKuwait", "/icons/kuwait.png", "دينار كويتي", "KWD"],
+  ["priceUAE", "/icons/united-arab-emirates.png", "درهم إمراتي", "UAD"],
+  ["priceOman", "/icons/oman.png", "ريال عماني", "OMR"],
 ]
 
 const PriceType = (props: PriceTypeProps) => {

@@ -71,6 +71,17 @@ const Nav = (props: NavProps) => {
                   الرئيسية
                 </ThemeLink>
               </Link>
+              <Link href="/about-us">
+                <ThemeLink
+                  sx={{
+                    marginTop: 5,
+                    fontWeight: 700,
+                    fontSize: [3, null, 5, 6],
+                  }}
+                >
+                  عنا
+                </ThemeLink>
+              </Link>
               <Link href="/furniture">
                 <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>الاثاث</ThemeLink>
               </Link>

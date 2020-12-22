@@ -6,6 +6,7 @@ const defaultProps = {
   slidesToShow: 4,
   slidesToScroll: 4,
   centerMode: false,
+  autoplay: false,
   initialSlide: 0,
   className: "slick-with-padding",
   responsive: [
@@ -40,6 +41,7 @@ type SlickSliderProps = {
   children: ReactNode[]
   prevArrow?: ReactElement
   nextArrow?: ReactElement
+  customPaging?: (index: number) => any
 } & typeof defaultProps
 
 export default function SlickSlider({

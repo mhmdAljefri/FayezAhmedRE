@@ -95,9 +95,9 @@ export default function Filter({
               <Field
                 name="price"
                 sx={{ backgroundColor: "white" }}
-                defaultValue={[1, 50]}
+                defaultValue={[50000, 2000000]}
                 render={({ input }) => (
-                  <DomainSlider {...input} values={input.value} domain={[1, 60]} />
+                  <DomainSlider {...input} values={input.value} domain={[50000, 2000000]} />
                 )}
               />
             </Box>

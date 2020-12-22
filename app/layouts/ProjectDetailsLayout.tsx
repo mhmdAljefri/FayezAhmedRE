@@ -427,7 +427,22 @@ export default function ProjectDetailsLayout({
           {(nearBy as any)?.length > 0 && (
             <Wrapper>
               <Heading>بالجوار</Heading>
-              <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
+              <SlickSlider
+                slidesToShow={1}
+                slidesToScroll={1}
+                responsive={[]}
+                centerMode
+                customPaging={(i) => (
+                  <Box
+                    style={{
+                      width: 30,
+                      height: 30,
+                      backgroundColor: "primary",
+                      borderRadius: 30,
+                    }}
+                  ></Box>
+                )}
+              >
                 {(nearBy as any)?.map((item) => (
                   <Box sx={{ textAlign: "center" }}>
                     <Image
@@ -462,7 +477,13 @@ export default function ProjectDetailsLayout({
 
         <ContructionCompaniesDetails {...(oprationCompanies as any)} />
         <Wrapper>
-          {location && <GoogleMap center={location as any} />}
+          {location && (
+            <>
+              <Heading>الموقع</Heading>
+
+              <GoogleMap center={location as any} />
+            </>
+          )}
           <Contact />
 
           <Link href="/furniture">
@@ -470,7 +491,7 @@ export default function ProjectDetailsLayout({
               sx={{ marginBottom: 5, maxWidth: 200, textAlign: "center", marginX: "auto" }}
               variant="outline"
             >
-              اثث منزلكlocation
+              اثث منزلك
             </ThemeLink>
           </Link>
         </Wrapper>

@@ -28,6 +28,7 @@ const Search = (props: SearchProps) => {
           position: open ? "fixed" : "relative",
           left: open ? 50 : undefined,
           right: open ? 50 : undefined,
+          top: open ? 50 : undefined,
           zIndex: open ? 50 : undefined,
           overflow: "hidden",
           backgroundColor: "text",

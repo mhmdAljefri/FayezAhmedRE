@@ -124,6 +124,7 @@ export default function CountryPage({
         <HomeSlider
           data={country.carouselImages.map((image) => ({ image }))}
           slideStyle={{
+            maxHeight: [400, 500, 600],
             borderRadius: "lg",
             overflow: "hidden",
           }}
@@ -163,24 +164,34 @@ export default function CountryPage({
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
-        <Grid columns={[1, null, 2]}>
-          <Box>
-            <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
-          </Box>
-          <Carousel autoplay nextArrow prevArrow>
-            {country.projects.map((project, index) => (
-              <Box sx={{ marginBottom: 4 }} key={project.name + index}>
-                <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
-              </Box>
-            ))}
-          </Carousel>
-          <ShowMoreButton
-            href={projectsUrl}
-            sx={{
-              display: ["auto", "none"],
-            }}
-          />
-        </Grid>
+        <Box>
+          <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
+        </Box>
+        <SlickSlider
+          responsive={[
+            {
+              breakpoint: 800,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ]}
+          slidesToShow={3}
+          slidesToScroll={1}
+        >
+          {[...country.projects, ...country.projects].map((project, index) => (
+            <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
+              <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+            </Box>
+          ))}
+        </SlickSlider>
+        <ShowMoreButton
+          href={projectsUrl}
+          sx={{
+            display: ["auto", "none"],
+          }}
+        />
       </Wrapper>
       <Box
         sx={{
@@ -242,13 +253,13 @@ export default function CountryPage({
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
-        <Grid columns={[1, 1, 3]}>
+        <Grid columns={[1, 2, 3]}>
           {explores.map(({ image, title, id }, index) => (
             <Slide key={id} bottom>
               <Link href={`${asPath}/explore/${title}`}>
                 <Box
                   sx={{
-                    height: 200,
+                    height: 250,
                     borderRadius: "lg",
                     overflow: "hidden",
                     position: "relative",
@@ -269,6 +280,8 @@ export default function CountryPage({
                       left: 0,
                       right: 0,
                       bottom: 0,
+                      textAlign: "center",
+                      padding: 2,
                       backgroundColor: "primary",
                       color: "white",
                       fontSize: 3,

@@ -3,14 +3,13 @@ import Wrapper from "app/components/Wrapper"
 import getCountry from "app/public/countries/queries/getCountry"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
 import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
-import React, { useRef, useState } from "react"
+import React, { ReactNode, useRef, useState } from "react"
 import { Button, Flex, Grid, Image, Box, Heading, Text } from "theme-ui"
 
 import Icon, { IconProp } from "react-icons-kit"
 import { building } from "react-icons-kit/fa/building"
 import { money } from "react-icons-kit/fa/money"
-import { dollar } from "react-icons-kit/fa/dollar"
-import { chevronCircleDown } from "react-icons-kit/fa/chevronCircleDown"
+import { chevronDown } from "react-icons-kit/fa/chevronDown"
 import { ic_format_paint } from "react-icons-kit/md/ic_format_paint"
 import { Project, RoomWithPrice } from "@prisma/client"
 import usePriceType from "app/hooks/usePriceType"
@@ -20,9 +19,11 @@ import Fade from "react-reveal/Fade"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 
-interface ProjectCardIconsTextProps extends IconProp {
+interface ProjectCardIconsTextProps {
   width?: number
   text: string
+  icon?: IconProp["icon"]
+  prefix?: ReactNode
 }
 
 type ProjectCardProps = Pick<
@@ -43,10 +44,12 @@ type ProjectCardProps = Pick<
   >[]
 }
 
-function ProjectCardIconsText({ icon, text, width }: ProjectCardIconsTextProps) {
+function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTextProps) {
   return (
     <Flex sx={{ marginBottom: 3, fontSize: 1, width, color: "lightText", whiteSpace: "nowrap" }}>
-      <Icon icon={icon} />
+      {icon && <Icon icon={icon} />}
+
+      {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
       <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{text}</span>
     </Flex>
   )
@@ -64,8 +67,8 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
         onClick={() => setOpen(true)}
       >
         <ProjectCardIconsText text={selected.room} icon={building} />
-        <Box sx={{ marginInlineStart: 5 }}>
-          <Icon icon={chevronCircleDown} />
+        <Box sx={{ marginX: 1 }}>
+          <Icon size={12} icon={chevronDown} />
         </Box>
       </Button>
 
@@ -77,16 +80,17 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
             backgroundColor: "background",
           }}
         >
-          {roomWithPrices.map((room) => (
-            <div
+          {roomWithPrices.map((roomWithPrice) => (
+            <Box
               role="button"
               aria-label="select"
+              sx={{ borderRadius: "default", paddingX: 3, paddingY: 2, cursor: "pointer" }}
               tabIndex={0}
-              onKeyDown={() => onChange(room)}
-              onClick={() => onChange(room)}
+              onKeyDown={() => onChange(roomWithPrice)}
+              onClick={() => onChange(roomWithPrice)}
             >
-              <ProjectCardIconsText text={room.room} icon={building} />
-            </div>
+              {roomWithPrice.room}
+            </Box>
           ))}
         </Box>
       )}
@@ -105,7 +109,7 @@ export function ProjectCard({
   paymentType,
   roomWithPrices,
 }: ProjectCardProps) {
-  const { priceType } = usePriceType()
+  const { priceType, priceTypeSign } = usePriceType()
   const [selected, setSelected] = useState(roomWithPrices[0])
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
 
@@ -144,11 +148,17 @@ export function ProjectCard({
             </Text>
           </Link>
         </Box>
-        <Flex sx={{ paddingX: 3, justifyContent: "space-between" }}>
+        <Flex sx={{ paddingX: 2, justifyContent: "space-between" }}>
           <ProjectCardIconsText text={statusText || ""} icon={ic_format_paint} />
-          <SelectRoom selected={selected} roomWithPrices={roomWithPrices} onChange={setSelected} />
+          {roomWithPrices[0]["room"] && (
+            <SelectRoom
+              selected={selected}
+              roomWithPrices={roomWithPrices}
+              onChange={setSelected}
+            />
+          )}
           <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
-          <ProjectCardIconsText text={`تبدا من ${price}`} icon={dollar} />
+          <ProjectCardIconsText text={`تبدا من ${price}`} prefix={priceTypeSign} />
         </Flex>
       </Box>
     </Fade>

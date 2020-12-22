@@ -50,6 +50,7 @@
     "final-form": "4.20.1",
     "final-form-arrays": "3.0.2",
     "google-map-react": "2.1.9",
+    "nprogress": "0.2.0",
     "nuka-carousel": "4.7.2",
     "rc-drawer": "4.1.0",
     "react": "0.0.0-experimental-7f28234f8",
