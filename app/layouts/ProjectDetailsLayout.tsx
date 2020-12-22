@@ -19,7 +19,9 @@ import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
 import GoogleMap from "app/components/GoogleMap"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
-import HomeSlider from "app/components/HomeSlider"
+import { City, Project, PropertyType, RoomWithPrice } from "@prisma/client"
+import { format } from "date-fns"
+import { ar } from "date-fns/locale"
 
 type ConstractingCardProps = {
   label: string
@@ -217,13 +219,14 @@ export default function ProjectDetailsLayout({
   propertyType,
   complationDate,
   paymentType,
-  carouselImages,
+}: Project & {
+  roomsWithPrices: RoomWithPrice[]
+  propertyType: PropertyType
+  city: City
 }) {
   const isCompleted = status === "completed"
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
-  const date = `${new Date(complationDate).getFullYear()} - ${
-    new Date(complationDate).getMonth() + 1
-  }`
+  const date = format(complationDate || new Date(), "MMM/yyyy", { locale: ar })
   const room = 0
   const { priceType, priceTypeSuffix } = usePriceType()
 
@@ -247,21 +250,9 @@ export default function ProjectDetailsLayout({
           }}
         />
         <Wrapper>
-          {carouselImages.length > 0 && (
-            <Box
-              sx={{
-                borderRadius: 15,
-                marginTop: -6,
-                overflow: "hidden",
-                height: 500,
-              }}
-            >
-              <HomeSlider data={carouselImages} onlyImages />
-            </Box>
-          )}
           <Box
             sx={{
-              marginTop: carouselImages.length > 0 ? 4 : -6,
+              marginTop: -6,
 
               borderRadius: 15,
               overflow: "hidden",
@@ -272,7 +263,7 @@ export default function ProjectDetailsLayout({
               sx={{
                 width: "100%",
               }}
-              src={image}
+              src={image || ""}
             />
           </Box>
           <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
@@ -419,7 +410,7 @@ export default function ProjectDetailsLayout({
                 download={name}
                 target="_blank"
                 rel="noopener "
-                href={brochure}
+                href={brochure || ""}
                 sx={{
                   variant: "links.outline",
                   opacity: brochure ? 1 : 0.3,
@@ -433,11 +424,11 @@ export default function ProjectDetailsLayout({
               </ThemeLink>
             </Wrapper>
           )}
-          {nearBy?.length > 0 && (
+          {(nearBy as any)?.length > 0 && (
             <Wrapper>
               <Heading>بالجوار</Heading>
               <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
-                {nearBy?.map((item) => (
+                {(nearBy as any)?.map((item) => (
                   <Box sx={{ textAlign: "center" }}>
                     <Image
                       sx={{
@@ -469,9 +460,9 @@ export default function ProjectDetailsLayout({
           constructingUpdateVideo={constructingUpdateVideo}
         />
 
-        <ContructionCompaniesDetails {...oprationCompanies} />
+        <ContructionCompaniesDetails {...(oprationCompanies as any)} />
         <Wrapper>
-          {location && <GoogleMap center={location || undefined} />}
+          {location && <GoogleMap center={location as any} />}
           <Contact />
 
           <Link href="/furniture">
@@ -479,7 +470,7 @@ export default function ProjectDetailsLayout({
               sx={{ marginBottom: 5, maxWidth: 200, textAlign: "center", marginX: "auto" }}
               variant="outline"
             >
-              اثث منزلك
+              اثث منزلكlocation
             </ThemeLink>
           </Link>
         </Wrapper>
