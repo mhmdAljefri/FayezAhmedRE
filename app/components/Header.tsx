@@ -15,7 +15,7 @@ const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const countryId = useParam("countryId", "number")
   const { pathname } = useRouter()
-  const hasProjects = pathname === "/countries/[countryId]" || pathname.includes("projects")
+  const hasProjects = pathname.startsWith("/countries/[countryId]") || pathname.includes("projects")
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
   return (
     <Box
@@ -67,8 +67,7 @@ const Header = ({ sx }: HeaderProps) => {
           <>
             {countryId && <Search />}
             {hasProjects && (
-              <Box sx={{ display: ["none", null, "flex"] }}>
-                <Box sx={{ width: 1, height: 20, backgroundColor: "primary", marginX: 3 }} />
+              <Box>
                 <PriceType />
               </Box>
             )}

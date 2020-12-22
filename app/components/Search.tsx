@@ -20,6 +20,7 @@ const Search = (props: SearchProps) => {
       ref={ref}
       onClick={() => setOpen(true)}
       sx={{
+        display: ["none", "initial"],
         justifyContent: "flex-end",
       }}
     >

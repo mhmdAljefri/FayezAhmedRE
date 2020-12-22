@@ -74,12 +74,21 @@ const Nav = (props: NavProps) => {
               <Link href="/about-us">
                 <ThemeLink
                   sx={{
-                    marginTop: 5,
                     fontWeight: 700,
                     fontSize: [3, null, 5, 6],
                   }}
                 >
                   عنا
+                </ThemeLink>
+              </Link>
+              <Link href="/search">
+                <ThemeLink
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: [3, null, 5, 6],
+                  }}
+                >
+                  البحث
                 </ThemeLink>
               </Link>
               <Link href="/furniture">
@@ -95,6 +104,11 @@ const Nav = (props: NavProps) => {
                   <Link passHref href={`/countries/${countryId}/offers`}>
                     <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
                       العروض
+                    </ThemeLink>
+                  </Link>
+                  <Link passHref href={`/countries/${countryId}/opration-companies`}>
+                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                      الشركات العاملة
                     </ThemeLink>
                   </Link>
                 </>
