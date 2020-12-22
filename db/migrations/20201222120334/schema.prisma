@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -148,7 +148,6 @@ model Country {
   gallery               Json?
   isTurkey              Boolean @default(false)
   rooms                 String[]
-  carouselImages        String[]
 
   cities                City[]
   projects              Project[]
@@ -156,7 +155,6 @@ model Country {
   offers                Offer[]
   oprationCompanyPages  OprationCompanyPage[]
   contacts              Contact[]
-
 }
 
 model City {

@@ -18,6 +18,7 @@ import useOnClickout from "app/hooks/useOnClickout"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
+import { TURKEY_PROJECT_STATUS } from "app/constants"
 
 interface ProjectCardIconsTextProps extends IconProp {
   width?: number
@@ -26,7 +27,7 @@ interface ProjectCardIconsTextProps extends IconProp {
 
 type ProjectCardProps = Pick<
   Project,
-  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType" | "countryId"
+  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType" | "countryId" | "status"
 > & {
   roomWithPrices: Pick<
     RoomWithPrice,
@@ -46,7 +47,7 @@ function ProjectCardIconsText({ icon, text, width }: ProjectCardIconsTextProps) 
   return (
     <Flex sx={{ marginBottom: 3, fontSize: 1, width, color: "lightText", whiteSpace: "nowrap" }}>
       <Icon icon={icon} />
-      <span style={{ whiteSpace: "nowrap" }}>{text}</span>
+      <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{text}</span>
     </Flex>
   )
 }
@@ -100,11 +101,13 @@ export function ProjectCard({
   countryId,
   subTitle,
   locationText,
+  status,
   paymentType,
   roomWithPrices,
 }: ProjectCardProps) {
   const { priceType } = usePriceType()
   const [selected, setSelected] = useState(roomWithPrices[0])
+  const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
 
   const price = selected?.[priceType]
   const projectPath = `/countries/${countryId}/projects/${id}`
@@ -142,7 +145,7 @@ export function ProjectCard({
           </Link>
         </Box>
         <Flex sx={{ paddingX: 3, justifyContent: "space-between" }}>
-          <ProjectCardIconsText text={"جاهز"} icon={ic_format_paint} />
+          <ProjectCardIconsText text={statusText || ""} icon={ic_format_paint} />
           <SelectRoom selected={selected} roomWithPrices={roomWithPrices} onChange={setSelected} />
           <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
           <ProjectCardIconsText text={`تبدا من ${price}`} icon={dollar} />

@@ -18,6 +18,8 @@ import { Link } from "blitz"
 import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
 import GoogleMap from "app/components/GoogleMap"
+import { TURKEY_PROJECT_STATUS } from "app/constants"
+import HomeSlider from "app/components/HomeSlider"
 
 type ConstractingCardProps = {
   label: string
@@ -215,9 +217,10 @@ export default function ProjectDetailsLayout({
   propertyType,
   complationDate,
   paymentType,
+  carouselImages,
 }) {
   const isCompleted = status === "completed"
-  const statusText = isCompleted ? "مكتمل" : "قيد البناء"
+  const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
   const date = `${new Date(complationDate).getFullYear()} - ${
     new Date(complationDate).getMonth() + 1
   }`
@@ -244,7 +247,34 @@ export default function ProjectDetailsLayout({
           }}
         />
         <Wrapper>
-          <Image sx={{ borderRadius: 15, marginTop: -6, width: "100%" }} src={image} />
+          {carouselImages.length > 0 && (
+            <Box
+              sx={{
+                borderRadius: 15,
+                marginTop: -6,
+                overflow: "hidden",
+                height: 500,
+              }}
+            >
+              <HomeSlider data={carouselImages} onlyImages />
+            </Box>
+          )}
+          <Box
+            sx={{
+              marginTop: carouselImages.length > 0 ? 4 : -6,
+
+              borderRadius: 15,
+              overflow: "hidden",
+              maxHeight: 600,
+            }}
+          >
+            <Image
+              sx={{
+                width: "100%",
+              }}
+              src={image}
+            />
+          </Box>
           <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
 
@@ -321,111 +351,116 @@ export default function ProjectDetailsLayout({
           constructingUpdatePrview={mainVideoPreview}
           constructingUpdateVideo={mainVideo}
         />
-        <Wrapper sx={{ marginY: 6 }}>
-          <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-          <SlickSlider
-            slidesToShow={3}
-            slidesToScroll={3}
-            sx={{ justifyContent: "center", marginY: 3 }}
-          >
-            {floorplan.map((item, index) => (
-              <div>
-                <Image
-                  key={item + "_" + index}
-                  sx={{
-                    borderColor: "primary",
-                    objectFit: "cover",
-                    marginX: 2,
-                    width: ["90vw", 350],
-                    minWidth: ["90vw", 300],
-                    borderWidth: 2,
-                    borderStyle: "solid",
-                    borderRadius: 15,
-                    boxShadow: "default",
-                    height: [300, 350],
-                  }}
-                  src={item}
-                />
-              </div>
-            ))}
-          </SlickSlider>
-        </Wrapper>
-        <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
-          <Wrapper>
-            <Box>
-              <Heading sx={{ fontSize: [5, null, 6] }}>وسائل الراحة والمزايا</Heading>
-              <Text sx={{ fontSize: 3, marginBottom: 5 }}>عالم من الراحة الجمال في التصميم</Text>
-            </Box>
-
+        {[...floorplan].length > 0 && (
+          <Wrapper sx={{ marginY: 6 }}>
+            <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
             <SlickSlider
               slidesToShow={3}
               slidesToScroll={3}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
-              {features.map((feat) => (
-                <Text
-                  sx={{
-                    margin: 2,
-                    backgroundColor: "primary",
-                    textAlign: "center",
-                    fontWeight: 700,
-                    paddingX: 3,
-                    paddingY: 5,
-                    fontSize: 5,
-                    color: "white",
-                    boxShadow: "default",
-                    width: 250,
-                    borderRadius: "default",
-                  }}
-                >
-                  {feat}
-                </Text>
-              ))}
-            </SlickSlider>
-            <ThemeLink
-              download={name}
-              target="_blank"
-              rel="noopener "
-              href={brochure}
-              sx={{
-                variant: "links.outline",
-                opacity: brochure ? 1 : 0.3,
-                maxWidth: 250,
-                marginX: "auto",
-                marginY: 5,
-                textAlign: "center",
-              }}
-            >
-              تنزيل البروشور
-            </ThemeLink>
-          </Wrapper>
-
-          <Wrapper>
-            <Heading>بالجوار</Heading>
-            <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
-              {nearBy?.map((item) => (
-                <Box sx={{ textAlign: "center" }}>
+              {floorplan.map((item, index) => (
+                <div>
                   <Image
+                    key={item + "_" + index}
                     sx={{
-                      marginX: "auto",
-                      width: [200, 300, 350],
-                      height: [200, 300, 350],
-                      borderRadius: 350,
-                      borderWidth: 2,
                       borderColor: "primary",
+                      objectFit: "cover",
+                      marginX: 2,
+                      width: ["90vw", 350],
+                      minWidth: ["90vw", 300],
+                      borderWidth: 2,
                       borderStyle: "solid",
+                      borderRadius: 15,
+                      boxShadow: "default",
+                      height: [300, 350],
                     }}
-                    src={item.image}
-                    alt={item.name}
+                    src={item}
                   />
-                  <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
-                    {item.name}
-                  </Heading>
-                  <Text>{item.description}</Text>
-                </Box>
+                </div>
               ))}
             </SlickSlider>
           </Wrapper>
+        )}
+        <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
+          {features?.length > 0 && (
+            <Wrapper>
+              <Box>
+                <Heading sx={{ fontSize: [5, null, 6] }}>وسائل الراحة والمزايا</Heading>
+                <Text sx={{ fontSize: 3, marginBottom: 5 }}>عالم من الراحة الجمال في التصميم</Text>
+              </Box>
+
+              <SlickSlider
+                slidesToShow={3}
+                slidesToScroll={3}
+                sx={{ justifyContent: "center", marginY: 3 }}
+              >
+                {features.map((feat) => (
+                  <Text
+                    sx={{
+                      margin: 2,
+                      backgroundColor: "primary",
+                      textAlign: "center",
+                      fontWeight: 700,
+                      paddingX: 3,
+                      paddingY: 5,
+                      fontSize: 5,
+                      color: "white",
+                      boxShadow: "default",
+                      width: 250,
+                      borderRadius: "default",
+                    }}
+                  >
+                    {feat}
+                  </Text>
+                ))}
+              </SlickSlider>
+              <ThemeLink
+                download={name}
+                target="_blank"
+                rel="noopener "
+                href={brochure}
+                sx={{
+                  variant: "links.outline",
+                  opacity: brochure ? 1 : 0.3,
+                  maxWidth: 250,
+                  marginX: "auto",
+                  marginY: 5,
+                  textAlign: "center",
+                }}
+              >
+                تنزيل البروشور
+              </ThemeLink>
+            </Wrapper>
+          )}
+          {nearBy?.length > 0 && (
+            <Wrapper>
+              <Heading>بالجوار</Heading>
+              <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
+                {nearBy?.map((item) => (
+                  <Box sx={{ textAlign: "center" }}>
+                    <Image
+                      sx={{
+                        marginX: "auto",
+                        width: [200, 300, 350],
+                        height: [200, 300, 350],
+                        borderRadius: 350,
+                        borderWidth: 2,
+                        borderColor: "primary",
+                        borderStyle: "solid",
+                      }}
+                      src={item.image}
+                      alt={item.name}
+                    />
+                    <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
+                      {item.name}
+                    </Heading>
+                    <Text>{item.description}</Text>
+                  </Box>
+                ))}
+              </SlickSlider>
+            </Wrapper>
+          )}
         </Box>
 
         <ConstractiongVideo
@@ -436,7 +471,7 @@ export default function ProjectDetailsLayout({
 
         <ContructionCompaniesDetails {...oprationCompanies} />
         <Wrapper>
-          <GoogleMap center={location || undefined} />
+          {location && <GoogleMap center={location || undefined} />}
           <Contact />
 
           <Link href="/furniture">

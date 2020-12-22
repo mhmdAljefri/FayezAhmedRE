@@ -23,7 +23,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
   return (
     <>
       <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
-        <HomeSlider data={carousels} />
+        <HomeSlider onlyImages data={carousels} />
         <Box
           sx={{
             position: "absolute",
@@ -31,7 +31,6 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
             left: 0,
             right: 0,
             paddingY: 50,
-            backgroundImage: "linear-gradient(0deg, #000000c7, transparent)",
           }}
         >
           <Wrapper>

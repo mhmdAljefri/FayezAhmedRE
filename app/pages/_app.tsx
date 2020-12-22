@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <PriceProvider>
           <>
             <ToastContainer />
+
             {getLayout(<Component {...pageProps} />)}
           </>
         </PriceProvider>

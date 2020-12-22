@@ -122,11 +122,7 @@ export default function CountryPage({
       />
       <Wrapper sx={{ marginTop: -50 }}>
         <HomeSlider
-          data={country.oprationCompanyPages.map(({ image, title, id }) => ({
-            title,
-            image,
-            path: `${asPath}/opration-companies/${id}`,
-          }))}
+          data={country.carouselImages.map((image) => ({ image }))}
           slideStyle={{
             borderRadius: "lg",
             overflow: "hidden",

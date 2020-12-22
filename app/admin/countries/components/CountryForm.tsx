@@ -14,6 +14,7 @@ const CountryForm = ({ initialValues, onSubmit }: CountryFormProps) => {
     <Form initialValues={initialValues} onSubmit={onSubmit}>
       <LabeledTextField name="name" label="تسمية الدولة" />
       <MediaWidthTextField name="image" label="صورة الدولة" />
+      <MediaWidthTextField multiple name="carouselImages" label="صور السلايدر المتحرك" />
 
       <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>تاكيد</Button>
     </Form>

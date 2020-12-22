@@ -184,7 +184,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           <LabeledTextField name="oprationCompanies.design" label="تصميم المشروع" />
         </Box>
 
-        <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
+        <LabeledTextField name="brochure" label="البروشور" />
 
         <RoomsField />
 

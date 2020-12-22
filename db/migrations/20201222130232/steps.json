@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "Project",
+      "field": "carouselImages"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Country",
+      "field": "carouselImages",
+      "type": "String",
+      "arity": "List"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage } from "blitz"
+import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage, useMutation } from "blitz"
 import getExplores from "app/admin/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import { Image, Button } from "theme-ui"
+import Action from "app/admin/components/Action"
+import deleteExplore from "app/admin/explores/mutations/deleteExplore"
 
 const ITEMS_PER_PAGE = 100
 
@@ -14,7 +16,8 @@ export const ExploresList = () => {
   const countryId = useParam("countryId", "number")
   const type = useParam("type", "string") as Explore["type"]
 
-  const [{ explores, hasMore }] = usePaginatedQuery(getExplores, {
+  const [deleteExploreMutation] = useMutation(deleteExplore)
+  const [{ explores, hasMore }, { refetch }] = usePaginatedQuery(getExplores, {
     where: { country: { id: countryId }, type: { equals: type } },
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
@@ -36,6 +39,15 @@ export const ExploresList = () => {
           name: "",
         },
         { key: "title", name: "العنوان" },
+        {
+          name: "",
+          render: ({ id }) => (
+            <Action
+              id={id}
+              onDelete={() => deleteExploreMutation({ where: { id } }).then(() => refetch())}
+            />
+          ),
+        },
       ]}
       data={explores}
       onNext={goToNextPage}

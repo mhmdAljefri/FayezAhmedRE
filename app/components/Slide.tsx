@@ -28,10 +28,12 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
         ":before": {
           content: '""',
           position: "absolute",
-          top: 100,
-          left: 100,
-          right: 100,
-          bottom: 100,
+          backgroundColor: "heading",
+          opacity: 0.8,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
         },
       }}
     >

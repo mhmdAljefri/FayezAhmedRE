@@ -20,6 +20,7 @@ export default async function getCountry({ where }: GetCountryInput) {
       offers: {
         take: 3,
       },
+      carouselImages: true,
       rooms: true,
       isTurkey: true,
       name: true,
