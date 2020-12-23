@@ -242,7 +242,7 @@ export default function CountryPage({
         <Grid columns={[3]}>
           {explores.map(({ image, title, id }, index) => (
             <Slide key={id} bottom>
-              <Link href={`${asPath}/explore/${title}`}>
+              <Link href={`${asPath}/explore/${id}`}>
                 <Box
                   sx={{
                     height: 250,

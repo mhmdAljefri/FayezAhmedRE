@@ -11,10 +11,10 @@ import { Explore } from "@prisma/client"
 
 type ExploreProps = {
   explore: Explore
-  next: Explore
-  prev: Explore
+  // next: Explore
+  // prev: Explore
 }
-const WhatsNew: BlitzPage<ExploreProps> = ({ explore, next, prev }) => {
+const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={explore.title}>
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
@@ -36,20 +36,20 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore, next, prev }) => {
           </Heading>
           <Box dangerouslySetInnerHTML={{ __html: explore.description }} />
 
-          <Flex>
-            <Link href={prev?.title}>
+          {/* <Flex>
+            <Link href={`/countries/${prev.countryId}/explore/${prev?.id}`}>
               <Button variant="link" as="a">
                 {prev?.title}
                 <ArrowIcon sx={{ transform: "rotate(180deg)" }} />
               </Button>
             </Link>
-            <Link href={next?.title}>
+            <Link href={`/countries/${next.countryId}/explore/${next?.id}`}>
               <Button variant="link" as="a">
                 {next?.title}
                 <ArrowIcon />
               </Button>
             </Link>
-          </Flex>
+          </Flex> */}
         </Wrapper>
       </Box>
     </Layout>
@@ -61,7 +61,7 @@ export async function getStaticPaths() {
   const paths = explores.map((explore: Explore) => ({
     params: {
       countryId: `${explore.countryId}`,
-      exploreTitle: `${explore.title}`,
+      exploreId: `${explore.id}`,
     },
   }))
 
@@ -72,16 +72,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const exploreTitle = context.params.exploreTitle
-  const explore = await getExplore({ where: { title: exploreTitle } })
-  const next = await getExplore({ where: { id: explore.id + 1 } })
-  const prev = await getExplore({ where: { id: explore.id - 1 } })
+  const exploreId = parseInt(context.params.exploreId)
+  const explore = await getExplore({ where: { id: exploreId } })
+  // const next = await getExplore({ where: { id: explore.id + 1 } })
+  // const prev = await getExplore({ where: { id: explore.id - 1 } })
 
   return {
     props: {
       explore,
-      next,
-      prev,
+      // next,
+      // prev,
     },
     revalidate: 60 * 2,
   }
