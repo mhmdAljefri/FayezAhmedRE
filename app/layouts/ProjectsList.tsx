@@ -49,7 +49,7 @@ function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTex
     <Flex sx={{ marginBottom: 3, fontSize: 1, width, color: "lightText", whiteSpace: "nowrap" }}>
       {icon && <Icon icon={icon} />}
 
-      {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
+      {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 5 }}>{prefix}</span>}
       <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{text}</span>
     </Flex>
   )
@@ -213,7 +213,7 @@ export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
           <Heading as="h1" sx={{ fontSize: 7, color: "white" }}>
             {title}
           </Heading>
-          <Text>{subTitle}</Text>
+          <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -7, marginBottom: 5 }}>

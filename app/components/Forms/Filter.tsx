@@ -67,10 +67,10 @@ export default function Filter({
 
           <Grid
             sx={{ marginBottom: 3, marginTop: 3, alignItems: "center" }}
-            columns={[1, null, isTurkey ? 4 : 3]}
+            columns={[1, 1, isTurkey ? 4 : 3]}
           >
             {isTurkey ? (
-              <Box sx={{ gridColumn: "span 2" }}>
+              <Box sx={{ gridColumn: ["auto", null, "span 2"] }}>
                 <MenuField emptyOptionText="غرف النوم" options={[...rooms]} name="room" />
               </Box>
             ) : (
@@ -90,7 +90,7 @@ export default function Filter({
                 />
               </Box>
             )}
-            <Box sx={{ marginTop: [1, null, -4], marginBottom: 4 }}>
+            <Box sx={{ marginTop: [1, null, -4], marginBottom: 5 }}>
               <Label sx={{ color: "white" }}>السعر</Label>
               <Field
                 name="price"
@@ -109,7 +109,7 @@ export default function Filter({
               options={propertyTypes}
             />
           </Grid>
-          <Flex sx={{ justifyContent: "center", flexWrap: ["wrap", null, "nowrap"], marginTop: 3 }}>
+          <Flex sx={{ justifyContent: "center", flexWrap: ["wrap", "nowrap"], marginTop: 3 }}>
             <MenuField
               sx={{ width: 200, marginX: 2 }}
               name="status"

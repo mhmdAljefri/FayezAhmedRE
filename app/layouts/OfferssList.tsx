@@ -121,11 +121,11 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
           <Heading as="h1" sx={{ fontSize: 7, color: "background" }}>
             {name}
           </Heading>
-          <Text>{details}</Text>
+          <Text sx={{ fontSize: 4 }}>{details}</Text>
         </Wrapper>
       </Box>
-      <Box>
-        <Wrapper sx={{ marginTop: -4 }}>
+      <Box sx={{ marginTop: -7, position: "relative", zIndex: 2 }}>
+        <Wrapper>
           <Grid sx={{ marginBottom: 5, justifyContent: "center" }} columns={[1, null, 2, 3]}>
             {groupedProjects.map((group, i) => (
               <React.Fragment key={i}>

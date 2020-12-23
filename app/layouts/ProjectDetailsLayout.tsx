@@ -103,6 +103,23 @@ export function ConstractiongVideo({
   )
 }
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props
+  return (
+    <Box sx={{ top: -100, left: 10, position: "absolute" }} onClick={onClick}>
+      <ArrowIcon />
+    </Box>
+  )
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props
+  return (
+    <Box sx={{ top: -100, left: 60, position: "absolute" }} onClick={onClick}>
+      <ArrowIcon sx={{ transform: "rotate(180deg)" }} />
+    </Box>
+  )
+}
 export function GalleryView({ gallery }) {
   return (
     <>
@@ -113,14 +130,17 @@ export function GalleryView({ gallery }) {
       </Box>
 
       <Wrapper sx={{ marginTop: -5 }}>
-        <SlickSlider sx={{ justifyContent: "center", overflow: "auto" }}>
+        <SlickSlider
+          prevArrow={<SamplePrevArrow />}
+          nextArrow={<SampleNextArrow />}
+          sx={{ justifyContent: "center", overflow: "auto" }}
+        >
           {gallery.map((item, index) => (
             <Image
               key={item + "_" + index}
               sx={{
                 width: "30%",
                 maxWidth: 350,
-                minWidth: 280,
                 borderRadius: 15,
                 margin: 3,
                 boxShadow: "default",
@@ -348,6 +368,16 @@ export default function ProjectDetailsLayout({
             <SlickSlider
               slidesToShow={3}
               slidesToScroll={3}
+              customPaging={(i) => (
+                <Box
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    backgroundColor: "primary",
+                    borderRadius: 30,
+                  }}
+                ></Box>
+              )}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
               {floorplan.map((item, index) => (
@@ -359,7 +389,6 @@ export default function ProjectDetailsLayout({
                       objectFit: "cover",
                       marginX: 2,
                       width: ["90vw", 350],
-                      minWidth: ["90vw", 300],
                       borderWidth: 2,
                       borderStyle: "solid",
                       borderRadius: 15,
@@ -434,7 +463,7 @@ export default function ProjectDetailsLayout({
                 centerMode
                 customPaging={(i) => (
                   <Box
-                    style={{
+                    sx={{
                       width: 30,
                       height: 30,
                       backgroundColor: "primary",

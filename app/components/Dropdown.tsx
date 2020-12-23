@@ -45,6 +45,7 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
             onClick={() => {
               setSelected(option)
               onChange(option)
+              setOpen(false)
             }}
           >
             {option.node || option.value}

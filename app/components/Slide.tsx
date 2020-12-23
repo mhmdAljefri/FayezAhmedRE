@@ -19,10 +19,9 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
         alignItems: "center",
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh",
-        minHeight: 300,
+        backgroundPosition: "bottom",
         backgroundColor: "#eee",
+        height: "100%",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
         ":before": {

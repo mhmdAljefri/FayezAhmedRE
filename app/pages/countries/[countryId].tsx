@@ -2,7 +2,6 @@ import HomeSlider from "app/components/HomeSlider"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
-import Carousel from "app/components/Slider"
 
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
@@ -120,11 +119,11 @@ export default function CountryPage({
           backgroundColor: "dark",
         }}
       />
-      <Wrapper sx={{ marginTop: -50 }}>
+      <Wrapper sx={{ marginTop: -100 }}>
         <HomeSlider
           data={country.carouselImages.map((image) => ({ image }))}
           slideStyle={{
-            maxHeight: ["50vw", 500, 600],
+            maxHeight: ["110vw", 500, 600],
             borderRadius: "lg",
             overflow: "hidden",
           }}
@@ -149,6 +148,7 @@ export default function CountryPage({
           href={offersUrl}
           heading="جديدنا"
         />
+        <Text>اكتشف احدث عروضنا الحصرية</Text>
 
         <Grid sx={{ mt: 5 }} columns={[1, 1, 2, 3]}>
           {country.offers.map((offer) => (
@@ -165,7 +165,7 @@ export default function CountryPage({
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
         <Box>
-          <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>إكتشف منزلك الجديد</Heading>
+          <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>منزلك الجديد بانتظارك</Heading>
         </Box>
         <SlickSlider
           responsive={[

@@ -2,31 +2,23 @@ import { AppProps, ErrorComponent, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
-import { ComponentType, Suspense } from "react"
+import { Suspense } from "react"
 
 import Router from "next/router"
 import NProgress from "nprogress" //nprogress module
 import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
-import dynamic from "next/dynamic"
 
 import "nprogress/nprogress.css" //styles of nprogress
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "app/styles/slick-modifier.css"
+import "app/styles/fonts.css" // add local fonts
 import "react-phone-number-input/style.css"
 import "react-toastify/dist/ReactToastify.css"
 import "suneditor/dist/css/suneditor.min.css" // Import Sun Editor's CSS File
 import "react-datepicker/dist/react-datepicker.css"
 import "rc-drawer/assets/index.css"
-
-type AnimatedProps = { color?: string }
-const AnimatedCursor: ComponentType<AnimatedProps> = dynamic(
-  () => import("react-animated-cursor"),
-  {
-    ssr: false,
-  }
-)
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start())
@@ -56,7 +48,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </>
         </PriceProvider>
       </Suspense>
-      <AnimatedCursor color="216, 192, 122" />
     </ErrorBoundary>
   )
 }
