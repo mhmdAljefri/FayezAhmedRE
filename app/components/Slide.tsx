@@ -1,6 +1,7 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Button, Flex, Heading, Text } from "theme-ui"
+import { Animated } from "react-animated-css"
 
 export type SlideProps = {
   image: string
@@ -24,7 +25,7 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
         height: "100%",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
-        animation: `fadeIn 0.5s`,
+        animation: `zoomIn 1s`,
         ":before": {
           content: '""',
           position: "absolute",

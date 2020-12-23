@@ -1,5 +1,5 @@
 import React from "react"
-import { BlitzPage, Link, useParam, useQuery } from "blitz"
+import { BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Button, Flex, Heading, Image } from "theme-ui"
@@ -58,10 +58,10 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore, next, prev }) => {
 
 export async function getStaticPaths() {
   const { explores } = await getExplores({})
-  const paths = explores.map((offer: Explore) => ({
+  const paths = explores.map((explore: Explore) => ({
     params: {
-      countryId: `${offer.countryId}`,
-      exploreTitle: `${offer.id}`,
+      countryId: `${explore.countryId}`,
+      exploreTitle: `${explore.title}`,
     },
   }))
 
