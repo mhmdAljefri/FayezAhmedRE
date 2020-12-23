@@ -377,8 +377,8 @@ export default function ProjectDetailsLayout({
           {features?.length > 0 && (
             <Wrapper>
               <Box>
-                <Heading sx={{ fontSize: [5, null, 6] }}>وسائل الراحة والمزايا</Heading>
-                <Text sx={{ fontSize: 3, marginBottom: 5 }}>عالم من الراحة الجمال في التصميم</Text>
+                <Heading sx={{ fontSize: [5, null, 6] }}>المزايا</Heading>
+                <Text sx={{ fontSize: 3, marginBottom: 5 }}>دلل نفسك مع هذه الخيارات الرائعة</Text>
               </Box>
 
               <SlickSlider
@@ -426,7 +426,7 @@ export default function ProjectDetailsLayout({
           )}
           {(nearBy as any)?.length > 0 && (
             <Wrapper>
-              <Heading>بالجوار</Heading>
+              <Heading>مناطق الجذب في المدينة على مقربة منك</Heading>
               <SlickSlider
                 slidesToShow={1}
                 slidesToScroll={1}
@@ -479,7 +479,7 @@ export default function ProjectDetailsLayout({
         <Wrapper>
           {location && (
             <>
-              <Heading>الموقع</Heading>
+              <Heading sx={{ marginBottom: 3 }}>الموقع</Heading>
 
               <GoogleMap center={location as any} />
             </>

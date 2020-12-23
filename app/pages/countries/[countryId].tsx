@@ -124,7 +124,7 @@ export default function CountryPage({
         <HomeSlider
           data={country.carouselImages.map((image) => ({ image }))}
           slideStyle={{
-            maxHeight: [400, 500, 600],
+            maxHeight: ["50vw", 500, 600],
             borderRadius: "lg",
             overflow: "hidden",
           }}

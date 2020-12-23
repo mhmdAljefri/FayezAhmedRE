@@ -46,7 +46,7 @@ export default function Filter({
           paddingBottom: 5,
         }}
       >
-        <Heading sx={{ fontSize: 6, paddingY: 4, color: "white" }}>فلتر</Heading>
+        <Heading sx={{ fontSize: 6, paddingY: 4, color: "white" }}>التحكم بالبحث</Heading>
         <Form initialValues={initialValues} onSubmit={onFilter}>
           <Grid columns={[1, null, 3]}>
             <Field

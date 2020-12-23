@@ -125,7 +125,7 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
         </Wrapper>
       </Box>
       <Box>
-        <Wrapper>
+        <Wrapper sx={{ marginTop: -4 }}>
           <Grid sx={{ marginBottom: 5, justifyContent: "center" }} columns={[1, null, 2, 3]}>
             {groupedProjects.map((group, i) => (
               <React.Fragment key={i}>
