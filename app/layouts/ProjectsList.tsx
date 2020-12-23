@@ -46,11 +46,21 @@ type ProjectCardProps = Pick<
 
 function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTextProps) {
   return (
-    <Flex sx={{ marginBottom: 3, fontSize: 1, width, color: "lightText", whiteSpace: "nowrap" }}>
+    <Flex
+      sx={{
+        marginBottom: 3,
+        fontSize: 1,
+        height: 40,
+        width,
+        color: "lightText",
+        whiteSpace: "nowrap",
+        alignItems: "center",
+      }}
+    >
       {icon && <Icon icon={icon} />}
 
-      {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 5 }}>{prefix}</span>}
-      <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{text}</span>
+      {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
+      <span style={{ whiteSpace: "nowrap", paddingInlineStart: 5 }}>{text}</span>
     </Flex>
   )
 }
@@ -67,7 +77,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
         onClick={() => setOpen(true)}
       >
         <ProjectCardIconsText text={selected.room} icon={building} />
-        <Box sx={{ marginX: 1 }}>
+        <Box sx={{ marginX: 1, marginTop: 1 }}>
           <Icon size={12} icon={chevronDown} />
         </Box>
       </Button>
@@ -76,6 +86,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
         <Box
           sx={{
             position: "absolute",
+            zIndex: 5,
             boxShadow: "default",
             backgroundColor: "background",
           }}
@@ -86,8 +97,14 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
               aria-label="select"
               sx={{ borderRadius: "default", paddingX: 3, paddingY: 2, cursor: "pointer" }}
               tabIndex={0}
-              onKeyDown={() => onChange(roomWithPrice)}
-              onClick={() => onChange(roomWithPrice)}
+              onKeyDown={() => {
+                onChange(roomWithPrice)
+                setOpen(false)
+              }}
+              onClick={() => {
+                onChange(roomWithPrice)
+                setOpen(false)
+              }}
             >
               {roomWithPrice.room}
             </Box>
@@ -174,7 +191,7 @@ export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const [country] = useQuery(getCountry, { where: { id: countryId } })
+  const [country] = useQuery(getCountry, { where: { id: countryId } }, { suspense: false })
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
 
   const [

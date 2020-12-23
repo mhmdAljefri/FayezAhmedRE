@@ -6,6 +6,7 @@ const defaultProps = {
   slidesToShow: 4,
   slidesToScroll: 4,
   centerMode: false,
+  dots: true,
   autoplay: false,
   initialSlide: 0,
   className: "slick-with-padding",
@@ -16,7 +17,6 @@ const defaultProps = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true,
       },
     },
     {
@@ -28,8 +28,9 @@ const defaultProps = {
       },
     },
     {
-      breakpoint: 480,
+      breakpoint: 580,
       settings: {
+        centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
       },

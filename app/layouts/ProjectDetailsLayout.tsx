@@ -9,6 +9,7 @@ import { buildingO } from "react-icons-kit/fa/buildingO"
 import { dollar } from "react-icons-kit/fa/dollar"
 import { minusSquare } from "react-icons-kit/fa/minusSquare"
 import { mapMarker } from "react-icons-kit/fa/mapMarker"
+import { close } from "react-icons-kit/fa/close"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
@@ -22,6 +23,7 @@ import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { City, Project, PropertyType, RoomWithPrice } from "@prisma/client"
 import { format } from "date-fns"
 import { arSA } from "date-fns/locale"
+import Icon from "react-icons-kit"
 
 type ConstractingCardProps = {
   label: string
@@ -133,19 +135,20 @@ export function GalleryView({ gallery }) {
         <SlickSlider
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
+          dots={false}
           sx={{ justifyContent: "center", overflow: "auto" }}
         >
           {gallery.map((item, index) => (
             <Image
               key={item + "_" + index}
               sx={{
-                width: "30%",
+                width: ["100%", "30%"],
                 maxWidth: 350,
                 borderRadius: 15,
                 margin: 3,
                 boxShadow: "default",
-                height: "30vw",
-                maxHeight: 350,
+                height: [300, "30vw"],
+                maxHeight: ["auto", 350],
               }}
               src={item}
             />
@@ -168,21 +171,30 @@ export function PaymentPlan({ installmentPlan }) {
           <ArrowIcon />
         </Flex>
       </Button>
-      <Drawer onClose={() => setOpen(false)} open={open}>
-        <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark" }}>
+      <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
+        <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark", px: 3 }}>
           <Box>
-            <Text sx={{ paddingTop: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
-              خطة السداد
-            </Text>
+            <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
+              <Text sx={{ paddingY: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
+                خطة السداد
+              </Text>
+              <Icon onClick={() => setOpen(false)} icon={close} />
+            </Flex>
 
-            <Grid columns={2}>
-              {installmentPlan.map(({ instalment, milestone }, index) => (
-                <React.Fragment key={index}>
-                  <Box sx={{ fontWeight: 700, fontSize: 3, color: "white" }}>{instalment}</Box>
-                  <Box sx={{ fontWeight: 700, fontSize: 3, color: "white" }}>{milestone}</Box>
-                </React.Fragment>
-              ))}
-            </Grid>
+            {installmentPlan.map(({ instalment, milestone }, index) => (
+              <Grid columns={instalment && milestone ? 2 : 1}>
+                {instalment && (
+                  <Heading sx={{ border: "1px solid white", padding: 2, color: "white" }}>
+                    {instalment}
+                  </Heading>
+                )}
+                {milestone && (
+                  <Heading sx={{ border: "1px solid white", padding: 2, color: "white" }}>
+                    {milestone}
+                  </Heading>
+                )}
+              </Grid>
+            ))}
           </Box>
         </Box>
       </Drawer>
@@ -300,7 +312,7 @@ export default function ProjectDetailsLayout({
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{
-                  fontSize: 5,
+                  fontSize: [4, 5],
                   color: "primary",
                   borderBottom: "2px solid #eee",
                   borderColor: "primary",
@@ -315,7 +327,7 @@ export default function ProjectDetailsLayout({
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{
-                  fontSize: 5,
+                  fontSize: [4, 5],
                   color: "primary",
                   borderBottom: "2px solid #eee",
                   borderColor: "primary",
@@ -368,16 +380,6 @@ export default function ProjectDetailsLayout({
             <SlickSlider
               slidesToShow={3}
               slidesToScroll={3}
-              customPaging={(i) => (
-                <Box
-                  sx={{
-                    width: 30,
-                    height: 30,
-                    backgroundColor: "primary",
-                    borderRadius: 30,
-                  }}
-                ></Box>
-              )}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
               {floorplan.map((item, index) => (
@@ -424,7 +426,7 @@ export default function ProjectDetailsLayout({
                       fontWeight: 700,
                       paddingX: 3,
                       paddingY: 5,
-                      fontSize: 5,
+                      fontSize: [3, 4, 5],
                       color: "white",
                       boxShadow: "default",
                       width: 250,
@@ -455,23 +457,11 @@ export default function ProjectDetailsLayout({
           )}
           {(nearBy as any)?.length > 0 && (
             <Wrapper>
-              <Heading>مناطق الجذب في المدينة على مقربة منك</Heading>
-              <SlickSlider
-                slidesToShow={1}
-                slidesToScroll={1}
-                responsive={[]}
-                centerMode
-                customPaging={(i) => (
-                  <Box
-                    sx={{
-                      width: 30,
-                      height: 30,
-                      backgroundColor: "primary",
-                      borderRadius: 30,
-                    }}
-                  ></Box>
-                )}
-              >
+              <Heading>بالجوار</Heading>
+              <Text sx={{ fontSize: 3, marginBottom: 5 }}>
+                مناطق الجذب في المدينة على مقربة منك
+              </Text>
+              <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
                 {(nearBy as any)?.map((item) => (
                   <Box sx={{ textAlign: "center" }}>
                     <Image
@@ -508,7 +498,7 @@ export default function ProjectDetailsLayout({
         <Wrapper>
           {location && (
             <>
-              <Heading sx={{ marginBottom: 3 }}>الموقع</Heading>
+              <Heading sx={{ marginBottom: 5 }}>الموقع</Heading>
 
               <GoogleMap center={location as any} />
             </>

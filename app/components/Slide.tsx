@@ -24,10 +24,11 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
         height: "100%",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
+        animation: `fadeIn 0.5s`,
         ":before": {
           content: '""',
           position: "absolute",
-          backgroundColor: "heading",
+          backgroundColor: "#000",
           opacity: 0.5,
           top: 0,
           left: 0,

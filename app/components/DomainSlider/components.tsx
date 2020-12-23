@@ -33,9 +33,32 @@ export const Handle: React.SFC<IHandleProps> = ({
       borderRadius: "50%",
       boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.2)",
       backgroundColor: "primary",
+      "&>div": {
+        opacity: 0,
+      },
+      ":hover": {
+        "&>div": {
+          opacity: 1,
+        },
+      },
     }}
     {...getHandleProps(id)}
-  />
+  >
+    <Box
+      sx={{
+        position: "absolute",
+        left: `${percent}%`,
+        padding: 2,
+        borderRadius: "default",
+        boxShadow: "sm",
+        backgroundColor: "background",
+        display: "inline-block",
+        marginTop: -50,
+      }}
+    >
+      {norlizer(value)}
+    </Box>
+  </Box>
 )
 
 // *******************************************************

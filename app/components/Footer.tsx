@@ -37,7 +37,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
       }}
     >
       <Icon style={{ marginInlineEnd: 0 }} icon={icon} />
-      <Text sx={{ fontSize: [0, null, 2] }}>{children}</Text>
+      <Text sx={{ fontSize: ["10px", 1, 2] }}>{children}</Text>
     </Box>
   )
 }

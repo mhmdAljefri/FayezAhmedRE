@@ -30,11 +30,11 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
             bottom: 0,
             left: 0,
             right: 0,
-            paddingY: 50,
+            paddingY: [100, 50],
           }}
         >
           <Wrapper>
-            <Heading sx={{ fontSize: [5, 6], color: "primary", textShadow: "1px 2px 52px #000" }}>
+            <Heading sx={{ fontSize: 6, color: "primary", textShadow: "1px 2px 52px #000" }}>
               الارتقاء بالحياة
             </Heading>
             <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>

@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "app/styles/slick-modifier.css"
 import "app/styles/fonts.css" // add local fonts
+import "app/styles/animate.css"
 import "react-phone-number-input/style.css"
 import "react-toastify/dist/ReactToastify.css"
 import "suneditor/dist/css/suneditor.min.css" // Import Sun Editor's CSS File

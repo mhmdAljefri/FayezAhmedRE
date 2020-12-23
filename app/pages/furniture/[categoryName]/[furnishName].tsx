@@ -19,18 +19,23 @@ const Search: BlitzPage<furnishesProps> = ({ furnish }) => {
         </Wrapper>
       </Box>
       <Wrapper>
-        <Flex>
-          <Box sx={{ width: "50%", marginTop: -5 }}>
+        <Flex sx={{ flexWrap: ["wrap", "nowrap"] }}>
+          <Box
+            sx={{
+              width: ["100%", "50%"],
+              marginTop: -5,
+            }}
+          >
             <Image src={furnish.image} alt={furnish.name} />
           </Box>
           <Box
             sx={{
               backgroundColor: "light",
-              width: "40%",
+              width: ["100%", "40%"],
               borderTopRightRadius: "lg",
               borderTopLeftRadius: "lg",
               marginRight: "10%",
-              marginTop: 6,
+              marginTop: [3, 6],
               paddingY: 5,
               paddingX: 4,
             }}

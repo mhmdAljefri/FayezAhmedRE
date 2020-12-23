@@ -123,7 +123,7 @@ export default function CountryPage({
         <HomeSlider
           data={country.carouselImages.map((image) => ({ image }))}
           slideStyle={{
-            maxHeight: ["110vw", 500, 600],
+            maxHeight: ["85vw", 500, 600],
             borderRadius: "lg",
             overflow: "hidden",
           }}
@@ -164,22 +164,8 @@ export default function CountryPage({
       </Wrapper>
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
-        <Box>
-          <Heading sx={{ fontSize: 6, padding: 4, maxWidth: 350 }}>منزلك الجديد بانتظارك</Heading>
-        </Box>
-        <SlickSlider
-          responsive={[
-            {
-              breakpoint: 800,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-              },
-            },
-          ]}
-          slidesToShow={3}
-          slidesToScroll={1}
-        >
+        <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
+        <SlickSlider slidesToShow={3} slidesToScroll={1}>
           {[...country.projects, ...country.projects].map((project, index) => (
             <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
               <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
@@ -253,7 +239,7 @@ export default function CountryPage({
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
-        <Grid columns={[1, 2, 3]}>
+        <Grid columns={[3]}>
           {explores.map(({ image, title, id }, index) => (
             <Slide key={id} bottom>
               <Link href={`${asPath}/explore/${title}`}>

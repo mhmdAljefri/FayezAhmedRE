@@ -11,13 +11,16 @@ export default function FurnishCategoryCard(furnishCategory: furnishCategoryCard
       sx={{
         borderRadius: "lg",
         overflow: "hidden",
+        direction: "rtl",
         boxShadow: "default",
       }}
     >
       <Link passHref href={`/furniture/${furnishCategory.name}`}>
         <ThemeLink sx={{ textDecoration: "none" }}>
           <Image src={furnishCategory.image} alt={furnishCategory.name} />
-          <Text sx={{ paddingY: 4, paddingX: 3 }}>{furnishCategory.name}</Text>
+          <Text sx={{ paddingY: 4, paddingX: 3, fontSize: [4, 5], fontWeight: 700 }}>
+            {furnishCategory.name}
+          </Text>
         </ThemeLink>
       </Link>
     </Box>

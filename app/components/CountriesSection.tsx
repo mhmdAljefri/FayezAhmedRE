@@ -21,6 +21,8 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
           sx={{
             backgroundImage: `url(${image})`,
             backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            backgroundAttachment: "fixed",
             flexDirection: "column",
             justifyContent: "flex-end",
             color: "white",

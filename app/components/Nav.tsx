@@ -60,10 +60,22 @@ const Nav = (props: NavProps) => {
             >
               <Burger onClick={() => setOpen(false)} open={open} />
 
-              <Link href="/">
+              <Link href="/search">
                 <ThemeLink
+                  onClick={() => setOpen(false)}
                   sx={{
                     marginTop: 5,
+                    fontWeight: 700,
+                    fontSize: [3, null, 5, 6],
+                  }}
+                >
+                  البحث
+                </ThemeLink>
+              </Link>
+              <Link href="/">
+                <ThemeLink
+                  onClick={() => setOpen(false)}
+                  sx={{
                     fontWeight: 700,
                     fontSize: [3, null, 5, 6],
                   }}
@@ -73,6 +85,7 @@ const Nav = (props: NavProps) => {
               </Link>
               <Link href="/about-us">
                 <ThemeLink
+                  onClick={() => setOpen(false)}
                   sx={{
                     fontWeight: 700,
                     fontSize: [3, null, 5, 6],
@@ -81,33 +94,37 @@ const Nav = (props: NavProps) => {
                   عنا
                 </ThemeLink>
               </Link>
-              <Link href="/search">
-                <ThemeLink
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: [3, null, 5, 6],
-                  }}
-                >
-                  البحث
-                </ThemeLink>
-              </Link>
               <Link href="/furniture">
-                <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>الاثاث</ThemeLink>
+                <ThemeLink
+                  onClick={() => setOpen(false)}
+                  sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
+                >
+                  الاثاث
+                </ThemeLink>
               </Link>
               {countryId && (
                 <>
                   <Link passHref href={`/countries/${countryId}/projects`}>
-                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                    <ThemeLink
+                      onClick={() => setOpen(false)}
+                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
+                    >
                       المشاريع
                     </ThemeLink>
                   </Link>
                   <Link passHref href={`/countries/${countryId}/offers`}>
-                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                    <ThemeLink
+                      onClick={() => setOpen(false)}
+                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
+                    >
                       العروض
                     </ThemeLink>
                   </Link>
                   <Link passHref href={`/countries/${countryId}/opration-companies`}>
-                    <ThemeLink sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}>
+                    <ThemeLink
+                      onClick={() => setOpen(false)}
+                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
+                    >
                       الشركات العاملة
                     </ThemeLink>
                   </Link>

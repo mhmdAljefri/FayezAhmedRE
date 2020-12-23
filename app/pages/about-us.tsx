@@ -8,20 +8,20 @@ const AboutusPage: BlitzPage = () => {
     <>
       <Box sx={{ backgroundColor: "dark", paddingY: 5 }}>
         <Wrapper>
-          <Heading sx={{ fontSize: 6, color: "primary" }}>استفسر الان</Heading>
+          <Heading sx={{ fontSize: 6, color: "primary" }}>عن مجموعة فائز احمد العقارية</Heading>
         </Wrapper>
       </Box>
       <Wrapper sx={{ paddingY: 5 }}>
-        <Heading>الرؤية</Heading>
+        <Heading sx={{ mb: 2 }}>الرؤية</Heading>
         <Text>أن تكون مجموعة فايز أحمد العقارية الأكثر تميزا وإدراكا في صناعة وبيع العقار</Text>
 
-        <Heading>الرسالة</Heading>
+        <Heading sx={{ mt: 5, mb: 2 }}>الرسالة</Heading>
         <Text>
           أن نسوق مشاريع عقارية مبتكرة ذات جودة عالية بما يوفر لعملائنا أساليب الحياة التي يطمحون
           إليها في مجتمعاتنا السكنية النابضة بالحياة
         </Text>
 
-        <Heading>القيم</Heading>
+        <Heading sx={{ mt: 5, mb: 2 }}>القيم</Heading>
         <Text>الريادة.. الجودة.. رضاء العملاء.. الشفافية.. الثقة.. الابتكار</Text>
       </Wrapper>
     </>
