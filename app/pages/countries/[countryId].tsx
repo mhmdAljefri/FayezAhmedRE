@@ -119,14 +119,17 @@ export default function CountryPage({
           backgroundColor: "dark",
         }}
       />
-      <Wrapper sx={{ marginTop: -100 }}>
+      <Wrapper
+        sx={{
+          marginTop: -100,
+          borderRadius: "lg",
+          overflow: "hidden",
+          maxHeight: [300, null, 600],
+        }}
+      >
         <HomeSlider
-          data={country.carouselImages.map((image) => ({ image }))}
-          slideStyle={{
-            maxHeight: ["85vw", 500, 600],
-            borderRadius: "lg",
-            overflow: "hidden",
-          }}
+          data={country.carouselImages.map((image) => ({ image, opacity: 0 }))}
+          slideStyle={{}}
         />
       </Wrapper>
       <Wrapper
@@ -165,8 +168,36 @@ export default function CountryPage({
       <Wrapper>
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
         <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
-        <SlickSlider slidesToShow={3} slidesToScroll={1}>
-          {[...country.projects, ...country.projects].map((project, index) => (
+        <SlickSlider
+          responsive={[
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+              },
+            },
+            {
+              breakpoint: 1100,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+              },
+            },
+            {
+              breakpoint: 900,
+              settings: {
+                centerMode: true,
+                vertical: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ]}
+        >
+          {[...country.projects].map((project, index) => (
             <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
               <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
             </Box>
@@ -239,13 +270,43 @@ export default function CountryPage({
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
-        <Grid columns={[3]}>
+        <SlickSlider
+          slidesToScroll={1}
+          slidesToShow={3}
+          responsive={[
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+              },
+            },
+            {
+              breakpoint: 840,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                initialSlide: 1,
+              },
+            },
+            {
+              breakpoint: 580,
+              settings: {
+                centerMode: true,
+                vertical: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+              },
+            },
+          ]}
+        >
           {explores.map(({ image, title, id }, index) => (
             <Slide key={id} bottom>
               <Link href={`${asPath}/explore/${id}`}>
                 <Box
                   sx={{
-                    height: 250,
+                    height: [200, "25vw", 250],
                     borderRadius: "lg",
                     overflow: "hidden",
                     position: "relative",
@@ -285,7 +346,7 @@ export default function CountryPage({
               </Link>
             </Slide>
           ))}
-        </Grid>
+        </SlickSlider>
       </Wrapper>
 
       <Slide right>
@@ -317,11 +378,38 @@ export default function CountryPage({
       >
         <Wrapper>
           <HeadingWithMoreLink href={projectsUrl} heading="الاكثر مشاهدة" />
-          <Grid sx={{ paddingX: [1, 1, 4] }} columns={[1, 1, 3]}>
+          <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 3]}>
             {country.projects.map((project) => (
-              <Box key={project.name}>
-                <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
-              </Box>
+              <Flex
+                sx={{
+                  border: "1px solid #eee",
+                  borderColor: "primary",
+                  borderRadius: "sm",
+                  // flexWrap: ["nowrap", "wrap"],
+                  flexDirection: ["row", "column"],
+                  backgroundColor: "background",
+                }}
+                key={project.name}
+              >
+                <Box sx={{ overflow: "hidden", maxWidth: [100, "auto"] }}>
+                  <Link passHref href={`/countrie/${project.countryId}/projects/${project.id}`}>
+                    <a>
+                      <Image
+                        sx={{ minWidth: "100%", objectFit: "cover", height: [100, 150] }}
+                        src={project.image}
+                      />
+                    </a>
+                  </Link>
+                </Box>
+                <Box sx={{ p: [2, 3], flex: 1 }}>
+                  <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
+                    <a style={{ textDecoration: "none" }}>
+                      <Heading sx={{ fontSize: 2, color: "primary" }}>{project.subTitle}</Heading>
+                    </a>
+                  </Link>
+                  <Text as="small">{project.views} مشاهدة</Text>
+                </Box>
+              </Flex>
             ))}
           </Grid>
           <ShowMoreButton

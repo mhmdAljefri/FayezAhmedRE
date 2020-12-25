@@ -8,6 +8,7 @@ import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 import ArrowIcon from "app/components/ArrowIcon"
 import getExplores from "app/public/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
+import HTMLBox from "app/components/HTMLBox"
 
 type ExploreProps = {
   explore: Explore
@@ -34,7 +35,7 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
           <Heading sx={{ fontSize: 6, fontWeight: 700, textAlign: "center", marginY: 5 }}>
             {explore.title}
           </Heading>
-          <Box dangerouslySetInnerHTML={{ __html: explore.description }} />
+          <HTMLBox html={explore.description} />
 
           {/* <Flex>
             <Link href={`/countries/${prev.countryId}/explore/${prev?.id}`}>

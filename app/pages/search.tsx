@@ -9,6 +9,7 @@ import { Icon } from "react-icons-kit"
 import { search } from "react-icons-kit/fa/search"
 import useTimeout from "app/hooks/useTimeout"
 import ArrowIcon from "app/components/ArrowIcon"
+import HTMLBox from "app/components/HTMLBox"
 
 const select = {
   name: true,
@@ -101,7 +102,7 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
                 >
                   <Box>
                     <Heading sx={{ fontSize: [4, 6] }}>{item.name}</Heading>
-                    <Text dangerouslySetInnerHTML={{ __html: item.details }} />
+                    <HTMLBox html={item.details} />
                   </Box>
                   <Link passHref href={`/countries/${item.countryId}/projects/${item.name}`}>
                     <ThemeLink>

@@ -1,7 +1,7 @@
 import Form from "app/components/Form"
 import LabeledTextField from "app/components/LabeledTextField"
 import React from "react"
-import { Box, Button, Card, Heading, Label } from "theme-ui"
+import { Box, Button, Card, Flex, Heading, Label, Radio } from "theme-ui"
 import { FieldArray } from "react-final-form-arrays"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
@@ -127,6 +127,20 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
               <Label>التفاصيل</Label>
               <ReactReachTextEditor {...input} />
             </>
+          )}
+        />
+        <Field
+          name="isHousingComplex"
+          render={({ input }) => (
+            <Flex>
+              <Label>
+                <Radio {...input} name="dark-mode" value="true" />
+                فيديو عبر اليوتويب
+              </Label>
+              <Label>
+                <Radio {...input} name="dark-mode" value="false" />
+              </Label>
+            </Flex>
           )}
         />
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Flex, Link as ThemeLink } from "theme-ui"
+import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "./Burger"
 import ChangeColorsMode from "./ChangeColorsMode"
@@ -12,6 +12,25 @@ type NavProps = {}
 const Nav = (props: NavProps) => {
   const { open, setOpen, ref } = useOnClickout()
   const countryId = useParam("countryId")
+
+  const NavItem = ({ sx, to, text }: { to: string; text: string; sx?: SxStyleProp }) => {
+    return (
+      <Link passHref href={to}>
+        <ThemeLink
+          onClick={() => setOpen(false)}
+          sx={{
+            ...sx,
+            textDecoration: "none",
+            fontWeight: 700,
+            fontSize: [3, null, 5, 6],
+          }}
+        >
+          {text}
+        </ThemeLink>
+      </Link>
+    )
+  }
+
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Burger onClick={() => setOpen(true)} open={open} />
@@ -60,74 +79,26 @@ const Nav = (props: NavProps) => {
             >
               <Burger onClick={() => setOpen(false)} open={open} />
 
-              <Link href="/search">
-                <ThemeLink
-                  onClick={() => setOpen(false)}
-                  sx={{
-                    marginTop: 5,
-                    fontWeight: 700,
-                    fontSize: [3, null, 5, 6],
-                  }}
-                >
-                  البحث
-                </ThemeLink>
-              </Link>
-              <Link href="/">
-                <ThemeLink
-                  onClick={() => setOpen(false)}
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: [3, null, 5, 6],
-                  }}
-                >
-                  الرئيسية
-                </ThemeLink>
-              </Link>
-              <Link href="/about-us">
-                <ThemeLink
-                  onClick={() => setOpen(false)}
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: [3, null, 5, 6],
-                  }}
-                >
-                  عنا
-                </ThemeLink>
-              </Link>
-              <Link href="/furniture">
-                <ThemeLink
-                  onClick={() => setOpen(false)}
-                  sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
-                >
-                  الاثاث
-                </ThemeLink>
-              </Link>
+              <NavItem
+                to="/search"
+                text="البحث"
+                sx={{
+                  marginTop: 5,
+                }}
+              />
+              <NavItem to="/" text="الرئيسية" />
+              <NavItem to="/about-us" text="عنا" />
+              <NavItem to="/services" text="خدماتنا" />
+              <NavItem to="/furniture" text="الاثاث" />
+
               {countryId && (
                 <>
-                  <Link passHref href={`/countries/${countryId}/projects`}>
-                    <ThemeLink
-                      onClick={() => setOpen(false)}
-                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
-                    >
-                      المشاريع
-                    </ThemeLink>
-                  </Link>
-                  <Link passHref href={`/countries/${countryId}/offers`}>
-                    <ThemeLink
-                      onClick={() => setOpen(false)}
-                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
-                    >
-                      العروض
-                    </ThemeLink>
-                  </Link>
-                  <Link passHref href={`/countries/${countryId}/opration-companies`}>
-                    <ThemeLink
-                      onClick={() => setOpen(false)}
-                      sx={{ fontWeight: 700, fontSize: [3, null, 5, 6] }}
-                    >
-                      الشركات العاملة
-                    </ThemeLink>
-                  </Link>
+                  <NavItem to={`/countries/${countryId}/projects`} text="المشاريع" />
+                  <NavItem to={`/countries/${countryId}/offers`} text="العروض" />
+                  <NavItem
+                    to={`/countries/${countryId}/opration-companies`}
+                    text="الشركات العاملة"
+                  />
                 </>
               )}
             </Flex>

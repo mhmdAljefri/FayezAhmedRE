@@ -31,6 +31,7 @@ const defaultProps = {
       breakpoint: 580,
       settings: {
         centerMode: true,
+        vertical: false,
         slidesToShow: 1,
         slidesToScroll: 1,
       },

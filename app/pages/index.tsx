@@ -2,24 +2,29 @@ import { BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
 import CountriesSection, { CountryCardProps } from "app/components/CountriesSection"
-import OurServicesSection from "app/components/OurServicesSection"
 import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
-import getFeatures from "app/public/features/queries/getFeatures"
 import getPartners from "app/public/partners/queries/getPartners"
-import { Carousel, Feature, Partner } from "@prisma/client"
+import { Carousel, City, Country, Partner, Project } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
-import { Box, Heading } from "theme-ui"
+import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
+import SlickSlider from "app/components/SlickSlider"
+import getProjects from "app/public/projects/queries/getProjects"
+import HTMLBox from "app/components/HTMLBox"
 
+type CountryWithCityAndCountry = Project & {
+  city: City
+  country: Country
+}
 type HomeProps = {
   countries: CountryCardProps[]
   carousels: Carousel[]
-  features: Feature[]
   partners: Partner[]
+  projects: CountryWithCityAndCountry[]
 }
 
-const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }) => {
+const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }) => {
   return (
     <>
       <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
@@ -44,7 +49,73 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
         </Box>
       </Box>
       <CountriesSection data={countries} />
-      <OurServicesSection data={features} />
+      <Box>
+        <Wrapper
+          sx={{
+            ".slick-slider ": {
+              maxWidth: 800,
+              mx: "auto",
+            },
+            ".slick-dots": {
+              top: 180,
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
+            },
+          }}
+        >
+          <Heading sx={{ marginY: 5, fontSize: 6 }}>مجمعات بارزة</Heading>
+          <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]}>
+            {projects.map(({ country, city, name, image, gallery, subTitle }) => (
+              <Box sx={{ direction: "rtl", overflow: "hidden" }}>
+                <Grid columns={2}>
+                  <Box>
+                    <Text
+                      sx={{
+                        fontSize: 4,
+                        marginBottom: 3,
+                        color: "heading",
+                        fontWeight: 700,
+                      }}
+                    >
+                      <span>{country.name}</span>, <span>{city.name}</span>
+                    </Text>
+                    {country.isTurkey ? (
+                      <Flex sx={{ alignItems: "center" }}>
+                        <Text>مناسب للجنسية التركية</Text>
+                        <Image
+                          sx={{ height: 80, mx: 2 }}
+                          src="Turkish_e-passport.jpg"
+                          alt="مناسب للجنسية التركية"
+                        />
+                      </Flex>
+                    ) : (
+                      <Box>مناسب للجنسية القطرية والمقيمين</Box>
+                    )}
+                  </Box>
+                  <Box>
+                    <Box sx={{}}>
+                      <Image
+                        sx={{ objectFit: "cover", maxWidth: 350, height: 200 }}
+                        src={image}
+                        alt={name}
+                      />
+                    </Box>
+                    <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                      {name}
+                    </Heading>
+                  </Box>
+                </Grid>
+                <Box>
+                  <Image src={gallery?.[0] || ""} alt={name} />
+                  <Box sx={{ pt: 3, textAlign: "center" }}>
+                    <HTMLBox html={subTitle} />
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </SlickSlider>
+        </Wrapper>
+      </Box>
       <OurPartnersSection data={partners} />
     </>
   )
@@ -52,12 +123,28 @@ const Home: BlitzPage<HomeProps> = ({ countries, carousels, features, partners }
 
 export async function getStaticProps(context) {
   const { countries } = await getCountries({})
-  const { features } = await getFeatures({})
   const { partners } = await getPartners({})
   const { carousels } = await getCarousels({})
+  const { projects } = await getProjects({
+    select: {
+      name: true,
+      subTitle: true,
+      image: true,
+      gallery: true,
+
+      country: {
+        select: {
+          name: true,
+          isTurkey: true,
+          id: true,
+        },
+      },
+      city: true,
+    },
+  })
 
   return {
-    props: { countries, features, partners, carousels }, // will be passed to the page component as props
+    props: { countries, partners, projects, carousels }, // will be passed to the page component as props
     revalidate: 60 * 2,
   }
 }

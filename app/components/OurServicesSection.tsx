@@ -73,7 +73,6 @@ export default function OurServicesSection(props: OurServicesSectionProps) {
   return (
     <Box>
       <Wrapper>
-        <Heading sx={{ marginY: 5, fontSize: 6 }}>خدماتنا</Heading>
         <Grid columns={[1, 2, 2, 3]} sx={{ justifyContent: "center", alignItems: "center" }}>
           {props.data.map((feat, index) => (
             <ServicesCard {...feat} key={index} />

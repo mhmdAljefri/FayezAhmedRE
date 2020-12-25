@@ -99,7 +99,7 @@ const norlizer = (num: number) => {
   let norlizedNumber: string = num.toString()
 
   if (num >= 1000000) norlizedNumber = num / 1000000 + "M"
-  else if (num >= 1000) norlizedNumber = num / 1000000 + "K"
+  else if (num >= 1000) norlizedNumber = num / 1000 + "K"
   return norlizedNumber
 }
 export const Tick: React.FC<ITickProps> = ({ tick, count }) => (

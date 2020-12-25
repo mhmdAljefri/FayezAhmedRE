@@ -65,7 +65,6 @@ const Header = ({ sx }: HeaderProps) => {
         </Link>
         <Flex sx={{ alignItems: "center" }}>
           <>
-            {countryId && <Search />}
             {hasProjects && (
               <Box>
                 <PriceType />

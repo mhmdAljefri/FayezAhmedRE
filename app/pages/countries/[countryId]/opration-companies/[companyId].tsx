@@ -9,6 +9,7 @@ import {
   ContructionCompaniesDetails,
   GalleryView,
 } from "app/layouts/ProjectDetailsLayout"
+import HTMLBox from "app/components/HTMLBox"
 
 const OprationCompanyPage: BlitzPage = () => {
   const companyId = useParam("companyId", "number")
@@ -22,7 +23,7 @@ const OprationCompanyPage: BlitzPage = () => {
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{oprationCompanyPage.title}</Heading>
-          <Box dangerouslySetInnerHTML={{ __html: oprationCompanyPage.description }} />
+          <HTMLBox html={oprationCompanyPage.description} />
         </Wrapper>
       </Box>
 

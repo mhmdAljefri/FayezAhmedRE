@@ -8,6 +8,7 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getOprationCompanyPages from "app/public/oprationCompanyPages/queries/getOprationCompanyPages"
 import { OprationCompanyPage } from "@prisma/client"
+import HTMLBox from "app/components/HTMLBox"
 
 type CompaniesCardProps = Pick<OprationCompanyPage, "id" | "title" | "image" | "description"> & {
   prefixPath?: string
@@ -74,7 +75,7 @@ export function CompaniesCard({
         </Link>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{title}</Heading>
-          <Text dangerouslySetInnerHTML={{ __html: description }} />
+          <HTMLBox html={description} />
         </Box>
       </Box>
     </Fade>

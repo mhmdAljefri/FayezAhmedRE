@@ -78,18 +78,7 @@ export default function Contact() {
                 getLabel={(t) => t.name}
                 getValue={(t) => t.id}
               />
-              <LabeledMenuField
-                label="الميزانية (اختياري)"
-                name="budget"
-                options={[
-                  { id: "1 مليون", name: "مليون" },
-                  { id: "2 مليون", name: "2 مليون" },
-                  { id: "4 مليون", name: "4 مليون" },
-                  { id: "اكثر من 4 مليون", name: "اكثر من 4 مليون" },
-                ]}
-                getLabel={(t) => t.name}
-                getValue={(t) => t.id}
-              />
+              <LabeledTextField label="الميزانية (اختياري)" name="budget" />
             </Grid>
             <SubmitButton fetching={fetching} />
           </Grid>

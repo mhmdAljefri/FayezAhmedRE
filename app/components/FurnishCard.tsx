@@ -18,17 +18,21 @@ export default function FurnishCard(furnish: furnishCardProps) {
     >
       <Link passHref href={`${asPath}/${furnish.name}`}>
         <ThemeLink sx={{ textDecoration: "none" }}>
-          <Box sx={{ height: 400 }}>
-            <Image src={furnish.image} sx={{ objectFit: "cover" }} alt={furnish.name} />
+          <Box sx={{ height: 400, overflow: "hidden" }}>
+            <Image
+              src={furnish.image}
+              sx={{ width: "100%", objectFit: "cover" }}
+              alt={furnish.name}
+            />
           </Box>
           <Text
             sx={{
-              paddingY: 5,
+              paddingY: 4,
               paddingX: 3,
               backgroundColor: "primary",
               color: "white",
               fontWeight: 700,
-              fontSize: 5,
+              fontSize: [3, 4],
             }}
           >
             {furnish.name}

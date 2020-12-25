@@ -5,6 +5,7 @@ import { BlitzPage, useParam } from "blitz"
 import { Box, Flex, Heading, Image, Text } from "theme-ui"
 import { Furnish } from "@prisma/client"
 import getFurnish from "app/public/furnishes/queries/getFurnish"
+import HTMLBox from "app/components/HTMLBox"
 
 type furnishesProps = {
   furnish: Furnish
@@ -47,7 +48,7 @@ const Search: BlitzPage<furnishesProps> = ({ furnish }) => {
               </Text>
               {furnish.price}
             </Text>
-            <Text sx={{ fontSize: 3 }} dangerouslySetInnerHTML={{ __html: furnish.description }} />
+            <HTMLBox sx={{ fontSize: 3 }} html={furnish.description} />
           </Box>
         </Flex>
       </Wrapper>

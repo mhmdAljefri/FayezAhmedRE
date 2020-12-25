@@ -133,52 +133,43 @@ export function ProjectCard({
   const price = selected?.[priceType]
   const projectPath = `/countries/${countryId}/projects/${id}`
   return (
-    <Fade bottom>
-      <Box
-        sx={{
-          width: ["90vw", null, 370],
-          backgroundColor: "white",
-          marginX: "auto",
-          boxShadow: "default",
-          marginBottom: 2,
-        }}
-      >
-        <Box sx={{}}>
-          <Link passHref href={projectPath}>
-            <a>
-              <Image
-                sx={{ height: 240, width: "100%", objectFit: "cover" }}
-                src={image as string}
-              />
-            </a>
-          </Link>
-        </Box>
-        <Box sx={{ paddingY: 3, paddingX: 3 }}>
-          <Heading>{name}</Heading>
-          <Text>{locationText}</Text>
-          <Link passHref href={projectPath}>
-            <Text
-              as="a"
-              sx={{ textDecoration: "none", color: "text", ":hover": { color: "primary" } }}
-            >
-              {subTitle}
-            </Text>
-          </Link>
-        </Box>
-        <Flex sx={{ paddingX: 2, justifyContent: "space-between" }}>
-          <ProjectCardIconsText text={statusText || ""} icon={ic_format_paint} />
-          {roomWithPrices[0]["room"] && (
-            <SelectRoom
-              selected={selected}
-              roomWithPrices={roomWithPrices}
-              onChange={setSelected}
-            />
-          )}
-          <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
-          <ProjectCardIconsText text={`تبدا من ${price}`} prefix={priceTypeSign} />
-        </Flex>
+    <Box
+      sx={{
+        width: ["100%", null, 370],
+        backgroundColor: "white",
+        marginX: "auto",
+        boxShadow: "default",
+        marginBottom: 2,
+      }}
+    >
+      <Box sx={{}}>
+        <Link passHref href={projectPath}>
+          <a>
+            <Image sx={{ height: 240, width: "100%", objectFit: "cover" }} src={image as string} />
+          </a>
+        </Link>
       </Box>
-    </Fade>
+      <Box sx={{ paddingY: 3, paddingX: 3 }}>
+        <Heading>{name}</Heading>
+        <Text>{locationText}</Text>
+        <Link passHref href={projectPath}>
+          <Text
+            as="a"
+            sx={{ textDecoration: "none", color: "text", ":hover": { color: "primary" } }}
+          >
+            {subTitle}
+          </Text>
+        </Link>
+      </Box>
+      <Flex sx={{ paddingX: 2, justifyContent: "space-between" }}>
+        <ProjectCardIconsText text={statusText || ""} icon={ic_format_paint} />
+        {roomWithPrices[0]["room"] && (
+          <SelectRoom selected={selected} roomWithPrices={roomWithPrices} onChange={setSelected} />
+        )}
+        <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
+        <ProjectCardIconsText text={`تبدا من ${price}`} prefix={priceTypeSign} />
+      </Flex>
+    </Box>
   )
 }
 

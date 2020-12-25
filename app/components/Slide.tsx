@@ -1,28 +1,32 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Button, Flex, Heading, Text } from "theme-ui"
-import { Animated } from "react-animated-css"
 
+const defaultProps = {
+  opacity: 0.5,
+}
 export type SlideProps = {
   image: string
   title?: string | null
   text?: string | null
   path?: string
+  opacity?: number
 }
 type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
 }
 
-const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
+const Slide = ({ title, opacity, text, image, path, onlyImages }: SlideTypeProps) => {
   return (
     <Flex
       sx={{
         alignItems: "center",
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
-        backgroundPosition: "bottom",
+        backgroundPosition: "center",
         backgroundColor: "#eee",
         height: "100%",
+        maxWidth: "100%",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
         animation: `zoomIn 1s`,
@@ -30,7 +34,7 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
           content: '""',
           position: "absolute",
           backgroundColor: "#000",
-          opacity: 0.5,
+          opacity,
           top: 0,
           left: 0,
           right: 0,
@@ -62,4 +66,5 @@ const Slide = ({ title, text, image, path, onlyImages }: SlideTypeProps) => {
   )
 }
 
+Slide.defaultProps = defaultProps
 export default Slide

@@ -11,7 +11,7 @@ const NewOprationCompanyPagePage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Create New OprationCompanyPage</h1>
+      <h1>اضافة شركة عاملة</h1>
 
       <OprationCompanyPageForm
         initialValues={{}}
@@ -39,7 +39,7 @@ const NewOprationCompanyPagePage: BlitzPage = () => {
 }
 
 NewOprationCompanyPagePage.getLayout = (page) => (
-  <AdminLayout title={"Create New OprationCompanyPage"}>{page}</AdminLayout>
+  <AdminLayout title={"اضافة شركة عاملة"}>{page}</AdminLayout>
 )
 
 export default NewOprationCompanyPagePage

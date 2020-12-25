@@ -1,15 +1,28 @@
-import React from "react"
-import { BlitzPage } from "blitz"
+import React, { useEffect } from "react"
+import { BlitzPage, useMutation } from "blitz"
 import ProjectDetailsLayout from "app/layouts/ProjectDetailsLayout"
 import getProject from "app/public/projects/queries/getProject"
 import getProjects from "app/public/projects/queries/getProjects"
-import { Project } from "@prisma/client"
+import { City, Country, Project, PropertyType, RoomWithPrice } from "@prisma/client"
+import updateProject from "app/public/projects/mutations/updateProject"
 
 type ProjectProps = {
-  project: any
+  project: Project & {
+    city: City
+    country: Country
+    roomsWithPrices: RoomWithPrice[]
+    propertyType: PropertyType
+  }
 }
 
 const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
+  const [updateProjectMutation] = useMutation(updateProject)
+
+  useEffect(() => {
+    updateProjectMutation({ where: { id: project.id } })
+    return () => {}
+  }, [project.id, updateProjectMutation])
+
   return <ProjectDetailsLayout {...project} />
 }
 

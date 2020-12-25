@@ -9,8 +9,8 @@ import { buildingO } from "react-icons-kit/fa/buildingO"
 import { dollar } from "react-icons-kit/fa/dollar"
 import { minusSquare } from "react-icons-kit/fa/minusSquare"
 import { mapMarker } from "react-icons-kit/fa/mapMarker"
-import { close } from "react-icons-kit/fa/close"
 import { key } from "react-icons-kit/fa/key"
+import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
 import SlickSlider from "app/components/SlickSlider"
@@ -24,6 +24,7 @@ import { City, Project, PropertyType, RoomWithPrice } from "@prisma/client"
 import { format } from "date-fns"
 import { arSA } from "date-fns/locale"
 import Icon from "react-icons-kit"
+import HTMLBox from "app/components/HTMLBox"
 
 type ConstractingCardProps = {
   label: string
@@ -183,7 +184,7 @@ export function PaymentPlan({ installmentPlan }) {
               <Text sx={{ paddingY: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
                 خطة السداد
               </Text>
-              <Icon size={20} onClick={() => setOpen(false)} icon={close} />
+              <Icon size={20} onClick={() => setOpen(false)} icon={arrows_remove} />
             </Flex>
 
             {installmentPlan.map(({ instalment, milestone }, index) => (
@@ -343,7 +344,9 @@ export default function ProjectDetailsLayout({
               <Text sx={{ paddingY: 3, fontSize: 3 }}>حالة المشروع</Text>
             </Box>
           </Flex>
-          <Text sx={{ marginY: 5 }} dangerouslySetInnerHTML={{ __html: details }} />
+          <Box>
+            <HTMLBox html={details} />
+          </Box>
 
           <PaymentPlan installmentPlan={installmentPlan} />
           <Box

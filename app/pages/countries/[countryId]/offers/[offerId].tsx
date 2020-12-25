@@ -8,6 +8,7 @@ import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
 import { ConstractiongVideo, GalleryView, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
 import { Offer, Project } from "@prisma/client"
+import HTMLBox from "app/components/HTMLBox"
 
 const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
   return (
@@ -19,7 +20,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{offer.name}</Heading>
-          <Box dangerouslySetInnerHTML={{ __html: offer.details }} />
+          <HTMLBox html={offer.details} />
         </Wrapper>
       </Box>
       <Wrapper>
