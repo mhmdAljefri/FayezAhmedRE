@@ -42,6 +42,8 @@ type SlickSliderProps = {
   children: ReactNode[]
   prevArrow?: ReactElement
   nextArrow?: ReactElement
+  variableWidth?: boolean
+  adaptiveHeight?: boolean
   customPaging?: (index: number) => any
 } & typeof defaultProps
 
@@ -49,10 +51,23 @@ export default function SlickSlider({
   children,
   prevArrow,
   nextArrow,
+  variableWidth,
   ...props
 }: SlickSliderProps) {
+  const responsive = variableWidth
+    ? props.responsive.map(({ breakpoint, settings }) => ({
+        breakpoint,
+        settings: { ...settings, variableWidth },
+      }))
+    : props.responsive
   return (
-    <ReactSlick prevArrow={prevArrow} nextArrow={nextArrow} {...props}>
+    <ReactSlick
+      {...props}
+      variableWidth={variableWidth}
+      responsive={responsive}
+      prevArrow={prevArrow}
+      nextArrow={nextArrow}
+    >
       {children}
     </ReactSlick>
   )

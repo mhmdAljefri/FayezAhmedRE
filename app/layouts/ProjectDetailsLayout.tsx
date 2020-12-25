@@ -131,27 +131,32 @@ export function GalleryView({ gallery }) {
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5 }}>
+      <Wrapper sx={{ marginTop: -5, direction: "ltr" }}>
         <SlickSlider
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
+          slidesToShow={1}
+          slidesToScroll={1}
+          responsive={[]}
+          variableWidth
+          centerMode={false}
           dots={false}
           sx={{ justifyContent: "center", overflow: "auto" }}
         >
           {gallery.map((item, index) => (
-            <Image
-              key={item + "_" + index}
-              sx={{
-                width: ["100%", "30%"],
-                maxWidth: 350,
-                borderRadius: 15,
-                margin: 3,
-                boxShadow: "default",
-                height: [300, "30vw"],
-                maxHeight: ["auto", 350],
-              }}
-              src={item}
-            />
+            <Box sx={{ height: [200, 300] }}>
+              <Image
+                key={item + "_" + index}
+                sx={{
+                  borderRadius: 15,
+                  margin: 3,
+                  width: "auto",
+                  maxHeight: [200, 300],
+                  boxShadow: "default",
+                }}
+                src={item}
+              />
+            </Box>
           ))}
         </SlickSlider>
       </Wrapper>
@@ -178,7 +183,7 @@ export function PaymentPlan({ installmentPlan }) {
               <Text sx={{ paddingY: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
                 خطة السداد
               </Text>
-              <Icon onClick={() => setOpen(false)} icon={close} />
+              <Icon size={20} onClick={() => setOpen(false)} icon={close} />
             </Flex>
 
             {installmentPlan.map(({ instalment, milestone }, index) => (
@@ -378,8 +383,12 @@ export default function ProjectDetailsLayout({
           <Wrapper sx={{ marginY: 6 }}>
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
             <SlickSlider
-              slidesToShow={3}
-              slidesToScroll={3}
+              slidesToShow={1}
+              slidesToScroll={1}
+              responsive={[]}
+              variableWidth
+              centerMode={false}
+              dots={false}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
               {floorplan.map((item, index) => (
@@ -390,12 +399,11 @@ export default function ProjectDetailsLayout({
                       borderColor: "primary",
                       objectFit: "cover",
                       marginX: 2,
-                      width: ["90vw", 350],
                       borderWidth: 2,
                       borderStyle: "solid",
                       borderRadius: 15,
                       boxShadow: "default",
-                      height: [300, 350],
+                      height: [250, 300, 350],
                     }}
                     src={item}
                   />
@@ -418,29 +426,39 @@ export default function ProjectDetailsLayout({
                 sx={{ justifyContent: "center", marginY: 3 }}
               >
                 {features.map((feat) => (
-                  <Text
-                    sx={{
-                      margin: 2,
-                      backgroundColor: "primary",
-                      textAlign: "center",
-                      fontWeight: 700,
-                      paddingX: 3,
-                      paddingY: 5,
-                      fontSize: [3, 4, 5],
-                      color: "white",
-                      boxShadow: "default",
-                      width: 250,
-                      borderRadius: "default",
-                    }}
-                  >
-                    {feat}
-                  </Text>
+                  <div>
+                    <Flex
+                      sx={{
+                        paddingX: 3,
+                        margin: 2,
+                        backgroundColor: "primary",
+                        height: 300,
+                        color: "white",
+                        boxShadow: "default",
+                        borderRadius: "default",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        textAlign: "center",
+                      }}
+                    >
+                      <Text
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: [3, 4, 5],
+                        }}
+                      >
+                        {feat}
+                      </Text>
+                    </Flex>
+                  </div>
                 ))}
               </SlickSlider>
               <ThemeLink
                 download={name}
                 target="_blank"
                 rel="noopener "
+                as={brochure ? "a" : "span"}
                 href={brochure || ""}
                 sx={{
                   variant: "links.outline",

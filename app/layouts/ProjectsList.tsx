@@ -11,7 +11,7 @@ import { building } from "react-icons-kit/fa/building"
 import { money } from "react-icons-kit/fa/money"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
 import { ic_format_paint } from "react-icons-kit/md/ic_format_paint"
-import { Project, RoomWithPrice } from "@prisma/client"
+import { City, Country, Project, RoomWithPrice } from "@prisma/client"
 import usePriceType from "app/hooks/usePriceType"
 import useOnClickout from "app/hooks/useOnClickout"
 import FetchMoreButton from "app/components/FetchMoreButton"
@@ -185,13 +185,13 @@ export function ProjectCard({
 type ProjectListTypes = {
   title: string
   subTitle: string
+  country: Country & { cities: City[] }
 }
 
-export default function ProjectsList({ title, subTitle }: ProjectListTypes) {
+export default function ProjectsList({ country, title, subTitle }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const [country] = useQuery(getCountry, { where: { id: countryId } }, { suspense: false })
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
 
   const [
