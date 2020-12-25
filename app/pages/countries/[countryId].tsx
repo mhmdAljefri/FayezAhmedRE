@@ -396,7 +396,7 @@ export default function CountryPage({
                     <a>
                       <Image
                         sx={{ minWidth: "100%", objectFit: "cover", height: [100, 150] }}
-                        src={project.image}
+                        src={project.image || undefined}
                       />
                     </a>
                   </Link>
