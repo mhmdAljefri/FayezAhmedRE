@@ -52,6 +52,7 @@ export default async function updateProject(
     where,
     data: {
       ...data,
+      isHousingComplex: (data.isHousingComplex as any) === "true",
       country: {
         connect: {
           id: countryId,

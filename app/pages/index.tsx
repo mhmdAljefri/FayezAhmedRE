@@ -63,7 +63,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
             },
           }}
         >
-          <Heading sx={{ marginY: 5, fontSize: [4, 6] }}>مجمعات بارزة</Heading>
+          <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
           <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]}>
             {projects.map(({ country, city, name, image, gallery, subTitle }) => (
               <Box sx={{ direction: "rtl", overflow: "hidden" }}>

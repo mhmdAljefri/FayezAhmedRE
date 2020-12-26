@@ -21,6 +21,7 @@ export default async function createProject(
   const project = await db.project.create({
     data: {
       ...data,
+      isHousingComplex: (data.isHousingComplex as any) === "true",
       propertyType: {
         connect: {
           id: parseInt(propertyTypeId),
