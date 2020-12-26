@@ -2,8 +2,10 @@ import React, { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import arrayMutators from "final-form-arrays"
 
-import { Button, SxStyleProp } from "theme-ui"
+import { Box, Button, SxStyleProp } from "theme-ui"
 import * as z from "zod"
+import { useRouter } from "blitz"
+import { BounceLoader } from "react-spinners"
 export { FORM_ERROR } from "final-form"
 
 type FormProps<S extends z.ZodType<any, any>> = {
@@ -31,6 +33,9 @@ export function Form<S extends z.ZodType<any, any>>({
   buttonProps,
   ...props
 }: FormProps<S>) {
+  const { pathname } = useRouter()
+  const isAdmin = pathname.startsWith("/admin")
+
   return (
     <FinalForm
       initialValues={initialValues}
@@ -57,6 +62,32 @@ export function Form<S extends z.ZodType<any, any>>({
             <Button {...buttonProps} type="submit" disabled={submitting}>
               {submitText}
             </Button>
+          )}
+          {submitting && isAdmin && (
+            <Box
+              sx={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                ":before": {
+                  backgroundColor: "primary",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: 0.4,
+                  bottom: 0,
+                  content: '""',
+                  position: "absolute",
+                },
+              }}
+            >
+              <BounceLoader />
+            </Box>
           )}
           <style global jsx>{`
             .form > * + * {

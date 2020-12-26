@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -51,7 +51,6 @@ model Project {
   propertyTypeId            Int?
   isHousingComplex          Boolean         @default(false)
   housingComplexText        String?
-  housingComplexImage       String?
   name                      String
   views                     Int             @default(0)
   subTitle                  String

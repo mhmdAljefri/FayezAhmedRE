@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from "react"
 import ReactSlick from "react-slick"
 
-const defaultProps = {
+const noSizeDefaultProps = {
   rtl: true,
   slidesToShow: 4,
   slidesToScroll: 4,
@@ -11,6 +11,22 @@ const defaultProps = {
   initialSlide: 0,
   infinite: false,
   className: "slick-with-padding",
+}
+const defaultProps: typeof noSizeDefaultProps & {
+  responsive: {
+    breakpoint: number
+    settings: {
+      centerMode?: boolean
+      vertical?: boolean
+      infinite?: boolean
+      initialSlide?: number
+      slidesToShow?: number
+      slidesToScroll?: number
+      rtl?: boolean
+    }
+  }[]
+} = {
+  ...noSizeDefaultProps,
   responsive: [
     {
       breakpoint: 1200,
@@ -18,6 +34,7 @@ const defaultProps = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
+        rtl: true,
       },
     },
     {
@@ -26,6 +43,7 @@ const defaultProps = {
         slidesToShow: 2,
         slidesToScroll: 2,
         initialSlide: 2,
+        rtl: true,
       },
     },
     {
@@ -35,6 +53,7 @@ const defaultProps = {
         vertical: false,
         slidesToShow: 1,
         slidesToScroll: 1,
+        rtl: true,
       },
     },
   ],

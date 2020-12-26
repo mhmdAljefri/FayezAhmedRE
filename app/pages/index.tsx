@@ -52,10 +52,6 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
       <Box>
         <Wrapper
           sx={{
-            ".slick-slider ": {
-              maxWidth: 800,
-              mx: "auto",
-            },
             ".slick-dots": {
               top: 180,
               alignItems: "flex-start",
@@ -64,55 +60,64 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
           }}
         >
           <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
-          <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]}>
-            {projects.map(({ country, city, name, image, gallery, subTitle }) => (
-              <Box sx={{ direction: "rtl", overflow: "hidden" }}>
-                <Grid columns={2}>
-                  <Box>
-                    <Text
-                      sx={{
-                        fontSize: 4,
-                        marginBottom: 3,
-                        color: "heading",
-                        fontWeight: 700,
-                      }}
-                    >
-                      <span>{country.name}</span>, <span>{city.name}</span>
-                    </Text>
-                    {country.isTurkey ? (
+          <SlickSlider autoplay slidesToShow={1} slidesToScroll={1} responsive={[]}>
+            {projects.map(
+              ({
+                country,
+                city,
+                name,
+                housingComplexText,
+                housingComplexImage,
+                image,
+                gallery,
+                subTitle,
+              }) => (
+                <Box sx={{ direction: "rtl", overflow: "hidden" }}>
+                  <Grid columns={2}>
+                    <Box>
+                      <Text
+                        sx={{
+                          fontSize: 4,
+                          marginBottom: 3,
+                          color: "heading",
+                          fontWeight: 700,
+                        }}
+                      >
+                        <span>{country.name}</span>, <span>{city.name}</span>
+                      </Text>
                       <Flex sx={{ alignItems: "center" }}>
-                        <Text>مناسب للجنسية التركية</Text>
-                        <Image
-                          sx={{ height: 80, mx: 2 }}
-                          src="Turkish_e-passport.jpg"
-                          alt="مناسب للجنسية التركية"
-                        />
+                        <Text>{housingComplexText}</Text>
+                        {housingComplexImage && (
+                          <Image
+                            sx={{ height: 80, mx: 2 }}
+                            src={housingComplexImage}
+                            alt={housingComplexText || ""}
+                          />
+                        )}
                       </Flex>
-                    ) : (
-                      <Box>مناسب للجنسية القطرية والمقيمين</Box>
-                    )}
-                  </Box>
-                  <Box>
-                    <Box sx={{}}>
-                      <Image
-                        sx={{ objectFit: "cover", maxWidth: 350, height: [200, 300] }}
-                        src={image}
-                        alt={name}
-                      />
                     </Box>
-                    <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
-                      {name}
-                    </Heading>
-                  </Box>
-                </Grid>
-                <Box>
-                  <Image src={gallery?.[0] || ""} alt={name} />
-                  <Box sx={{ pt: 3, textAlign: "center" }}>
-                    <HTMLBox html={subTitle} />
+                    <Box>
+                      <Box sx={{}}>
+                        <Image
+                          sx={{ objectFit: "cover", maxWidth: 350, height: [200, 300] }}
+                          src={image}
+                          alt={name}
+                        />
+                      </Box>
+                      <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                        {name}
+                      </Heading>
+                    </Box>
+                  </Grid>
+                  <Box>
+                    <Image src={gallery?.[0] || ""} alt={name} />
+                    <Box sx={{ pt: 3, textAlign: "center" }}>
+                      <HTMLBox html={subTitle} />
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            ))}
+              )
+            )}
           </SlickSlider>
         </Wrapper>
       </Box>
@@ -131,6 +136,8 @@ export async function getStaticProps(context) {
       subTitle: true,
       image: true,
       gallery: true,
+      housingComplexText: true,
+      housingComplexImage: true,
 
       country: {
         select: {

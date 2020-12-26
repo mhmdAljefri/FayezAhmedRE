@@ -61,7 +61,7 @@ function ShowMoreButton({ sx, href }: showMoreButton) {
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButton & { heading: string }) {
   return (
     <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
-      <Heading sx={{ fontSize: 6, padding: 0 }}>{heading}</Heading>
+      <Heading sx={{ fontSize: [5, 6], padding: 0 }}>{heading}</Heading>
 
       <ShowMoreButton href={href} sx={sx} />
     </Flex>
@@ -178,6 +178,7 @@ export default function CountryPage({
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 infinite: false,
+                rtl: true,
               },
             },
             {
@@ -185,16 +186,18 @@ export default function CountryPage({
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 1,
-                infinite: true,
+                infinite: false,
+                rtl: true,
               },
             },
             {
               breakpoint: 900,
               settings: {
-                centerMode: true,
+                centerMode: false,
                 vertical: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
+                rtl: true,
               },
             },
           ]}
@@ -287,6 +290,7 @@ export default function CountryPage({
             {
               breakpoint: 840,
               settings: {
+                infinite: false,
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 initialSlide: 1,

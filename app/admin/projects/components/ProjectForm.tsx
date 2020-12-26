@@ -148,6 +148,13 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             </>
           )}
         />
+        <LabeledTextField
+          name="housingComplexText"
+          placeholder="مناسب للجنسية التركية"
+          label="نص خاص بالمجمعات البارزة"
+        />
+
+        <MediaWidthTextField name="housingComplexImage" label="صورة خاصة بالمجمعات البارزة" />
 
         <Field
           name="complationDate"
