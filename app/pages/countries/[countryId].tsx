@@ -169,13 +169,15 @@ export default function CountryPage({
         <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
         <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
         <SlickSlider
+          infinite={false}
+          slidesToShow={3}
           responsive={[
             {
               breakpoint: 1200,
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
+                infinite: false,
               },
             },
             {

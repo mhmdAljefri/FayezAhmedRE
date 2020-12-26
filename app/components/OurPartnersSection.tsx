@@ -23,7 +23,7 @@ export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
     <Box sx={{ paddingY: 5, marginTop: 6, backgroundColor: "light" }}>
       <Wrapper>
-        <Heading sx={{ marginBottom: 5, fontSize: 6 }}>شركائنا</Heading>
+        <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
         <Grid columns={[2, 2, 4]} sx={{ justifyContent: "center", alignItems: "center" }}>
           {props.data.map((partner, index) => (
             <PartnersCard {...partner} key={index} />

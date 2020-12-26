@@ -9,6 +9,7 @@ const defaultProps = {
   dots: true,
   autoplay: false,
   initialSlide: 0,
+  infinite: false,
   className: "slick-with-padding",
   responsive: [
     {
