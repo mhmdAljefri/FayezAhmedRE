@@ -132,15 +132,20 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
         <Field
           name="isHousingComplex"
           render={({ input }) => (
-            <Flex>
-              <Label>
-                <Radio {...input} name="dark-mode" value="true" />
-                فيديو عبر اليوتويب
-              </Label>
-              <Label>
-                <Radio {...input} name="dark-mode" value="false" />
-              </Label>
-            </Flex>
+            <>
+              <Label>مجمع بارز</Label>
+
+              <Flex>
+                <Label>
+                  <Radio {...input} name="dark-mode" value="true" />
+                  نعم
+                </Label>
+                <Label>
+                  <Radio {...input} name="dark-mode" value="false" />
+                  لا
+                </Label>
+              </Flex>
+            </>
           )}
         />
 

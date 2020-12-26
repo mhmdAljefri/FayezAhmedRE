@@ -141,6 +141,9 @@ export async function getStaticProps(context) {
       },
       city: true,
     },
+    where: {
+      isHousingComplex: true,
+    },
   })
 
   return {
