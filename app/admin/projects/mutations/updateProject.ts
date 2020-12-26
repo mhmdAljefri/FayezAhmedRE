@@ -52,7 +52,7 @@ export default async function updateProject(
     where,
     data: {
       ...data,
-      isHousingComplex: (data.isHousingComplex as any) === "true",
+      isHousingComplex: `${data.isHousingComplex}` === "true",
       country: {
         connect: {
           id: countryId,
