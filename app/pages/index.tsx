@@ -95,7 +95,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                   <Box>
                     <Box sx={{}}>
                       <Image
-                        sx={{ objectFit: "cover", maxWidth: 350, height: 200 }}
+                        sx={{ objectFit: "cover", maxWidth: 350, height: [200, 300] }}
                         src={image}
                         alt={name}
                       />

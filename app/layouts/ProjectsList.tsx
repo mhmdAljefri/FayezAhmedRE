@@ -76,7 +76,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
         variant="link"
         onClick={() => setOpen(true)}
       >
-        <ProjectCardIconsText text={selected.room} icon={building} />
+        <ProjectCardIconsText text={selected?.room} icon={building} />
         <Box sx={{ marginX: 1, marginTop: 1 }}>
           <Icon size={12} icon={chevronDown} />
         </Box>
@@ -106,7 +106,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
                 setOpen(false)
               }}
             >
-              {roomWithPrice.room}
+              {roomWithPrice?.room}
             </Box>
           ))}
         </Box>
