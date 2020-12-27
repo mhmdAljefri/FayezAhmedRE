@@ -129,13 +129,13 @@ export default function CountryPage({
       >
         <HomeSlider
           data={country.carouselImages.map((image) => ({ image, opacity: 0 }))}
-          slideStyle={{}}
+          slideStyle={{ maxHeight: [300, "100%"] }}
         />
       </Wrapper>
       <Wrapper
         sx={{
           paddingX: [2, null, null, 6],
-          marginTop: -5,
+          marginTop: [-3, -5],
           position: "relative",
           zIndex: 1,
           marginBottom: 5,

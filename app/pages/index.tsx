@@ -1,4 +1,4 @@
-import { BlitzPage } from "blitz"
+import { BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
 import CountriesSection, { CountryCardProps } from "app/components/CountriesSection"
@@ -39,9 +39,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
           }}
         >
           <Wrapper>
-            <Heading sx={{ fontSize: 6, color: "primary", textShadow: "1px 2px 52px #000" }}>
-              الارتقاء بالحياة
-            </Heading>
+            <Heading sx={{ fontSize: [5, 6], color: "primary" }}>الارتقاء بالحياة</Heading>
             <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>
               يتلاقى مع اهتمامنا
             </Heading>
@@ -60,9 +58,10 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
           }}
         >
           <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
-          <SlickSlider autoplay slidesToShow={1} slidesToScroll={1} responsive={[]}>
+          <SlickSlider autoplay infinite slidesToShow={1} slidesToScroll={1} responsive={[]}>
             {projects.map(
               ({
+                id,
                 country,
                 city,
                 name,
@@ -89,7 +88,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                         <Text>{housingComplexText}</Text>
                         {housingComplexImage && (
                           <Image
-                            sx={{ height: 80, mx: 2 }}
+                            sx={{ width: [50, 70], mx: 2 }}
                             src={housingComplexImage}
                             alt={housingComplexText || ""}
                           />
@@ -97,20 +96,26 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                       </Flex>
                     </Box>
                     <Box>
-                      <Box sx={{}}>
-                        <Image
-                          sx={{ objectFit: "cover", maxWidth: 350, height: [200, 300] }}
-                          src={image}
-                          alt={name}
-                        />
-                      </Box>
-                      <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
-                        {name}
-                      </Heading>
+                      <Link href={`/countries/${country.id}/projects/${id}`}>
+                        <Box
+                          sx={{
+                            cursor: "pointer",
+                            maxWidth: 350,
+                            marginRight: "auto",
+                          }}
+                        >
+                          <Image sx={{ objectFit: "cover" }} src={image} alt={name} />
+                          <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                            {name}
+                          </Heading>
+                        </Box>
+                      </Link>
                     </Box>
                   </Grid>
-                  <Box>
-                    <Image src={gallery?.[0] || ""} alt={name} />
+                  <Box sx={{ cursor: "pointer", textAlign: "center", maxHeight: 400, mx: "auto" }}>
+                    <Link href={`/countries/${country.id}/projects/${id}`}>
+                      <Image src={gallery?.[0] || ""} alt={name} />
+                    </Link>
                     <Box sx={{ pt: 3, textAlign: "center" }}>
                       <HTMLBox html={subTitle} />
                     </Box>
@@ -132,6 +137,7 @@ export async function getStaticProps(context) {
   const { carousels } = await getCarousels({})
   const { projects } = await getProjects({
     select: {
+      id: true,
       name: true,
       subTitle: true,
       image: true,

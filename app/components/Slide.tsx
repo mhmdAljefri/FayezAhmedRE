@@ -27,6 +27,7 @@ const Slide = ({ title, opacity, text, image, path, onlyImages }: SlideTypeProps
         backgroundColor: "#eee",
         height: "100%",
         maxWidth: "100%",
+        maxHeight: "inherit",
         filter: "drop-shadow(0 0 60px black)",
         position: "relative",
         animation: `zoomIn 1s`,

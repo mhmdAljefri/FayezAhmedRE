@@ -74,7 +74,7 @@ export default function Filter({
                 <MenuField emptyOptionText="غرف النوم" options={[...rooms]} name="room" />
               </Box>
             ) : (
-              <Box sx={{ marginTop: [1, null, -4], marginBottom: 4 }}>
+              <Box sx={{ marginTop: [1, null, -2], marginBottom: 4 }}>
                 <Label sx={{ color: "white" }}>غرف النوم</Label>
                 <Field
                   name="room"
@@ -90,8 +90,8 @@ export default function Filter({
                 />
               </Box>
             )}
-            <Box sx={{ marginTop: [1, null, -4], marginBottom: 5 }}>
-              <Label sx={{ color: "white" }}>السعر</Label>
+            <Box sx={{ marginTop: [1, null, -2], marginBottom: 5 }}>
+              <Label sx={{ color: "white" }}>السعر (بالدولار)</Label>
               <Field
                 name="price"
                 sx={{ backgroundColor: "white" }}

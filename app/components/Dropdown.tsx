@@ -36,7 +36,7 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
           visibility: open ? "visible" : "hidden",
           borderRadius: 15,
           boxShadow: "default",
-          zIndex: 100,
+          zIndex: 1111,
         }}
       >
         {options.map((option, index) => (

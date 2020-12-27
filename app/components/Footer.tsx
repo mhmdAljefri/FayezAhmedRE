@@ -67,12 +67,12 @@ export default function Footer() {
           <Heading sx={{ paddingBottom: 2, color: "white" }}>حمل تطبيقنا</Heading>
           <Flex sx={{ marginBottom: 4 }}>
             <ThemeLink>
-              <Box sx={{ m: 1, width: [150, null, 250] }}>
+              <Box sx={{ m: 1, width: ["50%", 150, 250] }}>
                 <Image src="/google_play_badge.png" alt="apple" />
               </Box>
             </ThemeLink>
             <ThemeLink>
-              <Box sx={{ m: 1, width: [150, null, 250] }}>
+              <Box sx={{ m: 1, width: ["50%", 150, 250] }}>
                 <Image src="/appstore_badge.png" alt="apple" />
               </Box>
             </ThemeLink>

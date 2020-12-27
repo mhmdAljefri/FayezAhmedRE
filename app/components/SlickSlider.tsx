@@ -7,6 +7,7 @@ const noSizeDefaultProps = {
   slidesToScroll: 4,
   centerMode: false,
   dots: true,
+  pauseOnHover: true,
   autoplay: false,
   initialSlide: 0,
   infinite: false,

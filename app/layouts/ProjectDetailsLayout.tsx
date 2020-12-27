@@ -132,7 +132,7 @@ export function GalleryView({ gallery }) {
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5, direction: "ltr" }}>
+      <Wrapper sx={{ marginTop: -5 }}>
         <SlickSlider
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
@@ -140,6 +140,7 @@ export function GalleryView({ gallery }) {
           slidesToScroll={1}
           responsive={[]}
           variableWidth
+          rtl
           centerMode={false}
           dots={false}
           sx={{ justifyContent: "center", overflow: "auto" }}
@@ -391,6 +392,7 @@ export default function ProjectDetailsLayout({
               responsive={[]}
               variableWidth
               centerMode={false}
+              rtl
               dots={false}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
