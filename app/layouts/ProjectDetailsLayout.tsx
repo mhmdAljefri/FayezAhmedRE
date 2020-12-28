@@ -107,7 +107,7 @@ export function ConstractiongVideo({
 }
 
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props
+  const { onClick } = props
   return (
     <Box sx={{ top: -100, left: 10, position: "absolute" }} onClick={onClick}>
       <ArrowIcon />
@@ -116,7 +116,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props
+  const { onClick } = props
   return (
     <Box sx={{ top: -100, left: 60, position: "absolute" }} onClick={onClick}>
       <ArrowIcon sx={{ transform: "rotate(180deg)" }} />
@@ -137,10 +137,9 @@ export function GalleryView({ gallery }) {
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
           slidesToShow={1}
-          slidesToScroll={1}
+          slidesToScroll={-1}
           responsive={[]}
           variableWidth
-          rtl
           centerMode={false}
           dots={false}
           sx={{ justifyContent: "center", overflow: "auto" }}

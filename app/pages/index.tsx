@@ -100,15 +100,15 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                         <Box
                           sx={{
                             cursor: "pointer",
-                            maxWidth: 350,
+                            maxHeight: 350,
                             marginRight: "auto",
                           }}
                         >
                           <Image sx={{ objectFit: "cover" }} src={image} alt={name} />
-                          <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
-                            {name}
-                          </Heading>
                         </Box>
+                        <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                          {name}
+                        </Heading>
                       </Link>
                     </Box>
                   </Grid>
