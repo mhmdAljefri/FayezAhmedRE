@@ -26,7 +26,7 @@ type HomeProps = {
 
 const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }) => {
   return (
-    <>
+    <main>
       <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
         <HomeSlider slideStyle={{ height: "100vh" }} onlyImages data={carousels} />
         <Box
@@ -106,10 +106,10 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                         >
                           <Image sx={{ objectFit: "cover" }} src={image} alt={name} />
                         </Box>
-                        <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
-                          {name}
-                        </Heading>
                       </Link>
+                      <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                        {name}
+                      </Heading>
                     </Box>
                   </Grid>
                   <Box sx={{ cursor: "pointer", textAlign: "center", maxHeight: 400, mx: "auto" }}>
@@ -127,7 +127,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
         </Wrapper>
       </Box>
       <OurPartnersSection data={partners} />
-    </>
+    </main>
   )
 }
 
