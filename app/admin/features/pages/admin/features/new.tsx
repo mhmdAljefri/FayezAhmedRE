@@ -32,7 +32,7 @@ const NewFeaturePage: BlitzPage = () => {
       />
 
       <p>
-        <Link href="/features">
+        <Link href="/admin/features">
           <a>الخدمات</a>
         </Link>
       </p>

@@ -56,6 +56,7 @@ export default function DynamicTable({
   tableHeader,
   tableActions,
 }: DynamicTableProps) {
+  const noData = data.length === 0
   return (
     <Card
       sx={{
@@ -97,6 +98,7 @@ export default function DynamicTable({
               }}
               role="button"
               tabIndex={-1}
+              disabled={noData}
             >
               <Icon icon={chevronRight} />
             </Button>
@@ -106,6 +108,7 @@ export default function DynamicTable({
                 e.preventDefault()
                 if (hasMore) onNext()
               }}
+              disabled={noData}
             >
               <Icon icon={chevronLeft} />
             </Button>
