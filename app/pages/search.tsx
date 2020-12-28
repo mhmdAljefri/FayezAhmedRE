@@ -51,10 +51,10 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
             <Input
               variant="none"
               sx={{
-                height: 150,
+                height: 80,
                 borderWidth: 0,
                 fontSize: 7,
-                paddingInlineEnd: 80,
+                paddingInlineEnd: 50,
                 paddingY: 4,
                 ":focus": {
                   borderWidth: 0,
@@ -67,7 +67,7 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
               name="search"
               placeholder="البحث عن"
             />
-            <Box sx={{ position: "absolute", left: 15, top: 65 }}>
+            <Box sx={{ position: "absolute", left: 15, top: 25 }}>
               <Icon size={30} icon={search} />
             </Box>
           </Flex>
@@ -75,7 +75,7 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
       </Box>
       <Wrapper>
         <Box>
-          {projects.length === 0 && (
+          {value && projects.length === 0 && (
             <Box>
               <Text sx={{ fontSize: 5, paddingY: 5 }}>لا توجد بيانات مطابقة لعملية البحث!</Text>
             </Box>
