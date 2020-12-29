@@ -14,6 +14,7 @@ import * as z from "zod"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import UploadVideo from "./UploadVideo"
 import MapField from "app/admin/components/MapField"
+import UploadMainVideo from "./UploadMainVideo"
 
 type OfferFormProps = {
   initialValues: any
@@ -98,7 +99,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           )}
         />
         <MediaWidthTextField name="image" label="صورة العرض" />
-        <MediaWidthTextField name="mainViedo" label="فيديو الرئيسية للعرض" />
+        <UploadMainVideo />
         <Text as="small">هذا الفيديو سيظهر في بداية الصفحة بديل للصورة</Text>
 
         <LabeledMenuField
