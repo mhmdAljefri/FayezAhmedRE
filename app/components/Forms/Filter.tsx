@@ -7,13 +7,13 @@ import SubmitButton from "../SubmitButton"
 import DomainSlider from "../DomainSlider"
 import Slide from "react-reveal/Slide"
 import { City, Country, PropertyType } from "@prisma/client"
-import { PROJECT_STATUS } from "app/constants"
+import { PROJECT_STATUS, PRICE_RANG } from "app/constants"
 
 export type filterValues = {
   search?: string
   city?: string
   type?: string
-  price?: number[] | string[]
+  price?: number[]
   room?: number[] | string[]
   propertyType?: string
   status?: string
@@ -64,7 +64,6 @@ export default function Filter({
             />
             <MenuField options={["شراء", "تاجير"]} emptyOptionText="الغرض" name="purpose" />
           </Grid>
-
           <Grid
             sx={{ marginBottom: 3, marginTop: 3, alignItems: "center" }}
             columns={[1, 1, isTurkey ? 4 : 3]}
@@ -90,17 +89,13 @@ export default function Filter({
                 />
               </Box>
             )}
-            <Box sx={{ marginTop: [1, null, -2], marginBottom: 5 }}>
-              <Label sx={{ color: "white" }}>السعر (بالدولار)</Label>
-              <Field
-                name="price"
-                sx={{ backgroundColor: "white" }}
-                defaultValue={[50000, 2000000]}
-                render={({ input }) => (
-                  <DomainSlider {...input} values={input.value} domain={[50000, 2000000]} />
-                )}
-              />
-            </Box>
+            <MenuField
+              emptyOptionText="السعر (بالدولار)"
+              getLabel={(i) => i.name}
+              getValue={(i) => i.id}
+              options={PRICE_RANG}
+              name="price"
+            />
             <MenuField
               name="propertyType"
               getLabel={(i) => i.name}
