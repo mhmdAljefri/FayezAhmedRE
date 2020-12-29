@@ -10,7 +10,7 @@ type MenuFieldType = {
   emptyOptionText?: string
   required?: boolean
   getLabel?: (option: any) => string
-  getValue?: (option: any) => string | number
+  getValue?: (option: any) => string | number | number[]
 }
 
 type LabeledMenuFieldType = MenuFieldType & {

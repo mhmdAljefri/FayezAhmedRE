@@ -18,7 +18,15 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
+import { number } from "zod"
 
+const getListOfPrice = (price?: number[]): number[] => {
+  if (!price) return []
+  const arr = price.toString().split(",") // wtf
+  const firstPrice = parseInt(arr[0], 10)
+  const lastPrice = parseInt(arr[0], 10)
+  return [firstPrice, lastPrice]
+}
 interface ProjectCardIconsTextProps {
   width?: number
   text: string
@@ -232,7 +240,13 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
           rooms={country.rooms}
           cities={country.cities}
           onFilter={(data) => {
-            filterRef.current = data
+            const getList = getListOfPrice(data.price) // wtf
+            const newData = {
+              ...data,
+              price: getList,
+            }
+
+            filterRef.current = newData
             refetch()
           }}
         />
