@@ -15,7 +15,7 @@ export const EditFurnishCategory = () => {
 
   return (
     <div>
-      <h1>Edit FurnishCategory {furnishCategory.id}</h1>
+      <h1> {furnishCategory.id}</h1>
       <pre>{JSON.stringify(furnishCategory)}</pre>
 
       <FurnishCategoryForm
@@ -45,12 +45,6 @@ const EditFurnishCategoryPage: BlitzPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <EditFurnishCategory />
       </Suspense>
-
-      <p>
-        <Link href="/furnishCategories">
-          <a>FurnishCategories</a>
-        </Link>
-      </p>
     </div>
   )
 }

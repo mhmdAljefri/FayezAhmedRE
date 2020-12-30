@@ -46,7 +46,7 @@ type OfferFormProps = {
 const Schema = z.object({
   name: z.string(),
   details: z.string(),
-  image: z.string(),
+  image: z.string().optional(),
   countryId: z.string(),
 })
 
@@ -88,7 +88,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         onSubmit={onSubmit}
         initialValues={initialValues}
       >
-        <LabeledTextField required name="name" label="العنوان" />
+        <LabeledTextField required={false} name="name" label="العنوان" />
         <Field
           name="details"
           render={({ input }) => (
