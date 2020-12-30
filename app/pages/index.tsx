@@ -12,6 +12,7 @@ import Wrapper from "app/components/Wrapper"
 import SlickSlider from "app/components/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
 import HTMLBox from "app/components/HTMLBox"
+import CloudinaryImage from "app/components/CloudinaryImage"
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -88,10 +89,13 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                         <Text>{housingComplexText}</Text>
                         {housingComplexImage && (
                           <Box sx={{ width: [50, 70], mx: 2 }}>
-                            <Image
+                            <CloudinaryImage
+                              width={50}
+                              height={70}
+                              objectFit="contain"
                               src={housingComplexImage}
                               alt={housingComplexText || ""}
-                              layout="fill"
+                              layout="responsive"
                             />
                           </Box>
                         )}
@@ -102,11 +106,17 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                         <Box
                           sx={{
                             cursor: "pointer",
-                            maxHeight: 350,
                             marginRight: "auto",
                           }}
                         >
-                          <Image objectFit="cover" src={image} alt={name} layout="fill" />
+                          <CloudinaryImage
+                            height={250}
+                            width={250}
+                            objectFit="contain"
+                            src={image}
+                            alt={name}
+                            layout="responsive"
+                          />
                         </Box>
                       </Link>
                       <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
@@ -114,13 +124,19 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                       </Heading>
                     </Box>
                   </Grid>
-                  <Box sx={{ cursor: "pointer", textAlign: "center", maxHeight: 400, mx: "auto" }}>
-                    <Link href={`/countries/${country.id}/projects/${id}`}>
-                      <Image src={gallery?.[0] || ""} alt={name} layout="fill" />
-                    </Link>
-                    <Box sx={{ pt: 3, textAlign: "center" }}>
-                      <HTMLBox html={subTitle} />
-                    </Box>
+                  <Box
+                    sx={{
+                      cursor: "pointer",
+                      textAlign: "center",
+                      height: 400,
+                      maxWidth: 800,
+                      mx: "auto",
+                    }}
+                  >
+                    <CloudinaryImage src={gallery?.[0] || ""} alt={name} layout="fill" />
+                  </Box>
+                  <Box sx={{ pt: 3, textAlign: "center" }}>
+                    <HTMLBox html={subTitle} />
                   </Box>
                 </Box>
               )

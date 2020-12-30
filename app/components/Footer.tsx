@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react"
-import { Image } from "blitz"
 import { Icon as RIconKit, IconProp } from "react-icons-kit"
 import { instagram } from "react-icons-kit/fa/instagram"
 import { facebook } from "react-icons-kit/fa/facebook"
@@ -10,7 +9,7 @@ import { envelope } from "react-icons-kit/fa/envelope"
 import { phone } from "react-icons-kit/fa/phone"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { addressBook } from "react-icons-kit/fa/addressBook"
-import { Box, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
+import { Image, Box, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
@@ -71,14 +70,14 @@ export default function Footer() {
             <Tooltip>
               <ThemeLink>
                 <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
-                  <Image src="/google_play_badge.png" alt="apple" layout="fill" />
+                  <Image src="/google_play_badge.png" alt="apple" />
                 </Box>
               </ThemeLink>
             </Tooltip>
             <Tooltip>
               <ThemeLink>
                 <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
-                  <Image src="/appstore_badge.png" alt="apple" layout="fill" />
+                  <Image src="/appstore_badge.png" alt="apple" />
                 </Box>
               </ThemeLink>
             </Tooltip>

@@ -1,17 +1,24 @@
 import React from "react"
-import { Image } from "blitz"
 import { Box, Grid, Heading } from "theme-ui"
 import Wrapper from "./Wrapper"
 import Slide from "react-reveal/Slide"
 import { Partner } from "@prisma/client"
+import CloudinaryImage from "./CloudinaryImage"
 
 type PartnersCardProps = Partner
 
 function PartnersCard({ image, name }: PartnersCardProps) {
   return (
     <Slide bottom>
-      <Box sx={{ textAlign: "center", marginX: "auto", padding: 2, maxWidth: 200 }}>
-        <Image src={image} alt={name} layout="fill" />
+      <Box sx={{ textAlign: "center", marginX: "auto", padding: 2 }}>
+        <CloudinaryImage
+          src={image}
+          alt={name}
+          objectFit="contain"
+          height={200}
+          width={200}
+          layout="responsive"
+        />
       </Box>
     </Slide>
   )
