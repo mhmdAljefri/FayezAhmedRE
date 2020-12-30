@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Image } from "blitz"
+import { Box, Grid, Heading } from "theme-ui"
 import Form from "../Form"
 import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
@@ -40,6 +41,7 @@ export default function Contact() {
             sx={{ objectFit: "contain" }}
             src="/icons/icons8_headset_128px.png"
             alt="اطلب استشارتك"
+            layout="fill"
           />
         </Box>
         <Heading sx={{ fontSize: 6, paddingTop: 5, paddingBottom: 4, color: "white" }}>

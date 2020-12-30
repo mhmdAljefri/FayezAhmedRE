@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
-import { Link, useRouter } from "blitz"
-import { Badge, Box, Button, Flex, Image, Link as ThemeLink, Text } from "theme-ui"
+import { Link, useRouter, Image } from "blitz"
+import { Badge, Box, Button, Flex, Link as ThemeLink, Text } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { star } from "react-icons-kit/fa/star"
 import { handshakeO } from "react-icons-kit/fa/handshakeO"
@@ -98,6 +98,7 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
           sx={{ objectFit: "contain" }}
           src="/logo.png"
           alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
+          layout="fill"
         />
       </Box>
 

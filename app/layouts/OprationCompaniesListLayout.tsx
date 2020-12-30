@@ -1,8 +1,8 @@
 import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import { Link, usePaginatedQuery, useParam, useRouter, useRouterQuery } from "blitz"
+import { Link, usePaginatedQuery, useParam, useRouter, useRouterQuery, Image } from "blitz"
 import React, { useRef } from "react"
-import { Grid, Image, Box, Heading, Text } from "theme-ui"
+import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
@@ -38,17 +38,17 @@ export function CompaniesCard({
         <Link href={asPath + "/" + prefixPath + id}>
           <a>
             <Box sx={{ position: "relative" }}>
-              <Image
+              <Box
                 sx={{
                   height: 240,
                   width: "100%",
-                  objectFit: "cover",
                   ":hover + div": {
                     backgroundColor: "primary",
                   },
                 }}
-                src={image as string}
-              />
+              >
+                <Image objectFit="cover" layout="fill" src={image as string} />
+              </Box>
               {!hideCompaniesLabel && (
                 <Box
                   sx={{

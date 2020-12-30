@@ -1,8 +1,8 @@
 import React from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, useParam } from "blitz"
-import { Box, Flex, Heading, Image, Text } from "theme-ui"
+import { BlitzPage, useParam, Image } from "blitz"
+import { Box, Flex, Heading, Text } from "theme-ui"
 import { Furnish } from "@prisma/client"
 import getFurnish from "app/public/furnishes/queries/getFurnish"
 import HTMLBox from "app/components/HTMLBox"
@@ -27,7 +27,7 @@ const Search: BlitzPage<furnishesProps> = ({ furnish }) => {
               marginTop: -5,
             }}
           >
-            <Image src={furnish.image} alt={furnish.name} />
+            <Image src={furnish.image} alt={furnish.name} layout="fill" />
           </Box>
           <Box
             sx={{

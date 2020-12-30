@@ -1,10 +1,10 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage, useMutation } from "blitz"
+import { Link, usePaginatedQuery, useRouter, useParam, BlitzPage, useMutation, Image } from "blitz"
 import getExplores from "app/admin/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
 import DynamicTable from "app/components/Tables/DynamicTable"
-import { Image, Button } from "theme-ui"
+import { Box, Button } from "theme-ui"
 import Action from "app/admin/components/Action"
 import deleteExplore from "app/admin/explores/mutations/deleteExplore"
 
@@ -35,7 +35,11 @@ export const ExploresList = () => {
           name: "",
         },
         {
-          render: ({ image }) => <Image src={image} sx={{ width: 100 }} />,
+          render: ({ image }) => (
+            <Box sx={{ width: 100 }}>
+              <Image src={image} layout="fill" />{" "}
+            </Box>
+          ),
           name: "",
         },
         { key: "title", name: "العنوان" },

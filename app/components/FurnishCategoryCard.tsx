@@ -1,7 +1,7 @@
 import { FurnishCategory } from "@prisma/client"
-import { Link } from "blitz"
+import { Link, Image } from "blitz"
 import React from "react"
-import { Box, Image, Text, Link as ThemeLink } from "theme-ui"
+import { Box, Text, Link as ThemeLink } from "theme-ui"
 
 type furnishCategoryCardProps = Pick<FurnishCategory, "name" | "image">
 export default function FurnishCategoryCard(furnishCategory: furnishCategoryCardProps) {
@@ -17,7 +17,7 @@ export default function FurnishCategoryCard(furnishCategory: furnishCategoryCard
     >
       <Link passHref href={`/furniture/${furnishCategory.name}`}>
         <ThemeLink sx={{ textDecoration: "none" }}>
-          <Image src={furnishCategory.image} alt={furnishCategory.name} />
+          <Image src={furnishCategory.image} alt={furnishCategory.name} layout="fill" />
           <Text sx={{ paddingY: 4, paddingX: 3, fontSize: [3, 5], fontWeight: 700 }}>
             {furnishCategory.name}
           </Text>

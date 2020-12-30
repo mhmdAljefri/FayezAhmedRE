@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Image } from "blitz"
+import { Box, Grid, Heading } from "theme-ui"
 import Wrapper from "./Wrapper"
 import Slide from "react-reveal/Slide"
 import { Partner } from "@prisma/client"
@@ -10,7 +11,7 @@ function PartnersCard({ image, name }: PartnersCardProps) {
   return (
     <Slide bottom>
       <Box sx={{ textAlign: "center", marginX: "auto", padding: 2, maxWidth: 200 }}>
-        <Image src={image} alt={name} />
+        <Image src={image} alt={name} layout="fill" />
       </Box>
     </Slide>
   )
