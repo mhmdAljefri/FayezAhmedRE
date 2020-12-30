@@ -1,6 +1,7 @@
 import React from "react"
+import { Image } from "blitz"
 import { Field } from "react-final-form"
-import { Box, Flex, Image, Label } from "theme-ui"
+import { Box, Flex, Label } from "theme-ui"
 import UploadCloudinary from "./UploadCloudinary"
 import Slide from "react-reveal/Slide"
 import { FieldArray } from "react-final-form-arrays"
@@ -33,7 +34,12 @@ export default function MediaWidthTextField({
                   accept={accept}
                   onChange={(data) => input.onChange(data)}
                 />
-                {input.value && <Image sx={{ width: 80 }} alt="uploaded" src={input.value} />}
+                {input.value && (
+                  <Box sx={{ width: 80 }}>
+                    {" "}
+                    <Image alt="uploaded" src={input.value} layout="fill" />
+                  </Box>
+                )}
                 {meta.touched && meta.error && <Box sx={{ color: "red" }}>{meta.error}</Box>}
               </>
             )}
@@ -59,7 +65,7 @@ export default function MediaWidthTextField({
                         style={{ position: "absolute", top: 5, left: 5, color: "red" }}
                         onClick={() => fields.remove(index)}
                       />
-                      <Image sx={{ width: 80 }} key={index} src={url} alt="..." />
+                      <Image width={80} height={80} key={index} src={url} alt="..." />
                     </Box>
                   ))}
                 </Flex>

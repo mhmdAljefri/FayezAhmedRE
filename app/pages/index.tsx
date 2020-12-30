@@ -1,4 +1,4 @@
-import { BlitzPage, Link } from "blitz"
+import { BlitzPage, Link, Image } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
 import CountriesSection, { CountryCardProps } from "app/components/CountriesSection"
@@ -7,7 +7,7 @@ import getCountries from "app/public/countries/queries/getCountries"
 import getPartners from "app/public/partners/queries/getPartners"
 import { Carousel, City, Country, Partner, Project } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
-import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
+import { Box, Flex, Grid, Heading, Text } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import SlickSlider from "app/components/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
@@ -87,11 +87,13 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                       <Flex sx={{ alignItems: "center" }}>
                         <Text>{housingComplexText}</Text>
                         {housingComplexImage && (
-                          <Image
-                            sx={{ width: [50, 70], mx: 2 }}
-                            src={housingComplexImage}
-                            alt={housingComplexText || ""}
-                          />
+                          <Box sx={{ width: [50, 70], mx: 2 }}>
+                            <Image
+                              src={housingComplexImage}
+                              alt={housingComplexText || ""}
+                              layout="fill"
+                            />
+                          </Box>
                         )}
                       </Flex>
                     </Box>
@@ -104,7 +106,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                             marginRight: "auto",
                           }}
                         >
-                          <Image sx={{ objectFit: "cover" }} src={image} alt={name} />
+                          <Image objectFit="cover" src={image} alt={name} layout="fill" />
                         </Box>
                       </Link>
                       <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
@@ -114,7 +116,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                   </Grid>
                   <Box sx={{ cursor: "pointer", textAlign: "center", maxHeight: 400, mx: "auto" }}>
                     <Link href={`/countries/${country.id}/projects/${id}`}>
-                      <Image src={gallery?.[0] || ""} alt={name} />
+                      <Image src={gallery?.[0] || ""} alt={name} layout="fill" />
                     </Link>
                     <Box sx={{ pt: 3, textAlign: "center" }}>
                       <HTMLBox html={subTitle} />

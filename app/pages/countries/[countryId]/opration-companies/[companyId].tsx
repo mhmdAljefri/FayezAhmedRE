@@ -1,8 +1,8 @@
 import React from "react"
-import { BlitzPage, useParam, useQuery } from "blitz"
+import { BlitzPage, useParam, useQuery, Image } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Image } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import getOprationCompanyPage from "app/public/oprationCompanyPages/queries/getOprationCompanyPage"
 import {
   ConstractiongVideo,
@@ -19,7 +19,11 @@ const OprationCompanyPage: BlitzPage = () => {
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
-          <Image src={oprationCompanyPage.image || ""} alt={oprationCompanyPage.title} />
+          <Image
+            src={oprationCompanyPage.image || ""}
+            alt={oprationCompanyPage.title}
+            layout="fill"
+          />
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{oprationCompanyPage.title}</Heading>

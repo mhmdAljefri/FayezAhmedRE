@@ -1,8 +1,9 @@
 import BigIconText from "app/components/BigIconBox"
+import { Image } from "blitz"
 // import SelectionBox from "app/components/SelectionBox"
 import Wrapper from "app/components/Wrapper"
 import React, { useState } from "react"
-import { Box, Button, Flex, Grid, Heading, Image, Link as ThemeLink, Text } from "theme-ui"
+import { Box, Button, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Layout from "./Layout"
 
 import { buildingO } from "react-icons-kit/fa/buildingO"
@@ -147,7 +148,7 @@ export function GalleryView({ gallery }) {
         >
           {gallery.map((item, index) => (
             <Box sx={{ height: [200, 300] }}>
-              <Image
+              <Box
                 key={item + "_" + index}
                 sx={{
                   borderRadius: 15,
@@ -156,8 +157,9 @@ export function GalleryView({ gallery }) {
                   maxHeight: [200, 300],
                   boxShadow: "default",
                 }}
-                src={item}
-              />
+              >
+                <Image src={item} layout="fill" />
+              </Box>
             </Box>
           ))}
         </SlickSlider>
@@ -298,12 +300,13 @@ export default function ProjectDetailsLayout({
               maxHeight: 600,
             }}
           >
-            <Image
+            <Box
               sx={{
                 width: "100%",
               }}
-              src={image || ""}
-            />
+            >
+              <Image src={image || ""} layout="fill" />
+            </Box>
           </Box>
           <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
@@ -398,11 +401,10 @@ export default function ProjectDetailsLayout({
             >
               {floorplan.map((item, index) => (
                 <div>
-                  <Image
+                  <Box
                     key={item + "_" + index}
                     sx={{
                       borderColor: "primary",
-                      objectFit: "cover",
                       marginX: 2,
                       borderWidth: 2,
                       borderStyle: "solid",
@@ -410,8 +412,9 @@ export default function ProjectDetailsLayout({
                       boxShadow: "default",
                       height: [250, 300, 350],
                     }}
-                    src={item}
-                  />
+                  >
+                    <Image objectFit="cover" src={item} layout="fill" />
+                  </Box>
                 </div>
               ))}
             </SlickSlider>
@@ -487,7 +490,7 @@ export default function ProjectDetailsLayout({
               <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
                 {(nearBy as any)?.map((item) => (
                   <Box sx={{ textAlign: "center" }}>
-                    <Image
+                    <Box
                       sx={{
                         marginX: "auto",
                         width: [200, 300, 350],
@@ -497,9 +500,9 @@ export default function ProjectDetailsLayout({
                         borderColor: "primary",
                         borderStyle: "solid",
                       }}
-                      src={item.image}
-                      alt={item.name}
-                    />
+                    >
+                      <Image src={item.image} alt={item.name} layout="fill" />
+                    </Box>
                     <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
                       {item.name}
                     </Heading>

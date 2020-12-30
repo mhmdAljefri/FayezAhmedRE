@@ -2,9 +2,9 @@ import Filter, { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import getCountry from "app/public/countries/queries/getCountry"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
-import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
+import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery, Image } from "blitz"
 import React, { ReactNode, useRef, useState } from "react"
-import { Button, Flex, Grid, Image, Box, Heading, Text } from "theme-ui"
+import { Button, Flex, Grid, Box, Heading, Text } from "theme-ui"
 
 import Icon, { IconProp } from "react-icons-kit"
 import { building } from "react-icons-kit/fa/building"
@@ -161,7 +161,9 @@ export function ProjectCard({
       <Box sx={{}}>
         <Link passHref href={projectPath}>
           <a>
-            <Image sx={{ height: 240, width: "100%", objectFit: "cover" }} src={image as string} />
+            <Box sx={{ height: 240, width: "100%" }}>
+              <Image objectFit="cover" layout="fill" src={image as string} />
+            </Box>
           </a>
         </Link>
       </Box>

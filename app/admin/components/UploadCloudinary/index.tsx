@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react"
+import { Image as BlitzImage } from "blitz"
 import { Box, Image } from "theme-ui"
 import { useDropzone } from "react-dropzone"
 import { ClipLoader } from "react-spinners"
@@ -69,21 +70,36 @@ function MyDropzone({ onSuccess, multiple, accept }: MyDropzoneType) {
               <ClipLoader />
             </Box>
           )}
-          {image && !multiple && (
-            <Image
-              as={isImage ? "img" : "video"}
-              style={{
-                opacity: fetching ? 0.5 : 1,
-                objectFit: "contain",
-                width: 50,
-                position: "absolute",
-                top: 15,
-                left: 15,
-              }}
-              src={image}
-              alt="..."
-            />
-          )}
+          {image &&
+            !multiple &&
+            (isImage ? (
+              <Box
+                style={{
+                  opacity: fetching ? 0.5 : 1,
+                  objectFit: "contain",
+                  width: 50,
+                  position: "absolute",
+                  top: 15,
+                  left: 15,
+                }}
+              >
+                <BlitzImage src={image} alt="..." layout="fill" />
+              </Box>
+            ) : (
+              <Image
+                as="video"
+                style={{
+                  opacity: fetching ? 0.5 : 1,
+                  objectFit: "contain",
+                  width: 50,
+                  position: "absolute",
+                  top: 15,
+                  left: 15,
+                }}
+                src={image}
+                alt="..."
+              />
+            ))}
         </div>
       </Box>
     </>

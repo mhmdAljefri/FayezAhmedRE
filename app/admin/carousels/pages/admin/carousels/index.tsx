@@ -1,10 +1,10 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage, useMutation } from "blitz"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, useMutation, Image } from "blitz"
 import getCarousels from "app/admin/carousels/queries/getCarousels"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import Action from "app/admin/components/Action"
-import { Image } from "theme-ui"
+import { Box } from "theme-ui"
 import deleteCarousel from "app/admin/carousels/mutations/deleteCarousel"
 
 const ITEMS_PER_PAGE = 100
@@ -28,7 +28,14 @@ export const CarouselsList = () => {
     <DynamicTable
       headers={[
         { name: "", key: "id" },
-        { name: "", render: ({ image }) => <Image sx={{ width: 120 }} src={image} /> },
+        {
+          name: "",
+          render: ({ image }) => (
+            <Box sx={{ width: 120 }}>
+              <Image src={image} layout="fill" />
+            </Box>
+          ),
+        },
         { name: "", render: ({ id }) => <Action onDelete={() => handleDelete(id)} id={id} /> },
       ]}
       onPrev={goToPreviousPage}

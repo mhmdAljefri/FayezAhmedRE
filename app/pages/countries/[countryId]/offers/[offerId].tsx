@@ -1,8 +1,8 @@
 import React from "react"
-import { BlitzPage, Link } from "blitz"
+import { BlitzPage, Link, Image } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
+import { Box, Heading, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -16,7 +16,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
-          <Image src={offer.image || ""} alt={offer.name} />
+          <Image src={offer.image || ""} alt={offer.name} layout="fill" />
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
           <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{offer.name}</Heading>

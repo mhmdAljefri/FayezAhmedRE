@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Image } from "blitz"
+import { Box, Grid, Heading } from "theme-ui"
 import Wrapper from "./Wrapper"
 import Fade from "react-reveal/Fade"
 import { Feature } from "@prisma/client"
@@ -49,7 +50,9 @@ function ServicesCard({ name, image }: ServicesCardProps) {
             backgroundColor: "primary",
           }}
         >
-          <Image src={image} sx={{ padding: 3, objectFit: "contain" }} />
+          <Box sx={{ padding: 3 }}>
+            <Image src={image} objectFit="contain" layout="fill" />
+          </Box>
         </Box>
         <Heading
           sx={{

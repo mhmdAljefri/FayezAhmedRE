@@ -1,4 +1,5 @@
-import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
+import { Image } from "blitz"
+import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 import React from "react"
 import Wrapper from "./Wrapper"
 import Nav from "./Nav"
@@ -39,7 +40,11 @@ const Header = ({ sx }: HeaderProps) => {
           >
             <Flex sx={{ alignItems: "center" }}>
               <Box sx={{ maxWidth: 50, paddingY: 2 }}>
-                <Image src="/FAYEZ.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
+                <Image
+                  src="/FAYEZ.png"
+                  alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
+                  layout="fill"
+                />
               </Box>
               <Text
                 sx={{

@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Image } from "blitz"
 import usePriceType from "app/hooks/usePriceType"
 import HomeSlider from "app/components/HomeSlider"
 import Wrapper from "app/components/Wrapper"
@@ -6,7 +7,7 @@ import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
 
 import React, { useState } from "react"
-import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
+import { Box, Flex, Grid, Heading, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
@@ -329,11 +330,9 @@ export default function CountryPage({
                     boxShadow: "default",
                   }}
                 >
-                  <Image
-                    sx={{ objectFit: "cover", width: "100%", minHeight: "100%" }}
-                    src={image}
-                    alt={title}
-                  />
+                  <Box sx={{ width: "100%", minHeight: "100%" }}>
+                    <Image objectFit="cover" src={image} alt={title} layout="fill" />
+                  </Box>
                   <Flex
                     sx={{
                       justifyContent: "center",

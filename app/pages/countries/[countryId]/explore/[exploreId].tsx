@@ -1,8 +1,8 @@
 import React from "react"
-import { BlitzPage, Link } from "blitz"
+import { BlitzPage, Link, Image } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Button, Flex, Heading, Image } from "theme-ui"
+import { Box, Button, Flex, Heading } from "theme-ui"
 import getExplore from "app/public/explores/queries/getExplore"
 import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -28,7 +28,7 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
               constructingUpdateVideo={explore.videoUrl}
             />
           ) : (
-            <Image src={explore.image} alt={explore.title} />
+            <Image src={explore.image} alt={explore.title} layout="fill" />
           )}
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5 }}>

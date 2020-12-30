@@ -1,7 +1,7 @@
 import { Furnish } from "@prisma/client"
-import { Link, useRouter } from "blitz"
+import { Link, useRouter, Image } from "blitz"
 import React from "react"
-import { Box, Image, Text, Link as ThemeLink } from "theme-ui"
+import { Box, Text, Link as ThemeLink } from "theme-ui"
 
 type furnishCardProps = Pick<Furnish, "name" | "image">
 export default function FurnishCard(furnish: furnishCardProps) {
@@ -19,11 +19,9 @@ export default function FurnishCard(furnish: furnishCardProps) {
       <Link passHref href={`${asPath}/${furnish.name}`}>
         <ThemeLink sx={{ textDecoration: "none" }}>
           <Box sx={{ height: 400, overflow: "hidden" }}>
-            <Image
-              src={furnish.image}
-              sx={{ width: "100%", objectFit: "cover" }}
-              alt={furnish.name}
-            />
+            <Box sx={{ width: "100%" }}>
+              <Image src={furnish.image} alt={furnish.name} objectFit="cover" layout="fill" />
+            </Box>
           </Box>
           <Text
             sx={{

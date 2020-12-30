@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Link, useQuery, useRouter } from "blitz"
-import { Box, Flex, Link as ThemeLink, Image, Heading, Input, Text } from "theme-ui"
+import { BlitzPage, Link, useQuery, useRouter, Image } from "blitz"
+import { Box, Flex, Link as ThemeLink, Heading, Input, Text } from "theme-ui"
 import getProjects from "app/public/projects/queries/getProjects"
 import { Project } from "@prisma/client"
 import { Icon } from "react-icons-kit"
@@ -85,11 +85,10 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
               <Flex sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}>
                 <Box sx={{ width: ["100%", 200], boxShadow: "card" }}>
                   <Image
-                    sx={{
-                      objectFit: "cover",
-                    }}
+                    objectFit="cover"
                     src={item.image as string}
                     alt={item.name}
+                    layout="fill"
                   />
                 </Box>
                 <Flex
