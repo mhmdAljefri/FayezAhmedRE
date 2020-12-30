@@ -15,7 +15,7 @@ import Wrapper from "./Wrapper"
 import { Link } from "blitz"
 
 function Icon(props: IconProp) {
-  return <RIconKit {...props} size={24} style={{ marginInlineEnd: 20, ...props.style }} />
+  return <RIconKit {...props} size={18} style={{ marginInlineEnd: 20, ...props.style }} />
 }
 
 type CallUSButtonProps = IconProp & {
@@ -55,7 +55,7 @@ export default function Footer() {
       <Wrapper>
         <Box>
           <Heading sx={{ paddingBottom: 4, color: "white" }}>تابعنا</Heading>
-          <Flex>
+          <Flex sx={{ flexWrap: "wrap" }}>
             <Icon icon={instagram} />
             <Icon icon={youtube} />
             <Icon icon={facebook} />

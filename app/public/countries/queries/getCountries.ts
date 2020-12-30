@@ -4,7 +4,7 @@ type GetCountriesInput = Pick<Prisma.FindManyCountryArgs, "where" | "orderBy" | 
 
 export default async function getCountries({
   where,
-  orderBy = { id: "desc" },
+  orderBy = { id: "asc" },
   skip = 0,
   take,
 }: GetCountriesInput) {

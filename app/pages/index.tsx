@@ -28,7 +28,33 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
   return (
     <main>
       <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
-        <HomeSlider slideStyle={{ height: "100vh" }} onlyImages data={carousels} />
+        {false ? ( // todo add video
+          <Box
+            sx={{
+              position: "relative",
+              ":after": {
+                position: "absolute",
+                content: '""',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+              },
+              iframe: { minHeight: "100vh", minWidth: "100%" },
+            }}
+          >
+            <iframe
+              title="an"
+              id="frame"
+              src={`https://www.youtube.com/embed/PEwac2WZ7rU?rel=0?version=3&autoplay=1&controls=0&showinfo=0&loop=1`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+          </Box>
+        ) : (
+          <HomeSlider slideStyle={{ height: "100vh" }} onlyImages data={carousels} />
+        )}
         <Box
           sx={{
             position: "absolute",
@@ -51,14 +77,31 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
         <Wrapper
           sx={{
             ".slick-dots": {
-              top: 180,
+              top: 280,
+              maxHeight: 30,
+
               alignItems: "flex-start",
               justifyContent: "flex-end",
+              li: {
+                width: [20, 30],
+                height: [20, 30],
+                "&button:before": {
+                  width: [20, 30],
+                  fontSize: [1, 2],
+                  height: [20, 30],
+                },
+              },
             },
           }}
         >
           <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
-          <SlickSlider autoplay infinite slidesToShow={1} slidesToScroll={1} responsive={[]}>
+          <SlickSlider
+            autoplay={false}
+            infinite
+            slidesToShow={1}
+            slidesToScroll={1}
+            responsive={[]}
+          >
             {projects.map(
               ({
                 id,
@@ -73,7 +116,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
               }) => (
                 <Box sx={{ direction: "rtl", overflow: "hidden" }}>
                   <Grid columns={2}>
-                    <Box>
+                    <Box sx={{ height: 300 }}>
                       <Text
                         sx={{
                           fontSize: 4,
@@ -96,15 +139,19 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                       </Flex>
                     </Box>
                     <Box>
-                      <Link href={`/countries/${country.id}/projects/${id}`}>
+                      <Link passHref href={`/countries/${country.id}/projects/${id}`}>
                         <Box
+                          as="a"
                           sx={{
                             cursor: "pointer",
-                            maxHeight: 350,
                             marginRight: "auto",
                           }}
                         >
-                          <Image sx={{ objectFit: "cover" }} src={image} alt={name} />
+                          <Image
+                            sx={{ objectFit: "cover", maxHeight: 280 }}
+                            src={image}
+                            alt={name}
+                          />
                         </Box>
                       </Link>
                       <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
@@ -112,13 +159,15 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                       </Heading>
                     </Box>
                   </Grid>
-                  <Box sx={{ cursor: "pointer", textAlign: "center", maxHeight: 400, mx: "auto" }}>
-                    <Link href={`/countries/${country.id}/projects/${id}`}>
-                      <Image src={gallery?.[0] || ""} alt={name} />
-                    </Link>
-                    <Box sx={{ pt: 3, textAlign: "center" }}>
-                      <HTMLBox html={subTitle} />
-                    </Box>
+                  <Box sx={{ cursor: "pointer", textAlign: "center", mx: "auto" }}>
+                    <Image
+                      sx={{ objectFit: "contain", maxHeight: 400, maxWidth: 600, mx: "auto" }}
+                      src={gallery?.[0] || ""}
+                      alt={name}
+                    />
+                  </Box>
+                  <Box sx={{ pt: 3, textAlign: "center" }}>
+                    <HTMLBox html={subTitle} />
                   </Box>
                 </Box>
               )

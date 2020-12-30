@@ -47,23 +47,47 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
         >
           <Text
             sx={{
-              filter: "drop-shadow(2px 4px 2px black)",
+              filter: "drop-shadow(2px 4px 2px #000000bd)",
               fontWeight: 900,
               margin: 0,
               padding: 0,
-              fontSize: 3,
+              fontSize: [2, 3],
             }}
           >
             مشاريع وعقارات
           </Text>
           <Flex>
             <Heading
-              sx={{ fontSize: 6, color: "white", filter: "drop-shadow(2px 4px 22px black)" }}
+              sx={{ fontSize: [5, 6], color: "white", filter: "drop-shadow(2px 4px 22px black)" }}
             >
               {name}
             </Heading>
+            {/** mobile view icon */}
             <Box
               sx={{
+                display: ["block", "none"],
+                borderRadius: 100,
+                position: "relative",
+                zIndex: 1,
+                height: 30,
+                width: 30,
+                marginX: 3,
+                marginTop: 13,
+                backgroundColor: "primary",
+              }}
+            >
+              <Icon
+                size={12}
+                style={{ color: "white", marginTop: 3, marginRight: 10 }}
+                icon={arrowLeft}
+              />
+            </Box>
+            {/** end mobile view icon */}
+
+            <Box
+              sx={{
+                display: ["none", "block"],
+
                 borderRadius: 100,
                 position: "relative",
                 zIndex: 1,
