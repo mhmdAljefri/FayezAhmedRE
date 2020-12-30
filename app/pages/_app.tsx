@@ -14,7 +14,6 @@ import "app/styles/slick-modifier.css"
 import "app/styles/fonts.css" // add local fonts
 import "app/styles/animate.css"
 import "react-toastify/dist/ReactToastify.css"
-import "suneditor/dist/css/suneditor.min.css" // Import Sun Editor's CSS File
 import "react-datepicker/dist/react-datepicker.css"
 import "rc-drawer/assets/index.css"
 
