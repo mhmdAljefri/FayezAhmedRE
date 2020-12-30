@@ -1,21 +1,25 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, useMutation } from "blitz"
 import getFurnishes from "app/admin/furnishes/queries/getFurnishes"
 import DynamicTable from "app/components/Tables/DynamicTable"
+import deleteFurnish from "app/admin/furnishes/mutations/deleteFurnish"
+import Action from "app/admin/components/Action"
 
 const ITEMS_PER_PAGE = 100
 
 export const FurnishesList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ furnishes, hasMore }] = usePaginatedQuery(getFurnishes, {
+  const [deleteFurnishMutation] = useMutation(deleteFurnish)
+  const [{ furnishes, hasMore }, { refetch }] = usePaginatedQuery(getFurnishes, {
     orderBy: { id: "asc" },
     where: {},
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
 
+  const handleDelete = (id) => deleteFurnishMutation({ where: { id } }).then(() => refetch())
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
@@ -27,6 +31,10 @@ export const FurnishesList = () => {
           key: "id",
         },
         { name: "الاثاث", key: "name" },
+        {
+          name: "",
+          render: ({ id }) => <Action onDelete={() => handleDelete(id)} id={id} />,
+        },
       ]}
       data={furnishes}
       onNext={goToNextPage}

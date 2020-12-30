@@ -14,7 +14,7 @@ export const EditFurnish = () => {
 
   return (
     <div>
-      <h1>Edit Furnish {furnish.id}</h1>
+      <h1>تعديل على {furnish.name}</h1>
       <pre>{JSON.stringify(furnish)}</pre>
 
       <FurnishForm
