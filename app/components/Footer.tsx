@@ -10,6 +10,7 @@ import { phone } from "react-icons-kit/fa/phone"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { addressBook } from "react-icons-kit/fa/addressBook"
 import { Box, Image, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
+import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
 
@@ -64,18 +65,22 @@ export default function Footer() {
         </Box>
         <HR />
         <Box>
-          <Heading sx={{ paddingBottom: 2, color: "white" }}>قريبا سيتوفر</Heading>
+          <Heading sx={{ paddingBottom: 2, color: "white" }}>حمل تطبيقنا</Heading>
           <Flex sx={{ marginBottom: 4 }}>
-            <ThemeLink>
-              <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
-                <Image src="/google_play_badge.png" alt="apple" />
-              </Box>
-            </ThemeLink>
-            <ThemeLink>
-              <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
-                <Image src="/appstore_badge.png" alt="apple" />
-              </Box>
-            </ThemeLink>
+            <Tooltip>
+              <ThemeLink>
+                <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
+                  <Image src="/google_play_badge.png" alt="apple" />
+                </Box>
+              </ThemeLink>
+            </Tooltip>
+            <Tooltip>
+              <ThemeLink>
+                <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
+                  <Image src="/appstore_badge.png" alt="apple" />
+                </Box>
+              </ThemeLink>
+            </Tooltip>
           </Flex>
         </Box>
       </Wrapper>

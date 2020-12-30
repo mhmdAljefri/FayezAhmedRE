@@ -25,6 +25,7 @@ import { format } from "date-fns"
 import { arSA } from "date-fns/locale"
 import Icon from "react-icons-kit"
 import HTMLBox from "app/components/HTMLBox"
+import { numberFormat } from "app/utils"
 
 type ConstractingCardProps = {
   label: string
@@ -327,7 +328,7 @@ export default function ProjectDetailsLayout({
                 {priceTypeSuffix}
               </Text>
               <Text sx={{ paddingY: 3, fontSize: 3 }}>
-                السعر يبداء من <span>{roomWithPrice?.[priceType]}</span>
+                السعر يبداء من <span>{numberFormat(roomWithPrice?.[priceType])}</span>
               </Text>
             </Box>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>

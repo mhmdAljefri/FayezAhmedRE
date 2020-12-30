@@ -92,13 +92,13 @@ export default function CountryPage({
   ...props
 }: CountryPropsType) {
   const { push, asPath } = useRouter()
-  // const { changePriceType } = usePriceType()
+  const { changePriceType } = usePriceType()
 
-  // useEffect(() => {
-  //   changePriceType("priceTurkey")
-  // }, [country])
-
-  // How can I will know the price !!
+  useEffect(() => {
+    if (country.isTurkey) {
+      changePriceType("priceTurkey")
+    }
+  }, [country])
 
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
