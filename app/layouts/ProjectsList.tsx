@@ -18,6 +18,7 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
+import { numberFormat } from "app/utils"
 import { number } from "zod"
 
 const getListOfPrice = (price?: number[]): number[] => {
@@ -65,7 +66,14 @@ function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTex
         alignItems: "center",
       }}
     >
-      {icon && <Icon icon={icon} />}
+      {icon && (
+        <Icon
+          icon={icon}
+          style={{
+            fontSize: "large",
+          }}
+        />
+      )}
 
       {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
       <span style={{ whiteSpace: "nowrap", paddingInlineStart: 5 }}>{text}</span>
@@ -175,7 +183,7 @@ export function ProjectCard({
           <SelectRoom selected={selected} roomWithPrices={roomWithPrices} onChange={setSelected} />
         )}
         <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
-        <ProjectCardIconsText text={`تبدا من ${price}`} prefix={priceTypeSign} />
+        <ProjectCardIconsText text={`تبدا من ${numberFormat(price)}`} prefix={priceTypeSign} />
       </Flex>
     </Box>
   )
