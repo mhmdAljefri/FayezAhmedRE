@@ -10,8 +10,6 @@ import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
 
 import "nprogress/nprogress.css" //styles of nprogress
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import "app/styles/slick-modifier.css"
 import "app/styles/fonts.css" // add local fonts
 import "app/styles/animate.css"
