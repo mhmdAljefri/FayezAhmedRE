@@ -1,0 +1,117 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "PRICE_TYPES",
+      "values": [
+        "priceQatar",
+        "priceKSA",
+        "priceTurkey",
+        "priceKuwait",
+        "priceUAE",
+        "priceOman",
+        "price"
+      ]
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "Offer",
+      "type": "Offer",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "RoomWithPrice",
+      "field": "Project",
+      "type": "Project",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "RoomWithPrice",
+          "field": "Project"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "RoomWithPrice",
+          "field": "Project"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[projectId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "RoomWithPrice",
+          "field": "Project"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "RoomWithPrice",
+      "field": "projectId",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Country",
+      "field": "priceType",
+      "type": "PRICE_TYPES",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Country",
+          "field": "priceType"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Country",
+          "field": "priceType"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "price"
+    },
+    {
+      "tag": "CreateField",
+      "model": "City",
+      "field": "Project",
+      "type": "Project",
+      "arity": "List"
+    }
+  ]
+}

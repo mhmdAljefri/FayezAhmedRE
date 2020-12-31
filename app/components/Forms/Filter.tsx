@@ -1,6 +1,7 @@
 import React from "react"
 import { Field } from "react-final-form"
 import { Box, Flex, Grid, Heading, Input, Label } from "theme-ui"
+import usePriceType from "app/hooks/usePriceType"
 import Form from "../Form"
 import { MenuField } from "app/admin/components/LabeledMenuField"
 import SubmitButton from "../SubmitButton"
@@ -8,6 +9,7 @@ import DomainSlider from "../DomainSlider"
 import Slide from "react-reveal/Slide"
 import { City, Country, PropertyType } from "@prisma/client"
 import { PROJECT_STATUS, PRICE_RANG } from "app/constants"
+import { getPriceTypeName } from "app/utils"
 
 export type filterValues = {
   search?: string
@@ -33,6 +35,7 @@ export default function Filter({
   isTurkey,
   onFilter,
 }: filterProps) {
+  const { priceType } = usePriceType()
   const sortedRooms = isTurkey ? [] : rooms?.map((item) => parseInt(item)).sort()
   if (!rooms) return null
   return (
@@ -90,7 +93,7 @@ export default function Filter({
               </Box>
             )}
             <MenuField
-              emptyOptionText="السعر (بالدولار)"
+              emptyOptionText={`السعر (${getPriceTypeName(priceType)})`}
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               options={PRICE_RANG}
