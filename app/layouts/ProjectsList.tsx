@@ -222,6 +222,7 @@ function CityButton({ children, isSelected, onClick }) {
         borderColor: "primary",
         borderStyle: "solid",
         marginTop: 2,
+        width: 120,
       }}
     >
       {children}

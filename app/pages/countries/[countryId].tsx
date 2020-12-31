@@ -408,7 +408,7 @@ export default function CountryPage({
                 }}
                 key={project.name}
               >
-                <Link passHref href={`/countrie/${project.countryId}/projects/${project.id}`}>
+                <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
                   <a>
                     <Box
                       sx={{
