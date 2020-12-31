@@ -37,7 +37,15 @@ interface ProjectCardIconsTextProps {
 
 type ProjectCardProps = Pick<
   Project,
-  "id" | "name" | "image" | "locationText" | "subTitle" | "paymentType" | "countryId" | "status"
+  | "id"
+  | "name"
+  | "image"
+  | "locationText"
+  | "subTitle"
+  | "paymentType"
+  | "countryId"
+  | "status"
+  | "cityId"
 > & {
   roomWithPrices: Pick<
     RoomWithPrice,
@@ -195,11 +203,42 @@ type ProjectListTypes = {
   country: Country & { cities: City[] }
 }
 
+function CityButton({ children, isSelected, onClick }) {
+  return (
+    <Box
+      onClick={onClick}
+      role="button"
+      aria-label={children}
+      sx={{
+        cursor: "pointer",
+        borderRadius: "md",
+        backgroundColor: isSelected ? "white" : "primary",
+        borderWidth: 3,
+        paddingY: 2,
+        paddingX: 3,
+        fontWeight: "700",
+        textAlign: "center",
+        color: isSelected ? "primary" : "heading",
+        borderColor: "primary",
+        borderStyle: "solid",
+        marginTop: 2,
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+interface SelectedCity {
+  id: number | string
+  name: string
+}
+
 export default function ProjectsList({ country, title, subTitle }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
+  const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
 
   const [
     groupedProjects,
@@ -259,18 +298,61 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
           }}
         />
       </Wrapper>
+
+      {country.isTurkey && (
+        <Wrapper>
+          <Flex
+            sx={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {country.cities &&
+              [...[{ id: "اظهار الكل", name: "اظهار الكل" }], ...country.cities].map((city) => (
+                <CityButton
+                  isSelected={selected.id === city.id}
+                  key={city.id}
+                  onClick={() => setSelected({ id: city.id, name: city.name })}
+                >
+                  {city.name}
+                </CityButton>
+              ))}
+          </Flex>
+        </Wrapper>
+      )}
+
       <Box>
         <Wrapper>
           <Grid sx={{ marginBottom: 5, justifyContent: "center" }} columns={[1, null, 2, 3]}>
             {groupedProjects.map((group, i) => (
               <React.Fragment key={i}>
-                {group.projects.map((project) => (
-                  <ProjectCard
-                    {...project}
-                    roomWithPrices={project.roomsWithPrices}
-                    key={project.id}
-                  />
-                ))}
+                {country.isTurkey
+                  ? selected.id === "اظهار الكل"
+                    ? group.projects.map((project) => (
+                        <ProjectCard
+                          {...project}
+                          roomWithPrices={project.roomsWithPrices}
+                          key={project.id}
+                        />
+                      ))
+                    : group.projects
+                        .filter((pro) => pro.cityId === selected.id)
+                        .map((project) => (
+                          <ProjectCard
+                            {...project}
+                            roomWithPrices={project.roomsWithPrices}
+                            key={project.id}
+                          />
+                        ))
+                  : group.projects.map((project) => (
+                      <ProjectCard
+                        {...project}
+                        roomWithPrices={project.roomsWithPrices}
+                        key={project.id}
+                      />
+                    ))}
               </React.Fragment>
             ))}
           </Grid>
