@@ -14,6 +14,7 @@ import {
   Explore,
   Offer,
   OprationCompanyPage,
+  PRICE_TYPES,
   Project,
   PropertyType,
   RoomWithPrice,
@@ -79,6 +80,7 @@ export type CountryPropsType = {
     cities: City[]
     offers: Offer[]
     explores: Explore[]
+    priceType: PRICE_TYPES
   }
   furnishCategories: { name: string; image: string }[]
   propertyTypes: PropertyType[]
@@ -96,7 +98,9 @@ export default function CountryPage({
   const { changePriceType } = usePriceType()
 
   useEffect(() => {
-    if (country.id) {
+    if (country.isTurkey) {
+      changePriceType("priceTurkey")
+    } else {
       changePriceType(getPriceTypeValue(country.priceType))
     }
   }, [country])
