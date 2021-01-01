@@ -19,7 +19,6 @@ export default async function getCountries({
       rooms: true,
       nameEN: true,
       isTurkey: true,
-      isQatari: true,
     },
     skip,
   })

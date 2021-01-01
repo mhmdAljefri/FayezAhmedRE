@@ -18,7 +18,7 @@ export const getPriceType = (country: Country): priceTypes => {
   switch (true) {
     case country.isTurkey:
       return "priceTurkey"
-    case country.isQatari:
+    case !country.isTurkey:
       return "priceQatar"
 
     default:
