@@ -30,6 +30,7 @@ import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
 import { ProjectCard } from "app/layouts/ProjectsList"
+import { getPriceType } from "app/utils"
 
 type showMoreButton = {
   sx?: SxStyleProp
@@ -95,14 +96,8 @@ export default function CountryPage({
   const { changePriceType } = usePriceType()
 
   useEffect(() => {
-    if (country.isTurkey) {
-      changePriceType("priceTurkey")
-    } else if (country.isQatari) {
-      changePriceType("priceQatar")
-    } else {
-      changePriceType("price")
-    }
-  }, [country])
+    changePriceType(getPriceType(country))
+  }, [changePriceType, country])
 
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
