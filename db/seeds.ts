@@ -26,6 +26,7 @@ const COUNTRIES = [
     ],
     image: "https://res.cloudinary.com/dco7dcmbq/image/upload/v1606724914/istanbul_r7phsu.jpg",
     isTurkey: true,
+    isQatari: false,
   },
   {
     name: "قطر",
@@ -34,13 +35,15 @@ const COUNTRIES = [
     image:
       "https://res.cloudinary.com/dco7dcmbq/image/upload/v1606724974/http_3A_2F_2Fcom.ft.imagepublish.upp-prod-us.s3.amazonaws_zof7jm.jpg",
     rooms: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    isQatari: true,
   },
 ]
 const seed = async () => {
   for (let i = 0; i < COUNTRIES.length; i++) {
-    const { name, nameEN, image, rooms, isTurkey } = COUNTRIES[i]
+    const { name, nameEN, image, rooms, isTurkey, isQatari } = COUNTRIES[i]
     await db.country.create({
       data: {
+        isQatari,
         isTurkey,
         nameEN,
         name,

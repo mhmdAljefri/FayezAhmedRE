@@ -97,6 +97,10 @@ export default function CountryPage({
   useEffect(() => {
     if (country.isTurkey) {
       changePriceType("priceTurkey")
+    } else if (country.isQatari) {
+      changePriceType("priceQatar")
+    } else {
+      changePriceType("price")
     }
   }, [country])
 

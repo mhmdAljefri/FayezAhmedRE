@@ -222,7 +222,13 @@ function CityButton({ children, isSelected, onClick }) {
         borderColor: "primary",
         borderStyle: "solid",
         marginTop: 2,
-        width: 120,
+        display: "0 0 auto",
+        maxWidth: "33.333%",
+        flexGrow: 0,
+        flexShrink: 0,
+        marginBottom: "2rem",
+        marginLeft: 20,
+        marginRight: 20,
       }}
     >
       {children}
@@ -271,6 +277,7 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
           color: "white",
           backgroundColor: "dark",
           marginBottom: 4,
+          marginTop: 4,
         }}
       >
         <Wrapper>
@@ -304,10 +311,10 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
         <Wrapper>
           <Flex
             sx={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-              flexWrap: "wrap",
+              display: "flex",
+              flexWrap: "nowrap",
+              overflowX: "auto",
+              overflowY: "hidden",
             }}
           >
             {country.cities &&

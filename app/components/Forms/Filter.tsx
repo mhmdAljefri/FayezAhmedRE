@@ -1,5 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form"
+import usePriceType from "app/hooks/usePriceType"
 import { Box, Flex, Grid, Heading, Input, Label } from "theme-ui"
 import Form from "../Form"
 import { MenuField } from "app/admin/components/LabeledMenuField"
@@ -33,6 +34,7 @@ export default function Filter({
   isTurkey,
   onFilter,
 }: filterProps) {
+  const { priceType } = usePriceType()
   const sortedRooms = isTurkey ? [] : rooms?.map((item) => parseInt(item)).sort()
   if (!rooms) return null
   return (
@@ -90,7 +92,9 @@ export default function Filter({
               </Box>
             )}
             <MenuField
-              emptyOptionText="السعر (بالدولار)"
+              emptyOptionText={
+                priceType === "priceQatar" ? "السعر (بالريال القطري)" : "السعر (بالدولار)"
+              }
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               options={PRICE_RANG}
