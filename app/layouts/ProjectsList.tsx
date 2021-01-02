@@ -1,6 +1,5 @@
 import Filter, { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import getCountry from "app/public/countries/queries/getCountry"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
 import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
 import React, { ReactNode, useRef, useState } from "react"
@@ -15,11 +14,9 @@ import { City, Country, Project, RoomWithPrice } from "@prisma/client"
 import usePriceType from "app/hooks/usePriceType"
 import useOnClickout from "app/hooks/useOnClickout"
 import FetchMoreButton from "app/components/FetchMoreButton"
-import Fade from "react-reveal/Fade"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { numberFormat } from "app/utils"
-import { number } from "zod"
 
 const getListOfPrice = (price?: number[]): number[] => {
   if (!price) return []
@@ -160,7 +157,7 @@ export function ProjectCard({
     <Box
       sx={{
         width: ["100%", null, 370],
-        backgroundColor: "white",
+        backgroundColor: "background",
         marginX: "auto",
         boxShadow: "default",
         marginBottom: 2,

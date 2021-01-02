@@ -216,6 +216,7 @@ export async function getStaticProps(context) {
       },
       city: true,
     },
+    take: 4,
     where: {
       isHousingComplex: true,
     },

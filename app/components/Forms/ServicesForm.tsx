@@ -120,7 +120,7 @@ export default function ServicesForm({ cities }) {
         borderRadius: "lg",
         boxShadow: "default",
         marginX: "auto",
-        paddingX: 5,
+        paddingX: [3, 5],
         paddingBottom: 3,
         paddingTop: 3,
         backgroundColor: "primary",

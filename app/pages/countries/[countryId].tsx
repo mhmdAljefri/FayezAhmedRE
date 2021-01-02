@@ -98,7 +98,7 @@ export default function CountryPage({
     if (country.isTurkey) {
       changePriceType("priceTurkey")
     }
-  }, [country])
+  }, [country.isTurkey, changePriceType])
 
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
@@ -309,7 +309,6 @@ export default function CountryPage({
             {
               breakpoint: 580,
               settings: {
-                centerMode: true,
                 vertical: true,
                 slidesToShow: 3,
                 slidesToScroll: 3,
@@ -321,8 +320,10 @@ export default function CountryPage({
             <Slide key={id} bottom>
               <Link href={`${asPath}/explore/${id}`}>
                 <Box
+                  as="a"
                   sx={{
-                    height: [200, "25vw", 250],
+                    display: "block",
+                    height: [150, null, 200, 250],
                     borderRadius: "lg",
                     overflow: "hidden",
                     position: "relative",

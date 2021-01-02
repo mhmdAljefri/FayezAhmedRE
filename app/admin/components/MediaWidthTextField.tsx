@@ -33,7 +33,16 @@ export default function MediaWidthTextField({
                   accept={accept}
                   onChange={(data) => input.onChange(data)}
                 />
-                {input.value && <Image sx={{ width: 80 }} alt="uploaded" src={input.value} />}
+                {input.value && (
+                  <Box sx={{ position: "relative" }}>
+                    <Icon
+                      icon={close}
+                      style={{ position: "absolute", top: 5, left: 5, color: "red" }}
+                      onClick={() => input.onChange(undefined)}
+                    />
+                    <Image sx={{ width: 80 }} src={input.value} alt="..." />
+                  </Box>
+                )}
                 {meta.touched && meta.error && <Box sx={{ color: "red" }}>{meta.error}</Box>}
               </>
             )}

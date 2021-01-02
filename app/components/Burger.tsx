@@ -4,9 +4,11 @@ import { Box } from "theme-ui"
 type BurgerProps = {
   open: Boolean
   onClick: () => void
+  onOpenedColor?: string
+  onClosedColor?: string
 }
 
-const Burger = ({ open, onClick }: BurgerProps) => {
+const Burger = ({ open, onOpenedColor, onClosedColor, onClick }: BurgerProps) => {
   return (
     <Box
       role="button"
@@ -26,7 +28,7 @@ const Burger = ({ open, onClick }: BurgerProps) => {
         span: {
           width: "1.5rem",
           height: "1px",
-          backgroundColor: open ? "text" : "primary",
+          backgroundColor: open ? onClosedColor : onOpenedColor,
           borderRadius: "10px",
           transition: "all 0.3s linear",
           position: "relative",
@@ -52,4 +54,8 @@ const Burger = ({ open, onClick }: BurgerProps) => {
   )
 }
 
+Burger.defaultProps = {
+  onOpenedColor: "primary",
+  onClosedColor: "text",
+}
 export default Burger
