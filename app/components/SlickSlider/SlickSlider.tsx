@@ -66,6 +66,7 @@ type SlickSliderProps = {
   nextArrow?: ReactElement
   variableWidth?: boolean
   adaptiveHeight?: boolean
+  arrows?: boolean
   customPaging?: (index: number) => any
 } & typeof defaultProps
 
