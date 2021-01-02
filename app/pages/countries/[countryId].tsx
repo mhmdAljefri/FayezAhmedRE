@@ -29,6 +29,7 @@ import ArrowIcon from "app/components/ArrowIcon"
 import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
+import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
 
 type showMoreButton = {
@@ -79,6 +80,8 @@ export type CountryPropsType = {
     offers: Offer[]
     explores: Explore[]
   }
+  oceanViewProjects: ProjectWitRooms[]
+  govProjects: ProjectWitRooms[]
   furnishCategories: { name: string; image: string }[]
   propertyTypes: PropertyType[]
 }
@@ -89,6 +92,8 @@ export default function CountryPage({
   country,
   propertyTypes,
   furnishCategories,
+  oceanViewProjects,
+  govProjects,
   ...props
 }: CountryPropsType) {
   const { push, asPath } = useRouter()
@@ -176,8 +181,14 @@ export default function CountryPage({
         />
       </Wrapper>
       <Wrapper>
-        <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
-        <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
+        {country.isTurkey ? (
+          <Heading sx={{ fontSize: 6 }}>مشاريع مميزة</Heading>
+        ) : (
+          <>
+            <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
+            <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
+          </>
+        )}
         <SlickSlider
           infinite={false}
           slidesToShow={3}
@@ -225,6 +236,113 @@ export default function CountryPage({
           }}
         />
       </Wrapper>
+
+      {country.isTurkey && (
+        <>
+          <Wrapper>
+            {govProjects.length > 0 && (
+              <Heading sx={{ fontSize: 6 }}>مشاريع بضمانة الحكومة</Heading>
+            )}
+            <SlickSlider
+              infinite={false}
+              slidesToShow={3}
+              responsive={[
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: false,
+                    rtl: true,
+                  },
+                },
+                {
+                  breakpoint: 1100,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    rtl: true,
+                  },
+                },
+                {
+                  breakpoint: 900,
+                  settings: {
+                    centerMode: false,
+                    vertical: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    rtl: true,
+                  },
+                },
+              ]}
+            >
+              {[...govProjects].map((project, index) => (
+                <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
+                  <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+                </Box>
+              ))}
+            </SlickSlider>
+            <ShowMoreButton
+              href={projectsUrl}
+              sx={{
+                display: ["auto", "none"],
+              }}
+            />
+          </Wrapper>
+          <Wrapper>
+            {oceanViewProjects.length > 0 && (
+              <Heading sx={{ fontSize: 6 }}>مشاريع باطلالة بحرية</Heading>
+            )}
+            <SlickSlider
+              infinite={false}
+              slidesToShow={3}
+              responsive={[
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: false,
+                    rtl: true,
+                  },
+                },
+                {
+                  breakpoint: 1100,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    rtl: true,
+                  },
+                },
+                {
+                  breakpoint: 900,
+                  settings: {
+                    centerMode: false,
+                    vertical: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    rtl: true,
+                  },
+                },
+              ]}
+            >
+              {[...oceanViewProjects].map((project, index) => (
+                <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
+                  <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+                </Box>
+              ))}
+            </SlickSlider>
+            <ShowMoreButton
+              href={projectsUrl}
+              sx={{
+                display: ["auto", "none"],
+              }}
+            />
+          </Wrapper>
+        </>
+      )}
       <Box
         sx={{
           backgroundColor: "dark",
@@ -286,8 +404,8 @@ export default function CountryPage({
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <SlickSlider
-          slidesToScroll={1}
-          slidesToShow={3}
+          slidesToScroll={-1}
+          slidesToShow={explores.length > 3 ? 3 : explores.length}
           responsive={[
             {
               breakpoint: 1200,
@@ -472,6 +590,24 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
+  let oceanViewProjects: any[] = []
+  let govProjects: any[] = []
+
+  if (country.isTurkey) {
+    const { projects } = await getProjects({
+      where: { status: "granted_by_gov" },
+      select: { roomsWithPrices: true },
+      take: 3,
+    })
+    const { projects: oceanViews } = await getProjects({
+      where: { status: "ocean_view" },
+      select: { roomsWithPrices: true },
+      take: 3,
+    })
+    oceanViewProjects = oceanViews
+    govProjects = projects
+  }
+
   const { propertyTypes } = await getPropertyTypes({})
   const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
 
@@ -480,6 +616,8 @@ export async function getStaticProps(context) {
       country,
       furnishCategories,
       propertyTypes,
+      oceanViewProjects,
+      govProjects,
     },
     revalidate: 60 * 2,
   }

@@ -6,6 +6,7 @@ const noSizeDefaultProps = {
   slidesToShow: 4,
   slidesToScroll: 4,
   centerMode: false,
+  arrows: false,
   dots: true,
   pauseOnHover: true,
   autoplay: false,
@@ -75,12 +76,13 @@ export default function SlickSlider({
   prevArrow,
   nextArrow,
   variableWidth,
+  arrows,
   ...props
 }: SlickSliderProps) {
   const responsive = variableWidth
     ? props.responsive.map(({ breakpoint, settings }) => ({
         breakpoint,
-        settings: { ...settings, variableWidth },
+        settings: { ...settings, variableWidth, arrows },
       }))
     : props.responsive
   return (
@@ -88,6 +90,7 @@ export default function SlickSlider({
       {...props}
       variableWidth={variableWidth}
       responsive={responsive}
+      arrows={arrows}
       prevArrow={prevArrow}
       nextArrow={nextArrow}
     >

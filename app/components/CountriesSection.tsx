@@ -118,7 +118,7 @@ export default function CountriesSection(props: CountriesSectionProps) {
   return (
     <Grid gap={0} columns={[1, null, 2]}>
       {props.data.map((counry) => (
-        <Fade>
+        <Fade key={counry.id}>
           <CountryCard {...counry} />
         </Fade>
       ))}
