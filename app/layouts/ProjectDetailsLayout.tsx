@@ -137,6 +137,7 @@ export function GalleryView({ gallery }) {
         <SlickSlider
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
+          arrows
           slidesToShow={1}
           slidesToScroll={-1}
           responsive={[]}
