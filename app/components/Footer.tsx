@@ -14,8 +14,12 @@ import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
 
-function Icon(props: IconProp) {
-  return <RIconKit {...props} size={18} style={{ marginInlineEnd: 20, ...props.style }} />
+function Icon(props: IconProp & { href?: string }) {
+  return (
+    <a style={{ color: "inherit" }} target="blank" rel="noopener norefrence" href={props.href}>
+      <RIconKit {...props} size={18} style={{ marginInlineEnd: 20, ...props.style }} />
+    </a>
+  )
 }
 
 type CallUSButtonProps = IconProp & {
@@ -56,11 +60,14 @@ export default function Footer() {
         <Box>
           <Heading sx={{ paddingBottom: 4, color: "white" }}>تابعنا</Heading>
           <Flex sx={{ flexWrap: "wrap" }}>
-            <Icon icon={instagram} />
-            <Icon icon={youtube} />
-            <Icon icon={facebook} />
-            <Icon icon={twitter} />
-            <Icon icon={snapchat} />
+            <Icon
+              href="https://instagram.com/fayez_projects?igshid=1joclb832c6qt"
+              icon={instagram}
+            />
+            <Icon href="https://www.youtube.com/channel/UCtDgEC5W-5Rs8Wk8ecYs8NA" icon={youtube} />
+            <Icon href="https://www.facebook.com/profile.php?id=100011271579057" icon={facebook} />
+            <Icon href="https://twitter.com/fayez_projects" icon={twitter} />
+            <Icon href="https://www.snapchat.com/add/projects_live" icon={snapchat} />
           </Flex>
         </Box>
         <HR />

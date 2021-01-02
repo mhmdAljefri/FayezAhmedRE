@@ -3,8 +3,7 @@ import React from "react"
 import Wrapper from "./Wrapper"
 import Nav from "./Nav"
 import PriceType from "./PriceType"
-import Search from "./Search"
-import { Link, useParam, useRouter } from "blitz"
+import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
 
 type HeaderProps = {
@@ -13,7 +12,6 @@ type HeaderProps = {
 
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
-  const countryId = useParam("countryId", "number")
   const { pathname } = useRouter()
   const hasProjects = pathname.startsWith("/countries/[countryId]") || pathname.includes("projects")
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor

@@ -70,7 +70,7 @@ export default function MySlider({
 
   const handleResize = () => {
     const hieght = wrapper?.current?.offsetHeight
-    hieght && setOffsetHeight(hieght)
+    hieght && hieght !== offsetHeight && setOffsetHeight(hieght)
   }
 
   const handlePrevPress = () => {
