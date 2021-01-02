@@ -164,16 +164,20 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                     </Box>
                   </Grid>
                   <Box sx={{ cursor: "pointer", textAlign: "center", mx: "auto" }}>
-                    <Image
-                      sx={{
-                        objectFit: "contain",
-                        height: [200, 300, 400],
-                        maxWidth: 600,
-                        mx: "auto",
-                      }}
-                      src={gallery?.[0] || ""}
-                      alt={name}
-                    />
+                    <Link passHref href={`/countries/${country.id}/projects/${id}`}>
+                      <a style={{ textDecoration: "none" }}>
+                        <Image
+                          sx={{
+                            objectFit: "contain",
+                            height: [200, 300, 400],
+                            maxWidth: 600,
+                            mx: "auto",
+                          }}
+                          src={gallery?.[0] || ""}
+                          alt={name}
+                        />
+                      </a>
+                    </Link>
                   </Box>
                   <Box sx={{ pt: 3, textAlign: "center" }}>
                     <HTMLBox html={subTitle} />

@@ -27,7 +27,8 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
             justifyContent: "flex-end",
             color: "white",
             textShadow: "5px 5px 50px #000",
-            padding: 4,
+            paddingX: [1, 2, 4],
+            paddingY: [2, 4],
             height: 200,
             boxShadow: "default",
             position: "relative",
@@ -87,7 +88,6 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
             <Box
               sx={{
                 display: ["none", "block"],
-
                 borderRadius: 100,
                 position: "relative",
                 zIndex: 1,
