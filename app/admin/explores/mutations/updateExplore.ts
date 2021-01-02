@@ -15,6 +15,7 @@ export default async function updateExplore(
 
   // Don't allow updating
   delete (data as any).country
+  delete (data as any).id
 
   const explore = await db.explore.update({ where, data })
 
