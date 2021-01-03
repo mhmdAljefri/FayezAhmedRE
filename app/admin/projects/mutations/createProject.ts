@@ -22,6 +22,8 @@ export default async function createProject(
     data: {
       ...data,
       isHousingComplex: `${data.isHousingComplex}` === "true",
+      isGrantedByGov: `${data.isGrantedByGov}` === "true",
+      isWithSeaView: `${data.isWithSeaView}` === "true",
       propertyType: {
         connect: {
           id: parseInt(propertyTypeId),

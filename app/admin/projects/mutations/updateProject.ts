@@ -53,6 +53,8 @@ export default async function updateProject(
     data: {
       ...data,
       isHousingComplex: `${data.isHousingComplex}` === "true",
+      isGrantedByGov: `${data.isGrantedByGov}` === "true",
+      isWithSeaView: `${data.isWithSeaView}` === "true",
       country: {
         connect: {
           id: countryId,

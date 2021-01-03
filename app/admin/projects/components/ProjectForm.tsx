@@ -105,6 +105,59 @@ const StatusField = ({ countries }) => {
   )
 }
 
+const SeaViewAndGrantedByGoveChekBoxs = ({ countries }) => {
+  const {
+    values: { countryId },
+  } = useFormState()
+  const selectedCountry = countries.find(
+    (country) => country.id.toString() === countryId?.toString()
+  )
+
+  if (!selectedCountry || !selectedCountry.isTurkey) return <div />
+  return (
+    <>
+      <Field
+        name="isWithSeaView"
+        render={({ input }) => (
+          <>
+            <Label>مشروع باطلالة بحرية</Label>
+
+            <Flex>
+              <Label>
+                <Radio {...input} name="isWithSeaView" value="true" />
+                نعم
+              </Label>
+              <Label>
+                <Radio {...input} name="isWithSeaView" value="false" />
+                لا
+              </Label>
+            </Flex>
+          </>
+        )}
+      />
+      <Field
+        name="isGrantedByGov"
+        render={({ input }) => (
+          <>
+            <Label>مشروع بضمان الحكومة التركية</Label>
+
+            <Flex>
+              <Label>
+                <Radio {...input} name="isGrantedByGov" value="true" />
+                نعم
+              </Label>
+              <Label>
+                <Radio {...input} name="isGrantedByGov" value="false" />
+                لا
+              </Label>
+            </Flex>
+          </>
+        )}
+      />
+    </>
+  )
+}
+
 const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
   const [{ countries }] = usePaginatedQuery(getCountries, {})
 
@@ -130,6 +183,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             </>
           )}
         />
+        <SeaViewAndGrantedByGoveChekBoxs countries={countries} />
         <Field
           name="isHousingComplex"
           render={({ input }) => (
@@ -149,6 +203,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             </>
           )}
         />
+
         <LabeledTextField
           name="housingComplexText"
           placeholder="مناسب للجنسية التركية"

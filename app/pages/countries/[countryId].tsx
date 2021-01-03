@@ -595,12 +595,14 @@ export async function getStaticProps(context) {
 
   if (country.isTurkey) {
     const { projects } = await getProjects({
-      where: { status: "granted_by_gov" },
+      where: { isGrantedByGov: true },
       select: { roomsWithPrices: true },
       take: 3,
     })
     const { projects: oceanViews } = await getProjects({
-      where: { status: "ocean_view" },
+      where: {
+        isWithSeaView: true,
+      },
       select: { roomsWithPrices: true },
       take: 3,
     })
