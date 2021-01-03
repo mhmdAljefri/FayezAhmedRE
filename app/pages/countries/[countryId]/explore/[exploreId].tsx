@@ -2,10 +2,9 @@ import React from "react"
 import { BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Button, Flex, Heading, Image } from "theme-ui"
+import { Box, Button, Heading, Image } from "theme-ui"
 import getExplore from "app/public/explores/queries/getExplore"
 import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
-import ArrowIcon from "app/components/ArrowIcon"
 import getExplores from "app/public/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
@@ -37,20 +36,9 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
           </Heading>
           <HTMLBox html={explore.description} />
 
-          {/* <Flex>
-            <Link href={`/countries/${prev.countryId}/explore/${prev?.id}`}>
-              <Button variant="link" as="a">
-                {prev?.title}
-                <ArrowIcon sx={{ transform: "rotate(180deg)" }} />
-              </Button>
-            </Link>
-            <Link href={`/countries/${next.countryId}/explore/${next?.id}`}>
-              <Button variant="link" as="a">
-                {next?.title}
-                <ArrowIcon />
-              </Button>
-            </Link>
-          </Flex> */}
+          <Link href={`/countries/${explore.countryId}/explore`}>
+            <Button>المزيد</Button>
+          </Link>
         </Wrapper>
       </Box>
     </Layout>

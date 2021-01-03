@@ -6,7 +6,7 @@ import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
 
 import React, { useState } from "react"
-import { Box, Flex, Grid, Heading, Image, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
+import { Box, Flex, Grid, Heading, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
@@ -31,6 +31,7 @@ import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
 import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
+import ExploreCard from "app/components/ExploreCard"
 
 type showMoreButton = {
   sx?: SxStyleProp
@@ -429,56 +430,14 @@ export default function CountryPage({
               settings: {
                 vertical: true,
                 slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToScroll: -3,
               },
             },
           ]}
         >
           {explores.map(({ image, title, id }, index) => (
             <Slide key={id} bottom>
-              <Link href={`${asPath}/explore/${id}`}>
-                <Box
-                  as="a"
-                  sx={{
-                    display: "block",
-                    height: [150, null, 200, 250],
-                    borderRadius: "lg",
-                    overflow: "hidden",
-                    position: "relative",
-                    boxShadow: "default",
-                  }}
-                >
-                  <Image
-                    sx={{ objectFit: "cover", width: "100%", minHeight: "100%" }}
-                    src={image}
-                    alt={title}
-                  />
-                  <Flex
-                    sx={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      textAlign: "center",
-                      padding: 2,
-                      backgroundColor: "primary",
-                      color: "white",
-                      fontSize: 3,
-                      fontWeight: 700,
-                      opacity: 0,
-                      transition: "all 500ms linear",
-                      ":hover": {
-                        opacity: 1,
-                      },
-                    }}
-                  >
-                    {title}
-                  </Flex>
-                </Box>
-              </Link>
+              <ExploreCard href={`${asPath}/explore/${id}`} image={image} title={title} />
             </Slide>
           ))}
         </SlickSlider>
