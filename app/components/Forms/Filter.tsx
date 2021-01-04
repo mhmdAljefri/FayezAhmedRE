@@ -7,7 +7,7 @@ import SubmitButton from "../SubmitButton"
 import DomainSlider from "../DomainSlider"
 import Slide from "react-reveal/Slide"
 import { City, Country, PropertyType } from "@prisma/client"
-import { PROJECT_STATUS, PRICE_RANG } from "app/constants"
+import { PROJECT_STATUS, PRICE_RANG, PRICE_RANG_QATAR } from "app/constants"
 import useOnClickout from "app/hooks/useOnClickout"
 import useScreenSize from "app/hooks/useScreenSize"
 import Burger from "../Burger"
@@ -111,10 +111,10 @@ export default function Filter({
                 </Box>
               )}
               <MenuField
-                emptyOptionText="السعر (بالدولار)"
+                emptyOptionText={isTurkey ? "السعر (بالدولار)" : "السعر (بالريال القطري)"}
                 getLabel={(i) => i.name}
                 getValue={(i) => i.id}
-                options={PRICE_RANG}
+                options={isTurkey ? PRICE_RANG : PRICE_RANG_QATAR}
                 name="price"
               />
               <MenuField

@@ -183,10 +183,10 @@ export default function CountryPage({
       </Wrapper>
       <Wrapper>
         {country.isTurkey ? (
-          <Heading sx={{ fontSize: 6 }}>مشاريع مميزة</Heading>
+          <Heading sx={{ fontSize: [5, 6] }}>مشاريع مميزة</Heading>
         ) : (
           <>
-            <Heading sx={{ fontSize: 6 }}>مشاريعنا</Heading>
+            <Heading sx={{ fontSize: [5, 6] }}>مشاريعنا</Heading>
             <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
           </>
         )}
@@ -242,7 +242,7 @@ export default function CountryPage({
         <>
           <Wrapper>
             {govProjects.length > 0 && (
-              <Heading sx={{ fontSize: 6 }}>مشاريع بضمانة الحكومة</Heading>
+              <Heading sx={{ fontSize: [5, 6] }}>مشاريع بضمانة الحكومة</Heading>
             )}
             <SlickSlider
               infinite={false}
@@ -293,7 +293,7 @@ export default function CountryPage({
           </Wrapper>
           <Wrapper>
             {oceanViewProjects.length > 0 && (
-              <Heading sx={{ fontSize: 6 }}>مشاريع باطلالة بحرية</Heading>
+              <Heading sx={{ fontSize: [5, 6] }}>مشاريع باطلالة بحرية</Heading>
             )}
             <SlickSlider
               infinite={false}
@@ -555,14 +555,14 @@ export async function getStaticProps(context) {
   if (country.isTurkey) {
     const { projects } = await getProjects({
       where: { isGrantedByGov: true },
-      select: { roomsWithPrices: true },
+      include: { roomsWithPrices: true },
       take: 3,
     })
     const { projects: oceanViews } = await getProjects({
       where: {
         isWithSeaView: true,
       },
-      select: { roomsWithPrices: true },
+      include: { roomsWithPrices: true },
       take: 3,
     })
     oceanViewProjects = oceanViews

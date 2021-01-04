@@ -11,12 +11,6 @@ import useTimeout from "app/hooks/useTimeout"
 import ArrowIcon from "app/components/ArrowIcon"
 import HTMLBox from "app/components/HTMLBox"
 
-const select = {
-  name: true,
-  details: true,
-  countryId: true,
-  image: true,
-}
 type SearchProps = {
   projects: Project[]
 }
@@ -30,7 +24,6 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
       where: {
         name: { contains: value },
       },
-      select,
     },
     { initialData: { projects: ssrProjects }, enabled: true }
   )
@@ -140,7 +133,6 @@ export async function getServerSideProps(context) {
         contains: query.q,
       },
     },
-    select,
   })
   // Pass data to the page via props
   return {

@@ -1,5 +1,6 @@
 import usePriceType from "app/hooks/usePriceType"
-import React from "react"
+import { useParam } from "blitz"
+import React, { useEffect, useLayoutEffect } from "react"
 import { Avatar, Flex } from "theme-ui"
 import Dropdown from "./Dropdown"
 
@@ -17,6 +18,15 @@ export const prices = [
 
 const PriceType = (props: PriceTypeProps) => {
   const { priceType, changePriceType } = usePriceType()
+  const countryId = useParam("countryId", "number")
+
+  useLayoutEffect(() => {
+    if (countryId === 2) {
+      changePriceType("priceQatar")
+    } else changePriceType("price")
+
+    return () => {}
+  }, [countryId, changePriceType])
 
   return (
     <Dropdown
@@ -27,7 +37,7 @@ const PriceType = (props: PriceTypeProps) => {
         value: price[0],
         node: (
           <Flex sx={{ width: 150 }} key={price[0]}>
-            <Avatar sx={{ boxShadow: "card", marginInlineEnd: 10 }} size={30} src={price[1]} />{" "}
+            <Avatar sx={{ boxShadow: "card", marginInlineEnd: 10 }} size={30} src={price[1]} />
             {price[2]}
           </Flex>
         ),

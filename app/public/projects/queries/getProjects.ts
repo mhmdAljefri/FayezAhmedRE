@@ -1,19 +1,22 @@
-import db, { FindManyProjectArgs } from "db"
+import db, { Prisma } from "db"
 
-type GetProjectsInput = Pick<FindManyProjectArgs, "where" | "orderBy" | "skip" | "take" | "select">
+type GetProjectsInput = Pick<
+  Prisma.FindManyProjectArgs,
+  "where" | "orderBy" | "skip" | "take" | "include"
+>
 
 export default async function getProjects({
   where,
-  select,
   orderBy,
   skip = 0,
+  include,
   take,
 }: GetProjectsInput) {
   const projects = await db.project.findMany({
     where,
     orderBy,
     take,
-    select,
+    include,
     skip,
   })
 

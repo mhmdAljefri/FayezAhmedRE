@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import { useParam } from "blitz"
+import React, { useCallback, useLayoutEffect, useState } from "react"
 import { prices } from "../components/PriceType"
 type priceTypes =
   | "price"
@@ -9,11 +10,16 @@ type priceTypes =
   | "priceUAE"
   | "priceOman"
 
-export const PriceContext = React.createContext({
+export const PriceContext = React.createContext<{
+  priceType: string
+  priceTypeSign: string
+  priceTypeSuffix: string
+  changePriceType: (priceTypeValue: priceTypes) => any
+}>({
   priceType: "price",
-  priceTypeSuffix: "دولار امريكي",
   priceTypeSign: "$",
-  changePriceType: (priceTypeValue: priceTypes) => {},
+  priceTypeSuffix: '"دولار امريكي"',
+  changePriceType: (arg: priceTypes) => {},
 })
 
 function getPriceTypeSuffix(priceType: priceTypes) {
@@ -44,12 +50,16 @@ function getPriceTypeSign(priceType: priceTypes) {
 export default function PriceProvider(props) {
   const [priceType, setPriceType] = useState<priceTypes>("price")
 
-  const priceTypeSuffix = getPriceTypeSuffix(priceType)
-  const priceTypeSign = getPriceTypeSign(priceType)
+  const priceTypeSuffix = priceType && getPriceTypeSuffix(priceType)
+  const priceTypeSign = priceType && getPriceTypeSign(priceType)
 
-  const changePriceType = (priceTypeValue: priceTypes) => {
-    setPriceType(priceTypeValue)
-  }
+  const changePriceType = useCallback(
+    (priceTypeValue: priceTypes) => {
+      setPriceType(priceTypeValue)
+    },
+    [setPriceType]
+  )
+
   return (
     <PriceContext.Provider
       value={{ priceType, priceTypeSign, changePriceType, priceTypeSuffix }}

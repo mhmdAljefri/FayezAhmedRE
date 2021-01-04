@@ -1,9 +1,9 @@
 import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
-import React from "react"
+import React, { useLayoutEffect } from "react"
 import Wrapper from "./Wrapper"
 import Nav from "./Nav"
 import PriceType from "./PriceType"
-import { Link, useRouter } from "blitz"
+import { Link, useParam, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
 
 type HeaderProps = {
@@ -15,6 +15,7 @@ const Header = ({ sx }: HeaderProps) => {
   const { pathname } = useRouter()
   const hasProjects = pathname.startsWith("/countries/[countryId]") || pathname.includes("projects")
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
+
   return (
     <Box
       sx={{

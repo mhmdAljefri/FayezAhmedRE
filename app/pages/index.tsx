@@ -199,15 +199,7 @@ export async function getStaticProps(context) {
   const { partners } = await getPartners({})
   const { carousels } = await getCarousels({})
   const { projects } = await getProjects({
-    select: {
-      id: true,
-      name: true,
-      subTitle: true,
-      image: true,
-      gallery: true,
-      housingComplexText: true,
-      housingComplexImage: true,
-
+    include: {
       country: {
         select: {
           name: true,

@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "app/layouts/Layout"
 import getExplores from "app/public/explores/queries/getExplores"
-import { Flex, Grid } from "theme-ui"
+import { Grid } from "theme-ui"
 import ExploreCard from "app/components/ExploreCard"
 import { Explore } from "@prisma/client"
 import getCountries from "app/public/countries/queries/getCountries"
