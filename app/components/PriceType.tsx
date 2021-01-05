@@ -1,6 +1,6 @@
 import usePriceType from "app/hooks/usePriceType"
 import { useParam } from "blitz"
-import React, { useEffect, useLayoutEffect } from "react"
+import React, { useLayoutEffect } from "react"
 import { Avatar, Flex } from "theme-ui"
 import Dropdown from "./Dropdown"
 
