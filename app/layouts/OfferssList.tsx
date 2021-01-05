@@ -10,7 +10,7 @@ import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
 // import HTMLBox from "app/components/HTMLBox"
 
-type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "details"> & {
+type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle"> & {
   prefixPath?: string
   hideOfferLabel?: boolean
 }
@@ -18,7 +18,7 @@ type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "details"> & {
 export function OfferCard({
   image,
   hideOfferLabel,
-  details,
+  subTitle,
   id,
   name,
   prefixPath = "",
@@ -75,6 +75,7 @@ export function OfferCard({
         </Link>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{name}</Heading>
+          <Text>{subTitle}</Text>
           {/* <HTMLBox html={details} /> */}
         </Box>
       </Box>
@@ -92,7 +93,7 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
     { isFetching, fetchMore, canFetchMore, isFetchingMore },
   ] = useInfiniteQuery(
     getInfiniteOffersI,
-    (page = { take: 3, skip: 0 }) => ({
+    (page = { take: 30, skip: 0 }) => ({
       ...page,
       where: {
         countryId,
