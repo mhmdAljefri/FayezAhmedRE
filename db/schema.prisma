@@ -105,6 +105,7 @@ model Offer {
   projectId                 Int?
 
   name                      String          @unique
+  subTitle                  String?
   details                   String
   image                     String?
   mainVideo                 String?

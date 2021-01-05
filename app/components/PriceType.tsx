@@ -37,7 +37,10 @@ const PriceType = (props: PriceTypeProps) => {
         value: price[0],
         node: (
           <Flex sx={{ width: 150 }} key={price[0]}>
-            <Avatar sx={{ boxShadow: "card", marginInlineEnd: 10 }} size={30} src={price[1]} />
+            <Avatar
+              sx={{ boxShadow: "card", marginInlineEnd: 10, height: 30, width: 30 }}
+              src={price[1]}
+            />
             {price[2]}
           </Flex>
         ),

@@ -8,7 +8,7 @@ import { Grid, Image, Box, Heading, Text } from "theme-ui"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
-import HTMLBox from "app/components/HTMLBox"
+// import HTMLBox from "app/components/HTMLBox"
 
 type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "details"> & {
   prefixPath?: string
@@ -75,7 +75,7 @@ export function OfferCard({
         </Link>
         <Box sx={{ paddingY: 3, paddingX: 3 }}>
           <Heading>{name}</Heading>
-          <HTMLBox html={details} />
+          {/* <HTMLBox html={details} /> */}
         </Box>
       </Box>
     </Fade>

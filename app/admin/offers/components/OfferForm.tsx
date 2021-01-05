@@ -89,6 +89,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         initialValues={initialValues}
       >
         <LabeledTextField required={false} name="name" label="العنوان" />
+        <LabeledTextField required name="subTitle" label="العنوان لفرعي" />
         <Field
           name="details"
           render={({ input }) => (
