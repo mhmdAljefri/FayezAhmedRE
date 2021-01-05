@@ -19,7 +19,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
           <Image src={offer.image || ""} alt={offer.name} />
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
-          <Heading sx={{ fontSize: 6, fontWeight: 700 }}>{offer.name}</Heading>
+          <Heading sx={{ fontSize: [5, 6], fontWeight: 700 }}>{offer.name}</Heading>
           <Heading sx={{ fontSize: 4, fontWeight: 700 }}>{offer.subTitle}</Heading>
           <HTMLBox html={offer.details} />
         </Wrapper>

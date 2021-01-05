@@ -19,7 +19,8 @@ function MyDropzone({ onSuccess, multiple, accept }: MyDropzoneType) {
     async (acceptedFiles) => {
       const formData = new FormData()
       formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string)
-      formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET as string)
+      formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string)
+      formData.append("unique_filename", "true")
       try {
         setFetching(true)
         const resFiles: string[] = []
