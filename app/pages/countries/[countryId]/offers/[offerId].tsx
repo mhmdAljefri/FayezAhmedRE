@@ -33,22 +33,24 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         constructingUpdatePrview={offer.constructingUpdatePrview}
       />
 
-      <ThemeLink
-        download={offer.name}
-        target="_blank"
-        rel="noopener "
-        href={offer.brochure || ""}
-        sx={{
-          variant: "links.outline",
-          opacity: offer.brochure ? 1 : 0.3,
-          maxWidth: 250,
-          marginX: "auto",
-          marginY: 5,
-          textAlign: "center",
-        }}
-      >
-        تنزيل البروشور
-      </ThemeLink>
+      {offer.brochure && (
+        <ThemeLink
+          download={offer.name}
+          target="_blank"
+          rel="noopener "
+          href={offer.brochure}
+          sx={{
+            variant: "links.outline",
+            opacity: 1,
+            maxWidth: 250,
+            marginX: "auto",
+            marginY: 5,
+            textAlign: "center",
+          }}
+        >
+          تنزيل البروشور
+        </ThemeLink>
+      )}
       {offer.project && (
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>
@@ -70,7 +72,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
           </Wrapper>
         </Box>
       )}
-      <GalleryView gallery={offer.gallery} />
+      {offer.gallery.length > 0 && <GalleryView gallery={offer.gallery} />}
     </Layout>
   )
 }
