@@ -3,7 +3,7 @@ import Wrapper from "app/components/Wrapper"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
 import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
 import React, { ReactNode, useRef, useState } from "react"
-import { Button, Flex, Grid, Image, Box, Heading, Text } from "theme-ui"
+import { Button, Flex, Grid, Image, Box, Heading, Text, SxStyleProp } from "theme-ui"
 
 import Icon, { IconProp } from "react-icons-kit"
 import { building } from "react-icons-kit/fa/building"
@@ -30,6 +30,7 @@ interface ProjectCardIconsTextProps {
   text: string
   icon?: IconProp["icon"]
   prefix?: ReactNode
+  sx?: SxStyleProp
 }
 
 type ProjectCardProps = Pick<
@@ -58,17 +59,15 @@ type ProjectCardProps = Pick<
   >[]
 }
 
-function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTextProps) {
+function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextProps) {
   return (
     <Flex
       sx={{
-        marginBottom: 3,
-        fontSize: 1,
+        marginBottom: 0,
         height: 40,
-        width,
         color: "lightText",
-        whiteSpace: "nowrap",
         alignItems: "center",
+        ...sx,
       }}
     >
       {icon && (
@@ -81,7 +80,18 @@ function ProjectCardIconsText({ prefix, icon, text, width }: ProjectCardIconsTex
       )}
 
       {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
-      <span style={{ whiteSpace: "nowrap", paddingInlineStart: 5 }}>{text}</span>
+      <Box
+        as="span"
+        sx={{
+          marginInlineEnd: 5,
+          marginInlineStart: 5,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
+        {text}
+      </Box>
     </Flex>
   )
 }
@@ -93,7 +103,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
   return (
     <Box ref={ref} sx={{ position: "relative" }}>
       <Button
-        sx={{ height: 40, padding: 0, display: "flex" }}
+        sx={{ height: 40, padding: 0, minWidth: 80, display: "flex" }}
         variant="link"
         onClick={() => setOpen(true)}
       >
@@ -171,6 +181,21 @@ export function ProjectCard({
         </Link>
       </Box>
       <Box sx={{ paddingY: 3, paddingX: 3 }}>
+        <Flex>
+          {roomWithPrices[0]["room"] && (
+            <SelectRoom
+              selected={selected}
+              roomWithPrices={roomWithPrices}
+              onChange={setSelected}
+            />
+          )}
+          <ProjectCardIconsText
+            sx={{ color: "primary", fontSize: [2], fontWeight: 700 }}
+            text={`تبدا من ${numberFormat(price)}`}
+            prefix={priceTypeSign}
+          />
+        </Flex>
+
         <Heading>{name}</Heading>
         <Text>{locationText}</Text>
         <Link passHref href={projectPath}>
@@ -182,13 +207,16 @@ export function ProjectCard({
           </Text>
         </Link>
       </Box>
-      <Flex sx={{ paddingX: 2, justifyContent: "space-between" }}>
+      <Flex
+        sx={{
+          paddingTop: 2,
+          justifyContent: ["space-around", null, "space-between"],
+          flexWrap: ["wrap", null, "nowrap"],
+        }}
+      >
         <ProjectCardIconsText text={statusText || ""} icon={ic_format_paint} />
-        {roomWithPrices[0]["room"] && (
-          <SelectRoom selected={selected} roomWithPrices={roomWithPrices} onChange={setSelected} />
-        )}
+
         <ProjectCardIconsText text={paymentType === "cash" ? "كاش" : "تقسيط"} icon={money} />
-        <ProjectCardIconsText text={`تبدا من ${numberFormat(price)}`} prefix={priceTypeSign} />
       </Flex>
     </Box>
   )
