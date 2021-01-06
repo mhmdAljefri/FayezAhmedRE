@@ -32,6 +32,7 @@ import getCountries from "app/public/countries/queries/getCountries"
 import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
 import ExploreCard from "app/components/ExploreCard"
+import getExplores from "app/public/explores/queries/getExplores"
 
 type showMoreButton = {
   sx?: SxStyleProp
@@ -413,13 +414,13 @@ export default function CountryPage({
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
+                infinite: explores.length > 3,
               },
             },
             {
               breakpoint: 840,
               settings: {
-                infinite: false,
+                infinite: explores.length > 3,
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 initialSlide: 1,
@@ -429,6 +430,7 @@ export default function CountryPage({
               breakpoint: 580,
               settings: {
                 vertical: true,
+                infinite: explores.length > 3,
                 slidesToShow: 3,
                 slidesToScroll: -3,
               },
@@ -571,10 +573,28 @@ export async function getStaticProps(context) {
 
   const { propertyTypes } = await getPropertyTypes({})
   const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
+  const { explores: dontMissitGallery } = await getExplores({
+    where: {
+      type: "dontMissitGallery",
+    },
+  })
+  const { explores: exploreGallery } = await getExplores({
+    where: {
+      type: "exploreGallery",
+    },
+  })
+  const { explores: getInspiredGallery } = await getExplores({
+    where: {
+      type: "getInspiredGallery",
+    },
+  })
 
   return {
     props: {
-      country,
+      country: {
+        ...country,
+        explores: [...dontMissitGallery, ...exploreGallery, ...getInspiredGallery],
+      },
       furnishCategories,
       propertyTypes,
       oceanViewProjects,

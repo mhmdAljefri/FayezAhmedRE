@@ -209,8 +209,8 @@ export function ProjectCard({
       </Box>
       <Flex
         sx={{
-          paddingTop: 2,
-          justifyContent: ["space-around", null, "space-between"],
+          paddingY: 2,
+          justifyContent: ["space-evenly"],
           flexWrap: ["wrap", null, "nowrap"],
         }}
       >
