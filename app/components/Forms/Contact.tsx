@@ -42,7 +42,7 @@ export default function Contact() {
             alt="اطلب استشارتك"
           />
         </Box>
-        <Heading sx={{ fontSize: 6, paddingTop: 5, paddingBottom: 4, color: "white" }}>
+        <Heading sx={{ fontSize: [4, 6], paddingTop: 5, paddingBottom: 4, color: "white" }}>
           اطلب استشارتك
         </Heading>
         <Form onSubmit={run}>

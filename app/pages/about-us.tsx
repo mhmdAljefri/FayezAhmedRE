@@ -8,7 +8,7 @@ const AboutusPage: BlitzPage = () => {
     <>
       <Box sx={{ backgroundColor: "dark", paddingY: 5 }}>
         <Wrapper>
-          <Heading sx={{ fontSize: 6, color: "primary" }}>عن مجموعة فائز احمد العقارية</Heading>
+          <Heading sx={{ fontSize: 6, color: "primary" }}>عن مجموعة فايز احمد العقارية</Heading>
         </Wrapper>
       </Box>
       <Wrapper sx={{ paddingY: 5 }}>

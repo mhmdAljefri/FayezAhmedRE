@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useEffect, useRef, useState } from "react"
 import { Icon as RIconKit, IconProp } from "react-icons-kit"
 import { instagram } from "react-icons-kit/fa/instagram"
 import { facebook } from "react-icons-kit/fa/facebook"
@@ -13,6 +13,7 @@ import { Box, Image, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-
 import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
+import useScroll from "app/hooks/useScroll"
 
 function Icon(props: IconProp & { href?: string }) {
   return (
@@ -53,9 +54,32 @@ function HR(props: HRProps) {
 }
 
 export default function Footer() {
+  const prefScroll = useRef(0)
+  const scroll = useScroll()
+  const [open, setOpen] = useState(false)
   const mobileNumber = "97470040087"
+
+  useEffect(() => {
+    if (prefScroll.current > scroll) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+    prefScroll.current = scroll
+
+    return () => {}
+  }, [scroll])
+
   return (
-    <Box sx={{ backgroundColor: "dark", paddingTop: 5, color: "white" }}>
+    <Box
+      sx={{
+        backgroundColor: "dark",
+        paddingTop: 5,
+        paddingBottom: 6,
+        color: "white",
+        position: "relative",
+      }}
+    >
       <Wrapper>
         <Box>
           <Heading sx={{ paddingBottom: 4, color: "white" }}>تابعنا</Heading>
@@ -91,7 +115,15 @@ export default function Footer() {
           </Flex>
         </Box>
       </Wrapper>
-      <Box sx={{ backgroundColor: "dark2" }}>
+      <Box
+        sx={{
+          backgroundColor: "dark2",
+          position: open ? "fixed" : "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+      >
         <Wrapper>
           <Grid gap={[0, 1, 2]} columns={[4]}>
             <Link passHref href="/enquire">

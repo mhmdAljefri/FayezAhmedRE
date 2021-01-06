@@ -292,7 +292,7 @@ export default function CountryPage({
               }}
             />
           </Wrapper>
-          <Wrapper>
+          <Wrapper sx={{}}>
             {oceanViewProjects.length > 0 && (
               <Heading sx={{ fontSize: [5, 6] }}>مشاريع باطلالة بحرية</Heading>
             )}
