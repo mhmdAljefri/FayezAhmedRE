@@ -182,7 +182,7 @@ export function ProjectCard({
       </Box>
       <Box sx={{ paddingY: 3, paddingX: 3 }}>
         <Flex>
-          {roomWithPrices[0]["room"] && (
+          {roomWithPrices[0]?.["room"] && (
             <SelectRoom
               selected={selected}
               roomWithPrices={roomWithPrices}

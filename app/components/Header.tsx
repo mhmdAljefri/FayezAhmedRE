@@ -49,7 +49,7 @@ const Header = ({ sx }: HeaderProps) => {
                   color: "primary",
                 }}
               >
-                فائز احمد
+                فايز احمد
                 <Text
                   sx={{
                     p: 0,
