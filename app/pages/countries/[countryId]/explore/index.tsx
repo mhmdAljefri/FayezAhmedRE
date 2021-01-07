@@ -77,7 +77,7 @@ function ExploresPage({ explores: ssgExplores }: Props) {
           {explores.map(({ image, title, id, countryId }, index) => (
             <ExploreCard
               key={id}
-              href={`countries/${countryId}/explore/${id}`}
+              href={`/countries/${countryId}/explore/${id}`}
               image={image}
               title={title}
             />

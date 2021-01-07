@@ -27,6 +27,7 @@ export default function ExploreCard({ href, title, image }) {
             alignItems: "center",
             position: "absolute",
             top: 0,
+            cursor: "pointer",
             left: 0,
             right: 0,
             bottom: 0,

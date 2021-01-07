@@ -2,6 +2,14 @@
   padding: 30px;
 }
 
+.slick-slide div {
+  outline: none;
+}
+
+.slick-list:focus {
+  outline: none;
+}
+
 .slick-dots {
   overflow: hidden;
   display: flex !important;

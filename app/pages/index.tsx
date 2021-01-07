@@ -95,14 +95,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
           }}
         >
           <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
-          <SlickSlider
-            autoplay={false}
-            arrows={false}
-            infinite
-            slidesToShow={1}
-            slidesToScroll={1}
-            responsive={[]}
-          >
+          <SlickSlider autoplay arrows infinite slidesToShow={1} slidesToScroll={1} responsive={[]}>
             {projects.map(
               ({
                 id,
@@ -209,7 +202,7 @@ export async function getStaticProps(context) {
       },
       city: true,
     },
-    take: 4,
+    take: 6,
     where: {
       isHousingComplex: true,
     },

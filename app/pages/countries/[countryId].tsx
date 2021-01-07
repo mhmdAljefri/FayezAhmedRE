@@ -407,6 +407,7 @@ export default function CountryPage({
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <SlickSlider
           slidesToScroll={-1}
+          arrows
           slidesToShow={explores.length > 3 ? 3 : explores.length}
           responsive={[
             {

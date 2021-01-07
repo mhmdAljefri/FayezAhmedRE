@@ -119,6 +119,7 @@ export default function Footer() {
         sx={{
           backgroundColor: "dark2",
           position: open ? "fixed" : "absolute",
+          zIndex: 100,
           bottom: 0,
           left: 0,
           right: 0,

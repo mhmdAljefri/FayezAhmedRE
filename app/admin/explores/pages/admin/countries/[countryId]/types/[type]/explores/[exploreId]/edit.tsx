@@ -6,6 +6,9 @@ import updateExplore from "app/admin/explores/mutations/updateExplore"
 import ExploreForm from "app/admin/explores/components/ExploreForm"
 import { toast } from "react-toastify"
 import { Explore } from "@prisma/client"
+import { Box, Button, Flex } from "theme-ui"
+import useOnClickout from "app/hooks/useOnClickout"
+import { EXPLOARE_TYPES_TEXT } from "app/constants"
 
 export const EditExplore = () => {
   const router = useRouter()
@@ -16,11 +19,38 @@ export const EditExplore = () => {
   const [explore, { setQueryData }] = useQuery(getExplore, { where: { id: exploreId } })
   const [updateExploreMutation] = useMutation(updateExplore)
 
+  const { ref, open, setOpen } = useOnClickout()
+
   if (!countryId) return <div />
   return (
     <div>
-      <h1>تعديل على الصفحة {explore.id}</h1>
-      <pre>{JSON.stringify(explore)}</pre>
+      <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
+        <h1>تعديل على الصفحة {explore.id}</h1>
+
+        <Box ref={ref} sx={{ position: "relative" }}>
+          <Button onClick={() => setOpen(true)}>تعديل القائمة</Button>
+          <Box sx={{ position: "absolute", opacity: open ? 1 : 0 }}>
+            {Object.keys(EXPLOARE_TYPES_TEXT).map((exploreType: Explore["type"]) => (
+              <Box
+                onClick={() =>
+                  updateExploreMutation({
+                    where: { id: explore.id },
+                    data: { ...explore, type: exploreType },
+                    countryId,
+                  })
+                }
+                sx={{
+                  p: 2,
+                  backgroundColor: "background",
+                  color: exploreType === explore.type ? "primary" : "text",
+                }}
+              >
+                {EXPLOARE_TYPES_TEXT[exploreType]}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </Flex>
 
       <ExploreForm
         initialValues={explore}
