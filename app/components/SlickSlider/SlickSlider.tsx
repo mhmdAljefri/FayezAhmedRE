@@ -92,6 +92,7 @@ export default function SlickSlider({
       responsive={responsive}
       arrows={arrows}
       prevArrow={prevArrow}
+      dots
       nextArrow={nextArrow}
     >
       {children}
