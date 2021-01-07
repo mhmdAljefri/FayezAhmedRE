@@ -576,16 +576,19 @@ export async function getStaticProps(context) {
   const { explores: dontMissitGallery } = await getExplores({
     where: {
       type: "dontMissitGallery",
+      countryId,
     },
   })
   const { explores: exploreGallery } = await getExplores({
     where: {
       type: "exploreGallery",
+      countryId,
     },
   })
   const { explores: getInspiredGallery } = await getExplores({
     where: {
       type: "getInspiredGallery",
+      countryId,
     },
   })
 
