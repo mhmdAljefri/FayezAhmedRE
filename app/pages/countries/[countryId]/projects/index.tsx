@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "app/layouts/Layout"
 import ProjectsList from "app/layouts/ProjectsList"
-import { BlitzPage } from "blitz"
+import { BlitzPage, useRouter } from "blitz"
 import getCountries from "app/public/countries/queries/getCountries"
 import { City, Country } from "@prisma/client"
 import getCountry from "app/public/countries/queries/getCountry"
@@ -10,6 +10,12 @@ type Props = {
   country: Country & { cities: City[] }
 }
 const Projects: BlitzPage<Props> = ({ country }) => {
+  const router = useRouter()
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
   return <ProjectsList country={country} title="مشاريعنا" subTitle="اكتشف منزل أحلامك" />
 }
 

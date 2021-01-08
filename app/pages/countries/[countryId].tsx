@@ -98,23 +98,29 @@ export default function CountryPage({
   govProjects,
   ...props
 }: CountryPropsType) {
-  const { push, asPath } = useRouter()
+  const { push, asPath, isFallback } = useRouter()
   const { changePriceType } = usePriceType()
+  const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
+    "dontMissitGallery"
+  )
 
   useEffect(() => {
-    if (country.isTurkey) {
+    if (country?.isTurkey) {
       changePriceType("priceTurkey")
     }
-  }, [country.isTurkey, changePriceType])
+  }, [country?.isTurkey, changePriceType])
+
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (isFallback) {
+    return <div>Loading...</div>
+  }
 
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
   }
 
-  const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
-    "dontMissitGallery"
-  )
-  const explores = country.explores.filter(
+  const explores = country?.explores.filter(
     (explore: Explore) => explore.type === showInspirationGallery
   )
 

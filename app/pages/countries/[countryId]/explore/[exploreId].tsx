@@ -1,5 +1,5 @@
 import React from "react"
-import { BlitzPage, Link } from "blitz"
+import { BlitzPage, Link, useRouter } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Button, Heading, Image } from "theme-ui"
@@ -15,6 +15,12 @@ type ExploreProps = {
   // prev: Explore
 }
 const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
+  const router = useRouter()
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={explore.title}>
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>

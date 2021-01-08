@@ -6,6 +6,7 @@ import ExploreCard from "app/components/ExploreCard"
 import { Explore } from "@prisma/client"
 import getCountries from "app/public/countries/queries/getCountries"
 import Wrapper from "app/components/Wrapper"
+import { useRouter } from "blitz"
 
 type Props = {
   explores: Explore[]
@@ -13,9 +14,16 @@ type Props = {
 type inpirationGallery = Explore["type"]
 
 function ExploresPage({ explores: ssgExplores }: Props) {
+  const router = useRouter()
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   const explores = ssgExplores.filter((explore: Explore) => explore.type === showInspirationGallery)
 
   return (
