@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useLayoutEffect } from "react"
 import usePriceType from "app/hooks/usePriceType"
 import HomeSlider from "app/components/HomeSlider"
 import Wrapper from "app/components/Wrapper"
@@ -18,7 +18,7 @@ import {
   PropertyType,
   RoomWithPrice,
 } from "@prisma/client"
-import { Link, useRouter } from "blitz"
+import { Link, useParam, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/SlickSlider"
@@ -33,6 +33,7 @@ import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
 import ExploreCard from "app/components/ExploreCard"
 import getExplores from "app/public/explores/queries/getExplores"
+import { number } from "zod"
 
 type showMoreButton = {
   sx?: SxStyleProp
@@ -99,16 +100,16 @@ export default function CountryPage({
   ...props
 }: CountryPropsType) {
   const { push, asPath, isFallback } = useRouter()
-  const { changePriceType } = usePriceType()
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
 
-  useEffect(() => {
-    if (country?.isTurkey) {
-      changePriceType("priceTurkey")
-    }
-  }, [country?.isTurkey, changePriceType])
+  // useLayoutEffect(() => {
+  //   if (country && !isFallback) {
+  //     const pricetTypeState = !country.isTurkey || countryId === 2 ? "priceQatar" : "price"
+  //     changePriceType(pricetTypeState)
+  //   }
+  // })
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running

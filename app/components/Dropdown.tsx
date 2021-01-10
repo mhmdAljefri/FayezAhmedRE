@@ -16,13 +16,14 @@ type DropdownProps = {
 
 const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
   const defaultOption = options.find((option) => option.value === defaultValue)
-  const [selected, setSelected] = useState(defaultOption)
   const { ref, open, setOpen } = useOnClickout()
 
   return (
     <Box ref={ref} sx={{ position: "relative", zIndex: 1111 }}>
       <Flex sx={{ alignItems: "center", color: "primary" }} onMouseEnter={() => setOpen(true)}>
-        <Box sx={{ paddingX: 2, marginInlineEnd: 5 }}>{selected?.node || selected?.value}</Box>
+        <Box sx={{ paddingX: 2, marginInlineEnd: 5 }}>
+          {defaultOption?.node || defaultOption?.value}
+        </Box>
         <Box sx={{ position: "absolute", left: 23, top: 0 }}>
           <Icon icon={chevronDown} />
         </Box>
@@ -44,7 +45,6 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
             key={index}
             sx={{ paddingX: 2, cursor: "pointer" }}
             onClick={() => {
-              setSelected(option)
               onChange(option)
               setOpen(false)
             }}

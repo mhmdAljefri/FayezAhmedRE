@@ -1,5 +1,5 @@
 import { useParam } from "blitz"
-import React, { useCallback, useLayoutEffect, useState } from "react"
+import React, { ReactNode, useCallback, useLayoutEffect, useState } from "react"
 import { prices } from "../components/PriceType"
 type priceTypes =
   | "price"
@@ -44,14 +44,18 @@ function getPriceTypeSuffix(priceType: priceTypes) {
 
 // todo use currancy list
 function getPriceTypeSign(priceType: priceTypes) {
-  return prices.find((price) => price[0] === priceType)?.[3]
+  return prices.find((price) => price[0] === priceType)?.[3] || "$"
 }
 
-export default function PriceProvider(props) {
-  const [priceType, setPriceType] = useState<priceTypes>("price")
+type Props = {
+  price: priceTypes
+  children: ReactNode
+}
+export default function PriceProvider({ price = "price", ...props }: Props) {
+  const [priceType, setPriceType] = useState<priceTypes>(price)
 
-  const priceTypeSuffix = priceType && getPriceTypeSuffix(priceType)
-  const priceTypeSign = priceType && getPriceTypeSign(priceType)
+  const priceTypeSuffix = getPriceTypeSuffix(priceType)
+  const priceTypeSign = getPriceTypeSign(priceType)
 
   const changePriceType = useCallback(
     (priceTypeValue: priceTypes) => {

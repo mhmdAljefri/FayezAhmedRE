@@ -111,7 +111,7 @@ function SampleNextArrow(props) {
   const { onClick } = props
   return (
     <Box sx={{ top: -100, left: 10, position: "absolute" }} onClick={onClick}>
-      <ArrowIcon />
+      <ArrowIcon sx={{ width: 40 }} />
     </Box>
   )
 }
@@ -120,14 +120,15 @@ function SamplePrevArrow(props) {
   const { onClick } = props
   return (
     <Box sx={{ top: -100, left: 60, position: "absolute" }} onClick={onClick}>
-      <ArrowIcon sx={{ transform: "rotate(180deg)" }} />
+      <ArrowIcon sx={{ width: 40, transform: "rotate(180deg)" }} />
     </Box>
   )
 }
+
 export function GalleryView({ gallery }) {
   return (
     <>
-      <Box sx={{ paddingY: 6, backgroundColor: "dark" }}>
+      <Box sx={{ paddingTop: 6, paddingBottom: [4, 5, 6], backgroundColor: "dark" }}>
         <Wrapper>
           <Heading sx={{ color: "white", fontSize: [5, null, 6] }}>المعرض</Heading>
         </Wrapper>
@@ -382,11 +383,10 @@ export default function ProjectDetailsLayout({
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
             <SlickSlider
               slidesToShow={1}
-              slidesToScroll={1}
+              slidesToScroll={-1}
               responsive={[]}
               variableWidth
               centerMode={false}
-              rtl
               dots={false}
               sx={{ justifyContent: "center", marginY: 3 }}
             >
@@ -422,6 +422,39 @@ export default function ProjectDetailsLayout({
               <SlickSlider
                 slidesToShow={3}
                 slidesToScroll={3}
+                infinite={features?.length > 4}
+                responsive={[
+                  {
+                    breakpoint: 1200,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 3,
+                      infinite: features?.length > 4,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 840,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 2,
+                      initialSlide: 2,
+                      infinite: features?.length > 4,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 580,
+                    settings: {
+                      centerMode: true,
+                      vertical: false,
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      infinite: features?.length > 4,
+                      rtl: true,
+                    },
+                  },
+                ]}
                 sx={{ justifyContent: "center", marginY: 3 }}
               >
                 {features.map((feat) => (

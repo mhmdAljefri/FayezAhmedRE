@@ -1,8 +1,8 @@
-import { AppProps, ErrorComponent, useRouter } from "blitz"
+import { AppProps, ErrorComponent, useParam, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
-import { Suspense } from "react"
+import { Suspense, useLayoutEffect } from "react"
 
 import Router from "next/router"
 import NProgress from "nprogress" //nprogress module
@@ -23,6 +23,7 @@ Router.events.on("routeChangeError", () => NProgress.done())
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   const router = useRouter()
+  const countryId = useParam("countryId", "number")
 
   return (
     <ErrorBoundary
@@ -35,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <Suspense fallback="...">
-        <PriceProvider>
+        <PriceProvider price={countryId === 2 ? "priceQatar" : "price"}>
           <>
             <ToastContainer />
 
