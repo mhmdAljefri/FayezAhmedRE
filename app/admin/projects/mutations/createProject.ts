@@ -21,6 +21,7 @@ export default async function createProject(
   const project = await db.project.create({
     data: {
       ...data,
+      isDelux: `${data.isDelux}` === "true",
       isHousingComplex: `${data.isHousingComplex}` === "true",
       isGrantedByGov: `${data.isGrantedByGov}` === "true",
       isWithSeaView: `${data.isWithSeaView}` === "true",

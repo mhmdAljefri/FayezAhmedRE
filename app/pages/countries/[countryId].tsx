@@ -1,5 +1,3 @@
-import { useLayoutEffect } from "react"
-import usePriceType from "app/hooks/usePriceType"
 import HomeSlider from "app/components/HomeSlider"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
@@ -18,7 +16,7 @@ import {
   PropertyType,
   RoomWithPrice,
 } from "@prisma/client"
-import { Link, useParam, useRouter } from "blitz"
+import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/SlickSlider"
@@ -33,7 +31,6 @@ import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
 import ExploreCard from "app/components/ExploreCard"
 import getExplores from "app/public/explores/queries/getExplores"
-import { number } from "zod"
 
 type showMoreButton = {
   sx?: SxStyleProp
@@ -191,7 +188,7 @@ export default function CountryPage({
       </Wrapper>
       <Wrapper>
         {country.isTurkey ? (
-          <Heading sx={{ fontSize: [5, 6] }}>مشاريع مميزة</Heading>
+          <Heading sx={{ fontSize: [5, 6] }}>مشاريع فاخرة</Heading>
         ) : (
           <>
             <Heading sx={{ fontSize: [5, 6] }}>مشاريعنا</Heading>
@@ -559,6 +556,18 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const countryId = parseInt(context.params.countryId)
   const country = await getCountry({ where: { id: countryId } })
+  const { projects: mainProjects } = await getProjects({
+    take: 3,
+    orderBy: {
+      id: "desc",
+    },
+    where: {
+      isDelux: country.isTurkey,
+    },
+    include: {
+      roomsWithPrices: true,
+    },
+  })
   let oceanViewProjects: any[] = []
   let govProjects: any[] = []
 
@@ -604,6 +613,7 @@ export async function getStaticProps(context) {
     props: {
       country: {
         ...country,
+        projects: mainProjects,
         explores: [...dontMissitGallery, ...exploreGallery, ...getInspiredGallery],
       },
       furnishCategories,

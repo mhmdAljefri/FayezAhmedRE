@@ -117,6 +117,25 @@ const SeaViewAndGrantedByGoveChekBoxs = ({ countries }) => {
   return (
     <>
       <Field
+        name="isDelux"
+        render={({ input }) => (
+          <>
+            <Label>مشروع فاخر</Label>
+
+            <Flex>
+              <Label>
+                <Radio {...input} name="isDelux" value="true" />
+                نعم
+              </Label>
+              <Label>
+                <Radio {...input} name="isDelux" value="false" />
+                لا
+              </Label>
+            </Flex>
+          </>
+        )}
+      />
+      <Field
         name="isWithSeaView"
         render={({ input }) => (
           <>
