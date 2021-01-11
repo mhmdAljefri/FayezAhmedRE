@@ -132,7 +132,7 @@ const Home: BlitzPage<HomeProps> = ({
                     <Box sx={{ height: 300 }}>
                       <Text
                         sx={{
-                          fontSize: 4,
+                          fontSize: [3, 4],
                           marginBottom: 3,
                           color: "heading",
                           fontWeight: 700,
@@ -140,8 +140,8 @@ const Home: BlitzPage<HomeProps> = ({
                       >
                         <span>{country.name}</span>, <span>{city.name}</span>
                       </Text>
-                      <Flex sx={{ alignItems: "center" }}>
-                        <Text>{housingComplexText}</Text>
+                      <Flex sx={{ alignItems: "center", flexWrap: ["wrap", "nowrap"] }}>
+                        <Text sx={{ mb: 4 }}>{housingComplexText}</Text>
                         {housingComplexImage && (
                           <Image
                             sx={{ width: [50, 70], mx: 2 }}
@@ -169,7 +169,10 @@ const Home: BlitzPage<HomeProps> = ({
                       </Link>
                       <Link passHref href={`/countries/${country.id}/projects/${id}`}>
                         <a style={{ textDecoration: "none" }}>
-                          <Heading sx={{ paddingTop: 3, paddingBottom: 4 }} as="h3">
+                          <Heading
+                            sx={{ paddingTop: 3, textAlign: "center", paddingBottom: 4 }}
+                            as="h3"
+                          >
                             {name}
                           </Heading>
                         </a>
