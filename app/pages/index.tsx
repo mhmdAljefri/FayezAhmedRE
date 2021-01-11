@@ -5,13 +5,14 @@ import CountriesSection, { CountryCardProps } from "app/components/CountriesSect
 import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getPartners from "app/public/partners/queries/getPartners"
-import { Carousel, City, Country, Partner, Project } from "@prisma/client"
+import { Carousel, CarouselVideo, City, Country, Partner, Project } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
 import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import SlickSlider from "app/components/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
 import HTMLBox from "app/components/HTMLBox"
+import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -19,16 +20,23 @@ type CountryWithCityAndCountry = Project & {
 }
 type HomeProps = {
   countries: CountryCardProps[]
+  carouselVideo: CarouselVideo
   carousels: Carousel[]
   partners: Partner[]
   projects: CountryWithCityAndCountry[]
 }
 
-const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }) => {
+const Home: BlitzPage<HomeProps> = ({
+  countries,
+  projects,
+  carouselVideo,
+  carousels,
+  partners,
+}) => {
   return (
     <main>
       <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
-        {false ? ( // todo add video
+        {carouselVideo ? ( // todo add video
           <Box
             sx={{
               position: "relative",
@@ -39,18 +47,21 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
                 left: 0,
                 right: 0,
                 bottom: 0,
+
+                backgroundColor: "#000",
+                opacity: 0.5,
               },
-              iframe: { minHeight: "100vh", minWidth: "100%" },
             }}
           >
-            <iframe
-              title="an"
-              id="frame"
-              src={`https://www.youtube.com/embed/PEwac2WZ7rU?rel=0?version=3&autoplay=1&controls=0&showinfo=0&loop=1`}
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            ></iframe>
+            <video autoPlay loop width="100%" height="100%" controls={false}>
+              <track kind="captions" />
+              <source src={carouselVideo.videoUlr} type="video/mp4" />
+              <source src={carouselVideo.videoUlr} type="video/ogg" />
+              <source src={carouselVideo.videoUlr} type="video/webm" />
+              <object data={carouselVideo.videoUlr}>
+                <embed src={carouselVideo.videoUlr} />
+              </object>
+            </video>
           </Box>
         ) : (
           <HomeSlider slideStyle={{ height: "100vh" }} onlyImages data={carousels} />
@@ -60,6 +71,7 @@ const Home: BlitzPage<HomeProps> = ({ countries, projects, carousels, partners }
             position: "absolute",
             bottom: 0,
             left: 0,
+            zIndex: 1,
             right: 0,
             paddingY: [100, 50],
           }}
@@ -198,6 +210,7 @@ export async function getStaticProps(context) {
   const { countries } = await getCountries({})
   const { partners } = await getPartners({})
   const { carousels } = await getCarousels({})
+  const carouselVideo = await getCarouselVideo({})
   const { projects } = await getProjects({
     include: {
       country: {
@@ -216,7 +229,7 @@ export async function getStaticProps(context) {
   })
 
   return {
-    props: { countries, partners, projects, carousels }, // will be passed to the page component as props
+    props: { countries, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
     revalidate: 60 * 2,
   }
 }

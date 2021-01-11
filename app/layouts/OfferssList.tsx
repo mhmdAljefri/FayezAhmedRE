@@ -8,9 +8,10 @@ import { Grid, Image, Box, Heading, Text } from "theme-ui"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
+import { ConstractiongVideo } from "./ProjectDetailsLayout"
 // import HTMLBox from "app/components/HTMLBox"
 
-type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle"> & {
+type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
   prefixPath?: string
   hideOfferLabel?: boolean
 }
@@ -19,6 +20,7 @@ export function OfferCard({
   image,
   hideOfferLabel,
   subTitle,
+  mainVideo,
   id,
   name,
   prefixPath = "",
@@ -38,17 +40,42 @@ export function OfferCard({
         <Link href={asPath + "/" + prefixPath + id}>
           <a>
             <Box sx={{ position: "relative" }}>
-              <Image
-                sx={{
-                  height: 240,
-                  width: "100%",
-                  objectFit: "cover",
-                  ":hover + div": {
-                    backgroundColor: "primary",
-                  },
-                }}
-                src={image as string}
-              />
+              {mainVideo ? (
+                <Box sx={{ height: 240 }}>
+                  {mainVideo.startsWith("https://www.youtube") ? (
+                    <iframe width="100%" height="100%" title="any" src={mainVideo}></iframe>
+                  ) : (
+                    <video
+                      width="100%"
+                      height="100%"
+                      poster={image || "any"}
+                      // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+                      controls
+                    >
+                      <track kind="captions" />
+                      <source src={mainVideo} type="video/mp4" />
+                      <source src={mainVideo} type="video/ogg" />
+                      <source src={mainVideo} type="video/webm" />
+                      <object data={mainVideo}>
+                        <embed src={mainVideo} />
+                      </object>
+                    </video>
+                  )}
+                </Box>
+              ) : (
+                <Image
+                  sx={{
+                    height: 240,
+                    width: "100%",
+                    objectFit: "cover",
+                    ":hover + div": {
+                      backgroundColor: "primary",
+                    },
+                  }}
+                  src={image as string}
+                />
+              )}
+
               {!hideOfferLabel && (
                 <Box
                   sx={{

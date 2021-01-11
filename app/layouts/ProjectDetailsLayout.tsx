@@ -66,7 +66,7 @@ export function ConstractiongVideo({
   heading,
   constructingUpdateVideo,
 }: {
-  heading: string
+  heading?: string
   constructingUpdateVideo?: string | null
   constructingUpdatePrview?: string | null
 }) {
@@ -74,7 +74,7 @@ export function ConstractiongVideo({
   const isYoutube = constructingUpdateVideo.startsWith("https://www.youtube")
   return (
     <Wrapper sx={{ marginY: 5 }}>
-      <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>{heading}</Heading>
+      {heading && <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>{heading}</Heading>}
       <Box
         sx={{
           marginX: [1, null, 6],

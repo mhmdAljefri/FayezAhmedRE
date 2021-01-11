@@ -26,12 +26,12 @@ export default function UploadMainVideo(props) {
       {youtube ? (
         <LabeledTextField
           placeholder="https://www.youtube.com/embed/XN5p4EWnOEk"
-          name="mainViedo"
+          name="mainVideo"
           label="نص مشاركة فيديو اليوتيوب"
         />
       ) : (
         <>
-          <MediaWidthTextField name="mainViedo" accept="video/*" label="فيديو الرئيسية للعرض" />
+          <MediaWidthTextField name="mainVideo" accept="video/*" label="فيديو الرئيسية للعرض" />
         </>
       )}
     </>

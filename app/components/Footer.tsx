@@ -55,13 +55,16 @@ function HR(props: HRProps) {
 
 export default function Footer() {
   const prefScroll = useRef(0)
+  const timeout = useRef(setTimeout(() => {}, 0))
   const scroll = useScroll()
   const [open, setOpen] = useState(false)
   const mobileNumber = "97470040087"
 
   useEffect(() => {
+    clearTimeout(timeout.current)
     if (prefScroll.current > scroll) {
       setOpen(true)
+      timeout.current = setTimeout(() => setOpen(false), 5000)
     } else {
       setOpen(false)
     }

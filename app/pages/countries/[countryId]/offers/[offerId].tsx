@@ -22,7 +22,31 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
-          <Image src={offer.image || ""} alt={offer.name} />
+          {offer.mainVideo ? (
+            <Box sx={{ height: [240, 350, 450, 550] }}>
+              {offer.mainVideo.startsWith("https://www.youtube") ? (
+                <iframe width="100%" height="100%" title="any" src={offer.mainVideo}></iframe>
+              ) : (
+                <video
+                  width="100%"
+                  height="100%"
+                  poster={offer.image || "any"}
+                  // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+                  controls
+                >
+                  <track kind="captions" />
+                  <source src={offer.mainVideo} type="video/mp4" />
+                  <source src={offer.mainVideo} type="video/ogg" />
+                  <source src={offer.mainVideo} type="video/webm" />
+                  <object data={offer.mainVideo}>
+                    <embed src={offer.mainVideo} />
+                  </object>
+                </video>
+              )}
+            </Box>
+          ) : (
+            <Image src={offer.image || ""} alt={offer.name} />
+          )}
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
           <Heading sx={{ fontSize: [5, 6], fontWeight: 700 }}>{offer.name}</Heading>
