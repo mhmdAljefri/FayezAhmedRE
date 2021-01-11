@@ -8,7 +8,5 @@ export default async function getCarouselVideo({ where }: GetCarouselInput, ctx:
 
   const carouselVideo = await db.carouselVideo.findFirst({ where })
 
-  if (!carouselVideo) throw new NotFoundError()
-
   return carouselVideo
 }
