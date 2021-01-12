@@ -41,7 +41,7 @@ export function OfferCard({
           <a>
             <Box sx={{ position: "relative" }}>
               {mainVideo ? (
-                <Box sx={{ height: 240 }}>
+                <Box sx={{ height: 240, paddingBottom: 40 }}>
                   {mainVideo.startsWith("https://www.youtube") ? (
                     <iframe width="100%" height="100%" title="any" src={mainVideo}></iframe>
                   ) : (

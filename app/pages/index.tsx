@@ -53,7 +53,7 @@ const Home: BlitzPage<HomeProps> = ({
               },
             }}
           >
-            <video autoPlay loop muted width="100%" height="100%" controls={false}>
+            <video autoPlay loop muted style={{ height: "100vh" }} controls={false}>
               <track kind="captions" />
               <source src={carouselVideo.videoUlr} type="video/mp4" />
               <source src={carouselVideo.videoUlr} type="video/ogg" />
