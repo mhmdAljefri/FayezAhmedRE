@@ -30,6 +30,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
                 <video
                   width="100%"
                   height="100%"
+                  style={{ height: "100%", width: "100%", minHeight: "100vh", objectFit: "cover" }}
                   poster={offer.image || "any"}
                   // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
                   controls
