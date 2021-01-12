@@ -1,4 +1,4 @@
-import { Ctx, NotFoundError } from "blitz"
+import { Ctx } from "blitz"
 import db, { Prisma } from "db"
 
 type GetCarouselInput = Pick<Prisma.FindFirstCarouselVideoArgs, "where">
