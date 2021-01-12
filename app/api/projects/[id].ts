@@ -3,7 +3,7 @@ import db from "db"
 
 const ProjectApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const { id } = req.body
-  const project = await db.project.findOne({
+  const project = await db.project.findFirst({
     where: {
       id: id,
     },
