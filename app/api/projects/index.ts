@@ -5,7 +5,7 @@ const ProjectsApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const { countryId } = req.body
   const projects = await db.project.findMany({
     where: {
-      countryId,
+      countryId: parseInt(countryId) || undefined,
     },
     orderBy: {},
   })
