@@ -141,7 +141,36 @@ export function GalleryView({ gallery }) {
           arrows
           slidesToShow={1}
           slidesToScroll={-1}
-          responsive={[]}
+          responsive={[
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: false,
+                rtl: true,
+              },
+            },
+            {
+              breakpoint: 840,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 1,
+                rtl: false,
+              },
+            },
+            {
+              breakpoint: 580,
+              settings: {
+                centerMode: true,
+                vertical: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                rtl: true,
+              },
+            },
+          ]}
           variableWidth
           centerMode={false}
           dots={false}
@@ -384,8 +413,9 @@ export default function ProjectDetailsLayout({
             <SlickSlider
               slidesToScroll={-1}
               responsive={[]}
-              infinite={false}
+              infinite={[...floorplan].length > 3}
               variableWidth
+              adaptiveHeight
               centerMode={false}
               dots={false}
               sx={{ justifyContent: "center", marginY: 3 }}
@@ -438,7 +468,7 @@ export default function ProjectDetailsLayout({
                     settings: {
                       slidesToShow: 2,
                       slidesToScroll: 2,
-                      initialSlide: 2,
+                      initialSlide: 1,
                       infinite: features?.length > 4,
                       rtl: true,
                     },
