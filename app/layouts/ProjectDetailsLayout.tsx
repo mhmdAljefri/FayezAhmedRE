@@ -382,9 +382,9 @@ export default function ProjectDetailsLayout({
           <Wrapper sx={{ marginY: 6 }}>
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
             <SlickSlider
-              slidesToShow={1}
               slidesToScroll={-1}
               responsive={[]}
+              infinite={false}
               variableWidth
               centerMode={false}
               dots={false}
