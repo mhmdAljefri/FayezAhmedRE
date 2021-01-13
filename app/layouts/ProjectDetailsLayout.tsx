@@ -404,7 +404,7 @@ export default function ProjectDetailsLayout({
                       boxShadow: "default",
                       height: [250, 300, 350],
                     }}
-                    src={item}
+                    src={item.replace("/upload/", "/upload/w_400,c_scale/")}
                   />
                 </div>
               ))}
@@ -486,23 +486,23 @@ export default function ProjectDetailsLayout({
                   </div>
                 ))}
               </SlickSlider>
-              <ThemeLink
-                download={name}
-                target="_blank"
-                rel="noopener "
-                as={brochure ? "a" : "span"}
-                href={brochure || ""}
-                sx={{
-                  variant: "links.outline",
-                  opacity: brochure ? 1 : 0.3,
-                  maxWidth: 250,
-                  marginX: "auto",
-                  marginY: 5,
-                  textAlign: "center",
-                }}
-              >
-                تنزيل البروشور
-              </ThemeLink>
+              {brochure && (
+                <ThemeLink
+                  download={name}
+                  target="_blank"
+                  rel="noopener "
+                  href={brochure}
+                  sx={{
+                    variant: "links.outline",
+                    maxWidth: 250,
+                    marginX: "auto",
+                    marginY: 5,
+                    textAlign: "center",
+                  }}
+                >
+                  تنزيل البروشور
+                </ThemeLink>
+              )}
             </Wrapper>
           )}
           {(nearBy as any)?.length > 0 && (
