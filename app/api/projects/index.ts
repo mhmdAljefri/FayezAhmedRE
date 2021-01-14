@@ -1,14 +1,14 @@
+import getProjects from "app/public/projects/queries/getProjects"
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
-import db from "db"
 
 const ProjectsApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const { countryId } = req.body
-  const projects = await db.project.findMany({
+  const projects = await getProjects({
     where: {
       countryId: parseInt(countryId) || undefined,
     },
-    orderBy: {},
   })
+
   res.status(200).json({
     message: "message",
     projects,

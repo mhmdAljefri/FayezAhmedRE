@@ -1,7 +1,7 @@
 import { NotFoundError } from "blitz"
-import db, { FindFirstProjectArgs } from "db"
+import db, { Prisma } from "db"
 
-type GetProjectInput = Pick<FindFirstProjectArgs, "where">
+type GetProjectInput = Pick<Prisma.FindFirstProjectArgs, "where">
 
 export default async function getProject({ where }: GetProjectInput) {
   const project = await db.project.findFirst({

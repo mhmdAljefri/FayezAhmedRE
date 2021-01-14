@@ -1,7 +1,7 @@
-import db, { FindManyProjectArgs } from "db"
+import db, { Prisma } from "db"
 
 type GetProjectsInfiniteInput = Pick<
-  FindManyProjectArgs,
+  Prisma.FindManyProjectArgs,
   "where" | "orderBy" | "skip" | "take" | "select"
 >
 
