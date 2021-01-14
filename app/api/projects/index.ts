@@ -3,7 +3,7 @@ import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 
 const ProjectsApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const { countryId } = req.body
-  const projects = await getProjects({
+  const { projects } = await getProjects({
     where: {
       countryId: parseInt(countryId) || undefined,
     },
