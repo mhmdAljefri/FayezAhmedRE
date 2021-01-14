@@ -9,7 +9,7 @@ import { Carousel, CarouselVideo, City, Country, Partner, Project } from "@prism
 import getCarousels from "app/public/carousels/queries/getCarousels"
 import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
-import SlickSlider from "app/components/SlickSlider"
+import SlickSlider from "app/components/Sliders/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
 import HTMLBox from "app/components/HTMLBox"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"

@@ -19,7 +19,7 @@ import {
 import { Link, useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
-import SlickSlider from "app/components/SlickSlider"
+import SlickSlider from "app/components/Sliders/SlickSlider"
 import Contact from "app/components/Forms/Contact"
 import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"

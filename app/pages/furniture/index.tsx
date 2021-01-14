@@ -6,7 +6,7 @@ import { Box, Heading } from "theme-ui"
 import { FurnishCategory } from "@prisma/client"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import SlickSlider from "app/components/SlickSlider"
+import SlickSlider from "app/components/Sliders/SlickSlider"
 
 type furnishCategoriesProps = {
   furnishCategories: FurnishCategory[]

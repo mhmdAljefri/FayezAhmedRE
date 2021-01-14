@@ -8958,17 +8958,17 @@ nprogress@0.2.0:
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
   integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
 
-nuka-carousel@4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.7.2.tgz#62ee8c8d66f9c15bd9bc54bb3949172d123e39d3"
-  integrity sha512-kwJs9WoPTNeFxF7F+hT6lMpvjKexw5jmAGyZCciJolbhrZXleev2Ktm9ubGZyfgOJCesAMUb7ZWulGhYoRLXag==
+nuka-carousel@4.7.5:
+  version "4.7.5"
+  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.7.5.tgz#820f18afdd06b3f23474f0d2d102409f12a1375e"
+  integrity sha512-E5zsWgRZQxNz6lJaaioz+/3aTJr5pAAkZpxTIW+lK+9OpGz813rGEGEroO9FzHhnMGhV7KcuUnQ8bJgdoUq+1w==
   dependencies:
     csstype "^2.6.6"
     d3-ease "^1.0.3"
     exenv "^1.2.0"
     prop-types "^15.6.0"
     react-move "^6.1.0"
-    wicg-inert "^3.0.3"
+    wicg-inert "^3.1.0"
 
 null-loader@4.0.0:
   version "4.0.0"
@@ -10243,6 +10243,11 @@ react-spinners@0.9.0:
   integrity sha512-+x6eD8tn/aYLdxZjNW7fSR1uoAXLb9qq6TFYZR1dFweJvckcf/HfP8Pa/cy5HOvB/cvI4JgrYXTjh2Me3S6Now==
   dependencies:
     "@emotion/core" "^10.0.15"
+
+react-swipeable@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-6.0.1.tgz#14246e798c25a00da3279632a87811411756f652"
+  integrity sha512-69nonicgjT4ofeHxZSpjuz37BoIiWMEbUYkX0mdTCY2mX1U53XDzDUIOVKRg6vVBNGL+pxYjbRzmylXWORh1xQ==
 
 react-test-renderer@16.x:
   version "16.14.0"
@@ -12861,7 +12866,7 @@ which@^2.0.1, which@^2.0.2:
   dependencies:
     isexe "^2.0.0"
 
-wicg-inert@^3.0.3:
+wicg-inert@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/wicg-inert/-/wicg-inert-3.1.0.tgz#6525f12db188b83f0051bed2ddcf6c1aa5b17590"
   integrity sha512-P0ZiWaN9SxOkJbYtF/PIwmIRO8UTqTJtyl33QTQlHfAb6h15T0Dp5m7WTJ8N6UWIoj+KU5M0a8EtfRZLlHiP0Q==

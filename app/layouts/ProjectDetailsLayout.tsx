@@ -13,7 +13,7 @@ import { key } from "react-icons-kit/fa/key"
 import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import Contact from "app/components/Forms/Contact"
-import SlickSlider from "app/components/SlickSlider"
+import SlickSlider from "app/components/Sliders/SlickSlider"
 import usePriceType from "app/hooks/usePriceType"
 import { Link } from "blitz"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -147,8 +147,8 @@ export function GalleryView({ gallery }) {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: false,
-                rtl: true,
+                infinite: gallery?.length > 4,
+                variableWidth: false,
               },
             },
             {
@@ -157,7 +157,8 @@ export function GalleryView({ gallery }) {
                 slidesToShow: 2,
                 slidesToScroll: 2,
                 initialSlide: 1,
-                rtl: false,
+                infinite: false,
+                variableWidth: false,
               },
             },
             {
@@ -167,25 +168,28 @@ export function GalleryView({ gallery }) {
                 vertical: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                rtl: true,
+                infinite: false,
+                variableWidth: false,
               },
             },
           ]}
           variableWidth
           centerMode={false}
           dots={false}
+          rtl
           sx={{ justifyContent: "center", overflow: "auto" }}
         >
           {gallery.map((item, index) => (
-            <Box sx={{ height: [200, 300] }}>
+            <Box sx={{}}>
               <Image
                 key={item + "_" + index}
                 sx={{
                   borderRadius: 15,
                   margin: 3,
                   width: "auto",
-                  maxHeight: [200, 300],
-                  boxShadow: "default",
+                  height: ["auto", "auto", "auto", "auto", 350],
+                  objectFit: "contain",
+                  marginX: 2,
                 }}
                 src={item}
               />
@@ -460,7 +464,6 @@ export default function ProjectDetailsLayout({
                       slidesToShow: 3,
                       slidesToScroll: 3,
                       infinite: features?.length > 4,
-                      rtl: true,
                     },
                   },
                   {
@@ -470,7 +473,6 @@ export default function ProjectDetailsLayout({
                       slidesToScroll: 2,
                       initialSlide: 1,
                       infinite: features?.length > 4,
-                      rtl: true,
                     },
                   },
                   {
@@ -481,7 +483,6 @@ export default function ProjectDetailsLayout({
                       slidesToShow: 1,
                       slidesToScroll: 1,
                       infinite: features?.length > 4,
-                      rtl: true,
                     },
                   },
                 ]}
