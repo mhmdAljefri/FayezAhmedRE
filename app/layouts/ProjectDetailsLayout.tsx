@@ -187,7 +187,7 @@ export function GalleryView({ gallery }) {
                   borderRadius: 15,
                   margin: 3,
                   width: "auto",
-                  height: ["auto", "auto", "auto", "auto", 350],
+                  height: ["auto", "auto", "auto", 300],
                   objectFit: "contain",
                   marginX: 2,
                 }}
