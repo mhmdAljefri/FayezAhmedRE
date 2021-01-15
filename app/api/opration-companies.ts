@@ -4,7 +4,7 @@ import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 const FurnishCategoriesApi = async (req: BlitzApiRequest, res: BlitzApiResponse) => {
   const { countryId } = req.body
 
-  const oprationCompanyPages = await getOprationCompanyPages({
+  const { oprationCompanyPages } = await getOprationCompanyPages({
     where: {
       countryId: parseInt(countryId) || undefined,
     },
