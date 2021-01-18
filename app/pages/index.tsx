@@ -1,11 +1,19 @@
 import { BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
-import CountriesSection, { CountryCardProps } from "app/components/CountriesSection"
 import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getPartners from "app/public/partners/queries/getPartners"
-import { Carousel, CarouselVideo, City, Country, Partner, Project } from "@prisma/client"
+import {
+  Carousel,
+  CarouselVideo,
+  City,
+  Country,
+  Offer,
+  Partner,
+  Project,
+  RoomWithPrice,
+} from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
 import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
@@ -13,14 +21,23 @@ import SlickSlider from "app/components/Sliders/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
 import HTMLBox from "app/components/HTMLBox"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
+import { ProjectCard } from "app/layouts/ProjectsList"
+import Contact from "app/components/Forms/Contact"
+import getOffers from "app/public/offers/queries/getOffers"
+import { OfferCard } from "app/layouts/OfferssList"
 
 type CountryWithCityAndCountry = Project & {
   city: City
   country: Country
 }
+type ProjectWithRooms = Project & {
+  roomsWithPrices: RoomWithPrice[]
+}
+type CountryWithThierProjects = Country & { projects: ProjectWithRooms[] }
 type HomeProps = {
-  countries: CountryCardProps[]
+  countries: CountryWithThierProjects[]
   carouselVideo: CarouselVideo
+  offers: Offer[]
   carousels: Carousel[]
   partners: Partner[]
   projects: CountryWithCityAndCountry[]
@@ -28,6 +45,7 @@ type HomeProps = {
 
 const Home: BlitzPage<HomeProps> = ({
   countries,
+  offers,
   projects,
   carouselVideo,
   carousels,
@@ -90,7 +108,6 @@ const Home: BlitzPage<HomeProps> = ({
           </Wrapper>
         </Box>
       </Box>
-      <CountriesSection data={countries} />
       <Box>
         <Wrapper
           sx={{
@@ -210,15 +227,84 @@ const Home: BlitzPage<HomeProps> = ({
           </SlickSlider>
         </Wrapper>
       </Box>
+
+      <Box>
+        {countries.map(({ name, projects, isTurkey }) => (
+          <Box sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
+            <Wrapper>
+              <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6], color: "primary" }}>
+                عرض مشاريع {name}
+              </Heading>
+
+              <SlickSlider
+                autoplay
+                arrows={false}
+                infinite
+                slidesToShow={1}
+                slidesToScroll={1}
+                responsive={[]}
+              >
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    {...project}
+                    roomWithPrices={[...project.roomsWithPrices]}
+                  />
+                ))}
+              </SlickSlider>
+            </Wrapper>
+          </Box>
+        ))}
+      </Box>
+
+      <Box sx={{ py: 4 }}>
+        <Wrapper>
+          <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6], color: "primary" }}>احدث عروضنا</Heading>
+
+          <SlickSlider
+            autoplay
+            arrows={false}
+            infinite
+            slidesToShow={1}
+            slidesToScroll={1}
+            responsive={[]}
+          >
+            {offers.map((offer) => (
+              <OfferCard
+                key={offer.id}
+                {...offer}
+                prefixPath={`countries/${offer.countryId}/offers/`}
+              />
+            ))}
+          </SlickSlider>
+        </Wrapper>
+      </Box>
       <OurPartnersSection data={partners} />
+
+      <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
+        <Contact />
+      </Wrapper>
     </main>
   )
 }
 
 export async function getStaticProps(context) {
-  const { countries } = await getCountries({})
+  const { countries } = await getCountries({
+    select: {
+      projects: {
+        orderBy: {
+          id: "desc",
+        },
+        take: 3,
+        include: {
+          roomsWithPrices: true,
+        },
+      },
+    },
+  })
   const { partners } = await getPartners({})
   const { carousels } = await getCarousels({})
+  const { offers } = await getOffers({})
   const carouselVideo = await getCarouselVideo({})
   const { projects } = await getProjects({
     include: {
@@ -238,7 +324,7 @@ export async function getStaticProps(context) {
   })
 
   return {
-    props: { countries, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
+    props: { countries, offers, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
     revalidate: 60 * 2,
   }
 }

@@ -2,7 +2,7 @@ import { AppProps, ErrorComponent, useParam, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
-import { Suspense, useLayoutEffect } from "react"
+import { Suspense } from "react"
 
 import Router from "next/router"
 import NProgress from "nprogress" //nprogress module
@@ -14,6 +14,7 @@ import "app/styles/slick-modifier.css"
 import "app/styles/fonts.css" // add local fonts
 import "app/styles/animate.css"
 import "react-toastify/dist/ReactToastify.css"
+import "glider-js/glider.min.css"
 
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start())

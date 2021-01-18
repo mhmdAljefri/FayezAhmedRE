@@ -538,7 +538,9 @@ export default function ProjectDetailsLayout({
           )}
           {(nearBy as any)?.length > 0 && (
             <Wrapper>
-              <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>في الجوار</Heading>
+              <Heading sx={{ paddingBottom: 5, paddingTop: 4, fontSize: [5, null, 6] }}>
+                في الجوار
+              </Heading>
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>

@@ -26,6 +26,7 @@ export function OfferCard({
   prefixPath = "",
 }: OfferCardProps) {
   const { asPath } = useRouter()
+
   return (
     <Fade bottom>
       <Box
@@ -37,7 +38,7 @@ export function OfferCard({
           marginBottom: 2,
         }}
       >
-        <Link href={asPath + "/" + prefixPath + id}>
+        <Link href={asPath + prefixPath + id}>
           <a>
             <Box sx={{ position: "relative" }}>
               {mainVideo ? (

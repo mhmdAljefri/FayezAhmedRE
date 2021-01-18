@@ -1,18 +1,15 @@
 import React from "react"
 import { Box, Grid, Heading, Image } from "theme-ui"
 import Wrapper from "./Wrapper"
-import Slide from "react-reveal/Slide"
 import { Partner } from "@prisma/client"
 
 type PartnersCardProps = Partner
 
 function PartnersCard({ image, name }: PartnersCardProps) {
   return (
-    <Slide bottom>
-      <Box sx={{ textAlign: "center", marginX: "auto", padding: 2, maxWidth: 200 }}>
-        <Image src={image} alt={name} />
-      </Box>
-    </Slide>
+    <Box sx={{ textAlign: "center", marginX: "auto", padding: 2, maxWidth: 200 }}>
+      <Image src={image} alt={name} />
+    </Box>
   )
 }
 
@@ -21,7 +18,7 @@ type OurPartnersSectionProps = {
 }
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
-    <Box sx={{ paddingY: 5, marginTop: 6, backgroundColor: "light" }}>
+    <Box sx={{ paddingTop: 5, paddingBottom: 7, marginTop: 6, backgroundColor: "light" }}>
       <Wrapper>
         <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
         <Grid columns={[2, 2, 4]} sx={{ justifyContent: "center", alignItems: "center" }}>

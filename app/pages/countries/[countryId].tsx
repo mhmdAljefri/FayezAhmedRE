@@ -176,7 +176,7 @@ export default function CountryPage({
 
         <Grid sx={{ mt: 5 }} columns={[1, 1, 2, 3]}>
           {country.offers.map((offer) => (
-            <OfferCard {...offer} prefixPath="offers/" />
+            <OfferCard key={offer.id} {...offer} prefixPath="/offers/" />
           ))}
         </Grid>
         <ShowMoreButton
