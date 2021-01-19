@@ -83,9 +83,7 @@ function CountryPage({
     push({ pathname: `${asPath}/projects`, query: filter })
   }
 
-  const explores = country?.explores.filter(
-    (explore: Explore) => explore.type === showInspirationGallery
-  )
+  const explores = country?.explores.filter((explore) => explore.type === showInspirationGallery)
 
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
@@ -408,9 +406,7 @@ function CountryPage({
           ]}
         >
           {explores.map(({ image, title, id }, index) => (
-            <Slide key={id} bottom>
-              <ExploreCard href={`${asPath}/explore/${id}`} image={image} title={title} />
-            </Slide>
+            <ExploreCard key={id} href={`${asPath}/explore/${id}`} image={image} title={title} />
           ))}
         </SlickSlider>
       </Wrapper>
