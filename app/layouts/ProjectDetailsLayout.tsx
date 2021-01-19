@@ -327,10 +327,10 @@ export default function ProjectDetailsLayout({
           <Box
             sx={{
               marginTop: -6,
-
               borderRadius: 15,
               overflow: "hidden",
-              maxHeight: 600,
+              height: 600,
+              maxHeight: ["90vh", "70vh", "70vh"],
             }}
           >
             <Image

@@ -132,12 +132,12 @@ const Home: BlitzPage<HomeProps> = ({
         >
           <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
           <SlickSlider
+            responsive={[]}
             autoplay
             arrows={false}
             infinite
             slidesToShow={1}
             slidesToScroll={1}
-            responsive={[]}
           >
             {projects.map(
               ({
@@ -185,7 +185,7 @@ const Home: BlitzPage<HomeProps> = ({
                           }}
                         >
                           <Image
-                            sx={{ objectFit: "cover", maxHeight: 280 }}
+                            sx={{ objectFit: "cover", maxHeight: [200, null, 280], maxWidth: 300 }}
                             src={image}
                             alt={name}
                           />
@@ -233,8 +233,12 @@ const Home: BlitzPage<HomeProps> = ({
         {countries.map(({ name, projects, id, isTurkey }) => (
           <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
             <Wrapper>
-              <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
-                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6] }}>عرض مشاريع {name}</Heading>
+              <Flex
+                sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}
+              >
+                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20 }}>
+                  عرض مشاريع {name}
+                </Heading>
                 <ShowMoreButton href={`/countries/${id}`} />
               </Flex>
 
@@ -242,9 +246,38 @@ const Home: BlitzPage<HomeProps> = ({
                 autoplay
                 arrows={false}
                 infinite
-                slidesToShow={1}
+                slidesToShow={3}
                 slidesToScroll={1}
-                responsive={[]}
+                responsive={[
+                  {
+                    breakpoint: 1200,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 3,
+                      infinite: false,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 1100,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      infinite: false,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 900,
+                    settings: {
+                      centerMode: false,
+                      vertical: false,
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      rtl: true,
+                    },
+                  },
+                ]}
               >
                 {projects.map((project) => (
                   <ProjectCard
@@ -267,9 +300,38 @@ const Home: BlitzPage<HomeProps> = ({
             autoplay
             arrows={false}
             infinite
-            slidesToShow={1}
+            slidesToShow={3}
             slidesToScroll={1}
-            responsive={[]}
+            responsive={[
+              {
+                breakpoint: 1200,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: false,
+                  rtl: true,
+                },
+              },
+              {
+                breakpoint: 1100,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: false,
+                  rtl: true,
+                },
+              },
+              {
+                breakpoint: 900,
+                settings: {
+                  centerMode: false,
+                  vertical: false,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  rtl: true,
+                },
+              },
+            ]}
           >
             {offers.map((offer) => (
               <OfferCard

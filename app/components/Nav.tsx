@@ -22,7 +22,7 @@ const Nav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
-            fontSize: [3, null, 5, 6],
+            fontSize: [3, 4, 4, 5],
           }}
         >
           {text}
@@ -62,11 +62,13 @@ const Nav = (props: NavProps) => {
             sx={{
               paddingX: 4,
               height: "100vh",
+              overflowX: "hidden",
+              overflowY: "auto",
               backgroundColor: "dark",
 
               direction: "rtl",
               paddingY: 2,
-              width: ["90vw", null, null, 400],
+              width: ["90vw", null, 400],
               boxShadow: "default",
               justifyContent: "space-between",
               flexDirection: "column",
