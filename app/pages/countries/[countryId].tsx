@@ -4,7 +4,7 @@ import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
 
 import React, { useState } from "react"
-import { Box, Flex, Grid, Heading, Text, Link as ThemeLink, SxStyleProp } from "theme-ui"
+import { Box, Flex, Grid, Heading, Text } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
@@ -23,7 +23,6 @@ import SlickSlider from "app/components/Sliders/SlickSlider"
 import Contact from "app/components/Forms/Contact"
 import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import ArrowIcon from "app/components/ArrowIcon"
 import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
@@ -31,37 +30,9 @@ import getProjects from "app/public/projects/queries/getProjects"
 import { ProjectCard } from "app/layouts/ProjectsList"
 import ExploreCard from "app/components/ExploreCard"
 import getExplores from "app/public/explores/queries/getExplores"
+import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
 
-type showMoreButton = {
-  sx?: SxStyleProp
-  href: string
-}
-function ShowMoreButton({ sx, href }: showMoreButton) {
-  return (
-    <Link passHref href={href}>
-      <ThemeLink
-        sx={{
-          ...sx,
-          paddingX: 3,
-          paddingY: 2,
-          textDecoration: "none",
-          ":hover": {
-            backgroundColor: "light",
-            borderRadius: "lg",
-            boxShadow: "default",
-          },
-        }}
-      >
-        <Flex sx={{ color: "primary", alignItems: "center", justifyContent: "center" }}>
-          <Text sx={{ color: "text" }}>المزيد</Text>
-          <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
-        </Flex>
-      </ThemeLink>
-    </Link>
-  )
-}
-
-function HeadingWithMoreLink({ heading, href, sx }: showMoreButton & { heading: string }) {
+function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
     <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
       <Heading sx={{ fontSize: [5, 6], padding: 0 }}>{heading}</Heading>
@@ -88,7 +59,7 @@ export type CountryPropsType = {
 
 type inpirationGallery = Explore["type"]
 
-export default function CountryPage({
+function CountryPage({
   country,
   propertyTypes,
   furnishCategories,
@@ -100,13 +71,6 @@ export default function CountryPage({
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
-
-  // useLayoutEffect(() => {
-  //   if (country && !isFallback) {
-  //     const pricetTypeState = !country.isTurkey || countryId === 2 ? "priceQatar" : "price"
-  //     changePriceType(pricetTypeState)
-  //   }
-  // })
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
@@ -562,6 +526,7 @@ export async function getStaticProps(context) {
       id: "desc",
     },
     where: {
+      countryId,
       isDelux: country.isTurkey,
     },
     include: {
@@ -576,6 +541,7 @@ export async function getStaticProps(context) {
       where: { isGrantedByGov: true },
       include: { roomsWithPrices: true },
       take: 3,
+      orderBy: { id: "desc" },
     })
     const { projects: oceanViews } = await getProjects({
       where: {
@@ -583,6 +549,7 @@ export async function getStaticProps(context) {
       },
       include: { roomsWithPrices: true },
       take: 3,
+      orderBy: { id: "desc" },
     })
     oceanViewProjects = oceanViews
     govProjects = projects
@@ -595,18 +562,21 @@ export async function getStaticProps(context) {
       type: "dontMissitGallery",
       countryId,
     },
+    orderBy: { id: "desc" },
   })
   const { explores: exploreGallery } = await getExplores({
     where: {
       type: "exploreGallery",
       countryId,
     },
+    orderBy: { id: "desc" },
   })
   const { explores: getInspiredGallery } = await getExplores({
     where: {
       type: "getInspiredGallery",
       countryId,
     },
+    orderBy: { id: "desc" },
   })
 
   return {
@@ -624,3 +594,5 @@ export async function getStaticProps(context) {
     revalidate: 60 * 2,
   }
 }
+
+export default CountryPage

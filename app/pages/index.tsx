@@ -25,6 +25,7 @@ import { ProjectCard } from "app/layouts/ProjectsList"
 import Contact from "app/components/Forms/Contact"
 import getOffers from "app/public/offers/queries/getOffers"
 import { OfferCard } from "app/layouts/OfferssList"
+import ShowMoreButton from "app/components/ShowMoreButton"
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -229,12 +230,13 @@ const Home: BlitzPage<HomeProps> = ({
       </Box>
 
       <Box>
-        {countries.map(({ name, projects, isTurkey }) => (
-          <Box sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
+        {countries.map(({ name, projects, id, isTurkey }) => (
+          <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
             <Wrapper>
-              <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6], color: "primary" }}>
-                عرض مشاريع {name}
-              </Heading>
+              <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
+                <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6] }}>عرض مشاريع {name}</Heading>
+                <ShowMoreButton href={`/countries/${id}/projects`} />
+              </Flex>
 
               <SlickSlider
                 autoplay
@@ -259,7 +261,7 @@ const Home: BlitzPage<HomeProps> = ({
 
       <Box sx={{ py: 4 }}>
         <Wrapper>
-          <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6], color: "primary" }}>احدث عروضنا</Heading>
+          <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6] }}>احدث عروضنا</Heading>
 
           <SlickSlider
             autoplay

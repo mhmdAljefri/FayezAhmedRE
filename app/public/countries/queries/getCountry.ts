@@ -9,6 +9,7 @@ export default async function getCountry({ where }: GetCountryInput) {
       cities: true,
       offers: {
         take: 3,
+        orderBy: { id: "desc" },
       },
       carouselImages: true,
       rooms: true,

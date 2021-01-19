@@ -9,7 +9,12 @@ import NProgress from "nprogress" //nprogress module
 import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
 
+import "react-phone-number-input/style.css"
+import "rc-drawer/assets/index.css"
 import "nprogress/nprogress.css" //styles of nprogress
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
 import "app/styles/fonts.css" // add local fonts
 import "app/styles/animate.css"
