@@ -193,7 +193,7 @@ function CountryPage({
             },
           ]}
         >
-          {[...country.projects].map((project, index) => (
+          {country.projects.map((project, index) => (
             <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
               <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
             </Box>
@@ -247,7 +247,7 @@ function CountryPage({
                 },
               ]}
             >
-              {[...govProjects].map((project, index) => (
+              {govProjects.map((project, index) => (
                 <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
                   <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
                 </Box>
@@ -298,7 +298,7 @@ function CountryPage({
                 },
               ]}
             >
-              {[...oceanViewProjects].map((project, index) => (
+              {oceanViewProjects.map((project, index) => (
                 <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
                   <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
                 </Box>

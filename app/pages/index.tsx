@@ -234,8 +234,8 @@ const Home: BlitzPage<HomeProps> = ({
           <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
             <Wrapper>
               <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
-                <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6] }}>عرض مشاريع {name}</Heading>
-                <ShowMoreButton href={`/countries/${id}/projects`} />
+                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6] }}>عرض مشاريع {name}</Heading>
+                <ShowMoreButton href={`/countries/${id}`} />
               </Flex>
 
               <SlickSlider
@@ -261,7 +261,7 @@ const Home: BlitzPage<HomeProps> = ({
 
       <Box sx={{ py: 4 }}>
         <Wrapper>
-          <Heading sx={{ pt: 5, pb: 4, fontSize: [5, 6] }}>احدث عروضنا</Heading>
+          <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
 
           <SlickSlider
             autoplay

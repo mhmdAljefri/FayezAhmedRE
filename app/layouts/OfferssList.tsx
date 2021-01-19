@@ -26,6 +26,7 @@ export function OfferCard({
   prefixPath = "",
 }: OfferCardProps) {
   const { asPath } = useRouter()
+  const href = asPath + prefixPath + id
 
   return (
     <Fade bottom>
@@ -38,11 +39,11 @@ export function OfferCard({
           marginBottom: 2,
         }}
       >
-        <Link href={asPath + prefixPath + id}>
+        <Link href={href}>
           <a>
             <Box sx={{ position: "relative" }}>
               {mainVideo ? (
-                <Box sx={{ height: 240, paddingBottom: 40 }}>
+                <Box sx={{ height: 240, paddingBottom: hideOfferLabel ? 0 : 40 }}>
                   {mainVideo.startsWith("https://www.youtube") ? (
                     <iframe width="100%" height="100%" title="any" src={mainVideo}></iframe>
                   ) : (
@@ -101,11 +102,13 @@ export function OfferCard({
             </Box>
           </a>
         </Link>
-        <Box sx={{ paddingY: 3, paddingX: 3 }}>
-          <Heading>{name}</Heading>
-          <Text>{subTitle}</Text>
-          {/* <HTMLBox html={details} /> */}
-        </Box>
+        <Link href={href}>
+          <Box sx={{ paddingY: 3, paddingX: 3 }}>
+            <Heading>{name}</Heading>
+            <Text>{subTitle}</Text>
+            {/* <HTMLBox html={details} /> */}
+          </Box>
+        </Link>
       </Box>
     </Fade>
   )

@@ -3,6 +3,7 @@
 }
 
 .slick-slide div {
+  direction: rtl;
   outline: none;
 }
 
