@@ -75,7 +75,10 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
           )}
           {projects.map((item) => {
             return (
-              <Flex sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}>
+              <Flex
+                key={item.id}
+                sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}
+              >
                 <Box sx={{ width: ["100%", 200], boxShadow: "card" }}>
                   <Image
                     sx={{

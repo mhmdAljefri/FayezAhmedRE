@@ -151,7 +151,7 @@ const Home: BlitzPage<HomeProps> = ({
                 gallery,
                 subTitle,
               }) => (
-                <Box sx={{ direction: "rtl", overflow: "hidden" }}>
+                <Box key={id} sx={{ direction: "rtl", overflow: "hidden" }}>
                   <Grid columns={2}>
                     <Box sx={{ height: 300 }}>
                       <Text

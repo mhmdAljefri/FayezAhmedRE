@@ -1,6 +1,6 @@
 import { BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
-import { Box, Heading, Text } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import getFeatures from "app/public/features/queries/getFeatures"
 import OurServicesSection from "app/components/OurServicesSection"

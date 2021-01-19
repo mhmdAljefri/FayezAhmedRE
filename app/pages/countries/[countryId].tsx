@@ -10,6 +10,7 @@ import {
   City,
   Country,
   Explore,
+  FurnishCategory,
   Offer,
   OprationCompanyPage,
   Project,
@@ -53,7 +54,7 @@ export type CountryPropsType = {
   }
   oceanViewProjects: ProjectWitRooms[]
   govProjects: ProjectWitRooms[]
-  furnishCategories: { name: string; image: string }[]
+  furnishCategories: Pick<FurnishCategory, "id" | "image" | "name">[]
   propertyTypes: PropertyType[]
 }
 
@@ -419,7 +420,7 @@ function CountryPage({
           <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
           <SlickSlider>
             {furnishCategories.map((furnishCategory) => (
-              <FurnishCategoryCard {...furnishCategory} />
+              <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
             ))}
           </SlickSlider>
         </Wrapper>
@@ -556,7 +557,9 @@ export async function getStaticProps(context) {
   }
 
   const { propertyTypes } = await getPropertyTypes({})
-  const { furnishCategories } = await getFurnishCategories({ select: { name: true, image: true } })
+  const { furnishCategories } = await getFurnishCategories({
+    select: { name: true, image: true, id: true },
+  })
   const { explores: dontMissitGallery } = await getExplores({
     where: {
       type: "dontMissitGallery",

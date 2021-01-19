@@ -22,7 +22,7 @@ const Search: BlitzPage<furnishesProps> = ({ furnishes }) => {
       <Wrapper sx={{ marginTop: furnishes.length > 0 ? -5 : 5, marginBottom: 5 }}>
         <Grid columns={[1, null, 3]}>
           {furnishes.length > 0 ? (
-            furnishes.map((furnish) => <FurnishCard {...furnish} />)
+            furnishes.map((furnish) => <FurnishCard key={furnish.id} {...furnish} />)
           ) : (
             <Box sx={{ fontSize: 4, textAlign: "center", paddingY: 5 }}>لا توجد بيانات</Box>
           )}
