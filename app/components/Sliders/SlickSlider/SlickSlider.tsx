@@ -80,17 +80,17 @@ export default function SlickSlider({
   arrows,
   ...props
 }: SlickSliderProps) {
-  const responsive = variableWidth
-    ? props.responsive.map(({ breakpoint, settings }) => ({
-        breakpoint,
-        settings: { variableWidth, ...settings, arrows },
-      }))
-    : props.responsive
+  // const responsive = variableWidth
+  //   ? props.responsive.map(({ breakpoint, settings }) => ({
+  //       breakpoint,
+  //       settings: { variableWidth, ...settings, arrows },
+  //     }))
+  //   : props.responsive
   return (
     <ReactSlick
       {...props}
       variableWidth={variableWidth}
-      responsive={responsive}
+      // responsive={responsive}
       arrows={arrows}
       prevArrow={prevArrow}
       dots
