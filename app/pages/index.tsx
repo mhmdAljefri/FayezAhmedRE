@@ -109,6 +109,122 @@ const Home: BlitzPage<HomeProps> = ({
           </Wrapper>
         </Box>
       </Box>
+
+      <Box sx={{ py: 4 }}>
+        <Wrapper>
+          <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
+
+          <SlickSlider
+            autoplay
+            arrows={false}
+            infinite
+            slidesToShow={3}
+            slidesToScroll={1}
+            responsive={[
+              {
+                breakpoint: 1200,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                  infinite: false,
+                  rtl: true,
+                },
+              },
+              {
+                breakpoint: 1100,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: false,
+                  rtl: true,
+                },
+              },
+              {
+                breakpoint: 900,
+                settings: {
+                  centerMode: false,
+                  vertical: false,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  rtl: true,
+                },
+              },
+            ]}
+          >
+            {offers.map((offer) => (
+              <OfferCard
+                key={offer.id}
+                {...offer}
+                prefixPath={`countries/${offer.countryId}/offers/`}
+              />
+            ))}
+          </SlickSlider>
+        </Wrapper>
+      </Box>
+
+      <Box>
+        {countries.map(({ name, projects, id, isTurkey }) => (
+          <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
+            <Wrapper>
+              <Flex
+                sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}
+              >
+                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20 }}>
+                  عرض مشاريع {name}
+                </Heading>
+                <ShowMoreButton href={`/countries/${id}`} />
+              </Flex>
+
+              <SlickSlider
+                autoplay
+                arrows={false}
+                infinite
+                slidesToShow={3}
+                slidesToScroll={1}
+                responsive={[
+                  {
+                    breakpoint: 1200,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 3,
+                      infinite: false,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 1100,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      infinite: false,
+                      rtl: true,
+                    },
+                  },
+                  {
+                    breakpoint: 900,
+                    settings: {
+                      centerMode: false,
+                      vertical: false,
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      rtl: true,
+                    },
+                  },
+                ]}
+              >
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    {...project}
+                    roomWithPrices={[...project.roomsWithPrices]}
+                  />
+                ))}
+              </SlickSlider>
+            </Wrapper>
+          </Box>
+        ))}
+      </Box>
+
       <Box>
         <Wrapper
           sx={{
@@ -185,7 +301,11 @@ const Home: BlitzPage<HomeProps> = ({
                           }}
                         >
                           <Image
-                            sx={{ objectFit: "cover", maxHeight: [200, null, 280], maxWidth: 300 }}
+                            sx={{
+                              objectFit: "contain",
+                              maxHeight: [200, null, 280],
+                              maxWidth: 300,
+                            }}
                             src={image}
                             alt={name}
                           />
@@ -225,121 +345,6 @@ const Home: BlitzPage<HomeProps> = ({
                 </Box>
               )
             )}
-          </SlickSlider>
-        </Wrapper>
-      </Box>
-
-      <Box>
-        {countries.map(({ name, projects, id, isTurkey }) => (
-          <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
-            <Wrapper>
-              <Flex
-                sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}
-              >
-                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20 }}>
-                  عرض مشاريع {name}
-                </Heading>
-                <ShowMoreButton href={`/countries/${id}`} />
-              </Flex>
-
-              <SlickSlider
-                autoplay
-                arrows={false}
-                infinite
-                slidesToShow={3}
-                slidesToScroll={1}
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 3,
-                      infinite: false,
-                      rtl: true,
-                    },
-                  },
-                  {
-                    breakpoint: 1100,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                      infinite: false,
-                      rtl: true,
-                    },
-                  },
-                  {
-                    breakpoint: 900,
-                    settings: {
-                      centerMode: false,
-                      vertical: false,
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      rtl: true,
-                    },
-                  },
-                ]}
-              >
-                {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    {...project}
-                    roomWithPrices={[...project.roomsWithPrices]}
-                  />
-                ))}
-              </SlickSlider>
-            </Wrapper>
-          </Box>
-        ))}
-      </Box>
-
-      <Box sx={{ py: 4 }}>
-        <Wrapper>
-          <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
-
-          <SlickSlider
-            autoplay
-            arrows={false}
-            infinite
-            slidesToShow={3}
-            slidesToScroll={1}
-            responsive={[
-              {
-                breakpoint: 1200,
-                settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  infinite: false,
-                  rtl: true,
-                },
-              },
-              {
-                breakpoint: 1100,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1,
-                  infinite: false,
-                  rtl: true,
-                },
-              },
-              {
-                breakpoint: 900,
-                settings: {
-                  centerMode: false,
-                  vertical: false,
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  rtl: true,
-                },
-              },
-            ]}
-          >
-            {offers.map((offer) => (
-              <OfferCard
-                key={offer.id}
-                {...offer}
-                prefixPath={`countries/${offer.countryId}/offers/`}
-              />
-            ))}
           </SlickSlider>
         </Wrapper>
       </Box>

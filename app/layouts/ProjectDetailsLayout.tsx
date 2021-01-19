@@ -329,7 +329,7 @@ export default function ProjectDetailsLayout({
               marginTop: -6,
               borderRadius: 15,
               overflow: "hidden",
-              height: 600,
+              height: ["auto", "auto", 600],
               maxHeight: ["90vh", "70vh", "70vh"],
             }}
           >
