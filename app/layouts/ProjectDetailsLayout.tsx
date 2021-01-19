@@ -2,7 +2,7 @@ import BigIconText from "app/components/BigIconBox"
 // import SelectionBox from "app/components/SelectionBox"
 import Wrapper from "app/components/Wrapper"
 import React, { useState } from "react"
-import { Box, Button, Flex, Grid, Heading, Image, Link as ThemeLink, Text } from "theme-ui"
+import { Box, Button, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
 import Layout from "./Layout"
 
 import { buildingO } from "react-icons-kit/fa/buildingO"
@@ -26,6 +26,7 @@ import { arSA } from "date-fns/locale"
 import Icon from "react-icons-kit"
 import HTMLBox from "app/components/HTMLBox"
 import { numberFormat } from "app/utils"
+import Image from "app/components/Image"
 
 type ConstractingCardProps = {
   label: string
@@ -180,9 +181,8 @@ export function GalleryView({ gallery }) {
           sx={{ justifyContent: "center", overflow: "auto" }}
         >
           {gallery.map((item, index) => (
-            <Box sx={{}}>
+            <Box key={item + "_" + index} sx={{}}>
               <Image
-                key={item + "_" + index}
                 sx={{
                   borderRadius: 15,
                   margin: 3,
@@ -224,7 +224,7 @@ export function PaymentPlan({ installmentPlan }) {
             </Flex>
 
             {installmentPlan.map(({ instalment, milestone }, index) => (
-              <Grid columns={instalment && milestone ? 2 : 1}>
+              <Grid key={index} columns={instalment && milestone ? 2 : 1}>
                 {instalment && (
                   <Heading sx={{ border: "1px solid white", padding: 2, color: "white" }}>
                     {instalment}
@@ -425,9 +425,8 @@ export default function ProjectDetailsLayout({
               sx={{ justifyContent: "center", marginY: 3 }}
             >
               {floorplan.map((item, index) => (
-                <div>
+                <div key={item + "_" + index}>
                   <Image
-                    key={item + "_" + index}
                     sx={{
                       borderColor: "primary",
                       objectFit: "cover",
@@ -488,8 +487,8 @@ export default function ProjectDetailsLayout({
                 ]}
                 sx={{ justifyContent: "center", marginY: 3 }}
               >
-                {features.map((feat) => (
-                  <div>
+                {features.map((feat, index) => (
+                  <div key={feat + "_" + index}>
                     <Flex
                       sx={{
                         paddingX: 3,
@@ -545,8 +544,8 @@ export default function ProjectDetailsLayout({
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
-                {(nearBy as any)?.map((item) => (
-                  <Box sx={{ textAlign: "center" }}>
+                {(nearBy as any)?.map((item, index) => (
+                  <Box key={item.name + "_" + index} sx={{ textAlign: "center" }}>
                     <Image
                       sx={{
                         marginX: "auto",

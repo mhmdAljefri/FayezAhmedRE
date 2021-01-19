@@ -85,9 +85,10 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
       {offer.project && (
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           <Wrapper>
-            <Link passHref href={`/countries/${offer.countryId}/projects/${offer.project?.name}`}>
+            <Link passHref href={`/countries/${offer.countryId}/projects/${offer.project.id}`}>
               <ThemeLink
                 sx={{
+                  variant: "links.outline",
                   marginY: 4,
                   textDecoration: "none",
                   fontWeight: 700,

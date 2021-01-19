@@ -122,8 +122,9 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
             backgroundColor: "background",
           }}
         >
-          {roomWithPrices.map((roomWithPrice) => (
+          {roomWithPrices.map((roomWithPrice, index) => (
             <Box
+              key={roomWithPrice?.room + "_" + index}
               role="button"
               aria-label="select"
               sx={{ borderRadius: "default", paddingX: 3, paddingY: 2, cursor: "pointer" }}

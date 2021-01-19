@@ -8,8 +8,6 @@ import { Grid, Image, Box, Heading, Text } from "theme-ui"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
-import { ConstractiongVideo } from "./ProjectDetailsLayout"
-// import HTMLBox from "app/components/HTMLBox"
 
 type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
   prefixPath?: string
@@ -23,7 +21,7 @@ export function OfferCard({
   mainVideo,
   id,
   name,
-  prefixPath = "",
+  prefixPath = "/",
 }: OfferCardProps) {
   const { asPath } = useRouter()
   const href = asPath + prefixPath + id
@@ -103,7 +101,7 @@ export function OfferCard({
           </a>
         </Link>
         <Link href={href}>
-          <Box sx={{ paddingY: 3, paddingX: 3 }}>
+          <Box sx={{ paddingY: 3, paddingX: 3, cursor: "pointer" }}>
             <Heading>{name}</Heading>
             <Text>{subTitle}</Text>
             {/* <HTMLBox html={details} /> */}
