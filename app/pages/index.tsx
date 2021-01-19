@@ -296,6 +296,7 @@ const Home: BlitzPage<HomeProps> = ({
                         <Box
                           as="a"
                           sx={{
+                            textAlign: "center",
                             cursor: "pointer",
                             marginRight: "auto",
                           }}
@@ -304,6 +305,7 @@ const Home: BlitzPage<HomeProps> = ({
                             sx={{
                               objectFit: "contain",
                               maxHeight: [200, null, 280],
+                              mx: "auto",
                               maxWidth: 300,
                             }}
                             src={image}
