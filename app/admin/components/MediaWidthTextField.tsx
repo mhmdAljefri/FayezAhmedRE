@@ -62,7 +62,7 @@ export default function MediaWidthTextField({
                 />
                 <Flex>
                   {fields.value?.map((url, index) => (
-                    <Box sx={{ position: "relative" }}>
+                    <Box key={url + index} sx={{ position: "relative" }}>
                       <Icon
                         icon={close}
                         style={{ position: "absolute", top: 5, left: 5, color: "red" }}

@@ -39,6 +39,7 @@ export const RequestsList = () => {
       <Flex>
         {types.map((t) => (
           <Button
+            key={t}
             onClick={() => setType(t)}
             sx={{ margin: 3 }}
             variant={t === type ? "links.outline" : undefined}

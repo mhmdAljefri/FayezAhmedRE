@@ -32,6 +32,7 @@ export const EditExplore = () => {
           <Box sx={{ position: "absolute", opacity: open ? 1 : 0 }}>
             {Object.keys(EXPLOARE_TYPES_TEXT).map((exploreType: Explore["type"]) => (
               <Box
+                key={exploreType}
                 onClick={() =>
                   updateExploreMutation({
                     where: { id: explore.id },

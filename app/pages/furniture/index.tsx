@@ -22,7 +22,7 @@ const Search: BlitzPage<furnishCategoriesProps> = ({ furnishCategories }) => {
       <Wrapper sx={{ marginTop: -5, marginBottom: 5 }}>
         <SlickSlider rtl>
           {furnishCategories.map((furnishCategory) => (
-            <FurnishCategoryCard {...furnishCategory} />
+            <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
           ))}
         </SlickSlider>
       </Wrapper>

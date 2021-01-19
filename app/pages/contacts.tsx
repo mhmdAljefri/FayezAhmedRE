@@ -25,7 +25,7 @@ const ContactsPage: BlitzPage<ContactsPageProps> = ({ contacts }) => {
           {contacts.map((contact) => {
             const center: { lat: number; lng: number } = contact.locationObject as any
             return (
-              <Box sx={{ marginBottom: 5 }}>
+              <Box key={contact.id} sx={{ marginBottom: 5 }}>
                 <Heading
                   sx={{ color: "primary", fontSize: 5, paddingBottom: 3, marginTop: 5 }}
                   as="h3"
@@ -51,7 +51,7 @@ const ContactsPage: BlitzPage<ContactsPageProps> = ({ contacts }) => {
                   </Box>
                   <Box sx={{ marginX: 3 }}>
                     {contact.mobiles.map((number) => (
-                      <Box>
+                      <Box key={number}>
                         <Link sx={{ textDecoration: "none" }} href={"tel:" + number}>
                           {number}
                         </Link>
@@ -74,7 +74,7 @@ const ContactsPage: BlitzPage<ContactsPageProps> = ({ contacts }) => {
                   </Box>
                   <Box sx={{ marginX: 3 }}>
                     {contact.phones.map((phone) => (
-                      <Box>
+                      <Box key={phone}>
                         <Link sx={{ textDecoration: "none" }} href={"tel:" + phone}>
                           {phone}
                         </Link>
