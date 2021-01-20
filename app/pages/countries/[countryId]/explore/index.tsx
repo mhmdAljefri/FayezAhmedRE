@@ -118,7 +118,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const countryId = parseInt(context.params.countryId)
-  const { explores } = await getExplores({ where: { countryId: parseInt(`${countryId}`) } })
+  const { explores } = await getExplores({
+    where: { countryId: parseInt(`${countryId}`) },
+    orderBy: { id: "desc" },
+  })
 
   return {
     props: {

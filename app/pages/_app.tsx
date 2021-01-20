@@ -1,6 +1,5 @@
 import { AppProps, ErrorComponent, useParam, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
-import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
 import { Suspense } from "react"
 
@@ -8,6 +7,7 @@ import Router from "next/router"
 import NProgress from "nprogress" //nprogress module
 import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
+import { queryCache } from "react-query"
 
 import "react-phone-number-input/style.css"
 import "rc-drawer/assets/index.css"

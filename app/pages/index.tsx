@@ -1,4 +1,4 @@
-import { BlitzPage, Link } from "blitz"
+import { BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
 import HomeSlider from "app/components/HomeSlider"
 import OurPartnersSection from "app/components/OurPartnersSection"
@@ -9,23 +9,25 @@ import {
   CarouselVideo,
   City,
   Country,
+  Explore,
   Offer,
   Partner,
   Project,
   RoomWithPrice,
 } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
-import { Box, Flex, Grid, Heading, Image, Text } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
-import SlickSlider from "app/components/Sliders/SlickSlider"
 import getProjects from "app/public/projects/queries/getProjects"
-import HTMLBox from "app/components/HTMLBox"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
-import { ProjectCard } from "app/layouts/ProjectsList"
 import Contact from "app/components/Forms/Contact"
 import getOffers from "app/public/offers/queries/getOffers"
-import { OfferCard } from "app/layouts/OfferssList"
-import ShowMoreButton from "app/components/ShowMoreButton"
+import ComplexProjects from "app/components/ComplexProjects"
+import CountriesProjectsSection from "app/components/CountriesProjectsSection"
+import getExplores from "app/public/explores/queries/getExplores"
+import LatestOffersSection from "app/components/LatestOffersSection"
+import IdealDestinations from "app/components/IdealDestinations"
+import Twits from "app/components/Twits"
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -42,6 +44,7 @@ type HomeProps = {
   carousels: Carousel[]
   partners: Partner[]
   projects: CountryWithCityAndCountry[]
+  explores: Explore[]
 }
 
 const Home: BlitzPage<HomeProps> = ({
@@ -51,6 +54,7 @@ const Home: BlitzPage<HomeProps> = ({
   carouselVideo,
   carousels,
   partners,
+  explores,
 }) => {
   return (
     <main>
@@ -110,246 +114,11 @@ const Home: BlitzPage<HomeProps> = ({
         </Box>
       </Box>
 
-      <Box sx={{ py: 4 }}>
-        <Wrapper>
-          <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
-
-          <SlickSlider
-            autoplay
-            arrows={false}
-            infinite
-            slidesToShow={3}
-            slidesToScroll={1}
-            responsive={[
-              {
-                breakpoint: 1200,
-                settings: {
-                  slidesToShow: 3,
-                  slidesToScroll: 3,
-                  infinite: false,
-                  rtl: true,
-                },
-              },
-              {
-                breakpoint: 1100,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1,
-                  infinite: false,
-                  rtl: true,
-                },
-              },
-              {
-                breakpoint: 900,
-                settings: {
-                  centerMode: false,
-                  vertical: false,
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  rtl: true,
-                },
-              },
-            ]}
-          >
-            {offers.map((offer) => (
-              <OfferCard
-                key={offer.id}
-                {...offer}
-                prefixPath={`countries/${offer.countryId}/offers/`}
-              />
-            ))}
-          </SlickSlider>
-        </Wrapper>
-      </Box>
-
-      <Box>
-        {countries.map(({ name, projects, id, isTurkey }) => (
-          <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
-            <Wrapper>
-              <Flex
-                sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}
-              >
-                <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20 }}>
-                  عرض مشاريع {name}
-                </Heading>
-                <ShowMoreButton href={`/countries/${id}`} />
-              </Flex>
-
-              <SlickSlider
-                autoplay
-                arrows={false}
-                infinite
-                slidesToShow={3}
-                slidesToScroll={1}
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 3,
-                      infinite: false,
-                      rtl: true,
-                    },
-                  },
-                  {
-                    breakpoint: 1100,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                      infinite: false,
-                      rtl: true,
-                    },
-                  },
-                  {
-                    breakpoint: 900,
-                    settings: {
-                      centerMode: false,
-                      vertical: false,
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      rtl: true,
-                    },
-                  },
-                ]}
-              >
-                {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    {...project}
-                    roomWithPrices={[...project.roomsWithPrices]}
-                  />
-                ))}
-              </SlickSlider>
-            </Wrapper>
-          </Box>
-        ))}
-      </Box>
-
-      <Box>
-        <Wrapper
-          sx={{
-            ".slick-dots": {
-              top: 280,
-              maxHeight: 30,
-
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-              li: {
-                width: [20, 30],
-                height: [20, 30],
-                "&button:before": {
-                  width: [20, 30],
-                  fontSize: [1, 2],
-                  height: [20, 30],
-                },
-              },
-            },
-          }}
-        >
-          <Heading sx={{ marginY: 5, fontSize: [5, 6] }}>مجمعات بارزة</Heading>
-          <SlickSlider
-            responsive={[]}
-            autoplay
-            arrows={false}
-            infinite
-            slidesToShow={1}
-            slidesToScroll={1}
-          >
-            {projects.map(
-              ({
-                id,
-                country,
-                city,
-                name,
-                housingComplexText,
-                housingComplexImage,
-                image,
-                gallery,
-                subTitle,
-              }) => (
-                <Box key={id} sx={{ direction: "rtl", overflow: "hidden" }}>
-                  <Grid columns={2}>
-                    <Box sx={{ height: 300 }}>
-                      <Text
-                        sx={{
-                          fontSize: [3, 4],
-                          marginBottom: 3,
-                          color: "heading",
-                          fontWeight: 700,
-                        }}
-                      >
-                        <span>{country.name}</span>, <span>{city.name}</span>
-                      </Text>
-                      <Flex sx={{ alignItems: "center", flexWrap: ["wrap", "nowrap"] }}>
-                        <Text sx={{ mb: 4 }}>{housingComplexText}</Text>
-                        {housingComplexImage && (
-                          <Image
-                            sx={{ width: [50, 70], mx: 2 }}
-                            src={housingComplexImage}
-                            alt={housingComplexText || ""}
-                          />
-                        )}
-                      </Flex>
-                    </Box>
-                    <Box>
-                      <Link passHref href={`/countries/${country.id}/projects/${id}`}>
-                        <Box
-                          as="a"
-                          sx={{
-                            textAlign: "center",
-                            cursor: "pointer",
-                            marginRight: "auto",
-                          }}
-                        >
-                          <Image
-                            sx={{
-                              objectFit: "contain",
-                              maxHeight: [200, null, 280],
-                              mx: "auto",
-                              maxWidth: 300,
-                            }}
-                            src={image}
-                            alt={name}
-                          />
-                        </Box>
-                      </Link>
-                      <Link passHref href={`/countries/${country.id}/projects/${id}`}>
-                        <a style={{ textDecoration: "none" }}>
-                          <Heading
-                            sx={{ paddingTop: 3, textAlign: "center", paddingBottom: 4 }}
-                            as="h3"
-                          >
-                            {name}
-                          </Heading>
-                        </a>
-                      </Link>
-                    </Box>
-                  </Grid>
-                  <Box sx={{ cursor: "pointer", textAlign: "center", mx: "auto" }}>
-                    <Link passHref href={`/countries/${country.id}/projects/${id}`}>
-                      <a style={{ textDecoration: "none" }}>
-                        <Image
-                          sx={{
-                            objectFit: "contain",
-                            height: [200, 300, 400],
-                            maxWidth: 600,
-                            mx: "auto",
-                          }}
-                          src={gallery?.[0] || ""}
-                          alt={name}
-                        />
-                      </a>
-                    </Link>
-                  </Box>
-                  <Box sx={{ pt: 3, textAlign: "center" }}>
-                    <HTMLBox html={subTitle} />
-                  </Box>
-                </Box>
-              )
-            )}
-          </SlickSlider>
-        </Wrapper>
-      </Box>
+      <LatestOffersSection offers={offers} />
+      <CountriesProjectsSection countries={countries} />
+      <ComplexProjects projects={projects} />
+      <IdealDestinations explores={explores} />
+      <Twits />
       <OurPartnersSection data={partners} />
 
       <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
@@ -377,6 +146,11 @@ export async function getStaticProps(context) {
   const { carousels } = await getCarousels({})
   const { offers } = await getOffers({})
   const carouselVideo = await getCarouselVideo({})
+  const { explores } = await getExplores({
+    orderBy: { id: "desc" },
+    take: 9,
+  })
+
   const { projects } = await getProjects({
     include: {
       country: {
@@ -395,7 +169,7 @@ export async function getStaticProps(context) {
   })
 
   return {
-    props: { countries, offers, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
+    props: { countries, explores, offers, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
     revalidate: 60 * 2,
   }
 }

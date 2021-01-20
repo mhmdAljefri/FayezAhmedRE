@@ -78,6 +78,7 @@ export default function SlickSlider({
   nextArrow,
   variableWidth,
   arrows,
+  dots,
   ...props
 }: SlickSliderProps) {
   const responsive = variableWidth
@@ -93,7 +94,7 @@ export default function SlickSlider({
       responsive={responsive}
       arrows={arrows}
       prevArrow={prevArrow}
-      dots
+      dots={dots}
       nextArrow={nextArrow}
     >
       {children}
