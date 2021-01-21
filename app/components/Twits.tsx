@@ -1,10 +1,12 @@
 import React from "react"
-import { Heading } from "theme-ui"
+import { Box, Flex, Heading, Link } from "theme-ui"
 import { useQuery } from "react-query"
 import Wrapper from "./Wrapper"
 import SlickSlider from "./Sliders/SlickSlider"
 import { Icon } from "react-icons-kit"
 import { twitter } from "react-icons-kit/fa/twitter"
+import { shareAlt } from "react-icons-kit/fa/shareAlt"
+import { eye } from "react-icons-kit/fa/eye"
 
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 export default function Twits() {
@@ -54,11 +56,60 @@ export default function Twits() {
           },
         ]}
       >
-        {twits.map(({ text, id }) => (
-          <Heading key={id} sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
-            {text}
-          </Heading>
-        ))}
+        {twits.map(({ text, id }) => {
+          const twitUrl = `https://twitter.com/ProjectsQatar/status/${id}`
+          return (
+            <Box key={id}>
+              <Link sx={{ marginInlineEnd: 15, textDecoration: "none" }} href={twitUrl}>
+                <Heading sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
+                  {text}
+                </Heading>
+              </Link>
+              <Flex
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 2,
+                  a: {
+                    textDecoration: "none",
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderColor: "lightGray",
+                    color: "lightGray",
+
+                    width: 35,
+                    height: 35,
+                    lineHeight: "36px",
+                    textAlign: "center",
+                    borderRadius: 99,
+                    ":hover": {
+                      color: "primary",
+                      borderColor: "primary",
+                    },
+                  },
+                }}
+              >
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  title="مشاهدة التغريدة"
+                  sx={{ marginInlineEnd: 15 }}
+                  href={twitUrl}
+                >
+                  <Icon icon={eye} />
+                </Link>
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  title="مشاركة التغريدة"
+                  href={`http://www.twitter.com/share?url=${twitUrl}`}
+                >
+                  <Icon icon={shareAlt} />
+                </Link>
+              </Flex>
+            </Box>
+          )
+        })}
       </SlickSlider>
     </Wrapper>
   )
