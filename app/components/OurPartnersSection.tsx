@@ -1,14 +1,15 @@
 import React from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Box, Heading, Image, Flex } from "theme-ui"
 import Wrapper from "./Wrapper"
 import { Partner } from "@prisma/client"
 import SlickSlider from "./Sliders/SlickSlider"
+import ArrowIcon from "./ArrowIcon"
 
 type PartnersCardProps = Partner
 
 function PartnersCard({ image, name }: PartnersCardProps) {
   return (
-    <Box
+    <Flex
       sx={{
         textAlign: "center",
         marginX: "auto",
@@ -17,26 +18,41 @@ function PartnersCard({ image, name }: PartnersCardProps) {
         height: [170, 220],
         backgroundColor: "background",
         borderRadius: 999,
+        alignItems: "center",
+        justifyContent: "center",
         boxShadow: "md",
       }}
     >
       <Image
         sx={{
           padding: 2,
-          width: [130, 190],
-          height: [130, 190],
+          width: [150, 190],
+          height: [150, 190],
           objectFit: "contain",
+          objectPosition: "center",
         }}
         src={image}
         alt={name}
       />
-    </Box>
+    </Flex>
   )
 }
 
 type OurPartnersSectionProps = {
   data: Partner[]
 }
+
+const ArrowNext = ({ sx, ...props }) => (
+  <Box {...props} className="" sx={{ position: "absolute", top: "50%" }}>
+    <ArrowIcon sx={{ padding: 1, ...sx }} />
+  </Box>
+)
+const ArrowPrev = ({ sx, ...props }) => (
+  <Box {...props} className="" sx={{ position: "absolute", right: 0, top: "50%" }}>
+    <ArrowIcon sx={{ padding: 1, ...sx }} />
+  </Box>
+)
+
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
     <Box sx={{ paddingTop: 5, paddingBottom: 7, marginTop: 6, backgroundColor: "light" }}>
@@ -44,11 +60,13 @@ export default function OurPartnersSection(props: OurPartnersSectionProps) {
         <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
 
         <SlickSlider
-          arrows={false}
+          arrows
           infinite
           dots={false}
           slidesToShow={4}
           slidesToScroll={1}
+          nextArrow={<ArrowNext sx={{}} />}
+          prevArrow={<ArrowPrev sx={{ transform: "rotate(180deg)" }} />}
           responsive={[
             {
               breakpoint: 1200,

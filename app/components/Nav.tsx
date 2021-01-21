@@ -88,11 +88,10 @@ const Nav = (props: NavProps) => {
                   marginTop: 5,
                 }}
               />
-              <NavItem to="/" text="الرئيسية" />
-              <NavItem to="/about-us" text="عنا" />
               <NavItem to="/services" text="خدماتنا" />
-              <NavItem to="/furniture" text="الاثاث" />
+              <NavItem to="/about-us" text="لماذا فايز احمد" />
 
+              <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
               {countryId && (
                 <>
                   <NavItem to={`/countries/${countryId}/projects`} text="المشاريع" />

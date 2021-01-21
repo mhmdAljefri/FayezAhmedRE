@@ -16,6 +16,7 @@ export default function IdealDestinations({ explores }) {
         <SlickSlider
           arrows={false}
           infinite
+          autoplay
           slidesToShow={3}
           slidesToScroll={3}
           responsive={[
@@ -54,11 +55,11 @@ export default function IdealDestinations({ explores }) {
               <a style={{ textDecoration: "none" }}>
                 <Image
                   sx={{
-                    width: [150, 200, 250],
-                    height: [150, 200, 250],
+                    width: [200, 250],
+                    height: [200, 250],
                     marginY: 10,
                     mx: "auto",
-                    borderWidth: 4,
+                    borderWidth: [3, 4],
                     borderColor: "primary",
                     borderStyle: "solid",
                     borderRadius: 11111,
@@ -66,8 +67,8 @@ export default function IdealDestinations({ explores }) {
                     transition: "all 0.5s",
                     ":hover": {
                       marginY: 0,
-                      width: [180, 220, 270],
-                      height: [180, 220, 270],
+                      width: [220, 270],
+                      height: [220, 270],
                     },
                   }}
                   alt={title}

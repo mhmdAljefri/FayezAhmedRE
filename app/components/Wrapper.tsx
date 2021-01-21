@@ -1,14 +1,15 @@
-import React, { ReactNode } from "react"
+import React, { ComponentPropsWithoutRef, ReactNode } from "react"
 import { Box, SxStyleProp } from "theme-ui"
 
-type WrapperProps = {
+type WrapperProps = ComponentPropsWithoutRef<"div"> & {
   children: ReactNode
   sx?: SxStyleProp
 }
 
-const Wrapper = ({ children, sx }: WrapperProps) => {
+const Wrapper = ({ children, sx, ...props }: WrapperProps) => {
   return (
     <Box
+      {...props}
       sx={{
         width: ["95vw", null, null, null, 1400],
         maxWidth: ["auto", null, null, 1400],

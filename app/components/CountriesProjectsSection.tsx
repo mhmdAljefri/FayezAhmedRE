@@ -17,7 +17,7 @@ export default function CountriesProjectsSection({ countries }) {
               <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20 }}>
                 عرض مشاريع {name}
               </Heading>
-              <ShowMoreButton href={`/countries/${id}`} />
+              <ShowMoreButton href={`/countries/${id}/projects`} />
             </Flex>
 
             <SlickSlider

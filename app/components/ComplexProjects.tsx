@@ -80,9 +80,9 @@ export default function ComplexProjects({ projects }) {
                         <Image
                           sx={{
                             objectFit: "contain",
-                            maxHeight: [200, null, 280],
                             mx: "auto",
                             maxWidth: 300,
+                            width: "100%",
                           }}
                           src={image}
                           alt={name}
