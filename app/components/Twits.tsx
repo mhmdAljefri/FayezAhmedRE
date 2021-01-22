@@ -58,11 +58,33 @@ export default function Twits() {
       >
         {twits.map(({ text, id }) => {
           const twitUrl = `https://twitter.com/ProjectsQatar/status/${id}`
+          const textArray: string[] = text.split(" ")
+          const textWithoutLinkArray = textArray.map((word) => {
+            if (word.startsWith("http")) return false
+            if (word.startsWith("#"))
+              return (
+                <Box as="span" sx={{ color: "primary" }}>
+                  {word}{" "}
+                </Box>
+              )
+            if (word.startsWith("@"))
+              return (
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  href={`https://twitter.com/${word.replace(":", "")}`}
+                  sx={{ color: "primary" }}
+                >
+                  {word}{" "}
+                </Link>
+              )
+            return word + " "
+          })
           return (
             <Box key={id}>
               <Link sx={{ marginInlineEnd: 15, textDecoration: "none" }} href={twitUrl}>
                 <Heading sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
-                  {text}
+                  {textWithoutLinkArray}
                 </Heading>
               </Link>
               <Flex
