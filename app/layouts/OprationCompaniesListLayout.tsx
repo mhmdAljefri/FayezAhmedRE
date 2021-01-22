@@ -1,10 +1,8 @@
-import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import { Link, usePaginatedQuery, useParam, useRouter, useRouterQuery } from "blitz"
-import React, { useRef } from "react"
+import { Link, usePaginatedQuery, useParam, useRouter } from "blitz"
+import React from "react"
 import { Grid, Image, Box, Heading, Text } from "theme-ui"
 
-import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getOprationCompanyPages from "app/public/oprationCompanyPages/queries/getOprationCompanyPages"
 import { OprationCompanyPage } from "@prisma/client"

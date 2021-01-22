@@ -1,10 +1,14 @@
 import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
 import React from "react"
-import Wrapper from "./Wrapper"
-import Nav from "./Nav"
-import PriceType from "./PriceType"
+import Wrapper from "app/components/Wrapper"
+import Nav from "app/components/Navs/Nav"
+import PriceType from "app/components/PriceType"
 import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
+import DesktopNav from "./Navs/DesktopNav"
+import useScreenSize from "app/hooks/useScreenSize"
+import WhatsappButton from "./NavItems/WhatsappButton"
+import SearchButton from "./NavItems/SearchButton"
 
 type HeaderProps = {
   sx?: SxStyleProp
@@ -13,12 +17,18 @@ type HeaderProps = {
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const { pathname } = useRouter()
+  const isDesktopScreen = useScreenSize() > 700
   const hasProjects =
     pathname.startsWith("/countries/[countryId]") ||
     pathname.includes("projects") ||
     pathname === "/"
   const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
 
+  const priceRender = hasProjects ? (
+    <Box>
+      <PriceType />
+    </Box>
+  ) : null
   return (
     <Box
       sx={{
@@ -65,15 +75,20 @@ const Header = ({ sx }: HeaderProps) => {
             </Flex>
           </a>
         </Link>
+        {isDesktopScreen && (
+          <Flex>
+            <DesktopNav />
+          </Flex>
+        )}
         <Flex sx={{ alignItems: "center" }}>
-          <>
-            {hasProjects && (
-              <Box>
-                <PriceType />
-              </Box>
-            )}
-          </>
-          <Nav />
+          {isDesktopScreen && (
+            <>
+              <WhatsappButton />
+              <SearchButton />
+            </>
+          )}
+          {priceRender}
+          {!isDesktopScreen && <Nav />}
         </Flex>
       </Wrapper>
     </Box>

@@ -68,11 +68,6 @@ export default function MySlider({
 
   const handlePrev = () => setCindex(prevIndex)
 
-  const handleResize = () => {
-    const hieght = wrapper?.current?.offsetHeight
-    hieght && hieght !== offsetHeight && setOffsetHeight(hieght)
-  }
-
   const handlePrevPress = () => {
     handlePrev()
     setReset(true)
@@ -85,6 +80,11 @@ export default function MySlider({
   useInterval(() => autoplay && handleNext(), duration, reset)
 
   useEffect(() => {
+    const handleResize = () => {
+      const hieght = wrapper?.current?.offsetHeight
+      hieght && hieght !== offsetHeight && setOffsetHeight(hieght)
+    }
+
     if (!offsetHeight) handleResize()
     if (reset) setReset(false)
     if (!isSSR()) {

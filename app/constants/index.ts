@@ -1,3 +1,6 @@
+export const MOBILE_NUMBER = process.env.NEXT_PUBLIC_MOBILE_NUMBER
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
+
 export const EXPLOARE_TYPES_TEXT = {
   dontMissitGallery: "لايفوتك",
   getInspiredGallery: "استمد الالهام",

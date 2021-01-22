@@ -7,6 +7,7 @@ import { Icon } from "react-icons-kit"
 import { twitter } from "react-icons-kit/fa/twitter"
 import { shareAlt } from "react-icons-kit/fa/shareAlt"
 import { eye } from "react-icons-kit/fa/eye"
+import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
 
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 export default function Twits() {
@@ -20,11 +21,13 @@ export default function Twits() {
         <span>اخر الاخبار</span>
       </Heading>
       <SlickSlider
-        arrows={false}
+        arrows
         infinite
         dots={false}
         slidesToShow={3}
         slidesToScroll={1}
+        nextArrow={<ArrowNext />}
+        prevArrow={<ArrowPrev />}
         responsive={[
           {
             breakpoint: 1200,

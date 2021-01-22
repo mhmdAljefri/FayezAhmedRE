@@ -1,20 +1,22 @@
-import React, { ReactNode, useState } from "react"
+import React, { ReactNode } from "react"
 import { Box, Flex } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
 import useOnClickout from "app/hooks/useOnClickout"
 
-type Option = { key: String; value: String; node?: ReactNode }
+type Option = { key: string | number; value: string | number; node?: ReactNode }
 
 type DropdownProps = {
   options: Option[]
-  defaultValue: String
+  defaultValue?: string
+  /**
+   * this prop for unselectable dropdown such list of navigations
+   */
+  title?: ReactNode
   onChange: (value: any) => void
 }
 
-// TODO add Price hooks and context
-
-const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
+const Dropdown = ({ options, title, defaultValue, onChange }: DropdownProps) => {
   const defaultOption = options.find((option) => option.value === defaultValue)
   const { ref, open, setOpen } = useOnClickout()
 
@@ -22,7 +24,7 @@ const Dropdown = ({ options, defaultValue, onChange }: DropdownProps) => {
     <Box ref={ref} sx={{ position: "relative", zIndex: 1111 }}>
       <Flex sx={{ alignItems: "center", color: "primary" }} onMouseEnter={() => setOpen(true)}>
         <Box sx={{ paddingX: 2, marginInlineEnd: 5 }}>
-          {defaultOption?.node || defaultOption?.value}
+          {title || defaultOption?.node || defaultOption?.value}
         </Box>
         <Box sx={{ position: "absolute", left: 23, top: 0 }}>
           <Icon icon={chevronDown} />

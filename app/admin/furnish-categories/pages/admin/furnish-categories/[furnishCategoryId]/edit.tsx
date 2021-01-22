@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+import { useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getFurnishCategory from "app/admin/furnish-categories/queries/getFurnishCategory"
 import updateFurnishCategory from "app/admin/furnish-categories/mutations/updateFurnishCategory"
 import FurnishCategoryForm from "app/admin/furnish-categories/components/FurnishCategoryForm"

@@ -14,6 +14,7 @@ import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
 import useScroll from "app/hooks/useScroll"
+import { MOBILE_NUMBER, WHATSAPP_NUMBER } from "app/constants"
 
 function Icon(props: IconProp & { href?: string }) {
   return (
@@ -58,7 +59,6 @@ export default function Footer() {
   const timeout = useRef(setTimeout(() => {}, 0))
   const scroll = useScroll()
   const [open, setOpen] = useState(false)
-  const mobileNumber = "97470040087"
 
   useEffect(() => {
     clearTimeout(timeout.current)
@@ -139,7 +139,7 @@ export default function Footer() {
               sx={{ textDecoration: "none" }}
               target="_blank"
               rel="noopener noreferrer"
-              href={"tel:00" + mobileNumber}
+              href={"tel:00" + MOBILE_NUMBER}
             >
               <CallUSButton icon={phone}>مكالمة</CallUSButton>
             </ThemeLink>
@@ -147,7 +147,7 @@ export default function Footer() {
               sx={{ textDecoration: "none" }}
               target="_blank"
               rel="noopener noreferrer"
-              href={"https://api.whatsapp.com/send?phone=" + mobileNumber}
+              href={"https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMBER}
             >
               <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
             </ThemeLink>

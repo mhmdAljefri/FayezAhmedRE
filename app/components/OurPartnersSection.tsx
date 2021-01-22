@@ -3,7 +3,7 @@ import { Box, Heading, Image, Flex } from "theme-ui"
 import Wrapper from "./Wrapper"
 import { Partner } from "@prisma/client"
 import SlickSlider from "./Sliders/SlickSlider"
-import ArrowIcon from "./ArrowIcon"
+import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
 
 type PartnersCardProps = Partner
 
@@ -42,17 +42,6 @@ type OurPartnersSectionProps = {
   data: Partner[]
 }
 
-const ArrowNext = ({ sx, ...props }) => (
-  <Box {...props} className="" sx={{ position: "absolute", top: "50%" }}>
-    <ArrowIcon sx={{ padding: 1, ...sx }} />
-  </Box>
-)
-const ArrowPrev = ({ sx, ...props }) => (
-  <Box {...props} className="" sx={{ position: "absolute", right: 0, top: "50%" }}>
-    <ArrowIcon sx={{ padding: 1, ...sx }} />
-  </Box>
-)
-
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
     <Box sx={{ paddingTop: 5, paddingBottom: 7, marginTop: 6, backgroundColor: "light" }}>
@@ -65,8 +54,8 @@ export default function OurPartnersSection(props: OurPartnersSectionProps) {
           dots={false}
           slidesToShow={4}
           slidesToScroll={1}
-          nextArrow={<ArrowNext sx={{}} />}
-          prevArrow={<ArrowPrev sx={{ transform: "rotate(180deg)" }} />}
+          nextArrow={<ArrowNext />}
+          prevArrow={<ArrowPrev />}
           responsive={[
             {
               breakpoint: 1200,

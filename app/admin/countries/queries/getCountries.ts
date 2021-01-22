@@ -1,7 +1,7 @@
 import { Ctx } from "blitz"
-import db, { FindManyCountryArgs } from "db"
+import db, { Prisma } from "db"
 
-type GetCountriesInput = Pick<FindManyCountryArgs, "where" | "orderBy" | "skip" | "take">
+type GetCountriesInput = Pick<Prisma.FindManyCountryArgs, "where" | "orderBy" | "skip" | "take">
 
 export default async function getCountries(
   { where, orderBy, skip = 0, take }: GetCountriesInput,

@@ -1,8 +1,8 @@
 import React from "react"
 import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Global } from "@emotion/core"
-import Burger from "./Burger"
-import ChangeColorsMode from "./ChangeColorsMode"
+import Burger from "app/components/Burger"
+import ChangeColorsMode from "app/components/ChangeColorsMode"
 import { Link, useParam } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
 import Slide from "react-reveal/Slide"
@@ -22,7 +22,7 @@ const Nav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
-            fontSize: [3, 4, 4, 5],
+            fontSize: [2, 3, 4],
           }}
         >
           {text}
@@ -92,16 +92,6 @@ const Nav = (props: NavProps) => {
               <NavItem to="/about-us" text="لماذا فايز احمد" />
 
               <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
-              {countryId && (
-                <>
-                  <NavItem to={`/countries/${countryId}/projects`} text="المشاريع" />
-                  <NavItem to={`/countries/${countryId}/offers`} text="العروض" />
-                  <NavItem
-                    to={`/countries/${countryId}/opration-companies`}
-                    text="الشركات العاملة"
-                  />
-                </>
-              )}
             </Flex>
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
           </Flex>

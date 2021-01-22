@@ -1,5 +1,4 @@
-import { useParam } from "blitz"
-import React, { ReactNode, useCallback, useLayoutEffect, useState } from "react"
+import React, { ReactNode, useCallback, useState } from "react"
 import { prices } from "../components/PriceType"
 type priceTypes =
   | "price"

@@ -1,7 +1,6 @@
-import { useCallback, useMemo } from "react"
+import { useCallback } from "react"
 import ReactPhoneInput from "react-phone-number-input"
-import { Input, Select } from "theme-ui"
-import getSelectedOption from "country-flag-icons/unicode"
+import { Select } from "theme-ui"
 
 type PhoneInputProps = {
   placeholder: string
@@ -17,10 +16,6 @@ function CountrySelect({ value, onChange, options, ...rest }) {
     },
     [onChange]
   )
-
-  const selectedOption = useMemo(() => {
-    return getSelectedOption(options, value)
-  }, [options, value])
 
   // "ZZ" means "International".
   // (HTML requires each `<option/>` have some string `value`).
