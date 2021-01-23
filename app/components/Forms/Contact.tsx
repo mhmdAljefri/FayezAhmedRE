@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef } from "react"
 import { Box, Grid, Heading, Image } from "theme-ui"
 import Form from "../Form"
 import LabeledTextField from "../LabeledTextField"
@@ -9,20 +9,13 @@ import useScroll from "app/hooks/useScroll"
 
 export default function Contact() {
   const { run, fetching } = useRequestsMutation("consultings")
-  const [visiable, setVisiable] = useState(false)
-  const scroll = useScroll()
   const formRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const top = formRef.current?.getBoundingClientRect().top || 0
-    const offsetHeight = formRef.current?.offsetHeight || 0
-    if (top <= offsetHeight) {
-      setVisiable(true)
-    } else {
-      setVisiable(false)
-    }
-    return () => {}
-  }, [scroll])
+  const top = formRef.current?.getBoundingClientRect().top || 0
+  const offsetHeight = formRef.current?.offsetHeight || 0
+  const visiable = top <= offsetHeight
+
+  useScroll() // update component on scroll (rerender)
 
   return (
     <Box
