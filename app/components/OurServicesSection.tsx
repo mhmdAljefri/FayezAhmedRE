@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Box, Grid, Heading } from "theme-ui"
 import Wrapper from "./Wrapper"
 import Fade from "react-reveal/Fade"
 import { Feature } from "@prisma/client"

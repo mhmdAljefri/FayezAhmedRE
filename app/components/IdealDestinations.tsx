@@ -10,7 +10,7 @@ export default function IdealDestinations({ explores }) {
     <Box sx={{ backgroundColor: "dark", pb: 4 }}>
       <Wrapper>
         <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20, color: "primary" }}>
-          وجهات مثالية الجميع
+          وجهات مثالية للجميع
         </Heading>
 
         <SlickSlider

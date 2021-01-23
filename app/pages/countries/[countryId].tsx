@@ -35,8 +35,8 @@ import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButt
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
-    <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
-      <Heading sx={{ fontSize: [5, 6], padding: 0 }}>{heading}</Heading>
+    <Flex sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}>
+      <Heading sx={{ fontSize: [5, 6], padding: 0, marginInlineEnd: 15 }}>{heading}</Heading>
 
       <ShowMoreButton href={href} sx={sx} />
     </Flex>
@@ -175,7 +175,13 @@ function CountryPage({
       </Wrapper>
       <Wrapper>
         {country.isTurkey ? (
-          <Heading sx={{ fontSize: [5, 6] }}>مشاريع فاخرة</Heading>
+          <HeadingWithMoreLink
+            sx={{
+              display: ["none", "none", "unset"],
+            }}
+            href={projectsUrl}
+            heading="مشاريع فاخرة"
+          />
         ) : (
           <>
             <Heading sx={{ fontSize: [5, 6] }}>مشاريعنا</Heading>
@@ -234,7 +240,13 @@ function CountryPage({
         <>
           <Wrapper>
             {govProjects.length > 0 && (
-              <Heading sx={{ fontSize: [5, 6] }}>مشاريع بضمانة الحكومة</Heading>
+              <HeadingWithMoreLink
+                sx={{
+                  display: ["none", "none", "unset"],
+                }}
+                href={projectsUrl}
+                heading="مشاريع بضمانة الحكومة"
+              />
             )}
             <SlickSlider
               infinite={false}
@@ -285,7 +297,13 @@ function CountryPage({
           </Wrapper>
           <Wrapper sx={{}}>
             {oceanViewProjects.length > 0 && (
-              <Heading sx={{ fontSize: [5, 6] }}>مشاريع باطلالة بحرية</Heading>
+              <HeadingWithMoreLink
+                sx={{
+                  display: ["none", "none", "unset"],
+                }}
+                href={projectsUrl}
+                heading="مشاريع باطلالة بحرية"
+              />
             )}
             <SlickSlider
               infinite={false}
@@ -505,7 +523,7 @@ function CountryPage({
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
+      <Wrapper sx={{ marginTop: -200, marginBottom: 100 }}>
         <Contact />
       </Wrapper>
     </Layout>
