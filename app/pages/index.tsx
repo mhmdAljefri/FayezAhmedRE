@@ -122,15 +122,9 @@ const Home: BlitzPage<HomeProps> = ({
       <ComplexProjects projects={projects} />
       <IdealDestinations explores={explores} />
       <Twits />
-      <Box
-        sx={{
-          backgroundColor: "light",
-          paddingY: 350,
-          marginTop: -250,
-        }}
-      >
+      <Box sx={{}}>
         <Wrapper>
-          <Heading sx={{ fontSize: [5, 6], color: "primary" }}>الاكثر مشاهدة</Heading>
+          <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 
           <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 4]}>
             {mostViewedProjects

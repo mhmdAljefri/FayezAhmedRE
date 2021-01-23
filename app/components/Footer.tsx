@@ -18,9 +18,15 @@ import { MOBILE_NUMBER, WHATSAPP_NUMBER } from "app/constants"
 
 function Icon(props: IconProp & { href?: string }) {
   return (
-    <a style={{ color: "inherit" }} target="blank" rel="noopener norefrence" href={props.href}>
+    <ThemeLink
+      style={{ color: "inherit" }}
+      target="blank"
+      rel="noopener norefrence"
+      href={props.href}
+      as={props.href ? "a" : "span"}
+    >
       <RIconKit {...props} size={18} style={{ marginInlineEnd: 20, ...props.style }} />
-    </a>
+    </ThemeLink>
   )
 }
 
@@ -152,7 +158,7 @@ export default function Footer() {
               <CallUSButton icon={whatsapp}>وتساب</CallUSButton>
             </ThemeLink>
             <Link href="/contacts">
-              <ThemeLink sx={{ textDecoration: "none" }}>
+              <ThemeLink as="span" sx={{ textDecoration: "none" }}>
                 <CallUSButton icon={addressBook}>جهات الاتصال</CallUSButton>
               </ThemeLink>
             </Link>

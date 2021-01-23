@@ -17,7 +17,7 @@ import {
   PropertyType,
   RoomWithPrice,
 } from "@prisma/client"
-import { Link, useRouter } from "blitz"
+import { useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/Sliders/SlickSlider"
@@ -185,7 +185,13 @@ function CountryPage({
           />
         ) : (
           <>
-            <Heading sx={{ fontSize: [5, 6] }}>مشاريعنا</Heading>
+            <HeadingWithMoreLink
+              sx={{
+                display: ["none", "none", "unset"],
+              }}
+              href={projectsUrl}
+              heading="مشاريعنا"
+            />
             <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
           </>
         )}

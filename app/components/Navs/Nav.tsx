@@ -23,6 +23,7 @@ const Nav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
+            my: 3,
             fontSize: [2, 3, 4],
           }}
         >

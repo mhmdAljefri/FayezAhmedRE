@@ -6,10 +6,7 @@ type Props = ComponentPropsWithRef<"img"> & {
   imageMaxWidth: number
 }
 export default function Image({ imageMaxWidth, ...props }: Props) {
-  const src = props.src
-    ?.replace("/upload/", `/upload/w_${imageMaxWidth}/q_auto/`)
-    .replace("http://", "https://")
-    .replace(/(.jpg|.jpeg|.png)/, ".webp")
+  const src = props.src?.replace("http://", "https://").replace(/(.jpg|.jpeg|.png)/, ".webp")
 
   return <ThemeImage {...props} src={src} />
 }
