@@ -16,7 +16,7 @@ import {
   RoomWithPrice,
 } from "@prisma/client"
 import getCarousels from "app/public/carousels/queries/getCarousels"
-import { Box, Heading } from "theme-ui"
+import { Box, Grid, Heading } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import getProjects from "app/public/projects/queries/getProjects"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
@@ -28,6 +28,7 @@ import getExplores from "app/public/explores/queries/getExplores"
 import LatestOffersSection from "app/components/LatestOffersSection"
 import IdealDestinations from "app/components/IdealDestinations"
 import Twits from "app/components/Twits"
+import MostViewd from "app/components/Cards/MostViewd"
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -45,6 +46,7 @@ type HomeProps = {
   partners: Partner[]
   projects: CountryWithCityAndCountry[]
   explores: Explore[]
+  mostViewedProjects: Project[]
 }
 
 const Home: BlitzPage<HomeProps> = ({
@@ -55,6 +57,7 @@ const Home: BlitzPage<HomeProps> = ({
   carousels,
   partners,
   explores,
+  mostViewedProjects,
 }) => {
   return (
     <main>
@@ -119,6 +122,26 @@ const Home: BlitzPage<HomeProps> = ({
       <ComplexProjects projects={projects} />
       <IdealDestinations explores={explores} />
       <Twits />
+      <Box
+        sx={{
+          backgroundColor: "light",
+          paddingY: 350,
+          marginTop: -250,
+        }}
+      >
+        <Wrapper>
+          <Heading sx={{ fontSize: [5, 6], color: "primary" }}>الاكثر مشاهدة</Heading>
+
+          <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 4]}>
+            {mostViewedProjects
+              .sort((first, second) => (first.views > second.views ? 1 : -1))
+              .map((project) => (
+                <MostViewd key={project.id} project={project} />
+              ))}
+          </Grid>
+        </Wrapper>
+      </Box>
+
       <OurPartnersSection data={partners} />
 
       <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
@@ -151,6 +174,31 @@ export async function getStaticProps(context) {
     take: 9,
   })
 
+  const { projects: qatarMostViewd } = await getProjects({
+    where: {
+      country: {
+        isTurkey: false,
+      },
+    },
+    take: 2,
+    orderBy: {
+      views: "desc",
+    },
+  })
+  const { projects: turkeyMostViewd } = await getProjects({
+    where: {
+      country: {
+        isTurkey: true,
+      },
+    },
+    take: 2,
+    orderBy: {
+      views: "desc",
+    },
+  })
+
+  const mostViewedProjects = [...qatarMostViewd, ...turkeyMostViewd]
+
   const { projects } = await getProjects({
     include: {
       country: {
@@ -162,6 +210,7 @@ export async function getStaticProps(context) {
       },
       city: true,
     },
+
     take: 6,
     where: {
       isHousingComplex: true,
@@ -169,7 +218,16 @@ export async function getStaticProps(context) {
   })
 
   return {
-    props: { countries, explores, offers, partners, projects, carousels, carouselVideo }, // will be passed to the page component as props
+    props: {
+      countries,
+      explores,
+      offers,
+      mostViewedProjects,
+      partners,
+      projects,
+      carousels,
+      carouselVideo,
+    }, // will be passed to the page component as props
     revalidate: 60 * 2,
   }
 }
