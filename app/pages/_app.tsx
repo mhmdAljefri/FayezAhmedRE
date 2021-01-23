@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "glider-js/glider.min.css"
 
 //Binding events.
+NProgress.configure({ showSpinner: false })
 Router.events.on("routeChangeStart", () => NProgress.start())
 Router.events.on("routeChangeComplete", () => NProgress.done())
 Router.events.on("routeChangeError", () => NProgress.done())
