@@ -427,6 +427,7 @@ export default function ProjectDetailsLayout({
               {floorplan.map((item, index) => (
                 <div key={item + "_" + index}>
                   <Image
+                    imageMaxWidth={350}
                     sx={{
                       borderColor: "primary",
                       objectFit: "cover",

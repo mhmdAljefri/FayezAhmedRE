@@ -3,11 +3,12 @@ import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import { Link, useInfiniteQuery, useParam, useRouter, useRouterQuery } from "blitz"
 import React, { useRef } from "react"
-import { Grid, Image, Box, Heading, Text } from "theme-ui"
+import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
 import Fade from "react-reveal/Fade"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
+import Image from "app/components/Image"
 
 type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
   prefixPath?: string

@@ -2,7 +2,7 @@ import React from "react"
 import { BlitzPage, useParam, useQuery } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Image } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import getOprationCompanyPage from "app/public/oprationCompanyPages/queries/getOprationCompanyPage"
 import {
   ConstractiongVideo,
@@ -10,6 +10,7 @@ import {
   GalleryView,
 } from "app/layouts/ProjectDetailsLayout"
 import HTMLBox from "app/components/HTMLBox"
+import Image from "app/components/Image"
 
 const OprationCompanyPage: BlitzPage = () => {
   const companyId = useParam("companyId", "number")

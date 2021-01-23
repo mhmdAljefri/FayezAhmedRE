@@ -3,7 +3,7 @@ import Wrapper from "app/components/Wrapper"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
 import { Link, useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
 import React, { ReactNode, useRef, useState } from "react"
-import { Button, Flex, Grid, Image, Box, Heading, Text, SxStyleProp } from "theme-ui"
+import { Button, Flex, Grid, Box, Heading, Text, SxStyleProp } from "theme-ui"
 
 import Icon, { IconProp } from "react-icons-kit"
 import { building } from "react-icons-kit/fa/building"
@@ -17,6 +17,7 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { numberFormat } from "app/utils"
+import Image from "app/components/Image"
 
 const getListOfPrice = (price?: number[]): number[] => {
   if (!price) return []

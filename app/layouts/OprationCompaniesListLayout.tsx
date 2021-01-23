@@ -1,12 +1,13 @@
 import Wrapper from "app/components/Wrapper"
 import { Link, usePaginatedQuery, useParam, useRouter } from "blitz"
 import React from "react"
-import { Grid, Image, Box, Heading, Text } from "theme-ui"
+import { Grid, Box, Heading, Text } from "theme-ui"
 
 import Fade from "react-reveal/Fade"
 import getOprationCompanyPages from "app/public/oprationCompanyPages/queries/getOprationCompanyPages"
 import { OprationCompanyPage } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
+import Image from "app/components/Image"
 
 type CompaniesCardProps = Pick<OprationCompanyPage, "id" | "title" | "image" | "description"> & {
   prefixPath?: string

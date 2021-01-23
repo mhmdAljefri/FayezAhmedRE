@@ -2,12 +2,13 @@ import React from "react"
 import { BlitzPage, Link, useRouter } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Button, Heading, Image } from "theme-ui"
+import { Box, Button, Heading } from "theme-ui"
 import getExplore from "app/public/explores/queries/getExplore"
 import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 import getExplores from "app/public/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
+import Image from "app/components/Image"
 
 type ExploreProps = {
   explore: Explore

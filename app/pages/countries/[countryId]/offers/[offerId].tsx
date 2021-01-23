@@ -2,13 +2,14 @@ import React from "react"
 import { BlitzPage, Link, useRouter } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Image, Link as ThemeLink } from "theme-ui"
+import { Box, Heading, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
 import { ConstractiongVideo, GalleryView, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
 import { Offer, Project } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
+import Image from "app/components/Image"
 
 const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
   const router = useRouter()

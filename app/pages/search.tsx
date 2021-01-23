@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import { BlitzPage, Link, useQuery, useRouter } from "blitz"
-import { Box, Flex, Link as ThemeLink, Image, Heading, Input, Text } from "theme-ui"
+import { Box, Flex, Link as ThemeLink, Heading, Input, Text } from "theme-ui"
 import getProjects from "app/public/projects/queries/getProjects"
 import { Project } from "@prisma/client"
 import { Icon } from "react-icons-kit"
@@ -10,6 +10,7 @@ import { search } from "react-icons-kit/fa/search"
 import useTimeout from "app/hooks/useTimeout"
 import ArrowIcon from "app/components/ArrowIcon"
 import HTMLBox from "app/components/HTMLBox"
+import Image from "app/components/Image"
 
 type SearchProps = {
   projects: Project[]
