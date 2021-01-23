@@ -437,7 +437,7 @@ export default function ProjectDetailsLayout({
                       boxShadow: "default",
                       height: [250, 300, 350],
                     }}
-                    src={item.replace("/upload/", "/upload/w_400,c_scale/")}
+                    src={item}
                   />
                 </div>
               ))}

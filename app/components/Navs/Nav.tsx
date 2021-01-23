@@ -6,6 +6,7 @@ import ChangeColorsMode from "app/components/ChangeColorsMode"
 import { Link, useParam } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
 import Slide from "react-reveal/Slide"
+import CountriesItemsList from "../NavItems/CountriesItemsList"
 
 type NavProps = {}
 
@@ -86,12 +87,15 @@ const Nav = (props: NavProps) => {
                 text="البحث"
                 sx={{
                   marginTop: 5,
+                  fontSize: [2, 3, 4],
                 }}
               />
+              <CountriesItemsList />
               <NavItem to="/services" text="خدماتنا" />
               <NavItem to="/about-us" text="لماذا فايز احمد" />
 
               <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
+              <NavItem to="/furniture/" text="أثث منزلك" />
             </Flex>
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
           </Flex>

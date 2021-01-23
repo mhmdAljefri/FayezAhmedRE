@@ -43,6 +43,30 @@ function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { head
   )
 }
 
+function ExploreToggleButton({ onClick, isActive, children }) {
+  return (
+    <Box
+      onClick={onClick}
+      role="buttom"
+      title={children}
+      aria-label={children}
+      tabIndex={0}
+      sx={{
+        paddingY: 2,
+        cursor: "pointer",
+        width: 200,
+        fontWeight: 700,
+        color: "white",
+        textAlign: "center",
+        backgroundColor: isActive ? "primary" : "dark",
+        borderRadius: "md",
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+
 type ProjectWitRooms = Project & { roomsWithPrices: RoomWithPrice[] }
 export type CountryPropsType = {
   country: Country & {
@@ -330,58 +354,40 @@ function CountryPage({
               paddingBottom: 3,
             }}
           >
-            <Box
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("exploreGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor: showInspirationGallery === "exploreGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "exploreGallery"}
             >
               إستكشف
-            </Box>
-            <Box
+            </ExploreToggleButton>
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("getInspiredGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor:
-                  showInspirationGallery === "getInspiredGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "getInspiredGallery"}
             >
               استمد الإلهام
-            </Box>
-            <Box
+            </ExploreToggleButton>
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("dontMissitGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor:
-                  showInspirationGallery === "dontMissitGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "dontMissitGallery"}
             >
               لا يفوتك
-            </Box>
+            </ExploreToggleButton>
           </Flex>
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <SlickSlider
-          slidesToScroll={-1}
+          slidesToScroll={1}
+          slidesToShow={3}
           arrows={false}
-          slidesToShow={explores.length > 3 ? 3 : explores.length}
+          rtl
+          infinite={explores.length > 3}
           responsive={[
             {
               breakpoint: 1200,
               settings: {
                 slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToScroll: 1,
                 infinite: explores.length > 3,
               },
             },
@@ -406,7 +412,12 @@ function CountryPage({
           ]}
         >
           {explores.map(({ image, title, id }, index) => (
-            <ExploreCard key={id} href={`${asPath}/explore/${id}`} image={image} title={title} />
+            <ExploreCard
+              key={`${asPath}/explore/${id}`}
+              href={`${asPath}/explore/${id}`}
+              image={image}
+              title={title}
+            />
           ))}
         </SlickSlider>
       </Wrapper>

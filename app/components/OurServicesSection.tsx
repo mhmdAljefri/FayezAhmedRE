@@ -19,10 +19,9 @@ function ServicesCard({ name, image }: ServicesCardProps) {
           marginLeft: "auto",
           borderRadius: "15px 0",
           width: 200,
-          paddingInlineStart: 80,
-          paddingInlineEnd: 10,
           paddingBottom: 3,
           paddingTop: 4,
+          textAlign: "center",
           backgroundColor: "primary",
           ":after": {
             content: '""',
@@ -37,20 +36,6 @@ function ServicesCard({ name, image }: ServicesCardProps) {
           },
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            width: 100,
-            height: 100,
-            top: -20,
-            right: -20,
-            borderRadius: 1111,
-            boxShadow: "default",
-            backgroundColor: "primary",
-          }}
-        >
-          <Image src={image} sx={{ padding: 3, objectFit: "contain" }} />
-        </Box>
         <Heading
           sx={{
             paddingX: 2,

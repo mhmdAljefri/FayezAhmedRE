@@ -6,8 +6,15 @@ import SlickSlider from "./Sliders/SlickSlider"
 import { Icon } from "react-icons-kit"
 import { twitter } from "react-icons-kit/fa/twitter"
 import { shareAlt } from "react-icons-kit/fa/shareAlt"
+import { whatsapp } from "react-icons-kit/fa/whatsapp"
+import { facebook } from "react-icons-kit/fa/facebook"
 import { eye } from "react-icons-kit/fa/eye"
 import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
+import {
+  facebookLinkGenerator,
+  twitterLinkGenerator,
+  whatsappPreFilledLinkGenerator,
+} from "app/utils"
 
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 export default function Twits() {
@@ -61,6 +68,12 @@ export default function Twits() {
       >
         {twits.map(({ text, id }) => {
           const twitUrl = `https://twitter.com/ProjectsQatar/status/${id}`
+          // generating socail links
+          const shareWhatssapp = whatsappPreFilledLinkGenerator(`${text} - ${twitUrl}`)
+          const shareFacebook = facebookLinkGenerator(twitUrl, text)
+          const shareTwitter = twitterLinkGenerator(twitUrl, text)
+
+          // modify twitter text
           const textArray: string[] = text.split(" ")
           const textWithoutLinkArray = textArray.map((word) => {
             if (word.startsWith("http")) return false
@@ -123,14 +136,36 @@ export default function Twits() {
                 >
                   <Icon icon={eye} />
                 </Link>
-                <Link
-                  target="_blank"
-                  rel="noopener"
-                  title="مشاركة التغريدة"
-                  href={`http://www.twitter.com/share?url=${twitUrl}`}
+                <Flex
+                  sx={{
+                    alignItems: "center",
+
+                    paddingInlineStart: 13,
+                    borderRadius: 99,
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderColor: "lightGray",
+                    a: {
+                      border: "none",
+                    },
+                  }}
                 >
                   <Icon icon={shareAlt} />
-                </Link>
+                  <Link target="_blank" rel="noopener" title="مشاركة التغريدة" href={shareFacebook}>
+                    <Icon icon={facebook} />
+                  </Link>
+                  <Link
+                    target="_blank"
+                    rel="noopener"
+                    title="مشاركة التغريدة"
+                    href={shareWhatssapp}
+                  >
+                    <Icon icon={whatsapp} />
+                  </Link>
+                  <Link target="_blank" rel="noopener" title="مشاركة التغريدة" href={shareTwitter}>
+                    <Icon icon={twitter} />
+                  </Link>
+                </Flex>
               </Flex>
             </Box>
           )

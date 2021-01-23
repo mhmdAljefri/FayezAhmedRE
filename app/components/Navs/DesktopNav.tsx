@@ -34,6 +34,7 @@ const DesktopNav = (props: NavProps) => {
         <NavItem to="/about-us" text="لماذا فايز احمد" />
 
         <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
+        <NavItem to="/furniture/" text="أثث منزلك" />
       </Flex>
     </Box>
   )
