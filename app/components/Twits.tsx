@@ -75,17 +75,18 @@ export default function Twits() {
 
           // modify twitter text
           const textArray: string[] = text.split(" ")
-          const textWithoutLinkArray = textArray.map((word) => {
+          const textWithoutLinkArray = textArray.map((word, index) => {
             if (word.startsWith("http")) return false
             if (word.startsWith("#"))
               return (
-                <Box as="span" sx={{ color: "primary" }}>
+                <Box key={index} as="span" sx={{ color: "primary" }}>
                   {word}{" "}
                 </Box>
               )
             if (word.startsWith("@"))
               return (
                 <Link
+                  key={index}
                   target="_blank"
                   rel="noopener"
                   href={`https://twitter.com/${word.replace(":", "")}`}
@@ -94,7 +95,7 @@ export default function Twits() {
                   {word}{" "}
                 </Link>
               )
-            return word + " "
+            return <span key={index}>{word + " "}</span>
           })
           return (
             <Box key={id}>

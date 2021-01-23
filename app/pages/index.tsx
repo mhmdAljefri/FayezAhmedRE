@@ -59,6 +59,8 @@ const Home: BlitzPage<HomeProps> = ({
   explores,
   mostViewedProjects,
 }) => {
+  const secureVideoUrl = carouselVideo?.videoUlr.replace("http://", "https://")
+
   return (
     <main>
       <Box sx={{ position: "relative", height: "100vh", overflow: "hidden" }}>
@@ -87,11 +89,11 @@ const Home: BlitzPage<HomeProps> = ({
               controls={false}
             >
               <track kind="captions" />
-              <source src={carouselVideo.videoUlr} type="video/mp4" />
-              <source src={carouselVideo.videoUlr} type="video/ogg" />
-              <source src={carouselVideo.videoUlr} type="video/webm" />
-              <object data={carouselVideo.videoUlr}>
-                <embed src={carouselVideo.videoUlr} />
+              <source src={secureVideoUrl} type="video/mp4" />
+              <source src={secureVideoUrl} type="video/ogg" />
+              <source src={secureVideoUrl} type="video/webm" />
+              <object data={secureVideoUrl}>
+                <embed src={secureVideoUrl} />
               </object>
             </video>
           </Box>

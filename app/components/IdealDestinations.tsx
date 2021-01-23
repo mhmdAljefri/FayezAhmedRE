@@ -7,7 +7,14 @@ import Wrapper from "./Wrapper"
 
 export default function IdealDestinations({ explores }) {
   return (
-    <Box sx={{ backgroundColor: "dark", pb: 4 }}>
+    <Box
+      sx={{
+        backgroundColor: "dark",
+        pb: 4,
+        backgroundImage: "url(/back2.jpg)",
+        backgroundSize: "cover",
+      }}
+    >
       <Wrapper>
         <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20, color: "primary" }}>
           وجهات مثالية للجميع
