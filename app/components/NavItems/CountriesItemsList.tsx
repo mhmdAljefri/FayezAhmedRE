@@ -1,8 +1,9 @@
 import getCountries from "app/public/countries/queries/getCountries"
 import { Link, useQuery } from "blitz"
 import React from "react"
-import { Avatar, Box, Flex } from "theme-ui"
+import { Box, Flex } from "theme-ui"
 import Dropdown from "../Dropdown"
+import Image from "../Image"
 
 export default function CountriesItemsList() {
   const [{ countries }] = useQuery(getCountries, { select: { id: true, name: true, image: true } })
@@ -20,8 +21,14 @@ export default function CountriesItemsList() {
         node: (
           <Link href={`/countries/${country.id}`}>
             <Flex sx={{ marginY: 3, width: 180 }} key={country.id}>
-              <Avatar
-                sx={{ boxShadow: "card", marginInlineEnd: 10, height: 30, width: 30 }}
+              <Image
+                sx={{
+                  boxShadow: "card",
+                  borderRadius: 30,
+                  marginInlineEnd: 10,
+                  height: 30,
+                  width: 30,
+                }}
                 src={country.image}
               />
               مشاريع وعروض {country.name}

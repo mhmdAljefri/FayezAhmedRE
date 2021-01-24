@@ -1,7 +1,8 @@
 import { FurnishCategory } from "@prisma/client"
 import { Link } from "blitz"
 import React from "react"
-import { Box, Image, Text, Link as ThemeLink } from "theme-ui"
+import { Box, Text, Link as ThemeLink } from "theme-ui"
+import Image from "./Image"
 
 type furnishCategoryCardProps = Pick<FurnishCategory, "name" | "image">
 export default function FurnishCategoryCard(furnishCategory: furnishCategoryCardProps) {
