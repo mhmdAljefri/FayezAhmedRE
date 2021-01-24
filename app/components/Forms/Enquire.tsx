@@ -25,7 +25,7 @@ export default function Enquire() {
         }}
       >
         <Heading sx={{ fontSize: [4, 6], paddingTop: 5, paddingBottom: 4, color: "white" }}>
-          اطلب استشارتك
+          استفسر الان
         </Heading>
         <Form onSubmit={run}>
           <LabeledMenuField
