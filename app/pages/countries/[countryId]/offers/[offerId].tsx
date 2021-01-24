@@ -84,26 +84,24 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         </ThemeLink>
       )}
       {offer.project && (
-        <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
-          <Wrapper>
-            <Link passHref href={`/countries/${offer.countryId}/projects/${offer.project.id}`}>
-              <ThemeLink
-                sx={{
-                  variant: "links.outline",
-                  marginY: 4,
-                  textDecoration: "none",
-                  fontWeight: 700,
-                  display: "inline-block",
-                }}
-              >
-                <Box as="span" sx={{ paddingX: 5 }}>
-                  عرض المشروع
-                </Box>
-                <ArrowIcon />
-              </ThemeLink>
-            </Link>
-          </Wrapper>
-        </Box>
+        <Wrapper>
+          <Link passHref href={`/countries/${offer.countryId}/projects/${offer.project.id}`}>
+            <ThemeLink
+              sx={{
+                variant: "links.outline",
+                marginY: 4,
+                textDecoration: "none",
+                fontWeight: 700,
+                display: "inline-block",
+              }}
+            >
+              <Box as="span" sx={{ paddingX: 5 }}>
+                عرض المشروع
+              </Box>
+              <ArrowIcon />
+            </ThemeLink>
+          </Link>
+        </Wrapper>
       )}
       {offer.gallery.length > 0 && <GalleryView gallery={offer.gallery} />}
     </Layout>

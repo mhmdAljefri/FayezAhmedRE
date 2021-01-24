@@ -124,7 +124,7 @@ const Home: BlitzPage<HomeProps> = ({
       <ComplexProjects projects={projects} />
       <IdealDestinations explores={explores} />
       <Twits />
-      <Box sx={{}}>
+      <Box sx={{ pt: 5 }}>
         <Wrapper>
           <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 

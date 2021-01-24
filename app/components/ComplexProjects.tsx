@@ -8,7 +8,7 @@ import Wrapper from "./Wrapper"
 
 export default function ComplexProjects({ projects }) {
   return (
-    <Box>
+    <Box sx={{ backgroundColor: "light", pt: 4 }}>
       <Wrapper
         sx={{
           ".slick-dots": {

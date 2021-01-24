@@ -22,156 +22,172 @@ export default function Twits() {
   const twits = data?.data || []
 
   return (
-    <Wrapper>
-      <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>
-        <Icon icon={twitter} size={32} style={{ marginInlineEnd: 15, color: "#1da1f2" }} />
-        <span>اخر الاخبار</span>
-      </Heading>
-      <SlickSlider
-        arrows
-        infinite
-        dots={false}
-        slidesToShow={3}
-        slidesToScroll={1}
-        nextArrow={<ArrowNext />}
-        prevArrow={<ArrowPrev />}
-        responsive={[
-          {
-            breakpoint: 1200,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: false,
-              rtl: true,
+    <Box
+      sx={{
+        backgroundColor: "light",
+      }}
+    >
+      <Wrapper>
+        <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>
+          <Icon icon={twitter} size={32} style={{ marginInlineEnd: 15, color: "#1da1f2" }} />
+          <span>اخر الاخبار</span>
+        </Heading>
+        <SlickSlider
+          arrows
+          infinite
+          dots={false}
+          slidesToShow={3}
+          slidesToScroll={1}
+          nextArrow={<ArrowNext />}
+          prevArrow={<ArrowPrev />}
+          responsive={[
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: false,
+                rtl: true,
+              },
             },
-          },
-          {
-            breakpoint: 1100,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              infinite: false,
-              rtl: true,
+            {
+              breakpoint: 1100,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: false,
+                rtl: true,
+              },
             },
-          },
-          {
-            breakpoint: 900,
-            settings: {
-              centerMode: false,
-              vertical: false,
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              rtl: true,
+            {
+              breakpoint: 900,
+              settings: {
+                centerMode: false,
+                vertical: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                rtl: true,
+              },
             },
-          },
-        ]}
-      >
-        {twits.map(({ text, id }) => {
-          const twitUrl = `https://twitter.com/ProjectsQatar/status/${id}`
-          // generating socail links
-          const shareWhatssapp = whatsappPreFilledLinkGenerator(`${text} - ${twitUrl}`)
-          const shareFacebook = facebookLinkGenerator(twitUrl, text)
-          const shareTwitter = twitterLinkGenerator(twitUrl, text)
+          ]}
+        >
+          {twits.map(({ text, id }) => {
+            const twitUrl = `https://twitter.com/ProjectsQatar/status/${id}`
+            // generating socail links
+            const shareWhatssapp = whatsappPreFilledLinkGenerator(`${text} - ${twitUrl}`)
+            const shareFacebook = facebookLinkGenerator(twitUrl, text)
+            const shareTwitter = twitterLinkGenerator(twitUrl, text)
 
-          // modify twitter text
-          const textArray: string[] = text.split(" ")
-          const textWithoutLinkArray = textArray.map((word, index) => {
-            if (word.startsWith("http")) return false
-            if (word.startsWith("#"))
-              return (
-                <Box key={index} as="span" sx={{ color: "primary" }}>
-                  {word}{" "}
-                </Box>
-              )
-            if (word.startsWith("@"))
-              return (
-                <Link
-                  key={index}
-                  target="_blank"
-                  rel="noopener"
-                  href={`https://twitter.com/${word.replace(":", "")}`}
-                  sx={{ color: "primary" }}
-                >
-                  {word}{" "}
-                </Link>
-              )
-            return <span key={index}>{word + " "}</span>
-          })
-          return (
-            <Box key={id}>
-              <Link sx={{ marginInlineEnd: 15, textDecoration: "none" }} href={twitUrl}>
-                <Heading sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
-                  {textWithoutLinkArray}
-                </Heading>
-              </Link>
-              <Flex
-                sx={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 2,
-                  a: {
-                    textDecoration: "none",
-                    borderWidth: 1,
-                    borderStyle: "solid",
-                    borderColor: "lightGray",
-                    color: "lightGray",
-
-                    width: 35,
-                    height: 35,
-                    lineHeight: "36px",
-                    textAlign: "center",
-                    borderRadius: 99,
-                    ":hover": {
-                      color: "primary",
-                      borderColor: "primary",
-                    },
-                  },
-                }}
-              >
-                <Link
-                  target="_blank"
-                  rel="noopener"
-                  title="مشاهدة التغريدة"
-                  sx={{ marginInlineEnd: 15 }}
-                  href={twitUrl}
-                >
-                  <Icon icon={eye} />
+            // modify twitter text
+            const textArray: string[] = text.split(" ")
+            const textWithoutLinkArray = textArray.map((word, index) => {
+              if (word.startsWith("http")) return false
+              if (word.startsWith("#"))
+                return (
+                  <Box key={index} as="span" sx={{ color: "primary" }}>
+                    {word}{" "}
+                  </Box>
+                )
+              if (word.startsWith("@"))
+                return (
+                  <Link
+                    key={index}
+                    target="_blank"
+                    rel="noopener"
+                    href={`https://twitter.com/${word.replace(":", "")}`}
+                    sx={{ color: "primary" }}
+                  >
+                    {word}{" "}
+                  </Link>
+                )
+              return <span key={index}>{word + " "}</span>
+            })
+            return (
+              <Box key={id}>
+                <Link sx={{ marginInlineEnd: 15, textDecoration: "none" }} href={twitUrl}>
+                  <Heading sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
+                    {textWithoutLinkArray}
+                  </Heading>
                 </Link>
                 <Flex
                   sx={{
+                    justifyContent: "center",
                     alignItems: "center",
-
-                    paddingInlineStart: 13,
-                    borderRadius: 99,
-                    borderWidth: 1,
-                    borderStyle: "solid",
-                    borderColor: "lightGray",
+                    marginTop: 2,
                     a: {
-                      border: "none",
+                      textDecoration: "none",
+                      borderWidth: 1,
+                      borderStyle: "solid",
+                      borderColor: "lightGray",
+                      color: "lightGray",
+
+                      width: 35,
+                      height: 35,
+                      lineHeight: "36px",
+                      textAlign: "center",
+                      borderRadius: 99,
+                      ":hover": {
+                        color: "primary",
+                        borderColor: "primary",
+                      },
                     },
                   }}
                 >
-                  <Icon icon={shareAlt} />
-                  <Link target="_blank" rel="noopener" title="مشاركة التغريدة" href={shareFacebook}>
-                    <Icon icon={facebook} />
-                  </Link>
                   <Link
                     target="_blank"
                     rel="noopener"
-                    title="مشاركة التغريدة"
-                    href={shareWhatssapp}
+                    title="مشاهدة التغريدة"
+                    sx={{ marginInlineEnd: 15 }}
+                    href={twitUrl}
                   >
-                    <Icon icon={whatsapp} />
+                    <Icon icon={eye} />
                   </Link>
-                  <Link target="_blank" rel="noopener" title="مشاركة التغريدة" href={shareTwitter}>
-                    <Icon icon={twitter} />
-                  </Link>
+                  <Flex
+                    sx={{
+                      alignItems: "center",
+
+                      paddingInlineStart: 13,
+                      borderRadius: 99,
+                      borderWidth: 1,
+                      borderStyle: "solid",
+                      borderColor: "lightGray",
+                      a: {
+                        border: "none",
+                      },
+                    }}
+                  >
+                    <Icon icon={shareAlt} />
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      title="مشاركة التغريدة"
+                      href={shareFacebook}
+                    >
+                      <Icon icon={facebook} />
+                    </Link>
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      title="مشاركة التغريدة"
+                      href={shareWhatssapp}
+                    >
+                      <Icon icon={whatsapp} />
+                    </Link>
+                    <Link
+                      target="_blank"
+                      rel="noopener"
+                      title="مشاركة التغريدة"
+                      href={shareTwitter}
+                    >
+                      <Icon icon={twitter} />
+                    </Link>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
-          )
-        })}
-      </SlickSlider>
-    </Wrapper>
+              </Box>
+            )
+          })}
+        </SlickSlider>
+      </Wrapper>
+    </Box>
   )
 }
