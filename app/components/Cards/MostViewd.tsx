@@ -3,6 +3,8 @@ import React from "react"
 import { Box, Grid, Heading, Text } from "theme-ui"
 
 export default function MostViewd({ project }) {
+  const bgImageSecureUrl = project.image.replace("http://", "https://")
+
   return (
     <Grid
       columns={3}
@@ -24,7 +26,7 @@ export default function MostViewd({ project }) {
               maxWidth: ["auto"],
               height: "100%",
               backgroundPosition: "center",
-              backgroundImage: `url(${project.image || undefined})`,
+              backgroundImage: `url(${bgImageSecureUrl})`,
               backgroundSize: "cover",
             }}
           ></Box>

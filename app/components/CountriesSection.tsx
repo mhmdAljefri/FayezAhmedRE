@@ -9,6 +9,7 @@ import { Country } from "@prisma/client"
 export type CountryCardProps = Country
 
 function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
+  const bgImageSecureUrl = image.replace("http://", "https://")
   return (
     <Link passHref href={`/countries/${id}`}>
       <ThemeLink
@@ -19,7 +20,7 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
         <Flex
           key={id}
           sx={{
-            backgroundImage: `url(${image})`,
+            backgroundImage: `url(${bgImageSecureUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "bottom",
             backgroundAttachment: "fixed",

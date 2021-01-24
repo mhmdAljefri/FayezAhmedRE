@@ -17,11 +17,13 @@ type SlideTypeProps = SlideProps & {
 }
 
 const Slide = ({ title, opacity, text, image, path, onlyImages }: SlideTypeProps) => {
+  const bgImageSecureUrl = image.replace("http://", "https://")
+
   return (
     <Flex
       sx={{
         alignItems: "center",
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${bgImageSecureUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundColor: "#eee",
