@@ -72,7 +72,8 @@ export function ConstractiongVideo({
   constructingUpdatePrview?: string | null
 }) {
   if (!constructingUpdateVideo) return <div />
-  const isYoutube = constructingUpdateVideo.startsWith("https://www.youtube")
+  const constructingSecureUpdateVideo = constructingUpdateVideo.replace("http://", "https://")
+  const isYoutube = constructingSecureUpdateVideo.startsWith("https://www.youtube")
   return (
     <Wrapper sx={{ marginY: 5 }}>
       {heading && <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>{heading}</Heading>}
@@ -85,7 +86,12 @@ export function ConstractiongVideo({
         }}
       >
         {isYoutube ? (
-          <iframe width="100%" height="100%" title="any" src={constructingUpdateVideo}></iframe>
+          <iframe
+            width="100%"
+            height="100%"
+            title="any"
+            src={constructingSecureUpdateVideo}
+          ></iframe>
         ) : (
           <video
             width="100%"
@@ -95,11 +101,11 @@ export function ConstractiongVideo({
             controls
           >
             <track kind="captions" />
-            <source src={constructingUpdateVideo} type="video/mp4" />
-            <source src={constructingUpdateVideo} type="video/ogg" />
-            <source src={constructingUpdateVideo} type="video/webm" />
-            <object data={constructingUpdateVideo}>
-              <embed src={constructingUpdateVideo} />
+            <source src={constructingSecureUpdateVideo} type="video/mp4" />
+            <source src={constructingSecureUpdateVideo} type="video/ogg" />
+            <source src={constructingSecureUpdateVideo} type="video/webm" />
+            <object data={constructingSecureUpdateVideo}>
+              <embed src={constructingSecureUpdateVideo} />
             </object>
           </video>
         )}

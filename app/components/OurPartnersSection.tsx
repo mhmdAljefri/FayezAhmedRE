@@ -1,9 +1,10 @@
 import React from "react"
-import { Box, Heading, Image, Flex } from "theme-ui"
+import { Box, Heading, Flex } from "theme-ui"
 import Wrapper from "./Wrapper"
 import { Partner } from "@prisma/client"
 import SlickSlider from "./Sliders/SlickSlider"
 import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
+import Image from "./Image"
 
 type PartnersCardProps = Partner
 

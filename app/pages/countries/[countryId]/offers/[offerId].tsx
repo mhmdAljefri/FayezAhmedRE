@@ -37,11 +37,11 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
                   controls
                 >
                   <track kind="captions" />
-                  <source src={offer.mainVideo} type="video/mp4" />
-                  <source src={offer.mainVideo} type="video/ogg" />
-                  <source src={offer.mainVideo} type="video/webm" />
-                  <object data={offer.mainVideo}>
-                    <embed src={offer.mainVideo} />
+                  <source src={offer.mainVideo.replace("http://", "https://")} type="video/mp4" />
+                  <source src={offer.mainVideo.replace("http://", "https://")} type="video/ogg" />
+                  <source src={offer.mainVideo.replace("http://", "https://")} type="video/webm" />
+                  <object data={offer.mainVideo.replace("http://", "https://")}>
+                    <embed src={offer.mainVideo.replace("http://", "https://")} />
                   </object>
                 </video>
               )}

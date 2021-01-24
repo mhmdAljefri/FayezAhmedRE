@@ -1,6 +1,7 @@
 import { Link } from "blitz"
 import React from "react"
-import { Box, Flex, Image } from "theme-ui"
+import { Box, Flex } from "theme-ui"
+import Image from "./Image"
 
 export default function ExploreCard({ href, title, image }) {
   return (

@@ -1,7 +1,8 @@
 import { Furnish } from "@prisma/client"
 import { Link, useRouter } from "blitz"
 import React from "react"
-import { Box, Image, Text, Link as ThemeLink } from "theme-ui"
+import { Box, Text, Link as ThemeLink } from "theme-ui"
+import Image from "./Image"
 
 type furnishCardProps = Pick<Furnish, "name" | "image">
 export default function FurnishCard(furnish: furnishCardProps) {
