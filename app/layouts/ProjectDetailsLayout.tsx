@@ -551,9 +551,8 @@ export default function ProjectDetailsLayout({
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <SlickSlider
-                slidesToShow={(nearBy as any)?.length > 5 ? 5 : (nearBy as any)?.length}
+                slidesToShow={(nearBy as any)?.length >= 5 ? 5 : 3}
                 slidesToScroll={1}
-                rtl
                 responsive={[
                   {
                     breakpoint: 1000,
@@ -570,7 +569,6 @@ export default function ProjectDetailsLayout({
                     },
                   },
                 ]}
-                centerMode
               >
                 {(nearBy as any)?.map((item, index) => (
                   <Box key={item.name + "_" + index} sx={{ textAlign: "center" }}>
