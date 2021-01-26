@@ -10117,9 +10117,10 @@ react-reveal@1.2.2:
   dependencies:
     prop-types "^15.5.10"
 
-"react-slick@https://github.com/mhmdAljefri/react-slick.git":
+react-slick@0.28.0:
   version "0.28.0"
-  resolved "https://github.com/mhmdAljefri/react-slick.git#36cd2a8e0e87c8e5f05db9a674fce1f1081d93d7"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.28.0.tgz#b3f8511b0facca41cabe35cbf37771250f8287ea"
+  integrity sha512-/EZI9FOVFo9PseQKOw08K/lVT/T81rkVJkCDGCQbDGbg4irSMALaoesBMmAZie2YALuMlKHdzDsqioNtkmJKVg==
   dependencies:
     classnames "^2.2.5"
     enquire.js "^2.1.6"
