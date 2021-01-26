@@ -442,7 +442,7 @@ export default function ProjectDetailsLayout({
                       borderStyle: "solid",
                       borderRadius: 15,
                       boxShadow: "default",
-                      height: [250, 300, 350],
+                      height: [200, 250],
                     }}
                     src={item}
                   />
@@ -498,10 +498,10 @@ export default function ProjectDetailsLayout({
                   <div key={feat + "_" + index}>
                     <Flex
                       sx={{
-                        paddingX: 3,
+                        paddingX: [2, 2, 3],
                         margin: 2,
                         backgroundColor: "primary",
-                        height: 300,
+                        height: 150,
                         color: "white",
                         boxShadow: "default",
                         borderRadius: "default",
@@ -514,7 +514,7 @@ export default function ProjectDetailsLayout({
                       <Text
                         sx={{
                           fontWeight: 700,
-                          fontSize: [3, 4, 5],
+                          fontSize: [2, 3, 3, 4],
                         }}
                       >
                         {feat}
@@ -544,14 +544,13 @@ export default function ProjectDetailsLayout({
           )}
           {(nearBy as any)?.length > 0 && (
             <Wrapper>
-              <Heading sx={{ paddingBottom: 5, paddingTop: 4, fontSize: [5, null, 6] }}>
-                في الجوار
-              </Heading>
+              <Heading sx={{ paddingTop: 4, fontSize: [5, null, 6] }}>في الجوار</Heading>
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <SlickSlider
                 slidesToShow={(nearBy as any)?.length >= 5 ? 5 : 3}
+                infinite={(nearBy as any)?.length > 5}
                 slidesToScroll={1}
                 responsive={[
                   {

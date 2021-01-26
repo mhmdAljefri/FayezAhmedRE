@@ -16,9 +16,9 @@ export default function useOnClickout() {
     }
 
     if (isOnBrowser) {
-      window.addEventListener("mousedown", handleOnMouseMove, false)
+      window.addEventListener("mousemove", handleOnMouseMove, false)
       return () => {
-        window.removeEventListener("mousedown", handleOnMouseMove, false)
+        window.removeEventListener("mousemove", handleOnMouseMove, false)
       }
     }
   })

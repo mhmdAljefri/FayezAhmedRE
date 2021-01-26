@@ -10,7 +10,14 @@ export default function CountriesItemsList() {
   return (
     <Dropdown
       title={
-        <Box sx={{ width: 160, fontWeight: 700, marginInlineEnd: [10, 15, 20], fontSize: [1, 2] }}>
+        <Box
+          sx={{
+            fontWeight: 700,
+            marginInlineEnd: [10, 15, 20],
+            fontSize: [1, 2, 2, 1],
+            paddingInlineEnd: 15,
+          }}
+        >
           المشاريع والعروض
         </Box>
       }
