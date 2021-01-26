@@ -16,7 +16,7 @@ const DesktopNav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
-            marginInlineEnd: [10, 15, 20],
+            marginInlineEnd: [18, 20, 25],
             fontSize: [3],
           }}
         >

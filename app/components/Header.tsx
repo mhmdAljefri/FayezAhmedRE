@@ -17,7 +17,7 @@ type HeaderProps = {
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const { pathname } = useRouter()
-  const isDesktopScreen = useScreenSize() > 700
+  const isDesktopScreen = useScreenSize() > 850
   const hasProjects =
     pathname.startsWith("/countries/[countryId]") ||
     pathname.includes("projects") ||
