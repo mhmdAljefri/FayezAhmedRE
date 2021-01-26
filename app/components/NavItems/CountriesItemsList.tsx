@@ -10,7 +10,7 @@ export default function CountriesItemsList() {
   return (
     <Dropdown
       title={
-        <Box sx={{ width: 160, fontWeight: 700, marginInlineEnd: [10, 15, 20], fontSize: [2, 3] }}>
+        <Box sx={{ width: 160, fontWeight: 700, marginInlineEnd: [10, 15, 20], fontSize: [1, 2] }}>
           المشاريع والعروض
         </Box>
       }
@@ -20,7 +20,7 @@ export default function CountriesItemsList() {
         value: country.id,
         node: (
           <Link href={`/countries/${country.id}`}>
-            <Flex sx={{ marginY: 3, width: 180 }} key={country.id}>
+            <Flex sx={{ marginY: 3, width: 180, fontSize: [0, 1] }} key={country.id}>
               <Image
                 sx={{
                   boxShadow: "card",

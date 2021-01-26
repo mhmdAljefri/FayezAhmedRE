@@ -65,20 +65,13 @@ function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextPr
     <Flex
       sx={{
         marginBottom: 0,
-        height: 40,
+        height: [30, 30, 30, 40],
         color: "lightText",
         alignItems: "center",
         ...sx,
       }}
     >
-      {icon && (
-        <Icon
-          icon={icon}
-          style={{
-            fontSize: "large",
-          }}
-        />
-      )}
+      {icon && <Icon icon={icon} />}
 
       {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
       <Box
@@ -89,6 +82,7 @@ function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextPr
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
+          fontSize: [1, 1, 1, 2],
         }}
       >
         {text}
@@ -178,11 +172,14 @@ export function ProjectCard({
       <Box sx={{}}>
         <Link passHref href={projectPath}>
           <a>
-            <Image sx={{ height: 240, width: "100%", objectFit: "cover" }} src={image as string} />
+            <Image
+              sx={{ height: [180, 200, 200, 240], width: "100%", objectFit: "cover" }}
+              src={image as string}
+            />
           </a>
         </Link>
       </Box>
-      <Box sx={{ paddingY: 3, paddingX: 3 }}>
+      <Box sx={{ paddingY: [1, 2, 3], paddingX: [2, 2, 3] }}>
         <Flex>
           {roomWithPrices[0]?.["room"] && (
             <SelectRoom

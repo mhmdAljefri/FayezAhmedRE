@@ -1,7 +1,7 @@
 const future = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body: 'Tajawal, NotoKufi, "Avenir Next", system-ui, sans-serif',
+    body: 'Tajawal, Helvetica, Arial, "sans-serif"',
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
@@ -38,6 +38,7 @@ const future = {
       fontFamily: "body",
       lineHeight: "body",
       fontWeight: "body",
+      fontDisplay: "swap",
     },
     h1: {
       color: "text",

@@ -19,7 +19,7 @@ export default function FurnishCategoryCard(furnishCategory: furnishCategoryCard
       <Link passHref href={`/furniture/${furnishCategory.name}`}>
         <ThemeLink sx={{ textDecoration: "none" }}>
           <Image src={furnishCategory.image} alt={furnishCategory.name} />
-          <Text sx={{ paddingY: 4, paddingX: 3, fontSize: [3, 4, 5], fontWeight: 700 }}>
+          <Text sx={{ paddingY: 4, paddingX: 3, fontSize: [3, 4], fontWeight: 700 }}>
             {furnishCategory.name}
           </Text>
         </ThemeLink>

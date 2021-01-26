@@ -16,7 +16,6 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
-import "app/styles/fonts.css" // add local fonts
 import "app/styles/animate.css"
 import "react-toastify/dist/ReactToastify.css"
 import "glider-js/glider.min.css"
