@@ -550,15 +550,36 @@ export default function ProjectDetailsLayout({
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
-              <SlickSlider slidesToShow={1} slidesToScroll={1} responsive={[]} centerMode>
+              <SlickSlider
+                slidesToShow={(nearBy as any)?.length > 5 ? 5 : (nearBy as any)?.length}
+                slidesToScroll={1}
+                rtl
+                responsive={[
+                  {
+                    breakpoint: 1000,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1,
+                    },
+                  },
+                  {
+                    breakpoint: 800,
+                    settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                    },
+                  },
+                ]}
+                centerMode
+              >
                 {(nearBy as any)?.map((item, index) => (
                   <Box key={item.name + "_" + index} sx={{ textAlign: "center" }}>
                     <Image
                       sx={{
                         marginX: "auto",
-                        width: [200, 300, 350],
-                        height: [200, 300, 350],
-                        borderRadius: 350,
+                        width: [180, 200],
+                        height: [180, 200],
+                        borderRadius: 999,
                         borderWidth: 2,
                         borderColor: "primary",
                         borderStyle: "solid",
