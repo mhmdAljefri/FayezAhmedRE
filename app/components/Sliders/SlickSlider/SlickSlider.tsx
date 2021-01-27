@@ -26,6 +26,7 @@ const defaultProps: typeof noSizeDefaultProps & {
       slidesToShow?: number
       slidesToScroll?: number
       rtl?: boolean
+      dots?: boolean
     }
   }[]
 } = {
@@ -84,7 +85,7 @@ export default function SlickSlider({
   const responsive = variableWidth
     ? props.responsive.map(({ breakpoint, settings }) => ({
         breakpoint,
-        settings: { variableWidth, ...settings, arrows },
+        settings: { dots, variableWidth, arrows, ...settings },
       }))
     : props.responsive
   return (

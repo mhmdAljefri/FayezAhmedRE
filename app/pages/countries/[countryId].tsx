@@ -383,6 +383,7 @@ function CountryPage({
           slidesToShow={3}
           arrows={false}
           rtl
+          dots
           infinite={explores.length > 3}
           responsive={[
             {
