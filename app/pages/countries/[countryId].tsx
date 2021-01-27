@@ -33,6 +33,7 @@ import ExploreCard from "app/components/ExploreCard"
 import getExplores from "app/public/explores/queries/getExplores"
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
 import MostViewd from "app/components/Cards/MostViewd"
+import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
@@ -41,30 +42,6 @@ function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { head
 
       <ShowMoreButton href={href} sx={sx} />
     </Flex>
-  )
-}
-
-function ExploreToggleButton({ onClick, isActive, children }) {
-  return (
-    <Box
-      onClick={onClick}
-      role="buttom"
-      title={children}
-      aria-label={children}
-      tabIndex={0}
-      sx={{
-        paddingY: 2,
-        cursor: "pointer",
-        width: 200,
-        fontWeight: 700,
-        color: "white",
-        textAlign: "center",
-        backgroundColor: isActive ? "primary" : "dark",
-        borderRadius: "md",
-      }}
-    >
-      {children}
-    </Box>
   )
 }
 

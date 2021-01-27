@@ -7,6 +7,7 @@ import { Explore } from "@prisma/client"
 import getCountries from "app/public/countries/queries/getCountries"
 import Wrapper from "app/components/Wrapper"
 import { useRouter } from "blitz"
+import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
 
 type Props = {
   explores: Explore[]
@@ -39,44 +40,24 @@ function ExploresPage({ explores: ssgExplores }: Props) {
               paddingBottom: 3,
             }}
           >
-            <Box
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("exploreGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor: showInspirationGallery === "exploreGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "exploreGallery"}
             >
               إستكشف
-            </Box>
-            <Box
+            </ExploreToggleButton>
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("getInspiredGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor:
-                  showInspirationGallery === "getInspiredGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "getInspiredGallery"}
             >
               استمد الإلهام
-            </Box>
-            <Box
+            </ExploreToggleButton>
+            <ExploreToggleButton
               onClick={() => setShowInspirationGallery("dontMissitGallery")}
-              sx={{
-                paddingY: 2,
-                width: 200,
-                textAlign: "center",
-                backgroundColor:
-                  showInspirationGallery === "dontMissitGallery" ? "primary" : "dark",
-                borderRadius: "md",
-              }}
+              isActive={showInspirationGallery === "dontMissitGallery"}
             >
               لا يفوتك
-            </Box>
+            </ExploreToggleButton>
           </Flex>
         </Wrapper>
       </Box>
