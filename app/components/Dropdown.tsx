@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { Box, Flex } from "theme-ui"
+import { Box, Flex, SxStyleProp } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
 import useOnClickout from "app/hooks/useOnClickout"
@@ -12,21 +12,23 @@ type DropdownProps = {
   /**
    * this prop for unselectable dropdown such list of navigations
    */
+
+  outterStyle?: SxStyleProp
   title?: ReactNode
   onChange: (value: any) => void
 }
 
-const Dropdown = ({ options, title, defaultValue, onChange }: DropdownProps) => {
+const Dropdown = ({ options, title, outterStyle, defaultValue, onChange }: DropdownProps) => {
   const defaultOption = options.find((option) => option.value === defaultValue)
   const { ref, open, setOpen } = useOnClickout()
 
   return (
-    <Box ref={ref} sx={{ position: "relative", zIndex: 1111 }}>
+    <Box ref={ref} sx={{ position: "relative", zIndex: 1111, ...outterStyle }}>
       <Flex sx={{ alignItems: "center", color: "primary" }} onMouseEnter={() => setOpen(true)}>
-        <Box sx={{ paddingX: 2, marginInlineEnd: 5 }}>
+        <Box sx={{ marginInlineEnd: 5 }}>
           {title || defaultOption?.node || defaultOption?.value}
         </Box>
-        <Box sx={{ position: "absolute", left: 23, top: 0 }}>
+        <Box sx={{}}>
           <Icon icon={chevronDown} />
         </Box>
       </Flex>

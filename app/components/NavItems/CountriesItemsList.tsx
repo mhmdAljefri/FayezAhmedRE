@@ -9,13 +9,12 @@ export default function CountriesItemsList() {
   const [{ countries }] = useQuery(getCountries, { select: { id: true, name: true, image: true } })
   return (
     <Dropdown
+      outterStyle={{ marginInlineEnd: 20 }}
       title={
         <Box
           sx={{
             fontWeight: 700,
-            marginInlineEnd: [10, 15, 20],
             fontSize: [1, 2, 2, 1],
-            paddingInlineEnd: 15,
           }}
         >
           المشاريع والعروض
