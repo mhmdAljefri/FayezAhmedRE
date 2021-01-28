@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithRef } from "react"
+import React, { ComponentPropsWithRef, useState } from "react"
 import { Image as ThemeImage, SxStyleProp } from "theme-ui"
 import { makeS3Url } from "app/utils/aws"
 
@@ -7,9 +7,14 @@ type Props = ComponentPropsWithRef<"img"> & {
   imageMaxWidth: number
 }
 export default function Image({ imageMaxWidth, ...props }: Props) {
-  const src = makeS3Url(props.src)
+  const s3Url = makeS3Url(props.src)
+  const [src, setSrc] = useState(s3Url)
 
-  return <ThemeImage {...props} src={src} />
+  const handleImageError = (error) => {
+    if (src === s3Url) setSrc(props.src || "")
+  }
+
+  return <ThemeImage {...props} onError={handleImageError} src={src} />
 }
 
 Image.defaultProps = {
