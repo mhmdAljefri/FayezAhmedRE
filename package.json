@@ -40,6 +40,7 @@
     "@types/theme-ui": "0.3.7",
     "add": "2.0.6",
     "animate.css": "4.1.1",
+    "aws-sdk": "2.832.0",
     "axios": "0.21.0",
     "blitz": "0.29.2",
     "cloudinary-core": "2.11.3",

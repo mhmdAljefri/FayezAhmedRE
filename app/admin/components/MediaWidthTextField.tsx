@@ -1,11 +1,12 @@
 import React from "react"
 import { Field } from "react-final-form"
-import { Box, Flex, Image, Label } from "theme-ui"
+import { Box, Flex, Label } from "theme-ui"
 import UploadCloudinary from "./UploadCloudinary"
 import Slide from "react-reveal/Slide"
 import { FieldArray } from "react-final-form-arrays"
 import { Icon } from "react-icons-kit"
 import { close } from "react-icons-kit/fa/close"
+import Image from "app/components/Image"
 
 type MediaWidthTextFieldType = {
   name: string

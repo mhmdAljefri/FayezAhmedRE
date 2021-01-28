@@ -1,9 +1,10 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Grid, Heading, Text } from "theme-ui"
+import { makeS3Url } from "app/utils/aws"
 
 export default function MostViewd({ project }) {
-  const bgImageSecureUrl = project.image.replace("http://", "https://")
+  const bgImageSecureUrl = makeS3Url(project.image)
 
   return (
     <Grid
