@@ -529,6 +529,11 @@ export class InnerSlider extends React.Component {
         return
       }
     }
+
+    if (autoplaying === "playing") {
+      return
+    }
+
     this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed + 50)
     this.setState({ autoplaying: "playing" })
   }

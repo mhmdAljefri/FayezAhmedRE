@@ -146,10 +146,9 @@ export function GalleryView({ gallery }) {
             {
               breakpoint: 1200,
               settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 2,
+                slidesToScroll: 2,
                 infinite: gallery?.length > 3,
-                variableWidth: false,
               },
             },
             {
@@ -157,19 +156,15 @@ export function GalleryView({ gallery }) {
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
-                infinite: false,
-                variableWidth: false,
+                infinite: gallery?.length > 3,
               },
             },
             {
               breakpoint: 580,
               settings: {
-                centerMode: true,
-                vertical: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: gallery?.length > 3,
-                variableWidth: false,
               },
             },
           ]}

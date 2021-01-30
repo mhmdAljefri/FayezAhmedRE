@@ -128,7 +128,7 @@ const Home: BlitzPage<HomeProps> = ({
         <Wrapper>
           <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 
-          <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 4]}>
+          <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 2, 4]}>
             {mostViewedProjects
               .sort((first, second) => (first.views > second.views ? 1 : -1))
               .map((project) => (

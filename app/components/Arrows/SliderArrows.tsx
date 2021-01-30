@@ -1,8 +1,8 @@
 import React, { ComponentPropsWithoutRef } from "react"
 import { Box, SxStyleProp } from "theme-ui"
 import { Icon } from "react-icons-kit"
-import { arrows_right } from "react-icons-kit/linea/arrows_right"
-import { arrows_left } from "react-icons-kit/linea/arrows_left"
+import { chevronRight } from "react-icons-kit/fa/chevronRight"
+import { chevronLeft } from "react-icons-kit/fa/chevronLeft"
 
 type ArrowProps = {
   sx?: SxStyleProp
@@ -13,7 +13,14 @@ const SharedStyle: SxStyleProp = {
   color: "primary",
   position: "absolute",
   top: "50%",
-} as const
+  paddingTop: 10,
+  px: 3,
+  height: 40,
+  cursor: "pointer",
+  ":hover": {
+    backgroundColor: "background",
+  },
+}
 
 export const ArrowNext = (props: ArrowProps) => (
   <Box
@@ -25,7 +32,7 @@ export const ArrowNext = (props: ArrowProps) => (
       ...props.sx,
     }}
   >
-    <Icon size={36} icon={arrows_left} />
+    <Icon size={24} icon={chevronLeft} />
   </Box>
 )
 export const ArrowPrev = (props: ArrowProps) => (
@@ -38,6 +45,6 @@ export const ArrowPrev = (props: ArrowProps) => (
       ...props.sx,
     }}
   >
-    <Icon size={36} icon={arrows_right} />
+    <Icon size={24} icon={chevronRight} />
   </Box>
 )
