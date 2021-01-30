@@ -14,7 +14,7 @@ export default function CountriesItemsList() {
         <Box
           sx={{
             fontWeight: 700,
-            fontSize: [1, 2, 2, 1],
+            fontSize: [1, 2, 2, 2],
             color: "primary",
             cursor: "pointer",
             whiteSpace: "nowrap",

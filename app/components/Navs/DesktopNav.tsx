@@ -19,7 +19,7 @@ const DesktopNav = (props: NavProps) => {
             marginInlineEnd: [18, 20, 25],
             wordBreak: "keep-all",
             whiteSpace: "nowrap",
-            fontSize: 1,
+            fontSize: [1, 1, 2, 2],
             ":hover": {
               color: "white",
             },

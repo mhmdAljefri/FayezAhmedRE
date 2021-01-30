@@ -1,15 +1,14 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Grid, Heading, Text } from "theme-ui"
-import { makeS3Url } from "app/utils/aws"
+import Image from "../Image"
 
 export default function MostViewd({ project }) {
-  const bgImageSecureUrl = makeS3Url(project.image)
-
   return (
     <Grid
       columns={3}
       sx={{
+        maxHeight: 150,
         border: "1px solid #eee",
         borderColor: "primary",
         borderRadius: "sm",
@@ -21,16 +20,15 @@ export default function MostViewd({ project }) {
     >
       <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
         <a>
-          <Box
+          <Image
             sx={{
+              height: 150,
               overflow: "hidden",
               maxWidth: ["auto"],
-              height: "100%",
-              backgroundPosition: "center",
-              backgroundImage: `url(${bgImageSecureUrl})`,
-              backgroundSize: "cover",
+              objectFit: "cover",
             }}
-          ></Box>
+            src={project.image}
+          />
         </a>
       </Link>
       <Box sx={{ gridColumn: "span 2", p: [2, 3], flex: 1 }}>

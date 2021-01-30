@@ -116,21 +116,11 @@ export function ConstractiongVideo({
 }
 
 function SampleNextArrow(props) {
-  return (
-    <ArrowNext
-      sx={{ top: [-45, null, -50], right: [300, 300, 350], position: "absolute", zIndex: 10 }}
-      {...props}
-    />
-  )
+  return <ArrowNext {...props} />
 }
 
 function SamplePrevArrow(props) {
-  return (
-    <ArrowPrev
-      sx={{ top: [-45, null, -50], right: [250, 250, 300], position: "absolute", zIndex: 10 }}
-      {...props}
-    />
-  )
+  return <ArrowPrev {...props} />
 }
 
 export function GalleryView({ gallery }) {
@@ -144,13 +134,13 @@ export function GalleryView({ gallery }) {
         </Wrapper>
       </Box>
 
-      <Box sx={{ marginTop: -5 }}>
+      <Box sx={{ marginTop: -5, direction: "ltr" }}>
         <SlickSlider
-          prevArrow={<SamplePrevArrow />}
-          nextArrow={<SampleNextArrow />}
+          prevArrow={<ArrowPrev />}
+          nextArrow={<ArrowNext />}
           arrows
           slidesToShow={3}
-          slidesToScroll={-1}
+          slidesToScroll={1}
           infinite={gallery?.length > 3}
           responsive={[
             {
@@ -186,17 +176,15 @@ export function GalleryView({ gallery }) {
           variableWidth
           centerMode={false}
           dots={false}
-          rtl
-          sx={{ justifyContent: "center", overflow: "auto" }}
+          rtl={false}
         >
           {gallery.map((item, index) => (
             <Box key={item + "_" + index} sx={{}}>
               <Image
                 sx={{
                   borderRadius: 15,
-                  margin: 3,
                   width: "auto",
-                  height: ["auto", "auto", "auto", 300],
+                  height: [200, 200, 250, 300],
                   objectFit: "contain",
                   marginX: 2,
                 }}
