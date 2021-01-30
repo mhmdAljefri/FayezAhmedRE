@@ -10,7 +10,6 @@ type ArrowProps = {
 
 const SharedStyle: SxStyleProp = {
   zIndex: 1,
-  backgroundColor: "background",
   color: "primary",
   position: "absolute",
   top: "50%",
