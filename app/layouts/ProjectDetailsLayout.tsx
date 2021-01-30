@@ -27,6 +27,7 @@ import Icon from "react-icons-kit"
 import HTMLBox from "app/components/HTMLBox"
 import { numberFormat } from "app/utils"
 import Image from "app/components/Image"
+import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
 
 type ConstractingCardProps = {
   label: string
@@ -115,46 +116,49 @@ export function ConstractiongVideo({
 }
 
 function SampleNextArrow(props) {
-  const { onClick } = props
   return (
-    <Box sx={{ top: -100, left: 10, position: "absolute" }} onClick={onClick}>
-      <ArrowIcon sx={{ width: 40 }} />
-    </Box>
+    <ArrowNext
+      sx={{ top: [-45, null, -50], right: [300, 300, 350], position: "absolute", zIndex: 10 }}
+      {...props}
+    />
   )
 }
 
 function SamplePrevArrow(props) {
-  const { onClick } = props
   return (
-    <Box sx={{ top: -100, left: 60, position: "absolute" }} onClick={onClick}>
-      <ArrowIcon sx={{ width: 40, transform: "rotate(180deg)" }} />
-    </Box>
+    <ArrowPrev
+      sx={{ top: [-45, null, -50], right: [250, 250, 300], position: "absolute", zIndex: 10 }}
+      {...props}
+    />
   )
 }
 
 export function GalleryView({ gallery }) {
   return (
     <>
-      <Box sx={{ paddingTop: 6, paddingBottom: [4, 5, 6], backgroundColor: "dark" }}>
+      <Box sx={{ marginTop: 5, paddingTop: 6, backgroundColor: "dark" }}>
         <Wrapper>
-          <Heading sx={{ color: "white", fontSize: [5, null, 6] }}>المعرض</Heading>
+          <Heading sx={{ color: "white", paddingBottom: 5, fontSize: [5, null, 6] }}>
+            المعرض
+          </Heading>
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5 }}>
+      <Box sx={{ marginTop: -5 }}>
         <SlickSlider
           prevArrow={<SamplePrevArrow />}
           nextArrow={<SampleNextArrow />}
           arrows
-          slidesToShow={1}
+          slidesToShow={3}
           slidesToScroll={-1}
+          infinite={gallery?.length > 3}
           responsive={[
             {
               breakpoint: 1200,
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: gallery?.length > 4,
+                infinite: gallery?.length > 3,
                 variableWidth: false,
               },
             },
@@ -163,7 +167,6 @@ export function GalleryView({ gallery }) {
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
-                initialSlide: 1,
                 infinite: false,
                 variableWidth: false,
               },
@@ -175,7 +178,7 @@ export function GalleryView({ gallery }) {
                 vertical: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                infinite: false,
+                infinite: gallery?.length > 3,
                 variableWidth: false,
               },
             },
@@ -202,7 +205,7 @@ export function GalleryView({ gallery }) {
             </Box>
           ))}
         </SlickSlider>
-      </Wrapper>
+      </Box>
     </>
   )
 }
@@ -226,7 +229,12 @@ export function PaymentPlan({ installmentPlan }) {
               <Text sx={{ paddingY: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
                 خطة السداد
               </Text>
-              <Icon size={20} onClick={() => setOpen(false)} icon={arrows_remove} />
+              <Icon
+                size={36}
+                style={{ color: "white" }}
+                onClick={() => setOpen(false)}
+                icon={arrows_remove}
+              />
             </Flex>
 
             {installmentPlan.map(({ instalment, milestone }, index) => (
@@ -309,7 +317,7 @@ export default function ProjectDetailsLayout({
   const date = format(complationDate || new Date(), "MMM/yyyy", { locale: arSA })
   const room = 0
   const { priceType, priceTypeSuffix } = usePriceType()
-
+  const nearByItemsLength = (nearBy as any)?.length
   const roomWithPrice = roomsWithPrices[room]
 
   return (
@@ -420,35 +428,46 @@ export default function ProjectDetailsLayout({
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-            <SlickSlider
-              slidesToScroll={-1}
-              responsive={[]}
-              infinite={[...floorplan].length > 3}
-              variableWidth
-              adaptiveHeight
-              centerMode={false}
-              dots={false}
-              sx={{ justifyContent: "center", marginY: 3 }}
-            >
-              {floorplan.map((item, index) => (
-                <div key={item + "_" + index}>
-                  <Image
-                    imageMaxWidth={350}
-                    sx={{
-                      borderColor: "primary",
-                      objectFit: "cover",
-                      marginX: 2,
-                      borderWidth: 2,
-                      borderStyle: "solid",
-                      borderRadius: 15,
-                      boxShadow: "default",
-                      height: [200, 250],
-                    }}
-                    src={item}
-                  />
-                </div>
-              ))}
-            </SlickSlider>
+            <Box sx={{ direction: "ltr", marginTop: -5 }}>
+              <SlickSlider
+                rtl={false}
+                arrows
+                prevArrow={<SamplePrevArrow />}
+                nextArrow={<SampleNextArrow />}
+                responsive={[
+                  {
+                    breakpoint: 1020,
+                    settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: -1,
+                    },
+                  },
+                ]}
+                variableWidth
+                slidesToShow={1}
+                slidesToScroll={-1}
+                infinite={[...floorplan].length > 2}
+              >
+                {floorplan.map((item, index) => (
+                  <div key={item + "_" + index}>
+                    <Image
+                      imageMaxWidth={350}
+                      sx={{
+                        borderColor: "primary",
+                        objectFit: "cover",
+                        marginX: 2,
+                        borderWidth: 2,
+                        borderStyle: "solid",
+                        borderRadius: 15,
+                        boxShadow: "default",
+                        height: [200, 250],
+                      }}
+                      src={item}
+                    />
+                  </div>
+                ))}
+              </SlickSlider>
+            </Box>
           </Wrapper>
         )}
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
@@ -542,29 +561,40 @@ export default function ProjectDetailsLayout({
               )}
             </Wrapper>
           )}
-          {(nearBy as any)?.length > 0 && (
+          {nearByItemsLength > 0 && (
             <Wrapper>
               <Heading sx={{ paddingTop: 4, fontSize: [5, null, 6] }}>في الجوار</Heading>
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <SlickSlider
-                slidesToShow={(nearBy as any)?.length >= 5 ? 5 : 3}
-                infinite={(nearBy as any)?.length > 5}
+                slidesToShow={nearByItemsLength > 5 ? 5 : 3}
+                infinite={nearByItemsLength > 2}
                 slidesToScroll={1}
+                centerMode={nearByItemsLength <= 2}
                 responsive={[
                   {
                     breakpoint: 1000,
                     settings: {
                       slidesToShow: 3,
                       slidesToScroll: 1,
+                      infinite: nearByItemsLength > 3,
                     },
                   },
                   {
                     breakpoint: 800,
                     settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      infinite: nearByItemsLength > 2,
+                    },
+                  },
+                  {
+                    breakpoint: 500,
+                    settings: {
                       slidesToShow: 1,
                       slidesToScroll: 1,
+                      infinite: (nearBy as any)?.length > 2,
                     },
                   },
                 ]}

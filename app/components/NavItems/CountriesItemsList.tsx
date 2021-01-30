@@ -15,6 +15,12 @@ export default function CountriesItemsList() {
           sx={{
             fontWeight: 700,
             fontSize: [1, 2, 2, 1],
+            color: "primary",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            ":hover": {
+              color: "white",
+            },
           }}
         >
           المشاريع والعروض
@@ -26,7 +32,14 @@ export default function CountriesItemsList() {
         value: country.id,
         node: (
           <Link href={`/countries/${country.id}`}>
-            <Flex sx={{ marginY: 3, width: 180, fontSize: [0, 1] }} key={country.id}>
+            <Flex
+              sx={{
+                marginY: 3,
+                width: 180,
+                fontSize: [0, 1],
+              }}
+              key={country.id}
+            >
               <Image
                 sx={{
                   boxShadow: "card",

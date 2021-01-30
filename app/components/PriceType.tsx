@@ -26,12 +26,21 @@ const PriceType = (props: PriceTypeProps) => {
         key: price[0],
         value: price[0],
         node: (
-          <Flex sx={{ width: 150 }} key={price[0]}>
+          <Flex sx={{ alignItems: "center" }} key={price[0]}>
             <Avatar
               sx={{ boxShadow: "card", marginInlineEnd: 10, height: 30, width: 30 }}
               src={price[1]}
             />
-            {price[2]}
+            <p
+              style={{
+                maxWidth: 130,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {price[2]}
+            </p>
           </Flex>
         ),
       }))}

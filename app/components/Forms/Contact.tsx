@@ -35,10 +35,10 @@ export default function Contact() {
       <Box
         sx={{
           position: visiable ? "absolute" : "fixed",
-          zIndex: 1,
+          zIndex: 10,
           top: visiable ? -50 : "auto",
-          left: 50,
-          bottom: visiable ? "auto" : 100,
+          left: [10, null, 50],
+          bottom: visiable ? "auto" : [80, null, 100],
           padding: [2, 3],
           width: visiable ? [100, 150] : [80, 100],
           height: visiable ? [100, 150] : [80, 100],

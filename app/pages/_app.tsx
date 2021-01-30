@@ -19,6 +19,7 @@ import "app/styles/slick-modifier.css"
 import "glider-js/glider.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import "app/styles/animate.css"
+import FullpageLoader from "app/components/Loaders/Fullpage"
 
 //Binding events.
 NProgress.configure({ showSpinner: false })
@@ -41,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
         queryCache.resetErrorBoundaries()
       }}
     >
-      <Suspense fallback="...">
+      <Suspense fallback={<FullpageLoader />}>
         <PriceProvider price={countryId === 2 ? "priceQatar" : "price"}>
           <>
             <ToastContainer />

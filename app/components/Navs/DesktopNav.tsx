@@ -17,6 +17,8 @@ const DesktopNav = (props: NavProps) => {
             textDecoration: "none",
             fontWeight: 700,
             marginInlineEnd: [18, 20, 25],
+            wordBreak: "keep-all",
+            whiteSpace: "nowrap",
             fontSize: 1,
             ":hover": {
               color: "white",
@@ -31,7 +33,7 @@ const DesktopNav = (props: NavProps) => {
 
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
-      <Flex sx={{}}>
+      <Flex sx={{ alignItems: "center" }}>
         <CountriesItemsList />
         <NavItem to="/services" text="خدماتنا" />
         <NavItem to="/about-us" text="لماذا فايز احمد" />

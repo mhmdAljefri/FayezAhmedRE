@@ -7,7 +7,8 @@
     "build": "blitz build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "scripts:migrateImages": "ts-node --project=tsconfig.json -O '{\"module\":\"commonjs\"}' scripts/migrate-images.ts"
   },
   "browserslist": [
     "defaults"
@@ -52,6 +53,7 @@
     "final-form": "4.20.1",
     "final-form-arrays": "3.0.2",
     "google-map-react": "2.1.9",
+    "node-fetch": "2.6.1",
     "nprogress": "0.2.0",
     "nuka-carousel": "4.7.5",
     "rc-drawer": "4.1.0",
@@ -116,6 +118,7 @@
     "react-test-renderer": "16.x",
     "superjson": "1.4.1",
     "ts-jest": "26.x",
+    "ts-node": "9.1.1",
     "typescript": "4.x"
   },
   "private": true
