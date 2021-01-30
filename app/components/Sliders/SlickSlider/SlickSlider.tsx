@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from "react"
-import ReactSlick from "react-slick"
+import ReactSlick from "./src"
 
 const noSizeDefaultProps = {
   rtl: true,

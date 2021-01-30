@@ -50,6 +50,7 @@
     "emotion": "10.0.27",
     "emotion-server": "10.0.27",
     "emotion-theming": "10.0.27",
+    "enquire.js": "2.1.6",
     "final-form": "4.20.1",
     "final-form-arrays": "3.0.2",
     "google-map-react": "2.1.9",
