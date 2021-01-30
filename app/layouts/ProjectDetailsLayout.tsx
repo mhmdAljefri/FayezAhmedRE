@@ -139,7 +139,7 @@ export function GalleryView({ gallery }) {
           prevArrow={<ArrowPrev />}
           nextArrow={<ArrowNext />}
           arrows
-          slidesToShow={3}
+          slidesToShow={1}
           slidesToScroll={1}
           infinite={gallery?.length > 3}
           responsive={[
@@ -154,17 +154,9 @@ export function GalleryView({ gallery }) {
             {
               breakpoint: 840,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                infinite: gallery?.length > 3,
-              },
-            },
-            {
-              breakpoint: 580,
-              settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                infinite: gallery?.length > 3,
+                infinite: gallery?.length > 2,
               },
             },
           ]}

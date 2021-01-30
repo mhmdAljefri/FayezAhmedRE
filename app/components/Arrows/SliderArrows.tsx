@@ -17,9 +17,6 @@ const SharedStyle: SxStyleProp = {
   px: 3,
   height: 40,
   cursor: "pointer",
-  ":hover": {
-    backgroundColor: "background",
-  },
 }
 
 export const ArrowNext = (props: ArrowProps) => (

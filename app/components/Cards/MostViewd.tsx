@@ -8,7 +8,7 @@ export default function MostViewd({ project }) {
     <Grid
       columns={3}
       sx={{
-        maxHeight: [130, null, 150],
+        maxHeight: [150, null, 150],
         overflow: "hidden",
         border: "1px solid #eee",
         borderColor: "primary",
@@ -23,7 +23,7 @@ export default function MostViewd({ project }) {
         <a>
           <Image
             sx={{
-              height: [130, null, 150],
+              height: [150, null, 150],
               overflow: "hidden",
               maxWidth: ["auto"],
               objectFit: "cover",
