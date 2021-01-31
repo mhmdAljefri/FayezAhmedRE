@@ -7,7 +7,7 @@ const s3 = new S3({
 })
 
 const sharedParams = {
-  Bucket: process.env.AWS_BUCKET as string,
+  Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET as string,
 }
 
 export const uploadFile = async (params) => {

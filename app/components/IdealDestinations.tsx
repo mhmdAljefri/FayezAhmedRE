@@ -11,6 +11,7 @@ export default function IdealDestinations({ explores }) {
       sx={{
         backgroundColor: "dark",
         pb: 4,
+        backgroundAttachment: "fixed",
         backgroundImage: "url(/back2.jpg)",
         backgroundSize: "cover",
       }}

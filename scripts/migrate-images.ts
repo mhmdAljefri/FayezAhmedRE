@@ -10,7 +10,7 @@ const s3 = new S3({
 })
 
 const sharedParams = {
-  Bucket: process.env.AWS_BUCKET as string,
+  Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET as string,
 }
 
 export const uploadFile = async (params) => {
@@ -43,13 +43,13 @@ async function download(url?: string) {
 
 async function handleDownloadAndUpload(url) {
   const imageBuffer = await download(url)
-  const Key = `${process.env.AWS_FOLDER}/${url.split("/").reverse()[0]}`
+  const Key = `${process.env.NEXT_PUBLIC_AWS_FOLDER}/${url.split("/").reverse()[0]}`
 
   const params = {
     Key,
     ACL: "public-read",
     Body: imageBuffer,
-    Bucket: process.env.AWS_BUCKET as string,
+    Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET as string,
   }
   await uploadFile(params)
 }

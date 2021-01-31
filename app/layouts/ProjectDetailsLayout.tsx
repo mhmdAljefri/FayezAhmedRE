@@ -27,7 +27,7 @@ import Icon from "react-icons-kit"
 import HTMLBox from "app/components/HTMLBox"
 import { numberFormat } from "app/utils"
 import Image from "app/components/Image"
-import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
+import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
 
 type ConstractingCardProps = {
   label: string
@@ -116,50 +116,35 @@ export function ConstractiongVideo({
 }
 
 function SampleNextArrow(props) {
-  return <ArrowNext {...props} />
+  return <ArrowRight {...props} />
 }
 
 function SamplePrevArrow(props) {
-  return <ArrowPrev {...props} />
+  return <ArrowLeft {...props} />
 }
 
 export function GalleryView({ gallery }) {
   return (
     <>
-      <Box sx={{ marginTop: 5, paddingTop: 6, backgroundColor: "dark" }}>
+      <Box sx={{ marginTop: -5, paddingTop: 6, backgroundColor: "dark" }}>
         <Wrapper>
-          <Heading sx={{ color: "white", paddingBottom: 5, fontSize: [5, null, 6] }}>
+          <Heading
+            sx={{ color: "white", paddingBottom: 5, marginBottom: 1, fontSize: [5, null, 6] }}
+          >
             المعرض
           </Heading>
         </Wrapper>
       </Box>
 
-      <Box sx={{ marginTop: -5, direction: "ltr" }}>
+      <Wrapper sx={{ marginTop: -5, direction: "ltr" }}>
         <SlickSlider
-          prevArrow={<ArrowPrev />}
-          nextArrow={<ArrowNext />}
+          prevArrow={<ArrowLeft />}
+          nextArrow={<ArrowRight />}
           arrows
           slidesToShow={1}
           slidesToScroll={1}
           infinite={gallery?.length > 3}
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                infinite: gallery?.length > 3,
-              },
-            },
-            {
-              breakpoint: 840,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: gallery?.length > 2,
-              },
-            },
-          ]}
+          responsive={[]}
           variableWidth
           centerMode={false}
           dots={false}
@@ -180,7 +165,7 @@ export function GalleryView({ gallery }) {
             </Box>
           ))}
         </SlickSlider>
-      </Box>
+      </Wrapper>
     </>
   )
 }

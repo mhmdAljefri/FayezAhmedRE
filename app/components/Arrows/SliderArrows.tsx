@@ -1,10 +1,15 @@
 import React, { ComponentPropsWithoutRef } from "react"
 import { Box, SxStyleProp } from "theme-ui"
-import { Icon } from "react-icons-kit"
-import { chevronRight } from "react-icons-kit/fa/chevronRight"
-import { chevronLeft } from "react-icons-kit/fa/chevronLeft"
+import { Icon, IconProp } from "react-icons-kit"
+import { thinRight } from "react-icons-kit/entypo/thinRight"
+import { thinLeft } from "react-icons-kit/entypo/thinLeft"
 
+const defaultProps = {
+  iconSize: 30,
+}
 type ArrowProps = {
+  iconSize: number
+  icon?: IconProp["icon"]
   sx?: SxStyleProp
 } & ComponentPropsWithoutRef<"div">
 
@@ -19,7 +24,7 @@ const SharedStyle: SxStyleProp = {
   cursor: "pointer",
 }
 
-export const ArrowNext = (props: ArrowProps) => (
+export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
     className=""
@@ -29,10 +34,10 @@ export const ArrowNext = (props: ArrowProps) => (
       ...props.sx,
     }}
   >
-    <Icon size={24} icon={chevronLeft} />
+    <Icon size={iconSize} icon={icon} />
   </Box>
 )
-export const ArrowPrev = (props: ArrowProps) => (
+export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
     className=""
@@ -42,6 +47,9 @@ export const ArrowPrev = (props: ArrowProps) => (
       ...props.sx,
     }}
   >
-    <Icon size={24} icon={chevronRight} />
+    <Icon size={iconSize} icon={icon} />
   </Box>
 )
+
+ArrowNext.defaultProps = { ...defaultProps, icon: thinLeft }
+ArrowPrev.defaultProps = { ...defaultProps, icon: thinRight }

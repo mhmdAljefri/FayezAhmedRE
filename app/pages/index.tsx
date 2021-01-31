@@ -59,12 +59,15 @@ const Home: BlitzPage<HomeProps> = ({
   explores,
   mostViewedProjects,
 }) => {
-  const secureVideoUrl = carouselVideo?.videoUlr.replace("http://", "https://")
+  // todo migrate this logic to Server :(
+  const secureVideoUrl = carouselVideo?.videoUlr.includes("res.cloudinary")
+    ? carouselVideo?.videoUlr.replace("http://", "https://")
+    : `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
     <main>
       <Box sx={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-        {carouselVideo ? ( // todo add video
+        {carouselVideo.isActive ? ( // todo add video
           <Box
             sx={{
               position: "relative",

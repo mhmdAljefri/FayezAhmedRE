@@ -5,10 +5,10 @@ const ObjectsUploadAPI = async (req: BlitzApiRequest, res: BlitzApiResponse) => 
   const { file } = JSON.parse(req.body)
 
   // make file form string
-  const Body = Buffer.from(file.data.replace(/^data:image\/\w+;base64,/, ""), "base64")
+  const Body = Buffer.from(file.data.replace(/^data:image|data:video\/\w+;base64,/, ""), "base64")
 
   try {
-    const Key = `${process.env.AWS_FOLDER}/${file.filename}`
+    const Key = `${process.env.NEXT_PUBLIC_AWS_FOLDER}/${file.filename}`
     const params = {
       Key,
       ACL: "public-read",
@@ -27,3 +27,11 @@ const ObjectsUploadAPI = async (req: BlitzApiRequest, res: BlitzApiResponse) => 
 }
 
 export default ObjectsUploadAPI
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "17mb",
+    },
+  },
+}

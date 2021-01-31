@@ -8,8 +8,8 @@ export default function MostViewd({ project }) {
     <Grid
       columns={3}
       sx={{
-        maxHeight: [150, null, 150],
         overflow: "hidden",
+        position: "relative",
         border: "1px solid #eee",
         borderColor: "primary",
         borderRadius: "sm",
@@ -23,7 +23,11 @@ export default function MostViewd({ project }) {
         <a>
           <Image
             sx={{
-              height: [150, null, 150],
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
               overflow: "hidden",
               maxWidth: ["auto"],
               objectFit: "cover",
@@ -32,16 +36,25 @@ export default function MostViewd({ project }) {
           />
         </a>
       </Link>
-      <Box sx={{ gridColumn: "span 2", p: [2, 3], flex: 1 }}>
+      <Box
+        sx={{
+          gridColumn: "span 2",
+          p: [2, 3],
+          flex: 1,
+          position: "relative",
+          zIndex: 1,
+          backgroundColor: "background",
+        }}
+      >
         <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
           <a style={{ textDecoration: "none" }}>
-            <Heading sx={{ fontSize: 2, color: "primary" }}>{project.name}</Heading>
+            <Heading sx={{ fontSize: 3, color: "primary" }}>{project.name}</Heading>
           </a>
         </Link>
 
         <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
           <a style={{ textDecoration: "none" }}>
-            <Text sx={{ fontSize: [0, 1], color: "primary" }}>{project.subTitle}</Text>
+            <Text sx={{ fontSize: [1], color: "primary" }}>{project.subTitle}</Text>
           </a>
         </Link>
         <Text as="small">{project.views} مشاهدة</Text>
