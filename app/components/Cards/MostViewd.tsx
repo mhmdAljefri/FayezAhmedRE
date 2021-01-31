@@ -28,6 +28,7 @@ export default function MostViewd({ project }) {
               left: 0,
               right: 0,
               bottom: 0,
+              minHeight: "100%",
               overflow: "hidden",
               maxWidth: ["auto"],
               objectFit: "cover",
