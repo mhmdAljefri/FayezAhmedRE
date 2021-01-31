@@ -136,19 +136,26 @@ export function GalleryView({ gallery }) {
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5, direction: "ltr" }}>
+      <Wrapper sx={{ marginTop: -5 }}>
         <SlickSlider
           prevArrow={<ArrowLeft />}
           nextArrow={<ArrowRight />}
           arrows
           slidesToShow={1}
-          slidesToScroll={1}
+          slidesToScroll={-1}
           infinite={gallery?.length > 3}
-          responsive={[]}
+          responsive={[
+            {
+              breakpoint: 800,
+              settings: {
+                arrows: false,
+              },
+            },
+          ]}
           variableWidth
           centerMode={false}
           dots={false}
-          rtl={false}
+          rtl
         >
           {gallery.map((item, index) => (
             <Box key={item + "_" + index} sx={{}}>
@@ -388,13 +395,18 @@ export default function ProjectDetailsLayout({
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-            <Box sx={{ direction: "ltr", marginTop: -5 }}>
+            <Box sx={{ marginTop: -5 }}>
               <SlickSlider
-                rtl={false}
                 arrows
                 prevArrow={<SamplePrevArrow />}
                 nextArrow={<SampleNextArrow />}
                 responsive={[
+                  {
+                    breakpoint: 800,
+                    settings: {
+                      arrows: false,
+                    },
+                  },
                   {
                     breakpoint: 1020,
                     settings: {

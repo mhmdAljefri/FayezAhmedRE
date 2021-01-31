@@ -23,6 +23,7 @@ const defaultProps: typeof noSizeDefaultProps & {
       vertical?: boolean
       infinite?: boolean
       initialSlide?: number
+      arrows?: boolean
       slidesToShow?: number
       slidesToScroll?: number
       rtl?: boolean
@@ -80,12 +81,13 @@ export default function SlickSlider({
   variableWidth,
   arrows,
   dots,
+  autoplay,
   ...props
 }: SlickSliderProps) {
   const responsive = variableWidth
     ? props.responsive.map(({ breakpoint, settings }) => ({
         breakpoint,
-        settings: { dots, variableWidth, arrows, ...settings },
+        settings: { dots, autoplay, variableWidth, arrows, ...settings },
       }))
     : props.responsive
   return (

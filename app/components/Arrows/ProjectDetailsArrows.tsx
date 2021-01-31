@@ -5,7 +5,6 @@ import { arrows_slim_left } from "react-icons-kit/linea/arrows_slim_left"
 import { SxStyleProp } from "theme-ui"
 
 const sharedStyle: SxStyleProp = {
-  display: ["none", null, "block"],
   top: -70,
   left: "auto",
   opacity: 0.7,
