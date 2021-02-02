@@ -48,6 +48,10 @@ const theme = {
       color: "heading",
     },
   },
+  zIndices: {
+    header: 100,
+    contactForm: 10,
+  },
   buttons: {
     link: {
       backgroundColor: "transparent",
