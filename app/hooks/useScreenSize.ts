@@ -16,7 +16,7 @@ export default function useScreenSize() {
       }
 
       handelSize()
-      window.addEventListener("resize", handelSize)
+      window.addEventListener("resize", handelSize, { passive: true })
       return () => {
         window.removeEventListener("resize", handelSize)
       }

@@ -9,7 +9,7 @@ export default function useScroll() {
       setScroll(window.pageYOffset)
     }
     if (!isSSR) {
-      window.addEventListener("scroll", handleScroll)
+      window.addEventListener("scroll", handleScroll, { passive: true })
       return () => {
         window.removeEventListener("scroll", handleScroll)
       }
