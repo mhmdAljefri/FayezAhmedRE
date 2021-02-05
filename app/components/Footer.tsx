@@ -109,14 +109,14 @@ export default function Footer() {
           <Flex sx={{ marginBottom: 4 }}>
             <Tooltip>
               <ThemeLink>
-                <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
+                <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
                   <Image src="/google_play_badge.png" alt="apple" />
                 </Box>
               </ThemeLink>
             </Tooltip>
             <Tooltip>
               <ThemeLink>
-                <Box sx={{ m: 1, width: ["50% 100%", 150, 250] }}>
+                <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
                   <Image src="/appstore_badge.png" alt="apple" />
                 </Box>
               </ThemeLink>

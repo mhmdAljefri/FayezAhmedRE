@@ -116,7 +116,7 @@ export default function ServicesForm({ cities }) {
   return (
     <Card
       sx={{
-        maxWidth: 1000,
+        maxWidth: 900,
         borderRadius: "lg",
         boxShadow: "default",
         marginX: "auto",

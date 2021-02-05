@@ -4,6 +4,7 @@ import HomeSlider from "app/components/HomeSlider"
 import OurPartnersSection from "app/components/OurPartnersSection"
 import getCountries from "app/public/countries/queries/getCountries"
 import getPartners from "app/public/partners/queries/getPartners"
+import AboutUSSection from "app/components/AboutUSSection"
 import {
   Carousel,
   CarouselVideo,
@@ -121,6 +122,8 @@ const Home: BlitzPage<HomeProps> = ({
           </Wrapper>
         </Box>
       </Box>
+
+      <AboutUSSection />
 
       <LatestOffersSection offers={offers} />
       <CountriesProjectsSection countries={countries} />

@@ -27,7 +27,7 @@ export default function Contact() {
       <Box
         ref={formRef}
         sx={{
-          maxWidth: 1000,
+          maxWidth: 900,
           marginX: "auto",
           backgroundColor: "primary",
           borderRadius: "lg",

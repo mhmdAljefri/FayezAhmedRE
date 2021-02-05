@@ -11,8 +11,8 @@ const Wrapper = ({ children, sx, ...props }: WrapperProps) => {
     <Box
       {...props}
       sx={{
-        width: ["95vw", null, null, null, 1400],
-        maxWidth: ["auto", null, null, 1400],
+        width: ["95vw", null, 1200, 1400],
+        maxWidth: ["auto", null, "85vw", null],
         paddingX: [2, null, null, null, 3],
         boxSizing: "border-box",
         marginX: "auto",
