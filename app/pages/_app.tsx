@@ -19,6 +19,7 @@ import "app/styles/slick-modifier.css"
 import "glider-js/glider.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import "app/styles/animate.css"
+import "app/styles/global.css"
 import FullpageLoader from "app/components/Loaders/Fullpage"
 
 //Binding events.

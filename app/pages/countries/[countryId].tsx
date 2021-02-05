@@ -70,7 +70,8 @@ function CountryPage({
   govProjects,
   ...props
 }: CountryPropsType) {
-  const { push, asPath, isFallback } = useRouter()
+  const { push, isFallback } = useRouter()
+  const asPath = `/countries/${country.id}`
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
@@ -86,7 +87,7 @@ function CountryPage({
   }
 
   const explores = country?.explores.filter((explore) => explore.type === showInspirationGallery)
-
+  console.log(showInspirationGallery, explores, country?.explores)
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
 
@@ -208,7 +209,7 @@ function CountryPage({
         >
           {country.projects.map((project, index) => (
             <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-              <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+              <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
             </Box>
           ))}
         </SlickSlider>
@@ -268,7 +269,7 @@ function CountryPage({
             >
               {govProjects.map((project, index) => (
                 <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-                  <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+                  <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
                 </Box>
               ))}
             </SlickSlider>
@@ -325,7 +326,7 @@ function CountryPage({
             >
               {oceanViewProjects.map((project, index) => (
                 <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-                  <ProjectCard {...project} roomWithPrices={project.roomsWithPrices} />
+                  <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
                 </Box>
               ))}
             </SlickSlider>
@@ -379,7 +380,8 @@ function CountryPage({
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <SlickSlider
-          slidesToScroll={1}
+          key={showInspirationGallery}
+          slidesToScroll={3}
           slidesToShow={3}
           arrows={false}
           rtl
@@ -390,7 +392,7 @@ function CountryPage({
               breakpoint: 1200,
               settings: {
                 slidesToShow: 3,
-                slidesToScroll: 1,
+                slidesToScroll: 3,
                 infinite: explores.length > 3,
               },
             },
@@ -414,13 +416,8 @@ function CountryPage({
             },
           ]}
         >
-          {explores.map(({ image, title, id }, index) => (
-            <ExploreCard
-              key={`${asPath}/explore/${id}`}
-              href={`${asPath}/explore/${id}`}
-              image={image}
-              title={title}
-            />
+          {explores.map(({ image, title, id }) => (
+            <ExploreCard key={id} href={`${asPath}/explore/${id}`} image={image} title={title} />
           ))}
         </SlickSlider>
       </Wrapper>
@@ -439,6 +436,7 @@ function CountryPage({
       <Wrapper
         id="ServicesForm"
         sx={{
+          paddingTop: 5,
           zIndex: 1,
           position: "relative",
         }}
@@ -537,6 +535,7 @@ export async function getStaticProps(context) {
       type: "dontMissitGallery",
       countryId,
     },
+    take: 6,
     orderBy: { id: "desc" },
   })
   const { explores: exploreGallery } = await getExplores({
@@ -544,6 +543,7 @@ export async function getStaticProps(context) {
       type: "exploreGallery",
       countryId,
     },
+    take: 6,
     orderBy: { id: "desc" },
   })
   const { explores: getInspiredGallery } = await getExplores({
@@ -551,6 +551,7 @@ export async function getStaticProps(context) {
       type: "getInspiredGallery",
       countryId,
     },
+    take: 6,
     orderBy: { id: "desc" },
   })
 

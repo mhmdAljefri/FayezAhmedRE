@@ -19,7 +19,7 @@ const SharedStyle: SxStyleProp = {
   position: "absolute",
   top: "50%",
   paddingTop: 10,
-  px: 3,
+  px: 1,
   height: 40,
   cursor: "pointer",
 }

@@ -5,7 +5,7 @@ import Image from "./Image"
 
 export default function ExploreCard({ href, title, image }) {
   return (
-    <Link href={href}>
+    <Link passHref href={href}>
       <Box
         as="a"
         sx={{

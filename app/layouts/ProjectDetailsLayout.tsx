@@ -310,8 +310,8 @@ export default function ProjectDetailsLayout({
               marginTop: -6,
               borderRadius: 15,
               overflow: "hidden",
-              height: ["auto", "auto", 600],
-              maxHeight: ["90vh", "70vh", "70vh"],
+              height: ["auto", "auto", "auto", 600],
+              maxHeight: ["90vh", "65vh", "65vh"],
             }}
           >
             <Image

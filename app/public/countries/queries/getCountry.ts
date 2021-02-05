@@ -6,6 +6,7 @@ export default async function getCountry({ where }: GetCountryInput) {
   const country = await db.country.findFirst({
     where,
     select: {
+      id: true,
       cities: true,
       offers: {
         take: 3,

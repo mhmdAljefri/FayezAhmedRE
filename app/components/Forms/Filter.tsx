@@ -47,6 +47,8 @@ export default function Filter({
       className="animate__animated animate__fadeInUp animate__slow"
       sx={{
         backgroundColor: "primary",
+        maxWidth: 950,
+        marginX: "auto",
         borderRadius: "lg",
         boxShadow: "default",
         paddingX: [2, 4],

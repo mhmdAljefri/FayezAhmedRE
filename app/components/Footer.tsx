@@ -40,17 +40,17 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
         textAlign: "center",
         textDecoration: "none",
         cursor: "pointer",
-        paddingY: [1],
-        paddingX: [1, null, 2],
-        marginX: [0, 2],
+        paddingY: 1,
+        paddingX: 1,
+        marginX: 0,
         color: "primary",
-        marginY: [1, 2],
+        marginY: 1,
         boxShadow: "0 1px 15px #111",
         borderRadius: 15,
       }}
     >
       <Icon style={{ marginInlineEnd: 0 }} icon={icon} />
-      <Text sx={{ fontSize: ["10px", 1, 2] }}>{children}</Text>
+      <Text sx={{ fontSize: 10 }}>{children}</Text>
     </Box>
   )
 }

@@ -34,7 +34,7 @@ interface ProjectCardIconsTextProps {
   sx?: SxStyleProp
 }
 
-type ProjectCardProps = Pick<
+export type ProjectCardProps = Pick<
   Project,
   | "id"
   | "name"
@@ -46,18 +46,7 @@ type ProjectCardProps = Pick<
   | "status"
   | "cityId"
 > & {
-  roomWithPrices: Pick<
-    RoomWithPrice,
-    | "room"
-    | "price"
-    | "priceKSA"
-    | "priceKuwait"
-    | "priceOman"
-    | "priceQatar"
-    | "priceTurkey"
-    | "priceUAE"
-    | "id"
-  >[]
+  roomsWithPrices: RoomWithPrice[]
 }
 
 function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextProps) {
@@ -91,7 +80,7 @@ function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextPr
   )
 }
 
-function SelectRoom({ roomWithPrices, selected, onChange }) {
+function SelectRoom({ roomsWithPrices, selected, onChange }) {
   const { open, setOpen, ref } = useOnClickout()
 
   if (!selected) return <div />
@@ -117,7 +106,7 @@ function SelectRoom({ roomWithPrices, selected, onChange }) {
             backgroundColor: "background",
           }}
         >
-          {roomWithPrices.map((roomWithPrice, index) => (
+          {roomsWithPrices.map((roomWithPrice, index) => (
             <Box
               key={roomWithPrice?.room + "_" + index}
               role="button"
@@ -151,10 +140,10 @@ export function ProjectCard({
   locationText,
   status,
   paymentType,
-  roomWithPrices,
+  roomsWithPrices,
 }: ProjectCardProps) {
   const { priceType, priceTypeSign } = usePriceType()
-  const [selected, setSelected] = useState(roomWithPrices[0])
+  const [selected, setSelected] = useState(roomsWithPrices[0])
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
 
   const price = selected?.[priceType]
@@ -181,10 +170,10 @@ export function ProjectCard({
       </Box>
       <Box sx={{ paddingY: [1, 2, 3], paddingX: [2, 2, 3] }}>
         <Flex>
-          {roomWithPrices[0]?.["room"] && (
+          {roomsWithPrices[0]?.["room"] && (
             <SelectRoom
               selected={selected}
-              roomWithPrices={roomWithPrices}
+              roomsWithPrices={roomsWithPrices}
               onChange={setSelected}
             />
           )}
@@ -225,6 +214,7 @@ type ProjectListTypes = {
   title: string
   subTitle: string
   country: Country & { cities: City[] }
+  projects: ProjectCardProps[]
 }
 
 function CityButton({ children, isSelected, onClick }) {
@@ -258,13 +248,13 @@ interface SelectedCity {
   name: string
 }
 
-export default function ProjectsList({ country, title, subTitle }: ProjectListTypes) {
+export default function ProjectsList({ country, projects, title, subTitle }: ProjectListTypes) {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
+  const { search, city, price } = filterRef.current || {}
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
-
   const [
     groupedProjects,
     { isFetching, refetch, fetchMore, canFetchMore, isFetchingMore },
@@ -275,13 +265,27 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
       where: {
         countryId,
         OR: [
-          { name: { contains: filterRef.current?.search } },
-          { subTitle: { contains: filterRef.current?.search } },
-          { details: { contains: filterRef.current?.search } },
+          { name: { contains: search } },
+          { subTitle: { contains: search } },
+          { details: { contains: search } },
         ],
+        city: { id: parseInt(city || "") || undefined },
+        roomsWithPrices: {
+          some: {
+            price: {
+              lt: price?.[1]?.toString() || undefined,
+            },
+            OR: {
+              price: {
+                gt: price?.[0]?.toString() || undefined,
+              },
+            },
+          },
+        },
       },
     }),
     {
+      initialData: [{ projects, nextPage: 2 }],
       getFetchMore: (lastGroup) => lastGroup.nextPage,
     }
   )
@@ -358,7 +362,7 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
                     ? group.projects.map((project) => (
                         <ProjectCard
                           {...project}
-                          roomWithPrices={project.roomsWithPrices}
+                          roomsWithPrices={project.roomsWithPrices}
                           key={project.id}
                         />
                       ))
@@ -367,14 +371,14 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
                         .map((project) => (
                           <ProjectCard
                             {...project}
-                            roomWithPrices={project.roomsWithPrices}
+                            roomsWithPrices={project.roomsWithPrices}
                             key={project.id}
                           />
                         ))
                   : group.projects.map((project) => (
                       <ProjectCard
                         {...project}
-                        roomWithPrices={project.roomsWithPrices}
+                        roomsWithPrices={project.roomsWithPrices}
                         key={project.id}
                       />
                     ))}

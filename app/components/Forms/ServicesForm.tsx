@@ -127,7 +127,9 @@ export default function ServicesForm({ cities }) {
       }}
     >
       <Grid sx={{ marginBottom: 5, alignItems: "center" }} columns={[1, null, 2]}>
-        <Heading sx={{ marginTop: [2, 4], fontSize: 6, color: "white" }}>خطط لرحلتك معنا</Heading>
+        <Heading sx={{ marginTop: [2, 4], fontSize: [4, 4, 6], color: "white" }}>
+          خطط لرحلتك معنا
+        </Heading>
         <Grid columns={[1, null, 3]}>
           {OPTIONS.map((option) => (
             <TripButton
