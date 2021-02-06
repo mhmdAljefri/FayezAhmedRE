@@ -26,7 +26,6 @@ export const EditCountry = () => {
             alert("Success!" + JSON.stringify(updated))
             router.push(`/admin/countries/${updated.id}`)
           } catch (error) {
-            console.log(error)
             alert("Error creating country ")
           }
         }}

@@ -17,13 +17,13 @@ export default async function getCountries({
     orderBy,
     take,
     select: {
+      ...select,
       id: true,
       name: true,
       image: true,
       rooms: true,
       nameEN: true,
       isTurkey: true,
-      ...select,
     },
     skip,
   })

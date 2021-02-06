@@ -66,7 +66,6 @@ export const EditExplore = () => {
             toast.success("تمت العملية!")
             router.push(`/admin/countries/${countryId}/types/${type}/explores/`)
           } catch (error) {
-            console.log(error)
             alert("Error editing explore " + JSON.stringify(error, null, 2))
           }
         }}

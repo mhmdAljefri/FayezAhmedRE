@@ -71,7 +71,6 @@ function CountryPage({
   ...props
 }: CountryPropsType) {
   const { push, isFallback } = useRouter()
-  const asPath = `/countries/${country.id}`
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
   )
@@ -82,12 +81,12 @@ function CountryPage({
     return <div>Loading...</div>
   }
 
+  const asPath = `/countries/${country.id}`
   const handleFilter = (filter) => {
     push({ pathname: `${asPath}/projects`, query: filter })
   }
 
   const explores = country?.explores.filter((explore) => explore.type === showInspirationGallery)
-  console.log(showInspirationGallery, explores, country?.explores)
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
 
@@ -475,7 +474,7 @@ function CountryPage({
 }
 
 export async function getStaticPaths() {
-  const { countries } = await getCountries({})
+  const { countries } = await getCountries({ select: {} })
   const paths = countries.map((c) => ({
     params: {
       countryId: `${c.id}`,

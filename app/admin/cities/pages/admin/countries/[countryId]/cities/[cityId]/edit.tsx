@@ -30,7 +30,6 @@ export const EditCity = () => {
             toast.success("تمت العملية!")
             router.push(`/admin/countries/${countryId}/cities/`)
           } catch (error) {
-            console.log(error)
             alert("Error editing city " + JSON.stringify(error, null, 2))
           }
         }}

@@ -37,7 +37,6 @@ export const EditFurnish = () => {
             toast.success("تمت العملية بنجاح!")
             router.push(`/admin/furnishes/`)
           } catch (error) {
-            console.log(error)
             toast.error("فشلت العملية ")
           }
         }}

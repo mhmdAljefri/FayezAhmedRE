@@ -12,7 +12,6 @@ export default function MapField({ name }) {
     const value = event.currentTarget.value
     const location: string = value.split("@")[1]
     const [lat, lng] = location?.split(",")
-    console.log({ value: { lat, lng } })
 
     if (lat && lng) onChange({ lat: parseFloat(lat), lng: parseFloat(lng) })
   }

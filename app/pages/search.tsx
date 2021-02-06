@@ -129,7 +129,6 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
 
 export async function getServerSideProps(context) {
   const { query } = context
-  console.log({ query })
   // Fetch data from external API
   const { projects, count } = await getProjects({
     where: {

@@ -36,7 +36,6 @@ export const EditProject = () => {
             toast.success("تم التعديل بنجاح!")
             router.push(`/admin/offers/`)
           } catch (error) {
-            console.log(error)
             toast.error("فشل في عملية التعديل!")
           }
         }}

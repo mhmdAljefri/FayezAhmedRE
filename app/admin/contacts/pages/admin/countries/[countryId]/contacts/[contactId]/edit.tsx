@@ -32,7 +32,6 @@ export const EditContact = () => {
             toast.success("Success!")
             router.push(`/admin/countries/${countryId}/contacts/`)
           } catch (error) {
-            console.log(error)
             alert("Error editing contact " + JSON.stringify(error, null, 2))
           }
         }}
