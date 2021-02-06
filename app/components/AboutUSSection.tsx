@@ -19,6 +19,7 @@ function Card({ heading, text, layerBackgroundColor, darkColor = false }) {
         sx={{
           position: "relative",
           zIndex: 1,
+          fontSize: 1,
           fontWeight: 600,
           color: darkColor ? "black" : "white",
         }}
@@ -32,28 +33,22 @@ export default function AboutUSSection() {
   return (
     <Grid gap={0} columns={[1, 1, 2, 4]}>
       <Card
-        heading={"رؤيتنا"}
+        heading={"الرؤية"}
         text="  أن تكون مجموعة فايز أحمد العقارية الشركة الرائدة في التسويق والخدمات العقارية والجهة
       الموثوقة في مجال صناعة العقار"
         layerBackgroundColor="primary100"
       />
       <Card
-        heading={"رسالتنا"}
+        heading={"الرسالة"}
         text="أن نلبي طموحات عملائنا والارتقاء بالسوق العقاري من خلال تقديم مشاريع عقارية مبتكرة ذات
       جودة عالية بما يوفر لعملائنا أساليب الحياة التي يطمحون إليها في مجتمعاتنا السكنية النابضة
       بالحياة"
         layerBackgroundColor="black100"
       />
       <Card
-        heading={"قيمنا"}
-        text="الريادة.. الجودة.. رضاء العملاء.. الشفافية.. الثقة.. الابتكار"
-        layerBackgroundColor="secondary100"
-      />
-      <Card
-        darkColor
-        heading={"هدفنا"}
+        heading={"الهدف"}
         text="فريق عمل واحد.. يمتلك حلماً واحداً.. وهدف واحد.. لنصنع قصة نجاح واحدة"
-        layerBackgroundColor="white100"
+        layerBackgroundColor="secondary100"
       />
     </Grid>
   )
