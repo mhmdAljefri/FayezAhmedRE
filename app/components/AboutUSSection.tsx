@@ -1,7 +1,13 @@
 import React from "react"
 import { Box, Grid, Heading, SxStyleProp, Text } from "theme-ui"
 
-function Card({ heading, text, layerBackgroundColor, darkColor = false }) {
+function Card({
+  heading,
+  text,
+  layerBackgroundColor,
+  headingColor = "primary",
+  darkColor = false,
+}) {
   return (
     <Box
       sx={{
@@ -12,7 +18,7 @@ function Card({ heading, text, layerBackgroundColor, darkColor = false }) {
         },
       }}
     >
-      <Heading sx={{ ...styles.headingStyle, color: darkColor ? "black" : "white" }}>
+      <Heading sx={{ ...styles.headingStyle, color: darkColor ? "black" : headingColor }}>
         {heading}
       </Heading>
       <Text
@@ -31,9 +37,10 @@ function Card({ heading, text, layerBackgroundColor, darkColor = false }) {
 }
 export default function AboutUSSection() {
   return (
-    <Grid gap={0} columns={[1, 1, 2, 4]}>
+    <Grid gap={0} columns={[1, 1, 3]}>
       <Card
         heading={"الرؤية"}
+        headingColor="white"
         text="  أن تكون مجموعة فايز أحمد العقارية الشركة الرائدة في التسويق والخدمات العقارية والجهة
       الموثوقة في مجال صناعة العقار"
         layerBackgroundColor="primary100"

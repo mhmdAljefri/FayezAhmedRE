@@ -16,7 +16,7 @@ const theme = {
     primary: "#ccb87d",
     primary100: "#ccb87ded",
     white100: "#ffffffeb",
-    black100: "#000000ed",
+    black100: "#000000d9",
     secondary100: "#051e1ede",
     input: "#d8c07a",
     light: "#fff8ea",
