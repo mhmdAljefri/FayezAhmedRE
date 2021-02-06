@@ -25,7 +25,7 @@ function Icon(props: IconProp & { href?: string }) {
       href={props.href}
       as={props.href ? "a" : "span"}
     >
-      <RIconKit {...props} size={18} style={{ marginInlineEnd: 20, ...props.style }} />
+      <RIconKit {...props} size={22} style={{ marginInlineEnd: 20, ...props.style }} />
     </ThemeLink>
   )
 }

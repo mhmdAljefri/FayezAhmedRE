@@ -65,7 +65,7 @@ export default function AboutUSSection() {
 // black100
 // secondary100
 const styles: { headingStyle: SxStyleProp; boxStyle: SxStyleProp; before: SxStyleProp } = {
-  boxStyle: { p: 3, backgroundImage: "url(sky.jpeg)", position: "relative" },
+  boxStyle: { p: [3, 4], backgroundImage: "url(sky.jpg)", position: "relative" },
   headingStyle: { mt: 2, mb: 2, position: "relative", zIndex: 1 },
   before: {
     content: "''",

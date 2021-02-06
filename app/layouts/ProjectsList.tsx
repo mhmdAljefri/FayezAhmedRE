@@ -252,7 +252,7 @@ export default function ProjectsList({ country, projects, title, subTitle }: Pro
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const { search, city, price } = filterRef.current || {}
+  const { search, city, price, propertyType, status } = filterRef.current || {}
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
   const [
@@ -269,6 +269,14 @@ export default function ProjectsList({ country, projects, title, subTitle }: Pro
           { subTitle: { contains: search } },
           { details: { contains: search } },
         ],
+        propertyType: {
+          id: {
+            equals: propertyType ? parseInt(propertyType) : undefined,
+          },
+        },
+        status: status,
+        //         propertyType
+        // status
         city: { id: parseInt(city || "") || undefined },
         roomsWithPrices: {
           some: {

@@ -107,6 +107,8 @@ const theme = {
       fontWeight: "bold",
     },
     field: {
+      p: 1,
+      fontFamily: "body",
       borderRadius: "md",
       color: "white",
       borderWidth: "1px",

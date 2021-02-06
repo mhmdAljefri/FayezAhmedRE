@@ -17,10 +17,10 @@
 
   align-items: center;
   justify-content: center;
-  bottom: 10px;
+  bottom: -20px;
 }
 
 .slick-dots li.slick-active button:before,
 .slick-dots li button:before {
-  color: var(--theme-ui-colors-primary, #ccb87d) !important;
+  color: #443300 !important;
 }
