@@ -47,7 +47,7 @@ export default function Contact() {
             width: visiable ? [100, 150] : [80, 100],
             height: visiable ? [100, 150] : [80, 100],
             boxShadow: "default",
-            backgroundColor: "background",
+            backgroundColor: visiable ? "background" : "white100",
             borderRadius: 1000,
           }}
         >
