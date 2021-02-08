@@ -27,7 +27,6 @@ const defaultProps: typeof noSizeDefaultProps & {
       slidesToShow?: number
       slidesToScroll?: number
       rtl?: boolean
-      autoplay?: boolean
       dots?: boolean
     }
   }[]
@@ -72,6 +71,9 @@ type SlickSliderProps = {
   variableWidth?: boolean
   adaptiveHeight?: boolean
   arrows?: boolean
+  speed?: number
+  autoplaySpeed?: number
+  cssEase?: string
   customPaging?: (index: number) => any
 } & typeof defaultProps
 
@@ -83,16 +85,22 @@ export default function SlickSlider({
   arrows,
   dots,
   autoplay,
+  speed,
+  autoplaySpeed = 2000,
+  cssEase = "linear",
   ...props
 }: SlickSliderProps) {
   const responsive = props.responsive.map(({ breakpoint, settings }) => ({
     breakpoint,
-    settings: { dots, autoplay, variableWidth, arrows, ...settings },
+    settings: { dots, variableWidth, arrows, ...settings },
   }))
   return (
     <ReactSlick
       {...props}
+      speed={speed}
+      autoplaySpeed={autoplaySpeed}
       autoplay={autoplay}
+      cssEase={cssEase}
       variableWidth={variableWidth}
       responsive={responsive}
       arrows={arrows}

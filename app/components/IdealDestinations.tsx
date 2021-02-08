@@ -34,7 +34,6 @@ export default function IdealDestinations({ explores }) {
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 infinite: false,
-                rtl: true,
               },
             },
             {
@@ -43,17 +42,15 @@ export default function IdealDestinations({ explores }) {
                 slidesToShow: 2,
                 slidesToScroll: 1,
                 infinite: false,
-                rtl: true,
               },
             },
             {
               breakpoint: 900,
               settings: {
-                centerMode: false,
                 vertical: false,
+                infinite: true,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                rtl: true,
               },
             },
           ]}

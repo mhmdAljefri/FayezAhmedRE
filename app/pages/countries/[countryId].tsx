@@ -410,7 +410,7 @@ function CountryPage({
                 vertical: true,
                 infinite: explores.length > 3,
                 slidesToShow: 3,
-                slidesToScroll: -3,
+                slidesToScroll: 3,
               },
             },
           ]}
@@ -534,7 +534,7 @@ export async function getStaticProps(context) {
       type: "dontMissitGallery",
       countryId,
     },
-    take: 6,
+    take: 9,
     orderBy: { id: "desc" },
   })
   const { explores: exploreGallery } = await getExplores({
@@ -542,7 +542,7 @@ export async function getStaticProps(context) {
       type: "exploreGallery",
       countryId,
     },
-    take: 6,
+    take: 9,
     orderBy: { id: "desc" },
   })
   const { explores: getInspiredGallery } = await getExplores({
@@ -550,7 +550,7 @@ export async function getStaticProps(context) {
       type: "getInspiredGallery",
       countryId,
     },
-    take: 6,
+    take: 9,
     orderBy: { id: "desc" },
   })
 
