@@ -113,9 +113,13 @@ function CountryPage({
         }}
       >
         <HomeSlider
-          data={(country.carousel as any)?.map(
-            ({ image, url }: { image: string; url: string }) => ({ url, image, opacity: 0 })
-          )}
+          data={
+            (country.carousel as any)?.map(({ image, url }: { image: string; url: string }) => ({
+              url,
+              image,
+              opacity: 0,
+            })) || []
+          }
           slideStyle={{ maxHeight: [300, 300, "100%"] }}
         />
       </Wrapper>
