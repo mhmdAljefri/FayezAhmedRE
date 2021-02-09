@@ -19,7 +19,7 @@ const CountryForm = ({ initialValues, onSubmit }: CountryFormProps) => {
         {({ fields }) => (
           <>
             {fields.map((name, index) => (
-              <div key={name}>
+              <div key={index}>
                 <Grid columns={[1, 2]}>
                   <Box>
                     <MediaWidthTextField name={`${name}.image`} label="صور السلايدر المتحرك" />
