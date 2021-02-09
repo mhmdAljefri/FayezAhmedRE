@@ -74,6 +74,7 @@ type SlickSliderProps = {
   speed?: number
   autoplaySpeed?: number
   cssEase?: string
+  ref?: any
   customPaging?: (index: number) => any
 } & typeof defaultProps
 
@@ -86,14 +87,16 @@ export default function SlickSlider({
   dots,
   autoplay,
   speed,
+  ref,
   autoplaySpeed = 2000,
   cssEase = "linear",
   ...props
 }: SlickSliderProps) {
   const responsive = props.responsive.map(({ breakpoint, settings }) => ({
     breakpoint,
-    settings: { dots, variableWidth, arrows, ...settings },
+    settings: { dots, autoplay, variableWidth, arrows, ...settings },
   }))
+
   return (
     <ReactSlick
       {...props}

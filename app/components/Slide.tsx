@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Flex, Heading, Text } from "theme-ui"
+import { Box, Flex, Heading, SxStyleProp, Text } from "theme-ui"
 
 const defaultProps = {
   opacity: 0.5,
@@ -13,9 +13,10 @@ export type SlideProps = {
 }
 type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
+  sx?: SxStyleProp
 }
 
-const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps) => {
+const Slide = ({ title, opacity, text, sx, image, url, onlyImages }: SlideTypeProps) => {
   const bgImageSecureUrl = image.replace("http://", "https://")
 
   const Wrapper = ({ children }) => (url ? <a href={url}>{children}</a> : <>{children}</>)
@@ -44,6 +45,7 @@ const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps)
             right: 0,
             bottom: 0,
           },
+          ...sx,
         }}
       >
         {!onlyImages && (

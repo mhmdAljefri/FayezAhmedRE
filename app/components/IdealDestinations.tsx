@@ -1,11 +1,14 @@
 import { Link } from "blitz"
-import React from "react"
+import React, { useRef } from "react"
 import { Box, Heading, Text } from "theme-ui"
 import Image from "./Image"
 import SlickSlider from "./Sliders/SlickSlider"
 import Wrapper from "./Wrapper"
 
 export default function IdealDestinations({ explores }) {
+  const ref = useRef()
+
+  console.log(ref.current)
   return (
     <Box
       sx={{
@@ -25,6 +28,7 @@ export default function IdealDestinations({ explores }) {
           arrows={false}
           infinite
           autoplay
+          speed={800}
           slidesToShow={3}
           slidesToScroll={3}
           responsive={[
@@ -33,7 +37,7 @@ export default function IdealDestinations({ explores }) {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: false,
+                infinite: true,
               },
             },
             {
@@ -41,7 +45,7 @@ export default function IdealDestinations({ explores }) {
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 1,
-                infinite: false,
+                infinite: true,
               },
             },
             {

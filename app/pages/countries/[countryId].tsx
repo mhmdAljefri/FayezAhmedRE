@@ -1,10 +1,9 @@
-import HomeSlider from "app/components/HomeSlider"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
 
 import React, { useState } from "react"
-import { Box, Flex, Grid, Heading, Text } from "theme-ui"
+import { Box, Flex, Grid, Heading, Text, Link as ThemeLink } from "theme-ui"
 import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
@@ -20,7 +19,6 @@ import {
 import { useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
-import SlickSlider from "app/components/Sliders/SlickSlider"
 import Contact from "app/components/Forms/Contact"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import { OfferCard } from "app/layouts/OfferssList"
@@ -33,6 +31,9 @@ import getExplores from "app/public/explores/queries/getExplores"
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
 import MostViewd from "app/components/Cards/MostViewd"
 import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
+import Image from "app/components/Image"
+import Slider from "app/components/Slider"
+import SlickSlider from "app/components/Sliders/SlickSlider"
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
@@ -109,19 +110,47 @@ function CountryPage({
           marginTop: -100,
           borderRadius: "lg",
           overflow: "hidden",
-          maxHeight: [300, null, 600],
         }}
       >
-        <HomeSlider
-          data={
-            (country.carousel as any)?.map(({ image, url }: { image: string; url: string }) => ({
-              url,
-              image,
-              opacity: 0,
-            })) || []
-          }
-          slideStyle={{ maxHeight: [300, 300, "100%"] }}
-        />
+        {Array.isArray(country.carousel) ? (
+          <Slider prevArrow={<div />} nextArrow={<div />} autoplay>
+            {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
+              <ThemeLink
+                key={index}
+                target="blank"
+                rel="noopener noreferrer"
+                href={url}
+                sx={{
+                  display: "block",
+                  marginTop: -6,
+                  overflow: "hidden",
+                  textAlign: "center",
+                  position: "relative",
+                  ":after": {
+                    display: "block",
+                    content: '""',
+                    /* 16:9 aspect ratio */
+                    paddingBottom: "38.25%",
+                    minHeight: 200,
+                  },
+                }}
+              >
+                <Image
+                  sx={{
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  src={image || ""}
+                />
+              </ThemeLink>
+            ))}
+          </Slider>
+        ) : null}
       </Wrapper>
       <Wrapper
         sx={{

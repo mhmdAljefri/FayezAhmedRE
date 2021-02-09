@@ -57,7 +57,9 @@ export default function Filter({
       ref={ref}
     >
       <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
-        <Heading sx={{ fontSize: 6, paddingY: 4, color: "white" }}>التحكم بالبحث</Heading>
+        <Heading sx={{ fontSize: [4, 4, 5, 6], paddingY: 4, color: "white" }}>
+          التحكم بالبحث
+        </Heading>
         {isSmall && (
           <Burger
             onClosedColor="heading"
