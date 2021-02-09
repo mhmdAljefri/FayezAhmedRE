@@ -1,6 +1,5 @@
 import React, { PropsWithoutRef } from "react"
 import { useField } from "react-final-form"
-import Slide from "react-reveal/Slide"
 import { Input, Label } from "theme-ui"
 
 export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
@@ -23,35 +22,33 @@ export const LabeledTextField = React.forwardRef<HTMLInputElement, LabeledTextFi
     const normalizedError = Array.isArray(error) ? error.join(", ") : error || submitError
 
     return (
-      <Slide bottom>
-        <div {...outerProps}>
-          <Label htmlFor={input.name}>{label}</Label>
-          <Input {...input} disabled={submitting} {...props} ref={ref} />
+      <div {...outerProps}>
+        <Label htmlFor={input.name}>{label}</Label>
+        <Input {...input} disabled={submitting} {...props} ref={ref} />
 
-          {touched && normalizedError && (
-            <div role="alert" style={{ color: "red" }}>
-              {normalizedError}
-            </div>
-          )}
+        {touched && normalizedError && (
+          <div role="alert" style={{ color: "red" }}>
+            {normalizedError}
+          </div>
+        )}
 
-          <style jsx>{`
-            label {
-              display: flex;
-              flex-direction: column;
-              align-items: start;
-              font-size: 1rem;
-            }
-            input {
-              font-size: 1rem;
-              padding: 0.25rem 0.5rem;
-              border-radius: 3px;
-              border: 1px solid purple;
-              appearance: none;
-              margin-top: 0.5rem;
-            }
-          `}</style>
-        </div>
-      </Slide>
+        <style jsx>{`
+          label {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            font-size: 1rem;
+          }
+          input {
+            font-size: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            border: 1px solid purple;
+            appearance: none;
+            margin-top: 0.5rem;
+          }
+        `}</style>
+      </div>
     )
   }
 )

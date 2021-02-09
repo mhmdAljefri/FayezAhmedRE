@@ -1,7 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form"
 import { Box, Label, Select, SxStyleProp } from "theme-ui"
-import Slide from "react-reveal/Slide"
 
 type MenuFieldType = {
   name: string
@@ -52,11 +51,9 @@ export function MenuField({
 
 export default function LabeledMenuField({ label, ...props }: LabeledMenuFieldType) {
   return (
-    <Slide bottom>
-      <div>
-        <Label>{label}</Label>
-        <MenuField {...props} />
-      </div>
-    </Slide>
+    <div>
+      <Label>{label}</Label>
+      <MenuField {...props} />
+    </div>
   )
 }

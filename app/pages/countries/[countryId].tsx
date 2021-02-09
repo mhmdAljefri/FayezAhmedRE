@@ -22,7 +22,6 @@ import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import SlickSlider from "app/components/Sliders/SlickSlider"
 import Contact from "app/components/Forms/Contact"
-import Slide from "react-reveal/Slide"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import { OfferCard } from "app/layouts/OfferssList"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
@@ -114,8 +113,10 @@ function CountryPage({
         }}
       >
         <HomeSlider
-          data={country.carouselImages.map((image) => ({ image, opacity: 0 }))}
-          slideStyle={{ maxHeight: [300, "100%"] }}
+          data={(country.carousel as any)?.map(
+            ({ image, url }: { image: string; url: string }) => ({ url, image, opacity: 0 })
+          )}
+          slideStyle={{ maxHeight: [300, 300, "100%"] }}
         />
       </Wrapper>
       <Wrapper
@@ -421,16 +422,14 @@ function CountryPage({
         </SlickSlider>
       </Wrapper>
 
-      <Slide right>
-        <Wrapper sx={{ paddingY: 5 }}>
-          <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
-          <SlickSlider>
-            {furnishCategories.map((furnishCategory) => (
-              <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
-            ))}
-          </SlickSlider>
-        </Wrapper>
-      </Slide>
+      <Wrapper sx={{ paddingY: 5 }}>
+        <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
+        <SlickSlider>
+          {furnishCategories.map((furnishCategory) => (
+            <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
+          ))}
+        </SlickSlider>
+      </Wrapper>
 
       <Wrapper
         id="ServicesForm"

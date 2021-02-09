@@ -39,16 +39,35 @@ const COUNTRIES = [
 const seed = async () => {
   for (let i = 0; i < COUNTRIES.length; i++) {
     const { name, nameEN, image, rooms, isTurkey } = COUNTRIES[i]
-    await db.country.create({
+    try {
+      await db.country.create({
+        data: {
+          isTurkey,
+          nameEN,
+          name,
+          image,
+          rooms,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const countries = await db.country.findMany({})
+  countries.forEach(async ({ id, carouselImages }) => {
+    await db.country.update({
+      where: {
+        id,
+      },
       data: {
-        isTurkey,
-        nameEN,
-        name,
-        image,
-        rooms,
+        carousel: carouselImages.map((image) => ({
+          image: image,
+          url: image,
+        })),
       },
     })
-  }
+  })
 }
 
 export default seed

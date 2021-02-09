@@ -12,7 +12,7 @@ export default async function getCountry({ where }: GetCountryInput) {
         take: 3,
         orderBy: { id: "desc" },
       },
-      carouselImages: true,
+      carousel: true,
       rooms: true,
       isTurkey: true,
       name: true,
