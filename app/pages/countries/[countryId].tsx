@@ -108,12 +108,11 @@ function CountryPage({
       <Wrapper
         sx={{
           marginTop: -100,
-          borderRadius: "lg",
           overflow: "hidden",
         }}
       >
         {Array.isArray(country.carousel) ? (
-          <Slider prevArrow={<div />} nextArrow={<div />} autoplay>
+          <Slider prevArrow={<div />} nextArrow={<div />} autoplay={false}>
             {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
               <ThemeLink
                 key={index}
@@ -122,16 +121,14 @@ function CountryPage({
                 href={url}
                 sx={{
                   display: "block",
-                  marginTop: -6,
                   overflow: "hidden",
                   textAlign: "center",
                   position: "relative",
                   ":after": {
                     display: "block",
                     content: '""',
-                    /* 16:9 aspect ratio */
-                    paddingBottom: "38.25%",
-                    minHeight: 200,
+                    /* 16:9, 21:9 aspect ratio */
+                    paddingBottom: ["56.25%", "42.8571%"],
                   },
                 }}
               >
