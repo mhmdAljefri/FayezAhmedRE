@@ -1,11 +1,17 @@
 const { sessionMiddleware, simpleRolesIsAuthorized } = require("@blitzjs/server")
+const withPWA = require("next-pwa")
 
-module.exports = {
+module.exports = withPWA({
   middleware: [
     sessionMiddleware({
       isAuthorized: simpleRolesIsAuthorized,
     }),
   ],
+  pwa: {
+    dest: "public",
+    register: true,
+  },
+
   /* Uncomment this to customize the webpack config
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it
@@ -14,4 +20,4 @@ module.exports = {
     return config
   },
   */
-}
+})
