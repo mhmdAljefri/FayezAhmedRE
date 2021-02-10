@@ -1,6 +1,11 @@
 {
   "name": "فايز احمد العقارية",
   "short_name": "فايز العقارية",
+  "start_url": "/",
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#ccb87d",
+  "background_color": "#ccb87d",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
@@ -38,14 +43,5 @@
       "type": "image/png",
       "density": "4.0"
     }
-  ],
-  "gcm_sender_id": "",
-  "gcm_user_visible_only": true,
-  "start_url": "/",
-  "permissions": ["gcm"],
-  "scope": "",
-  "orientation": "portrait",
-  "display": "standalone",
-  "theme_color": "#ccb87d",
-  "background_color": "#ccb87d"
+  ]
 }

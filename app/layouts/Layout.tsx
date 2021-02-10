@@ -4,7 +4,6 @@ import Footer from "app/components/Footer"
 import Header from "app/components/Header"
 import { SxStyleProp, ThemeProvider } from "theme-ui"
 import theme from "app/theme"
-import MetaTags from "app/components/MetaTags"
 
 type LayoutProps = {
   title?: string
@@ -18,7 +17,7 @@ const Layout = ({ title, headerProps, children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <MetaTags title={title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"} />
+        <title>{title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"}</title>
 
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

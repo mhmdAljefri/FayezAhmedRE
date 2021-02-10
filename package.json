@@ -54,6 +54,7 @@
     "final-form": "4.20.1",
     "final-form-arrays": "3.0.2",
     "google-map-react": "2.1.9",
+    "next-offline": "5.0.3",
     "next-pwa": "5.0.5",
     "node-fetch": "2.6.1",
     "nprogress": "0.2.0",

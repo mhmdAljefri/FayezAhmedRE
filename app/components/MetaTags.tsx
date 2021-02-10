@@ -1,8 +1,9 @@
+import { Head } from "blitz"
 import React from "react"
 
-export default function MetaTags({ title }) {
+export default function MetaTags() {
   return (
-    <>
+    <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta
@@ -19,7 +20,6 @@ export default function MetaTags({ title }) {
         name="keywords"
         content="عقارات, فايز احمد, مباني, فلل, شقق, اراضي, مجمعات سكنية, مجمعات على البحر, تاجير, تمليك' بيع, ايجار' شراء, بيوت' بيت, فلل, متجر, عقار"
       />
-      <title>{title}</title>
 
       {/* <!-- Android  --> */}
       <meta name="theme-color" content="#ccb87d" />
@@ -75,6 +75,6 @@ export default function MetaTags({ title }) {
 
       {/* <!-- Manifest  --> */}
       <link rel="manifest" href="/manifest.json" />
-    </>
+    </Head>
   )
 }
