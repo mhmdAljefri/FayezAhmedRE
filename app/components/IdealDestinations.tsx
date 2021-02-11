@@ -34,6 +34,7 @@ export default function IdealDestinations({ explores }) {
                       width: [200, 250],
                       height: [200, 250],
                       marginY: 10,
+                      display: "block",
                       mx: "auto",
                       borderWidth: [3, 4],
                       borderColor: "primary",
