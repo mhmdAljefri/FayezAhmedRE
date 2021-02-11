@@ -112,7 +112,7 @@ function CountryPage({
         }}
       >
         {Array.isArray(country.carousel) ? (
-          <Slider prevArrow={<div />} nextArrow={<div />} autoplay={false}>
+          <Slider prevArrow={<div />} nextArrow={<div />} autoplay>
             {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
               <ThemeLink
                 key={index}
