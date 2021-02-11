@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
 import { queryCache } from "react-query"
 
+import "swiper/swiper-bundle.min.css"
 import "react-phone-number-input/style.css"
 import "rc-drawer/assets/index.css"
 import "nprogress/nprogress.css" //styles of nprogress

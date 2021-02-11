@@ -2,7 +2,7 @@ import { Link } from "blitz"
 import React, { useRef } from "react"
 import { Box, Heading, Text } from "theme-ui"
 import Image from "./Image"
-import SlickSlider from "./Sliders/SlickSlider"
+import { Swiper, SwiperSlide } from "./Sliders/Swiper"
 import Wrapper from "./Wrapper"
 
 export default function IdealDestinations({ explores }) {
@@ -24,70 +24,38 @@ export default function IdealDestinations({ explores }) {
           وجهات مثالية للجميع
         </Heading>
 
-        <SlickSlider
-          arrows={false}
-          infinite
-          autoplay
-          speed={800}
-          slidesToShow={3}
-          slidesToScroll={3}
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-              },
-            },
-            {
-              breakpoint: 1100,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-              },
-            },
-            {
-              breakpoint: 900,
-              settings: {
-                vertical: false,
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-              },
-            },
-          ]}
-        >
+        <Swiper autoplay loop>
           {explores.map(({ title, countryId, image, id }) => (
-            <Link passHref href={`/countries/${countryId}/explore/${id}`} key={id}>
-              <a style={{ textDecoration: "none" }}>
-                <Image
-                  sx={{
-                    width: [200, 250],
-                    height: [200, 250],
-                    marginY: 10,
-                    mx: "auto",
-                    borderWidth: [3, 4],
-                    borderColor: "primary",
-                    borderStyle: "solid",
-                    borderRadius: 11111,
-                    objectFit: "cover",
-                    transition: "all 0.5s",
-                    ":hover": {
-                      marginY: 0,
-                      width: [220, 270],
-                      height: [220, 270],
-                    },
-                  }}
-                  alt={title}
-                  src={image}
-                />
-                <Text sx={{ mt: 4, textAlign: "center", color: "white" }}>{title}</Text>
-              </a>
-            </Link>
+            <SwiperSlide key={id} virtualIndex={id}>
+              <Link passHref href={`/countries/${countryId}/explore/${id}`}>
+                <a style={{ textDecoration: "none" }}>
+                  <Image
+                    sx={{
+                      width: [200, 250],
+                      height: [200, 250],
+                      marginY: 10,
+                      mx: "auto",
+                      borderWidth: [3, 4],
+                      borderColor: "primary",
+                      borderStyle: "solid",
+                      borderRadius: 11111,
+                      objectFit: "cover",
+                      transition: "all 0.5s",
+                      ":hover": {
+                        marginY: 0,
+                        width: [220, 270],
+                        height: [220, 270],
+                      },
+                    }}
+                    alt={title}
+                    src={image}
+                  />
+                  <Text sx={{ mt: 4, textAlign: "center", color: "white" }}>{title}</Text>
+                </a>
+              </Link>
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
     </Box>
   )

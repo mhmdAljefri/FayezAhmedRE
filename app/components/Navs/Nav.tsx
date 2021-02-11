@@ -5,7 +5,6 @@ import Burger from "app/components/Burger"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
 import { Link, useParam } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
-import Slide from "react-reveal/Slide"
 import CountriesItemsList from "../NavItems/CountriesItemsList"
 
 type NavProps = {}
@@ -57,50 +56,48 @@ const Nav = (props: NavProps) => {
           display: open ? "block" : "none",
         }}
       >
-        <Slide left when={open}>
-          <Flex
-            as="nav"
-            ref={ref}
-            sx={{
-              paddingX: 4,
-              height: "100vh",
-              overflowX: "hidden",
-              overflowY: "auto",
-              backgroundColor: "dark",
+        <Flex
+          as="nav"
+          ref={ref}
+          sx={{
+            paddingX: 4,
+            height: "100vh",
+            overflowX: "hidden",
+            overflowY: "auto",
+            backgroundColor: "dark",
 
-              direction: "rtl",
-              paddingY: 2,
-              width: ["90vw", null, 400],
-              boxShadow: "default",
-              justifyContent: "space-between",
+            direction: "rtl",
+            paddingY: 2,
+            width: ["90vw", null, 400],
+            boxShadow: "default",
+            justifyContent: "space-between",
+            flexDirection: "column",
+          }}
+        >
+          <Flex
+            sx={{
               flexDirection: "column",
             }}
           >
-            <Flex
+            <Burger onClick={() => setOpen(false)} open={open} />
+
+            <NavItem
+              to="/search"
+              text="البحث"
               sx={{
-                flexDirection: "column",
+                marginTop: 5,
+                fontSize: [2, 3, 4],
               }}
-            >
-              <Burger onClick={() => setOpen(false)} open={open} />
+            />
+            <CountriesItemsList />
+            <NavItem to="/services" text="خدماتنا" />
+            <NavItem to="/about-us" text="لماذا فايز احمد" />
 
-              <NavItem
-                to="/search"
-                text="البحث"
-                sx={{
-                  marginTop: 5,
-                  fontSize: [2, 3, 4],
-                }}
-              />
-              <CountriesItemsList />
-              <NavItem to="/services" text="خدماتنا" />
-              <NavItem to="/about-us" text="لماذا فايز احمد" />
-
-              <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
-              <NavItem to="/furniture/" text="أثث منزلك" />
-            </Flex>
-            <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
+            <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
+            <NavItem to="/furniture/" text="أثث منزلك" />
           </Flex>
-        </Slide>
+          <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
+        </Flex>
       </Box>
     </Box>
   )
