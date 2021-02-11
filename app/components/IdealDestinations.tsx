@@ -24,7 +24,7 @@ export default function IdealDestinations({ explores }) {
           وجهات مثالية للجميع
         </Heading>
 
-        <Swiper autoplay loop>
+        <Swiper slidesPerView={3} autoplay={{ delay: 3000, disableOnInteraction: false }} loop>
           {explores.map(({ title, countryId, image, id }) => (
             <SwiperSlide key={id} virtualIndex={id}>
               <Link passHref href={`/countries/${countryId}/explore/${id}`}>
