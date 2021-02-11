@@ -1,5 +1,5 @@
-import SwiperCore, { Navigation, Pagination, Scrollbar } from "swiper"
+import SwiperCore, { Navigation, Autoplay, Pagination, Scrollbar } from "swiper"
 
-SwiperCore.use([Navigation, Pagination, Scrollbar])
+SwiperCore.use([Navigation, Autoplay, Pagination, Scrollbar])
 
 export * from "swiper/react"
