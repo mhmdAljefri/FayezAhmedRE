@@ -112,7 +112,12 @@ function CountryPage({
         }}
       >
         {Array.isArray(country.carousel) ? (
-          <Swiper autoplay>
+          <Swiper
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+          >
             {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
               <SwiperSlide key={index} virtualIndex={index}>
                 <ThemeLink
