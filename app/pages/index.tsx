@@ -62,6 +62,7 @@ const Home: BlitzPage<HomeProps> = ({
 }) => {
   // todo migrate this logic to Server :(
   const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
+  const poster = carousels[0]?.url || "sky.jpg"
 
   return (
     <main>
@@ -89,7 +90,7 @@ const Home: BlitzPage<HomeProps> = ({
               muted
               style={{ height: "100%", width: "100%", minHeight: "100vh", objectFit: "cover" }}
               controls={false}
-              poster="sky.jpg"
+              poster={poster}
             >
               <track kind="captions" />
               <source src={secureVideoUrl} type="video/mp4" />
