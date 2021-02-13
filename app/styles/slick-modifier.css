@@ -24,3 +24,7 @@
 .slick-dots li button:before {
   color: #443300 !important;
 }
+
+.swiper-pagination-bullet-active {
+  background: #947004 !important;
+}
