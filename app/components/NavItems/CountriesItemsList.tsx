@@ -3,7 +3,7 @@ import { Link, useQuery } from "blitz"
 import React from "react"
 import { Box, Flex } from "theme-ui"
 import Dropdown from "../Dropdown"
-import Image from "../Image"
+import OptmizationImage from "../OptmizationImage"
 
 export default function CountriesItemsList() {
   const [{ countries }] = useQuery(getCountries, { select: { id: true, name: true, image: true } })
@@ -42,16 +42,18 @@ export default function CountriesItemsList() {
               }}
               key={country.id}
             >
-              <Image
+              <Box
                 sx={{
                   boxShadow: "card",
                   borderRadius: 30,
                   marginInlineEnd: 10,
                   height: 30,
+                  position: "relative",
                   width: 30,
                 }}
-                src={country.image}
-              />
+              >
+                <OptmizationImage objectFit="cover" layout="fill" src={country.image} />
+              </Box>
               مشاريع وعروض {country.name}
             </Flex>
           </Link>
