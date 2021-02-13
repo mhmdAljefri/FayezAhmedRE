@@ -31,7 +31,7 @@ export default ObjectsUploadAPI
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "17mb",
+      sizeLimit: "170mb",
     },
   },
 }
