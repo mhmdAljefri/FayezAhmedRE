@@ -17,7 +17,7 @@ import FetchMoreButton from "app/components/FetchMoreButton"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { numberFormat } from "app/utils"
-import Image from "app/components/Image"
+import OptmizationImage from "app/components/OptmizationImage"
 
 const getListOfPrice = (price?: number[]): number[] => {
   if (!price) return []
@@ -161,10 +161,7 @@ export function ProjectCard({
       <Box sx={{}}>
         <Link passHref href={projectPath}>
           <a>
-            <Image
-              sx={{ height: [180, 200, 200, 240], width: "100%", objectFit: "cover" }}
-              src={image as string}
-            />
+            <OptmizationImage width={500} height={280} layout="responsive" src={image as string} />
           </a>
         </Link>
       </Box>

@@ -7,7 +7,7 @@ import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
-import Image from "app/components/Image"
+import OptmizationImage from "app/components/OptmizationImage"
 
 type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
   prefixPath?: string
@@ -62,17 +62,16 @@ export function OfferCard({
                 )}
               </Box>
             ) : (
-              <Image
+              <Box
                 sx={{
                   height: 240,
-                  width: "100%",
-                  objectFit: "cover",
                   ":hover + div": {
                     backgroundColor: "primary",
                   },
                 }}
-                src={image as string}
-              />
+              >
+                <OptmizationImage objectFit="cover" layout="fill" src={image as string} />
+              </Box>
             )}
 
             {!hideOfferLabel && (

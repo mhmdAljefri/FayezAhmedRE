@@ -1,4 +1,4 @@
-import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
+import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 import React from "react"
 import Wrapper from "app/components/Wrapper"
 import Nav from "app/components/Navs/Nav"
@@ -9,6 +9,7 @@ import DesktopNav from "./Navs/DesktopNav"
 import useScreenSize from "app/hooks/useScreenSize"
 import WhatsappButton from "./NavItems/WhatsappButton"
 import SearchButton from "./NavItems/SearchButton"
+import OptmizationImage from "./OptmizationImage"
 
 type HeaderProps = {
   sx?: SxStyleProp
@@ -50,8 +51,14 @@ const Header = ({ sx }: HeaderProps) => {
             }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Box sx={{ maxWidth: 50, paddingY: 2 }}>
-                <Image src="/FAYEZ.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
+              <Box sx={{ width: 80, height: 40, position: "relative", paddingY: 2 }}>
+                <OptmizationImage
+                  layout="fill"
+                  localImage
+                  objectFit="contain"
+                  src="/FAYEZ.png"
+                  alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
+                />
               </Box>
               <Text
                 sx={{

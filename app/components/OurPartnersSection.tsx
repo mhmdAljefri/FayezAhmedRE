@@ -4,7 +4,7 @@ import Wrapper from "./Wrapper"
 import { Partner } from "@prisma/client"
 import SlickSlider from "./Sliders/SlickSlider"
 import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
-import Image from "./Image"
+import OptmizationImage from "./OptmizationImage"
 
 type PartnersCardProps = Partner
 
@@ -22,9 +22,10 @@ function PartnersCard({ image, name }: PartnersCardProps) {
         alignItems: "center",
         justifyContent: "center",
         boxShadow: "md",
+        position: "relative",
       }}
     >
-      <Image
+      <OptmizationImage
         sx={{
           padding: 2,
           width: [150, 190],
@@ -32,6 +33,9 @@ function PartnersCard({ image, name }: PartnersCardProps) {
           objectFit: "contain",
           objectPosition: "center",
         }}
+        objectFit="contain"
+        width={200}
+        height={200}
         src={image}
         alt={name}
       />

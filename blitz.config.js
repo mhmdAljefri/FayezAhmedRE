@@ -31,6 +31,13 @@ module.exports = withOffline({
     ]
   },
 
+  images: {
+    domains: ["res.cloudinary.com", "fayezahmed.s3.ap-south-1.amazonaws.com"],
+
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+
   /* Uncomment this to customize the webpack config
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it

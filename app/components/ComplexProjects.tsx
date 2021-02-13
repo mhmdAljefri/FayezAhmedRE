@@ -2,7 +2,7 @@ import { Link } from "blitz"
 import React from "react"
 import { Box, Flex, Grid, Heading, Text } from "theme-ui"
 import HTMLBox from "./HTMLBox"
-import Image from "./Image"
+import OptmizationImage from "./OptmizationImage"
 import SlickSlider from "./Sliders/SlickSlider"
 import Wrapper from "./Wrapper"
 
@@ -59,8 +59,10 @@ export default function ComplexProjects({ projects }) {
                     <Flex sx={{ alignItems: "center", flexWrap: ["wrap", "nowrap"] }}>
                       <Text sx={{ mb: 4 }}>{housingComplexText}</Text>
                       {housingComplexImage && (
-                        <Image
-                          sx={{ width: [50, 70], mx: 2 }}
+                        <OptmizationImage
+                          width={55}
+                          height={60}
+                          objectFit="contain"
                           src={housingComplexImage}
                           alt={housingComplexText || ""}
                         />
@@ -75,15 +77,14 @@ export default function ComplexProjects({ projects }) {
                           textAlign: "center",
                           cursor: "pointer",
                           marginRight: "auto",
+                          display: "block",
+                          mx: "auto",
                         }}
                       >
-                        <Image
-                          sx={{
-                            objectFit: "contain",
-                            mx: "auto",
-                            maxWidth: 300,
-                            width: "100%",
-                          }}
+                        <OptmizationImage
+                          width={300}
+                          height={300}
+                          objectFit="contain"
                           src={image}
                           alt={name}
                         />
@@ -104,14 +105,11 @@ export default function ComplexProjects({ projects }) {
                 <Box sx={{ cursor: "pointer", textAlign: "center", mx: "auto" }}>
                   <Link passHref href={`/countries/${country.id}/projects/${id}`}>
                     <a style={{ textDecoration: "none" }}>
-                      <Image
-                        sx={{
-                          objectFit: "contain",
-                          height: [200, 300, 400],
-                          maxWidth: 600,
-                          mx: "auto",
-                        }}
-                        src={gallery?.[0] || ""}
+                      <OptmizationImage
+                        width={800}
+                        height={400}
+                        objectFit="contain"
+                        src={gallery?.[0]}
                         alt={name}
                       />
                     </a>

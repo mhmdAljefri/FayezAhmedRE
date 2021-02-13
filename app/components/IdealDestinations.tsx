@@ -1,7 +1,7 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Heading, Text } from "theme-ui"
-import Image from "./Image"
+import OptmizationImage from "./OptmizationImage"
 import { Swiper, SwiperSlide } from "./Sliders/Swiper"
 import Wrapper from "./Wrapper"
 
@@ -49,18 +49,19 @@ export default function IdealDestinations({ explores }) {
             <SwiperSlide key={id} virtualIndex={id}>
               <Link passHref href={`/countries/${countryId}/explore/${id}`}>
                 <a style={{ textDecoration: "none" }}>
-                  <Image
+                  <Box
                     sx={{
                       width: [200, 250],
                       height: [200, 250],
                       marginY: 10,
+                      position: "relative",
                       display: "block",
                       mx: "auto",
                       borderWidth: [3, 4],
                       borderColor: "primary",
                       borderStyle: "solid",
                       borderRadius: 11111,
-                      objectFit: "cover",
+                      overflow: "hidden",
                       transition: "all 0.5s",
                       ":hover": {
                         marginY: 0,
@@ -68,9 +69,9 @@ export default function IdealDestinations({ explores }) {
                         height: [220, 270],
                       },
                     }}
-                    alt={title}
-                    src={image}
-                  />
+                  >
+                    <OptmizationImage objectFit="cover" layout="fill" alt={title} src={image} />
+                  </Box>
                   <Text sx={{ mt: 4, textAlign: "center", color: "white", mb: 5 }}>{title}</Text>
                 </a>
               </Link>

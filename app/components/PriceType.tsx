@@ -1,7 +1,8 @@
 import usePriceType from "app/hooks/usePriceType"
 import React from "react"
-import { Avatar, Flex } from "theme-ui"
+import { Box, Flex } from "theme-ui"
 import Dropdown from "./Dropdown"
+import OptmizationImage from "./OptmizationImage"
 
 type PriceTypeProps = {}
 
@@ -27,10 +28,25 @@ const PriceType = (props: PriceTypeProps) => {
         value: price[0],
         node: (
           <Flex sx={{ alignItems: "center" }} key={price[0]}>
-            <Avatar
-              sx={{ boxShadow: "card", marginInlineEnd: 10, height: 30, width: 30 }}
-              src={price[1]}
-            />
+            <Box
+              sx={{
+                boxShadow: "card",
+                borderRadius: 555,
+                overflow: "hidden",
+                position: "relative",
+                marginInlineEnd: 10,
+                height: 30,
+                width: 30,
+              }}
+            >
+              <OptmizationImage
+                localImage
+                layout="intrinsic"
+                width={30}
+                height={30}
+                src={price[1]}
+              />
+            </Box>
             <p
               style={{
                 maxWidth: 130,
