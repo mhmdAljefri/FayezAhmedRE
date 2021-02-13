@@ -62,7 +62,7 @@ const Home: BlitzPage<HomeProps> = ({
 }) => {
   // todo migrate this logic to Server :(
   const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
-  const poster = carousels[0]?.url || "sky.jpg"
+  const poster = carousels[0]?.image || "sky.jpg"
 
   return (
     <main>
