@@ -18,7 +18,7 @@ export default function MediaWidthTextField({
   multiple,
   name,
   label,
-  accept,
+  accept = "image/*",
 }: MediaWidthTextFieldType) {
   return (
     <div>
@@ -39,7 +39,38 @@ export default function MediaWidthTextField({
                     style={{ position: "absolute", top: 5, left: 5, color: "red" }}
                     onClick={() => input.onChange(undefined)}
                   />
-                  <Image sx={{ width: 80 }} src={input.value} alt="..." />
+                  {accept === "video/*" && (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      style={{ height: 80, width: 80, objectFit: "cover" }}
+                      controls={false}
+                      poster="sky.jpg"
+                    >
+                      <track kind="captions" />
+                      <source
+                        src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${input.value}`}
+                        type="video/mp4"
+                      />
+                      <source
+                        src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${input.value}`}
+                        type="video/ogg"
+                      />
+                      <source
+                        src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${input.value}`}
+                        type="video/webm"
+                      />
+                      <object
+                        data={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${input.value}`}
+                      >
+                        <embed
+                          src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${input.value}`}
+                        />
+                      </object>
+                    </video>
+                  )}
+                  {accept === "image/*" && <Image sx={{ width: 80 }} src={input.value} alt="..." />}
                 </Box>
               )}
               {meta.touched && meta.error && <Box sx={{ color: "red" }}>{meta.error}</Box>}

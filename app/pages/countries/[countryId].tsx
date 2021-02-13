@@ -32,7 +32,7 @@ import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButt
 import MostViewd from "app/components/Cards/MostViewd"
 import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
 import Image from "app/components/Image"
-import Slider from "app/components/Slider"
+import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 import SlickSlider from "app/components/Sliders/SlickSlider"
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
@@ -112,41 +112,43 @@ function CountryPage({
         }}
       >
         {Array.isArray(country.carousel) ? (
-          <Slider prevArrow={<div />} nextArrow={<div />} autoplay>
+          <Swiper autoplay>
             {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
-              <ThemeLink
-                key={index}
-                target="blank"
-                rel="noopener noreferrer"
-                href={url}
-                sx={{
-                  display: "block",
-                  overflow: "hidden",
-                  textAlign: "center",
-                  position: "relative",
-                  ":after": {
-                    display: "block",
-                    content: '""',
-                    /* 16:9, 21:9 aspect ratio */
-                    paddingBottom: ["56.25%", "42.8571%"],
-                  },
-                }}
-              >
-                <Image
+              <SwiperSlide key={index} virtualIndex={index}>
+                <ThemeLink
+                  target="blank"
+                  rel="noopener noreferrer"
+                  href={url}
                   sx={{
-                    objectFit: "cover",
-                    objectPosition: "center",
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    width: "100%",
-                    height: "100%",
+                    display: "block",
+                    overflow: "hidden",
+                    textAlign: "center",
+                    position: "relative",
+                    ":after": {
+                      display: "block",
+                      content: '""',
+                      /* 16:9, 21:9 aspect ratio */
+                      paddingBottom: ["56.25%", "42.8571%"],
+                    },
                   }}
-                  src={image || ""}
-                />
-              </ThemeLink>
+                >
+                  <Image
+                    // className="animate__animated animate__zoomIn"
+                    sx={{
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    src={image || ""}
+                  />
+                </ThemeLink>
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Swiper>
         ) : null}
       </Wrapper>
       <Wrapper

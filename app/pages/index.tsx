@@ -61,9 +61,7 @@ const Home: BlitzPage<HomeProps> = ({
   mostViewedProjects,
 }) => {
   // todo migrate this logic to Server :(
-  const secureVideoUrl = carouselVideo?.videoUlr.includes("res.cloudinary")
-    ? carouselVideo?.videoUlr.replace("http://", "https://")
-    : `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
+  const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
     <main>
@@ -91,6 +89,7 @@ const Home: BlitzPage<HomeProps> = ({
               muted
               style={{ height: "100%", width: "100%", minHeight: "100vh", objectFit: "cover" }}
               controls={false}
+              poster="sky.jpg"
             >
               <track kind="captions" />
               <source src={secureVideoUrl} type="video/mp4" />

@@ -1,14 +1,11 @@
 import { Link } from "blitz"
-import React, { useRef } from "react"
+import React from "react"
 import { Box, Heading, Text } from "theme-ui"
 import Image from "./Image"
 import { Swiper, SwiperSlide } from "./Sliders/Swiper"
 import Wrapper from "./Wrapper"
 
 export default function IdealDestinations({ explores }) {
-  const ref = useRef()
-
-  console.log(ref.current)
   return (
     <Box
       sx={{
@@ -44,6 +41,9 @@ export default function IdealDestinations({ explores }) {
           slidesPerView={3}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop
+          pagination={{
+            clickable: true,
+          }}
         >
           {explores.map(({ title, countryId, image, id }) => (
             <SwiperSlide key={id} virtualIndex={id}>
@@ -71,7 +71,7 @@ export default function IdealDestinations({ explores }) {
                     alt={title}
                     src={image}
                   />
-                  <Text sx={{ mt: 4, textAlign: "center", color: "white" }}>{title}</Text>
+                  <Text sx={{ mt: 4, textAlign: "center", color: "white", mb: 5 }}>{title}</Text>
                 </a>
               </Link>
             </SwiperSlide>

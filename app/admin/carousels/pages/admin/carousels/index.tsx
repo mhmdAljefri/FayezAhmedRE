@@ -36,7 +36,11 @@ export const CarouselsList = () => {
   return (
     <>
       <VideoCarouselForm
-        initialValues={carouselVideo || {}}
+        initialValues={
+          carouselVideo
+            ? { ...carouselVideo, isActive: carouselVideo.isActive ? "true" : "false" }
+            : {}
+        }
         onSubmit={async (data) => {
           try {
             if (carouselVideo) {
