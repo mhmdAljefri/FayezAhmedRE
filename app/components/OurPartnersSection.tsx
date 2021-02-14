@@ -2,9 +2,9 @@ import React from "react"
 import { Box, Heading, Flex } from "theme-ui"
 import Wrapper from "./Wrapper"
 import { Partner } from "@prisma/client"
-import SlickSlider from "./Sliders/SlickSlider"
 import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
 import OptmizationImage from "./OptmizationImage"
+import { SwiperSlide, Swiper } from "./Sliders/Swiper"
 
 type PartnersCardProps = Partner
 
@@ -50,62 +50,39 @@ type OurPartnersSectionProps = {
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
     <Box sx={{ paddingTop: 5, paddingBottom: 7, marginTop: 6, backgroundColor: "light" }}>
-      <Wrapper>
+      <Wrapper sx={{ position: "relative" }}>
         <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
-
-        <SlickSlider
-          arrows
-          infinite
-          dots={false}
-          slidesToShow={4}
-          slidesToScroll={1}
-          nextArrow={<ArrowNext />}
-          prevArrow={<ArrowPrev />}
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true,
-                rtl: true,
-              },
+        <ArrowNext />
+        <ArrowPrev />
+        <Swiper
+          navigation={{
+            nextEl: ".next",
+            prevEl: ".prev",
+          }}
+          slidesPerView={4}
+          breakpoints={{
+            // when window width is >= 320px
+            320: {
+              slidesPerView: 1,
             },
-            {
-              breakpoint: 1100,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                infinite: true,
-                rtl: true,
-              },
+            // when window width is >= 480px
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 30,
             },
-            {
-              breakpoint: 900,
-              settings: {
-                centerMode: false,
-                vertical: false,
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                rtl: true,
-              },
+            // when window width is >= 640px
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 40,
             },
-            {
-              breakpoint: 600,
-              settings: {
-                centerMode: false,
-                vertical: false,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                rtl: true,
-              },
-            },
-          ]}
+          }}
         >
           {props.data.map((partner, index) => (
-            <PartnersCard {...partner} key={index} />
+            <SwiperSlide key={index} virtualIndex={index}>
+              <PartnersCard {...partner} />
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
     </Box>
   )

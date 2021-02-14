@@ -26,6 +26,7 @@ class MyDocument extends Document {
         <DocumentHead />
         <MetaTags />
         <script
+          defer
           dangerouslySetInnerHTML={{
             __html: `
   window.dataLayer = window.dataLayer || [];

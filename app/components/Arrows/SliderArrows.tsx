@@ -27,7 +27,7 @@ const SharedStyle: SxStyleProp = {
 export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className=""
+    className="next"
     sx={{
       ...SharedStyle,
       left: [-10, -30, -40, -50],
@@ -40,7 +40,7 @@ export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
 export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className=""
+    className="prev"
     sx={{
       ...SharedStyle,
       right: [-10, -30, -40, -50],
