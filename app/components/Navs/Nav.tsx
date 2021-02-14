@@ -1,17 +1,26 @@
-import React from "react"
+import React, { useLayoutEffect, useRef } from "react"
 import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "app/components/Burger"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
-import { Link, useParam } from "blitz"
+import { Link, Router, useParam } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
 import CountriesItemsList from "../NavItems/CountriesItemsList"
 
 type NavProps = {}
 
 const Nav = (props: NavProps) => {
+  const prevRouter = useRef<string | null>(null)
   const { open, setOpen, ref } = useOnClickout()
   const countryId = useParam("countryId")
+
+  useLayoutEffect(() => {
+    const isClient = typeof window !== "undefined"
+    if (isClient && open && prevRouter.current !== Router.asPath) {
+      prevRouter.current = Router.asPath
+      setOpen(false)
+    }
+  })
 
   const NavItem = ({ sx, to, text }: { to: string; text: string; sx?: SxStyleProp }) => {
     return (

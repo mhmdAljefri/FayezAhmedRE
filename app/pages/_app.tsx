@@ -8,20 +8,20 @@ import NProgress from "nprogress" //nprogress module
 import { ToastContainer } from "react-toastify"
 import PriceProvider from "app/context/price"
 import { queryCache } from "react-query"
+import FullpageLoader from "app/components/Loaders/Fullpage"
 
-import "swiper/swiper-bundle.min.css"
-import "react-phone-number-input/style.css"
+import "swiper/swiper.scss"
+import "swiper/components/pagination/pagination.scss"
+import "swiper/components/navigation/navigation.scss"
 import "rc-drawer/assets/index.css"
 import "nprogress/nprogress.css" //styles of nprogress
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
-import "glider-js/glider.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import "app/styles/animate.css"
 import "app/styles/global.css"
-import FullpageLoader from "app/components/Loaders/Fullpage"
 
 //Binding events.
 NProgress.configure({ showSpinner: false })

@@ -83,6 +83,7 @@
     "react-toastify": "6.1.0",
     "rebass": "4.0.7",
     "recompose": "0.30.0",
+    "sass": "1.32.7",
     "secure-password": "4.x",
     "slick-carousel": "1.8.1",
     "suneditor-react": "2.14.9",

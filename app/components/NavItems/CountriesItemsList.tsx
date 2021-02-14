@@ -36,7 +36,9 @@ export default function CountriesItemsList() {
               sx={{
                 marginY: 3,
                 width: 180,
-                fontSize: [0, 1],
+                fontWeight: 700,
+                fontSize: [1],
+                alignItems: "center",
               }}
               key={country.id}
             >

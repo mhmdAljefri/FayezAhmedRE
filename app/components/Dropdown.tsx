@@ -2,7 +2,6 @@ import React, { ReactNode } from "react"
 import { Box, Flex, SxStyleProp } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
-import useOnClickout from "app/hooks/useOnClickout"
 
 type Option = { key: string | number; value: string | number; node?: ReactNode }
 
@@ -20,11 +19,19 @@ type DropdownProps = {
 
 const Dropdown = ({ options, title, outterStyle, defaultValue, onChange }: DropdownProps) => {
   const defaultOption = options.find((option) => option.value === defaultValue)
-  const { ref, open, setOpen } = useOnClickout()
 
   return (
-    <Box ref={ref} sx={{ position: "relative", zIndex: 1111, ...outterStyle }}>
-      <Flex sx={{ alignItems: "center", color: "primary" }} onMouseEnter={() => setOpen(true)}>
+    <Box sx={{ position: "relative", zIndex: 1111, ...outterStyle }}>
+      <Flex
+        sx={{
+          alignItems: "center",
+          color: "primary",
+          ":hover + div": {
+            opacity: 1,
+            visibility: "visible",
+          },
+        }}
+      >
         <Box sx={{ marginInlineEnd: 5 }}>
           {title || defaultOption?.node || defaultOption?.value}
         </Box>
@@ -37,8 +44,12 @@ const Dropdown = ({ options, title, outterStyle, defaultValue, onChange }: Dropd
           paddingY: 2,
           position: "absolute",
           backgroundColor: "background",
-          opacity: open ? 1 : 0,
-          visibility: open ? "visible" : "hidden",
+          opacity: 0,
+          visibility: "hidden",
+          ":hover": {
+            opacity: 1,
+            visibility: "visible",
+          },
           borderRadius: 15,
           boxShadow: "default",
           zIndex: 1111,
@@ -50,7 +61,6 @@ const Dropdown = ({ options, title, outterStyle, defaultValue, onChange }: Dropd
             sx={{ paddingX: 2, cursor: "pointer" }}
             onClick={() => {
               onChange(option)
-              setOpen(false)
             }}
           >
             {option.node || option.value}
