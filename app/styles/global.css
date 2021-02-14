@@ -4,5 +4,4 @@
 
 *:focus {
   outline: none !important;
-  filter: drop-shadow(0 0 1px #ccb87d);
 }
