@@ -2,7 +2,7 @@ import { Offer } from "@prisma/client"
 import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import { Link, useInfiniteQuery, useParam, useRouter, useRouterQuery } from "blitz"
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
@@ -24,7 +24,20 @@ export function OfferCard({
   prefixPath = "/",
 }: OfferCardProps) {
   const { asPath } = useRouter()
+  const [youtubeUrl, setYoutubeUrl] = useState<string | null>(null)
   const href = asPath + prefixPath + id
+  const isYoutube = mainVideo?.startsWith("https://www.youtube")
+
+  useEffect(() => {
+    const handleOnWindowLoaded = () => {
+      if (isYoutube) setYoutubeUrl(mainVideo)
+    }
+    window.addEventListener("load", handleOnWindowLoaded)
+
+    return () => {
+      window.removeEventListener("load", handleOnWindowLoaded)
+    }
+  }, [isYoutube, mainVideo])
 
   return (
     <Box
@@ -41,8 +54,10 @@ export function OfferCard({
           <Box sx={{ position: "relative" }}>
             {mainVideo ? (
               <Box sx={{ height: 240, paddingBottom: hideOfferLabel ? 0 : 40 }}>
-                {mainVideo.startsWith("https://www.youtube") ? (
-                  <iframe width="100%" height="100%" title="any" src={mainVideo}></iframe>
+                {isYoutube ? (
+                  youtubeUrl && (
+                    <iframe width="100%" height="100%" title="any" src={youtubeUrl}></iframe>
+                  )
                 ) : (
                   <video
                     width="100%"
