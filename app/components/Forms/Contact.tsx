@@ -57,6 +57,7 @@ export default function Contact() {
               layout="intrinsic"
               width={150}
               height={150}
+              localImage
               objectFit="contain"
               src="/icons/icons8_headset_128px.png"
               alt="اطلب استشارتك"

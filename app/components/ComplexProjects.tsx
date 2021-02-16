@@ -18,7 +18,7 @@ export default function ComplexProjects({ projects }) {
             alignItems: "flex-start",
             justifyContent: "flex-end",
             ".swiper-pagination-bullet": {
-              margin: 8,
+              marginX: "8px",
             },
           },
         }}

@@ -21,6 +21,7 @@ import Image from "app/components/Image"
 import { numberFormat } from "app/utils"
 import HTMLBox from "app/components/HTMLBox"
 import BigIconText from "app/components/BigIconBox"
+import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 
 // Icons
 import { buildingO } from "react-icons-kit/fa/buildingO"
@@ -30,7 +31,6 @@ import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
-import SlickSlider from "app/components/Sliders/SlickSlider"
 import GoogleMap from "app/components/GoogleMap"
 import Contact from "app/components/Forms/Contact"
 
@@ -208,33 +208,22 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
             <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-            <Box sx={{ marginTop: -5 }}>
-              <SlickSlider
-                arrows
-                prevArrow={<ArrowLeft />}
-                nextArrow={<ArrowRight />}
-                responsive={[
-                  {
-                    breakpoint: 800,
-                    settings: {
-                      arrows: false,
-                    },
+            <Box sx={{ marginTop: -5, position: "relative" }}>
+              <ArrowRight />
+              <ArrowLeft />
+              <Swiper
+                breakpoints={{
+                  800: {
+                    pagination: false,
+                    // todo make it infinate
                   },
-                  {
-                    breakpoint: 1020,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: -1,
-                    },
+                  1020: {
+                    pagination: true,
                   },
-                ]}
-                variableWidth
-                slidesToShow={1}
-                slidesToScroll={-1}
-                infinite={[...floorplan].length > 2}
+                }}
               >
                 {floorplan.map((item, index) => (
-                  <div key={item + "_" + index}>
+                  <SwiperSlide virtualIndex={index} key={item + "_" + index}>
                     <Image
                       imageMaxWidth={350}
                       sx={{
@@ -249,9 +238,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                       }}
                       src={item}
                     />
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
             </Box>
           </Wrapper>
         )}
@@ -263,43 +252,32 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 <Text sx={{ fontSize: 3, marginBottom: 5 }}>دلل نفسك مع هذه الخيارات الرائعة</Text>
               </Box>
 
-              <SlickSlider
-                slidesToShow={3}
-                slidesToScroll={3}
-                infinite={features?.length > 4}
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 3,
-                      infinite: features?.length > 4,
-                    },
+              <Swiper
+                // infinite={features?.length > 4}
+                breakpoints={{
+                  1200: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    // infinite: features?.length > 4,
                   },
-                  {
-                    breakpoint: 840,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 2,
-                      initialSlide: 1,
-                      infinite: features?.length > 4,
-                    },
+                  840: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
+                    initialSlide: 1,
+                    // infinite: features?.length > 4,
                   },
-                  {
-                    breakpoint: 580,
-                    settings: {
-                      centerMode: true,
-                      vertical: false,
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      infinite: features?.length > 4,
-                    },
+                  580: {
+                    // centerMode: true,
+                    // vertical: false,
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    // infinite: features?.length > 4,
                   },
-                ]}
+                }}
                 sx={{ justifyContent: "center", marginY: 3 }}
               >
                 {features.map((feat, index) => (
-                  <div key={feat + "_" + index}>
+                  <SwiperSlide virtualIndex={index} key={feat + "_" + index}>
                     <Flex
                       sx={{
                         paddingX: [2, 2, 3],
@@ -324,9 +302,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                         {feat}
                       </Text>
                     </Flex>
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
               {brochure && (
                 <ThemeLink
                   download={name}
@@ -352,60 +330,53 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
-              <SlickSlider
-                slidesToShow={nearByItemsLength > 5 ? 5 : 3}
-                infinite={nearByItemsLength > 2}
-                slidesToScroll={1}
-                centerMode={nearByItemsLength <= 2}
-                responsive={[
-                  {
-                    breakpoint: 1000,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 1,
-                      infinite: nearByItemsLength > 3,
-                    },
+              <Swiper
+                slidesPerView={nearByItemsLength > 5 ? 5 : 3}
+                // infinite={nearByItemsLength > 2}
+                slidesPerGroup={1}
+                // centerMode={nearByItemsLength <= 2}
+                breakpoints={{
+                  1000: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 1,
+                    // infinite: nearByItemsLength > 3,
                   },
-                  {
-                    breakpoint: 800,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                      infinite: nearByItemsLength > 2,
-                    },
+                  800: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 1,
+                    // infinite: nearByItemsLength > 2,
                   },
-                  {
-                    breakpoint: 500,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      infinite: (nearBy as any)?.length > 2,
-                    },
+                  500: {
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    // infinite: (nearBy as any)?.length > 2,
                   },
-                ]}
+                }}
               >
                 {(nearBy as any)?.map((item, index) => (
-                  <Box key={item.name + "_" + index} sx={{ textAlign: "center" }}>
-                    <Image
-                      sx={{
-                        marginX: "auto",
-                        width: [180, 200],
-                        height: [180, 200],
-                        borderRadius: 999,
-                        borderWidth: 2,
-                        borderColor: "primary",
-                        borderStyle: "solid",
-                      }}
-                      src={item.image}
-                      alt={item.name}
-                    />
-                    <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
-                      {item.name}
-                    </Heading>
-                    <Text>{item.description}</Text>
-                  </Box>
+                  <SwiperSlide key={item.name + "_" + index} virtualIndex={index}>
+                    <Box sx={{ textAlign: "center" }}>
+                      <Image
+                        sx={{
+                          marginX: "auto",
+                          width: [180, 200],
+                          height: [180, 200],
+                          borderRadius: 999,
+                          borderWidth: 2,
+                          borderColor: "primary",
+                          borderStyle: "solid",
+                        }}
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
+                        {item.name}
+                      </Heading>
+                      <Text>{item.description}</Text>
+                    </Box>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
             </Wrapper>
           )}
         </Box>

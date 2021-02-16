@@ -39,13 +39,7 @@ const PriceType = (props: PriceTypeProps) => {
                 width: 30,
               }}
             >
-              <OptmizationImage
-                localImage
-                layout="intrinsic"
-                width={30}
-                height={30}
-                src={price[1]}
-              />
+              <OptmizationImage localImage layout="fixed" width={30} height={30} src={price[1]} />
             </Box>
             <p
               style={{

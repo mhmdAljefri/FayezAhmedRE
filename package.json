@@ -53,6 +53,7 @@
     "enquire.js": "2.1.6",
     "final-form": "4.20.1",
     "final-form-arrays": "3.0.2",
+    "global": "4.4.0",
     "google-map-react": "2.1.9",
     "next-offline": "5.0.3",
     "next-pwa": "5.0.5",

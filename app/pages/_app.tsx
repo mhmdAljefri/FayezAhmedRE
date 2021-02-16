@@ -15,8 +15,6 @@ import "swiper/components/pagination/pagination.scss"
 import "swiper/components/navigation/navigation.scss"
 import "rc-drawer/assets/index.css"
 import "nprogress/nprogress.css" //styles of nprogress
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
 import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
 import "react-toastify/dist/ReactToastify.css"

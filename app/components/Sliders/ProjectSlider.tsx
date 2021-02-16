@@ -9,18 +9,14 @@ export default function ProjectSlider({ projects }) {
       loop
       pagination={{ clickable: true }}
       autoHeight
-      slidesPerView={3}
       breakpoints={{
-        1200: {
-          slidesPerView: 3,
-          loop: false,
-        },
-        1100: {
+        768: {
           slidesPerView: 2,
-          loop: false,
+          spaceBetween: 40,
         },
-        900: {
-          slidesPerView: 1,
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 50,
         },
       }}
     >

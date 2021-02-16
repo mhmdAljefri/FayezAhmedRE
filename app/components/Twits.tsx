@@ -2,11 +2,11 @@ import React, { Suspense } from "react"
 import { Box, Heading } from "theme-ui"
 import { useQuery } from "react-query"
 import Wrapper from "./Wrapper"
-import SlickSlider from "./Sliders/SlickSlider"
 import { Icon } from "react-icons-kit"
 import { twitter } from "react-icons-kit/fa/twitter"
 import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
 import TwitCard from "./Cards/TwitCard"
+import { SwiperSlide, Swiper } from "./Sliders/Swiper"
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 
 function TwitsList() {
@@ -16,50 +16,40 @@ function TwitsList() {
   if (!twits) return <Box sx={{ px: 3, textAlign: "center", py: 4 }}>للاسف لاتوجد تغريدات</Box>
 
   return (
-    <SlickSlider
-      arrows
-      infinite
-      autoplay
-      dots={false}
-      slidesToShow={3}
-      slidesToScroll={1}
-      nextArrow={<ArrowNext />}
-      prevArrow={<ArrowPrev />}
-      responsive={[
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: false,
-            rtl: true,
+    <Wrapper sx={{ position: "relative" }}>
+      <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
+      <ArrowNext />
+      <ArrowPrev />
+      <Swiper
+        navigation={{
+          nextEl: ".next",
+          prevEl: ".prev",
+        }}
+        slidesPerView={4}
+        breakpoints={{
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 1,
           },
-        },
-        {
-          breakpoint: 1100,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            infinite: false,
-            rtl: true,
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 30,
           },
-        },
-        {
-          breakpoint: 900,
-          settings: {
-            centerMode: false,
-            vertical: false,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            rtl: true,
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 3,
+            spaceBetween: 40,
           },
-        },
-      ]}
-    >
-      {twits.map(({ text, id }) => (
-        <TwitCard key={id} id={id} text={text} />
-      ))}
-    </SlickSlider>
+        }}
+      >
+        {twits.map(({ text, id }) => (
+          <SwiperSlide key={id} virtualIndex={id}>
+            <TwitCard id={id} text={text} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Wrapper>
   )
 }
 

@@ -4,9 +4,9 @@ import React, { useState } from "react"
 import { Box, Button, Flex, Grid, Heading, Text } from "theme-ui"
 import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
 import Icon from "react-icons-kit"
-import SlickSlider from "app/components/Sliders/SlickSlider"
 import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
+import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
 import Image from "app/components/Image"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
 
@@ -110,41 +110,48 @@ export function GalleryView({ gallery }) {
       </Box>
 
       <Wrapper sx={{ marginTop: -5 }}>
-        <SlickSlider
-          prevArrow={<ArrowLeft />}
-          nextArrow={<ArrowRight />}
-          arrows
-          slidesToShow={1}
-          slidesToScroll={-1}
-          infinite={gallery?.length > 3}
-          responsive={[
-            {
-              breakpoint: 800,
-              settings: {
-                arrows: false,
-              },
+        <ArrowLeft />
+        <ArrowRight />
+        <Swiper
+          navigation={{
+            nextEl: ".next",
+            prevEl: ".prev",
+          }}
+          slidesPerView={4}
+          breakpoints={{
+            // when window width is >= 320px
+            320: {
+              slidesPerView: 1,
             },
-          ]}
-          variableWidth
-          centerMode={false}
-          dots={false}
-          rtl
+            // when window width is >= 480px
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            // when window width is >= 640px
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
         >
           {gallery.map((item, index) => (
-            <Box key={item + "_" + index} sx={{}}>
-              <Image
-                sx={{
-                  borderRadius: 15,
-                  width: "auto",
-                  height: [200, 200, 250, 300],
-                  objectFit: "contain",
-                  marginX: 2,
-                }}
-                src={item}
-              />
-            </Box>
+            <SwiperSlide virtualIndex={index} key={item + "_" + index}>
+              <Box key={item + "_" + index} sx={{}}>
+                <Image
+                  sx={{
+                    borderRadius: 15,
+                    width: "auto",
+                    height: [200, 200, 250, 300],
+                    objectFit: "contain",
+                    marginX: 2,
+                  }}
+                  src={item}
+                />
+              </Box>
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
     </>
   )
