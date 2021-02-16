@@ -113,27 +113,29 @@ export function GalleryView({ gallery }) {
         <ArrowLeft />
         <ArrowRight />
         <Swiper
+          lazy
           navigation={{
             nextEl: ".next",
             prevEl: ".prev",
           }}
-          slidesPerView={4}
-          breakpoints={{
-            // when window width is >= 320px
-            320: {
-              slidesPerView: 1,
-            },
-            // when window width is >= 480px
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            // when window width is >= 640px
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-            },
-          }}
+          slidesPerView="auto"
+          // slidesPerView={4}
+          // breakpoints={{
+          //   // when window width is >= 320px
+          //   320: {
+          //     slidesPerView: 1,
+          //   },
+          //   // when window width is >= 480px
+          //   480: {
+          //     slidesPerView: 2,
+          //     spaceBetween: 30,
+          //   },
+          //   // when window width is >= 640px
+          //   640: {
+          //     slidesPerView: 3,
+          //     spaceBetween: 40,
+          //   },
+          // }}
         >
           {gallery.map((item, index) => (
             <SwiperSlide virtualIndex={index} key={item + "_" + index}>
@@ -144,7 +146,6 @@ export function GalleryView({ gallery }) {
                     width: "auto",
                     height: [200, 200, 250, 300],
                     objectFit: "contain",
-                    marginX: 2,
                   }}
                   src={item}
                 />

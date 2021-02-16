@@ -15,6 +15,7 @@ export default function CountriesItemsList() {
           sx={{
             fontWeight: 700,
             fontSize: [1, 2, 2, 2],
+            minWidth: 90,
             color: "primary",
             cursor: "pointer",
             whiteSpace: "nowrap",

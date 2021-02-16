@@ -13,11 +13,8 @@ export default function OfferSlider({ offers }) {
         1200: {
           slidesPerView: 3,
         },
-        1100: {
-          slidesPerView: 2,
-        },
         900: {
-          slidesPerView: 1,
+          slidesPerView: 2,
         },
       }}
     >

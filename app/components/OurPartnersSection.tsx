@@ -49,7 +49,7 @@ type OurPartnersSectionProps = {
 
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
-    <Box sx={{ paddingTop: 5, paddingBottom: 7, marginTop: 6, backgroundColor: "light" }}>
+    <Box sx={{ paddingTop: 5, paddingBottom: 7, backgroundColor: "light" }}>
       <Wrapper sx={{ position: "relative" }}>
         <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
         <ArrowNext />
@@ -59,6 +59,7 @@ export default function OurPartnersSection(props: OurPartnersSectionProps) {
             nextEl: ".next",
             prevEl: ".prev",
           }}
+          loop
           slidesPerView={4}
           breakpoints={{
             // when window width is >= 320px
@@ -66,7 +67,7 @@ export default function OurPartnersSection(props: OurPartnersSectionProps) {
               slidesPerView: 1,
             },
             // when window width is >= 480px
-            480: {
+            500: {
               slidesPerView: 2,
               spaceBetween: 30,
             },

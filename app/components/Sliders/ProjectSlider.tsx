@@ -9,8 +9,9 @@ export default function ProjectSlider({ projects }) {
       loop
       pagination={{ clickable: true }}
       autoHeight
+      spaceBetween={20}
       breakpoints={{
-        768: {
+        900: {
           slidesPerView: 2,
           spaceBetween: 40,
         },
@@ -22,7 +23,7 @@ export default function ProjectSlider({ projects }) {
     >
       {projects.map((project) => (
         <SwiperSlide key={project.id} virtualIndex={project.id}>
-          <Box sx={{ mb: 5 }}>
+          <Box sx={{ mb: 5, px: 3 }}>
             <ProjectCard {...project} roomWithPrices={[...project.roomsWithPrices]} />
           </Box>
         </SwiperSlide>

@@ -11,6 +11,7 @@ export default function FullpageLoader() {
         layout="intrinsic"
         width={250}
         height={250}
+        localImage
         objectFit="contain"
         className="animate__animated animate__pulse animate__infinite"
         src="/logo.png"

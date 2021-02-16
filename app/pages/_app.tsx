@@ -1,14 +1,11 @@
 import { AppProps, ErrorComponent, useParam, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
-import LoginForm from "app/auth/components/LoginForm"
 import { Suspense } from "react"
 
 import Router from "next/router"
-import NProgress from "nprogress" //nprogress module
 import { ToastContainer } from "react-toastify"
-import PriceProvider from "app/context/price"
 import { queryCache } from "react-query"
-import FullpageLoader from "app/components/Loaders/Fullpage"
+import dynamic from "next/dynamic"
 
 import "swiper/swiper.scss"
 import "swiper/components/pagination/pagination.scss"
@@ -18,8 +15,12 @@ import "nprogress/nprogress.css" //styles of nprogress
 import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
 import "react-toastify/dist/ReactToastify.css"
-import "app/styles/animate.css"
 import "app/styles/global.css"
+import NProgress from "nprogress"
+
+const FullpageLoader = dynamic(() => import("app/components/Loaders/Fullpage"), { ssr: false })
+const PriceProvider = dynamic(() => import("app/context/price"), { ssr: false }) //nprogress module
+const LoginForm = dynamic(() => import("app/auth/components/LoginForm"), { ssr: false }) //nprogress module
 
 //Binding events.
 NProgress.configure({ showSpinner: false })

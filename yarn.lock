@@ -1210,7 +1210,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.12.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.12.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
   integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
@@ -5481,7 +5481,7 @@ cssstyle@^2.2.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^2.5.7, csstype@^2.6.6:
+csstype@^2.5.7:
   version "2.6.13"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.13.tgz#a6893015b90e84dd6e85d0e3b442a1e84f2dbe0f"
   integrity sha512-ul26pfSQTZW8dcOnD2iiJssfXw0gdNVX9IJDH/X3K5DGPfj+fUYe3kB+swUY6BF3oZDxaID3AJt+9/ojSAE05A==
@@ -5500,16 +5500,6 @@ d3-array@^2.8.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-2.9.0.tgz#a3041ab298f57ecc88b7d91610c6bc5297c03fb9"
   integrity sha512-yOokB8GozB6GAubW9n7phLdRugC8TgEjF6V1cX/q78L80d2tLirUnc0jvDSSF622JJJTmtnJOe9+WKs+yS5GFQ==
-
-d3-ease@^1.0.3:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/d3-ease/-/d3-ease-1.0.7.tgz#9a834890ef8b8ae8c558b2fe55bd57f5993b85e2"
-  integrity sha512-lx14ZPYkhNx0s/2HX5sLFUI3mbasHjSSpwO/KaaNACweVwxUruKyWVcb293wMv1RqTPZyZ8kSZ2NogUZNcLOFQ==
-
-d3-timer@^1.0.9:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/d3-timer/-/d3-timer-1.0.10.tgz#dfe76b8a91748831b13b6d9c793ffbd508dd9de5"
-  integrity sha512-B1JDm0XDaQC+uvo4DT79H0XmBskgS3l6Ve+1SBCfxgmtIb1AVrPIoqd+nPSv+loMX8szQ0sVUhGngL7D5QPiXw==
 
 d@1, d@^1.0.1:
   version "1.0.1"
@@ -6562,11 +6552,6 @@ execa@^5.0.0:
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
 
-exenv@^1.2.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
-  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
-
 exit@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
@@ -7151,11 +7136,6 @@ github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
   integrity sha1-l/tdlr/eiXMxPyDoKI75oWf6ZM4=
-
-glider-js@1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/glider-js/-/glider-js-1.7.1.tgz#ffa4ae6775b0c005e2eeca72e586acd1f64774e9"
-  integrity sha512-kry/GVCmo/MFUtMTgZONTjXorcvzKskt4VklSQD8kVDJbVfT3arV4Xf7o/ZwMZkDhLKlWX9bpV30fsp7vLHuUA==
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -9007,13 +8987,6 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kapellmeister@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/kapellmeister/-/kapellmeister-3.0.1.tgz#419b715cd221acda3db79892caedf63e1c9f7d25"
-  integrity sha512-S7+gYcziMREv8RxG46138mb1O4Xf9II/bCxEJPYkhlZ7PgGWTlicgsyNad/DGc5oEAlWGLXE5ExLbTDVvJmgDA==
-  dependencies:
-    d3-timer "^1.0.9"
-
 keygrip@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.1.0.tgz#871b1681d5e159c62a445b0c74b615e0917e7226"
@@ -10162,18 +10135,6 @@ nprogress@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
   integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
-
-nuka-carousel@4.7.5:
-  version "4.7.5"
-  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.7.5.tgz#820f18afdd06b3f23474f0d2d102409f12a1375e"
-  integrity sha512-E5zsWgRZQxNz6lJaaioz+/3aTJr5pAAkZpxTIW+lK+9OpGz813rGEGEroO9FzHhnMGhV7KcuUnQ8bJgdoUq+1w==
-  dependencies:
-    csstype "^2.6.6"
-    d3-ease "^1.0.3"
-    exenv "^1.2.0"
-    prop-types "^15.6.0"
-    react-move "^6.1.0"
-    wicg-inert "^3.1.0"
 
 null-loader@4.0.1:
   version "4.0.1"
@@ -11326,13 +11287,6 @@ react-fit@^1.0.3:
     detect-element-overflow "^1.2.0"
     prop-types "^15.6.0"
 
-react-glider@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/react-glider/-/react-glider-2.0.4.tgz#0bc4b1422b86d818f1e928ae47f8203265422a25"
-  integrity sha512-hqMTYYleIHmwKzMgf1VnkWH+kfck8bN77hnz/dO7xhP9Zxbs62+0kqmdxMYOtsr1lGGOdNwSlYgdBF7rAWMVYQ==
-  dependencies:
-    glider-js "1.7.1"
-
 react-google-maps@9.4.5:
   version "9.4.5"
   resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-9.4.5.tgz#920c199bdc925e0ce93880edffb09428d263aafa"
@@ -11372,15 +11326,6 @@ react-lifecycles-compat@^3.0.2:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
-
-react-move@^6.1.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/react-move/-/react-move-6.4.0.tgz#9163a87c62fff94bf6e6980685c713739192650e"
-  integrity sha512-TNyDQESDZ0xsejnxFTQ9CKarJQN6NbgpImrvIEzOVe7+jt8y7uTjJwWxqFTfmvwskIs+RmUbCWdN7PAbGyhrdA==
-  dependencies:
-    "@babel/runtime" "^7.10.3"
-    kapellmeister "^3.0.1"
-    prop-types "^15.7.2"
 
 react-onclickoutside@^6.9.0:
   version "6.9.0"
@@ -11457,11 +11402,6 @@ react-spinners@0.9.0:
   integrity sha512-+x6eD8tn/aYLdxZjNW7fSR1uoAXLb9qq6TFYZR1dFweJvckcf/HfP8Pa/cy5HOvB/cvI4JgrYXTjh2Me3S6Now==
   dependencies:
     "@emotion/core" "^10.0.15"
-
-react-swipeable@6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-6.0.1.tgz#14246e798c25a00da3279632a87811411756f652"
-  integrity sha512-69nonicgjT4ofeHxZSpjuz37BoIiWMEbUYkX0mdTCY2mX1U53XDzDUIOVKRg6vVBNGL+pxYjbRzmylXWORh1xQ==
 
 react-test-renderer@16.x:
   version "16.14.0"
@@ -12493,11 +12433,6 @@ slice-ansi@^4.0.0:
     ansi-styles "^4.0.0"
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
-
-slick-carousel@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
-  integrity sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
@@ -14274,11 +14209,6 @@ which@^2.0.1, which@^2.0.2:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
-
-wicg-inert@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/wicg-inert/-/wicg-inert-3.1.0.tgz#6525f12db188b83f0051bed2ddcf6c1aa5b17590"
-  integrity sha512-P0ZiWaN9SxOkJbYtF/PIwmIRO8UTqTJtyl33QTQlHfAb6h15T0Dp5m7WTJ8N6UWIoj+KU5M0a8EtfRZLlHiP0Q==
 
 wide-align@^1.1.0:
   version "1.1.3"

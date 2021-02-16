@@ -15,7 +15,6 @@ import {
   Project,
   PropertyType,
   RoomWithPrice,
-  Carousel,
 } from "@prisma/client"
 import { useRouter } from "blitz"
 import ServicesForm from "app/components/Forms/ServicesForm"
@@ -303,12 +302,20 @@ function CountryPage({
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
         <Swiper
-          direction="vertical"
-          slidesPerView={3}
-          slidesPerGroup={3}
-          key={showInspirationGallery}
+          lazy
+          pagination={{
+            clickable: true,
+          }}
           breakpoints={{
+            0: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+              height: 100,
+              direction: "vertical",
+            },
             840: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
               direction: "horizontal",
             },
           }}
@@ -323,7 +330,24 @@ function CountryPage({
 
       <Wrapper sx={{ paddingY: 5 }}>
         <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
-        <Swiper>
+        <Swiper
+          pagination={{
+            clickable: true,
+          }}
+          autoHeight
+          spaceBetween={20}
+          breakpoints={{
+            520: {
+              slidesPerView: 2,
+            },
+            760: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {furnishCategories.map((furnishCategory) => (
             <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
               <FurnishCategoryCard {...furnishCategory} />

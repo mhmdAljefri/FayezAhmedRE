@@ -128,7 +128,7 @@ const Home: BlitzPage<HomeProps> = ({
       <ComplexProjects projects={projects} />
       <IdealDestinations explores={explores} />
       <Twits />
-      <Box sx={{ pt: 5 }}>
+      <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
         <Wrapper>
           <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 
@@ -144,7 +144,15 @@ const Home: BlitzPage<HomeProps> = ({
 
       <OurPartnersSection data={partners} />
 
-      <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
+      <Wrapper
+        sx={{
+          marginTop: -200,
+          pb: 100,
+          backgroundColor: "background",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
         <Contact />
       </Wrapper>
     </main>

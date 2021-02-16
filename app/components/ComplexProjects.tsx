@@ -8,7 +8,7 @@ import Wrapper from "./Wrapper"
 
 export default function ComplexProjects({ projects }) {
   return (
-    <Box sx={{ backgroundColor: "light", pt: 4 }}>
+    <Box sx={{ backgroundColor: "light", py: 4 }}>
       <Wrapper
         sx={{
           ".upper--bullets": {

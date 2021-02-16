@@ -9,13 +9,13 @@ export default function IdealDestinations({ explores }) {
   return (
     <Box
       sx={{
-        backgroundColor: "dark",
+        position: "relative",
         pb: 4,
-        backgroundAttachment: "fixed",
-        backgroundImage: "url(/back2.jpg)",
-        backgroundSize: "cover",
       }}
     >
+      <Box sx={{ position: "fixed", top: 0, left: 0, bottom: 0, right: 0, zIndex: -1 }}>
+        <OptmizationImage objectFit="cover" src="/back2.jpg" localImage layout="fill" />
+      </Box>
       <Wrapper>
         <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20, color: "primary" }}>
           وجهات مثالية للجميع
@@ -23,10 +23,6 @@ export default function IdealDestinations({ explores }) {
 
         <Swiper
           breakpoints={{
-            // when window width is >= 320px
-            320: {
-              slidesPerView: 1,
-            },
             // when window width is >= 480px
             480: {
               slidesPerView: 2,

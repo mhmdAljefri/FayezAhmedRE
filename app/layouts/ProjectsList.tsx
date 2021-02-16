@@ -341,6 +341,7 @@ export default function ProjectsList({ country, projects, title, subTitle }: Pro
               justifyContent: "space-around",
               alignItems: "center",
               flexWrap: "wrap",
+              mb: 4,
             }}
           >
             {country.cities &&

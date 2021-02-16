@@ -14,12 +14,12 @@ type ArrowProps = {
 } & ComponentPropsWithoutRef<"div">
 
 const SharedStyle: SxStyleProp = {
-  zIndex: 1,
+  zIndex: 100,
   color: "primary",
   position: "absolute",
   top: "50%",
   paddingTop: 10,
-  px: 1,
+  px: 2,
   height: 40,
   cursor: "pointer",
 }
@@ -30,7 +30,7 @@ export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
     className="next"
     sx={{
       ...SharedStyle,
-      left: [-10, -30, -40, -50],
+      left: [0, -30, -40, -50],
       ...props.sx,
     }}
   >
@@ -43,7 +43,7 @@ export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
     className="prev"
     sx={{
       ...SharedStyle,
-      right: [-10, -30, -40, -50],
+      right: [0, -30, -40, -50],
       ...props.sx,
     }}
   >

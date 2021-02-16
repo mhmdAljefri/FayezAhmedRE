@@ -4,8 +4,6 @@ import React from "react"
 export default function MetaTags() {
   return (
     <Head>
-      {/* <!-- Manifest  --> */}
-      <link rel="manifest" href="/manifest.json" />
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta

@@ -27,7 +27,7 @@ const PriceType = (props: PriceTypeProps) => {
         key: price[0],
         value: price[0],
         node: (
-          <Flex sx={{ alignItems: "center" }} key={price[0]}>
+          <Flex sx={{ alignItems: "center", minWidth: 100 }} key={price[0]}>
             <Box
               sx={{
                 boxShadow: "card",
@@ -36,7 +36,9 @@ const PriceType = (props: PriceTypeProps) => {
                 position: "relative",
                 marginInlineEnd: 10,
                 height: 30,
+                minHeight: 30,
                 width: 30,
+                minWidth: 30,
               }}
             >
               <OptmizationImage localImage layout="fixed" width={30} height={30} src={price[1]} />
