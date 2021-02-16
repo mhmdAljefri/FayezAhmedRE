@@ -35,9 +35,3 @@ export const listS3Objects = async (params) => {
     })
     .promise()
 }
-
-export function makeS3Url(src?: string) {
-  const imageName = src?.split("/").reverse()[0]
-  const awsSrc = `https://fayezahmed.s3.ap-south-1.amazonaws.com/fayez/${imageName}`
-  return awsSrc
-}

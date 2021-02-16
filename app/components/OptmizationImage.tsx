@@ -1,7 +1,6 @@
 import React from "react"
 import { Image as BlitzImage, ImageProps } from "blitz"
-import { makeS3Url } from "app/utils/aws"
-
+import { makeS3Url } from "app/utils"
 type Props = ImageProps & {
   localImage?: boolean
 }

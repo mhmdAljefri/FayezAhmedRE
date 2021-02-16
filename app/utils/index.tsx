@@ -18,3 +18,9 @@ export const whatsappPreFilledLinkGenerator = (message) => `https://wa.me/?text=
 
 export const whatsappDirectMessageLinkGenerator = (number, message) =>
   `https://wa.me/${number}?text=${message}`
+
+export function makeS3Url(src?: string) {
+  const imageName = src?.split("/").reverse()[0]
+  const awsSrc = `https://fayezahmed.s3.ap-south-1.amazonaws.com/fayez/${imageName}`
+  return awsSrc
+}
