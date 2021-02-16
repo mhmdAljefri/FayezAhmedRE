@@ -29,13 +29,19 @@ export function OfferCard({
   const isYoutube = mainVideo?.startsWith("https://www.youtube")
 
   useEffect(() => {
-    const handleOnWindowLoaded = () => {
-      if (isYoutube) setYoutubeUrl(mainVideo)
-    }
-    window.addEventListener("load", handleOnWindowLoaded)
+    if (isYoutube) {
+      let timer
+      const handleOnWindowLoaded = () => {
+        timer = setTimeout(() => {
+          setYoutubeUrl(mainVideo)
+        }, 4000)
+      }
+      window.addEventListener("load", handleOnWindowLoaded)
 
-    return () => {
-      window.removeEventListener("load", handleOnWindowLoaded)
+      return () => {
+        clearTimeout(timer)
+        window.removeEventListener("load", handleOnWindowLoaded)
+      }
     }
   }, [isYoutube, mainVideo])
 
