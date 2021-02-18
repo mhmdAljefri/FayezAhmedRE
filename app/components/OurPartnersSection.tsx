@@ -1,10 +1,10 @@
 import React from "react"
 import { Box, Heading, Flex } from "theme-ui"
-import Wrapper from "./Wrapper"
+import Wrapper from "app/components/Wrapper"
 import { Partner } from "@prisma/client"
-import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
-import OptmizationImage from "./OptmizationImage"
-import { SwiperSlide, Swiper } from "./Sliders/Swiper"
+import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
+import OptmizationImage from "app/components/OptmizationImage"
+import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
 
 type PartnersCardProps = Partner
 
@@ -14,7 +14,7 @@ function PartnersCard({ image, name }: PartnersCardProps) {
       sx={{
         textAlign: "center",
         marginX: "auto",
-        padding: 2,
+        paddingX: 4,
         width: [170, 220],
         height: [170, 220],
         backgroundColor: "background",
@@ -27,7 +27,6 @@ function PartnersCard({ image, name }: PartnersCardProps) {
     >
       <OptmizationImage
         sx={{
-          padding: 2,
           width: [150, 190],
           height: [150, 190],
           objectFit: "contain",
@@ -49,7 +48,7 @@ type OurPartnersSectionProps = {
 
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
-    <Box sx={{ paddingTop: 5, paddingBottom: 7, backgroundColor: "light" }}>
+    <Box sx={{ paddingTop: 5, paddingBottom: 5, backgroundColor: "light" }}>
       <Wrapper sx={{ position: "relative" }}>
         <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
         <ArrowNext />

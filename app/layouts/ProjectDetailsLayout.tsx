@@ -109,7 +109,15 @@ export function GalleryView({ gallery }) {
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5 }}>
+      <Wrapper
+        sx={{
+          marginTop: -5,
+          ".swiper-slide": {
+            width: "auto",
+            marginInlineEnd: 10,
+          },
+        }}
+      >
         <ArrowLeft />
         <ArrowRight />
         <Swiper
@@ -119,37 +127,19 @@ export function GalleryView({ gallery }) {
             prevEl: ".prev",
           }}
           slidesPerView="auto"
-          // slidesPerView={4}
-          // breakpoints={{
-          //   // when window width is >= 320px
-          //   320: {
-          //     slidesPerView: 1,
-          //   },
-          //   // when window width is >= 480px
-          //   480: {
-          //     slidesPerView: 2,
-          //     spaceBetween: 30,
-          //   },
-          //   // when window width is >= 640px
-          //   640: {
-          //     slidesPerView: 3,
-          //     spaceBetween: 40,
-          //   },
-          // }}
         >
           {gallery.map((item, index) => (
             <SwiperSlide virtualIndex={index} key={item + "_" + index}>
-              <Box key={item + "_" + index} sx={{}}>
-                <Image
-                  sx={{
-                    borderRadius: 15,
-                    width: "auto",
-                    height: [200, 200, 250, 300],
-                    objectFit: "contain",
-                  }}
-                  src={item}
-                />
-              </Box>
+              <Image
+                key={item + "_" + index}
+                sx={{
+                  borderRadius: 15,
+                  width: "auto",
+                  height: [200, 200, 250, 300],
+                  objectFit: "contain",
+                }}
+                src={item}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

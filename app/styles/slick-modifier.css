@@ -28,3 +28,7 @@
 .swiper-pagination-bullet-active {
   background: #947004 !important;
 }
+
+.swiper-container {
+  padding: 10px;
+}

@@ -1,9 +1,13 @@
 import { ReactNode } from "react"
 import { Head } from "blitz"
-import Footer from "app/components/Footer"
-import Header from "app/components/Header"
 import { SxStyleProp, ThemeProvider } from "theme-ui"
 import theme from "app/theme"
+import Footer from "app/components/Footer"
+import dynamic from "next/dynamic"
+
+const Header = dynamic(() => import("app/components/Header"), {
+  ssr: false,
+})
 
 type LayoutProps = {
   title?: string

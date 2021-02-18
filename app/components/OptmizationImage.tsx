@@ -7,5 +7,5 @@ type Props = ImageProps & {
 export default function OptmizationImage({ localImage = false, src, ...props }: Props) {
   const s3Url = makeS3Url(src)
 
-  return <BlitzImage {...props} src={localImage ? src : s3Url} />
+  return <BlitzImage {...props} decoding="sync" src={localImage ? src : s3Url} />
 }

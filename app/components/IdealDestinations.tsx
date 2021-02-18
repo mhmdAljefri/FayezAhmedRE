@@ -22,23 +22,23 @@ export default function IdealDestinations({ explores }) {
         </Heading>
 
         <Swiper
-          breakpoints={{
-            // when window width is >= 480px
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            // when window width is >= 640px
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 40,
-            },
-          }}
-          slidesPerView={3}
+          slidesPerView={1}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop
           pagination={{
             clickable: true,
+          }}
+          breakpoints={{
+            // when window width is >= 480px
+            520: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            // when window width is >= 640px
+            780: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
           }}
         >
           {explores.map(({ title, countryId, image, id }) => (

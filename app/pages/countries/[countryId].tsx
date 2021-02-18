@@ -21,7 +21,7 @@ import ServicesForm from "app/components/Forms/ServicesForm"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import Contact from "app/components/Forms/Contact"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import { OfferCard } from "app/layouts/OfferssList"
+import OfferCard from "app/components/Cards/OfferCard"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
 import getProjects from "app/public/projects/queries/getProjects"
@@ -85,7 +85,13 @@ function CountryPage({
     push({ pathname: `${asPath}/projects`, query: filter })
   }
 
-  const explores = country?.explores.filter((explore) => explore.type === showInspirationGallery)
+  const exploresArray = country?.explores.filter(
+    (explore) => explore.type === showInspirationGallery
+  )
+  const explores: typeof exploresArray[] = []
+
+  while (exploresArray.length) explores.push(exploresArray.splice(0, 3))
+
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
 
@@ -306,23 +312,19 @@ function CountryPage({
           pagination={{
             clickable: true,
           }}
-          breakpoints={{
-            0: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-              height: 100,
-              direction: "vertical",
-            },
-            840: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-              direction: "horizontal",
-            },
-          }}
         >
-          {explores.map(({ image, title, id }) => (
-            <SwiperSlide key={id} virtualIndex={id}>
-              <ExploreCard href={`${asPath}/explore/${id}`} image={image} title={title} />
+          {explores.map((nestedExplores, index) => (
+            <SwiperSlide key={showInspirationGallery + index} virtualIndex={index}>
+              <Grid columns={[1, 1, 3]} sx={{ mb: 5 }}>
+                {nestedExplores.map(({ image, title, id }) => (
+                  <ExploreCard
+                    key={id}
+                    href={`${asPath}/explore/${id}`}
+                    image={image}
+                    title={title}
+                  />
+                ))}
+              </Grid>
             </SwiperSlide>
           ))}
         </Swiper>

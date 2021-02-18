@@ -6,7 +6,12 @@ import Wrapper from "./Wrapper"
 
 export default function CountriesProjectsSection({ countries }) {
   return (
-    <Box>
+    <Box
+      style={{
+        contentVisibility: "auto",
+        containIntrinsicSize: "500px" /* Explained in the next section. */,
+      }}
+    >
       {countries.map(({ name, projects, id, isTurkey }) => (
         <Box key={id} sx={{ backgroundColor: isTurkey ? "light" : "background", py: 4 }}>
           <Wrapper>

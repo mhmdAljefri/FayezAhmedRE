@@ -11,13 +11,11 @@ export default function ProjectSlider({ projects }) {
       autoHeight
       spaceBetween={20}
       breakpoints={{
+        1200: {
+          slidesPerView: 3,
+        },
         900: {
           slidesPerView: 2,
-          spaceBetween: 40,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 50,
         },
       }}
     >

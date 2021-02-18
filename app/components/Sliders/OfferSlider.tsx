@@ -1,7 +1,7 @@
 import React from "react"
 import { Box } from "theme-ui"
 import { Swiper, SwiperSlide } from "./Swiper"
-import { OfferCard } from "app/layouts/OfferssList"
+import OfferCard from "app/components/Cards/OfferCard"
 
 export default function OfferSlider({ offers }) {
   return (
