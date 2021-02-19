@@ -33,6 +33,7 @@ import dynamic from "next/dynamic"
 
 const HeroSection = dynamic(() => import("app/components/HeroSection"), {
   ssr: false,
+  loading: () => <Box sx={{ height: "100vh" }} />,
 })
 
 type CountryWithCityAndCountry = Project & {
