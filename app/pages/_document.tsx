@@ -1,4 +1,3 @@
-import MetaTags from "app/components/MetaTags"
 import { Document, Html, DocumentHead, Main, BlitzScript, DocumentContext } from "blitz"
 import { extractCritical } from "emotion-server"
 
@@ -24,7 +23,6 @@ class MyDocument extends Document {
     return (
       <Html lang="ar" dir="rtl">
         <DocumentHead />
-        <MetaTags />
         <script
           defer
           dangerouslySetInnerHTML={{
