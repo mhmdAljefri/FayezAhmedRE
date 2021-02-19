@@ -99,13 +99,21 @@ export function ConstractiongVideo({
 export function GalleryView({ gallery }) {
   return (
     <>
-      <Box sx={{ marginTop: -5, paddingTop: 6, backgroundColor: "dark" }}>
-        <Wrapper>
-          <Heading
-            sx={{ color: "white", paddingBottom: 5, marginBottom: 1, fontSize: [5, null, 6] }}
+      <Box sx={{ marginTop: -5, paddingTop: 6, paddingBottom: 5, backgroundColor: "dark" }}>
+        <Wrapper sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Heading sx={{ color: "white", marginBottom: 1, fontSize: [5, null, 6] }}>المعرض</Heading>
+          <Box
+            sx={{
+              position: "relative",
+              display: "flex",
+              width: 150,
+              pb: 4,
+              justifyContent: "space-between",
+            }}
           >
-            المعرض
-          </Heading>
+            <ArrowRight className="GalleryArrowRight" />
+            <ArrowLeft className="GalleryArrowLeft" />
+          </Box>
         </Wrapper>
       </Box>
 
@@ -118,13 +126,11 @@ export function GalleryView({ gallery }) {
           },
         }}
       >
-        <ArrowLeft />
-        <ArrowRight />
         <Swiper
           lazy
           navigation={{
-            nextEl: ".next",
-            prevEl: ".prev",
+            nextEl: ".GalleryArrowRight",
+            prevEl: ".GalleryArrowLeft",
           }}
           slidesPerView="auto"
         >

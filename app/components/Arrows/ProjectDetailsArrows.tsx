@@ -6,6 +6,9 @@ import { SxStyleProp } from "theme-ui"
 
 const sharedStyle: SxStyleProp = {
   opacity: 0.7,
+  right: "auto",
+  left: "auto",
+  position: "relative",
   ":hover": {
     opacity: 1,
   },

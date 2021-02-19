@@ -24,10 +24,10 @@ const SharedStyle: SxStyleProp = {
   cursor: "pointer",
 }
 
-export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
+export const ArrowNext = ({ icon, className, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className="next"
+    className={className}
     sx={{
       ...SharedStyle,
       left: [0, -30, -40, -50],
@@ -37,10 +37,10 @@ export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
     <Icon size={iconSize} icon={icon} />
   </Box>
 )
-export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
+export const ArrowPrev = ({ icon, className, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className="prev"
+    className={className}
     sx={{
       ...SharedStyle,
       right: [0, -30, -40, -50],
@@ -51,5 +51,5 @@ export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
   </Box>
 )
 
-ArrowNext.defaultProps = { ...defaultProps, icon: thinLeft }
-ArrowPrev.defaultProps = { ...defaultProps, icon: thinRight }
+ArrowNext.defaultProps = { ...defaultProps, className: "next", icon: thinLeft }
+ArrowPrev.defaultProps = { ...defaultProps, className: "prev", icon: thinRight }

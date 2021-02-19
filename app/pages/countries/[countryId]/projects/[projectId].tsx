@@ -207,11 +207,28 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
         />
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
-            <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-            <Box sx={{ marginTop: -5, position: "relative" }}>
-              <ArrowRight />
-              <ArrowLeft />
+            <Flex>
+              <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
+              <Box
+                sx={{
+                  position: "relative",
+                  display: "flex",
+                  width: 150,
+                  pb: 4,
+                  justifyContent: "space-between",
+                }}
+              >
+                <ArrowRight className="floorplanArrowRight" />
+                <ArrowLeft className="floorplanArrowLeft" />
+              </Box>
+            </Flex>
+            <Box sx={{ marginTop: -5 }}>
               <Swiper
+                lazy
+                navigation={{
+                  nextEl: ".floorplanArrowRight",
+                  prevEl: ".floorplanArrowLeft",
+                }}
                 breakpoints={{
                   800: {
                     pagination: false,
