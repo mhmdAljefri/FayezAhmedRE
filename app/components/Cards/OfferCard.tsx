@@ -28,7 +28,7 @@ export default function OfferCard({
     if (isYoutube && youtubeUrl !== mainVideo && !isSSR) {
       timer = setTimeout(() => {
         setYoutubeUrl(mainVideo)
-      }, 200)
+      }, 8000)
 
       return () => {
         clearTimeout(timer)
