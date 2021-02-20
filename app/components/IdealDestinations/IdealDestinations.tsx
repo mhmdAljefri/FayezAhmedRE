@@ -1,9 +1,9 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Heading, Text } from "theme-ui"
-import OptmizationImage from "./OptmizationImage"
-import { Swiper, SwiperSlide } from "./Sliders/Swiper"
-import Wrapper from "./Wrapper"
+import OptmizationImage from "../OptmizationImage"
+import { Swiper, SwiperSlide } from "../Sliders/Swiper"
+import Wrapper from "../Wrapper"
 
 export default function IdealDestinations({ explores }) {
   return (

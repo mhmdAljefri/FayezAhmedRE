@@ -1,15 +1,16 @@
 import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 import React from "react"
+import dynamic from "next/dynamic"
 import Wrapper from "app/components/Wrapper"
-import Nav from "app/components/Navs/Nav"
 import PriceType from "app/components/PriceType"
 import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
-import DesktopNav from "./Navs/DesktopNav"
 import useScreenSize from "app/hooks/useScreenSize"
-import WhatsappButton from "./NavItems/WhatsappButton"
-import SearchButton from "./NavItems/SearchButton"
 import OptmizationImage from "./OptmizationImage"
+const WhatsappButton = dynamic(() => import("./NavItems/WhatsappButton"))
+const SearchButton = dynamic(() => import("./NavItems/SearchButton"))
+const DesktopNav = dynamic(() => import("./Navs/DesktopNav"))
+const Nav = dynamic(() => import("app/components/Navs/Nav"))
 
 type HeaderProps = {
   sx?: SxStyleProp

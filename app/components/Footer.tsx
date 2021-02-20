@@ -109,34 +109,30 @@ export default function Footer() {
           <Heading sx={{ paddingBottom: 2, color: "white" }}>حمل تطبيقنا</Heading>
           <Flex sx={{ marginBottom: 4 }}>
             <Tooltip>
-              <ThemeLink>
-                <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
-                  <OptmizationImage
-                    width={180}
-                    height={90}
-                    objectFit="contain"
-                    layout="intrinsic"
-                    localImage
-                    src="/google_play_badge.png"
-                    alt="apple"
-                  />
-                </Box>
-              </ThemeLink>
+              <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
+                <OptmizationImage
+                  width={180}
+                  height={90}
+                  objectFit="contain"
+                  layout="intrinsic"
+                  localImage
+                  src="/google_play_badge.png"
+                  alt="apple"
+                />
+              </Box>
             </Tooltip>
             <Tooltip>
-              <ThemeLink>
-                <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
-                  <OptmizationImage
-                    width={180}
-                    height={90}
-                    objectFit="contain"
-                    layout="intrinsic"
-                    localImage
-                    src="/appstore_badge.png"
-                    alt="apple"
-                  />
-                </Box>
-              </ThemeLink>
+              <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
+                <OptmizationImage
+                  width={180}
+                  height={90}
+                  objectFit="contain"
+                  layout="intrinsic"
+                  localImage
+                  src="/appstore_badge.png"
+                  alt="apple"
+                />
+              </Box>
             </Tooltip>
           </Flex>
         </Box>
