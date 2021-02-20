@@ -6,7 +6,7 @@ export default function FullpageLoader() {
   return (
     <Flex
       sx={{
-        maxHeight: "100vh",
+        height: "100vh",
         overflow: "hidden",
         justifyContent: "center",
         alignItems: "center",

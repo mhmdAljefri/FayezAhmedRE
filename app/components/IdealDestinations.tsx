@@ -14,7 +14,7 @@ export default function IdealDestinations({ explores }) {
       }}
     >
       <Box sx={{ position: "fixed", top: 0, left: 0, bottom: 0, right: 0, zIndex: -1 }}>
-        <OptmizationImage objectFit="cover" src="/back2.jpg" localImage layout="fill" />
+        <OptmizationImage alt="..." objectFit="cover" src="/back2.jpg" localImage layout="fill" />
       </Box>
       <Wrapper>
         <Heading sx={{ pt: 4, pb: 4, fontSize: [4, 5, 6], paddingInlineEnd: 20, color: "primary" }}>

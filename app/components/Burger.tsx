@@ -12,6 +12,7 @@ const Burger = ({ open, onOpenedColor, onClosedColor, onClick }: BurgerProps) =>
   return (
     <Box
       role="button"
+      aria-label="menu"
       onClick={onClick}
       sx={{
         position: "relative",
