@@ -16,7 +16,7 @@ const Observer = ({ children }) => {
   }, [isIntersecting])
 
   return (
-    <div style={{ minHeight: 100 }} ref={ref}>
+    <div style={{ minHeight: 10 }} ref={ref}>
       {isChanged.current && children}
     </div>
   )

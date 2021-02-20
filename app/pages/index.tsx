@@ -1,6 +1,7 @@
 import { BlitzPage } from "blitz"
 import dynamic from "next/dynamic"
 import Layout from "app/layouts/Layout"
+import { SyncLoader } from "react-spinners"
 import {
   Carousel,
   CarouselVideo,
@@ -14,8 +15,6 @@ import {
 } from "@prisma/client"
 import { Box, Grid, Heading, Flex } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
-import Observer from "app/components/Observer"
-import Skeleton from "react-loading-skeleton"
 
 import getCountries from "app/public/countries/queries/getCountries"
 import getCarousels from "app/public/carousels/queries/getCarousels"
@@ -28,11 +27,11 @@ import SkeltonLoaderCard from "app/components/Cards/SkeltonLoaderCard"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
-  loading: () => <Skeleton height={400} />,
+  loading: () => <SyncLoader />,
 })
 const ComplexProjects = dynamic(() => import("app/components/ComplexProjects"), {
   ssr: false,
-  loading: () => <Skeleton height={400} />,
+  loading: () => <SyncLoader />,
 })
 const CountriesProjectsSection = dynamic(() => import("app/components/CountriesProjectsSection"), {
   ssr: false,
@@ -54,11 +53,26 @@ const LatestOffersSection = dynamic(() => import("app/components/LatestOffersSec
     </Flex>
   ),
 })
-const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"))
-const IdealDestinations = dynamic(() => import("app/components/IdealDestinations"))
-const Twits = dynamic(() => import("app/components/Twits"))
-const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"))
-const OurPartnersSection = dynamic(() => import("app/components/OurPartnersSection"))
+const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
+const IdealDestinations = dynamic(() => import("app/components/IdealDestinations"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
+const Twits = dynamic(() => import("app/components/Twits"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
+const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
+const OurPartnersSection = dynamic(() => import("app/components/OurPartnersSection"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
 
 const HeroSection = dynamic(() => import("app/components/HeroSection"), {
   ssr: false,
@@ -100,65 +114,49 @@ const Home: BlitzPage<HomeProps> = ({
     <main>
       <HeroSection carousels={carousels} carouselVideo={carouselVideo} />
 
-      <Observer>
-        <AboutUSSection />
-      </Observer>
+      <AboutUSSection />
 
-      <Observer>
-        <LatestOffersSection offers={offers} />
-      </Observer>
+      <LatestOffersSection offers={offers} />
 
-      <Observer>
-        <CountriesProjectsSection countries={countries} />
-      </Observer>
+      <CountriesProjectsSection countries={countries} />
 
-      <Observer>
-        <ComplexProjects projects={projects} />
-      </Observer>
+      <ComplexProjects projects={projects} />
 
-      <Observer>
-        <IdealDestinations explores={explores} />
-      </Observer>
+      <IdealDestinations explores={explores} />
 
-      <Observer>
-        <Twits />
-      </Observer>
+      <Twits />
 
-      <Observer>
-        <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
-          <Wrapper>
-            <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
+      <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
+        <Wrapper>
+          <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 
-            <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 2, 4]}>
-              {mostViewedProjects
-                .sort((first, second) => (first.views > second.views ? 1 : -1))
-                .map((project) => (
-                  <MostViewd key={project.id} project={project} />
-                ))}
-            </Grid>
-          </Wrapper>
-        </Box>
-      </Observer>
+          <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 2, 4]}>
+            {mostViewedProjects
+              .sort((first, second) => (first.views > second.views ? 1 : -1))
+              .map((project) => (
+                <MostViewd key={project.id} project={project} />
+              ))}
+          </Grid>
+        </Wrapper>
+      </Box>
 
-      <Observer>
-        <OurPartnersSection data={partners} />
-      </Observer>
+      <OurPartnersSection data={partners} />
 
-      <Observer>
-        <Box
-          sx={{
-            pb: 100,
-            backgroundColor: "background",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <Contact />
-        </Box>
-      </Observer>
+      <Box
+        sx={{
+          pb: 100,
+          backgroundColor: "background",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <Contact />
+      </Box>
     </main>
   )
 }
+
+export const config = { amp: "hybrid" }
 
 export async function getStaticProps(context) {
   const { countries } = await getCountries({
