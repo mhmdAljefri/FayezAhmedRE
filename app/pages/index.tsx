@@ -100,23 +100,30 @@ const Home: BlitzPage<HomeProps> = ({
     <main>
       <HeroSection carousels={carousels} carouselVideo={carouselVideo} />
 
-      <AboutUSSection />
+      <Observer>
+        <AboutUSSection />
+      </Observer>
 
       <Observer>
         <LatestOffersSection offers={offers} />
       </Observer>
+
       <Observer>
         <CountriesProjectsSection countries={countries} />
       </Observer>
+
       <Observer>
         <ComplexProjects projects={projects} />
       </Observer>
+
       <Observer>
         <IdealDestinations explores={explores} />
       </Observer>
+
       <Observer>
         <Twits />
       </Observer>
+
       <Observer>
         <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
           <Wrapper>
