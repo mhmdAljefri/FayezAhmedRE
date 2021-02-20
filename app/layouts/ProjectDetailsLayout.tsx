@@ -108,7 +108,7 @@ export function GalleryView({ gallery }) {
               display: "flex",
               width: 150,
               pb: 4,
-              justifyContent: "space-between",
+              justifyContent: ["space-between", null, "flex-start"],
             }}
           >
             <ArrowRight className="GalleryArrowRight" />

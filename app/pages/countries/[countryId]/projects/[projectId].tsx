@@ -207,11 +207,14 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
         />
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
-            <Flex>
-              <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
+            <Flex
+              sx={{ alignItems: "center", justifyContent: ["space-between", null, "flex-start"] }}
+            >
+              <Heading sx={{ fontSize: [5, null, 6] }}>المخططات</Heading>
               <Box
                 sx={{
                   position: "relative",
+                  zIndex: 10,
                   display: "flex",
                   width: 150,
                   pb: 4,
@@ -222,21 +225,19 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 <ArrowLeft className="floorplanArrowLeft" />
               </Box>
             </Flex>
-            <Box sx={{ marginTop: -5 }}>
+            <Box
+              sx={{
+                ".swiper-slide": {
+                  width: "auto !important",
+                  marginInlineEnd: 10,
+                },
+              }}
+            >
               <Swiper
-                lazy
+                slidesPerView="auto"
                 navigation={{
                   nextEl: ".floorplanArrowRight",
                   prevEl: ".floorplanArrowLeft",
-                }}
-                breakpoints={{
-                  800: {
-                    pagination: false,
-                    // todo make it infinate
-                  },
-                  1020: {
-                    pagination: true,
-                  },
                 }}
               >
                 {floorplan.map((item, index) => (
@@ -270,24 +271,27 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               </Box>
 
               <Swiper
-                // infinite={features?.length > 4}
+                loop
+                pagination={{
+                  clickable: true,
+                }}
                 breakpoints={{
                   1200: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
                     // infinite: features?.length > 4,
                   },
                   840: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
                     initialSlide: 1,
                     // infinite: features?.length > 4,
                   },
                   580: {
                     // centerMode: true,
                     // vertical: false,
-                    slidesPerView: 1,
-                    slidesPerGroup: 1,
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
                     // infinite: features?.length > 4,
                   },
                 }}
@@ -298,7 +302,8 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                     <Flex
                       sx={{
                         paddingX: [2, 2, 3],
-                        margin: 2,
+                        marginX: 2,
+                        mb: 4,
                         backgroundColor: "primary",
                         height: 150,
                         color: "white",
@@ -348,23 +353,25 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <Swiper
-                slidesPerView={nearByItemsLength > 5 ? 5 : 3}
-                // infinite={nearByItemsLength > 2}
+                slidesPerView={5}
                 slidesPerGroup={1}
-                // centerMode={nearByItemsLength <= 2}
+                loop
+                pagination={{
+                  clickable: true,
+                }}
                 breakpoints={{
                   1000: {
-                    slidesPerView: 3,
+                    slidesPerView: 4,
                     slidesPerGroup: 1,
                     // infinite: nearByItemsLength > 3,
                   },
                   800: {
-                    slidesPerView: 2,
+                    slidesPerView: 3,
                     slidesPerGroup: 1,
                     // infinite: nearByItemsLength > 2,
                   },
                   500: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     slidesPerGroup: 1,
                     // infinite: (nearBy as any)?.length > 2,
                   },
@@ -372,7 +379,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               >
                 {(nearBy as any)?.map((item, index) => (
                   <SwiperSlide key={item.name + "_" + index} virtualIndex={index}>
-                    <Box sx={{ textAlign: "center" }}>
+                    <Box sx={{ textAlign: "center", mb: 4 }}>
                       <Image
                         sx={{
                           marginX: "auto",

@@ -45,7 +45,7 @@ export default function ComplexProjects({ projects }) {
               subTitle,
             }) => (
               <SwiperSlide key={id} virtualIndex={id}>
-                <Box sx={{ direction: "rtl", overflow: "hidden" }}>
+                <Box sx={{ overflow: "hidden" }}>
                   <Grid columns={2}>
                     <Box sx={{ height: 300 }}>
                       <Text
@@ -71,7 +71,7 @@ export default function ComplexProjects({ projects }) {
                         )}
                       </Flex>
                     </Box>
-                    <Box>
+                    <Box sx={{ height: 300 }}>
                       <Link passHref href={`/countries/${country.id}/projects/${id}`}>
                         <Box
                           as="a"
@@ -84,10 +84,10 @@ export default function ComplexProjects({ projects }) {
                           }}
                         >
                           <OptmizationImage
-                            width={300}
-                            height={300}
+                            width={250}
+                            height={200}
                             objectFit="contain"
-                            layout="responsive"
+                            layout="intrinsic"
                             src={image}
                             alt={name}
                           />
@@ -96,7 +96,7 @@ export default function ComplexProjects({ projects }) {
                       <Link passHref href={`/countries/${country.id}/projects/${id}`}>
                         <a style={{ textDecoration: "none" }}>
                           <Heading
-                            sx={{ paddingTop: 3, textAlign: "center", paddingBottom: 4 }}
+                            sx={{ paddingTop: 2, textAlign: "center", paddingBottom: 4 }}
                             as="h3"
                           >
                             {name}

@@ -1,34 +1,8 @@
-.slick-with-padding .slick-slide {
-  padding: 30px;
-}
-
-.slick-slide div {
-  direction: rtl;
-  outline: none;
-}
-
-.slick-list:focus {
-  outline: none;
-}
-
-.slick-dots {
-  overflow: hidden;
-  display: flex !important;
-
-  align-items: center;
-  justify-content: center;
-  bottom: -20px;
-}
-
-.slick-dots li.slick-active button:before,
-.slick-dots li button:before {
-  color: #443300 !important;
-}
-
 .swiper-pagination-bullet-active {
-  background: #947004 !important;
+  background: #c8aa53 !important;
 }
 
-.swiper-container {
-  padding: 10px;
+.swiper-slide {
+  padding: 20px 5px 10px;
+  box-sizing: border-box;
 }

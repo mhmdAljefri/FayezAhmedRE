@@ -5,12 +5,17 @@ import OptmizationImage from "../OptmizationImage"
 export default function FullpageLoader() {
   return (
     <Flex
-      sx={{ height: "100vh", overflow: "hidden", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        maxHeight: "100vh",
+        overflow: "hidden",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <OptmizationImage
         layout="intrinsic"
-        width={250}
-        height={250}
+        width={200}
+        height={200}
         localImage
         objectFit="contain"
         className="animate__animated animate__pulse animate__infinite"

@@ -30,7 +30,7 @@ export const ArrowNext = ({ icon, className, iconSize, ...props }: ArrowProps) =
     className={className}
     sx={{
       ...SharedStyle,
-      left: [0, -30, -40, -50],
+      left: [0, 0, -40, -50],
       ...props.sx,
     }}
   >
@@ -43,7 +43,7 @@ export const ArrowPrev = ({ icon, className, iconSize, ...props }: ArrowProps) =
     className={className}
     sx={{
       ...SharedStyle,
-      right: [0, -30, -40, -50],
+      right: [0, 0, -40, -50],
       ...props.sx,
     }}
   >
