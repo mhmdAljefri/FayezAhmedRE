@@ -152,8 +152,6 @@ const Home: BlitzPage<HomeProps> = ({
   )
 }
 
-export const config = { amp: "hybrid" }
-
 export async function getStaticProps(context) {
   const { countries } = await getCountries({
     select: {
