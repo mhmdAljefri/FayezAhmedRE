@@ -152,7 +152,7 @@ function CountryPage({
       <Wrapper
         sx={{
           paddingX: [2, null, null, 6],
-          marginTop: [-3, -5],
+          marginTop: [-1, -5],
           position: "relative",
           zIndex: 1,
           marginBottom: 5,

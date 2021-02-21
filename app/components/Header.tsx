@@ -52,7 +52,7 @@ const Header = ({ sx }: HeaderProps) => {
             }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Box sx={{ width: 80, height: 40, position: "relative", paddingY: 2 }}>
+              <Box sx={{ width: 40, height: 40, position: "relative", paddingY: 2 }}>
                 <OptmizationImage
                   layout="fill"
                   localImage

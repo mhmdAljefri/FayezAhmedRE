@@ -362,7 +362,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
               <Swiper
-                slidesPerView={5}
+                slidesPerView={1}
                 slidesPerGroup={1}
                 loop
                 pagination={{
@@ -370,7 +370,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 }}
                 breakpoints={{
                   1000: {
-                    slidesPerView: 4,
+                    slidesPerView: 5,
                     slidesPerGroup: 1,
                     // infinite: nearByItemsLength > 3,
                   },

@@ -63,8 +63,7 @@ export function ConstractiongVideo({
         sx={{
           marginX: [1, null, 6],
           borderRadius: "default",
-          boxShadow: "card",
-          height: [250, 300, 350, 450],
+          boxShadow: isYoutube ? undefined : "card",
         }}
       >
         {isYoutube ? (

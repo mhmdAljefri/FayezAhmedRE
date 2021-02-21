@@ -5,6 +5,7 @@ import Wrapper from "app/components/Wrapper"
 import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
 import TwitCard from "app/components/Cards/TwitCard"
 import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
+
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 
 export default function TwitsList() {
