@@ -40,7 +40,7 @@ export default function OfferCard({
         <a>
           <Box sx={{ position: "relative" }}>
             {mainVideo ? (
-              <Box sx={{ height: 240, paddingBottom: hideOfferLabel ? 0 : 40 }}>
+              <Box sx={{ height: 190, paddingBottom: hideOfferLabel ? 0 : 25 }}>
                 <LazyLoad offset={100}>
                   {isYoutube ? (
                     <OfferCardYoutube src={mainVideo} />
