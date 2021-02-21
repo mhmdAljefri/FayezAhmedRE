@@ -131,7 +131,7 @@ export async function getStaticProps(context) {
     props: {
       offer,
     },
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }
 

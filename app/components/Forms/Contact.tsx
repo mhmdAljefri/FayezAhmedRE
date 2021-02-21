@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Box, Grid, Heading } from "theme-ui"
+import { Box, Link as ThemeLink, Grid, Heading } from "theme-ui"
 import Form from "../Form"
 import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
@@ -37,33 +37,32 @@ export default function Contact() {
           paddingX: 4,
         }}
       >
-        <a href="#Contact">
-          <Box
-            sx={{
-              position: visiable ? "absolute" : "fixed",
-              zIndex: "contactForm",
-              top: visiable ? -50 : "auto",
-              left: [10, null, 50],
-              bottom: visiable ? "auto" : [80, null, 100],
-              padding: [2, 3],
-              width: visiable ? [100, 150] : [80, 100],
-              height: visiable ? [100, 150] : [80, 100],
-              boxShadow: "default",
-              backgroundColor: visiable ? "background" : "white100",
-              borderRadius: 1000,
-            }}
-          >
-            <OptmizationImage
-              layout="intrinsic"
-              width={150}
-              height={150}
-              localImage
-              objectFit="contain"
-              src="/icons/icons8_headset_128px.png"
-              alt="اطلب استشارتك"
-            />
-          </Box>
-        </a>
+        <ThemeLink
+          href="#Contact"
+          sx={{
+            position: visiable ? "absolute" : "fixed",
+            zIndex: "contactForm",
+            top: visiable ? -50 : "auto",
+            left: [10, null, 50],
+            bottom: visiable ? "auto" : [80, null, 100],
+            padding: [2, 3],
+            width: visiable ? [100, 150] : [80, 100],
+            height: visiable ? [100, 150] : [80, 100],
+            boxShadow: "default",
+            backgroundColor: visiable ? "background" : "white100",
+            borderRadius: 1000,
+          }}
+        >
+          <OptmizationImage
+            layout="intrinsic"
+            width={150}
+            height={150}
+            localImage
+            objectFit="contain"
+            src="/icons/icons8_headset_128px.png"
+            alt="اطلب استشارتك"
+          />
+        </ThemeLink>
         <Heading sx={{ fontSize: [4, 6], paddingTop: 5, paddingBottom: 4, color: "white" }}>
           اطلب استشارتك
         </Heading>

@@ -1,15 +1,13 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { Box, Heading } from "theme-ui"
 import { useQuery } from "react-query"
-import Wrapper from "./Wrapper"
-import { Icon } from "react-icons-kit"
-import { twitter } from "react-icons-kit/fa/twitter"
-import { ArrowNext, ArrowPrev } from "./Arrows/SliderArrows"
-import TwitCard from "./Cards/TwitCard"
-import { SwiperSlide, Swiper } from "./Sliders/Swiper"
+import Wrapper from "app/components/Wrapper"
+import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
+import TwitCard from "app/components/Cards/TwitCard"
+import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
 const fetcher = () => fetch("/api/twits").then((res) => res.json())
 
-function TwitsList() {
+export default function TwitsList() {
   const { data } = useQuery("/api/twits", fetcher)
   const twits = data?.data
 
@@ -50,31 +48,5 @@ function TwitsList() {
         ))}
       </Swiper>
     </Wrapper>
-  )
-}
-
-export default function Twits() {
-  return (
-    <Box
-      sx={{
-        backgroundColor: "light",
-      }}
-    >
-      <Wrapper>
-        <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>
-          <Icon icon={twitter} size={32} style={{ marginInlineEnd: 15, color: "#1da1f2" }} />
-          <span>اخر الاخبار</span>
-        </Heading>
-        <Suspense
-          fallback={[
-            ...Array(3).map((_, index) => (
-              <TwitCard key={index} id={index} text="جاري التحميل..." />
-            )),
-          ]}
-        >
-          <TwitsList />
-        </Suspense>
-      </Wrapper>
-    </Box>
   )
 }

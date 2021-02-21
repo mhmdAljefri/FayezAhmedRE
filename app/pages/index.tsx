@@ -26,7 +26,12 @@ import getExplores from "app/public/explores/queries/getExplores"
 import SkeltonLoaderCard from "app/components/Cards/SkeltonLoaderCard"
 
 import LatestOffersSection from "app/components/LatestOffersSection"
-import ComplexProjects from "app/components/ComplexProjects" // suspended component
+import ComplexProjects from "app/components/ComplexProjects"
+import IdealDestinations from "app/components/IdealDestinations"
+import Twits from "app/components/Twits"
+import MostViewd from "app/components/Cards/MostViewd"
+import OurPartnersSection from "app/components/OurPartnersSection"
+import HeroSection from "app/components/HeroSection" // suspended component
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -52,27 +57,6 @@ const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
       <SkeltonLoaderCard />
     </Flex>
   ),
-})
-const IdealDestinations = dynamic(() => import("app/components/IdealDestinations"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
-})
-const Twits = dynamic(() => import("app/components/Twits"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
-})
-const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
-})
-const OurPartnersSection = dynamic(() => import("app/components/OurPartnersSection"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
-})
-
-const HeroSection = dynamic(() => import("app/components/HeroSection"), {
-  ssr: false,
-  loading: () => <Box sx={{ height: "100vh" }} />,
 })
 
 type CountryWithCityAndCountry = Project & {
@@ -229,6 +213,7 @@ export async function getStaticProps(context) {
       carousels,
       carouselVideo,
     }, // will be passed to the page component as props
+    revalidate: 60 * 15,
   }
 }
 

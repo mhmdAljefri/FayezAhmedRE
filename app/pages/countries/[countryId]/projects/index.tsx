@@ -65,6 +65,6 @@ export async function getStaticProps(context) {
       country,
       projects,
     },
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }

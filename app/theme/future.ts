@@ -1,5 +1,5 @@
 const future = {
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [0, 4, 8, 16, 32, 64, 80, 128, 512],
   fonts: {
     body: 'Tajawal, Helvetica, Arial, "sans-serif"',
     heading: "inherit",

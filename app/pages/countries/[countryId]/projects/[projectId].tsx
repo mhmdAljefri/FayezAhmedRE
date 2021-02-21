@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { BlitzPage, Link, useMutation, useRouter } from "blitz"
+import { BlitzPage, Link, useMutation, useRouter, dynamic } from "blitz"
 import {
   PaymentPlan,
   GalleryView,
@@ -31,8 +31,17 @@ import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
-import GoogleMap from "app/components/GoogleMap"
-import Contact from "app/components/Forms/Contact"
+import LazyLoad from "react-lazyload"
+import Skeleton from "react-loading-skeleton"
+
+const GoogleMap = dynamic(() => import("app/components/GoogleMap"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
+const Contact = dynamic(() => import("app/components/Forms/Contact"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
 
 type ProjectProps = {
   project: Project & {
@@ -416,11 +425,15 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           {location && (
             <>
               <Heading sx={{ marginBottom: 5 }}>الموقع</Heading>
-
-              <GoogleMap center={location as any} />
+              <LazyLoad height={250} offset={100}>
+                <GoogleMap zoom={18} center={location as any} />
+              </LazyLoad>
             </>
           )}
-          <Contact />
+
+          <LazyLoad height={250} offset={100}>
+            <Contact />
+          </LazyLoad>
 
           <Link href="/furniture">
             <ThemeLink
@@ -459,6 +472,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { project }, // will be passed to the page component as props
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }
