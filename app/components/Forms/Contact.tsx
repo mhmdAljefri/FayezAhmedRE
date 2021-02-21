@@ -1,11 +1,12 @@
 import React, { useRef } from "react"
-import { Box, Grid, Heading, Image } from "theme-ui"
+import { Box, Link as ThemeLink, Grid, Heading } from "theme-ui"
 import Form from "../Form"
 import LabeledTextField from "../LabeledTextField"
 import useRequestsMutation from "app/hooks/useRequestsMutation"
 import SubmitButton from "../SubmitButton"
 import LabeledMenuField from "app/admin/components/LabeledMenuField"
 import useScroll from "app/hooks/useScroll"
+import OptmizationImage from "../OptmizationImage"
 
 export default function Contact() {
   const { run, fetching } = useRequestsMutation("consultings")
@@ -36,7 +37,8 @@ export default function Contact() {
           paddingX: 4,
         }}
       >
-        <Box
+        <ThemeLink
+          href="#Contact"
           sx={{
             position: visiable ? "absolute" : "fixed",
             zIndex: "contactForm",
@@ -51,14 +53,16 @@ export default function Contact() {
             borderRadius: 1000,
           }}
         >
-          <a href="#Contact">
-            <Image
-              sx={{ objectFit: "contain" }}
-              src="/icons/icons8_headset_128px.png"
-              alt="اطلب استشارتك"
-            />
-          </a>
-        </Box>
+          <OptmizationImage
+            layout="intrinsic"
+            width={150}
+            height={150}
+            localImage
+            objectFit="contain"
+            src="/icons/icons8_headset_128px.png"
+            alt="اطلب استشارتك"
+          />
+        </ThemeLink>
         <Heading sx={{ fontSize: [4, 6], paddingTop: 5, paddingBottom: 4, color: "white" }}>
           اطلب استشارتك
         </Heading>

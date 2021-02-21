@@ -1,10 +1,9 @@
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
-
+import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Text, Link as ThemeLink } from "theme-ui"
-import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
   Country,
@@ -16,24 +15,25 @@ import {
   PropertyType,
   RoomWithPrice,
 } from "@prisma/client"
-import { useRouter } from "blitz"
-import ServicesForm from "app/components/Forms/ServicesForm"
-import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
-import Contact from "app/components/Forms/Contact"
-import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import { OfferCard } from "app/layouts/OfferssList"
+import { useRouter, dynamic } from "blitz"
+import getCountry from "app/public/countries/queries/getCountry"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
 import getProjects from "app/public/projects/queries/getProjects"
-import { ProjectCard } from "app/layouts/ProjectsList"
-import ExploreCard from "app/components/ExploreCard"
+import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import getExplores from "app/public/explores/queries/getExplores"
+
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
-import MostViewd from "app/components/Cards/MostViewd"
-import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
-import Image from "app/components/Image"
-import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
-import SlickSlider from "app/components/Sliders/SlickSlider"
+import OptmizationImage from "app/components/OptmizationImage"
+
+const ServicesForm = dynamic(() => import("app/components/Forms/ServicesForm"))
+const Contact = dynamic(() => import("app/components/Forms/Contact"))
+const FurnishCategoryCard = dynamic(() => import("app/components/FurnishCategoryCard"))
+const OfferCard = dynamic(() => import("app/components/Cards/OfferCard"))
+const ExploreCard = dynamic(() => import("app/components/ExploreCard"))
+const ExploreToggleButton = dynamic(() => import("app/components/Buttons/ExploreToggleButton"))
+const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"))
+const ProjectSlider = dynamic(() => import("app/components/Sliders/ProjectSlider"))
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
@@ -86,7 +86,13 @@ function CountryPage({
     push({ pathname: `${asPath}/projects`, query: filter })
   }
 
-  const explores = country?.explores.filter((explore) => explore.type === showInspirationGallery)
+  const exploresArray = country?.explores.filter(
+    (explore) => explore.type === showInspirationGallery
+  )
+  const explores: typeof exploresArray[] = []
+
+  while (exploresArray.length) explores.push(exploresArray.splice(0, 3))
+
   const projectsUrl = `${asPath}/projects`
   const offersUrl = `${asPath}/offers`
 
@@ -113,6 +119,7 @@ function CountryPage({
       >
         {Array.isArray(country.carousel) ? (
           <Swiper
+            autoHeight
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
@@ -126,28 +133,14 @@ function CountryPage({
                   href={url}
                   sx={{
                     display: "block",
-                    overflow: "hidden",
-                    textAlign: "center",
-                    position: "relative",
-                    ":after": {
-                      display: "block",
-                      content: '""',
-                      /* 16:9, 21:9 aspect ratio */
-                      paddingBottom: ["56.25%", "42.8571%"],
-                    },
                   }}
                 >
-                  <Image
+                  <OptmizationImage
+                    layout="responsive"
+                    width={210}
+                    height={90}
                     // className="animate__animated animate__zoomIn"
-                    sx={{
-                      objectFit: "cover",
-                      objectPosition: "center",
-                      position: "absolute",
-                      left: 0,
-                      top: 0,
-                      width: "100%",
-                      height: "100%",
-                    }}
+                    alt="///"
                     src={image || ""}
                   />
                 </ThemeLink>
@@ -210,46 +203,7 @@ function CountryPage({
             <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
           </>
         )}
-        <SlickSlider
-          infinite={false}
-          slidesToShow={3}
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: false,
-                rtl: true,
-              },
-            },
-            {
-              breakpoint: 1100,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: false,
-                rtl: true,
-              },
-            },
-            {
-              breakpoint: 900,
-              settings: {
-                centerMode: false,
-                vertical: false,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                rtl: true,
-              },
-            },
-          ]}
-        >
-          {country.projects.map((project, index) => (
-            <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-              <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
-            </Box>
-          ))}
-        </SlickSlider>
+        <ProjectSlider projects={country.projects} />
         <ShowMoreButton
           href={projectsUrl}
           sx={{
@@ -270,46 +224,8 @@ function CountryPage({
                 heading="مشاريع بضمانة الحكومة"
               />
             )}
-            <SlickSlider
-              infinite={false}
-              slidesToShow={3}
-              responsive={[
-                {
-                  breakpoint: 1200,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: false,
-                    rtl: true,
-                  },
-                },
-                {
-                  breakpoint: 1100,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: false,
-                    rtl: true,
-                  },
-                },
-                {
-                  breakpoint: 900,
-                  settings: {
-                    centerMode: false,
-                    vertical: false,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    rtl: true,
-                  },
-                },
-              ]}
-            >
-              {govProjects.map((project, index) => (
-                <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-                  <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
-                </Box>
-              ))}
-            </SlickSlider>
+            <ProjectSlider projects={govProjects} />
+
             <ShowMoreButton
               href={projectsUrl}
               sx={{
@@ -327,46 +243,9 @@ function CountryPage({
                 heading="مشاريع باطلالة بحرية"
               />
             )}
-            <SlickSlider
-              infinite={false}
-              slidesToShow={3}
-              responsive={[
-                {
-                  breakpoint: 1200,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: false,
-                    rtl: true,
-                  },
-                },
-                {
-                  breakpoint: 1100,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: false,
-                    rtl: true,
-                  },
-                },
-                {
-                  breakpoint: 900,
-                  settings: {
-                    centerMode: false,
-                    vertical: false,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    rtl: true,
-                  },
-                },
-              ]}
-            >
-              {oceanViewProjects.map((project, index) => (
-                <Box sx={{ marginBottom: 4, direction: "rtl" }} key={project.name + index}>
-                  <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
-                </Box>
-              ))}
-            </SlickSlider>
+
+            <ProjectSlider projects={oceanViewProjects} />
+
             <ShowMoreButton
               href={projectsUrl}
               sx={{
@@ -416,56 +295,55 @@ function CountryPage({
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
-        <SlickSlider
-          key={showInspirationGallery}
-          slidesToScroll={3}
-          slidesToShow={3}
-          arrows={false}
-          rtl
-          dots
-          infinite={explores.length > 3}
-          responsive={[
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: explores.length > 3,
-              },
-            },
-            {
-              breakpoint: 840,
-              settings: {
-                infinite: explores.length > 3,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                initialSlide: 1,
-              },
-            },
-            {
-              breakpoint: 580,
-              settings: {
-                vertical: true,
-                infinite: explores.length > 3,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-              },
-            },
-          ]}
+        <Swiper
+          lazy
+          pagination={{
+            clickable: true,
+          }}
         >
-          {explores.map(({ image, title, id }) => (
-            <ExploreCard key={id} href={`${asPath}/explore/${id}`} image={image} title={title} />
+          {explores.map((nestedExplores, index) => (
+            <SwiperSlide key={showInspirationGallery + index} virtualIndex={index}>
+              <Grid columns={[1, 1, 3]} sx={{ mb: 5 }}>
+                {nestedExplores.map(({ image, title, id }) => (
+                  <ExploreCard
+                    key={id}
+                    href={`${asPath}/explore/${id}`}
+                    image={image}
+                    title={title}
+                  />
+                ))}
+              </Grid>
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
 
       <Wrapper sx={{ paddingY: 5 }}>
         <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
-        <SlickSlider>
+        <Swiper
+          pagination={{
+            clickable: true,
+          }}
+          autoHeight
+          spaceBetween={20}
+          breakpoints={{
+            520: {
+              slidesPerView: 2,
+            },
+            760: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {furnishCategories.map((furnishCategory) => (
-            <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
+            <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
+              <FurnishCategoryCard {...furnishCategory} />
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
 
       <Wrapper
@@ -602,7 +480,7 @@ export async function getStaticProps(context) {
       oceanViewProjects,
       govProjects,
     },
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }
 

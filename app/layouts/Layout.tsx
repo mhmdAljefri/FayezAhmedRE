@@ -1,9 +1,14 @@
 import { ReactNode } from "react"
 import { Head } from "blitz"
-import Footer from "app/components/Footer"
-import Header from "app/components/Header"
 import { SxStyleProp, ThemeProvider } from "theme-ui"
 import theme from "app/theme"
+import Footer from "app/components/Footer"
+import dynamic from "next/dynamic"
+import MetaTags from "app/components/MetaTags"
+
+const Header = dynamic(() => import("app/components/Header"), {
+  ssr: false,
+})
 
 type LayoutProps = {
   title?: string
@@ -16,9 +21,11 @@ type LayoutProps = {
 const Layout = ({ title, headerProps, children }: LayoutProps) => {
   return (
     <>
+      <MetaTags />
       <Head>
         <title>{title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"}</title>
-
+        {/* <!-- Manifest  --> */}
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap"

@@ -6,7 +6,7 @@ import { Box, Heading } from "theme-ui"
 import { FurnishCategory } from "@prisma/client"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import SlickSlider from "app/components/Sliders/SlickSlider"
+import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
 
 type furnishCategoriesProps = {
   furnishCategories: FurnishCategory[]
@@ -20,11 +20,13 @@ const Search: BlitzPage<furnishCategoriesProps> = ({ furnishCategories }) => {
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -5, marginBottom: 5 }}>
-        <SlickSlider rtl>
+        <Swiper>
           {furnishCategories.map((furnishCategory) => (
-            <FurnishCategoryCard key={furnishCategory.id} {...furnishCategory} />
+            <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
+              <FurnishCategoryCard {...furnishCategory} />
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
     </>
   )

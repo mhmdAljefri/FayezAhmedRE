@@ -1,13 +1,23 @@
 import React from "react"
-import { Flex, Image } from "theme-ui"
+import { Flex } from "theme-ui"
+import OptmizationImage from "../OptmizationImage"
 
 export default function FullpageLoader() {
   return (
     <Flex
-      sx={{ height: "100vh", overflow: "hidden", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        height: "100vh",
+        overflow: "hidden",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      <Image
-        sx={{ minWidth: 170 }}
+      <OptmizationImage
+        layout="intrinsic"
+        width={200}
+        height={200}
+        localImage
+        objectFit="contain"
         className="animate__animated animate__pulse animate__infinite"
         src="/logo.png"
         alt="Fayez Ahmed RealEstate | فائز احمد العقارية"

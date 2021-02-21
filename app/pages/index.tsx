@@ -1,10 +1,7 @@
 import { BlitzPage } from "blitz"
+import dynamic from "next/dynamic"
 import Layout from "app/layouts/Layout"
-import HomeSlider from "app/components/HomeSlider"
-import OurPartnersSection from "app/components/OurPartnersSection"
-import getCountries from "app/public/countries/queries/getCountries"
-import getPartners from "app/public/partners/queries/getPartners"
-import AboutUSSection from "app/components/AboutUSSection"
+import { SyncLoader } from "react-spinners"
 import {
   Carousel,
   CarouselVideo,
@@ -16,20 +13,51 @@ import {
   Project,
   RoomWithPrice,
 } from "@prisma/client"
-import getCarousels from "app/public/carousels/queries/getCarousels"
-import { Box, Grid, Heading } from "theme-ui"
+import { Box, Grid, Heading, Flex } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
+
+import getCountries from "app/public/countries/queries/getCountries"
+import getCarousels from "app/public/carousels/queries/getCarousels"
 import getProjects from "app/public/projects/queries/getProjects"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
-import Contact from "app/components/Forms/Contact"
 import getOffers from "app/public/offers/queries/getOffers"
-import ComplexProjects from "app/components/ComplexProjects"
-import CountriesProjectsSection from "app/components/CountriesProjectsSection"
+import getPartners from "app/public/partners/queries/getPartners"
 import getExplores from "app/public/explores/queries/getExplores"
+import SkeltonLoaderCard from "app/components/Cards/SkeltonLoaderCard"
+
 import LatestOffersSection from "app/components/LatestOffersSection"
+import ComplexProjects from "app/components/ComplexProjects"
 import IdealDestinations from "app/components/IdealDestinations"
 import Twits from "app/components/Twits"
 import MostViewd from "app/components/Cards/MostViewd"
+import OurPartnersSection from "app/components/OurPartnersSection"
+import HeroSection from "app/components/HeroSection" // suspended component
+
+const Contact = dynamic(() => import("app/components/Forms/Contact"), {
+  ssr: false,
+  loading: () => <SyncLoader />,
+})
+const CountriesProjectsSection = dynamic(() => import("app/components/CountriesProjectsSection"), {
+  ssr: false,
+  loading: () => (
+    <Flex>
+      <SkeltonLoaderCard />
+      <SkeltonLoaderCard />
+      <SkeltonLoaderCard />
+    </Flex>
+  ),
+})
+
+const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
+  ssr: false,
+  loading: () => (
+    <Flex>
+      <SkeltonLoaderCard />
+      <SkeltonLoaderCard />
+      <SkeltonLoaderCard />
+    </Flex>
+  ),
+})
 
 type CountryWithCityAndCountry = Project & {
   city: City
@@ -61,74 +89,24 @@ const Home: BlitzPage<HomeProps> = ({
   mostViewedProjects,
 }) => {
   // todo migrate this logic to Server :(
-  const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
     <main>
-      <Box sx={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-        {carouselVideo.isActive ? ( // todo add video
-          <Box
-            sx={{
-              position: "relative",
-              ":after": {
-                position: "absolute",
-                content: '""',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-
-                backgroundColor: "#000",
-                opacity: 0.5,
-              },
-            }}
-          >
-            <video
-              autoPlay
-              loop
-              muted
-              style={{ height: "100%", width: "100%", minHeight: "100vh", objectFit: "cover" }}
-              controls={false}
-            >
-              <track kind="captions" />
-              <source src={secureVideoUrl} type="video/mp4" />
-              <source src={secureVideoUrl} type="video/ogg" />
-              <source src={secureVideoUrl} type="video/webm" />
-              <object data={secureVideoUrl}>
-                <embed src={secureVideoUrl} />
-              </object>
-            </video>
-          </Box>
-        ) : (
-          <HomeSlider slideStyle={{ height: "100vh" }} onlyImages data={carousels} />
-        )}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            zIndex: 1,
-            right: 0,
-            paddingY: [100, 50],
-          }}
-        >
-          <Wrapper>
-            <Heading sx={{ fontSize: [5, 6], color: "primary" }}>الارتقاء بالحياة</Heading>
-            <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>
-              يتلاقى مع اهتمامنا
-            </Heading>
-          </Wrapper>
-        </Box>
-      </Box>
+      <HeroSection carousels={carousels} carouselVideo={carouselVideo} />
 
       <AboutUSSection />
 
       <LatestOffersSection offers={offers} />
+
       <CountriesProjectsSection countries={countries} />
+
       <ComplexProjects projects={projects} />
+
       <IdealDestinations explores={explores} />
+
       <Twits />
-      <Box sx={{ pt: 5 }}>
+
+      <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
         <Wrapper>
           <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
 
@@ -144,9 +122,16 @@ const Home: BlitzPage<HomeProps> = ({
 
       <OurPartnersSection data={partners} />
 
-      <Wrapper sx={{ marginTop: -200, marginBottom: 100, position: "relative", zIndex: 1 }}>
+      <Box
+        sx={{
+          pb: 100,
+          backgroundColor: "background",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
         <Contact />
-      </Wrapper>
+      </Box>
     </main>
   )
 }
@@ -228,7 +213,7 @@ export async function getStaticProps(context) {
       carousels,
       carouselVideo,
     }, // will be passed to the page component as props
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }
 

@@ -4,9 +4,9 @@ import React, { useState } from "react"
 import { Box, Button, Flex, Grid, Heading, Text } from "theme-ui"
 import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
 import Icon from "react-icons-kit"
-import SlickSlider from "app/components/Sliders/SlickSlider"
 import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
+import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
 import Image from "app/components/Image"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
 
@@ -99,52 +99,56 @@ export function ConstractiongVideo({
 export function GalleryView({ gallery }) {
   return (
     <>
-      <Box sx={{ marginTop: -5, paddingTop: 6, backgroundColor: "dark" }}>
-        <Wrapper>
-          <Heading
-            sx={{ color: "white", paddingBottom: 5, marginBottom: 1, fontSize: [5, null, 6] }}
+      <Box sx={{ marginTop: -5, paddingTop: 6, paddingBottom: 5, backgroundColor: "dark" }}>
+        <Wrapper sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Heading sx={{ color: "white", marginBottom: 1, fontSize: [5, null, 6] }}>المعرض</Heading>
+          <Box
+            sx={{
+              position: "relative",
+              display: "flex",
+              width: 150,
+              pb: 4,
+              justifyContent: ["space-between", null, "flex-start"],
+            }}
           >
-            المعرض
-          </Heading>
+            <ArrowRight className="GalleryArrowRight" />
+            <ArrowLeft className="GalleryArrowLeft" />
+          </Box>
         </Wrapper>
       </Box>
 
-      <Wrapper sx={{ marginTop: -5 }}>
-        <SlickSlider
-          prevArrow={<ArrowLeft />}
-          nextArrow={<ArrowRight />}
-          arrows
-          slidesToShow={1}
-          slidesToScroll={-1}
-          infinite={gallery?.length > 3}
-          responsive={[
-            {
-              breakpoint: 800,
-              settings: {
-                arrows: false,
-              },
-            },
-          ]}
-          variableWidth
-          centerMode={false}
-          dots={false}
-          rtl
+      <Wrapper
+        sx={{
+          marginTop: -5,
+          ".swiper-slide": {
+            width: "auto",
+            marginInlineEnd: 10,
+          },
+        }}
+      >
+        <Swiper
+          lazy
+          navigation={{
+            nextEl: ".GalleryArrowRight",
+            prevEl: ".GalleryArrowLeft",
+          }}
+          slidesPerView="auto"
         >
           {gallery.map((item, index) => (
-            <Box key={item + "_" + index} sx={{}}>
+            <SwiperSlide virtualIndex={index} key={item + "_" + index}>
               <Image
+                key={item + "_" + index}
                 sx={{
                   borderRadius: 15,
                   width: "auto",
                   height: [200, 200, 250, 300],
                   objectFit: "contain",
-                  marginX: 2,
                 }}
                 src={item}
               />
-            </Box>
+            </SwiperSlide>
           ))}
-        </SlickSlider>
+        </Swiper>
       </Wrapper>
     </>
   )

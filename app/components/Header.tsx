@@ -1,14 +1,16 @@
-import { Box, Flex, Image, SxStyleProp, Text } from "theme-ui"
+import { Box, Flex, SxStyleProp, Text } from "theme-ui"
 import React from "react"
+import dynamic from "next/dynamic"
 import Wrapper from "app/components/Wrapper"
-import Nav from "app/components/Navs/Nav"
 import PriceType from "app/components/PriceType"
 import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
-import DesktopNav from "./Navs/DesktopNav"
 import useScreenSize from "app/hooks/useScreenSize"
-import WhatsappButton from "./NavItems/WhatsappButton"
-import SearchButton from "./NavItems/SearchButton"
+import OptmizationImage from "./OptmizationImage"
+const WhatsappButton = dynamic(() => import("./NavItems/WhatsappButton"))
+const SearchButton = dynamic(() => import("./NavItems/SearchButton"))
+const DesktopNav = dynamic(() => import("./Navs/DesktopNav"))
+const Nav = dynamic(() => import("app/components/Navs/Nav"))
 
 type HeaderProps = {
   sx?: SxStyleProp
@@ -17,7 +19,7 @@ type HeaderProps = {
 const Header = ({ sx }: HeaderProps) => {
   const scroll = useScroll()
   const { pathname } = useRouter()
-  const isDesktopScreen = useScreenSize() > 850
+  const isDesktopScreen = useScreenSize() > 920
   const hasProjects =
     pathname.startsWith("/countries/[countryId]") ||
     pathname.includes("projects") ||
@@ -50,13 +52,20 @@ const Header = ({ sx }: HeaderProps) => {
             }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Box sx={{ maxWidth: 50, paddingY: 2 }}>
-                <Image src="/FAYEZ.png" alt="Fayez Ahmed RealEstate | فائز احمد العقارية" />
+              <Box sx={{ width: 80, height: 40, position: "relative", paddingY: 2 }}>
+                <OptmizationImage
+                  layout="fill"
+                  localImage
+                  objectFit="contain"
+                  src="/FAYEZ.png"
+                  alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
+                />
               </Box>
               <Text
                 sx={{
                   fontSize: [1, 3],
                   paddingX: 2,
+                  width: 100,
                   lineHeight: "23px",
                   paddingY: 0,
                   color: "primary",

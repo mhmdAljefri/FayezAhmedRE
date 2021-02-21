@@ -1,114 +1,13 @@
 import { Offer } from "@prisma/client"
 import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import { Link, useInfiniteQuery, useParam, useRouter, useRouterQuery } from "blitz"
+import { useInfiniteQuery, useParam, useRouterQuery } from "blitz"
 import React, { useRef } from "react"
 import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
-import Image from "app/components/Image"
-
-type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
-  prefixPath?: string
-  hideOfferLabel?: boolean
-}
-
-export function OfferCard({
-  image,
-  hideOfferLabel,
-  subTitle,
-  mainVideo,
-  id,
-  name,
-  prefixPath = "/",
-}: OfferCardProps) {
-  const { asPath } = useRouter()
-  const href = asPath + prefixPath + id
-
-  return (
-    <Box
-      sx={{
-        width: ["90vw", null, 370],
-        backgroundColor: "background",
-        marginX: "auto",
-        boxShadow: "default",
-        marginBottom: 2,
-      }}
-    >
-      <Link href={href}>
-        <a>
-          <Box sx={{ position: "relative" }}>
-            {mainVideo ? (
-              <Box sx={{ height: 240, paddingBottom: hideOfferLabel ? 0 : 40 }}>
-                {mainVideo.startsWith("https://www.youtube") ? (
-                  <iframe width="100%" height="100%" title="any" src={mainVideo}></iframe>
-                ) : (
-                  <video
-                    width="100%"
-                    height="100%"
-                    poster={image || "any"}
-                    // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
-                    controls
-                  >
-                    <track kind="captions" />
-                    <source src={mainVideo} type="video/mp4" />
-                    <source src={mainVideo} type="video/ogg" />
-                    <source src={mainVideo} type="video/webm" />
-                    <object data={mainVideo}>
-                      <embed src={mainVideo} />
-                    </object>
-                  </video>
-                )}
-              </Box>
-            ) : (
-              <Image
-                sx={{
-                  height: 240,
-                  width: "100%",
-                  objectFit: "cover",
-                  ":hover + div": {
-                    backgroundColor: "primary",
-                  },
-                }}
-                src={image as string}
-              />
-            )}
-
-            {!hideOfferLabel && (
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  textAlign: "center",
-                  left: 0,
-                  right: 0,
-                  lineHeight: "40px",
-                  height: 40,
-                  backgroundColor: "dark",
-                  color: "white",
-                  transition: "all 0.5s linear",
-                  ":hover": {
-                    backgroundColor: "primary",
-                  },
-                }}
-              >
-                العرض الحالي
-              </Box>
-            )}
-          </Box>
-        </a>
-      </Link>
-      <Link href={href}>
-        <Box sx={{ paddingY: 3, paddingX: 3, cursor: "pointer" }}>
-          <Heading>{name}</Heading>
-          <Text>{subTitle}</Text>
-          {/* <HTMLBox html={details} /> */}
-        </Box>
-      </Link>
-    </Box>
-  )
-}
+import OfferCard from "app/components/Cards/OfferCard"
 
 type ProjectListTypes = Pick<Offer, "name" | "details">
 export default function ProjectsList({ name, details }: ProjectListTypes) {

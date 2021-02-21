@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { BlitzPage, Link, useMutation, useRouter } from "blitz"
+import { BlitzPage, Link, useMutation, useRouter, dynamic } from "blitz"
 import {
   PaymentPlan,
   GalleryView,
@@ -21,6 +21,7 @@ import Image from "app/components/Image"
 import { numberFormat } from "app/utils"
 import HTMLBox from "app/components/HTMLBox"
 import BigIconText from "app/components/BigIconBox"
+import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 
 // Icons
 import { buildingO } from "react-icons-kit/fa/buildingO"
@@ -30,9 +31,17 @@ import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
-import SlickSlider from "app/components/Sliders/SlickSlider"
-import GoogleMap from "app/components/GoogleMap"
-import Contact from "app/components/Forms/Contact"
+import LazyLoad from "react-lazyload"
+import Skeleton from "react-loading-skeleton"
+
+const GoogleMap = dynamic(() => import("app/components/GoogleMap"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
+const Contact = dynamic(() => import("app/components/Forms/Contact"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
 
 type ProjectProps = {
   project: Project & {
@@ -207,34 +216,41 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
         />
         {[...floorplan].length > 0 && (
           <Wrapper sx={{ marginY: 6 }}>
-            <Heading sx={{ paddingBottom: 5, fontSize: [5, null, 6] }}>المخططات</Heading>
-            <Box sx={{ marginTop: -5 }}>
-              <SlickSlider
-                arrows
-                prevArrow={<ArrowLeft />}
-                nextArrow={<ArrowRight />}
-                responsive={[
-                  {
-                    breakpoint: 800,
-                    settings: {
-                      arrows: false,
-                    },
-                  },
-                  {
-                    breakpoint: 1020,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: -1,
-                    },
-                  },
-                ]}
-                variableWidth
-                slidesToShow={1}
-                slidesToScroll={-1}
-                infinite={[...floorplan].length > 2}
+            <Flex
+              sx={{ alignItems: "center", justifyContent: ["space-between", null, "flex-start"] }}
+            >
+              <Heading sx={{ fontSize: [5, null, 6] }}>المخططات</Heading>
+              <Box
+                sx={{
+                  position: "relative",
+                  zIndex: 10,
+                  display: "flex",
+                  width: 150,
+                  pb: 4,
+                  justifyContent: "space-between",
+                }}
+              >
+                <ArrowRight className="floorplanArrowRight" />
+                <ArrowLeft className="floorplanArrowLeft" />
+              </Box>
+            </Flex>
+            <Box
+              sx={{
+                ".swiper-slide": {
+                  width: "auto !important",
+                  marginInlineEnd: 10,
+                },
+              }}
+            >
+              <Swiper
+                slidesPerView="auto"
+                navigation={{
+                  nextEl: ".floorplanArrowRight",
+                  prevEl: ".floorplanArrowLeft",
+                }}
               >
                 {floorplan.map((item, index) => (
-                  <div key={item + "_" + index}>
+                  <SwiperSlide virtualIndex={index} key={item + "_" + index}>
                     <Image
                       imageMaxWidth={350}
                       sx={{
@@ -249,9 +265,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                       }}
                       src={item}
                     />
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
             </Box>
           </Wrapper>
         )}
@@ -263,47 +279,40 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 <Text sx={{ fontSize: 3, marginBottom: 5 }}>دلل نفسك مع هذه الخيارات الرائعة</Text>
               </Box>
 
-              <SlickSlider
-                slidesToShow={3}
-                slidesToScroll={3}
-                infinite={features?.length > 4}
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 3,
-                      infinite: features?.length > 4,
-                    },
+              <Swiper
+                loop
+                pagination={{
+                  clickable: true,
+                }}
+                breakpoints={{
+                  1200: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    // infinite: features?.length > 4,
                   },
-                  {
-                    breakpoint: 840,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 2,
-                      initialSlide: 1,
-                      infinite: features?.length > 4,
-                    },
+                  840: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    initialSlide: 1,
+                    // infinite: features?.length > 4,
                   },
-                  {
-                    breakpoint: 580,
-                    settings: {
-                      centerMode: true,
-                      vertical: false,
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      infinite: features?.length > 4,
-                    },
+                  580: {
+                    // centerMode: true,
+                    // vertical: false,
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
+                    // infinite: features?.length > 4,
                   },
-                ]}
+                }}
                 sx={{ justifyContent: "center", marginY: 3 }}
               >
                 {features.map((feat, index) => (
-                  <div key={feat + "_" + index}>
+                  <SwiperSlide virtualIndex={index} key={feat + "_" + index}>
                     <Flex
                       sx={{
                         paddingX: [2, 2, 3],
-                        margin: 2,
+                        marginX: 2,
+                        mb: 4,
                         backgroundColor: "primary",
                         height: 150,
                         color: "white",
@@ -324,9 +333,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                         {feat}
                       </Text>
                     </Flex>
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
               {brochure && (
                 <ThemeLink
                   download={name}
@@ -352,60 +361,55 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               <Text sx={{ fontSize: 3, marginBottom: 5 }}>
                 مناطق الجذب في المدينة على مقربة منك
               </Text>
-              <SlickSlider
-                slidesToShow={nearByItemsLength > 5 ? 5 : 3}
-                infinite={nearByItemsLength > 2}
-                slidesToScroll={1}
-                centerMode={nearByItemsLength <= 2}
-                responsive={[
-                  {
-                    breakpoint: 1000,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 1,
-                      infinite: nearByItemsLength > 3,
-                    },
+              <Swiper
+                slidesPerView={5}
+                slidesPerGroup={1}
+                loop
+                pagination={{
+                  clickable: true,
+                }}
+                breakpoints={{
+                  1000: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 1,
+                    // infinite: nearByItemsLength > 3,
                   },
-                  {
-                    breakpoint: 800,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                      infinite: nearByItemsLength > 2,
-                    },
+                  800: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 1,
+                    // infinite: nearByItemsLength > 2,
                   },
-                  {
-                    breakpoint: 500,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                      infinite: (nearBy as any)?.length > 2,
-                    },
+                  500: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 1,
+                    // infinite: (nearBy as any)?.length > 2,
                   },
-                ]}
+                }}
               >
                 {(nearBy as any)?.map((item, index) => (
-                  <Box key={item.name + "_" + index} sx={{ textAlign: "center" }}>
-                    <Image
-                      sx={{
-                        marginX: "auto",
-                        width: [180, 200],
-                        height: [180, 200],
-                        borderRadius: 999,
-                        borderWidth: 2,
-                        borderColor: "primary",
-                        borderStyle: "solid",
-                      }}
-                      src={item.image}
-                      alt={item.name}
-                    />
-                    <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
-                      {item.name}
-                    </Heading>
-                    <Text>{item.description}</Text>
-                  </Box>
+                  <SwiperSlide key={item.name + "_" + index} virtualIndex={index}>
+                    <Box sx={{ textAlign: "center", mb: 4 }}>
+                      <Image
+                        sx={{
+                          marginX: "auto",
+                          width: [180, 200],
+                          height: [180, 200],
+                          borderRadius: 999,
+                          borderWidth: 2,
+                          borderColor: "primary",
+                          borderStyle: "solid",
+                        }}
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <Heading sx={{ marginTop: 4, marginBottom: 3 }} as="h3">
+                        {item.name}
+                      </Heading>
+                      <Text>{item.description}</Text>
+                    </Box>
+                  </SwiperSlide>
                 ))}
-              </SlickSlider>
+              </Swiper>
             </Wrapper>
           )}
         </Box>
@@ -421,11 +425,15 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           {location && (
             <>
               <Heading sx={{ marginBottom: 5 }}>الموقع</Heading>
-
-              <GoogleMap center={location as any} />
+              <LazyLoad height={250} offset={100}>
+                <GoogleMap zoom={18} center={location as any} />
+              </LazyLoad>
             </>
           )}
-          <Contact />
+
+          <LazyLoad height={250} offset={100}>
+            <Contact />
+          </LazyLoad>
 
           <Link href="/furniture">
             <ThemeLink
@@ -464,6 +472,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { project }, // will be passed to the page component as props
-    revalidate: 60 * 2,
+    revalidate: 60 * 15,
   }
 }

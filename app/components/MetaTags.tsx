@@ -4,14 +4,8 @@ import React from "react"
 export default function MetaTags() {
   return (
     <Head>
-      {/* <!-- Manifest  --> */}
-      <link rel="manifest" href="/manifest.json" />
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-      />
       <link rel="icon" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
@@ -53,11 +47,9 @@ export default function MetaTags() {
       <meta name="full-screen" content="yes" />
       <meta name="browsermode" content="application" />
       {/* <!-- Disable night mode for this page  --> */}
-      <meta name="nightmode" content="enable/disable" />
-      {/* <!-- Fitscreen  --> */}
-      <meta name="viewport" content="uc-fitscreen=yes" />
+      <meta name="nightmode" content="enable" />
       {/* <!-- Layout mode --> */}
-      <meta name="layoutmode" content="fitscreen/standard" />
+      <meta name="layoutmode" content="fitscreen" />
       {/* <!-- imagemode - show image even in text only mode  --> */}
       <meta name="imagemode" content="force" />
       {/* <!-- Orientation  --> */}

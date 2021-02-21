@@ -1,8 +1,8 @@
 import { S3 } from "aws-sdk"
 
 const s3 = new S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.APP_AWS_ACCESS_KEY,
+  secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY,
   region: "ap-south-1",
 })
 
@@ -34,10 +34,4 @@ export const listS3Objects = async (params) => {
       }
     })
     .promise()
-}
-
-export function makeS3Url(src?: string) {
-  const imageName = src?.split("/").reverse()[0]
-  const awsSrc = `https://fayezahmed.s3.ap-south-1.amazonaws.com/fayez/${imageName}`
-  return awsSrc
 }

@@ -1,7 +1,7 @@
 import { Link } from "blitz"
 import React from "react"
 import { Box, Grid, Heading, Text } from "theme-ui"
-import Image from "../Image"
+import OptmizationImage from "../OptmizationImage"
 
 export default function MostViewd({ project }) {
   return (
@@ -21,20 +21,7 @@ export default function MostViewd({ project }) {
     >
       <Link passHref href={`/countries/${project.countryId}/projects/${project.id}`}>
         <a>
-          <Image
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              minHeight: "100%",
-              overflow: "hidden",
-              maxWidth: ["auto"],
-              objectFit: "cover",
-            }}
-            src={project.image}
-          />
+          <OptmizationImage layout="fill" objectFit="cover" src={project.image} />
         </a>
       </Link>
       <Box

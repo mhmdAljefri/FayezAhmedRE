@@ -14,6 +14,7 @@ const DesktopNav = (props: NavProps) => {
         <ThemeLink
           sx={{
             ...sx,
+            mx: 2,
             textDecoration: "none",
             fontWeight: 700,
             marginInlineEnd: [18, 20, 25],

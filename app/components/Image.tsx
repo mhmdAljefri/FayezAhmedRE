@@ -1,7 +1,6 @@
 import React, { ComponentPropsWithRef, useState } from "react"
 import { Image as ThemeImage, SxStyleProp } from "theme-ui"
-import { makeS3Url } from "app/utils/aws"
-
+import { makeS3Url } from "app/utils"
 type Props = ComponentPropsWithRef<"img"> & {
   sx?: SxStyleProp
   imageMaxWidth: number

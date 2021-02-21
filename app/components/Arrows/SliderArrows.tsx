@@ -14,36 +14,36 @@ type ArrowProps = {
 } & ComponentPropsWithoutRef<"div">
 
 const SharedStyle: SxStyleProp = {
-  zIndex: 1,
+  zIndex: 100,
   color: "primary",
   position: "absolute",
   top: "50%",
   paddingTop: 10,
-  px: 1,
+  px: 2,
   height: 40,
   cursor: "pointer",
 }
 
-export const ArrowNext = ({ icon, iconSize, ...props }: ArrowProps) => (
+export const ArrowNext = ({ icon, className, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className=""
+    className={className}
     sx={{
       ...SharedStyle,
-      left: [-10, -30, -40, -50],
+      left: [0, 0, -40, -50],
       ...props.sx,
     }}
   >
     <Icon size={iconSize} icon={icon} />
   </Box>
 )
-export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
+export const ArrowPrev = ({ icon, className, iconSize, ...props }: ArrowProps) => (
   <Box
     {...props}
-    className=""
+    className={className}
     sx={{
       ...SharedStyle,
-      right: [-10, -30, -40, -50],
+      right: [0, 0, -40, -50],
       ...props.sx,
     }}
   >
@@ -51,5 +51,5 @@ export const ArrowPrev = ({ icon, iconSize, ...props }: ArrowProps) => (
   </Box>
 )
 
-ArrowNext.defaultProps = { ...defaultProps, icon: thinLeft }
-ArrowPrev.defaultProps = { ...defaultProps, icon: thinRight }
+ArrowNext.defaultProps = { ...defaultProps, className: "next", icon: thinLeft }
+ArrowPrev.defaultProps = { ...defaultProps, className: "prev", icon: thinRight }
