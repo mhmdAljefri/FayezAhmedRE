@@ -21,7 +21,7 @@ export default function ProjectSlider({ projects }) {
     >
       {projects.map((project) => (
         <SwiperSlide key={project.id} virtualIndex={project.id}>
-          <Box sx={{ mb: 5, px: 3 }}>
+          <Box sx={{ mb: 5 }}>
             <ProjectCard {...project} roomWithPrices={[...project.roomsWithPrices]} />
           </Box>
         </SwiperSlide>

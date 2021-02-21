@@ -151,7 +151,7 @@ export function ProjectCard({
   return (
     <Box
       sx={{
-        width: ["100%", null, 300, 350, 370],
+        width: ["100%", null, 300, 300, 350],
         backgroundColor: "background",
         marginX: "auto",
         boxShadow: "default",

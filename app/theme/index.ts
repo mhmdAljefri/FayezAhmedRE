@@ -2,6 +2,7 @@ import future from "./future"
 
 const theme = {
   ...future,
+  breakpoints: ["40em", "56em", "64em", "120em"],
   initialColorModeName: "light",
   fonts: {
     ...future.fonts,
@@ -54,7 +55,7 @@ const theme = {
     },
   },
   zIndices: {
-    header: 100,
+    header: 999,
     contactForm: 10,
   },
   buttons: {
