@@ -1,10 +1,9 @@
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import Filter from "app/components/Forms/Filter"
-
+import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Text, Link as ThemeLink } from "theme-ui"
-import getCountry from "app/public/countries/queries/getCountry"
 import {
   City,
   Country,
@@ -16,23 +15,25 @@ import {
   PropertyType,
   RoomWithPrice,
 } from "@prisma/client"
-import { useRouter } from "blitz"
-import ServicesForm from "app/components/Forms/ServicesForm"
-import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
-import Contact from "app/components/Forms/Contact"
-import FurnishCategoryCard from "app/components/FurnishCategoryCard"
-import OfferCard from "app/components/Cards/OfferCard"
+import { useRouter, dynamic } from "blitz"
+import getCountry from "app/public/countries/queries/getCountry"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountries from "app/public/countries/queries/getCountries"
 import getProjects from "app/public/projects/queries/getProjects"
-import ExploreCard from "app/components/ExploreCard"
+import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import getExplores from "app/public/explores/queries/getExplores"
+
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
-import MostViewd from "app/components/Cards/MostViewd"
-import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
-import Image from "app/components/Image"
-import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
-import ProjectSlider from "app/components/Sliders/ProjectSlider"
+import OptmizationImage from "app/components/OptmizationImage"
+
+const ServicesForm = dynamic(() => import("app/components/Forms/ServicesForm"))
+const Contact = dynamic(() => import("app/components/Forms/Contact"))
+const FurnishCategoryCard = dynamic(() => import("app/components/FurnishCategoryCard"))
+const OfferCard = dynamic(() => import("app/components/Cards/OfferCard"))
+const ExploreCard = dynamic(() => import("app/components/ExploreCard"))
+const ExploreToggleButton = dynamic(() => import("app/components/Buttons/ExploreToggleButton"))
+const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"))
+const ProjectSlider = dynamic(() => import("app/components/Sliders/ProjectSlider"))
 
 function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
   return (
@@ -118,6 +119,7 @@ function CountryPage({
       >
         {Array.isArray(country.carousel) ? (
           <Swiper
+            autoHeight
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
@@ -131,28 +133,14 @@ function CountryPage({
                   href={url}
                   sx={{
                     display: "block",
-                    overflow: "hidden",
-                    textAlign: "center",
-                    position: "relative",
-                    ":after": {
-                      display: "block",
-                      content: '""',
-                      /* 16:9, 21:9 aspect ratio */
-                      paddingBottom: ["56.25%", "42.8571%"],
-                    },
                   }}
                 >
-                  <Image
+                  <OptmizationImage
+                    layout="responsive"
+                    width={210}
+                    height={90}
                     // className="animate__animated animate__zoomIn"
-                    sx={{
-                      objectFit: "cover",
-                      objectPosition: "center",
-                      position: "absolute",
-                      left: 0,
-                      top: 0,
-                      width: "100%",
-                      height: "100%",
-                    }}
+                    alt="///"
                     src={image || ""}
                   />
                 </ThemeLink>

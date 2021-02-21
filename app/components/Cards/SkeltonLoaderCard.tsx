@@ -6,7 +6,7 @@ export default function SkeltonLoaderCard() {
   return (
     <Box>
       <Box sx={{ mb: 2 }}>
-        <Skeleton height={150} />
+        <Skeleton height={200} />
       </Box>
       <Box sx={{ mb: 2, my: 2 }}>
         <Skeleton />

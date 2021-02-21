@@ -25,11 +25,10 @@ import getPartners from "app/public/partners/queries/getPartners"
 import getExplores from "app/public/explores/queries/getExplores"
 import SkeltonLoaderCard from "app/components/Cards/SkeltonLoaderCard"
 
+import LatestOffersSection from "app/components/LatestOffersSection"
+import ComplexProjects from "app/components/ComplexProjects" // suspended component
+
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
-})
-const ComplexProjects = dynamic(() => import("app/components/ComplexProjects"), {
   ssr: false,
   loading: () => <SyncLoader />,
 })
@@ -43,7 +42,8 @@ const CountriesProjectsSection = dynamic(() => import("app/components/CountriesP
     </Flex>
   ),
 })
-const LatestOffersSection = dynamic(() => import("app/components/LatestOffersSection"), {
+
+const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
   ssr: false,
   loading: () => (
     <Flex>
@@ -52,10 +52,6 @@ const LatestOffersSection = dynamic(() => import("app/components/LatestOffersSec
       <SkeltonLoaderCard />
     </Flex>
   ),
-})
-const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
-  ssr: false,
-  loading: () => <SyncLoader />,
 })
 const IdealDestinations = dynamic(() => import("app/components/IdealDestinations"), {
   ssr: false,
