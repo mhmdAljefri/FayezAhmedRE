@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const countryId = useParam("countryId", "number")
 
+  console.log(Component.getLayout)
   return (
     <ErrorBoundary
       FallbackComponent={RootErrorFallback}

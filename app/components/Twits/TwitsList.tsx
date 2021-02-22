@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading } from "theme-ui"
+import { Box } from "theme-ui"
 import { useQuery } from "react-query"
 import Wrapper from "app/components/Wrapper"
 import { ArrowNext, ArrowPrev } from "app/components/Arrows/SliderArrows"
@@ -16,7 +16,6 @@ export default function TwitsList() {
 
   return (
     <Wrapper sx={{ position: "relative" }}>
-      <Heading sx={{ marginBottom: 5, fontSize: [4, 6] }}>شركائنا</Heading>
       <ArrowNext />
       <ArrowPrev />
       <Swiper
