@@ -21,7 +21,6 @@ const SharedStyle: SxStyleProp = {
   paddingTop: 10,
   px: 2,
   height: 40,
-  cursor: "pointer",
 }
 
 export const ArrowNext = ({ icon, className, iconSize, ...props }: ArrowProps) => (
