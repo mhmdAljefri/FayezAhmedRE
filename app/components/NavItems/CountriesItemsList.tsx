@@ -1,11 +1,12 @@
 import getCountries from "app/public/countries/queries/getCountries"
 import { Link, useQuery } from "blitz"
-import React from "react"
+import React, { Suspense } from "react"
+import { ClipLoader } from "react-spinners"
 import { Box, Flex } from "theme-ui"
 import Dropdown from "../Dropdown"
 import OptmizationImage from "../OptmizationImage"
 
-export default function CountriesItemsList() {
+function List() {
   const [{ countries }] = useQuery(getCountries, { select: { id: true, name: true, image: true } })
   return (
     <Dropdown
@@ -61,5 +62,13 @@ export default function CountriesItemsList() {
         ),
       }))}
     />
+  )
+}
+
+export default function CountriesItemsList() {
+  return (
+    <Suspense fallback={<ClipLoader />}>
+      <List />
+    </Suspense>
   )
 }

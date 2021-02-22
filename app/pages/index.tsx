@@ -35,7 +35,11 @@ import HeroSection from "app/components/HeroSection" // suspended component
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
-  loading: () => <SyncLoader />,
+  loading: () => (
+    <Box sx={{ height: 100, alignItems: "center", justifyContent: "center", color: "primary" }}>
+      <SyncLoader />
+    </Box>
+  ),
 })
 const CountriesProjectsSection = dynamic(() => import("app/components/CountriesProjectsSection"), {
   ssr: false,
@@ -108,7 +112,7 @@ const Home: BlitzPage<HomeProps> = ({
 
       <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>
         <Wrapper>
-          <Heading sx={{ fontSize: [5, 6] }}>الاكثر مشاهدة</Heading>
+          <Heading sx={{ fontSize: [4, 5, 6] }}>الاكثر مشاهدة</Heading>
 
           <Grid sx={{ paddingX: [1, 2, 4], marginTop: 5 }} columns={[1, 2, 2, 4]}>
             {mostViewedProjects
