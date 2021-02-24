@@ -1,7 +1,7 @@
 import { Head } from "blitz"
 import React from "react"
 
-export default function MetaTags() {
+export default function MetaTags({ title }) {
   return (
     <Head>
       <meta charSet="utf-8" />
@@ -10,6 +10,15 @@ export default function MetaTags() {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+      <title>{title}</title>
+      {/* <!-- Manifest  --> */}
+      <link rel="manifest" href="/manifest.json" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap"
+        rel="stylesheet"
+      />
       <meta name="description" content="الموقع الرسمي لشركة فايز احمد العقارية" />
       <meta
         name="keywords"

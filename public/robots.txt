@@ -7,3 +7,4 @@ Host: https://fayezahmed.com
 
 # Sitemaps
 Sitemap: https://fayezahmed.com/sitemap.xml
+Sitemap: https://fayezahmed.com/server-sitemap.xml

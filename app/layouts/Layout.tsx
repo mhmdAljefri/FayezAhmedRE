@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import { Head } from "blitz"
 import { SxStyleProp, ThemeProvider } from "theme-ui"
 import theme from "app/theme"
 import Footer from "app/components/Footer"
@@ -21,17 +20,7 @@ type LayoutProps = {
 const Layout = ({ title, headerProps, children }: LayoutProps) => {
   return (
     <>
-      <MetaTags />
-      <Head>
-        <title>{title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"}</title>
-        {/* <!-- Manifest  --> */}
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <MetaTags title={title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"} />
       <ThemeProvider theme={theme}>
         <Header sx={headerProps?.sx} />
 

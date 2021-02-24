@@ -30,7 +30,9 @@ export default function HeroSection({ carouselVideo, carousels }) {
         }}
       >
         <Wrapper>
-          <Heading sx={{ fontSize: [5, 6], color: "primary" }}>الارتقاء بالحياة</Heading>
+          <Heading as="h1" sx={{ fontSize: [5, 6], color: "primary" }}>
+            الارتقاء بالحياة
+          </Heading>
           <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>
             يتلاقى مع اهتمامنا
           </Heading>
