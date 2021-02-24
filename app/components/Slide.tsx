@@ -1,5 +1,6 @@
 import React from "react"
 import { Box, Flex, Heading, SxStyleProp, Text } from "theme-ui"
+import OptmizationImage from "./OptmizationImage"
 
 const defaultProps = {
   opacity: 0.5,
@@ -17,17 +18,12 @@ type SlideTypeProps = SlideProps & {
 }
 
 const Slide = ({ title, opacity, text, sx, image, url, onlyImages }: SlideTypeProps) => {
-  const bgImageSecureUrl = image.replace("http://", "https://")
-
   const Wrapper = ({ children }) => (url ? <a href={url}>{children}</a> : <>{children}</>)
   return (
     <Wrapper>
       <Flex
         sx={{
           alignItems: "center",
-          backgroundImage: `url(${bgImageSecureUrl})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           backgroundColor: "#eee",
           height: "100%",
           maxWidth: "100%",
@@ -48,6 +44,13 @@ const Slide = ({ title, opacity, text, sx, image, url, onlyImages }: SlideTypePr
           ...sx,
         }}
       >
+        <OptmizationImage
+          src={image}
+          alt=".."
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
         {!onlyImages && (
           <Box
             sx={{

@@ -26,6 +26,7 @@ import getExplores from "app/public/explores/queries/getExplores"
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
 import OptmizationImage from "app/components/OptmizationImage"
 import useScreenSize from "app/hooks/useScreenSize"
+import LazyLoad from "react-lazyload"
 
 const ServicesForm = dynamic(() => import("app/components/Forms/ServicesForm"))
 const Contact = dynamic(() => import("app/components/Forms/Contact"))
@@ -324,33 +325,36 @@ function CountryPage({
         </Swiper>
       </Wrapper>
 
-      <Wrapper sx={{ paddingY: 5 }}>
-        <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
-        <Swiper
-          pagination={{
-            clickable: true,
-          }}
-          height={350}
-          spaceBetween={20}
-          breakpoints={{
-            520: {
-              slidesPerView: 2,
-            },
-            760: {
-              slidesPerView: 3,
-            },
-            1024: {
-              slidesPerView: 4,
-            },
-          }}
-        >
-          {furnishCategories.map((furnishCategory) => (
-            <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
-              <FurnishCategoryCard {...furnishCategory} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Wrapper>
+      <LazyLoad once>
+        <Wrapper sx={{ paddingY: 5 }}>
+          <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
+          <Swiper
+            pagination={{
+              clickable: true,
+            }}
+            spaceBetween={20}
+            breakpoints={{
+              520: {
+                slidesPerView: 2,
+              },
+              760: {
+                slidesPerView: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+            }}
+          >
+            {furnishCategories.map((furnishCategory) => (
+              <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
+                <Box sx={{ minHeight: 300 }}>
+                  <FurnishCategoryCard {...furnishCategory} />
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Wrapper>
+      </LazyLoad>
 
       <Wrapper
         id="ServicesForm"

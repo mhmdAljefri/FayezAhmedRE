@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import Layout from "app/layouts/Layout"
+import AdminLayout from "app/layouts/AdminLayout"
 import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getCarousel from "app/admin/carousels/queries/getCarousel"
 import updateCarousel from "app/admin/carousels/mutations/updateCarousel"
@@ -15,11 +15,13 @@ export const EditCarousel = () => {
   return (
     <div>
       <h1>تعديل على التفاصيل {carousel.id}</h1>
-      <pre>{JSON.stringify(carousel)}</pre>
 
       <CarouselForm
         initialValues={carousel}
         onSubmit={async (data) => {
+          delete (data as any).id
+          delete (data as any).position
+
           try {
             const updated = await updateCarouselMutation({
               where: { id: carousel.id },
@@ -53,6 +55,6 @@ const EditCarouselPage: BlitzPage = () => {
   )
 }
 
-EditCarouselPage.getLayout = (page) => <Layout title={"Edit Carousel"}>{page}</Layout>
+EditCarouselPage.getLayout = (page) => <AdminLayout title={"Edit Carousel"}>{page}</AdminLayout>
 
 export default EditCarouselPage

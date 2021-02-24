@@ -24,11 +24,11 @@ const VideoCarouselForm = ({ initialValues, onSubmit }: VideoCarouselFormProps) 
 
             <Flex>
               <Label>
-                <Radio {...input} name="isActive" value="true" />
+                <Radio {...input} checked={input.value === "true"} name="isActive" value="true" />
                 نعم
               </Label>
               <Label>
-                <Radio {...input} name="isActive" value="false" />
+                <Radio {...input} checked={input.value === "false"} name="isActive" value="false" />
                 لا
               </Label>
             </Flex>

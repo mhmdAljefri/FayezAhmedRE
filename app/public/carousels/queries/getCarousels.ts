@@ -1,6 +1,6 @@
-import db, { FindManyCarouselArgs } from "db"
+import db, { Prisma } from "db"
 
-type GetCarouselsInput = Pick<FindManyCarouselArgs, "where" | "orderBy" | "skip" | "take">
+type GetCarouselsInput = Pick<Prisma.FindManyCarouselArgs, "where" | "orderBy" | "skip" | "take">
 
 export default async function getCarousels({ where, orderBy, skip = 0, take }: GetCarouselsInput) {
   const carousels = await db.carousel.findMany({
@@ -8,9 +8,8 @@ export default async function getCarousels({ where, orderBy, skip = 0, take }: G
     orderBy,
     take,
     select: {
-      title: true,
-      text: true,
       image: true,
+      url: true,
     },
     skip,
   })

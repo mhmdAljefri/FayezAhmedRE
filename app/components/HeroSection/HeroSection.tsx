@@ -10,6 +10,7 @@ const HomeSlider = dynamic(() => import("app/components/HomeSlider"), {
 })
 
 export default function HeroSection({ carouselVideo, carousels }) {
+  console.log({ carousels, carouselVideo })
   const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
@@ -30,7 +31,10 @@ export default function HeroSection({ carouselVideo, carousels }) {
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: [5, 6], color: "primary" }}>
+          <Heading
+            as="h1"
+            sx={{ fontSize: [5, 6], textShadow: "1px 2px 5px #000", color: "primary" }}
+          >
             الارتقاء بالحياة
           </Heading>
           <Heading sx={{ color: "white", textShadow: "1px 2px 5px #000" }}>

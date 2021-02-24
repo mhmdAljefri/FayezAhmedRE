@@ -3,11 +3,11 @@ import React from "react"
 import { Box } from "theme-ui"
 import { Swiper, SwiperSlide } from "./Swiper"
 
-export default function ProjectSlider({ projects }) {
+export default function ProjectSlider({ projects, pagination = false }) {
   return (
     <Swiper
       loop
-      pagination={{ clickable: true }}
+      pagination={pagination ? { clickable: true } : false}
       autoHeight
       spaceBetween={20}
       breakpoints={{

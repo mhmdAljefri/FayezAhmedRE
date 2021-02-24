@@ -20,10 +20,28 @@ const Search: BlitzPage<furnishCategoriesProps> = ({ furnishCategories }) => {
         </Wrapper>
       </Box>
       <Wrapper sx={{ marginTop: -5, marginBottom: 5 }}>
-        <Swiper>
+        <Swiper
+          pagination={{
+            clickable: true,
+          }}
+          spaceBetween={20}
+          breakpoints={{
+            520: {
+              slidesPerView: 2,
+            },
+            760: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {furnishCategories.map((furnishCategory) => (
             <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
-              <FurnishCategoryCard {...furnishCategory} />
+              <Box sx={{ minHeight: 300 }}>
+                <FurnishCategoryCard {...furnishCategory} />
+              </Box>
             </SwiperSlide>
           ))}
         </Swiper>
