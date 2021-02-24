@@ -14,7 +14,7 @@ export default function IdealDestinations({ explores }) {
         pb: 4,
       }}
     >
-      <LazyLoad>
+      <LazyLoad once>
         <IdealDestinationBG />
       </LazyLoad>
       <Wrapper>
@@ -22,7 +22,7 @@ export default function IdealDestinations({ explores }) {
           وجهات مثالية للجميع
         </Heading>
 
-        <LazyLoad offset={150}>
+        <LazyLoad once offset={150}>
           <IdealDestinationsSwiper explores={explores} />
         </LazyLoad>
       </Wrapper>

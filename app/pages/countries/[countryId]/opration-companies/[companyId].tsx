@@ -30,7 +30,7 @@ const OprationCompanyPage: BlitzPage = () => {
         </Wrapper>
       </Box>
 
-      <LazyLoad offset={100}>
+      <LazyLoad once offset={100}>
         <GalleryViewSlider gallery={oprationCompanyPage.galleryImages} />
       </LazyLoad>
 

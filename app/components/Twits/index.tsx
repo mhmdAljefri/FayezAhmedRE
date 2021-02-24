@@ -28,7 +28,7 @@ export default function Twits() {
             )),
           ]}
         >
-          <LazyLoad offset={50}>
+          <LazyLoad once offset={50}>
             <TwitsList />
           </LazyLoad>
         </Suspense>

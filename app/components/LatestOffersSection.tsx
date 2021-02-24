@@ -22,7 +22,7 @@ export default function LatestOffersSection({ offers }) {
       <Wrapper>
         <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
 
-        <LazyLoad offset={200} height={300}>
+        <LazyLoad once offset={200} height={300}>
           <OfferSlider offers={offers} />
         </LazyLoad>
       </Wrapper>

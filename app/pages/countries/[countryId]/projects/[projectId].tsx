@@ -212,7 +212,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
             </Grid>
           </Box>
         </Wrapper>
-        <LazyLoad offset={200}>
+        <LazyLoad once offset={200}>
           <GalleryViewSlider gallery={gallery} />
         </LazyLoad>
         <ConstractiongVideo
@@ -431,13 +431,13 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           {location && (
             <>
               <Heading sx={{ marginBottom: 5 }}>الموقع</Heading>
-              <LazyLoad height={250} offset={100}>
+              <LazyLoad once height={250} offset={100}>
                 <GoogleMap zoom={18} center={location as any} />
               </LazyLoad>
             </>
           )}
 
-          <LazyLoad height={250} offset={100}>
+          <LazyLoad once height={250} offset={100}>
             <Contact />
           </LazyLoad>
 

@@ -111,7 +111,7 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
         </Wrapper>
       )}
       {offer.gallery.length > 0 && (
-        <LazyLoad offset={200}>
+        <LazyLoad once offset={200}>
           <GalleryViewSlider gallery={offer.gallery} />
         </LazyLoad>
       )}

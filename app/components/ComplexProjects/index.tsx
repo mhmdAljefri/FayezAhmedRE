@@ -45,7 +45,7 @@ export default function ComplexProjects({ projects }) {
       >
         <Heading sx={{ marginY: 5, fontSize: [4, 5, 6] }}>مجمعات بارزة</Heading>
 
-        <LazyLoad offset={200}>
+        <LazyLoad once offset={200}>
           <ComplexProjectsSlider projects={projects} />
         </LazyLoad>
       </Wrapper>

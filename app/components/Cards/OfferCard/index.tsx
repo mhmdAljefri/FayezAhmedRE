@@ -38,17 +38,17 @@ export default function OfferCard({
     >
       <Link href={href}>
         <a>
-          <Box sx={{ position: "relative" }}>
+          <Box sx={{ position: "relative", paddingBottom: hideOfferLabel ? 0 : 25 }}>
             {mainVideo ? (
-              <Box sx={{ height: 190, paddingBottom: hideOfferLabel ? 0 : 25 }}>
-                <LazyLoad offset={100}>
+              <LazyLoad once height={200} offset={100}>
+                <Box sx={{ height: ["calc(100% * (9/16))", 190] }}>
                   {isYoutube ? (
                     <OfferCardYoutube src={mainVideo} />
                   ) : (
                     <OfferCardPureVideo poster={image || undefined} src={mainVideo} />
                   )}
-                </LazyLoad>
-              </Box>
+                </Box>
+              </LazyLoad>
             ) : (
               <OfferCardImage image={image} />
             )}
