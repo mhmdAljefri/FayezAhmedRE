@@ -25,6 +25,7 @@ import getExplores from "app/public/explores/queries/getExplores"
 
 import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButton"
 import OptmizationImage from "app/components/OptmizationImage"
+import useScreenSize from "app/hooks/useScreenSize"
 
 const ServicesForm = dynamic(() => import("app/components/Forms/ServicesForm"))
 const Contact = dynamic(() => import("app/components/Forms/Contact"))
@@ -70,6 +71,8 @@ function CountryPage({
   govProjects,
   ...props
 }: CountryPropsType) {
+  const isDesktopScreen = useScreenSize() > 720
+
   const { push, isFallback } = useRouter()
   const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
     "dontMissitGallery"
@@ -133,12 +136,15 @@ function CountryPage({
                   href={url}
                   sx={{
                     display: "block",
+                    position: "relative",
                   }}
                 >
                   <OptmizationImage
                     layout="responsive"
-                    width={210}
+                    width={isDesktopScreen ? 210 : 160}
                     height={90}
+                    objectFit="cover"
+                    objectPosition="center"
                     // className="animate__animated animate__zoomIn"
                     alt="///"
                     src={image || ""}
