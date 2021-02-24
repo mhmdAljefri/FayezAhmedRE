@@ -1,15 +1,22 @@
 import React from "react"
-import { BlitzPage, Link, useRouter } from "blitz"
+import { BlitzPage, dynamic, Link, useRouter } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
 import { Box, Heading, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
-import { ConstractiongVideo, GalleryView, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
+import { ConstractiongVideo, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
 import { Offer, Project } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
 import Image from "app/components/Image"
+import Skeleton from "react-loading-skeleton"
+import LazyLoad from "react-lazyload"
+
+const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
 
 const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
   const router = useRouter()
@@ -103,7 +110,11 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
           </Link>
         </Wrapper>
       )}
-      {offer.gallery.length > 0 && <GalleryView gallery={offer.gallery} />}
+      {offer.gallery.length > 0 && (
+        <LazyLoad offset={200}>
+          <GalleryViewSlider gallery={offer.gallery} />
+        </LazyLoad>
+      )}
     </Layout>
   )
 }

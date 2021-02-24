@@ -324,7 +324,7 @@ function CountryPage({
           pagination={{
             clickable: true,
           }}
-          autoHeight
+          height={350}
           spaceBetween={20}
           breakpoints={{
             520: {

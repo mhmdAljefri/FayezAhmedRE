@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import { BlitzPage, Link, useMutation, useRouter, dynamic } from "blitz"
 import {
   PaymentPlan,
-  GalleryView,
   ConstractiongVideo,
   ContructionCompaniesDetails,
 } from "app/layouts/ProjectDetailsLayout"
@@ -31,8 +30,13 @@ import { mapMarker } from "react-icons-kit/fa/mapMarker"
 import { key } from "react-icons-kit/fa/key"
 import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
-import LazyLoad from "react-lazyload"
 import Skeleton from "react-loading-skeleton"
+import LazyLoad from "react-lazyload"
+
+const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
 
 const GoogleMap = dynamic(() => import("app/components/GoogleMap"), {
   ssr: false,
@@ -208,7 +212,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
             </Grid>
           </Box>
         </Wrapper>
-        <GalleryView gallery={gallery} />
+        <LazyLoad offset={200}>
+          <GalleryViewSlider gallery={gallery} />
+        </LazyLoad>
         <ConstractiongVideo
           heading="فيديو المشروع"
           constructingUpdatePrview={mainVideoPreview}

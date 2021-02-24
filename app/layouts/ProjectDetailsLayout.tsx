@@ -61,15 +61,16 @@ export function ConstractiongVideo({
       {heading && <Heading sx={{ marginBottom: 4, fontSize: [5, null, 6] }}>{heading}</Heading>}
       <Box
         sx={{
-          marginX: [1, null, 6],
+          marginX: "auto",
           borderRadius: "default",
           boxShadow: isYoutube ? undefined : "card",
+          paddingBottom: ["56.25%", null, "38.25%"] /* 16:9 */,
+          position: "relative",
         }}
       >
         {isYoutube ? (
           <iframe
-            width="100%"
-            height="100%"
+            style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
             title="any"
             src={constructingSecureUpdateVideo}
           ></iframe>
@@ -92,64 +93,6 @@ export function ConstractiongVideo({
         )}
       </Box>
     </Wrapper>
-  )
-}
-
-export function GalleryView({ gallery }) {
-  return (
-    <>
-      <Box sx={{ marginTop: -5, paddingTop: 6, paddingBottom: 5, backgroundColor: "dark" }}>
-        <Wrapper sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Heading sx={{ color: "white", marginBottom: 1, fontSize: [5, null, 6] }}>المعرض</Heading>
-          <Box
-            sx={{
-              position: "relative",
-              display: "flex",
-              width: 150,
-              pb: 4,
-              justifyContent: ["space-between", null, "flex-start"],
-            }}
-          >
-            <ArrowRight className="GalleryArrowRight" />
-            <ArrowLeft className="GalleryArrowLeft" />
-          </Box>
-        </Wrapper>
-      </Box>
-
-      <Wrapper
-        sx={{
-          marginTop: -5,
-          ".swiper-slide": {
-            width: "auto",
-            marginInlineEnd: 10,
-          },
-        }}
-      >
-        <Swiper
-          lazy
-          navigation={{
-            nextEl: ".GalleryArrowRight",
-            prevEl: ".GalleryArrowLeft",
-          }}
-          slidesPerView="auto"
-        >
-          {gallery.map((item, index) => (
-            <SwiperSlide virtualIndex={index} key={item + "_" + index}>
-              <Image
-                key={item + "_" + index}
-                sx={{
-                  borderRadius: 15,
-                  width: "auto",
-                  height: [200, 200, 250, 300],
-                  objectFit: "contain",
-                }}
-                src={item}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Wrapper>
-    </>
   )
 }
 
