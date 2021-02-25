@@ -1,13 +1,10 @@
 import React from "react"
 import { Box, Heading } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
-import dynamic from "next/dynamic"
 
-const YoutubeVid = dynamic(() => import("./YoutubeVid"))
+import YoutubeVid from "./YoutubeVid"
 
-const HomeSlider = dynamic(() => import("app/components/HomeSlider"), {
-  ssr: false,
-})
+import HomeSlider from "app/components/HomeSlider"
 
 export default function HeroSection({ carouselVideo, carousels }) {
   console.log({ carousels, carouselVideo })
