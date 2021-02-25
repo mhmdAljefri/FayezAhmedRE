@@ -1,5 +1,6 @@
+import useScreenSize from "app/hooks/useScreenSize"
 import React from "react"
-import { Box, Flex, Heading, SxStyleProp, Text } from "theme-ui"
+import { Box, Heading, Text } from "theme-ui"
 import OptmizationImage from "./OptmizationImage"
 
 const defaultProps = {
@@ -17,6 +18,7 @@ type SlideTypeProps = SlideProps & {
 }
 
 const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps) => {
+  const isDisktop = useScreenSize() > 720
   const Wrapper = ({ children }) =>
     url ? (
       <a style={{ display: "block" }} href={url}>
@@ -43,7 +45,7 @@ const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps)
         src={image}
         alt=".."
         width={1280}
-        height={960}
+        height={isDisktop ? 720 : 960}
         layout="responsive"
         objectFit="cover"
         objectPosition="center"
