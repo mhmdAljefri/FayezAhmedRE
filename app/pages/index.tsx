@@ -53,7 +53,6 @@ const CountriesProjectsSection = dynamic(() => import("app/components/CountriesP
 })
 
 const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
-  ssr: false,
   loading: () => (
     <Flex>
       <SkeltonLoaderCard />
