@@ -17,8 +17,9 @@ export default function MetaTags({ title }) {
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap"
-        rel="stylesheet"
-      />
+        rel="preload"
+        as="style"
+      ></link>
       <meta name="description" content="الموقع الرسمي لشركة فايز احمد العقارية" />
       <meta
         name="keywords"

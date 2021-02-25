@@ -18,6 +18,8 @@ import "react-tippy/dist/tippy.css"
 import "app/styles/slick-modifier.css"
 import "react-toastify/dist/ReactToastify.css"
 import "app/styles/global.css"
+import "app/styles/animate.css"
+import "app/styles/fonts.css"
 
 const PriceProvider = dynamic(() => import("app/context/price"), { ssr: false }) //nprogress module
 const LoginForm = dynamic(() => import("app/auth/components/LoginForm"), { ssr: false }) //nprogress module

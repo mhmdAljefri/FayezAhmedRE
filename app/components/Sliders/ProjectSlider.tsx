@@ -3,18 +3,20 @@ import React from "react"
 import { Box } from "theme-ui"
 import { Swiper, SwiperSlide } from "./Swiper"
 
-export default function ProjectSlider({ projects, pagination = false }) {
+export default function ProjectSlider({ projects }) {
   return (
     <Swiper
       loop
-      pagination={pagination ? { clickable: true } : false}
+      pagination={{ clickable: true }}
       autoHeight
       spaceBetween={20}
       breakpoints={{
         1200: {
+          pagination: false,
           slidesPerView: 3,
         },
         900: {
+          pagination: false,
           slidesPerView: 2,
         },
       }}

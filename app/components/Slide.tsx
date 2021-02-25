@@ -1,11 +1,8 @@
 import useScreenSize from "app/hooks/useScreenSize"
-import React from "react"
+import React, { useState } from "react"
 import { Box, Heading, Text } from "theme-ui"
 import OptmizationImage from "./OptmizationImage"
 
-const defaultProps = {
-  opacity: 0.5,
-}
 export type SlideProps = {
   image: string
   title?: string | null
@@ -17,18 +14,19 @@ type SlideTypeProps = SlideProps & {
   onlyImages?: boolean
 }
 
-const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps) => {
+const Slide = ({ title, opacity = 0.4, text, image, url, onlyImages }: SlideTypeProps) => {
   const isDisktop = useScreenSize() > 720
-  const Wrapper = ({ children }) =>
+  const [loaded, setLoaded] = useState(false)
+  const Wrapper = ({ children, ...props }) =>
     url ? (
-      <a style={{ display: "block" }} href={url}>
+      <a {...props} style={{ display: "block" }} href={url}>
         {children}
       </a>
     ) : (
-      <>{children}</>
+      <div {...props}>{children}</div>
     )
   return (
-    <Wrapper>
+    <Wrapper className={loaded ? "animate__animated animate__zoomIn" : undefined}>
       <Box
         sx={{
           position: "absolute",
@@ -44,6 +42,7 @@ const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps)
       <OptmizationImage
         src={image}
         alt=".."
+        onLoad={() => setLoaded(true)}
         width={1280}
         height={isDisktop ? 720 : 960}
         layout="responsive"
@@ -69,5 +68,4 @@ const Slide = ({ title, opacity, text, image, url, onlyImages }: SlideTypeProps)
   )
 }
 
-Slide.defaultProps = defaultProps
 export default Slide

@@ -10,6 +10,7 @@ function Card({
 }) {
   return (
     <Box
+      className="animate__animated animate__fadeInUp animate__slow"
       sx={{
         ...styles.boxStyle,
         ":before": {

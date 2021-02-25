@@ -24,7 +24,7 @@ export default function CountriesProjectsSection({ countries }) {
               <ShowMoreButton href={`/countries/${id}/projects`} />
             </Flex>
 
-            <ProjectSlider pagination={false} projects={projects} />
+            <ProjectSlider projects={projects} />
           </Wrapper>
         </Box>
       ))}

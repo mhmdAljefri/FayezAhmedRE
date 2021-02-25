@@ -7,7 +7,6 @@ import YoutubeVid from "./YoutubeVid"
 import HomeSlider from "app/components/HomeSlider"
 
 export default function HeroSection({ carouselVideo, carousels }) {
-  console.log({ carousels, carouselVideo })
   const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
