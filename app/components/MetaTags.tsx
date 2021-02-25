@@ -14,12 +14,20 @@ export default function MetaTags({ title }) {
       <title>{title}</title>
       {/* <!-- Manifest  --> */}
       <link rel="manifest" href="/manifest.json" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      {/* Google fonts preload */}
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
         rel="preload"
         as="style"
       ></link>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
+        media="all"
+        id="print"
+      />
+      {/* End Google fonts */}
       <meta name="description" content="الموقع الرسمي لشركة فايز احمد العقارية" />
       <meta
         name="keywords"
