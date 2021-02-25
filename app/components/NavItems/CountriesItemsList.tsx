@@ -1,6 +1,7 @@
 import getCountries from "app/public/countries/queries/getCountries"
 import { Link, useQuery } from "blitz"
 import React, { Suspense } from "react"
+import { ErrorBoundary } from "react-error-boundary"
 import { ClipLoader } from "react-spinners"
 import { Box, Flex } from "theme-ui"
 import Dropdown from "../Dropdown"
@@ -67,8 +68,23 @@ function List() {
 
 export default function CountriesItemsList() {
   return (
-    <Suspense fallback={<ClipLoader />}>
-      <List />
-    </Suspense>
+    <ErrorBoundary
+      fallbackRender={({ resetErrorBoundary }) => (
+        <button
+          onClick={() => {
+            // this next line is why the fallbackRender is useful
+            // though you could accomplish this with a combination
+            // of the FallbackCallback and onReset props as well.
+            resetErrorBoundary()
+          }}
+        >
+          اعادة التحميل
+        </button>
+      )}
+    >
+      <Suspense fallback={<ClipLoader />}>
+        <List />
+      </Suspense>
+    </ErrorBoundary>
   )
 }
