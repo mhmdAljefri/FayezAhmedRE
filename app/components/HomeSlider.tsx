@@ -11,7 +11,7 @@ type HomeSliderProps = {
 
 const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
   return (
-    <Carousel autoplay slideStyle={slideStyle} nextArrow={<div />} prevArrow={<div />}>
+    <Carousel autoplay nextArrow={<div />} prevArrow={<div />}>
       {data.map((item, index) => (
         <Slide onlyImages={onlyImages} sx={slideStyle} {...item} key={index} />
       ))}
