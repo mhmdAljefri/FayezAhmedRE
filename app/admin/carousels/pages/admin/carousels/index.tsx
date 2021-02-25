@@ -11,6 +11,7 @@ import VideoCarouselForm from "app/admin/carousels/video-carousels/components/Vi
 import createCarouselVideo from "app/admin/carousels/video-carousels/mutations/createCarouselVideo"
 import updateCarouselVideo from "app/admin/carousels/video-carousels/mutations/updateCarouselVideo"
 import { toast } from "react-toastify"
+import { makeS3Url } from "app/utils"
 
 const ITEMS_PER_PAGE = 100
 
@@ -62,7 +63,7 @@ export const CarouselsList = () => {
       <DynamicTable
         headers={[
           { name: "", key: "id" },
-          { name: "", render: ({ image }) => <Image sx={{ width: 120 }} src={image} /> },
+          { name: "", render: ({ image }) => <Image sx={{ width: 120 }} src={makeS3Url(image)} /> },
           { name: "", render: ({ id }) => <Action onDelete={() => handleDelete(id)} id={id} /> },
         ]}
         onPrev={goToPreviousPage}
