@@ -1,5 +1,5 @@
 import useScreenSize from "app/hooks/useScreenSize"
-import React, { useState } from "react"
+import React from "react"
 import { Box, Heading, Text } from "theme-ui"
 import OptmizationImage from "./OptmizationImage"
 
@@ -16,7 +16,6 @@ type SlideTypeProps = SlideProps & {
 
 const Slide = ({ title, opacity = 0.4, text, image, url, onlyImages }: SlideTypeProps) => {
   const isDisktop = useScreenSize() > 720
-  const [loaded, setLoaded] = useState(false)
   const Wrapper = ({ children, ...props }) =>
     url ? (
       <a {...props} style={{ display: "block" }} href={url}>
@@ -26,7 +25,7 @@ const Slide = ({ title, opacity = 0.4, text, image, url, onlyImages }: SlideType
       <div {...props}>{children}</div>
     )
   return (
-    <Wrapper className={loaded ? "animate__animated animate__zoomIn" : undefined}>
+    <Wrapper>
       <Box
         sx={{
           position: "absolute",
@@ -42,7 +41,6 @@ const Slide = ({ title, opacity = 0.4, text, image, url, onlyImages }: SlideType
       <OptmizationImage
         src={image}
         alt=".."
-        onLoad={() => setLoaded(true)}
         width={1280}
         height={isDisktop ? 720 : 960}
         layout="responsive"

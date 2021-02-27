@@ -2,7 +2,7 @@
   background: #c8aa53 !important;
 }
 
-.swiper-slide {
+.swiper-slide:not(.no-padding) {
   padding: 20px 5px 10px;
   box-sizing: border-box;
 }

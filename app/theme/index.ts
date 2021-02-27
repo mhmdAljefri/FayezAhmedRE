@@ -132,6 +132,9 @@ const theme = {
     textarea: {
       variant: "forms.field",
     },
+    checkbox: {
+      backgroundColor: "white",
+    },
     select: {
       variant: "forms.field",
       "&+svg": {

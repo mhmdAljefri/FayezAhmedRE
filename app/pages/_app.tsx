@@ -10,6 +10,7 @@ import NProgress from "nprogress"
 import dynamic from "next/dynamic"
 
 import "swiper/swiper.scss"
+import "swiper/components/effect-fade/effect-fade.scss"
 import "swiper/components/pagination/pagination.scss"
 import "swiper/components/navigation/navigation.scss"
 import "rc-drawer/assets/index.css"

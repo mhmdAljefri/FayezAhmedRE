@@ -1,6 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form"
-import { Box, Flex, Grid, Heading, Input, Label } from "theme-ui"
+import { Box, Checkbox, Flex, Grid, Heading, Input, Label } from "theme-ui"
 import Form from "../Form"
 import { MenuField } from "app/admin/components/LabeledMenuField"
 import SubmitButton from "../SubmitButton"
@@ -19,6 +19,10 @@ export type filterValues = {
   room?: number[] | string[]
   propertyType?: string
   status?: string
+  isHousingComplex?: "true" | "false"
+  isGrantedByGov?: "true" | "false"
+  isWithSeaView?: "true" | "false"
+  isDelux?: "true" | "false"
 }
 type filterProps = Pick<Country, "isTurkey" | "rooms"> & {
   onFilter: (filter: filterValues) => any
@@ -112,7 +116,7 @@ export default function Filter({
                   )}
                 />
               </Box>
-            )}
+            )}{" "}
             <MenuField
               emptyOptionText={isTurkey ? "السعر (بالدولار)" : "السعر (بالريال القطري)"}
               getLabel={(i) => i.name}
@@ -128,6 +132,75 @@ export default function Filter({
               options={propertyTypes}
             />
           </Grid>
+
+          <Flex>
+            <Field
+              name="isWithSeaView"
+              render={({ input }) => (
+                <Label>
+                  <Checkbox
+                    sx={{
+                      mx: 2,
+                    }}
+                    {...input}
+                    defaultChecked={input.value}
+                  />
+                  اطلالة بحرية
+                </Label>
+              )}
+            />
+            {isTurkey && (
+              <Field
+                name="isGrantedByGov"
+                render={({ input }) => (
+                  <Label>
+                    <Checkbox
+                      sx={{
+                        mx: 2,
+                      }}
+                      {...input}
+                      onClick={(logs) => console.log(logs)}
+                      defaultChecked={input.value}
+                    />
+                    بضمان الحكومة التركية
+                  </Label>
+                )}
+              />
+            )}
+            <Field
+              name="isHousingComplex"
+              render={({ input }) => (
+                <Label>
+                  <Checkbox
+                    sx={{
+                      mx: 2,
+                    }}
+                    {...input}
+                    onClick={(logs) => console.log(logs)}
+                    defaultChecked={input.value}
+                  />
+                  مجمعات بارزة
+                </Label>
+              )}
+            />
+            <Field
+              name="isDelux"
+              render={({ input }) => (
+                <Label>
+                  <Checkbox
+                    sx={{
+                      mx: 2,
+                    }}
+                    {...input}
+                    onClick={(logs) => console.log(logs)}
+                    defaultChecked={input.value}
+                  />
+                  مشروع فاخر
+                </Label>
+              )}
+            />
+          </Flex>
+
           <Flex sx={{ justifyContent: "center", flexWrap: ["wrap", "nowrap"], marginTop: 3 }}>
             <MenuField
               sx={{ width: 200, marginX: 2 }}
