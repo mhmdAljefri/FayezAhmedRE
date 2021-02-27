@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { useRouter, Link, dynamic } from "blitz"
 import { Box, Heading, Text } from "theme-ui"
 import { Offer } from "@prisma/client"
@@ -25,11 +25,13 @@ export default function OfferCard({
   const { asPath } = useRouter()
   const href = asPath + prefixPath + id
   const isYoutube = mainVideo?.startsWith("https://www.youtube")
+  const cardWidths = useMemo(() => [250, 280, 300, 300, 350], [])
+  const cardVideoHieghts = useMemo(() => cardWidths.map((w) => w * (9 / 16)), [cardWidths])
 
   return (
     <Box
       sx={{
-        width: ["100%", null, 300, 300, 350],
+        width: cardWidths,
         backgroundColor: "background",
         marginX: "auto",
         boxShadow: "default",
@@ -41,7 +43,7 @@ export default function OfferCard({
           <Box sx={{ position: "relative", paddingBottom: hideOfferLabel ? 0 : 25 }}>
             {mainVideo ? (
               <LazyLoad once height={200} offset={100}>
-                <Box sx={{ height: ["calc(100% * (9/16))", 190] }}>
+                <Box sx={{ height: [cardVideoHieghts] }}>
                   {isYoutube ? (
                     <OfferCardYoutube src={mainVideo} />
                   ) : (
