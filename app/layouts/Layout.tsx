@@ -20,7 +20,13 @@ type LayoutProps = {
 const Layout = ({ title, headerProps, children }: LayoutProps) => {
   return (
     <>
-      <MetaTags title={title ? title + " | فايز احمد العقارية" : "فايز احمد العقارية"} />
+      <MetaTags
+        title={
+          title
+            ? title + " | Fayez Ahmed Real Estate | فايز احمد العقارية"
+            : "فايز احمد العقارية | Fayez Ahmed Real Estate"
+        }
+      />
       <ThemeProvider theme={theme}>
         <Header sx={headerProps?.sx} />
 

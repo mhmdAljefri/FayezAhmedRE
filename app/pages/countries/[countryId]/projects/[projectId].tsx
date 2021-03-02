@@ -107,6 +107,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           backgroundColor: "dark",
         },
       }}
+      title={project.name}
     >
       <div>
         <Box
@@ -147,7 +148,9 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               src={image || ""}
             />
           </Box>
-          <Heading sx={{ fontSize: 6, marginY: 3 }}>{name}</Heading>
+          <Heading as="h1" sx={{ fontSize: 6, marginY: 3 }}>
+            {name}
+          </Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
 
           <Flex>

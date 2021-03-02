@@ -38,7 +38,7 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
           )}
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5, img: { maxWidth: "100%" } }}>
-          <Heading sx={{ fontSize: 6, fontWeight: 700, textAlign: "center", marginY: 5 }}>
+          <Heading as="h1" sx={{ fontSize: 6, fontWeight: 700, textAlign: "center", marginY: 5 }}>
             {explore.title}
           </Heading>
           <HTMLBox html={explore.description} />

@@ -105,7 +105,7 @@ function CountryPage({
       headerProps={{
         sx: { backgroundColor: "dark" },
       }}
-      title="الدولة"
+      title={`مشاريع وعروض عقارات دولة ${country.name}`}
     >
       <Box
         sx={{
