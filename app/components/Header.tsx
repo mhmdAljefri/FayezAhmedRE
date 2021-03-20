@@ -100,6 +100,7 @@ const Header = ({ sx }: HeaderProps) => {
             </>
           )}
           {priceRender}
+          <UserDropdwon />
           {!isDesktopScreen && <Nav />}
         </Flex>
       </Wrapper>

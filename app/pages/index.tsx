@@ -9,7 +9,6 @@ import getCarousels from "app/public/carousels/queries/getCarousels"
 import getProjects from "app/public/projects/queries/getProjects"
 import getCarouselVideo from "app/public/carouselvideos/queries/getCarouselvideo"
 import getOffers from "app/public/offers/queries/getOffers"
-import SkeltonLoaderCard from "app/components/Cards/SkeltonLoaderCard"
 
 import LatestOffersSection from "app/components/LatestOffersSection"
 import Twits from "app/components/Twits"

@@ -1,8 +1,7 @@
 import { Offer } from "@prisma/client"
-import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import { useInfiniteQuery, useParam, useRouterQuery } from "blitz"
-import React, { useRef, useState } from "react"
+import { useInfiniteQuery, useParam } from "blitz"
+import React, { useState } from "react"
 import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
