@@ -2,31 +2,27 @@ import { Offer } from "@prisma/client"
 import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
 import { useInfiniteQuery, useParam, useRouterQuery } from "blitz"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
 import getInfiniteOffersI from "app/public/offers/queries/getInfiniteOffers"
 import OfferCard from "app/components/Cards/OfferCard"
+import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
+import { OffersPageProps } from "app/pages/countries/[countryId]/offers"
 
-type ProjectListTypes = Pick<Offer, "name" | "details">
-export default function ProjectsList({ name, details }: ProjectListTypes) {
-  const filter = useRouterQuery()
-  const filterRef = useRef<filterValues>(filter)
+type OfferListTypes = Pick<Offer, "name" | "details"> & OffersPageProps
+export default function OffersList({ name, details, country, offers }: OfferListTypes) {
+  const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
+
   const countryId = parseInt(useParam("countryId") as string)
-  const [
-    groupedProjects,
-    { isFetching, fetchMore, canFetchMore, isFetchingMore },
-  ] = useInfiniteQuery(
+  const [groupedOffers, { isFetching, fetchMore, canFetchMore, isFetchingMore }] = useInfiniteQuery(
     getInfiniteOffersI,
     (page = { take: 30, skip: 0 }) => ({
       ...page,
       where: {
         countryId,
-        OR: [
-          { name: { contains: filterRef.current?.search || undefined } },
-          { details: { contains: filterRef.current?.search || undefined } },
-        ],
+        cityId: typeof selected.id === "string" ? undefined : selected.id,
       },
     }),
     {
@@ -52,10 +48,16 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
           <Text sx={{ fontSize: 4 }}>{details}</Text>
         </Wrapper>
       </Box>
+
       <Box sx={{ marginTop: -7, position: "relative", zIndex: 2 }}>
         <Wrapper>
+          <CitiesFilter
+            selected={selected}
+            onClick={(city) => setSelected(city)}
+            cities={country.cities}
+          />
           <Grid sx={{ marginBottom: 5, justifyContent: "center" }} columns={[1, null, 2, 3]}>
-            {groupedProjects.map((group, i) => (
+            {groupedOffers.map((group, i) => (
               <React.Fragment key={i}>
                 {group.offers.map((offer) => (
                   <OfferCard hideOfferLabel {...offer} key={offer.id} />

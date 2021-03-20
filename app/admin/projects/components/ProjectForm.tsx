@@ -36,7 +36,8 @@ const Schema = z.object({
   cityId: z.string(),
 })
 
-const CitiesListField = () => {
+// TODO make it in shared file
+export const CitiesListField = () => {
   const {
     values: { countryId },
   } = useFormState()
