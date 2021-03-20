@@ -177,9 +177,6 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <Flex
             sx={{
               justifyContent: "space-evenly",
-              borderBottomWidth: 3,
-              borderBlockColor: "primary",
-              borderBottomStyle: "solid",
               paddingBottom: 3,
             }}
           >

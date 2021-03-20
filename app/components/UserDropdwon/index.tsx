@@ -25,7 +25,7 @@ export default function UserDropdwon() {
               height: 30,
               borderRadius: 30,
               mx: [2, 2, 3],
-              border: (t) => `3px solid ${t.colors.primary}`,
+              border: (t) => `3px solid ${t.colors.light}`,
               backgroundImage: "linear-gradient(to right, #0f0c29, #302b63, #24243e)",
             }}
           ></Box>

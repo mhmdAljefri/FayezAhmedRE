@@ -14,9 +14,9 @@ export default function ExploreToggleButton({ onClick, isActive, children }) {
         cursor: "pointer",
         width: 200,
         fontWeight: 700,
-        color: "white",
+        color: isActive ? "white" : "text",
         textAlign: "center",
-        backgroundColor: isActive ? "primary" : "dark",
+        backgroundColor: isActive ? "primary" : "muted",
         borderRadius: "md",
       }}
     >

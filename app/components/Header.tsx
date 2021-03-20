@@ -58,7 +58,7 @@ const Header = ({ sx }: HeaderProps) => {
                   layout="fill"
                   localImage
                   objectFit="contain"
-                  src="/FAYEZ.png"
+                  src="/logo.jpg"
                   alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
                 />
               </Box>

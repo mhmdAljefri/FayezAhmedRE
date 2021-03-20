@@ -14,14 +14,14 @@ const theme = {
     heading: "#000",
     lightText: "#999",
     background: "#fff",
-    primary: "#ccb87d",
-    primary100: "#ccb87ded",
+    primary: "#751a46",
+    primary100: "#751a46d1",
     white100: "#ffffff6e",
     black100: "#000000d9",
     secondary100: "#051e1ede",
-    input: "#d8c07a",
+    input: "#65143b",
     light: "#fff8ea",
-    dark: "#051e1e",
+    dark: "white",
     dark2: "#202020",
     shadow: "rgba(0, 0, 0, .125)",
     modes: {
@@ -106,6 +106,7 @@ const theme = {
   forms: {
     label: {
       fontSize: 1,
+      color: "white",
       fontWeight: "bold",
     },
     field: {
