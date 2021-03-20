@@ -121,8 +121,8 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
   )
 }
 
-export async function getStaticPaths() {
-  const { offers } = await getOffers({})
+export async function getStaticPaths(context) {
+  const { offers } = await getOffers({}, context)
   const paths = offers.map((offer: Offer) => ({
     params: {
       countryId: `${offer.countryId}`,

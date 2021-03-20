@@ -10,17 +10,18 @@ export const EditCountry = () => {
   const countryId = useParam("countryId", "number")
   const [country, { setQueryData }] = useQuery(getCountry, { where: { id: countryId } })
   const [updateCountryMutation] = useMutation(updateCountry)
+
   return (
     <div>
       <h1>تعديل على بيانات دولة {country.name}</h1>
 
       <CountryForm
-        initialValues={country}
+        initialValues={{ ...country, suspend: country.suspend ? "1" : "0" }}
         onSubmit={async (values) => {
           try {
             const updated = await updateCountryMutation({
               where: { id: country.id },
-              data: values,
+              data: { ...values, suspend: values.suspend === "1" ? true : false },
             })
             await setQueryData(updated)
             alert("Success!")

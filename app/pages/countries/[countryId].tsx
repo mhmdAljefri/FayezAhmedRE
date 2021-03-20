@@ -27,6 +27,7 @@ import ShowMoreButton, { showMoreButtonProps } from "app/components/ShowMoreButt
 import OptmizationImage from "app/components/OptmizationImage"
 import useScreenSize from "app/hooks/useScreenSize"
 import LazyLoad from "react-lazyload"
+import HeadingWithMoreLink from "app/components/HeadingWithMoreLink"
 
 const ServicesForm = dynamic(() => import("app/components/Forms/ServicesForm"))
 const Contact = dynamic(() => import("app/components/Forms/Contact"))
@@ -36,16 +37,6 @@ const ExploreCard = dynamic(() => import("app/components/ExploreCard"))
 const ExploreToggleButton = dynamic(() => import("app/components/Buttons/ExploreToggleButton"))
 const MostViewd = dynamic(() => import("app/components/Cards/MostViewd"))
 const ProjectSlider = dynamic(() => import("app/components/Sliders/ProjectSlider"))
-
-function HeadingWithMoreLink({ heading, href, sx }: showMoreButtonProps & { heading: string }) {
-  return (
-    <Flex sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}>
-      <Heading sx={{ fontSize: [4, 5, 5, 6], padding: 0, marginInlineEnd: 15 }}>{heading}</Heading>
-
-      <ShowMoreButton href={href} sx={sx} />
-    </Flex>
-  )
-}
 
 type ProjectWitRooms = Project & { roomsWithPrices: RoomWithPrice[] }
 export type CountryPropsType = {

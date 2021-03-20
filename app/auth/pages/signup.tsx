@@ -8,8 +8,8 @@ const SignupPage: BlitzPage = () => {
   const router = useRouter()
 
   return (
-    <Wrapper>
-      <SignupForm onSuccess={() => router.push("/")} />
+    <Wrapper sx={{ py: [3, 4, 5], px: 4, maxWidth: 580 }}>
+      <SignupForm onSuccess={() => router.back()} />
     </Wrapper>
   )
 }

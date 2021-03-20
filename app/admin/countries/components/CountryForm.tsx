@@ -1,13 +1,18 @@
 import React from "react"
 import Form from "app/components/Form"
-import { Box, Button, Grid } from "theme-ui"
+import { Box, Button, Grid, Label, Flex, Radio } from "theme-ui"
 import { Country } from "@prisma/client"
 import LabeledTextField from "app/components/LabeledTextField"
 import MediaWidthTextField from "app/admin/components/MediaWidthTextField"
 import { FieldArray } from "react-final-form-arrays"
+import { Field } from "react-final-form"
+
+type CountryFormData = {
+  suspend: "1" | "0"
+} & Omit<Country, "suspend">
 type CountryFormProps = {
   initialValues: any
-  onSubmit: (values: Country) => Promise<any>
+  onSubmit: (values: CountryFormData) => Promise<any>
 }
 
 const CountryForm = ({ initialValues, onSubmit }: CountryFormProps) => {
@@ -15,6 +20,26 @@ const CountryForm = ({ initialValues, onSubmit }: CountryFormProps) => {
     <Form initialValues={initialValues} onSubmit={onSubmit}>
       <LabeledTextField name="name" label="تسمية الدولة" />
       <MediaWidthTextField name="image" label="صورة الدولة" />
+
+      <Field
+        name="suspend"
+        render={({ input }) => (
+          <>
+            <Label>ايقاف</Label>
+
+            <Flex>
+              <Label>
+                <Radio {...input} checked={input.value === "1"} value={"1"} />
+                نعم
+              </Label>
+              <Label>
+                <Radio {...input} checked={input.value === "0"} value={"0"} />
+                لا
+              </Label>
+            </Flex>
+          </>
+        )}
+      />
       <FieldArray name="carousel">
         {({ fields }) => (
           <>

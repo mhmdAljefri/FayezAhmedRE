@@ -21,6 +21,8 @@ model User {
   hashedPassword String?
   role           String    @default("user")
   sessions       Session[]
+  projects       Project[]
+  offers         Offer[]
 }
 
 model Session {
@@ -75,6 +77,8 @@ model Project {
   installmentPlan           Json?
   locationText              String?
   oprationCompanies         Json?
+
+  users                     User[]
 }
 
 model OprationCompanyPage {
@@ -117,6 +121,8 @@ model Offer {
   constructingUpdatePrview  String?
   location                  Json?
   installmentPlan           Json?
+
+  users                     User[]
 } 
 
 model PropertyType {
@@ -157,6 +163,7 @@ model Country {
   rooms                 String[]
   carouselImages        String[]
   carousel              Json?
+  suspend               Boolean @default(false)
 
   cities                City[]
   projects              Project[]

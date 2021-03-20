@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-export default function useOnClickout() {
+export default function useOnClickout(hover = true) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -16,9 +16,11 @@ export default function useOnClickout() {
     }
 
     if (isOnBrowser) {
-      window.addEventListener("mousemove", handleOnMouseMove, { passive: true })
+      window.addEventListener("mousedown", handleOnMouseMove, { passive: true })
+      if (hover) window.addEventListener("mousemove", handleOnMouseMove, { passive: true })
       return () => {
-        window.removeEventListener("mousemove", handleOnMouseMove)
+        window.removeEventListener("mousedown", handleOnMouseMove)
+        if (hover) window.removeEventListener("mousemove", handleOnMouseMove)
       }
     }
   })

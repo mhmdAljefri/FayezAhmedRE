@@ -26,36 +26,6 @@ type ProjectFormProps = {
   onSubmit: (values: any) => {}
 }
 
-// model Project {
-//   id                        Int             @default(autoincrement()) @id
-//   createdAt                 DateTime        @default(now())
-//   updatedAt                 DateTime        @updatedAt
-//   paymentType               PAYMENT_TYPES   @default(cash)
-//   status                    STATUS          @default(inprogress)
-//   country                   Country         @relation(fields: [countryId], references: [id])
-//   countryId                 Int
-//   propertyType              PropertyType?   @relation(fields: [propertyTypeId], references: [id])
-//   propertyTypeId            Int?
-
-//   name                      String
-//   subTitle                  String
-//   details                   String
-//   complationDate            DateTime?
-//   image                     String?
-//   gallery                   String[]
-//   floorplan                 String[]
-//   features                  String[]
-//   brochure                  String?
-//   constructingUpdateVideo   String?
-//   constructingUpdatePrview  String?
-//   nearBy                    Json?
-//   roomsWithPrices           RoomWithPrice[]
-//   location                  Json?
-//   installmentPlan           Json?
-//   locationText              String?
-//   oprationCompanies         Json?
-// }
-
 const Schema = z.object({
   name: z.string(),
   subTitle: z.string(),

@@ -1,7 +1,7 @@
-import db, { FindManyFurnishCategoryArgs } from "db"
+import db, { Prisma, FurnishCategory } from "db"
 
 type GetFurnishCategoriesInput = Pick<
-  FindManyFurnishCategoryArgs,
+  Prisma.FindManyFurnishCategoryArgs,
   "where" | "orderBy" | "skip" | "take" | "select"
 >
 
@@ -12,13 +12,13 @@ export default async function getFurnishCategories({
   take,
   select,
 }: GetFurnishCategoriesInput) {
-  const furnishCategories = await db.furnishCategory.findMany({
+  const furnishCategories = (await db.furnishCategory.findMany({
     where,
     orderBy,
     take,
     skip,
     select,
-  })
+  })) as FurnishCategory[]
 
   const count = await db.furnishCategory.count()
   const hasMore = typeof take === "number" ? skip + take < count : false

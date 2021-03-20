@@ -35,12 +35,14 @@ const DesktopNav = (props: NavProps) => {
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Flex sx={{ alignItems: "center" }}>
-        <CountriesItemsList />
+        <NavItem to="/countries/2/projects" text="المشاريع" />
+        <NavItem to="/countries/2/offers" text="العروض" />
         <NavItem to="/services" text="خدماتنا" />
         <NavItem to="/about-us" text="لماذا فايز احمد" />
 
-        <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
+        <NavItem to={`/#ServicesForm`} text="خطط لرحلتك معنا" />
         <NavItem to="/furniture/" text="أثث منزلك" />
+        <NavItem to="/partners/" text="شركاء النجاح" />
       </Flex>
     </Box>
   )

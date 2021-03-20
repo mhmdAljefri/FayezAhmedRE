@@ -24,8 +24,8 @@ export default function ProjectsList({ name, details }: ProjectListTypes) {
       where: {
         countryId,
         OR: [
-          { name: { contains: filterRef.current?.search } },
-          { details: { contains: filterRef.current?.search } },
+          { name: { contains: filterRef.current?.search || undefined } },
+          { details: { contains: filterRef.current?.search || undefined } },
         ],
       },
     }),

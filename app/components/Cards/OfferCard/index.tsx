@@ -3,6 +3,8 @@ import { useRouter, Link, dynamic } from "blitz"
 import { Box, Heading, Text } from "theme-ui"
 import { Offer } from "@prisma/client"
 import LazyLoad from "react-lazyload"
+import SocialShare from "app/components/SocialShare"
+import { AddOfferToFav } from "app/components/AddToFav"
 
 const OfferCardYoutube = dynamic(() => import("./OfferCardYoutube"))
 const OfferCardPureVideo = dynamic(() => import("./OfferCardPureVideo"))
@@ -12,6 +14,7 @@ const OfferCardLabel = dynamic(() => import("./OfferCardLabel"))
 type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
   prefixPath?: string
   hideOfferLabel?: boolean
+  hasFav?: boolean
 }
 export default function OfferCard({
   image,
@@ -21,6 +24,7 @@ export default function OfferCard({
   id,
   name,
   prefixPath = "/",
+  hasFav = false,
 }: OfferCardProps) {
   const { asPath } = useRouter()
   const href = asPath + prefixPath + id
@@ -35,9 +39,23 @@ export default function OfferCard({
         backgroundColor: "background",
         marginX: "auto",
         boxShadow: "default",
+        position: "relative",
         marginBottom: 2,
       }}
     >
+      <Box
+        sx={{
+          position: "absolute",
+          marginTop: 22,
+          zIndex: 22,
+          px: 3,
+          py: 2,
+          backgroundColor: "light",
+        }}
+      >
+        <SocialShare url={href} />
+        <AddOfferToFav isActive={hasFav} offerId={id} />
+      </Box>
       <Link href={href}>
         <a>
           <Box sx={{ position: "relative", paddingBottom: hideOfferLabel ? 0 : 25 }}>

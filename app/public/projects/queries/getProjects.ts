@@ -13,7 +13,7 @@ export default async function getProjects({
   take,
 }: GetProjectsInput) {
   const projects = await db.project.findMany({
-    where,
+    where: { ...where, country: { suspend: false } },
     orderBy,
     take,
     include,

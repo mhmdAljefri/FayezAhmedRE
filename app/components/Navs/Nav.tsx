@@ -98,12 +98,14 @@ const Nav = (props: NavProps) => {
                 fontSize: [2, 3, 4],
               }}
             />
-            <CountriesItemsList />
+            <NavItem to="/countries/2/projects" text="المشاريع" />
+            <NavItem to="/countries/2/offers" text="العروض" />
             <NavItem to="/services" text="خدماتنا" />
             <NavItem to="/about-us" text="لماذا فايز احمد" />
 
-            <NavItem to={`/countries/${countryId || 1}/#ServicesForm`} text="خطط لرحلتك معنا" />
+            <NavItem to={`/#ServicesForm`} text="خطط لرحلتك معنا" />
             <NavItem to="/furniture/" text="أثث منزلك" />
+            <NavItem to="/partners/" text="شركاء النجاح" />
           </Flex>
           <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
         </Flex>
