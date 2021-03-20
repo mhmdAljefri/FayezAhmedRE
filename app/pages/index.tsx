@@ -30,6 +30,7 @@ import ServicesForm from "app/components/Forms/ServicesForm"
 import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ProjectSlider from "app/components/Sliders/ProjectSlider"
 import ShowMoreButton from "app/components/ShowMoreButton"
+import AboutUSSection from "app/components/AboutUSSection"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -37,26 +38,6 @@ const Contact = dynamic(() => import("app/components/Forms/Contact"), {
     <Box sx={{ height: 100, alignItems: "center", justifyContent: "center", color: "primary" }}>
       <SyncLoader />
     </Box>
-  ),
-})
-const CountriesProjectsSection = dynamic(() => import("app/components/CountriesProjectsSection"), {
-  ssr: false,
-  loading: () => (
-    <Flex>
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-    </Flex>
-  ),
-})
-
-const AboutUSSection = dynamic(() => import("app/components/AboutUSSection"), {
-  loading: () => (
-    <Flex>
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-    </Flex>
   ),
 })
 

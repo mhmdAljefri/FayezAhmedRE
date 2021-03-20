@@ -50,7 +50,6 @@ export default function OfferCard({
           zIndex: 22,
           px: 3,
           py: 2,
-          backgroundColor: "light",
         }}
       >
         <SocialShare url={href} />
