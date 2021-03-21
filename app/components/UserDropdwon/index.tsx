@@ -45,7 +45,7 @@ export default function UserDropdwon() {
           </>
         )}
       </Dropdown>
-      <MyFav open={openFav} onClose={() => setOpenFav(false)} />
+      {openFav && <MyFav open={openFav} onClose={() => setOpenFav(false)} />}
       <LoginFormModal isOpen={open} onRequestClose={() => setOpen(false)} />
     </div>
   )
