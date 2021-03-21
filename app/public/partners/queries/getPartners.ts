@@ -9,6 +9,7 @@ export default async function getPartners({ where, orderBy, skip = 0, take }: Ge
     select: {
       name: true,
       image: true,
+      id: true,
     },
     take,
     skip,

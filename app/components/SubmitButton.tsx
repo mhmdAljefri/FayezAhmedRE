@@ -1,6 +1,6 @@
 import React from "react"
 import { BeatLoader } from "react-spinners"
-import { Button, SxStyleProp } from "theme-ui"
+import { Button, SxStyleProp, Box } from "theme-ui"
 import ArrowIcon from "./ArrowIcon"
 
 type SubmitButtonProps = {
@@ -9,7 +9,16 @@ type SubmitButtonProps = {
 }
 
 export default function SubmitButton({ fetching, sx }: SubmitButtonProps) {
-  return (
+  return fetching ? (
+    <Box
+      sx={{
+        display: "flex",
+        p: 3,
+      }}
+    >
+      <BeatLoader color="white" size={15} />
+    </Box>
+  ) : (
     <Button
       sx={{
         variant: "forms.field",
@@ -22,7 +31,7 @@ export default function SubmitButton({ fetching, sx }: SubmitButtonProps) {
       }}
       type="submit"
     >
-      {fetching ? <BeatLoader size={15} /> : <span style={{ marginLeft: 20 }}>ارسال</span>}
+      <span style={{ marginLeft: 20 }}>ارسال</span>
       <ArrowIcon />
     </Button>
   )

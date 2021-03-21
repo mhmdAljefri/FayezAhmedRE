@@ -1,7 +1,7 @@
-import { ProjectCard } from "app/layouts/ProjectsList"
 import React from "react"
 import { Box } from "theme-ui"
 import { Swiper, SwiperSlide } from "./Swiper"
+import ProjectCard from "../Cards/ProjectCard"
 
 export default function ProjectSlider({ projects }) {
   return (

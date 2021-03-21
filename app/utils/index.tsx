@@ -24,3 +24,8 @@ export function makeS3Url(src?: string) {
   const awsSrc = `https://fayezahmed.s3.ap-south-1.amazonaws.com/fayez/${imageName}`
   return awsSrc
 }
+
+export function getSearchQuery(search: string | undefined, keys: string[]) {
+  if (!search) return []
+  return keys.map((key) => search.split(" ").map((word) => ({ [key]: { contains: word } }))).flat()
+}

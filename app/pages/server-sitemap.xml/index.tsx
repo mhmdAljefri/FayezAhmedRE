@@ -5,7 +5,7 @@ import getOffers from "app/public/offers/queries/getOffers"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { projects } = await getProjects({})
-  const { offers } = await getOffers({ select: { id: true, countryId: true } })
+  const { offers } = await getOffers({})
   const baseUrl = "https://fayezahmed.com/" // TODO move this to .env file
   // const urls = await fetch('https//example.com/api')
 

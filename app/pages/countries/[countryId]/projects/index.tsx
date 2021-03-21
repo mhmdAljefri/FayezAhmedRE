@@ -1,11 +1,12 @@
 import React from "react"
 import Layout from "app/layouts/Layout"
-import ProjectsList, { ProjectCardProps } from "app/layouts/ProjectsList"
+import ProjectsList from "app/layouts/ProjectsList"
 import { BlitzPage, useRouter } from "blitz"
 import getCountries from "app/public/countries/queries/getCountries"
 import { City, Country } from "@prisma/client"
 import getCountry from "app/public/countries/queries/getCountry"
 import getProjects from "app/public/projects/queries/getProjects"
+import { ProjectCardProps } from "app/components/Cards/ProjectCard"
 
 type Props = {
   country: Country & { cities: City[] }

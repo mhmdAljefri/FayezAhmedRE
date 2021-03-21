@@ -1,80 +1,98 @@
-import React, { useState } from "react"
+import React, { useRef } from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Link, useQuery, useRouter } from "blitz"
-import { Box, Flex, Link as ThemeLink, Heading, Input, Text } from "theme-ui"
+import { BlitzPage, Link, useQuery, useRouterQuery, InferGetStaticPropsType } from "blitz"
+import { Box, Flex, Link as ThemeLink, Heading, Text } from "theme-ui"
 import getProjects from "app/public/projects/queries/getProjects"
-import { Project } from "@prisma/client"
-import { Icon } from "react-icons-kit"
-import { search } from "react-icons-kit/fa/search"
-import useTimeout from "app/hooks/useTimeout"
 import ArrowIcon from "app/components/ArrowIcon"
-import HTMLBox from "app/components/HTMLBox"
 import Image from "app/components/Image"
+import Filter, { filterValues } from "app/components/Forms/Filter"
+import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
+import getCountry from "app/public/countries/queries/getCountry"
+import { getListOfPrice } from "app/layouts/ProjectsList"
+import getOffers from "app/public/offers/queries/getOffers"
+import { getSearchQuery } from "app/utils"
 
-type SearchProps = {
-  projects: Project[]
+export const getStaticProps = async (context) => {
+  const { propertyTypes } = await getPropertyTypes({})
+  const country = await getCountry({ where: { suspend: false } })
+
+  return {
+    props: {
+      propertyTypes,
+      country,
+    },
+  }
 }
-const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
-  const { query } = useRouter()
-  const searchQuery: string = query.q as string
-  const [value, setValue] = useState<string>(searchQuery)
-  const [{ projects }, { refetch }] = useQuery(
-    getProjects,
-    {
-      where: {
-        name: { contains: value },
+
+type SearchProps = InferGetStaticPropsType<typeof getStaticProps>
+const Search: BlitzPage<SearchProps> = ({ propertyTypes, country }) => {
+  const filter = useRouterQuery()
+  const filterRef = useRef<filterValues>(filter)
+  const { search, city, price, propertyType } = filterRef.current || {}
+
+  const [{ offers }] = useQuery(getOffers, {
+    where: {
+      OR: getSearchQuery(search, ["name", "subTitle"]),
+    },
+  })
+
+  const [{ projects }, { refetch }] = useQuery(getProjects, {
+    where: {
+      OR: getSearchQuery(search, ["name", "subTitle"]),
+      propertyType: {
+        id: {
+          equals: propertyType ? parseInt(propertyType) : undefined,
+        },
+      },
+      // status: status!,
+      city: { id: parseInt(city || "") || undefined },
+      roomsWithPrices: {
+        some: {
+          price: {
+            lt: price?.[1]?.toString() || undefined,
+          },
+          OR: {
+            price: {
+              gt: price?.[0]?.toString() || undefined,
+            },
+          },
+        },
       },
     },
-    { initialData: { projects: ssrProjects }, enabled: true }
-  )
-
-  useTimeout(refetch, 3000, value)
+  })
 
   return (
     <div>
       <Box sx={{ backgroundColor: "dark", paddingY: 5 }}>
         <Wrapper>
-          <Flex
-            sx={{
-              position: "relative",
-              maxWidth: 800,
-              color: "white",
+          <Filter
+            propertyTypes={propertyTypes}
+            initialValues={filter}
+            isTurkey={country.isTurkey}
+            rooms={country.rooms}
+            cities={country.cities}
+            onFilter={(data) => {
+              const getList = getListOfPrice(data.price) // wtf
+              const newData = {
+                ...data,
+                price: getList,
+              }
+
+              filterRef.current = newData
+              refetch()
             }}
-          >
-            <Input
-              variant="none"
-              sx={{
-                height: 80,
-                borderWidth: 0,
-                fontSize: 7,
-                paddingInlineEnd: 50,
-                paddingY: 4,
-                ":focus": {
-                  borderWidth: 0,
-                },
-              }}
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value)
-              }}
-              name="search"
-              placeholder="البحث عن"
-            />
-            <Box sx={{ position: "absolute", left: 15, top: 25 }}>
-              <Icon size={30} icon={search} />
-            </Box>
-          </Flex>
+          />
         </Wrapper>
       </Box>
       <Wrapper>
         <Box>
-          {value && projects.length === 0 && (
+          {projects.length === 0 && offers.length === 0 && (
             <Box>
               <Text sx={{ fontSize: 5, paddingY: 5 }}>لا توجد بيانات مطابقة لعملية البحث!</Text>
             </Box>
           )}
-          {projects.map((item) => {
+          {[...projects, ...offers].map((item) => {
             return (
               <Flex
                 key={item.id}
@@ -99,10 +117,21 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
                 >
                   <Box>
                     <Heading sx={{ fontSize: [4, 6] }}>{item.name}</Heading>
-                    <HTMLBox html={item.details} />
                   </Box>
-                  <Link passHref href={`/countries/${item.countryId}/projects/${item.name}`}>
+                  <Link
+                    passHref
+                    href={
+                      /**
+                       * project has isDelux field which can be true or false
+                       */
+
+                      `/countries/${item.countryId}/${
+                        typeof item.isDelux === "undefined" ? "offers" : "projects"
+                      }/${item.id}`
+                    }
+                  >
                     <ThemeLink>
+                      {console.log(item)}
                       <Flex
                         sx={{
                           fontWeight: 700,
@@ -125,25 +154,6 @@ const Search: BlitzPage<SearchProps> = ({ projects: ssrProjects }) => {
       </Wrapper>
     </div>
   )
-}
-
-export async function getServerSideProps(context) {
-  const { query } = context
-  // Fetch data from external API
-  const { projects, count } = await getProjects({
-    where: {
-      name: {
-        contains: query.q,
-      },
-    },
-  })
-  // Pass data to the page via props
-  return {
-    props: {
-      projects,
-      count,
-    },
-  }
 }
 
 Search.getLayout = (page) => (

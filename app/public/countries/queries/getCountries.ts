@@ -13,7 +13,7 @@ export default async function getCountries({
   take,
 }: GetCountriesInput) {
   const countries = await db.country.findMany({
-    where,
+    where: { ...where, suspend: false },
     orderBy,
     take,
     select: {

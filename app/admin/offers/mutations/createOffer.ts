@@ -10,6 +10,10 @@ export default async function createOffer({ data, countryId }: CreateOfferInputT
   ctx.session.authorize(["admin", "superadmin"])
 
   const projectId = parseInt((data as any).projectId)
+
+  const cityId = (data as any).cityId
+  delete (data as any).cityId
+
   delete (data as any).projectId
   if (projectId)
     data.project = {
@@ -23,6 +27,11 @@ export default async function createOffer({ data, countryId }: CreateOfferInputT
         country: {
           connect: {
             id: countryId,
+          },
+        },
+        city: {
+          connect: {
+            id: cityId,
           },
         },
       },

@@ -7,6 +7,7 @@ import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
 import useScreenSize from "app/hooks/useScreenSize"
 import OptmizationImage from "./OptmizationImage"
+import UserDropdwon from "./UserDropdwon"
 const WhatsappButton = dynamic(() => import("./NavItems/WhatsappButton"))
 const SearchButton = dynamic(() => import("./NavItems/SearchButton"))
 const DesktopNav = dynamic(() => import("./Navs/DesktopNav"))
@@ -98,6 +99,7 @@ const Header = ({ sx }: HeaderProps) => {
             </>
           )}
           {priceRender}
+          <UserDropdwon />
           {!isDesktopScreen && <Nav />}
         </Flex>
       </Wrapper>

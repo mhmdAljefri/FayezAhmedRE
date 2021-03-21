@@ -4,7 +4,7 @@ type GetExploresInput = Pick<Prisma.FindManyExploreArgs, "where" | "orderBy" | "
 
 export default async function getExplores({ where, orderBy, skip = 0, take }: GetExploresInput) {
   const explores = await db.explore.findMany({
-    where,
+    where: { ...where, country: { suspend: false } },
     orderBy,
     take,
     skip,
