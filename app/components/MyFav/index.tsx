@@ -1,21 +1,16 @@
-import React, { useState } from "react"
+import React, { Suspense } from "react"
 import { Box, Heading } from "theme-ui"
 import Drawer from "../Drawer"
 import { useQuery } from "blitz"
 import getMyFav from "app/public/fav/queries/getMyFav"
 import FavCard from "../Cards/FavCard"
-
-export default function MyFav() {
-  const [open, setOpen] = useState(false)
+type Props = { onClose: () => any; open: boolean }
+function MyFavFetcher({ onClose, open }: Props) {
   const [{ offers, projects }] = useQuery(getMyFav, {})
 
   return (
     <div>
-      <Box sx={{ py: 2, px: 3 }} role="button" onClick={() => setOpen(true)}>
-        المفضيات
-      </Box>
-
-      <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
+      <Drawer handler={false} onClose={onClose} open={open}>
         <Box sx={{ py: 4, px: 3, width: [250, 350, 450], maxWidth: "80vw" }}>
           <Heading>المفضيات</Heading>
           <Box>
@@ -42,5 +37,13 @@ export default function MyFav() {
         </Box>
       </Drawer>
     </div>
+  )
+}
+
+export default function MyFav(props: Props) {
+  return (
+    <Suspense fallback="">
+      <MyFavFetcher {...props} />
+    </Suspense>
   )
 }

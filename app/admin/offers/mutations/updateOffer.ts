@@ -9,7 +9,9 @@ export default async function updateOffer({ where, data, countryId }: UpdateOffe
   ctx.session.authorize(["admin", "superadmin"])
 
   const projectId = parseInt((data as any).projectId)
+  const cityId = parseInt((data as any).cityId)
   delete (data as any).projectId
+  delete (data as any).cityId
   if (projectId)
     data.project = {
       connect: { id: projectId },
@@ -24,6 +26,11 @@ export default async function updateOffer({ where, data, countryId }: UpdateOffe
       country: {
         connect: {
           id: countryId,
+        },
+      },
+      city: {
+        connect: {
+          id: cityId,
         },
       },
     },

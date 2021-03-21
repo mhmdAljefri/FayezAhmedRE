@@ -12,6 +12,8 @@ import HTMLBox from "app/components/HTMLBox"
 import Image from "app/components/Image"
 import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
+import SocialShare from "app/components/SocialShare"
+import { AddOfferToFav } from "app/components/AddToFav"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -30,6 +32,18 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
       <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              marginTop: 22,
+              zIndex: 22,
+              px: 3,
+              py: 2,
+            }}
+          >
+            <SocialShare url={`/countries/${offer.countryId}/offers/${offer.id}`} />
+            <AddOfferToFav isActive={false} offerId={offer.id} />
+          </Box>
           {offer.mainVideo ? (
             <Box sx={{ height: [240, 350, 450, 550] }}>
               {offer.mainVideo.startsWith("https://www.youtube") ? (

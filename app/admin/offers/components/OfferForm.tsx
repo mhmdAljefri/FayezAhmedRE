@@ -15,6 +15,7 @@ import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
 import UploadVideo from "./UploadVideo"
 import MapField from "app/admin/components/MapField"
 import UploadMainVideo from "./UploadMainVideo"
+import { CitiesListField } from "app/admin/projects/components/ProjectForm"
 
 type OfferFormProps = {
   initialValues: any
@@ -111,6 +112,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           label="الدولة"
           required
         />
+        <CitiesListField />
         <ProjectsListField />
 
         <MapField name="location" />

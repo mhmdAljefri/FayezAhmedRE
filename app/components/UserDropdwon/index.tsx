@@ -9,6 +9,7 @@ import LoginFormModal from "app/auth/components/LoginFormModal"
 export default function UserDropdwon() {
   const { isLoading, userId } = useSession()
   const [open, setOpen] = useState(false)
+  const [openFav, setOpenFav] = useState(false)
   const [logoutMutation] = useMutation(logout)
 
   if (isLoading) return <div />
@@ -33,16 +34,19 @@ export default function UserDropdwon() {
       >
         {userId ? (
           <div>
-            <MyFav />
+            <Box sx={{ py: 2, px: 3 }} role="button" onClick={() => setOpenFav(true)}>
+              المفضيات
+            </Box>
             <Button onClick={logoutMutation}>تسجيل الخروج</Button>
           </div>
         ) : (
           <>
             <Button onClick={() => setOpen(true)}>تسجيل الدخول</Button>
-            <LoginFormModal isOpen={open} onRequestClose={() => setOpen(false)} />
           </>
         )}
       </Dropdown>
+      <MyFav open={openFav} onClose={() => setOpenFav(false)} />
+      <LoginFormModal isOpen={open} onRequestClose={() => setOpen(false)} />
     </div>
   )
 }
