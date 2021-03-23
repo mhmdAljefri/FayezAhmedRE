@@ -102,7 +102,7 @@ function CountryPage({
         sx={{
           paddingTop: 4,
           paddingBottom: 6,
-          color: "white",
+          color: "heading",
           backgroundColor: "dark",
         }}
       />

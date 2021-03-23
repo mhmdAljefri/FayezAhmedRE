@@ -11,6 +11,16 @@ export default function HeroSection({ carouselVideo, carousels }) {
 
   return (
     <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          insetInline: 0,
+          height: 50,
+          backgroundImage: "linear-gradient(180deg, #ffffff8c, #ffffff03)",
+          zIndex: 1,
+        }}
+      />
+
       {carouselVideo.isActive ? ( // todo add video
         <>
           <YoutubeVid secureVideoUrl={secureVideoUrl} />

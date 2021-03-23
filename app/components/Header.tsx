@@ -25,7 +25,8 @@ const Header = ({ sx }: HeaderProps) => {
     pathname.startsWith("/countries/[countryId]") ||
     pathname.includes("projects") ||
     pathname === "/"
-  const backgroundColor = scroll >= 50 ? "dark" : (sx as any)?.backgroundColor
+  const backgroundColor = scroll >= 50 ? "background" : (sx as any)?.backgroundColor
+  const boxShadow = scroll >= 50 ? "default" : (sx as any)?.boxShadow
 
   const priceRender = hasProjects ? (
     <Box>
@@ -42,6 +43,7 @@ const Header = ({ sx }: HeaderProps) => {
         right: 0,
         ...sx,
         backgroundColor,
+        boxShadow,
       }}
       as="header"
     >
@@ -100,7 +102,6 @@ const Header = ({ sx }: HeaderProps) => {
             </>
           )}
           {priceRender}
-          <UserDropdwon />
           {!isDesktopScreen && <Nav />}
         </Flex>
       </Wrapper>

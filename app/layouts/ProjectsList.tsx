@@ -88,13 +88,13 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
         sx={{
           paddingTop: 3,
           paddingBottom: 7,
-          color: "white",
+          color: "heading",
           backgroundColor: "dark",
           marginBottom: 4,
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: 7, color: "white" }}>
+          <Heading as="h1" sx={{ fontSize: 7, color: "heading" }}>
             {title}
           </Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>

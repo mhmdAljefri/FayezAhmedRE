@@ -35,13 +35,13 @@ export default function OffersList({ name, details, country, offers }: OfferList
         sx={{
           paddingTop: 3,
           paddingBottom: 7,
-          color: "background",
+          color: "heading",
           backgroundColor: "dark",
           marginBottom: 4,
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: 7, color: "background" }}>
+          <Heading as="h1" sx={{ fontSize: 7, color: "heading" }}>
             {name}
           </Heading>
           <Text sx={{ fontSize: 4 }}>{details}</Text>

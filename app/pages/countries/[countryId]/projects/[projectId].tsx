@@ -114,7 +114,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           sx={{
             paddingTop: 4,
             paddingBottom: 6,
-            color: "white",
+            color: "heading",
             backgroundColor: "dark",
           }}
         />
@@ -324,7 +324,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                         mb: 4,
                         backgroundColor: "primary",
                         height: 150,
-                        color: "white",
+                        color: "heading",
                         boxShadow: "default",
                         borderRadius: "default",
                         alignItems: "center",
