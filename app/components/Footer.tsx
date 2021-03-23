@@ -10,12 +10,10 @@ import { phone } from "react-icons-kit/fa/phone"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { addressBook } from "react-icons-kit/fa/addressBook"
 import { Box, Flex, Grid, Heading, Link as ThemeLink, Text } from "theme-ui"
-import Tooltip from "app/components/Tooltip"
 import Wrapper from "./Wrapper"
 import { Link } from "blitz"
 import useScroll from "app/hooks/useScroll"
 import { MOBILE_NUMBER, WHATSAPP_NUMBER } from "app/constants"
-import OptmizationImage from "./OptmizationImage"
 
 function Icon(props: IconProp & { href?: string }) {
   return (
@@ -105,37 +103,6 @@ export default function Footer() {
           </Flex>
         </Box>
         <HR />
-        <Box>
-          <Heading sx={{ paddingBottom: 2, color: "white" }}>حمل تطبيقنا</Heading>
-          <Flex sx={{ marginBottom: 4 }}>
-            <Tooltip>
-              <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
-                <OptmizationImage
-                  width={180}
-                  height={90}
-                  objectFit="contain"
-                  layout="intrinsic"
-                  localImage
-                  src="/google_play_badge.png"
-                  alt="apple"
-                />
-              </Box>
-            </Tooltip>
-            <Tooltip>
-              <Box sx={{ m: 1, width: ["50% 100%", 150, 180] }}>
-                <OptmizationImage
-                  width={180}
-                  height={90}
-                  objectFit="contain"
-                  layout="intrinsic"
-                  localImage
-                  src="/appstore_badge.png"
-                  alt="apple"
-                />
-              </Box>
-            </Tooltip>
-          </Flex>
-        </Box>
       </Wrapper>
       <Box
         sx={{
