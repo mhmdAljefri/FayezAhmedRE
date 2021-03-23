@@ -26,7 +26,7 @@ function CountryCard({ name, id, image, isTurkey }: CountryCardProps) {
             backgroundAttachment: "fixed",
             flexDirection: "column",
             justifyContent: "flex-end",
-            color: "white",
+            color: "heading",
             textShadow: "5px 5px 50px #000",
             paddingX: [2, 4],
             paddingY: [4],

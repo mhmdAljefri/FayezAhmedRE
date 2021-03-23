@@ -5,7 +5,7 @@ import Wrapper from "app/components/Wrapper"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
 import { useInfiniteQuery, useParam, useQuery, useRouterQuery } from "blitz"
 import React, { useRef, useState } from "react"
-import { Flex, Grid, Box, Heading, Text } from "theme-ui"
+import { Grid, Box, Heading, Text } from "theme-ui"
 
 import { City, Country } from "@prisma/client"
 import { getSearchQuery } from "app/utils"
@@ -82,20 +82,19 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
     }
   )
 
-  console.log(selected)
   return (
     <div>
       <Box
         sx={{
           paddingTop: 3,
           paddingBottom: 7,
-          color: "white",
+          color: "heading",
           backgroundColor: "dark",
           marginBottom: 4,
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: 7, color: "white" }}>
+          <Heading as="h1" sx={{ fontSize: 7, color: "heading" }}>
             {title}
           </Heading>
           <Text sx={{ fontSize: 4 }}>{subTitle}</Text>

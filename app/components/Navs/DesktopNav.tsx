@@ -17,12 +17,13 @@ const DesktopNav = (props: NavProps) => {
             mx: 2,
             textDecoration: "none",
             fontWeight: 700,
-            marginInlineEnd: [18, 20, 25],
+            marginInlineEnd: [null, null, 10, null, 20],
             wordBreak: "keep-all",
             whiteSpace: "nowrap",
-            fontSize: [1, 1, 2, 2],
+            color: "heading",
+            fontSize: [1, 1, 1, 1],
             ":hover": {
-              color: "white",
+              color: "primary",
             },
           }}
         >
@@ -33,8 +34,16 @@ const DesktopNav = (props: NavProps) => {
   }
 
   return (
-    <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
-      <Flex sx={{ alignItems: "center" }}>
+    <Box>
+      <Flex
+        sx={{
+          alignItems: "center",
+          minWidth: 50,
+          position: "relative",
+          zIndex: 999999,
+          minHeight: 35,
+        }}
+      >
         <NavItem to="/countries/2/projects" text="المشاريع" />
         <NavItem to="/countries/2/offers" text="العروض" />
         <NavItem to="/services" text="خدماتنا" />

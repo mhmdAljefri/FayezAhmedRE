@@ -42,7 +42,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
         paddingY: 1,
         paddingX: 1,
         marginX: 0,
-        color: "primary",
+        color: "white",
         marginY: 1,
         boxShadow: "0 1px 15px #111",
         borderRadius: 15,
@@ -56,7 +56,7 @@ function CallUSButton({ icon, children }: CallUSButtonProps) {
 
 type HRProps = {}
 function HR(props: HRProps) {
-  return <Box sx={{ marginY: 4, height: 1, backgroundColor: "white" }} />
+  return <Box sx={{ marginY: 4, height: 1 }} />
 }
 
 export default function Footer() {
@@ -81,16 +81,15 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        backgroundColor: "dark",
+        backgroundColor: "muted",
         paddingTop: 5,
         paddingBottom: 6,
-        color: "white",
         position: "relative",
       }}
     >
       <Wrapper>
         <Box>
-          <Heading sx={{ paddingBottom: 4, color: "white" }}>تابعنا</Heading>
+          <Heading sx={{ paddingBottom: 4 }}>تابعنا</Heading>
           <Flex sx={{ flexWrap: "wrap" }}>
             <Icon
               href="https://instagram.com/fayez_projects?igshid=1joclb832c6qt"
@@ -107,6 +106,7 @@ export default function Footer() {
       <Box
         sx={{
           backgroundColor: "dark2",
+          color: "white",
           position: open ? "fixed" : "absolute",
           zIndex: 100,
           bottom: 0,

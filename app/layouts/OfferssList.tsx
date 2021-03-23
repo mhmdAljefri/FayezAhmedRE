@@ -1,8 +1,7 @@
 import { Offer } from "@prisma/client"
-import { filterValues } from "app/components/Forms/Filter"
 import Wrapper from "app/components/Wrapper"
-import { useInfiniteQuery, useParam, useRouterQuery } from "blitz"
-import React, { useRef, useState } from "react"
+import { useInfiniteQuery, useParam } from "blitz"
+import React, { useState } from "react"
 import { Grid, Box, Heading, Text } from "theme-ui"
 
 import FetchMoreButton from "app/components/FetchMoreButton"
@@ -36,13 +35,13 @@ export default function OffersList({ name, details, country, offers }: OfferList
         sx={{
           paddingTop: 3,
           paddingBottom: 7,
-          color: "background",
+          color: "heading",
           backgroundColor: "dark",
           marginBottom: 4,
         }}
       >
         <Wrapper>
-          <Heading as="h1" sx={{ fontSize: 7, color: "background" }}>
+          <Heading as="h1" sx={{ fontSize: 7, color: "heading" }}>
             {name}
           </Heading>
           <Text sx={{ fontSize: 4 }}>{details}</Text>
