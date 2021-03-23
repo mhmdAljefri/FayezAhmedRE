@@ -1,6 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form"
-import { Box, Checkbox, Flex, Grid, Heading, Input, Label } from "theme-ui"
+import { Box, Flex, Grid, Heading, Input, Label } from "theme-ui"
 import Form from "../Form"
 import { MenuField } from "app/admin/components/LabeledMenuField"
 import SubmitButton from "../SubmitButton"
@@ -90,7 +90,11 @@ export default function Filter({
               emptyOptionText="المدينة"
               name="city"
             />
-            <MenuField options={["شراء", "تاجير"]} emptyOptionText="الغرض" name="purpose" />
+            <MenuField
+              options={["شراء", "تاجير", "تجاري للبيع", "تجاري للايجار"]}
+              emptyOptionText="الغرض"
+              name="purpose"
+            />
           </Grid>
           <Grid
             sx={{ marginBottom: 3, marginTop: 3, alignItems: "center" }}
