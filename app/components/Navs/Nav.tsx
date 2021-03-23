@@ -3,16 +3,17 @@ import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "app/components/Burger"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
-import { Link, Router, useParam } from "blitz"
+import { Link, Router } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
-import CountriesItemsList from "../NavItems/CountriesItemsList"
+import UserDropdwon from "../UserDropdwon"
+// import CountriesItemsList from "../NavItems/CountriesItemsList"
 
 type NavProps = {}
 
 const Nav = (props: NavProps) => {
   const prevRouter = useRef<string | null>(null)
   const { open, setOpen, ref } = useOnClickout()
-  const countryId = useParam("countryId")
+  // const countryId = useParam("countryId")
 
   useLayoutEffect(() => {
     const isClient = typeof window !== "undefined"
@@ -107,7 +108,11 @@ const Nav = (props: NavProps) => {
             <NavItem to="/furniture/" text="أثث منزلك" />
             <NavItem to="/partners/" text="شركاء النجاح" />
           </Flex>
-          <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
+          <Box>
+            <UserDropdwon />
+
+            <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
+          </Box>
         </Flex>
       </Box>
     </Box>

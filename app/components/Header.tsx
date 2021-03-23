@@ -96,10 +96,10 @@ const Header = ({ sx }: HeaderProps) => {
             <>
               <WhatsappButton />
               <SearchButton />
+              <UserDropdwon />
             </>
           )}
           {priceRender}
-          <UserDropdwon />
           {!isDesktopScreen && <Nav />}
         </Flex>
       </Wrapper>
