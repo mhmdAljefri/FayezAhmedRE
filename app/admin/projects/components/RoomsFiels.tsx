@@ -23,6 +23,8 @@ export default function RoomsField(props) {
               <div key={name}>
                 <Grid columns={[2, 3, 4]}>
                   <LabeledTextField name={`${name}.room`} label="نوع الغرفة" />
+                  <LabeledTextField name={`${name}.bathroom`} label="الحمامات" />
+                  <LabeledTextField name={`${name}.area`} label="المساحة" />
                   <LabeledTextField
                     type="number"
                     required

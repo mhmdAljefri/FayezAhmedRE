@@ -7,7 +7,12 @@ export default async function getOffer({ where }: GetProjectInput) {
   const offer = await db.offer.findFirst({
     where,
     include: {
-      project: true,
+      project: {
+        include: {
+          roomsWithPrices: true,
+          propertyType: true,
+        },
+      },
       country: true,
     },
   })

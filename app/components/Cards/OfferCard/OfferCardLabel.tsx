@@ -13,9 +13,10 @@ export default function OfferCardLabel() {
         lineHeight: "40px",
         height: 40,
         backgroundColor: "dark",
-        color: "white",
+        color: "primary",
         transition: "all 0.5s linear",
         ":hover": {
+          color: "white",
           backgroundColor: "primary",
         },
       }}

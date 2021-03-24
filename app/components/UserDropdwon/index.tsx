@@ -5,6 +5,8 @@ import Dropdown from "../Dropdown"
 import MyFav from "../MyFav"
 import logout from "app/auth/mutations/logout"
 import LoginFormModal from "app/auth/components/LoginFormModal"
+import { userCircle } from "react-icons-kit/fa/userCircle"
+import { Icon } from "react-icons-kit"
 
 export default function UserDropdwon() {
   const { isLoading, userId } = useSession()
@@ -26,10 +28,12 @@ export default function UserDropdwon() {
               height: 30,
               borderRadius: 30,
               mx: [2, 2, 3],
-              border: (t) => `3px solid ${t.colors.light}`,
-              backgroundImage: "linear-gradient(to right, #0f0c29, #302b63, #24243e)",
+              backgroundColor: "white",
+              color: "text",
             }}
-          ></Box>
+          >
+            <Icon size={30} icon={userCircle} />
+          </Box>
         }
         onChange={() => {}}
       >

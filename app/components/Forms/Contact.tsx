@@ -21,7 +21,7 @@ export default function Contact() {
   return (
     <Box
       sx={{
-        paddingY: 5,
+        paddingY: 4,
       }}
       id="Contact"
     >

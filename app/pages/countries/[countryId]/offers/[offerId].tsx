@@ -1,26 +1,68 @@
 import React from "react"
-import { BlitzPage, dynamic, Link, useRouter } from "blitz"
+import { BlitzPage, dynamic, Link, useRouter, InferGetStaticPropsType } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Link as ThemeLink } from "theme-ui"
+import { Box, Heading, Link as ThemeLink, Grid, Flex, Text } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
 import { ConstractiongVideo, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
-import { Offer, Project } from "@prisma/client"
+import { Offer } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
 import Image from "app/components/Image"
 import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
+import { Icon } from "react-icons-kit"
+import { home } from "react-icons-kit/feather/home"
+import { box } from "react-icons-kit/feather/box"
+import { bath } from "react-icons-kit/fa/bath"
+import { map2 } from "react-icons-kit/icomoon/map2"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
   loading: () => <Skeleton height={250} />,
 })
 
-const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }) => {
+const IconText = ({ icon, heading, text }) => (
+  <Flex>
+    <Icon size={24} icon={icon} />
+    <Box sx={{ px: 2 }}>
+      <Heading sx={{ fontSize: 3 }}>{heading}</Heading>
+      <Text>{text}</Text>
+    </Box>
+  </Flex>
+)
+
+export async function getStaticPaths(context) {
+  const { offers } = await getOffers({}, context)
+  const paths = offers.map((offer: Offer) => ({
+    params: {
+      countryId: `${offer.countryId}`,
+      offerId: `${offer.id}`,
+    },
+  }))
+
+  return {
+    paths,
+    fallback: true,
+  }
+}
+
+export async function getStaticProps(context) {
+  const offerId = parseInt(context.params.offerId)
+  const offer = await getOffer({ where: { id: offerId } })
+
+  return {
+    props: {
+      offer,
+    },
+    revalidate: 60 * 15,
+  }
+}
+
+const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ offer }) => {
   const router = useRouter()
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
@@ -76,6 +118,39 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
             {offer.name}
           </Heading>
           <Heading sx={{ fontSize: 3, mt: 3, fontWeight: 700 }}>{offer.subTitle}</Heading>
+          {offer.project && (
+            <>
+              <Heading sx={{ fontSize: 6, mt: 4, textAlign: ["center", null, "start"] }}>
+                {offer.project.roomsWithPrices[0].price}
+              </Heading>
+
+              <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
+                <IconText
+                  heading="نوع العقار"
+                  text={offer.project.propertyType?.name}
+                  icon={home}
+                />
+                <IconText
+                  heading="عدد الغرف"
+                  text={offer.project.roomsWithPrices[0].room || "لا توجد تفاصيل"}
+                  icon={box}
+                />
+                <IconText
+                  heading="عدد الحمامات"
+                  text={offer.project.roomsWithPrices[0].bathroom || "لا توجد تفاصيل"}
+                  icon={bath}
+                />
+                <IconText
+                  heading="مساحة العقار"
+                  text={offer.project.roomsWithPrices[0].area || "لا توجد تفاصيل"}
+                  icon={map2}
+                />
+              </Grid>
+              <Heading sx={{ mt: 4 }}>الوصف</Heading>
+              <Text>{offer.project.subTitle}</Text>
+              <HTMLBox html={offer.project.details} />
+            </>
+          )}
           <HTMLBox html={offer.details} />
         </Wrapper>
       </Box>
@@ -133,33 +208,6 @@ const WhatsNew: BlitzPage<{ offer: Offer & { project?: Project } }> = ({ offer }
       )}
     </Layout>
   )
-}
-
-export async function getStaticPaths(context) {
-  const { offers } = await getOffers({}, context)
-  const paths = offers.map((offer: Offer) => ({
-    params: {
-      countryId: `${offer.countryId}`,
-      offerId: `${offer.id}`,
-    },
-  }))
-
-  return {
-    paths,
-    fallback: true,
-  }
-}
-
-export async function getStaticProps(context) {
-  const offerId = parseInt(context.params.offerId)
-  const offer = await getOffer({ where: { id: offerId } })
-
-  return {
-    props: {
-      offer,
-    },
-    revalidate: 60 * 15,
-  }
 }
 
 export default WhatsNew

@@ -91,7 +91,7 @@ export default function Footer() {
       <Wrapper>
         <Box>
           <Heading sx={{ paddingBottom: 1 }}>تابعنا</Heading>
-          <Flex sx={{ flexWrap: "wrap" }}>
+          <Flex sx={{ color: "primary", flexWrap: "wrap" }}>
             <Icon
               href="https://instagram.com/fayez_projects?igshid=1joclb832c6qt"
               icon={instagram}

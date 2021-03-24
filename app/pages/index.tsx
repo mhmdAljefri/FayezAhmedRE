@@ -168,7 +168,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Box
         sx={{
           backgroundColor: "dark",
-          paddingTop: 350,
+          paddingTop: 200,
           marginTop: -200,
           paddingBottom: 100,
         }}
@@ -201,7 +201,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </Flex>
         </Wrapper>
       </Box>
-      <Wrapper sx={{ marginTop: -80, marginBottom: 5 }}>
+      <Wrapper sx={{ marginTop: -80, marginBottom: 4 }}>
         <Swiper
           lazy
           pagination={{
@@ -226,7 +226,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Wrapper>
 
       <LazyLoad once>
-        <Wrapper sx={{ paddingY: 5 }}>
+        <Wrapper sx={{ pb: 3 }}>
           <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
           <Swiper
             pagination={{
@@ -284,7 +284,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
       <Box
         sx={{
-          pb: 100,
+          pb: 1,
           backgroundColor: "background",
           position: "relative",
           zIndex: 1,

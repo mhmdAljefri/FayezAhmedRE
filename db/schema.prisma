@@ -141,6 +141,8 @@ model RoomWithPrice {
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
     room           String?
+    bathroom       String?
+    area           String?
     value          Int      @default(autoincrement())
 
     price          String
