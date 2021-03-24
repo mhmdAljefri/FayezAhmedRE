@@ -42,7 +42,7 @@ const Contact = dynamic(() => import("app/components/Forms/Contact"), {
 
 export async function getStaticProps(context) {
   const { carousels } = await getCarousels({})
-  const { offers } = await getOffers({}, context)
+  const { offers } = await getOffers({ take: 3 }, context)
   const carouselVideo = await getCarouselVideo({})
 
   const { projects: qatarMostViewd } = await getProjects({

@@ -17,6 +17,7 @@ export default function UserDropdwon() {
   return (
     <div>
       <Dropdown
+        showIcon={false}
         outterStyle={{ marginInlineEnd: 20 }}
         title={
           <Box
@@ -32,18 +33,24 @@ export default function UserDropdwon() {
         }
         onChange={() => {}}
       >
-        {userId ? (
-          <div>
-            <Box sx={{ py: 2, px: 3 }} role="button" onClick={() => setOpenFav(true)}>
-              المفضيات
-            </Box>
-            <Button onClick={logoutMutation}>تسجيل الخروج</Button>
-          </div>
-        ) : (
-          <>
-            <Button onClick={() => setOpen(true)}>تسجيل الدخول</Button>
-          </>
-        )}
+        <Box sx={{ minWidth: 130 }}>
+          {userId ? (
+            <div>
+              <Box sx={{ py: 2, px: 1 }} role="button" onClick={() => setOpenFav(true)}>
+                المفضيات
+              </Box>
+              <Button variant="link" onClick={logoutMutation}>
+                تسجيل الخروج
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button variant="link" onClick={() => setOpen(true)}>
+                تسجيل الدخول
+              </Button>
+            </>
+          )}
+        </Box>
       </Dropdown>
       {openFav && <MyFav open={openFav} onClose={() => setOpenFav(false)} />}
       <LoginFormModal isOpen={open} onRequestClose={() => setOpen(false)} />

@@ -1,20 +1,7 @@
 import React from "react"
-import { Box, Heading } from "theme-ui"
+import { Box, Heading, Grid } from "theme-ui"
 import Wrapper from "./Wrapper"
-import { dynamic } from "blitz"
-import SkeltonLoaderCard from "./Cards/SkeltonLoaderCard"
-import LazyLoad from "react-lazyload"
-
-const OfferSlider = dynamic(() => import("./Sliders/OfferSlider"), {
-  ssr: false,
-  loading: () => (
-    <Box sx={{ display: "flex" }}>
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-      <SkeltonLoaderCard />
-    </Box>
-  ),
-})
+import OfferCard from "./Cards/OfferCard"
 
 export default function LatestOffersSection({ offers }) {
   return (
@@ -22,9 +9,15 @@ export default function LatestOffersSection({ offers }) {
       <Wrapper>
         <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>احدث عروضنا</Heading>
 
-        <LazyLoad once offset={200} height={300}>
-          <OfferSlider offers={offers} />
-        </LazyLoad>
+        <Grid columns={[1, null, 3]}>
+          {offers.map((offer) => (
+            <OfferCard
+              key={offer.id}
+              {...offer}
+              prefixPath={`countries/${offer.countryId}/offers/`}
+            />
+          ))}
+        </Grid>
       </Wrapper>
     </Box>
   )

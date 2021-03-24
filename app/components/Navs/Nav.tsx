@@ -108,11 +108,11 @@ const Nav = (props: NavProps) => {
             <NavItem to="/furniture/" text="أثث منزلك" />
             <NavItem to="/partners/" text="شركاء النجاح" />
           </Flex>
-          <Box>
+          <Flex>
             <UserDropdwon />
 
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
-          </Box>
+          </Flex>
         </Flex>
       </Box>
     </Box>
