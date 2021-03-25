@@ -104,6 +104,7 @@
     "swiper": "6.4.11",
     "theme-ui": "0.3.1",
     "yarn": "1.22.10",
+    "next-sitemap": "1.5.6",
     "zod": "1.x"
   },
   "devDependencies": {
@@ -129,7 +130,6 @@
     "jest-environment-jsdom-fourteen": "1.x",
     "jest-watch-typeahead": "0.x",
     "lint-staged": "10.x",
-    "next-sitemap": "1.5.6",
     "prettier": "2.x",
     "pretty-quick": "3.x",
     "prisma": "2.19.0",
