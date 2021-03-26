@@ -22,6 +22,7 @@ export default function Enquire() {
           boxShadow: "default",
           position: "relative",
           paddingX: 4,
+          paddingBottom: 4,
         }}
       >
         <Heading sx={{ fontSize: [4, 6], paddingTop: 5, paddingBottom: 4, color: "white" }}>

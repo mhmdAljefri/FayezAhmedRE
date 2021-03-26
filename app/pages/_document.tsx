@@ -23,6 +23,7 @@ class MyDocument extends Document {
     return (
       <Html lang="ar" dir="rtl">
         <DocumentHead />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=GB7839KPBBX`}></script>
         <script
           defer
           dangerouslySetInnerHTML={{

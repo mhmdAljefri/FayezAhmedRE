@@ -9,7 +9,7 @@ type OurPartnersSectionProps = {
 
 export default function OurPartnersSection(props: OurPartnersSectionProps) {
   return (
-    <Flex sx={{ paddingTop: 5, paddingBottom: 5 }}>
+    <Flex sx={{ paddingTop: 5, paddingBottom: 5, flexWrap: "wrap" }}>
       {props.data.map((partner) => (
         <PartnersCard key={partner.id} {...partner} />
       ))}
