@@ -2,8 +2,14 @@ import React from "react"
 import { Box } from "theme-ui"
 import { Swiper, SwiperSlide } from "./Swiper"
 import ProjectCard from "../Cards/ProjectCard"
+import { Project, RoomWithPrice } from "@prisma/client"
+import { Link } from "blitz"
 
-export default function ProjectSlider({ projects }) {
+type ProjectWithRooms = Project & { roomsWithPrices: RoomWithPrice[] }
+type Props = {
+  projects: ProjectWithRooms[]
+}
+export default function ProjectSlider({ projects }: Props) {
   return (
     <Swiper
       loop
@@ -21,13 +27,23 @@ export default function ProjectSlider({ projects }) {
         },
       }}
     >
-      {projects.map((project) => (
-        <SwiperSlide key={project.id} virtualIndex={project.id}>
-          <Box sx={{ mb: 5 }}>
-            <ProjectCard {...project} roomWithPrices={[...project.roomsWithPrices]} />
-          </Box>
-        </SwiperSlide>
-      ))}
+      {projects.length === 0 ? (
+        <Box sx={{ textAlign: "center", py: 5, px: 2 }}>
+          لاتوجد مشاريع بحسب الفلتر بامكانك التنقل الى صفحة{" "}
+          <Link href="/countries/2/projects">
+            <a>المشاريع</a>
+          </Link>{" "}
+          لعرض كل الخيارات
+        </Box>
+      ) : (
+        projects.map((project) => (
+          <SwiperSlide key={project.id} virtualIndex={project.id}>
+            <Box sx={{ mb: 5 }}>
+              <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
+            </Box>
+          </SwiperSlide>
+        ))
+      )}
     </Swiper>
   )
 }

@@ -7,7 +7,7 @@ type GetProjectsInput = Pick<
 >
 
 export default async function getProjects(
-  { where, orderBy, skip = 0, include, take }: GetProjectsInput,
+  { where, orderBy, skip = 0, include = {}, take }: GetProjectsInput,
   ctx?: Ctx
 ) {
   const userId = ctx?.session?.userId
@@ -17,8 +17,8 @@ export default async function getProjects(
     orderBy,
     take,
     include: {
-      ...include,
       users: true,
+      ...include,
     },
     skip,
   })

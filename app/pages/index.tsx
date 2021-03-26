@@ -31,6 +31,7 @@ import ProjectSlider from "app/components/Sliders/ProjectSlider"
 import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
 import getCurrencyRate from "app/utils/getCurrencyRate"
+import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -116,6 +117,8 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   furnishCategories,
   rates,
 }) => {
+  const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
+
   const { push } = useRouter()
   const asPath = `/countries/${country.id}`
 
@@ -161,7 +164,21 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           heading="مشاريعنا"
         />
         <Text sx={{ mb: 3 }}>منزلك الجديد بانتظارك</Text>
-        <ProjectSlider projects={projects} />
+        <CitiesFilter
+          selected={selected}
+          onClick={(city) => setSelected({ name: city.name, id: city.id })}
+          cities={country.cities}
+        />
+        {typeof selected.id === "string" ? (
+          // all projects
+          <ProjectSlider key="allProjects" projects={projects as any} />
+        ) : (
+          // projects by city
+          <ProjectSlider
+            key="filterProjects"
+            projects={projects.filter((project) => project.cityId === selected.id) as any}
+          />
+        )}
         <ShowMoreButton
           href={`${asPath}/projects`}
           sx={{
