@@ -19,6 +19,7 @@ import { home } from "react-icons-kit/feather/home"
 import { box } from "react-icons-kit/feather/box"
 import { bath } from "react-icons-kit/fa/bath"
 import { map2 } from "react-icons-kit/icomoon/map2"
+import CurrencyPrice from "app/components/CurrencyPrice"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -118,39 +119,31 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             {offer.name}
           </Heading>
           <Heading sx={{ fontSize: 3, mt: 3, fontWeight: 700 }}>{offer.subTitle}</Heading>
-          {offer.project && (
-            <>
-              <Heading sx={{ fontSize: 6, mt: 4, textAlign: ["center", null, "start"] }}>
-                {offer.project.roomsWithPrices[0].price}
-              </Heading>
-
-              <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
-                <IconText
-                  heading="نوع العقار"
-                  text={offer.project.propertyType?.name}
-                  icon={home}
-                />
-                <IconText
-                  heading="عدد الغرف"
-                  text={offer.project.roomsWithPrices[0].room || "لا توجد تفاصيل"}
-                  icon={box}
-                />
-                <IconText
-                  heading="عدد الحمامات"
-                  text={offer.project.roomsWithPrices[0].bathroom || "لا توجد تفاصيل"}
-                  icon={bath}
-                />
-                <IconText
-                  heading="مساحة العقار"
-                  text={offer.project.roomsWithPrices[0].area || "لا توجد تفاصيل"}
-                  icon={map2}
-                />
-              </Grid>
-              <Heading sx={{ mt: 4 }}>الوصف</Heading>
-              <Text>{offer.project.subTitle}</Text>
-              <HTMLBox html={offer.project.details} />
-            </>
+          {offer.price && (
+            <Heading sx={{ fontSize: 6, mt: 4, textAlign: ["center", null, "start"] }}>
+              <CurrencyPrice price={offer.price} />
+            </Heading>
           )}
+
+          <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
+            <IconText heading="نوع العقار" text={offer.propertyType} icon={home} />
+            <IconText
+              heading="عدد الغرف"
+              text={offer.numberOfRooms || "لا توجد تفاصيل"}
+              icon={box}
+            />
+            <IconText
+              heading="عدد الحمامات"
+              text={offer.numberOfBathrooms || "لا توجد تفاصيل"}
+              icon={bath}
+            />
+            <IconText
+              heading="مساحة العقار"
+              text={offer.areaSize || "لا توجد تفاصيل"}
+              icon={map2}
+            />
+          </Grid>
+          <Heading sx={{ mt: 4 }}>الوصف</Heading>
           <HTMLBox html={offer.details} />
         </Wrapper>
       </Box>

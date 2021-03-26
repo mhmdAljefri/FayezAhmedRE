@@ -36,8 +36,8 @@ export default function ChangeColorsMode({ sx }: ChangeColorsModeProps) {
     >
       <Box
         sx={{
-          color: isDark ? "text" : "primary",
-          backgroundColor: !isDark ? "text" : "primary",
+          color: isDark ? "text" : "background",
+          backgroundColor: !isDark ? "text" : "background",
           boxShadow: isDark ? undefined : "card",
           ...iconStyle,
         }}
@@ -46,8 +46,8 @@ export default function ChangeColorsMode({ sx }: ChangeColorsModeProps) {
       </Box>
       <Box
         sx={{
-          color: isDark ? "primary" : "text",
-          backgroundColor: !isDark ? "primary" : "text",
+          color: isDark ? "primary" : "white  ",
+          backgroundColor: !isDark ? "primary" : "white ",
           boxShadow: isDark ? "card" : undefined,
           ...iconStyle,
         }}

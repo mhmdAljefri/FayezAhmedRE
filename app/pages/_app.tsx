@@ -1,4 +1,4 @@
-import { AppProps, ErrorComponent, useParam, useRouter } from "blitz"
+import { AppProps, ErrorComponent, useRouter } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { Suspense } from "react"
 
@@ -34,7 +34,6 @@ Router.events.on("routeChangeError", () => NProgress.done())
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   const router = useRouter()
-  const countryId = useParam("countryId", "number")
 
   return (
     <ErrorBoundary
@@ -47,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <Suspense fallback={<FullpageLoader />}>
-        <PriceProvider price={countryId === 2 ? "priceQatar" : "price"}>
+        <PriceProvider price={"priceQatar"}>
           <>
             <ToastContainer />
 

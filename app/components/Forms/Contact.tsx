@@ -78,7 +78,7 @@ export default function Contact() {
           <LabeledTextField
             required
             name="description"
-            placeholder="المنازل الافضل في قطر وتركيا"
+            placeholder="المنازل الافضل في قطر"
             label="تفاصيل الاستشارة"
           />
           <Grid

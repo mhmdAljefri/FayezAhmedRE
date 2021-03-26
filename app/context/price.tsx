@@ -1,6 +1,7 @@
 import React, { ReactNode, useCallback, useState } from "react"
 import { prices } from "../components/PriceType"
-type priceTypes =
+
+export type priceTypes =
   | "price"
   | "priceQatar"
   | "priceTurkey"
@@ -9,16 +10,22 @@ type priceTypes =
   | "priceUAE"
   | "priceOman"
 
+export type RateKeys = "USD" | "QAR" | "OMR" | "TRY" | "KWD" | "AED" | "SAR"
+type Rates = Record<RateKeys, number>[]
+
 export const PriceContext = React.createContext<{
-  priceType: string
+  priceType: priceTypes
   priceTypeSign: string
   priceTypeSuffix: string
+  rates?: Rates
   changePriceType: (priceTypeValue: priceTypes) => any
+  changeRates?: (arg: Rates) => any
 }>({
-  priceType: "price",
+  priceType: "priceQatar",
   priceTypeSign: "$",
-  priceTypeSuffix: '"دولار امريكي"',
+  priceTypeSuffix: "ريال قطري",
   changePriceType: (arg: priceTypes) => {},
+  changeRates: (arg: Rates) => {},
 })
 
 function getPriceTypeSuffix(priceType: priceTypes) {
@@ -50,8 +57,9 @@ type Props = {
   price: priceTypes
   children: ReactNode
 }
-export default function PriceProvider({ price = "price", ...props }: Props) {
+export default function PriceProvider({ price = "priceQatar", ...props }: Props) {
   const [priceType, setPriceType] = useState<priceTypes>(price)
+  const [rates, setRates] = useState<Rates | undefined>()
 
   const priceTypeSuffix = getPriceTypeSuffix(priceType)
   const priceTypeSign = getPriceTypeSign(priceType)
@@ -65,7 +73,14 @@ export default function PriceProvider({ price = "price", ...props }: Props) {
 
   return (
     <PriceContext.Provider
-      value={{ priceType, priceTypeSign, changePriceType, priceTypeSuffix }}
+      value={{
+        rates,
+        priceType,
+        priceTypeSign,
+        changeRates: (newRates: Rates) => setRates(newRates),
+        changePriceType,
+        priceTypeSuffix,
+      }}
       {...props}
     />
   )

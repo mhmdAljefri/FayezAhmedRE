@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { shareSquareO } from "react-icons-kit/fa/shareSquareO"
+import { telegram } from "react-icons-kit/fa/telegram"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { Button, Flex, Link } from "theme-ui"
 import { usePopper } from "react-popper"
@@ -94,7 +95,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           <IconWithText icon={whatsapp} text="وتساب" />
         </Link>
         <Link target="blank" rel="noreferrer noopener" href={telegramLink}>
-          <IconWithText icon={whatsapp} text="تليجرام" />
+          <IconWithText icon={telegram} text="تليجرام" />
         </Link>
         <CopyToClipboard text={url} />
 

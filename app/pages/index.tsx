@@ -30,6 +30,7 @@ import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ProjectSlider from "app/components/Sliders/ProjectSlider"
 import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
+import getCurrencyRate from "app/utils/getCurrencyRate"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -41,6 +42,7 @@ const Contact = dynamic(() => import("app/components/Forms/Contact"), {
 })
 
 export async function getStaticProps(context) {
+  const rates = await getCurrencyRate()
   const { carousels } = await getCarousels({})
   const { offers } = await getOffers({ take: 3 }, context)
   const carouselVideo = await getCarouselVideo({})
@@ -49,6 +51,7 @@ export async function getStaticProps(context) {
     where: {
       country: {
         isTurkey: false,
+        suspend: false,
       },
     },
     take: 4,
@@ -95,6 +98,7 @@ export async function getStaticProps(context) {
       projects,
       carousels,
       carouselVideo,
+      rates,
     }, // will be passed to the page component as props
     revalidate: 60 * 15,
   }
@@ -110,6 +114,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   carousels,
   mostViewedProjects,
   furnishCategories,
+  rates,
 }) => {
   const { push } = useRouter()
   const asPath = `/countries/${country.id}`

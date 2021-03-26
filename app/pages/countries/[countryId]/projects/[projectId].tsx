@@ -166,7 +166,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 {priceTypeSuffix}
               </Text>
               <Text sx={{ paddingY: 3, fontSize: 3 }}>
-                السعر يبداء من <span>{numberFormat(roomWithPrice?.[priceType])}</span>
+                السعر يبداء من <span>{numberFormat(parseInt(roomWithPrice?.[priceType]))}</span>
               </Text>
             </Box>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>

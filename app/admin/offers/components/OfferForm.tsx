@@ -22,33 +22,16 @@ type OfferFormProps = {
   onSubmit: (values: any) => {}
 }
 
-// model Project {
-//   id                         Int      @default(autoincrement()) @id
-//   createdAt                  DateTime @default(now())
-//   updatedAt                  DateTime @updatedAt
-
-//   name                      String   @unique
-//   subTitle                  String
-//   details                   String
-//   status                    STATUS
-//   gallery                   String[]
-//   floorplan                 String[]
-//   features                  String[]
-//   brochure                  String?
-//   constructingUpdateVideo   String?
-//   constructingUpdatePrview  String?
-//   nearBy                    Json[]
-//   roomsWithPrices           Json[]
-//   location                  Json
-//   country                   Country  @relation(fields: [countryId], references: [id])
-//   countryId                 Int
-// }
-
 const Schema = z.object({
   name: z.string(),
   details: z.string(),
   image: z.string().optional(),
   countryId: z.string(),
+  propertyType: z.string().optional(),
+  areaSize: z.string().optional(),
+  numberOfRooms: z.string().optional(),
+  numberOfBathrooms: z.string().optional(),
+  price: z.any().optional(),
 })
 
 const ProjectsListField = () => {
@@ -86,7 +69,9 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
       <Form
         // mutators={arrayMutators}
         schema={Schema}
-        onSubmit={onSubmit}
+        onSubmit={(data) =>
+          onSubmit({ ...data, price: data.price ? parseInt(data.price) : undefined })
+        }
         initialValues={initialValues}
       >
         <LabeledTextField required={false} name="name" label="العنوان" />
@@ -103,7 +88,6 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         <MediaWidthTextField name="image" label="صورة العرض" />
         <UploadMainVideo />
         <Text as="small">هذا الفيديو سيظهر في بداية الصفحة بديل للصورة</Text>
-
         <LabeledMenuField
           getLabel={(country) => country.name}
           getValue={(country) => country.id as number}
@@ -115,8 +99,13 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
         <CitiesListField />
         <ProjectsListField />
 
-        <MapField name="location" />
+        <LabeledTextField required={false} name="propertyType" label="نوع العقار" />
+        <LabeledTextField required={false} name="areaSize" label="مساحة العقار" />
+        <LabeledTextField required={false} name="numberOfRooms" label="عدد الغرف" />
+        <LabeledTextField required={false} name="numberOfBathrooms" label="عدد الحمامات" />
+        <LabeledTextField type="number" required={false} name="price" label="السعر" />
 
+        <MapField name="location" />
         <LabeledMenuField
           options={[
             {
@@ -130,11 +119,8 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           getValue={(item) => item.id}
           label="نوع الدفع"
         />
-
         <InstallmentPalnField />
-
         <MediaWidthTextField accept=".pdf" name="brochure" label="البروشور" />
-
         <FieldArray name="features">
           {({ fields }) => (
             <div>
@@ -163,11 +149,8 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
             </div>
           )}
         </FieldArray>
-
         <MediaWidthTextField multiple name="gallery" label="معرض الصور" />
-
         <UploadVideo />
-
         <Button sx={{ marginY: 2, marginRight: "auto", display: "block", width: 150 }}>
           تاكيد
         </Button>

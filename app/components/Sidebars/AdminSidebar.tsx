@@ -10,6 +10,7 @@ import { flagO } from "react-icons-kit/fa/flagO"
 import { certificate } from "react-icons-kit/fa/certificate"
 import { bed } from "react-icons-kit/fa/bed"
 import { image } from "react-icons-kit/fa/image"
+import LogoWithText from "../LogoWithText"
 
 const links = [
   { icon: star, name: "الخدمات", url: "/admin/features" },
@@ -83,7 +84,7 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
         width: [100, null, 250],
         overflow: "hidden",
         paddingX: 2,
-        backgroundColor: "dark",
+        backgroundColor: "background",
         minHeight: "100vh",
         position: "relative",
         paddingBottom: 150,
@@ -93,12 +94,8 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
         },
       }}
     >
-      <Box sx={{ width: [70, null, 100], paddingX: [2, null, 3], paddingY: 3 }}>
-        <Image
-          sx={{ objectFit: "contain" }}
-          src="/logo.png"
-          alt="Fayez Ahmed RealEstate | فائز احمد العقارية"
-        />
+      <Box sx={{ paddingX: [2, null, 3], paddingY: 3 }}>
+        <LogoWithText />
       </Box>
 
       <Flex sx={{ marginTop: 5 }} as="nav">

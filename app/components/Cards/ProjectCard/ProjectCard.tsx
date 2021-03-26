@@ -15,10 +15,11 @@ import { numberFormat } from "app/utils"
 import OptmizationImage from "app/components/OptmizationImage"
 import SocialShare from "app/components/SocialShare"
 import { AddProjectToFav } from "app/components/AddToFav"
+import CurrencyPrice from "app/components/CurrencyPrice"
 
 interface ProjectCardIconsTextProps {
   width?: number
-  text: string
+  text: ReactNode
   icon?: IconProp["icon"]
   prefix?: ReactNode
   sx?: SxStyleProp
@@ -181,7 +182,11 @@ function ProjectCard({
           )}
           <ProjectCardIconsText
             sx={{ color: "primary", fontSize: [2], fontWeight: 700 }}
-            text={`تبدا من ${numberFormat(price)}`}
+            text={
+              <span>
+                تبدا من <CurrencyPrice price={parseInt(price, 10)} />
+              </span>
+            }
             prefix={priceTypeSign}
           />
         </Flex>
