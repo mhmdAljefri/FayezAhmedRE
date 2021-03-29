@@ -5,13 +5,25 @@ import { Offer } from "@prisma/client"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
+import LabeldTexts from "./LabeldTexts"
 
 const OfferCardYoutube = dynamic(() => import("./OfferCardYoutube"))
 const OfferCardPureVideo = dynamic(() => import("./OfferCardPureVideo"))
 const OfferCardImage = dynamic(() => import("./OfferCardImage"))
 const OfferCardLabel = dynamic(() => import("./OfferCardLabel"))
 
-type OfferCardProps = Pick<Offer, "id" | "name" | "image" | "subTitle" | "mainVideo"> & {
+type OfferCardProps = Pick<
+  Offer,
+  | "id"
+  | "name"
+  | "image"
+  | "subTitle"
+  | "mainVideo"
+  | "areaSize"
+  | "numberOfBathrooms"
+  | "numberOfRooms"
+  | "propertyType"
+> & {
   prefixPath?: string
   hideOfferLabel?: boolean
   hasFav?: boolean
@@ -25,6 +37,7 @@ export default function OfferCard({
   name,
   prefixPath = "/",
   hasFav = false,
+  ...offer
 }: OfferCardProps) {
   const { asPath } = useRouter()
   const href = asPath + prefixPath + id
@@ -80,6 +93,7 @@ export default function OfferCard({
         <Box sx={{ paddingY: 3, paddingX: 3, cursor: "pointer" }}>
           <Heading>{name}</Heading>
           <Text>{subTitle}</Text>
+          <LabeldTexts {...offer} />
         </Box>
       </Link>
     </Box>

@@ -18,6 +18,7 @@ export default async function getCountry({ where }: GetCountryInput) {
       name: true,
       oprationCompanyPages: true,
       explores: {
+        where: { type: "dontMissitGallery" },
         take: 9,
       },
     },

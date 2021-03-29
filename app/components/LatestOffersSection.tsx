@@ -2,6 +2,7 @@ import React from "react"
 import { Box, Heading, Grid } from "theme-ui"
 import Wrapper from "./Wrapper"
 import OfferCard from "./Cards/OfferCard"
+import ShowMoreButton from "./ShowMoreButton"
 
 export default function LatestOffersSection({ offers }) {
   return (
@@ -18,6 +19,12 @@ export default function LatestOffersSection({ offers }) {
             />
           ))}
         </Grid>
+        <ShowMoreButton
+          href={`/countries/2/offers`}
+          sx={{
+            display: ["auto", null, "none"],
+          }}
+        />
       </Wrapper>
     </Box>
   )

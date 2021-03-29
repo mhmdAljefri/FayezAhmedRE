@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import { BlitzPage, dynamic, Link, useRouter, InferGetStaticPropsType } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
@@ -14,7 +14,7 @@ import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
-import { Icon } from "react-icons-kit"
+import { Icon, IconProp } from "react-icons-kit"
 import { home } from "react-icons-kit/feather/home"
 import { box } from "react-icons-kit/feather/box"
 import { bath } from "react-icons-kit/fa/bath"
@@ -26,15 +26,23 @@ const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryVi
   loading: () => <Skeleton height={250} />,
 })
 
-const IconText = ({ icon, heading, text }) => (
-  <Flex>
-    <Icon size={24} icon={icon} />
-    <Box sx={{ px: 2 }}>
-      <Heading sx={{ fontSize: 3 }}>{heading}</Heading>
-      <Text>{text}</Text>
-    </Box>
-  </Flex>
-)
+type OfferIconTextProps = {
+  icon: IconProp["icon"]
+  heading: string
+  text?: ReactNode
+}
+const OfferIconText = ({ icon, heading, text }: OfferIconTextProps) =>
+  !!text ? (
+    <Flex>
+      <Icon size={24} icon={icon} />
+      <Box sx={{ px: 2 }}>
+        <Heading sx={{ fontSize: 3 }}>{heading}</Heading>
+        <Text>{text}</Text>
+      </Box>
+    </Flex>
+  ) : (
+    <div />
+  )
 
 export async function getStaticPaths(context) {
   const { offers } = await getOffers({}, context)
@@ -126,22 +134,10 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           )}
 
           <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
-            <IconText heading="نوع العقار" text={offer.propertyType} icon={home} />
-            <IconText
-              heading="عدد الغرف"
-              text={offer.numberOfRooms || "لا توجد تفاصيل"}
-              icon={box}
-            />
-            <IconText
-              heading="عدد الحمامات"
-              text={offer.numberOfBathrooms || "لا توجد تفاصيل"}
-              icon={bath}
-            />
-            <IconText
-              heading="مساحة العقار"
-              text={offer.areaSize || "لا توجد تفاصيل"}
-              icon={map2}
-            />
+            <OfferIconText heading="نوع العقار" text={offer.propertyType} icon={home} />
+            <OfferIconText heading="عدد الغرف" text={offer.numberOfRooms} icon={box} />
+            <OfferIconText heading="عدد الحمامات" text={offer.numberOfBathrooms} icon={bath} />
+            <OfferIconText heading="مساحة العقار" text={offer.areaSize} icon={map2} />
           </Grid>
           <Heading sx={{ mt: 4 }}>الوصف</Heading>
           <HTMLBox html={offer.details} />

@@ -32,6 +32,8 @@ import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
 import getCurrencyRate from "app/utils/getCurrencyRate"
 import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
+import getExplore from "app/public/explores/queries/getExplore"
+import getExplores from "app/public/explores/queries/getExplores"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -84,6 +86,22 @@ export async function getStaticProps(context) {
   const country = await getCountry({
     where: { suspend: false },
   })
+  /**
+   * start add all explore types to country instance
+   */
+  const { explores: exploreGalleryExplores } = await getExplores({
+    where: { type: "exploreGallery", countryId: country.id },
+    take: 9,
+  })
+  const { explores: getInspiredGalleryExplores } = await getExplores({
+    where: { type: "getInspiredGallery", countryId: country.id },
+    take: 9,
+  })
+  country.explores = [...country.explores, ...exploreGalleryExplores, ...getInspiredGalleryExplores]
+  /**
+   * end add all explore types to country instance
+   */
+
   const { propertyTypes } = await getPropertyTypes({})
   const { furnishCategories } = await getFurnishCategories({
     select: { name: true, image: true, id: true },
