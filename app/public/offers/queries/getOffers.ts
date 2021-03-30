@@ -12,7 +12,7 @@ export default async function getOffers(
 ) {
   const userId = ctx?.session?.userId
   let offers = await db.offer.findMany({
-    where: { ...where, country: { suspend: false } },
+    where: { ...where, country: { suspend: false, isTurkey: false } },
     orderBy,
     take,
     include: {

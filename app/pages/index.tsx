@@ -32,7 +32,6 @@ import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
 import getCurrencyRate from "app/utils/getCurrencyRate"
 import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
-import getExplore from "app/public/explores/queries/getExplore"
 import getExplores from "app/public/explores/queries/getExplores"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {

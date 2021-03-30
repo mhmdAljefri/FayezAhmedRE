@@ -14,35 +14,17 @@ import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
-import { Icon, IconProp } from "react-icons-kit"
 import { home } from "react-icons-kit/feather/home"
 import { box } from "react-icons-kit/feather/box"
 import { bath } from "react-icons-kit/fa/bath"
 import { map2 } from "react-icons-kit/icomoon/map2"
 import CurrencyPrice from "app/components/CurrencyPrice"
+import OfferIconText from "app/components/OfferLabeldText"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
   loading: () => <Skeleton height={250} />,
 })
-
-type OfferIconTextProps = {
-  icon: IconProp["icon"]
-  heading: string
-  text?: ReactNode
-}
-const OfferIconText = ({ icon, heading, text }: OfferIconTextProps) =>
-  !!text ? (
-    <Flex>
-      <Icon size={24} icon={icon} />
-      <Box sx={{ px: 2 }}>
-        <Heading sx={{ fontSize: 3 }}>{heading}</Heading>
-        <Text>{text}</Text>
-      </Box>
-    </Flex>
-  ) : (
-    <div />
-  )
 
 export async function getStaticPaths(context) {
   const { offers } = await getOffers({}, context)

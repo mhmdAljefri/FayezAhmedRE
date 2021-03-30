@@ -13,7 +13,7 @@ export default async function getProjects(
   const userId = ctx?.session?.userId
 
   let projects = await db.project.findMany({
-    where: { ...where, country: { ...(where?.country as any), suspend: false } },
+    where: { ...where, country: { suspend: false, isTurkey: false } },
     orderBy,
     take,
     include: {

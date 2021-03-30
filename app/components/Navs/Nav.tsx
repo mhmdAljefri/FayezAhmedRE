@@ -57,6 +57,7 @@ const Nav = (props: NavProps) => {
           backdropFilter: "blur(10px)",
           position: "fixed",
           height: "100vh",
+          pb: 4,
 
           top: 0,
           left: 0,
