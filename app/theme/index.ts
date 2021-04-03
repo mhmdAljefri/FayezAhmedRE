@@ -32,7 +32,7 @@ const theme = {
         heading: "#fff",
         lightText: "#555",
         background: "#111",
-        primary: "#cf3680",
+        primary: "#a5165b",
         light: "#222",
         dark: "#000",
         dark2: "#111",
