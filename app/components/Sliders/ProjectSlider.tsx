@@ -10,6 +10,7 @@ type Props = {
   projects: ProjectWithRooms[]
 }
 export default function ProjectSlider({ projects }: Props) {
+  console.log(projects.length)
   return (
     <Swiper
       loop
@@ -19,11 +20,11 @@ export default function ProjectSlider({ projects }: Props) {
       breakpoints={{
         1200: {
           pagination: false,
-          slidesPerView: 3,
+          slidesPerView: projects.length >= 3 ? 3 : projects.length,
         },
         900: {
           pagination: false,
-          slidesPerView: 2,
+          slidesPerView: projects.length >= 2 ? 2 : projects.length,
         },
       }}
     >

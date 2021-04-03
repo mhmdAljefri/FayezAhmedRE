@@ -20,8 +20,8 @@ const theme = {
     black100: "#d4d4d4d9",
     secondary100: "#0a090487",
     input: "#65143b",
-    light: "#fff8ea",
-    dark: "#ececec",
+    light: "#ececec",
+    dark: "#dcdcdc",
     dark2: "#202020",
     shadow: "rgba(0, 0, 0, .125)",
     modes: {

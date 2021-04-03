@@ -4,7 +4,9 @@ import { Box, Flex } from "theme-ui"
 import Dropdown from "./Dropdown"
 import OptmizationImage from "./OptmizationImage"
 
-type PriceTypeProps = {}
+type PriceTypeProps = {
+  color?: string
+}
 
 export const prices = [
   ["price", "/icons/united-states.png", "دولار امريكي", "$"],
@@ -16,12 +18,13 @@ export const prices = [
   ["priceOman", "/icons/oman.png", "ريال عماني", "OMR"],
 ]
 
-const PriceType = (props: PriceTypeProps) => {
+const PriceType = ({ color }: PriceTypeProps) => {
   const { priceType, changePriceType } = usePriceType()
 
   return (
     <Dropdown
       defaultValue={priceType}
+      selectedItemStyle={{ color }}
       onChange={({ value }) => changePriceType(value)}
       options={prices.map((price) => ({
         key: price[0],

@@ -62,29 +62,36 @@ export async function getStaticProps(context) {
     },
   })
 
-  const { projects } = await getProjects({
-    include: {
-      country: {
-        select: {
-          name: true,
-          isTurkey: true,
-          id: true,
-        },
-      },
-      roomsWithPrices: true,
-      city: true,
-    },
-
-    take: 6,
-    where: {
-      isHousingComplex: true,
-    },
-  })
-
   /** remove turkey page changes */
   const country = await getCountry({
     where: { suspend: false },
   })
+
+  const projects: any = []
+  // find projects per city
+  country?.cities.forEach(async (city) => {
+    const { projects: cityProjects } = await getProjects({
+      include: {
+        country: {
+          select: {
+            name: true,
+            isTurkey: true,
+            id: true,
+          },
+        },
+        roomsWithPrices: true,
+        city: true,
+      },
+
+      where: {
+        cityId: city.id,
+      },
+      take: 3,
+    })
+
+    projects.push(...cityProjects)
+  })
+
   /**
    * start add all explore types to country instance
    */
@@ -192,7 +199,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         ) : (
           // projects by city
           <ProjectSlider
-            key="filterProjects"
+            key={selected.id}
             projects={projects.filter((project) => project.cityId === selected.id) as any}
           />
         )}

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Box, Button } from "theme-ui"
+import { Box, Button, Flex } from "theme-ui"
 import { useSession, useMutation } from "blitz"
 import Dropdown from "../Dropdown"
 import MyFav from "../MyFav"
@@ -22,18 +22,20 @@ export default function UserDropdwon() {
         showIcon={false}
         outterStyle={{ marginInlineEnd: 20 }}
         title={
-          <Box
+          <Flex
             sx={{
-              width: 30,
-              height: 30,
-              borderRadius: 30,
+              justifyContent: "center",
+              alignItems: "center",
+              width: 28,
+              height: 28,
+              borderRadius: 28,
               mx: [2, 2, 3],
               backgroundColor: "white",
               color: "text",
             }}
           >
             <Icon size={30} icon={userCircle} />
-          </Box>
+          </Flex>
         }
         onChange={() => {}}
       >

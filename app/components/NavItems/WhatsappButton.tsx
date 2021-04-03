@@ -4,7 +4,10 @@ import { Icon } from "react-icons-kit"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
 import { WHATSAPP_NUMBER } from "app/constants"
 
-export default function WhatsappButton() {
+type Props = {
+  color?: string
+}
+export default function WhatsappButton({ color = "primary" }: Props) {
   return (
     <ThemeLink
       target="_blank"
@@ -15,6 +18,7 @@ export default function WhatsappButton() {
         fontWeight: 700,
         marginInlineEnd: [10, 15, 20],
         fontSize: [3],
+        color,
       }}
     >
       <Icon size={30} icon={whatsapp} />

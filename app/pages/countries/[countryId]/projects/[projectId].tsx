@@ -324,7 +324,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                         mb: 4,
                         backgroundColor: "primary",
                         height: 150,
-                        color: "heading",
+                        color: "white",
                         boxShadow: "default",
                         borderRadius: "default",
                         alignItems: "center",

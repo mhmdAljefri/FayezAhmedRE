@@ -16,11 +16,9 @@ export default function ShowMoreButton({ sx, href }: showMoreButtonProps) {
           paddingX: 3,
           paddingY: 2,
           textDecoration: "none",
-          ":hover": {
-            backgroundColor: "light",
-            borderRadius: "lg",
-            boxShadow: "default",
-          },
+          backgroundColor: "light",
+          borderRadius: "lg",
+          boxShadow: "default",
         }}
       >
         <Flex sx={{ color: "primary", alignItems: "center", justifyContent: "center" }}>

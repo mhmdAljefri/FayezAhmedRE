@@ -112,12 +112,12 @@ export function PaymentPlan({ installmentPlan }) {
         <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark", px: 3 }}>
           <Box>
             <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
-              <Text sx={{ paddingY: 5, fontWeight: 700, color: "white", fontSize: 4 }}>
+              <Text sx={{ paddingY: 5, fontWeight: 700, color: "heading", fontSize: 4 }}>
                 خطة السداد
               </Text>
               <Icon
                 size={36}
-                style={{ color: "white" }}
+                style={{ color: "heading" }}
                 onClick={() => setOpen(false)}
                 icon={arrows_remove}
               />
@@ -126,12 +126,24 @@ export function PaymentPlan({ installmentPlan }) {
             {installmentPlan.map(({ instalment, milestone }, index) => (
               <Grid key={index} columns={instalment && milestone ? 2 : 1}>
                 {instalment && (
-                  <Heading sx={{ border: "1px solid white", padding: 2, color: "white" }}>
+                  <Heading
+                    sx={{
+                      border: (t) => `1px solid ${t.colors.heading}`,
+                      padding: 2,
+                      color: "heading",
+                    }}
+                  >
                     {instalment}
                   </Heading>
                 )}
                 {milestone && (
-                  <Heading sx={{ border: "1px solid white", padding: 2, color: "white" }}>
+                  <Heading
+                    sx={{
+                      border: (t) => `1px solid ${t.colors.heading}`,
+                      padding: 2,
+                      color: "heading",
+                    }}
+                  >
                     {milestone}
                   </Heading>
                 )}

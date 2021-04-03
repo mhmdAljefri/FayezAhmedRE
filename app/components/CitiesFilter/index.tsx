@@ -18,7 +18,7 @@ function CityButton({ children, isSelected, onClick }) {
         paddingX: 3,
         fontWeight: "700",
         textAlign: "center",
-        color: isSelected ? "primary" : "heading",
+        color: isSelected ? "primary" : "white",
         borderColor: "primary",
         borderStyle: "solid",
         marginTop: 2,

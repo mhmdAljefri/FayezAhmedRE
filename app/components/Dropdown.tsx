@@ -10,6 +10,7 @@ type DropdownProps = {
   options?: Option[]
   defaultValue?: string
   showIcon?: boolean
+  selectedItemStyle?: SxStyleProp
 
   /**
    * this prop for unselectable dropdown such list of navigations
@@ -28,6 +29,7 @@ const Dropdown = ({
   outterStyle,
   defaultValue,
   showIcon = true,
+  selectedItemStyle,
   onChange,
 }: DropdownProps) => {
   const defaultOption = options?.find((option) => option.value === defaultValue)
@@ -47,6 +49,7 @@ const Dropdown = ({
         sx={{
           alignItems: "center",
           color: "primary",
+          ...selectedItemStyle,
         }}
       >
         <Box sx={{ marginInlineEnd: 5 }}>

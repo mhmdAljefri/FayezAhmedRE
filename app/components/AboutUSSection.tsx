@@ -28,6 +28,7 @@ function Card({
           zIndex: 1,
           fontSize: 1,
           fontWeight: 600,
+          textShadow: (t) => `0 2px 5px ${t.colors.text}`,
           color: darkColor ? "black" : "white",
         }}
       >

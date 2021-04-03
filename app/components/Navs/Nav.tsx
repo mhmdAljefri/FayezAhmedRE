@@ -56,8 +56,6 @@ const Nav = (props: NavProps) => {
         sx={{
           backdropFilter: "blur(10px)",
           position: "fixed",
-          height: "100vh",
-          pb: 4,
 
           top: 0,
           left: 0,
@@ -72,7 +70,10 @@ const Nav = (props: NavProps) => {
           ref={ref}
           sx={{
             paddingX: 4,
-            height: "100vh",
+            pb: 4,
+            position: "absolute",
+            top: 0,
+            bottom: 0,
             overflowX: "hidden",
             overflowY: "auto",
             backgroundColor: "dark",

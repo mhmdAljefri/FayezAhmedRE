@@ -1,13 +1,12 @@
 import React from "react"
 import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
-import { Link, useParam } from "blitz"
-import CountriesItemsList from "app/components/NavItems/CountriesItemsList"
+import { Link } from "blitz"
 
-type NavProps = {}
+type NavProps = {
+  scrolled: boolean
+}
 
-const DesktopNav = (props: NavProps) => {
-  const countryId = useParam("countryId")
-
+const DesktopNav = ({ scrolled }: NavProps) => {
   const NavItem = ({ sx, to, text }: { to: string; text: string; sx?: SxStyleProp }) => {
     return (
       <Link passHref href={to}>
@@ -20,7 +19,7 @@ const DesktopNav = (props: NavProps) => {
             marginInlineEnd: [null, null, 10, null, 20],
             wordBreak: "keep-all",
             whiteSpace: "nowrap",
-            color: "heading",
+            color: scrolled ? "heading" : "white",
             fontSize: [1, 1, 1, 1],
             ":hover": {
               color: "primary",
