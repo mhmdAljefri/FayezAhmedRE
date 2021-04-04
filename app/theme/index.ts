@@ -1,6 +1,7 @@
 import future from "./future"
+import { Theme } from "theme-ui"
 
-const theme = {
+const theme: Theme = {
   ...future,
   breakpoints: ["40em", "56em", "64em", "120em"],
   initialColorModeName: "light",
@@ -145,6 +146,27 @@ const theme = {
       option: {
         backgroundColor: "background",
         color: "text",
+      },
+    },
+  },
+
+  styles: {
+    root: {
+      // uses the theme values provided above
+      fontFamily: "body",
+      fontWeight: "body",
+      ":before": {
+        borderColor: "background",
+        content: '""',
+        pointerEvents: "none",
+        borderWidth: 30,
+        borderStyle: "solid",
+        zIndex: 111111111111,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
       },
     },
   },

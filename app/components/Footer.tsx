@@ -110,9 +110,9 @@ export default function Footer() {
           color: "white",
           position: open ? "fixed" : "absolute",
           zIndex: 100,
-          bottom: 0,
-          left: 0,
-          right: 0,
+          bottom: open ? 30 : 0,
+          left: open ? 30 : 0,
+          right: open ? 30 : 0,
         }}
       >
         <Wrapper>

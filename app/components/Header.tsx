@@ -1,7 +1,6 @@
 import { Box, Flex, SxStyleProp } from "theme-ui"
 import React from "react"
 import dynamic from "next/dynamic"
-import Wrapper from "app/components/Wrapper"
 import PriceType from "app/components/PriceType"
 import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
@@ -38,18 +37,17 @@ const Header = ({ sx }: HeaderProps) => {
   return (
     <Box
       sx={{
-        position: "sticky",
+        position: "fixed",
         zIndex: "header",
-        top: 0,
-        left: 0,
-        right: 0,
+        width: "calc(100vw - 74px)",
+        px: 2,
         ...sx,
         backgroundColor,
         boxShadow,
       }}
       as="header"
     >
-      <Wrapper sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Link href="/" passHref>
           <a
             style={{
@@ -75,7 +73,7 @@ const Header = ({ sx }: HeaderProps) => {
           {priceRender}
           {!isDesktopScreen && <Nav />}
         </Flex>
-      </Wrapper>
+      </Box>
     </Box>
   )
 }

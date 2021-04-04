@@ -20,13 +20,10 @@ import getCountry from "app/public/countries/queries/getCountry"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { useState } from "react"
 import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
-import LazyLoad from "react-lazyload"
 import HeadingWithMoreLink from "app/components/HeadingWithMoreLink"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import ExploreCard from "app/components/ExploreCard"
 import { Explore } from "@prisma/client"
-import ServicesForm from "app/components/Forms/ServicesForm"
-import FurnishCategoryCard from "app/components/FurnishCategoryCard"
 import ProjectSlider from "app/components/Sliders/ProjectSlider"
 import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
@@ -271,47 +268,6 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </Swiper>
       </Wrapper>
 
-      <LazyLoad once>
-        <Wrapper sx={{ pb: 3 }}>
-          <HeadingWithMoreLink href="/furniture" heading="اثث منزلك" />
-          <Swiper
-            pagination={{
-              clickable: true,
-            }}
-            spaceBetween={20}
-            breakpoints={{
-              520: {
-                slidesPerView: 2,
-              },
-              760: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 4,
-              },
-            }}
-          >
-            {furnishCategories.map((furnishCategory) => (
-              <SwiperSlide key={furnishCategory.id} virtualIndex={furnishCategory.id}>
-                <Box sx={{ minHeight: 300 }}>
-                  <FurnishCategoryCard {...furnishCategory} />
-                </Box>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Wrapper>
-      </LazyLoad>
-
-      <Wrapper
-        id="ServicesForm"
-        sx={{
-          paddingTop: 5,
-          zIndex: 1,
-          position: "relative",
-        }}
-      >
-        <ServicesForm cities={country.cities} />
-      </Wrapper>
       <Twits />
 
       <Box sx={{ pt: 5, pb: 6, backgroundColor: "background" }}>

@@ -6,9 +6,6 @@ import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
 import Icon from "react-icons-kit"
 import ArrowIcon from "app/components/ArrowIcon"
 import Drawer from "app/components/Drawer"
-import { SwiperSlide, Swiper } from "app/components/Sliders/Swiper"
-import Image from "app/components/Image"
-import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
 
 type ConstractingCardProps = {
   label: string

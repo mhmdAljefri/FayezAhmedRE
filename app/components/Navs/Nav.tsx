@@ -57,10 +57,10 @@ const Nav = (props: NavProps) => {
           backdropFilter: "blur(10px)",
           position: "fixed",
 
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          top: 30,
+          left: 30,
+          right: 30,
+          bottom: 30,
           direction: "ltr",
           display: open ? "block" : "none",
         }}
@@ -80,7 +80,7 @@ const Nav = (props: NavProps) => {
 
             direction: "rtl",
             paddingY: 2,
-            width: ["90vw", null, 400],
+            width: ["80%", null, 400],
             boxShadow: "default",
             justifyContent: "space-between",
             flexDirection: "column",
