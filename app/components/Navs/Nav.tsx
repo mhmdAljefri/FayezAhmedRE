@@ -106,8 +106,6 @@ const Nav = (props: NavProps) => {
             <NavItem to="/services" text="خدماتنا" />
             <NavItem to="/about-us" text="لماذا فايز احمد" />
 
-            <NavItem to={`/#ServicesForm`} text="خطط لرحلتك معنا" />
-            <NavItem to="/furniture/" text="أثث منزلك" />
             <NavItem to="/partners/" text="شركاء النجاح" />
           </Flex>
           <Flex>
