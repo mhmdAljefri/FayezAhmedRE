@@ -101,7 +101,11 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
               )}
             </Box>
           ) : (
-            <Image src={offer.image || ""} alt={offer.name} />
+            <Image
+              sx={{ maxHeight: 300, objectFit: "cover", width: "100%" }}
+              src={offer.image || ""}
+              alt={offer.name}
+            />
           )}
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
