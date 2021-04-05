@@ -28,9 +28,6 @@ const Schema = z.object({
   image: z.string().optional(),
   countryId: z.string(),
   propertyType: z.string().optional(),
-  areaSize: z.string().optional(),
-  numberOfRooms: z.string().optional(),
-  numberOfBathrooms: z.string().optional(),
   price: z.any().optional(),
 })
 
