@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { useRouter, Link, dynamic } from "blitz"
 import { Box, Heading, Text } from "theme-ui"
-import { Offer } from "@prisma/client"
+import { Offer, City } from "@prisma/client"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
@@ -27,6 +27,7 @@ type OfferCardProps = Pick<
   prefixPath?: string
   hideOfferLabel?: boolean
   hasFav?: boolean
+  city?: City
 }
 export default function OfferCard({
   image,
@@ -93,7 +94,7 @@ export default function OfferCard({
         <Box sx={{ paddingY: 3, paddingX: 3, cursor: "pointer" }}>
           <Heading>{name}</Heading>
           <Text>{subTitle}</Text>
-          <LabeldTexts {...offer} />
+          <LabeldTexts {...offer} city={offer.city?.name} />
         </Box>
       </Link>
     </Box>

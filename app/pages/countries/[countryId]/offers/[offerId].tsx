@@ -109,12 +109,14 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           )}
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
-          <Heading as="h1" sx={{ fontSize: [5, 6], fontWeight: 700 }}>
+          <Heading as="h1" sx={{ fontSize: [5, 6], fontWeight: 700, textAlign: "center" }}>
             {offer.name}
           </Heading>
-          <Heading sx={{ fontSize: 3, mt: 3, fontWeight: 700 }}>{offer.subTitle}</Heading>
+          <Heading sx={{ fontSize: 3, mt: 3, fontWeight: 700, textAlign: "center" }}>
+            {offer.subTitle}
+          </Heading>
           {offer.price && (
-            <Heading sx={{ fontSize: 6, mt: 4, textAlign: ["center", null, "start"] }}>
+            <Heading sx={{ fontSize: 6, mt: 4, color: "primary", textAlign: "center" }}>
               <CurrencyPrice price={offer.price} />
             </Heading>
           )}

@@ -2,14 +2,10 @@ import { ReactNode } from "react"
 import { SxStyleProp, ThemeProvider } from "theme-ui"
 import theme from "app/theme"
 import Footer from "app/components/Footer"
-import dynamic from "next/dynamic"
 import MetaTags from "app/components/MetaTags"
 import usePriceType from "app/hooks/usePriceType"
 import { useEffect } from "react"
-
-const Header = dynamic(() => import("app/components/Header"), {
-  ssr: false,
-})
+import Header from "app/components/Header"
 
 type LayoutProps = {
   title?: string

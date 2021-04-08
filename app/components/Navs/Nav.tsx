@@ -5,7 +5,7 @@ import Burger from "app/components/Burger"
 import ChangeColorsMode from "app/components/ChangeColorsMode"
 import { Link, Router } from "blitz"
 import useOnClickout from "app/hooks/useOnClickout"
-import UserDropdwon from "../UserDropdwon"
+import UserDropdwon from "../NavItems/UserDropdwon"
 // import CountriesItemsList from "../NavItems/CountriesItemsList"
 
 type NavProps = {}
@@ -32,8 +32,8 @@ const Nav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
-            my: 3,
-            fontSize: [2, 3, 4],
+            my: 2,
+            fontSize: [2],
           }}
         >
           {text}
@@ -98,7 +98,7 @@ const Nav = (props: NavProps) => {
               text="البحث"
               sx={{
                 marginTop: 5,
-                fontSize: [2, 3, 4],
+                fontSize: [2],
               }}
             />
             <NavItem to="/countries/2/projects" text="المشاريع" />
@@ -107,10 +107,16 @@ const Nav = (props: NavProps) => {
             <NavItem to="/about-us" text="لماذا فايز احمد" />
 
             <NavItem to="/partners/" text="شركاء النجاح" />
+            <UserDropdwon
+              sx={{
+                textDecoration: "none",
+                fontWeight: 700,
+                my: 2,
+                fontSize: [2],
+              }}
+            />
           </Flex>
           <Flex>
-            <UserDropdwon />
-
             <ChangeColorsMode sx={{ fontSize: [3, null, 4, 5] }} />
           </Flex>
         </Flex>

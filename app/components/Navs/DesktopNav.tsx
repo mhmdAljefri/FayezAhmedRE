@@ -1,6 +1,7 @@
 import React from "react"
 import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Link } from "blitz"
+import UserDropdwon from "../NavItems/UserDropdwon"
 
 type NavProps = {
   scrolled: boolean
@@ -47,8 +48,16 @@ const DesktopNav = ({ scrolled }: NavProps) => {
         <NavItem to="/countries/2/offers" text="العروض" />
         <NavItem to="/services" text="خدماتنا" />
         <NavItem to="/about-us" text="لماذا فايز احمد" />
-
         <NavItem to="/partners/" text="شركاء النجاح" />
+        <UserDropdwon
+          sx={{
+            color: scrolled ? "heading" : "white",
+            fontSize: [1, 1, 1, 1],
+            ":hover": {
+              color: "primary",
+            },
+          }}
+        />
       </Flex>
     </Box>
   )

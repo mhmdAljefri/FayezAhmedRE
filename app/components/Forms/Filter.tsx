@@ -120,7 +120,7 @@ export default function Filter({
               </Box>
             )}{" "}
             <MenuField
-              emptyOptionText={isTurkey ? "السعر (بالدولار)" : "السعر (بالريال القطري)"}
+              emptyOptionText="السعر بالريال القطري"
               getLabel={(i) => i.name}
               getValue={(i) => i.id}
               options={isTurkey ? PRICE_RANG : PRICE_RANG_QATAR}

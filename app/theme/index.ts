@@ -21,8 +21,8 @@ const theme: Theme = {
     black100: "#d4d4d4d9",
     secondary100: "#0a090487",
     input: "#65143b",
-    light: "#ececec",
-    dark: "#dcdcdc",
+    light: "#f6f6ff",
+    dark: "#f6f6ff",
     dark2: "#202020",
     shadow: "rgba(0, 0, 0, .125)",
     modes: {
@@ -161,6 +161,7 @@ const theme: Theme = {
         pointerEvents: "none",
         borderWidth: 30,
         borderStyle: "solid",
+        borderTop: 0,
         zIndex: 111111111111,
         position: "fixed",
         top: 0,

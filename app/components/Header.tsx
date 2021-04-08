@@ -5,7 +5,6 @@ import PriceType from "app/components/PriceType"
 import { Link, useRouter } from "blitz"
 import useScroll from "app/hooks/useScroll"
 import useScreenSize from "app/hooks/useScreenSize"
-import UserDropdwon from "./UserDropdwon"
 import LogoWithText from "./LogoWithText"
 
 const WhatsappButton = dynamic(() => import("./NavItems/WhatsappButton"))
@@ -37,9 +36,12 @@ const Header = ({ sx }: HeaderProps) => {
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: "sticky",
         zIndex: "header",
-        width: "calc(100vw - 74px)",
+        width: "100%",
+        top: 0,
+        left: 0,
+        right: scrolled ? 30 : 0,
         px: 2,
         ...sx,
         backgroundColor,
@@ -67,7 +69,6 @@ const Header = ({ sx }: HeaderProps) => {
             <>
               <WhatsappButton color={scrolled || !isHomePage ? "primary" : "white"} />
               <SearchButton color={scrolled || !isHomePage ? "primary" : "white"} />
-              <UserDropdwon />
             </>
           )}
           {priceRender}

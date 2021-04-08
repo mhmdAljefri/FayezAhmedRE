@@ -132,6 +132,8 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
                 content: '""',
                 /* 16:9 aspect ratio */
                 paddingBottom: "38.25%",
+                boxSizing: "border-box",
+                minHeight: [200, null, 250],
               },
             }}
           >
@@ -443,15 +445,6 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           <LazyLoad once height={250} offset={100}>
             <Contact />
           </LazyLoad>
-
-          <Link href="/furniture">
-            <ThemeLink
-              sx={{ marginBottom: 5, maxWidth: 200, textAlign: "center", marginX: "auto" }}
-              variant="outline"
-            >
-              اثث منزلك
-            </ThemeLink>
-          </Link>
         </Wrapper>
       </div>
     </Layout>

@@ -1,14 +1,12 @@
 import React, { useState } from "react"
 import { Box, Button, Flex } from "theme-ui"
 import { useSession, useMutation } from "blitz"
-import Dropdown from "../Dropdown"
-import MyFav from "../MyFav"
+import Dropdown from "../../Dropdown"
+import MyFav from "../../MyFav"
 import logout from "app/auth/mutations/logout"
 import LoginFormModal from "app/auth/components/LoginFormModal"
-import { userCircle } from "react-icons-kit/fa/userCircle"
-import { Icon } from "react-icons-kit"
 
-export default function UserDropdwon() {
+export default function UserDropdwon({ sx }) {
   const { isLoading, userId } = useSession()
   const [open, setOpen] = useState(false)
   const [openFav, setOpenFav] = useState(false)
@@ -26,15 +24,13 @@ export default function UserDropdwon() {
             sx={{
               justifyContent: "center",
               alignItems: "center",
-              width: 28,
-              height: 28,
               borderRadius: 28,
               mx: [2, 2, 3],
-              backgroundColor: "white",
-              color: "text",
+              variant: "links.default",
+              ...sx,
             }}
           >
-            <Icon size={30} icon={userCircle} />
+            الملف الشخصي
           </Flex>
         }
         onChange={() => {}}
@@ -43,7 +39,7 @@ export default function UserDropdwon() {
           {userId ? (
             <div>
               <Box sx={{ py: 2, px: 1 }} role="button" onClick={() => setOpenFav(true)}>
-                المفضيات
+                المفضليات
               </Box>
               <Button variant="link" onClick={logoutMutation}>
                 تسجيل الخروج

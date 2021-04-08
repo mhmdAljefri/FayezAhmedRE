@@ -17,6 +17,7 @@ export default async function getOffers(
     take,
     include: {
       ...include,
+      city: true,
       users: true,
     },
     skip,

@@ -16,14 +16,11 @@ export default function ShowMoreButton({ sx, href }: showMoreButtonProps) {
           paddingX: 3,
           paddingY: 2,
           textDecoration: "none",
-          backgroundColor: "light",
-          borderRadius: "lg",
-          boxShadow: "default",
         }}
       >
         <Flex sx={{ color: "primary", alignItems: "center", justifyContent: "center" }}>
           <Text sx={{ color: "text" }}>المزيد</Text>
-          <ArrowIcon sx={{ width: 20, marginInlineStart: 20 }} />
+          <ArrowIcon sx={{ width: 25, marginInlineStart: 20 }} />
         </Flex>
       </ThemeLink>
     </Link>

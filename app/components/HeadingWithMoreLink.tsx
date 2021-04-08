@@ -11,7 +11,7 @@ export default function HeadingWithMoreLink({
     <Flex sx={{ justifyContent: ["space-between", null, "flex-start"], alignItems: "center" }}>
       <Heading sx={{ fontSize: [4, 5, 5, 6], padding: 0, marginInlineEnd: 15 }}>{heading}</Heading>
 
-      <ShowMoreButton href={href} sx={sx} />
+      {/* <ShowMoreButton href={href} sx={sx} /> */}
     </Flex>
   )
 }

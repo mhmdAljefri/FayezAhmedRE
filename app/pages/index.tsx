@@ -43,7 +43,7 @@ const Contact = dynamic(() => import("app/components/Forms/Contact"), {
 export async function getStaticProps(context) {
   const rates = await getCurrencyRate()
   const { carousels } = await getCarousels({})
-  const { offers } = await getOffers({ take: 3 }, context)
+  const { offers } = await getOffers({ take: 9 }, context)
   const carouselVideo = await getCarouselVideo({})
 
   const { projects: qatarMostViewd } = await getProjects({
@@ -157,7 +157,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   }
 
   return (
-    <main>
+    <>
       <HeroSection carousels={carousels} carouselVideo={carouselVideo} />
 
       <AboutUSSection />
@@ -192,7 +192,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         />
         {typeof selected.id === "string" ? (
           // all projects
-          <ProjectSlider key="allProjects" projects={projects as any} />
+          <ProjectSlider key={selected.id} projects={projects as any} />
         ) : (
           // projects by city
           <ProjectSlider
@@ -203,7 +203,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <ShowMoreButton
           href={`${asPath}/projects`}
           sx={{
-            display: ["auto", "none"],
+            mb: 3,
           }}
         />
       </Wrapper>
@@ -294,12 +294,15 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       >
         <Contact />
       </Box>
-    </main>
+    </>
   )
 }
 
 Home.getLayout = (page) => (
-  <Layout headerProps={{ sx: { position: "fixed" } }} title="الرئيسية">
+  <Layout
+    headerProps={{ sx: { position: "sticky", backgroundColor: "transparent" } }}
+    title="الرئيسية"
+  >
     {page}
   </Layout>
 )

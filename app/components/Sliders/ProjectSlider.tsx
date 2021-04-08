@@ -10,7 +10,6 @@ type Props = {
   projects: ProjectWithRooms[]
 }
 export default function ProjectSlider({ projects }: Props) {
-  console.log(projects.length)
   return (
     <Swiper
       loop

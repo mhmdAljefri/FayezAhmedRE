@@ -12,7 +12,7 @@ function MyFavFetcher({ onClose, open }: Props) {
     <div>
       <Drawer handler={false} onClose={onClose} open={open}>
         <Box sx={{ py: 4, px: 3, width: [250, 350, 450], maxWidth: "80vw" }}>
-          <Heading>المفضيات</Heading>
+          <Heading>المفضليات</Heading>
           <Box>
             {offers.map(({ id, subTitle, image, countryId }) => (
               <FavCard

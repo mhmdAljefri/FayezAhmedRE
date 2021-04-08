@@ -15,9 +15,7 @@ export default function GalleryViewSlider({ gallery }) {
             alignItems: "center",
           }}
         >
-          <Heading
-            sx={{ color: "white", marginBottom: 1, fontSize: [5, null, 6], paddingInlineEnd: 20 }}
-          >
+          <Heading sx={{ marginBottom: 1, fontSize: [5, null, 6], paddingInlineEnd: 20 }}>
             المعرض
           </Heading>
           <Box

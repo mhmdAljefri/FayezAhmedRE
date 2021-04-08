@@ -10,7 +10,14 @@ export default function HeroSection({ carouselVideo, carousels }) {
   const secureVideoUrl = `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.ap-south-1.amazonaws.com/${carouselVideo?.videoUlr}`
 
   return (
-    <Box sx={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}>
+    <Box
+      sx={{
+        position: "relative",
+        maxHeight: "calc(100vh - 30px)",
+        overflow: "hidden",
+        marginTop: -50,
+      }}
+    >
       <Box
         sx={{
           position: "absolute",
