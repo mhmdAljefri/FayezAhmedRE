@@ -11,7 +11,7 @@ export default async function createOffer({ data, countryId }: CreateOfferInputT
 
   const projectId = parseInt((data as any).projectId)
 
-  const cityId = (data as any).cityId
+  const cityId = parseInt((data as any).cityId)
   delete (data as any).cityId
 
   delete (data as any).projectId
@@ -20,24 +20,20 @@ export default async function createOffer({ data, countryId }: CreateOfferInputT
       connect: { id: projectId },
     }
 
-  try {
-    const offer = await db.offer.create({
-      data: {
-        ...data,
-        country: {
-          connect: {
-            id: countryId,
-          },
-        },
-        city: {
-          connect: {
-            id: cityId,
-          },
+  const offer = await db.offer.create({
+    data: {
+      ...data,
+      country: {
+        connect: {
+          id: countryId,
         },
       },
-    })
-    return offer
-  } catch (error) {
-    console.error(error)
-  }
+      city: {
+        connect: {
+          id: cityId,
+        },
+      },
+    },
+  })
+  return offer
 }
