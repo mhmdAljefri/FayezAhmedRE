@@ -33,6 +33,7 @@ const Nav = (props: NavProps) => {
             fontWeight: 700,
             my: 3,
             fontSize: [2],
+            color: "heading",
           }}
         >
           {text}
@@ -41,7 +42,6 @@ const Nav = (props: NavProps) => {
     )
   }
 
-  console.log(open)
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Burger onClick={() => setOpen(true)} open={false} />
@@ -113,6 +113,7 @@ const Nav = (props: NavProps) => {
                 fontWeight: 700,
                 my: 2,
                 fontSize: [2],
+                color: "heading",
               }}
             />
           </Flex>

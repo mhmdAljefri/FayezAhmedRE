@@ -16,44 +16,53 @@ export default function UserDropdwon({ sx }) {
 
   return (
     <div>
-      <Dropdown
-        showIcon={false}
-        outterStyle={{ marginInlineEnd: 20 }}
-        title={
-          <Flex
-            sx={{
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 28,
-              mx: [2, 2, 3],
-              variant: "links.default",
-              ...sx,
-            }}
-          >
-            الملف الشخصي
-          </Flex>
-        }
-        onChange={() => {}}
-      >
-        <Box sx={{ minWidth: 130 }}>
-          {userId ? (
+      {userId ? (
+        <Dropdown
+          showIcon={false}
+          outterStyle={{ marginInlineEnd: 20 }}
+          title={
+            <Flex
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 28,
+                variant: "links.default",
+                ...sx,
+              }}
+            >
+              الملف الشخصي
+            </Flex>
+          }
+          onChange={() => {}}
+        >
+          <Box sx={{ minWidth: 130 }}>
             <div>
-              <Box sx={{ py: 2, px: 1 }} role="button" onClick={() => setOpenFav(true)}>
+              <Box sx={{ py: 2, px: 2 }} role="button" onClick={() => setOpenFav(true)}>
                 المفضليات
               </Box>
               <Button variant="link" onClick={logoutMutation}>
                 تسجيل الخروج
               </Button>
             </div>
-          ) : (
-            <>
-              <Button variant="link" onClick={() => setOpen(true)}>
-                تسجيل الدخول
-              </Button>
-            </>
-          )}
-        </Box>
-      </Dropdown>
+          </Box>
+        </Dropdown>
+      ) : (
+        <>
+          <Box
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 28,
+              variant: "links.default",
+              ...sx,
+            }}
+            variant="link"
+            onClick={() => setOpen(true)}
+          >
+            تسجيل الدخول
+          </Box>
+        </>
+      )}
       {openFav && <MyFav open={openFav} onClose={() => setOpenFav(false)} />}
       <LoginFormModal isOpen={open} onRequestClose={() => setOpen(false)} />
     </div>
