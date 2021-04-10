@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import { BlitzPage, dynamic, Link, useRouter, InferGetStaticPropsType } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Link as ThemeLink, Grid, Flex, Text } from "theme-ui"
+import { Box, Heading, Link as ThemeLink, Grid } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -18,10 +18,16 @@ import { home } from "react-icons-kit/feather/home"
 import { box } from "react-icons-kit/feather/box"
 import { bath } from "react-icons-kit/fa/bath"
 import { map2 } from "react-icons-kit/icomoon/map2"
+import { flag } from "react-icons-kit/icomoon/flag"
 import CurrencyPrice from "app/components/CurrencyPrice"
 import OfferIconText from "app/components/OfferLabeldText"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
+  ssr: false,
+  loading: () => <Skeleton height={250} />,
+})
+
+const GoogleMap = dynamic(() => import("app/components/GoogleMap"), {
   ssr: false,
   loading: () => <Skeleton height={250} />,
 })
@@ -55,6 +61,7 @@ export async function getStaticProps(context) {
 
 const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ offer }) => {
   const router = useRouter()
+
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
@@ -122,6 +129,9 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           )}
 
           <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
+            {offer.city !== null && (
+              <OfferIconText heading="المدينة" text={offer.city.name} icon={flag} />
+            )}
             <OfferIconText heading="نوع العقار" text={offer.propertyType} icon={home} />
             <OfferIconText heading="عدد الغرف" text={offer.numberOfRooms} icon={box} />
             <OfferIconText heading="عدد الحمامات" text={offer.numberOfBathrooms} icon={bath} />
@@ -139,6 +149,8 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
         constructingUpdateVideo={offer.constructingUpdateVideo}
         constructingUpdatePrview={offer.constructingUpdatePrview}
       />
+
+      {offer.location && <GoogleMap zoom={18} center={offer.location as any} />}
 
       {offer.brochure && (
         <ThemeLink

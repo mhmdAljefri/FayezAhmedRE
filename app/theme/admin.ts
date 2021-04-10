@@ -35,6 +35,16 @@ const theme = {
       },
     },
   },
+  styles: {
+    root: {
+      // uses the theme values provided above
+      fontFamily: "body",
+      fontWeight: "body",
+      ":before": {
+        content: "",
+      },
+    },
+  },
 }
 
 export default theme

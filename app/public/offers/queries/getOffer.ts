@@ -13,6 +13,7 @@ export default async function getOffer({ where }: GetProjectInput) {
           propertyType: true,
         },
       },
+      city: true,
       country: true,
     },
   })

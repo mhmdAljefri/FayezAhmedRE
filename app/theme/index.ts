@@ -153,6 +153,7 @@ const theme: Theme = {
   styles: {
     root: {
       // uses the theme values provided above
+      padding: 30,
       fontFamily: "body",
       fontWeight: "body",
       ":before": {
@@ -162,6 +163,7 @@ const theme: Theme = {
         borderWidth: 30,
         borderStyle: "solid",
         borderTop: 0,
+        borderBottom: 0,
         zIndex: 111111111111,
         position: "fixed",
         top: 0,

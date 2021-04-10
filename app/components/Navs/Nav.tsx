@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { Box, Flex, Link as ThemeLink, SxStyleProp } from "theme-ui"
 import { Global } from "@emotion/core"
 import Burger from "app/components/Burger"
@@ -13,13 +13,12 @@ type NavProps = {}
 const Nav = (props: NavProps) => {
   const prevRouter = useRef<string | null>(null)
   const { open, setOpen, ref } = useOnClickout()
-  // const countryId = useParam("countryId")
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isClient = typeof window !== "undefined"
     if (isClient && open && prevRouter.current !== Router.asPath) {
+      prevRouter.current && setOpen(false) // Dont close it on first update
       prevRouter.current = Router.asPath
-      setOpen(false)
     }
   })
 
@@ -32,7 +31,7 @@ const Nav = (props: NavProps) => {
             ...sx,
             textDecoration: "none",
             fontWeight: 700,
-            my: 2,
+            my: 3,
             fontSize: [2],
           }}
         >
@@ -42,9 +41,10 @@ const Nav = (props: NavProps) => {
     )
   }
 
+  console.log(open)
   return (
     <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
-      <Burger onClick={() => setOpen(true)} open={open} />
+      <Burger onClick={() => setOpen(true)} open={false} />
       {open && (
         <Global
           styles={{
@@ -57,10 +57,10 @@ const Nav = (props: NavProps) => {
           backdropFilter: "blur(10px)",
           position: "fixed",
 
-          top: 30,
+          top: 0,
           left: 30,
           right: 30,
-          bottom: 30,
+          bottom: 0,
           direction: "ltr",
           display: open ? "block" : "none",
         }}
@@ -77,9 +77,9 @@ const Nav = (props: NavProps) => {
             overflowX: "hidden",
             overflowY: "auto",
             backgroundColor: "dark",
+            py: 30,
 
             direction: "rtl",
-            paddingY: 2,
             width: ["80%", null, 400],
             boxShadow: "default",
             justifyContent: "space-between",
@@ -91,7 +91,7 @@ const Nav = (props: NavProps) => {
               flexDirection: "column",
             }}
           >
-            <Burger onClick={() => setOpen(false)} open={open} />
+            <Burger onClick={() => setOpen(false)} open={true} />
 
             <NavItem
               to="/search"

@@ -25,10 +25,10 @@ type OfferFormProps = {
 const Schema = z.object({
   name: z.string(),
   details: z.string(),
-  image: z.string().optional(),
+  image: z.any().optional(),
   countryId: z.string(),
-  propertyType: z.string().optional(),
-  price: z.any().optional(),
+  propertyType: z.string().optional().nullable(),
+  price: z.any().optional().nullable(),
 })
 
 const ProjectsListField = () => {
