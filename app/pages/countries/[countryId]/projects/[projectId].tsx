@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { BlitzPage, Link, useMutation, useRouter, dynamic } from "blitz"
+import { BlitzPage, useMutation, useRouter, dynamic } from "blitz"
 import {
   PaymentPlan,
   ConstractiongVideo,
@@ -122,7 +122,6 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
           <Box
             sx={{
               marginTop: -6,
-              borderRadius: 15,
               overflow: "hidden",
               textAlign: "center",
               position: "relative",

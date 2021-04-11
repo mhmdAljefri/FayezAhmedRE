@@ -69,7 +69,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
   }
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={offer.name}>
-      <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
+      <Box sx={{ pb: 6, pt: 4, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
           <Box

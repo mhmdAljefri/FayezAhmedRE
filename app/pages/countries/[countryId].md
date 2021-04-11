@@ -5,15 +5,15 @@ import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
 import React, { useState } from "react"
 import { Box, Flex, Grid, Heading, Text, Link as ThemeLink } from "theme-ui"
 import {
-  City,
-  Country,
-  Explore,
-  FurnishCategory,
-  Offer,
-  OprationCompanyPage,
-  Project,
-  PropertyType,
-  RoomWithPrice,
+City,
+Country,
+Explore,
+FurnishCategory,
+Offer,
+OprationCompanyPage,
+Project,
+PropertyType,
+RoomWithPrice,
 } from "@prisma/client"
 import { useRouter, dynamic } from "blitz"
 import getCountry from "app/public/countries/queries/getCountry"
@@ -40,133 +40,128 @@ const ProjectSlider = dynamic(() => import("app/components/Sliders/ProjectSlider
 
 type ProjectWitRooms = Project & { roomsWithPrices: RoomWithPrice[] }
 export type CountryPropsType = {
-  country: Country & {
-    projects: ProjectWitRooms[]
-    oprationCompanyPages: OprationCompanyPage[]
-    cities: City[]
-    offers: Offer[]
-    explores: Explore[]
-  }
-  oceanViewProjects: ProjectWitRooms[]
-  govProjects: ProjectWitRooms[]
-  furnishCategories: Pick<FurnishCategory, "id" | "image" | "name">[]
-  propertyTypes: PropertyType[]
+country: Country & {
+projects: ProjectWitRooms[]
+oprationCompanyPages: OprationCompanyPage[]
+cities: City[]
+offers: Offer[]
+explores: Explore[]
+}
+oceanViewProjects: ProjectWitRooms[]
+govProjects: ProjectWitRooms[]
+furnishCategories: Pick<FurnishCategory, "id" | "image" | "name">[]
+propertyTypes: PropertyType[]
 }
 
 type inpirationGallery = Explore["type"]
 
 function CountryPage({
-  country,
-  propertyTypes,
-  furnishCategories,
-  oceanViewProjects,
-  govProjects,
-  ...props
+country,
+propertyTypes,
+furnishCategories,
+oceanViewProjects,
+govProjects,
+...props
 }: CountryPropsType) {
-  const isDesktopScreen = useScreenSize() > 720
+const isDesktopScreen = useScreenSize() > 720
 
-  const { push, isFallback } = useRouter()
-  const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
-    "dontMissitGallery"
-  )
+const { push, isFallback } = useRouter()
+const [showInspirationGallery, setShowInspirationGallery] = useState<inpirationGallery>(
+"dontMissitGallery"
+)
 
-  // If the page is not yet generated, this will be displayed
-  // initially until getStaticProps() finishes running
-  if (isFallback) {
-    return <div>Loading...</div>
-  }
+// If the page is not yet generated, this will be displayed
+// initially until getStaticProps() finishes running
+if (isFallback) {
+return <div>Loading...</div>
+}
 
-  const asPath = `/countries/${country.id}`
-  const handleFilter = (filter) => {
-    push({ pathname: `${asPath}/projects`, query: filter })
-  }
+const asPath = `/countries/${country.id}`
+const handleFilter = (filter) => {
+push({ pathname: `${asPath}/projects`, query: filter })
+}
 
-  const exploresArray = country?.explores.filter(
-    (explore) => explore.type === showInspirationGallery
-  )
-  const explores: typeof exploresArray[] = []
+const exploresArray = country?.explores.filter(
+(explore) => explore.type === showInspirationGallery
+)
+const explores: typeof exploresArray[] = []
 
-  while (exploresArray.length) explores.push(exploresArray.splice(0, 3))
+while (exploresArray.length) explores.push(exploresArray.splice(0, 3))
 
-  const projectsUrl = `${asPath}/projects`
-  const offersUrl = `${asPath}/offers`
+const projectsUrl = `${asPath}/projects`
+const offersUrl = `${asPath}/offers`
 
-  return (
-    <Layout
-      headerProps={{
+return (
+<Layout
+headerProps={{
         sx: { backgroundColor: "dark" },
       }}
-      title={`مشاريع وعروض عقارات دولة ${country.name}`}
-    >
-      <Box
-        sx={{
+title={`مشاريع وعروض عقارات دولة ${country.name}`} >
+<Box
+sx={{
           paddingTop: 4,
           paddingBottom: 6,
           color: "heading",
           backgroundColor: "dark",
         }}
-      />
-      <Wrapper
-        sx={{
+/>
+<Wrapper
+sx={{
           marginTop: -100,
           overflow: "hidden",
-        }}
-      >
-        {Array.isArray(country.carousel) ? (
-          <Swiper
-            autoHeight
-            autoplay={{
+        }} >
+{Array.isArray(country.carousel) ? (
+<Swiper
+autoHeight
+autoplay={{
               delay: 5000,
               disableOnInteraction: false,
-            }}
-          >
-            {country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
-              <SwiperSlide key={index} virtualIndex={index}>
-                <ThemeLink
-                  target="blank"
-                  rel="noopener noreferrer"
-                  href={url}
-                  sx={{
+            }} >
+{country.carousel.map(({ image, url }: { image: string; url?: string }, index) => (
+<SwiperSlide key={index} virtualIndex={index}>
+<ThemeLink
+target="blank"
+rel="noopener noreferrer"
+href={url}
+sx={{
                     display: "block",
                     position: "relative",
-                  }}
-                >
-                  <OptmizationImage
-                    layout="responsive"
-                    width={isDesktopScreen ? 210 : 160}
-                    height={90}
-                    objectFit="cover"
-                    objectPosition="center"
-                    // className="animate__animated animate__zoomIn"
-                    alt="///"
-                    src={image || ""}
-                  />
-                </ThemeLink>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : null}
-      </Wrapper>
-      <Wrapper
-        sx={{
+                  }} >
+<OptmizationImage
+layout="responsive"
+width={isDesktopScreen ? 210 : 160}
+height={90}
+objectFit="cover"
+objectPosition="center"
+// className="animate**animated animate**zoomIn"
+alt="///"
+src={image || ""}
+/>
+</ThemeLink>
+</SwiperSlide>
+))}
+</Swiper>
+) : null}
+</Wrapper>
+<Wrapper
+sx={{
           paddingX: [2, null, null, 6],
           marginTop: [-1, -5],
           position: "relative",
           zIndex: 1,
           marginBottom: 5,
-        }}
-      >
-        <Filter {...country} propertyTypes={propertyTypes} onFilter={handleFilter} />
-      </Wrapper>
-      <Wrapper sx={{ mb: 5 }}>
-        <HeadingWithMoreLink
-          sx={{
+        }} >
+<Filter {...country} propertyTypes={propertyTypes} onFilter={handleFilter} />
+</Wrapper>
+<Wrapper sx={{ mb: 5 }}>
+<HeadingWithMoreLink
+sx={{
             display: ["none", "none", "unset"],
           }}
-          href={offersUrl}
-          heading="جديدنا"
-        />
-        <Text>اكتشف احدث عروضنا الحصرية</Text>
+href={offersUrl}
+heading="جديدنا"
+/>
+<Text>اكتشف احدث عروضنا الحصرية</Text>
 
         <Grid sx={{ mt: 5 }} columns={[1, 1, 2, 3]}>
           {country.offers.map((offer) => (
@@ -385,104 +380,105 @@ function CountryPage({
         <Contact />
       </Wrapper>
     </Layout>
-  )
+
+)
 }
 
 export async function getStaticPaths() {
-  const { countries } = await getCountries({ select: {} })
-  const paths = countries.map((c) => ({
-    params: {
-      countryId: `${c.id}`,
-    },
-  }))
+const { countries } = await getCountries({ select: {} })
+const paths = countries.map((c) => ({
+params: {
+countryId: `${c.id}`,
+},
+}))
 
-  return {
-    paths,
-    fallback: true,
-  }
+return {
+paths,
+fallback: true,
+}
 }
 
 export async function getStaticProps(context) {
-  const countryId = parseInt(context.params.countryId)
-  const country = await getCountry({ where: { id: countryId } })
-  const { projects: mainProjects } = await getProjects({
-    take: 3,
-    orderBy: {
-      id: "desc",
-    },
-    where: {
-      countryId,
-      isDelux: country.isTurkey,
-    },
-    include: {
-      roomsWithPrices: true,
-    },
-  })
-  let oceanViewProjects: any[] = []
-  let govProjects: any[] = []
+const countryId = parseInt(context.params.countryId)
+const country = await getCountry({ where: { id: countryId } })
+const { projects: mainProjects } = await getProjects({
+take: 3,
+orderBy: {
+id: "desc",
+},
+where: {
+countryId,
+isDelux: country.isTurkey,
+},
+include: {
+roomsWithPrices: true,
+},
+})
+let oceanViewProjects: any[] = []
+let govProjects: any[] = []
 
-  if (country.isTurkey) {
-    const { projects } = await getProjects({
-      where: { isGrantedByGov: true },
-      include: { roomsWithPrices: true },
-      take: 3,
-      orderBy: { id: "desc" },
-    })
-    const { projects: oceanViews } = await getProjects({
-      where: {
-        isWithSeaView: true,
-      },
-      include: { roomsWithPrices: true },
-      take: 3,
-      orderBy: { id: "desc" },
-    })
-    oceanViewProjects = oceanViews
-    govProjects = projects
-  }
+if (country.isTurkey) {
+const { projects } = await getProjects({
+where: { isGrantedByGov: true },
+include: { roomsWithPrices: true },
+take: 3,
+orderBy: { id: "desc" },
+})
+const { projects: oceanViews } = await getProjects({
+where: {
+isWithSeaView: true,
+},
+include: { roomsWithPrices: true },
+take: 3,
+orderBy: { id: "desc" },
+})
+oceanViewProjects = oceanViews
+govProjects = projects
+}
 
-  const { propertyTypes } = await getPropertyTypes({})
-  const { furnishCategories } = await getFurnishCategories({
-    select: { name: true, image: true, id: true },
-  })
-  const { explores: dontMissitGallery } = await getExplores({
-    where: {
-      type: "dontMissitGallery",
-      countryId,
-    },
-    take: 9,
-    orderBy: { id: "desc" },
-  })
-  const { explores: exploreGallery } = await getExplores({
-    where: {
-      type: "exploreGallery",
-      countryId,
-    },
-    take: 9,
-    orderBy: { id: "desc" },
-  })
-  const { explores: getInspiredGallery } = await getExplores({
-    where: {
-      type: "getInspiredGallery",
-      countryId,
-    },
-    take: 9,
-    orderBy: { id: "desc" },
-  })
+const { propertyTypes } = await getPropertyTypes({})
+const { furnishCategories } = await getFurnishCategories({
+select: { name: true, image: true, id: true },
+})
+const { explores: dontMissitGallery } = await getExplores({
+where: {
+type: "dontMissitGallery",
+countryId,
+},
+take: 9,
+orderBy: { id: "desc" },
+})
+const { explores: exploreGallery } = await getExplores({
+where: {
+type: "exploreGallery",
+countryId,
+},
+take: 9,
+orderBy: { id: "desc" },
+})
+const { explores: getInspiredGallery } = await getExplores({
+where: {
+type: "getInspiredGallery",
+countryId,
+},
+take: 9,
+orderBy: { id: "desc" },
+})
 
-  return {
-    props: {
-      country: {
-        ...country,
-        projects: mainProjects,
-        explores: [...dontMissitGallery, ...exploreGallery, ...getInspiredGallery],
-      },
-      furnishCategories,
-      propertyTypes,
-      oceanViewProjects,
-      govProjects,
-    },
-    revalidate: 60 * 15,
-  }
+return {
+props: {
+country: {
+...country,
+projects: mainProjects,
+explores: [...dontMissitGallery, ...exploreGallery, ...getInspiredGallery],
+},
+furnishCategories,
+propertyTypes,
+oceanViewProjects,
+govProjects,
+},
+revalidate: 60 \* 15,
+}
 }
 
 export default CountryPage
