@@ -12,7 +12,7 @@ const EnquirePage: BlitzPage = () => {
           <Heading sx={{ fontSize: 6, color: "primary" }}>استفسر الان</Heading>
         </Wrapper>
       </Box>
-      <Wrapper sx={{ paddingY: 5 }}>
+      <Wrapper sx={{ paddingBottom: 5 }}>
         <EnquireForm />
       </Wrapper>
     </>

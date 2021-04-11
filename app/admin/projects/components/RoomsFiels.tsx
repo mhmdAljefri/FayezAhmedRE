@@ -28,44 +28,8 @@ export default function RoomsField(props) {
                   <LabeledTextField
                     type="number"
                     required
-                    name={`${name}.price`}
-                    label="القيمة المبدئية دولار امريكي"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
                     name={`${name}.priceQatar`}
                     label="القيمة المبدئية ريال قطري"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
-                    name={`${name}.priceTurkey`}
-                    label="القيمة المبدئية ليرة تركي"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
-                    name={`${name}.priceKSA`}
-                    label="القيمة المبدئية ريال سعودي"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
-                    name={`${name}.priceUAE`}
-                    label="القيمة المبدئية درهم امارتي"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
-                    name={`${name}.priceKuwait`}
-                    label="القيمة المبدئية دينار كويتي"
-                  />
-                  <LabeledTextField
-                    type="number"
-                    required
-                    name={`${name}.priceOman`}
-                    label="القيمة المبدئية ريال عمان"
                   />
                 </Grid>
               </div>

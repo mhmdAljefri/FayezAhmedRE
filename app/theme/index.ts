@@ -11,7 +11,7 @@ const theme: Theme = {
   },
   colors: {
     ...future.colors,
-    text: "#555",
+    text: "#333",
     heading: "#000",
     lightText: "#999",
     background: "#fff",

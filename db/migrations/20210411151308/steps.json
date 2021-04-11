@@ -1,0 +1,47 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "price",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceQatar",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceTurkey",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceKSA",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceKuwait",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceUAE",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "RoomWithPrice",
+      "field": "priceOman",
+      "arity": "Optional"
+    }
+  ]
+}
