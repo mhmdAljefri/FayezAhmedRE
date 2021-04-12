@@ -43,7 +43,7 @@ module.exports = withBundleAnalyzer(
           headers: [
             {
               key: "Cache-Control",
-              value: "public, max-age=180, s-maxage=180, stale-while-revalidate=180",
+              value: "public, max-age=18000, s-maxage=18000, stale-while-revalidate=18000",
             },
           ],
         },
@@ -54,7 +54,7 @@ module.exports = withBundleAnalyzer(
             {
               key: "Cache-Control",
               // Instead of this value:
-              value: "public, max-age=180, s-maxage=180, stale-while-revalidate=180",
+              value: "public, max-age=18000, s-maxage=18000, stale-while-revalidate=18000",
               // Cache-Control response header is `public, max-age=60` in production
               // and `public, max-age=0, must-revalidate` in development
             },
