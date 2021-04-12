@@ -7,7 +7,7 @@ export default async function getContacts(
   { where, orderBy, skip = 0, take }: GetContactsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const contacts = await db.contact.findMany({
     where,

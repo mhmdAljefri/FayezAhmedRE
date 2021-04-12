@@ -7,7 +7,7 @@ export default async function getRequests(
   { where, orderBy, skip = 0, take }: GetRequestsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const requests = await db.request.findMany({
     where,

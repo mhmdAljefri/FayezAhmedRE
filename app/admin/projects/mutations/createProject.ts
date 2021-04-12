@@ -11,7 +11,7 @@ export default async function createProject(
   { data, countryId, roomsWithPrices }: CreateProjectInputType,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const cityId = (data as any).cityId
   const propertyTypeId = (data as any).propertyTypeId

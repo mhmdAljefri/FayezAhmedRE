@@ -7,7 +7,7 @@ export default async function getFeatures(
   { where, orderBy, skip = 0, take }: GetFeaturesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const features = await db.feature.findMany({
     where,

@@ -7,7 +7,7 @@ export default async function getExplores(
   { where, orderBy, skip = 0, take }: GetExploresInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const explores = await db.explore.findMany({
     where,

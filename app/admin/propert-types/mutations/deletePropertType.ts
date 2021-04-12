@@ -4,7 +4,7 @@ import db, { PropertyTypeDeleteArgs } from "db"
 type DeletePropertyTypeInput = Pick<PropertyTypeDeleteArgs, "where">
 
 export default async function deletePropertyType({ where }: DeletePropertyTypeInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const propertyType = await db.propertyType.delete({ where })
 

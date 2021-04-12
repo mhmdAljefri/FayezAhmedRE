@@ -7,7 +7,7 @@ export default async function getProjects(
   { where, orderBy, skip = 0, take }: GetProjectsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const projects = await db.project.findMany({
     where,

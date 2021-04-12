@@ -7,7 +7,7 @@ export default async function getPartners(
   { where, orderBy, skip = 0, take }: GetPartnersInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const partners = await db.partner.findMany({
     where,

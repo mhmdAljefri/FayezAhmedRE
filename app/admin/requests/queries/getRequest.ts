@@ -4,7 +4,7 @@ import db, { Prisma } from "db"
 type GetRequestInput = Pick<Prisma.FindFirstRequestArgs, "where">
 
 export default async function getRequest({ where }: GetRequestInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const request = await db.request.findFirst({ where })
 

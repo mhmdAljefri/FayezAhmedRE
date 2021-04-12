@@ -6,7 +6,7 @@ type CreateExploreInput = {
   countryId: number
 }
 export default async function createExplore({ data, countryId }: CreateExploreInput, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const explore = await db.explore.create({
     data: { ...data, country: { connect: { id: countryId } } },

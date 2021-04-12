@@ -4,7 +4,7 @@ import db, { FindFirstFurnishArgs } from "db"
 type GetFurnishInput = Pick<FindFirstFurnishArgs, "where">
 
 export default async function getFurnish({ where }: GetFurnishInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const furnish = await db.furnish.findFirst({ where })
 

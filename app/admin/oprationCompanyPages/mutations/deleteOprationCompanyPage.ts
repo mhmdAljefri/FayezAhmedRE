@@ -7,7 +7,7 @@ export default async function deleteOprationCompanyPage(
   { where }: DeleteOprationCompanyPageInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const oprationCompanyPage = await db.oprationCompanyPage.delete({ where })
 

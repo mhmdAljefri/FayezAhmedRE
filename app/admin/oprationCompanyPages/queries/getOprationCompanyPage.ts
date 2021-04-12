@@ -7,7 +7,7 @@ export default async function getOprationCompanyPage(
   { where }: GetOprationCompanyPageInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const oprationCompanyPage = await db.oprationCompanyPage.findFirst({ where })
 

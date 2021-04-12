@@ -11,7 +11,7 @@ export default async function updateExplore(
   { where, data, countryId }: UpdateExploreInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   // Don't allow updating
   delete (data as any).country

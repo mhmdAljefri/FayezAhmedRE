@@ -1,4 +1,4 @@
 module.exports = {
-  presets: ["next/babel"],
-  plugins: ["superjson-next"],
+  presets: ["blitz/babel"], // blitz/babel preset which includes babel-plugin-superjson-next for getServerSideProps Date serialization
+  plugins: [],
 }

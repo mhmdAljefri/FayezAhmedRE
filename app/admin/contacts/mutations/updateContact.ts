@@ -8,7 +8,7 @@ type UpdateContactInput = {
 }
 
 export default async function updateContact({ where, data }: UpdateContactInput, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   // Don't allow updating
   delete (data as any).id

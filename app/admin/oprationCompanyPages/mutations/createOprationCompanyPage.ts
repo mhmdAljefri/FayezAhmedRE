@@ -9,7 +9,7 @@ export default async function createOprationCompanyPage(
   { data, countryId }: CreateOprationCompanyPageInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const oprationCompanyPage = await db.oprationCompanyPage.create({
     data: { ...data, country: { connect: { id: countryId } } },

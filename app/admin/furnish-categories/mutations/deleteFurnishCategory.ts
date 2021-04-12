@@ -7,7 +7,7 @@ export default async function deleteFurnishCategory(
   { where }: DeleteFurnishCategoryInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const furnishCategory = await db.furnishCategory.delete({ where })
 

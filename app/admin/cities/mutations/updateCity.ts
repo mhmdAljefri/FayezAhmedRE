@@ -7,7 +7,7 @@ type UpdateCityInput = {
 }
 
 export default async function updateCity({ where, data }: UpdateCityInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   // Don't allow updating
   delete (data as any).country

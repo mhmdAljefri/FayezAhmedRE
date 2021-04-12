@@ -10,7 +10,7 @@ export default async function getOprationCompanyPages(
   { where, orderBy, skip = 0, take }: GetOprationCompanyPagesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const oprationCompanyPages = await db.oprationCompanyPage.findMany({
     where,

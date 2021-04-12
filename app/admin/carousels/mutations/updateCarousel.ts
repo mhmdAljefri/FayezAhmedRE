@@ -4,7 +4,7 @@ import db, { CarouselUpdateArgs } from "db"
 type UpdateCarouselInput = Pick<CarouselUpdateArgs, "where" | "data">
 
 export default async function updateCarousel({ where, data }: UpdateCarouselInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const carousel = await db.carousel.update({ where, data })
 

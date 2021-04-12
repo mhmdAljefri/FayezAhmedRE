@@ -11,7 +11,7 @@ export default async function updateOprationCompanyPage(
   { where, data }: UpdateOprationCompanyPageInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   // Don't allow updating
   delete (data as any).country

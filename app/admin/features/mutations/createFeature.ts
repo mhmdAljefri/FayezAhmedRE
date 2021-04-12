@@ -3,7 +3,7 @@ import db, { FeatureCreateArgs } from "db"
 
 type CreateFeatureInput = Pick<FeatureCreateArgs, "data">
 export default async function createFeature({ data }: CreateFeatureInput, ctx: Ctx) {
-  ctx.session.authorize(["admin", "superadmin"])
+  ctx.session.$authorize(["admin", "superadmin"])
 
   const feature = await db.feature.create({ data })
 
