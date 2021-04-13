@@ -70,6 +70,7 @@ export const mockRouter: BlitzRouter = {
   asPath: "/",
   params: {},
   query: {},
+  isLocaleDomain: true,
   isReady: true,
   push: jest.fn(),
   replace: jest.fn(),

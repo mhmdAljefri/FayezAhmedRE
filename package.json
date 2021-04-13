@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "blitz start",
+    "dev": "blitz dev",
     "studio": "blitz db studio",
     "build": "blitz build",
     "postbuild": "next-sitemap",
@@ -53,7 +54,7 @@
     "animate.css": "4.1.1",
     "aws-sdk": "2.834.0",
     "axios": "0.21.0",
-    "blitz": "0.30.0-canary.0",
+    "blitz": "0.31.0",
     "cloudinary-core": "2.11.3",
     "cloudinary-react": "1.6.8",
     "date-fns": "2.16.1",
@@ -106,6 +107,7 @@
     "sweetalert2-react-content": "3.2.2",
     "swiper": "6.4.11",
     "theme-ui": "0.3.1",
+    "webpack": "5.32.0",
     "yarn": "1.22.10",
     "zod": "1.x"
   },

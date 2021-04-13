@@ -1,4 +1,4 @@
-const { sessionMiddleware, simpleRolesIsAuthorized } = require("@blitzjs/server")
+const { sessionMiddleware, simpleRolesIsAuthorized } = require("blitz")
 const withOffline = require("next-offline")
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
