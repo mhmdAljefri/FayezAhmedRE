@@ -36,7 +36,7 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const { search, city, price, propertyType, status } = filterRef.current || {}
+  const { search, city, propertyType, status } = filterRef.current || {}
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
   const [
@@ -46,6 +46,9 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
     getProjectsInfinite,
     (page = { take: 9, skip: 0 }) => ({
       ...page,
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         countryId,
         OR: getSearchQuery(search, ["name", "subTitle"]),
@@ -63,18 +66,18 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
               typeof selected.id !== "string" ? selected.id : parseInt(city || "") || undefined,
           },
         },
-        roomsWithPrices: {
-          some: {
-            price: {
-              lt: price?.[1]?.toString() || undefined,
-            },
-            OR: {
-              price: {
-                gt: price?.[0]?.toString() || undefined,
-              },
-            },
-          },
-        },
+        // roomsWithPrices: {
+        //   some: {
+        //     price: {
+        //       lt: price?.[1]?.toString() || undefined,
+        //     },
+        //     OR: {
+        //       price: {
+        //         gt: price?.[0]?.toString() || undefined,
+        //       },
+        //     },
+        //   },
+        // },
       },
     }),
     {

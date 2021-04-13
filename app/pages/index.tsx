@@ -84,6 +84,9 @@ export async function getStaticProps(context) {
         cityId: city.id,
       },
       take: 3,
+      orderBy: {
+        createdAt: "desc",
+      },
     })
 
     projects.push(...cityProjects)

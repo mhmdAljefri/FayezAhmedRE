@@ -41,7 +41,7 @@ const AdminLayout = ({ title, headerProps, children }: AdminLayoutProps) => {
 
   if (sesstion.isLoading) return <BarLoader />
   if (!sesstion.userId) throw new AuthenticationError("يرجى تسجيل الدخول")
-  if (!sesstion.roles.includes("admin") && !sesstion.roles.includes("superadmin"))
+  if (!sesstion.roles?.includes("admin") && !sesstion.roles?.includes("superadmin"))
     throw new AuthorizationError("غير مخول لك بالدخول")
 
   return (

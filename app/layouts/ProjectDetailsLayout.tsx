@@ -106,7 +106,15 @@ export function PaymentPlan({ installmentPlan }) {
         </Flex>
       </Button>
       <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
-        <Box sx={{ width: ["90vw", 400, 500], minHeight: "100vh", backgroundColor: "dark", px: 3 }}>
+        <Box
+          sx={{
+            width: ["90vw", 400, 500],
+            minHeight: "100vh",
+            backgroundColor: "dark",
+            px: 3,
+            marginInlineStart: 50,
+          }}
+        >
           <Box>
             <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
               <Text sx={{ paddingY: 5, fontWeight: 700, color: "heading", fontSize: 4 }}>

@@ -46,7 +46,7 @@ export default function TwitCard({ id, text }) {
   return (
     <Box>
       <Link sx={{ marginInlineEnd: 15, textDecoration: "none" }} href={twitUrl}>
-        <Heading sx={{ mt: 4, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
+        <Heading sx={{ mt: 0, fontSize: [1, 1, 2], color: "text", textAlign: "center" }}>
           {textWithoutLinkArray}
         </Heading>
       </Link>

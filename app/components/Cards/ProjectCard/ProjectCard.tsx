@@ -182,9 +182,7 @@ function ProjectCard({
           <ProjectCardIconsText
             sx={{ color: "primary", fontSize: [2], fontWeight: 700 }}
             text={
-              <span>
-                تبدا من <CurrencyPrice price={parseInt(price, 10)} />
-              </span>
+              <span>تبدا من {price ? <CurrencyPrice price={parseInt(price, 10)} /> : "-"}</span>
             }
             prefix={priceTypeSign}
           />

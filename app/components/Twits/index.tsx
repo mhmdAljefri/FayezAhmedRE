@@ -18,7 +18,7 @@ export default function Twits() {
       }}
     >
       <Wrapper>
-        <Heading sx={{ pt: 5, pb: 4, fontSize: [4, 5, 6] }}>
+        <Heading sx={{ pt: 5, pb: 2, fontSize: [4, 5, 6] }}>
           <Icon icon={twitter} size={32} style={{ marginInlineEnd: 15, color: "#1da1f2" }} />
           <span>اخر الاخبار</span>
         </Heading>
