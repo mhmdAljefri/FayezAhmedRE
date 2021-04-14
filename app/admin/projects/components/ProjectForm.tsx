@@ -14,8 +14,8 @@ import * as z from "zod"
 import { Field, useFormState } from "react-final-form"
 import getCities from "app/admin/cities/queries/getCities"
 import ReactReachTextEditor from "app/admin/components/ReactReachTextEditor"
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import Calendar from "react-calendar"
+
 import UploadMainVideo from "./UploadMainVideo"
 import { PROJECT_STATUS, TURKEY_PROJECT_STATUS } from "app/constants"
 import PropertyTypesField from "./PropertyTypesField"
@@ -207,7 +207,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
           render={({ input }) => (
             <>
               <Label>تاريخ التسليم</Label>
-              <DatePicker selected={input.value} {...input} />
+              <Calendar {...input} />
             </>
           )}
         />
