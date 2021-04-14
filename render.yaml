@@ -3,9 +3,11 @@ services:
     name: blitzapp
     env: node
     plan: Starter Plus
-    buildCommand: yarn --frozen-lockfile --prod=false; blitz prisma migrate save --experimental; blitz prisma migrate up --experimental; blitz build
-    # If you have an out of memory error, change startCommand to "yarn next start"
-    startCommand: yarn next start # blitz start --production
+
+    buildCommand: yarn --frozen-lockfile --prod=false &&
+      blitz build &&
+      blitz prisma migrate deploy --preview-feature
+    startCommand: blitz start
     envVars:
       - key: NODE_ENV
         value: production

@@ -11197,6 +11197,16 @@ react-animated-cursor@2.1.8:
   dependencies:
     utils "^0.3.1"
 
+react-calendar@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-3.3.1.tgz#da691a5d59c88f178695fd8b33909a71d698021f"
+  integrity sha512-iDIrhE0ABz3mChAIvA+5d2UtQGEb5oaUpLiEbrRdWHBYb45MhsbO59pG9HIy2uTdHkBF/nvzRV2JBmMfdg/0Qg==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.2"
+    get-user-locale "^1.2.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+
 react-calendar@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-3.2.1.tgz#056cbb5f30463f2162380a3632d9e851f501d8bf"
