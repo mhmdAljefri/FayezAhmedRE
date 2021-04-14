@@ -25,7 +25,7 @@ const HomeSlider = ({ slideStyle, onlyImages, data }: HomeSliderProps) => {
     >
       {data.map((item, index) => (
         <SwiperSlide className="no-padding" key={index}>
-          <Slide onlyImages={onlyImages} sx={slideStyle} {...item} />
+          <Slide opacity={0} onlyImages={onlyImages} sx={slideStyle} {...item} />
         </SwiperSlide>
       ))}
     </Swiper>

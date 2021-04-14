@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import { Link, useRouter } from "blitz"
-import { Badge, Box, Button, Flex, Image, Link as ThemeLink, Text } from "theme-ui"
+import { Badge, Box, Button, Link as ThemeLink, Text } from "theme-ui"
 import { Icon } from "react-icons-kit"
 import { star } from "react-icons-kit/fa/star"
 import { handshakeO } from "react-icons-kit/fa/handshakeO"
@@ -60,20 +60,15 @@ const ActiveLink = React.forwardRef<HTMLInputElement, ActiveLinkProps>(
 
 export default function AdminSidebar({ logout, newRequestsCount }) {
   const icons: ReactNode[] = []
-  const texts: ReactNode[] = []
 
   links.forEach(({ icon, name, url }) => {
     icons.push(
       <Link passHref key={url} href={url}>
         <ActiveLink>
-          <Icon style={{ margin: "auto" }} size={20} icon={icon} />
-        </ActiveLink>
-      </Link>
-    )
-    texts.push(
-      <Link passHref key={url} href={url}>
-        <ActiveLink>
-          <Box sx={{ wordWrap: "normal", wordBreak: "keep-all" }}>{name}</Box>
+          <Icon style={{ marginInline: 10 }} size={20} icon={icon} />
+          <Box sx={{ wordWrap: "normal", wordBreak: "keep-all", marginInlineStart: 15 }}>
+            {name}
+          </Box>
         </ActiveLink>
       </Link>
     )
@@ -97,11 +92,7 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
       <Box sx={{ paddingX: [2, null, 3], paddingY: 3 }}>
         <LogoWithText />
       </Box>
-
-      <Flex sx={{ marginTop: 5 }} as="nav">
-        <Box sx={{ minWidth: 72, textAlign: "center" }}>{icons}</Box>
-        <Box sx={{ minWidth: 150 }}>{texts}</Box>
-      </Flex>
+      <Box>{icons}</Box>
       <Box sx={{ marginTop: 4 }}>
         <Link passHref href={`/admin/requests`}>
           <ActiveLink>
@@ -112,7 +103,6 @@ export default function AdminSidebar({ logout, newRequestsCount }) {
           </ActiveLink>
         </Link>
       </Box>
-
       <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
         <Button onClick={logout} sx={{ width: "100%" }} variant="link">
           الخروج
