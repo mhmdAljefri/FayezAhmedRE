@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "app/styles/global.css"
 import "app/styles/animate.css"
 import "app/styles/fonts.css"
+import "react-calendar/dist/Calendar.css"
 
 const PriceProvider = dynamic(() => import("app/context/price"), { ssr: false }) //nprogress module
 const LoginForm = dynamic(() => import("app/auth/components/LoginForm"), { ssr: false }) //nprogress module
