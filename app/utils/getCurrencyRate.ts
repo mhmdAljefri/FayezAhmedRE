@@ -4,8 +4,9 @@ export default async function getCurrencyRate() {
   }
   const appId = process.env.APP_CURRENCY_API_ID
 
-  const { rates } = await fetch(`https://openexchangerates.org/api/latest.json?app_id=${appId}
-`).then((res) => res.json())
+  const { rates } = await fetch(
+    `https://openexchangerates.org/api/latest.json?app_id=${appId}`
+  ).then((res) => res.json())
 
   const prevQAR = rates.QAR // base currency
 

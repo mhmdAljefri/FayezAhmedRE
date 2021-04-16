@@ -18,6 +18,10 @@ export default function UserDropdwon({ sx }) {
     <div>
       {userId ? (
         <Dropdown
+          menuSx={{
+            backgroundColor: "white100",
+            backdropFilter: "blur(50px)",
+          }}
           showIcon={false}
           outterStyle={{ marginInlineEnd: 20 }}
           title={
@@ -35,7 +39,15 @@ export default function UserDropdwon({ sx }) {
           }
           onChange={() => {}}
         >
-          <Box sx={{ minWidth: 130 }}>
+          <Flex
+            sx={{
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              minWidth: 130,
+              textAlign: "center",
+            }}
+          >
             <div>
               <Box sx={{ py: 2, px: 2 }} role="button" onClick={() => setOpenFav(true)}>
                 المفضليات
@@ -44,7 +56,7 @@ export default function UserDropdwon({ sx }) {
                 تسجيل الخروج
               </Button>
             </div>
-          </Box>
+          </Flex>
         </Dropdown>
       ) : (
         <>
@@ -55,6 +67,7 @@ export default function UserDropdwon({ sx }) {
               borderRadius: 28,
               variant: "links.default",
               ...sx,
+              opacity: 1,
             }}
             variant="link"
             onClick={() => setOpen(true)}

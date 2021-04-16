@@ -142,6 +142,7 @@ const theme: Theme = {
       "&+svg": {
         marginRight: -28,
         marginLeft: "auto",
+        color: "background",
       },
       option: {
         backgroundColor: "background",

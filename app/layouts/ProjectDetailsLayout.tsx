@@ -108,7 +108,7 @@ export function PaymentPlan({ installmentPlan }) {
       <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
         <Box
           sx={{
-            width: ["90vw", 400, 500],
+            width: ["calc(90vw - 50px)", 400, 500],
             minHeight: "100vh",
             backgroundColor: "dark",
             px: 3,

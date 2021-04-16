@@ -18,6 +18,7 @@ type DropdownProps = {
   // TODO read next image prop type
   children?: ReactNode
   outterStyle?: SxStyleProp
+  menuSx?: SxStyleProp
   title?: ReactNode
   onChange: (value: any) => void
 }
@@ -30,6 +31,7 @@ const Dropdown = ({
   defaultValue,
   showIcon = true,
   selectedItemStyle,
+  menuSx,
   onChange,
 }: DropdownProps) => {
   const defaultOption = options?.find((option) => option.value === defaultValue)
@@ -71,6 +73,7 @@ const Dropdown = ({
             bottom: isBottom ? 30 : undefined,
             boxShadow: "default",
             zIndex: 1111,
+            ...menuSx,
           }}
         >
           {options

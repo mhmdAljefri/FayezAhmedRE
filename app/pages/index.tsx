@@ -179,7 +179,11 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Box>
 
       <LatestOffersSection offers={offers} />
-      <Wrapper>
+      <Wrapper
+        sx={{
+          my: 4,
+        }}
+      >
         <HeadingWithMoreLink
           sx={{
             display: ["none", "none", "unset"],
@@ -203,12 +207,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             projects={projects.filter((project) => project.cityId === selected.id) as any}
           />
         )}
-        <ShowMoreButton
-          href={`${asPath}/projects`}
-          sx={{
-            mb: 3,
-          }}
-        />
+        <ShowMoreButton href={`${asPath}/projects`} />
       </Wrapper>
 
       <Box

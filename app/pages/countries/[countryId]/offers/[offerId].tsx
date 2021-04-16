@@ -84,15 +84,40 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             <SocialShare url={`/countries/${offer.countryId}/offers/${offer.id}`} />
             <AddOfferToFav isActive={false} offerId={offer.id} />
           </Box>
-          {offer.mainVideo ? (
-            <Box sx={{ height: [240, 350, 450, 550] }}>
-              {offer.mainVideo.startsWith("https://www.youtube") ? (
-                <iframe width="100%" height="100%" title="any" src={offer.mainVideo}></iframe>
+          <Box
+            sx={{
+              position: "relative",
+
+              ":after": {
+                display: "block",
+                content: '""',
+                /* 16:9 aspect ratio */
+                paddingBottom: "38.25%",
+                boxSizing: "border-box",
+                minHeight: [200, null, 250],
+              },
+            }}
+          >
+            {offer.mainVideo ? (
+              offer.mainVideo.startsWith("https://www.youtube") ? (
+                <iframe
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                  }}
+                  width="100%"
+                  height="100%"
+                  title="any"
+                  src={offer.mainVideo}
+                ></iframe>
               ) : (
                 <video
                   width="100%"
                   height="100%"
-                  style={{ height: "100%", width: "100%", minHeight: "100vh", objectFit: "cover" }}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                  }}
                   poster={offer.image || "any"}
                   // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
                   controls
@@ -105,15 +130,15 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
                     <embed src={offer.mainVideo.replace("http://", "https://")} />
                   </object>
                 </video>
-              )}
-            </Box>
-          ) : (
-            <Image
-              sx={{ maxHeight: 300, objectFit: "cover", width: "100%" }}
-              src={offer.image || ""}
-              alt={offer.name}
-            />
-          )}
+              )
+            ) : (
+              <Image
+                sx={{ objectFit: "cover", width: "100%", position: "absolute", inset: 0 }}
+                src={offer.image || ""}
+                alt={offer.name}
+              />
+            )}
+          </Box>
         </Wrapper>
         <Wrapper sx={{ paddingY: 5 }}>
           <Heading as="h1" sx={{ fontSize: [5, 6], fontWeight: 700, textAlign: "center" }}>
@@ -128,7 +153,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             </Heading>
           )}
 
-          <Grid sx={{ mt: 4 }} columns={[1, 2, 4]}>
+          <Grid sx={{ mt: 4 }} columns={[1, 2, offer.city !== null ? 5 : 4]}>
             {offer.city !== null && (
               <OfferIconText heading="المدينة" text={offer.city.name} icon={flag} />
             )}
@@ -177,6 +202,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
               sx={{
                 variant: "links.outline",
                 marginY: 4,
+                marginX: "auto",
                 textDecoration: "none",
                 fontWeight: 700,
                 display: "inline-block",

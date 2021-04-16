@@ -38,9 +38,7 @@ export default function ProjectSlider({ projects }: Props) {
       ) : (
         projects.map((project) => (
           <SwiperSlide key={project.id} virtualIndex={project.id}>
-            <Box sx={{ mb: 5 }}>
-              <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
-            </Box>
+            <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
           </SwiperSlide>
         ))
       )}

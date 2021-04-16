@@ -43,7 +43,7 @@ const Nav = (props: NavProps) => {
   }
 
   return (
-    <Box sx={{ minWidth: 50, position: "relative", zIndex: 999999, minHeight: 35 }}>
+    <Box sx={{ minWidth: 35, position: "relative", zIndex: 999999, minHeight: 35 }}>
       <Burger onClick={() => setOpen(true)} open={false} />
       {open && (
         <Global

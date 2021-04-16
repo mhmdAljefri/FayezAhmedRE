@@ -41,15 +41,9 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
     modifiers: [
       { name: "arrow", options: { element: arrowElement } },
       {
-        name: "offset",
+        name: "preventOverflow",
         options: {
-          offset: [0, 0],
-        },
-      },
-      {
-        name: "flip",
-        options: {
-          fallbackPlacements: ["top", "bottom"],
+          padding: 20,
         },
       },
     ],
@@ -82,6 +76,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
         sx={{
           ...styles.popper,
           backgroundColor: "background",
+          justifyContent: "center",
           p: 2,
           borderRadius: 15,
           mt: 0,
@@ -91,10 +86,20 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
         }}
         {...attributes.popper}
       >
-        <Link target="blank" rel="noreferrer noopener" href={whatsappLink}>
+        <Link
+          sx={{ textDecoration: "none", color: "text" }}
+          target="blank"
+          rel="noreferrer noopener"
+          href={whatsappLink}
+        >
           <IconWithText icon={whatsapp} text="وتساب" />
         </Link>
-        <Link target="blank" rel="noreferrer noopener" href={telegramLink}>
+        <Link
+          sx={{ textDecoration: "none", color: "text" }}
+          target="blank"
+          rel="noreferrer noopener"
+          href={telegramLink}
+        >
           <IconWithText icon={telegram} text="تليجرام" />
         </Link>
         <CopyToClipboard text={url} />

@@ -23,7 +23,7 @@ export default function LatestOffersSection({ offers }) {
         <ShowMoreButton
           href={`/countries/2/offers`}
           sx={{
-            display: ["auto", null, "none"],
+            display: ["auto"],
           }}
         />
       </Wrapper>

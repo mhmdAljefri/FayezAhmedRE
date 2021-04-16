@@ -1,5 +1,12 @@
 import React, { useEffect } from "react"
-import { BlitzPage, useMutation, useRouter, dynamic } from "blitz"
+import {
+  BlitzPage,
+  useMutation,
+  useRouter,
+  dynamic,
+  InferGetStaticPropsType,
+  useQuery,
+} from "blitz"
 import {
   PaymentPlan,
   ConstractiongVideo,
@@ -7,7 +14,6 @@ import {
 } from "app/layouts/ProjectDetailsLayout"
 import getProject from "app/public/projects/queries/getProject"
 import getProjects from "app/public/projects/queries/getProjects"
-import { City, Country, Project, PropertyType, RoomWithPrice } from "@prisma/client"
 import updateProject from "app/public/projects/mutations/updateProject"
 import { TURKEY_PROJECT_STATUS } from "app/constants"
 import { format } from "date-fns"
@@ -32,6 +38,8 @@ import { checkSquare } from "react-icons-kit/fa/checkSquare"
 import { ArrowLeft, ArrowRight } from "app/components/Arrows/ProjectDetailsArrows"
 import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
+import { AddProjectToFav } from "app/components/AddToFav"
+import SocialShare from "app/components/SocialShare"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -47,17 +55,40 @@ const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   loading: () => <Skeleton height={250} />,
 })
 
-type ProjectProps = {
-  project: Project & {
-    city: City
-    country: Country
-    roomsWithPrices: RoomWithPrice[]
-    propertyType: PropertyType
+export async function getStaticPaths() {
+  const { projects } = await getProjects({})
+  const paths = projects.map((project) => ({
+    params: {
+      countryId: `${project.countryId}`,
+      projectId: `${project.id}`,
+    },
+  }))
+
+  return {
+    paths,
+    fallback: true,
   }
 }
 
-const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
+export async function getStaticProps(context) {
+  const projectId = parseInt(context.params.projectId)
+  const project = await getProject({ where: { id: projectId } }, context)
+
+  return {
+    props: { project }, // will be passed to the page component as props
+    revalidate: 60 * 15,
+  }
+}
+
+type ProjectProps = InferGetStaticPropsType<typeof getStaticProps>
+
+const ProjectPage: BlitzPage<ProjectProps> = ({ project: ssProject }) => {
   const [updateProjectMutation] = useMutation(updateProject)
+  const [project] = useQuery(
+    getProject,
+    { where: { id: ssProject.id } },
+    { initialData: ssProject }
+  )
   const router = useRouter()
   const { priceType, priceTypeSuffix } = usePriceType()
 
@@ -89,6 +120,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
     oprationCompanies,
     roomsWithPrices,
     location,
+    hasFav,
     propertyType,
     complationDate,
     paymentType,
@@ -136,6 +168,18 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               },
             }}
           >
+            <Box
+              sx={{
+                position: "absolute",
+                marginTop: 22,
+                zIndex: 22,
+                px: 3,
+                py: 2,
+              }}
+            >
+              <SocialShare url={router.asPath} />
+              <AddProjectToFav isActive={hasFav} projectId={project.id} />
+            </Box>
             <Image
               sx={{
                 objectFit: "cover",
@@ -149,12 +193,12 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
               src={image || ""}
             />
           </Box>
-          <Heading as="h1" sx={{ fontSize: 6, marginY: 3 }}>
+          <Heading as="h1" sx={{ fontSize: [4, 4, 5, 6], marginY: 3, textAlign: "center" }}>
             {name}
           </Heading>
-          <Text sx={{ fontSize: 4 }}>{subTitle}</Text>
+          <Text sx={{ fontSize: [3, 3, 4], mb: 4, textAlign: "center" }}>{subTitle}</Text>
 
-          <Flex>
+          <Flex sx={{ justifyContent: "center" }}>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{
@@ -211,7 +255,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
             <Grid columns={5} sx={{ justifyContent: "space-evenly" }}>
               <BigIconText icon={buildingO} text={propertyType?.name} />
               <BigIconText icon={dollar} text={paymentType === "cash" ? "كاش" : "تقسيط"} />
-              <BigIconText icon={mapMarker} text={city.name} />
+              <BigIconText icon={mapMarker} text={city?.name} />
               <BigIconText icon={key} text={`${date}`} />
               <BigIconText icon={isCompleted ? checkSquare : minusSquare} text={statusText} />
             </Grid>
@@ -452,28 +496,3 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project }) => {
 }
 
 export default ProjectPage
-
-export async function getStaticPaths() {
-  const { projects } = await getProjects({})
-  const paths = projects.map((project: Project) => ({
-    params: {
-      countryId: `${project.countryId}`,
-      projectId: `${project.id}`,
-    },
-  }))
-
-  return {
-    paths,
-    fallback: true,
-  }
-}
-
-export async function getStaticProps(context) {
-  const projectId = parseInt(context.params.projectId)
-  const project = await getProject({ where: { id: projectId } })
-
-  return {
-    props: { project }, // will be passed to the page component as props
-    revalidate: 60 * 15,
-  }
-}
