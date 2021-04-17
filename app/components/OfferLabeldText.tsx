@@ -19,8 +19,6 @@ const OfferIconText = ({ small = false, icon, heading, text }: OfferIconTextProp
         <Text>{text}</Text>
       </Box>
     </Flex>
-  ) : (
-    <div />
-  )
+  ) : null
 
 export default OfferIconText

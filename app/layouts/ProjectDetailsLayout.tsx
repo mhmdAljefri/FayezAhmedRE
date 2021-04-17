@@ -99,12 +99,14 @@ export function PaymentPlan({ installmentPlan }) {
   if (!installmentPlan) return <div />
   return (
     <>
-      <Button onClick={() => setOpen(true)} variant="links.outline">
-        <Flex sx={{ alignItems: "center" }}>
-          <Text sx={{ width: 200 }}>خطة السداد</Text>
-          <ArrowIcon />
-        </Flex>
-      </Button>
+      <Flex sx={{ justifyContent: "center" }}>
+        <Button onClick={() => setOpen(true)} variant="links.outline">
+          <Flex sx={{ alignItems: "center" }}>
+            <Text sx={{ width: 200 }}>خطة السداد</Text>
+            <ArrowIcon />
+          </Flex>
+        </Button>
+      </Flex>
       <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
         <Box
           sx={{

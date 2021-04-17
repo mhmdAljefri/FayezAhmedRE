@@ -198,7 +198,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project: ssProject }) => {
           </Heading>
           <Text sx={{ fontSize: [3, 3, 4], mb: 4, textAlign: "center" }}>{subTitle}</Text>
 
-          <Flex sx={{ justifyContent: "center" }}>
+          <Flex sx={{ justifyContent: "center", textAlign: "center" }}>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
               <Text
                 sx={{

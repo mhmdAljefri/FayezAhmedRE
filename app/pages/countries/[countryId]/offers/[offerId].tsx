@@ -67,6 +67,15 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
   if (router.isFallback) {
     return <div>Loading...</div>
   }
+
+  // fucking feedback on grid
+  let gridColumns = 0
+  if (offer.propertyType) gridColumns += 1
+  if (offer.numberOfRooms) gridColumns += 1
+  if (offer.numberOfBathrooms) gridColumns += 1
+  if (offer.areaSize) gridColumns += 1
+  if (offer.city) gridColumns += 1
+
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={offer.name}>
       <Box sx={{ pb: 6, pt: 4, backgroundColor: "dark" }}></Box>
@@ -159,7 +168,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             </Heading>
           )}
 
-          <Grid sx={{ mt: 4 }} columns={[1, 2, offer.city !== null ? 5 : 4]}>
+          <Grid sx={{ mt: 4 }} columns={[1, 2, gridColumns]}>
             {offer.city !== null && (
               <OfferIconText heading="المدينة" text={offer.city.name} icon={flag} />
             )}
@@ -200,7 +209,12 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
         </ThemeLink>
       )}
       {offer.project && (
-        <Wrapper>
+        <Wrapper
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Link passHref href={`/countries/${offer.countryId}/projects/${offer.project.id}`}>
             <ThemeLink
               sx={{
@@ -209,7 +223,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
                 marginX: "auto",
                 textDecoration: "none",
                 fontWeight: 700,
-                display: "inline-block",
+                display: "block",
               }}
             >
               <Box as="span" sx={{ paddingX: 5 }}>
@@ -221,7 +235,14 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
         </Wrapper>
       )}
 
-      {offer.location && <GoogleMap zoom={18} center={offer.location as any} />}
+      <Box
+        sx={{
+          maxWidth: [800, null, null, 900],
+          mx: "auto",
+        }}
+      >
+        {offer.location && <GoogleMap zoom={18} center={offer.location as any} />}
+      </Box>
 
       {offer.gallery.length > 0 && (
         <LazyLoad once offset={200}>
