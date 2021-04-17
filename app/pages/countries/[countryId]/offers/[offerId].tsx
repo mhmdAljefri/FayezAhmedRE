@@ -9,7 +9,6 @@ import ArrowIcon from "app/components/ArrowIcon"
 import { ConstractiongVideo, PaymentPlan } from "app/layouts/ProjectDetailsLayout"
 import { Offer } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
-import Image from "app/components/Image"
 import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
@@ -21,6 +20,7 @@ import { map2 } from "react-icons-kit/icomoon/map2"
 import { flag } from "react-icons-kit/icomoon/flag"
 import CurrencyPrice from "app/components/CurrencyPrice"
 import OfferIconText from "app/components/OfferLabeldText"
+import OptmizationImage from "app/components/OptmizationImage"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -87,6 +87,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           <Box
             sx={{
               position: "relative",
+              overflow: "hidden",
 
               ":after": {
                 display: "block",
@@ -114,10 +115,6 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
                 <video
                   width="100%"
                   height="100%"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                  }}
                   poster={offer.image || "any"}
                   // poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
                   controls
@@ -132,11 +129,20 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
                 </video>
               )
             ) : (
-              <Image
-                sx={{ objectFit: "cover", width: "100%", position: "absolute", inset: 0 }}
-                src={offer.image || ""}
-                alt={offer.name}
-              />
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                }}
+              >
+                <OptmizationImage
+                  layout="fill"
+                  objectPosition="center"
+                  objectFit="cover"
+                  src={offer.image || ""}
+                  alt={offer.name}
+                />
+              </Box>
             )}
           </Box>
         </Wrapper>
@@ -174,8 +180,6 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
         constructingUpdateVideo={offer.constructingUpdateVideo}
         constructingUpdatePrview={offer.constructingUpdatePrview}
       />
-
-      {offer.location && <GoogleMap zoom={18} center={offer.location as any} />}
 
       {offer.brochure && (
         <ThemeLink
@@ -216,6 +220,9 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           </Link>
         </Wrapper>
       )}
+
+      {offer.location && <GoogleMap zoom={18} center={offer.location as any} />}
+
       {offer.gallery.length > 0 && (
         <LazyLoad once offset={200}>
           <GalleryViewSlider gallery={offer.gallery} />
