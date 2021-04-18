@@ -1,5 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200&display=swap");
+@import url("//db.onlinewebfonts.com/c/eb685f5dc6b663497f7d5d4aa4a6c13d?family=Noto+Kufi+Arabic");
+
 @font-face {
   font-family: "NotoKufi";
   src: url("/fonts/Notokufiarabic-regular.ttf");
   src: url("/fonts/NotoKufiArabic-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.eot");
+  src: url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/eb685f5dc6b663497f7d5d4aa4a6c13d.svg#Noto Kufi Arabic")
+      format("svg");
 }
