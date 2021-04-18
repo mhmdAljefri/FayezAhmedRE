@@ -8,7 +8,7 @@ import { ConstractiongVideo } from "app/layouts/ProjectDetailsLayout"
 import getExplores from "app/public/explores/queries/getExplores"
 import { Explore } from "@prisma/client"
 import HTMLBox from "app/components/HTMLBox"
-import Image from "app/components/Image"
+import OptmizationImage from "app/components/OptmizationImage"
 
 type ExploreProps = {
   explore: Explore
@@ -34,7 +34,38 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
               constructingUpdateVideo={explore.videoUrl}
             />
           ) : (
-            <Image src={explore.image} alt={explore.title} />
+            <Box
+              sx={{
+                marginTop: -6,
+                overflow: "hidden",
+                textAlign: "center",
+                position: "relative",
+
+                ":after": {
+                  display: "block",
+                  content: '""',
+                  /* 16:9 aspect ratio */
+                  paddingBottom: "38.25%",
+                  boxSizing: "border-box",
+                  minHeight: [200, null, 250],
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                }}
+              >
+                <OptmizationImage
+                  layout="fill"
+                  objectPosition="center"
+                  objectFit="cover"
+                  src={explore.image}
+                  alt={explore.title}
+                />
+              </Box>
+            </Box>
           )}
         </Wrapper>
         <Wrapper sx={{ paddingBottom: 5, img: { maxWidth: "100%" } }}>
