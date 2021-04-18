@@ -1,11 +1,11 @@
 import React, { useMemo } from "react"
 import { useRouter, Link, dynamic } from "blitz"
-import { Box, Heading, Text } from "theme-ui"
+import { Box, Heading, Text, Flex } from "theme-ui"
 import { Offer, City } from "@prisma/client"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
-import LabeldTexts from "./LabeldTexts"
+import LabeldTexts from "../../LabeldTexts"
 
 const OfferCardYoutube = dynamic(() => import("./OfferCardYoutube"))
 const OfferCardPureVideo = dynamic(() => import("./OfferCardPureVideo"))
@@ -94,7 +94,9 @@ export default function OfferCard({
         <Box sx={{ paddingY: 3, paddingX: 3, cursor: "pointer" }}>
           <Heading>{name}</Heading>
           <Text>{subTitle}</Text>
-          <LabeldTexts {...offer} city={offer.city?.name} />
+          <Flex sx={{ justifyContent: "space-evenly", mt: 2 }}>
+            <LabeldTexts {...offer} city={offer.city?.name} />
+          </Flex>
         </Box>
       </Link>
     </Box>

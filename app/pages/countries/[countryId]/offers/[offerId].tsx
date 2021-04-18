@@ -2,7 +2,7 @@ import React from "react"
 import { BlitzPage, dynamic, Link, useRouter, InferGetStaticPropsType } from "blitz"
 import Layout from "app/layouts/Layout"
 import Wrapper from "app/components/Wrapper"
-import { Box, Heading, Link as ThemeLink, Grid } from "theme-ui"
+import { Box, Heading, Link as ThemeLink } from "theme-ui"
 import getOffer from "app/public/offers/queries/getOffer"
 import getOffers from "app/public/offers/queries/getOffers"
 import ArrowIcon from "app/components/ArrowIcon"
@@ -13,14 +13,9 @@ import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import SocialShare from "app/components/SocialShare"
 import { AddOfferToFav } from "app/components/AddToFav"
-import { home } from "react-icons-kit/feather/home"
-import { box } from "react-icons-kit/feather/box"
-import { bath } from "react-icons-kit/fa/bath"
-import { map2 } from "react-icons-kit/icomoon/map2"
-import { flag } from "react-icons-kit/icomoon/flag"
 import CurrencyPrice from "app/components/CurrencyPrice"
-import OfferIconText from "app/components/OfferLabeldText"
 import OptmizationImage from "app/components/OptmizationImage"
+import LabeldTexts from "app/components/LabeldTexts"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -67,14 +62,6 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
   if (router.isFallback) {
     return <div>Loading...</div>
   }
-
-  // fucking feedback on grid
-  let gridColumns = 0
-  if (offer.propertyType) gridColumns += 1
-  if (offer.numberOfRooms) gridColumns += 1
-  if (offer.numberOfBathrooms) gridColumns += 1
-  if (offer.areaSize) gridColumns += 1
-  if (offer.city) gridColumns += 1
 
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={offer.name}>
@@ -168,15 +155,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             </Heading>
           )}
 
-          <Grid sx={{ mt: 4 }} columns={[1, 2, gridColumns]}>
-            {offer.city !== null && (
-              <OfferIconText heading="المدينة" text={offer.city.name} icon={flag} />
-            )}
-            <OfferIconText heading="نوع العقار" text={offer.propertyType} icon={home} />
-            <OfferIconText heading="عدد الغرف" text={offer.numberOfRooms} icon={box} />
-            <OfferIconText heading="عدد الحمامات" text={offer.numberOfBathrooms} icon={bath} />
-            <OfferIconText heading="مساحة العقار" text={offer.areaSize} icon={map2} />
-          </Grid>
+          <LabeldTexts small={false} {...offer} city={offer.city?.name} />
           <Heading sx={{ mt: 4 }}>الوصف</Heading>
           <HTMLBox html={offer.details} />
         </Wrapper>

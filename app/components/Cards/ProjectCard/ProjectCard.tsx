@@ -3,7 +3,6 @@ import React, { ReactNode, useState } from "react"
 import { Button, Flex, Box, Heading, Text, SxStyleProp } from "theme-ui"
 
 import Icon, { IconProp } from "react-icons-kit"
-import { building } from "react-icons-kit/fa/building"
 import { money } from "react-icons-kit/fa/money"
 import { chevronDown } from "react-icons-kit/fa/chevronDown"
 import { ic_format_paint } from "react-icons-kit/md/ic_format_paint"
@@ -15,11 +14,13 @@ import OptmizationImage from "app/components/OptmizationImage"
 import SocialShare from "app/components/SocialShare"
 import { AddProjectToFav } from "app/components/AddToFav"
 import CurrencyPrice from "app/components/CurrencyPrice"
+import { IoBed } from "@react-icons/all-files/io5/IoBed"
 
 interface ProjectCardIconsTextProps {
   width?: number
   text: ReactNode
   icon?: IconProp["icon"]
+  reactIcon?: ReactNode
   prefix?: ReactNode
   sx?: SxStyleProp
 }
@@ -40,7 +41,7 @@ export type ProjectCardProps = Pick<
   hasFav?: boolean
 }
 
-function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextProps) {
+function ProjectCardIconsText({ prefix, reactIcon, icon, text, sx }: ProjectCardIconsTextProps) {
   return (
     <Flex
       sx={{
@@ -51,7 +52,7 @@ function ProjectCardIconsText({ prefix, icon, text, sx }: ProjectCardIconsTextPr
         ...sx,
       }}
     >
-      {icon && <Icon icon={icon} />}
+      {(icon || reactIcon) && (reactIcon || <Icon icon={icon} />)}
 
       {prefix && <span style={{ whiteSpace: "nowrap", paddingInlineStart: 10 }}>{prefix}</span>}
       <Box
@@ -82,7 +83,7 @@ function SelectRoom({ roomsWithPrices, selected, onChange }) {
         variant="link"
         onClick={() => setOpen(true)}
       >
-        <ProjectCardIconsText text={selected?.room} icon={building} />
+        <ProjectCardIconsText text={selected?.room} reactIcon={<IoBed />} />
         <Box sx={{ marginX: 1, marginTop: 1 }}>
           <Icon size={12} icon={chevronDown} />
         </Box>
