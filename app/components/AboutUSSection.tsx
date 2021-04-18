@@ -70,7 +70,7 @@ const styles: { headingStyle: SxStyleProp; boxStyle: SxStyleProp; before: SxStyl
   boxStyle: { p: [3, 4], backgroundImage: "url(sky.jpg)", position: "relative" },
   headingStyle: { mt: 2, mb: 2, position: "relative", zIndex: 1 },
   before: {
-    content: "''",
+    content: '""',
     position: "absolute",
     top: 0,
     left: 0,

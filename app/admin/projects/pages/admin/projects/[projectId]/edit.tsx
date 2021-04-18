@@ -31,6 +31,7 @@ export const EditProject = () => {
           delete values.id
           delete values.countryId
           delete values.roomsWithPrices
+          console.log(values)
 
           try {
             await updateProjectMutation({

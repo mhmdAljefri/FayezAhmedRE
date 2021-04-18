@@ -27,6 +27,7 @@ export default async function updateProject(
   const removableOldRoomsIds: number[] = [] // to be removed
   const oldRooms: RoomWithPrice[] = [] // to be updated
   const newRooms: RoomWithPrice[] = [] // to be created
+
   oldProject?.roomsWithPrices.forEach(({ id }) => {
     allRoomsIds.push(id)
   })
@@ -43,7 +44,6 @@ export default async function updateProject(
     if (!oldRoomsIds.includes(id)) removableOldRoomsIds.push(id)
   })
 
-  console.log(oldProject?.roomsWithPrices, roomsWithPrices)
   // remove unfounded ids
   // update exist data
   // create new data
@@ -52,6 +52,7 @@ export default async function updateProject(
     where,
     data: {
       ...data,
+      constructingUpdateVideo: data.constructingUpdateVideo || null,
       isDelux: `${data.isDelux}` === "true",
       isHousingComplex: `${data.isHousingComplex}` === "true",
       isGrantedByGov: `${data.isGrantedByGov}` === "true",
