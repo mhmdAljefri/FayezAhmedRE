@@ -41,7 +41,7 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
   const [
     groupedProjects,
-    { isFetching, refetch, fetchMore, canFetchMore, isFetchingMore },
+    { isFetching, refetch, fetchNextPage, hasNextPage, isFetchingNextPage },
   ] = useInfiniteQuery(
     getProjectsInfinite,
     (page = { take: 9, skip: 0 }) => ({
@@ -81,7 +81,7 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
       },
     }),
     {
-      getFetchMore: (lastGroup) => lastGroup.nextPage,
+      getNextPageParam: (lastGroup) => lastGroup.nextPage,
     }
   )
 
@@ -146,10 +146,10 @@ export default function ProjectsList({ country, title, subTitle }: ProjectListTy
           </Grid>
 
           <FetchMoreButton
-            disabled={!canFetchMore || !!isFetchingMore}
-            onClick={fetchMore}
-            isFetchingMore={isFetchingMore || isFetching}
-            canFetchMore={canFetchMore}
+            disabled={!hasNextPage || !!isFetchingNextPage}
+            onClick={fetchNextPage}
+            isFetchingMore={isFetchingNextPage || isFetching}
+            canFetchMore={hasNextPage}
           />
         </Wrapper>
       </Box>

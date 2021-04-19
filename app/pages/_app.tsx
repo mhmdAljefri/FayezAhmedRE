@@ -1,10 +1,9 @@
-import { AppProps, ErrorComponent, useRouter } from "blitz"
+import { AppProps, ErrorComponent, useRouter, useQueryErrorResetBoundary } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { Suspense } from "react"
 
 import Router from "next/router"
 import { ToastContainer } from "react-toastify"
-import { queryCache } from "react-query"
 import FullpageLoader from "app/components/Loaders/Fullpage"
 import NProgress from "nprogress"
 import dynamic from "next/dynamic"
@@ -35,16 +34,13 @@ Router.events.on("routeChangeError", () => NProgress.done())
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   const router = useRouter()
+  const reset = useQueryErrorResetBoundary().reset
 
   return (
     <ErrorBoundary
       FallbackComponent={RootErrorFallback}
       resetKeys={[router.asPath]}
-      onReset={() => {
-        // This ensures the Blitz useQuery hooks will automatically refetch
-        // data any time you reset the error boundary
-        queryCache.resetErrorBoundaries()
-      }}
+      onReset={reset}
     >
       <Suspense fallback={<FullpageLoader />}>
         <PriceProvider price={"priceQatar"}>

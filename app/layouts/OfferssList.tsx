@@ -15,7 +15,10 @@ export default function OffersList({ name, details, country, offers }: OfferList
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
 
   const countryId = parseInt(useParam("countryId") as string)
-  const [groupedOffers, { isFetching, fetchMore, canFetchMore, isFetchingMore }] = useInfiniteQuery(
+  const [
+    groupedOffers,
+    { isFetching, fetchNextPage, hasNextPage, isFetchingNextPage },
+  ] = useInfiniteQuery(
     getInfiniteOffersI,
     (page = { take: 30, skip: 0 }) => ({
       ...page,
@@ -25,7 +28,7 @@ export default function OffersList({ name, details, country, offers }: OfferList
       },
     }),
     {
-      getFetchMore: (lastGroup) => lastGroup.nextPage,
+      getNextPageParam: (lastGroup) => lastGroup.nextPage,
     }
   )
 
@@ -66,10 +69,10 @@ export default function OffersList({ name, details, country, offers }: OfferList
           </Grid>
 
           <FetchMoreButton
-            disabled={!canFetchMore || !!isFetchingMore}
-            onClick={fetchMore}
-            isFetchingMore={isFetchingMore || isFetching}
-            canFetchMore={canFetchMore}
+            disabled={!hasNextPage || !!isFetchingNextPage}
+            onClick={fetchNextPage}
+            isFetchingMore={isFetchingNextPage || isFetching}
+            canFetchMore={hasNextPage}
           />
         </Wrapper>
       </Box>

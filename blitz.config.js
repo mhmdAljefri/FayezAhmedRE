@@ -64,18 +64,7 @@ module.exports = withBundleAnalyzer(
     },
 
     images: {
-      domains: ["res.cloudinary.com", "fayezahmed.s3.ap-south-1.amazonaws.com"],
-
-      deviceSizes: [640, 1080, 1920, 3840],
+      domains: ["fayezahmed.s3.ap-south-1.amazonaws.com"],
     },
-
-    /* Uncomment this to customize the webpack config
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Note: we provide webpack above so you should not `require` it
-    // Perform customizations to webpack config
-    // Important: return the modified config
-    return config
-  },
-  */
   })
 )
