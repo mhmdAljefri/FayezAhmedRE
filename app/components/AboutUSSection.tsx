@@ -16,6 +16,7 @@ function Card({
         ":before": {
           ...styles.before,
           backgroundColor: layerBackgroundColor,
+          backgroundSize: "cover",
         },
       }}
     >

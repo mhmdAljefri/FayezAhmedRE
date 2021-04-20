@@ -24,7 +24,7 @@ const WhatsNew: BlitzPage<ExploreProps> = ({ explore /** next, prev */ }) => {
   }
   return (
     <Layout headerProps={{ sx: { backgroundColor: "dark" } }} title={explore.title}>
-      <Box sx={{ py: 6, backgroundColor: "dark" }}></Box>
+      <Box sx={{ py: 5, backgroundColor: "dark" }}></Box>
       <Box sx={{ marginTop: -6 }}>
         <Wrapper sx={{ textAlign: "center" }}>
           {explore.videoUrl ? (

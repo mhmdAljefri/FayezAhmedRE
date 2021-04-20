@@ -66,7 +66,7 @@ export async function getStaticProps(context) {
 
   const projects: any = []
   // find projects per city
-  country?.cities.forEach(async (city) => {
+  country.cities.forEach(async (city) => {
     const { projects: cityProjects } = await getProjects({
       include: {
         country: {
