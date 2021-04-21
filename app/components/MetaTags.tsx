@@ -31,21 +31,6 @@ export default function MetaTags({ title }) {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
-        rel="preload"
-        as="style"
-      ></link>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
-        media={!hydrated ? "print" : "all"}
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
-        media={!hydrated ? "print" : "all"}
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
         rel="stylesheet"
       ></link>
       {/* End Google fonts */}
