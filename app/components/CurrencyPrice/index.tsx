@@ -21,7 +21,5 @@ export default function CurrencyPrice({ price }: Props) {
 
   const rate: number = rates ? rates[priceTypeRate[priceType]] : 1
 
-  console.log({ price, are: price * rate, rate, priceType })
-
   return <span>{numberFormat(price * rate)}</span>
 }

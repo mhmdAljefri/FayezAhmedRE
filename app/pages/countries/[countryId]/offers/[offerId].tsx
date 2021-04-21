@@ -16,6 +16,7 @@ import { AddOfferToFav } from "app/components/AddToFav"
 import CurrencyPrice from "app/components/CurrencyPrice"
 import OptmizationImage from "app/components/OptmizationImage"
 import LabeldTexts from "app/components/LabeldTexts"
+import usePriceType from "app/hooks/usePriceType"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -56,6 +57,7 @@ export async function getStaticProps(context) {
 
 const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ offer }) => {
   const router = useRouter()
+  const { priceTypeSign } = usePriceType()
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
@@ -151,7 +153,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
           </Heading>
           {offer.price && (
             <Heading sx={{ fontSize: 6, mt: 4, color: "primary", textAlign: "center" }}>
-              <CurrencyPrice price={offer.price} />
+              <CurrencyPrice price={offer.price} /> {priceTypeSign}
             </Heading>
           )}
 

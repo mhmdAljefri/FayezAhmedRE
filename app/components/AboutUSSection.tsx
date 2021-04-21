@@ -13,10 +13,10 @@ function Card({
       className="animate__animated animate__fadeInUp"
       sx={{
         ...styles.boxStyle,
+        backgroundSize: "cover",
         ":before": {
           ...styles.before,
           backgroundColor: layerBackgroundColor,
-          backgroundSize: "cover",
         },
       }}
     >
