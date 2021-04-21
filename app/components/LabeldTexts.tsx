@@ -5,8 +5,8 @@ import { IoBed } from "@react-icons/all-files/io5/IoBed"
 
 import { FaHome } from "@react-icons/all-files/fa/FaHome"
 import { FaBath } from "@react-icons/all-files/fa/FaBath"
-import { ImMap2 } from "@react-icons/all-files/im/ImMap2"
 import { ImFlag } from "@react-icons/all-files/im/ImFlag"
+import { BiArea } from "@react-icons/all-files/bi/BiArea"
 
 type Props = {
   propertyType?: null | string
@@ -60,7 +60,7 @@ export default function LabeldTexts({
         small={small}
         heading="مساحة العقار"
         text={areaSize}
-        icon={<ImMap2 size={size} />}
+        icon={<BiArea size={size} />}
       />
     </Grid>
   )

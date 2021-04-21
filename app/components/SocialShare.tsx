@@ -79,7 +79,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           backgroundColor: "background",
           justifyContent: "center",
           flexDirection: ["column", null, "row"],
-          alignItems: "center",
+          alignItems: [null, null, "center"],
           p: 2,
           borderRadius: 15,
           mt: 0,
