@@ -29,3 +29,11 @@ export function getSearchQuery(search: string | undefined, keys: string[]) {
   if (!search) return []
   return keys.map((key) => search.split(" ").map((word) => ({ [key]: { contains: word } }))).flat()
 }
+
+export const getListOfPrice = (price?: number[]): number[] => {
+  if (!price) return []
+  const arr = price.toString().split(",") // wtf
+  const firstPrice = parseInt(arr[0], 10)
+  const lastPrice = parseInt(arr[0], 10)
+  return [firstPrice, lastPrice]
+}

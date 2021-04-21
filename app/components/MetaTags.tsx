@@ -39,6 +39,15 @@ export default function MetaTags({ title }) {
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
         media={!hydrated ? "print" : "all"}
       />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
+        media={!hydrated ? "print" : "all"}
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
+        rel="stylesheet"
+      ></link>
       {/* End Google fonts */}
       <meta name="description" content="الموقع الرسمي لشركة فايز احمد العقارية" />
       <meta

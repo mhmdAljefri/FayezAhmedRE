@@ -9,24 +9,26 @@ import Image from "app/components/Image"
 import Filter, { filterValues } from "app/components/Forms/Filter"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import getCountry from "app/public/countries/queries/getCountry"
-import { getListOfPrice } from "app/layouts/ProjectsList"
 import getOffers from "app/public/offers/queries/getOffers"
-import { getSearchQuery } from "app/utils"
+import { getSearchQuery, getListOfPrice } from "app/utils"
+import getPurposes from "app/public/purposes/queries/getPurposes"
 
 export const getStaticProps = async (context) => {
   const { propertyTypes } = await getPropertyTypes({})
+  const { purposes } = await getPurposes({})
   const country = await getCountry({ where: { suspend: false } })
 
   return {
     props: {
       propertyTypes,
+      purposes,
       country,
     },
   }
 }
 
 type SearchProps = InferGetStaticPropsType<typeof getStaticProps>
-const Search: BlitzPage<SearchProps> = ({ propertyTypes, country }) => {
+const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) => {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const { search, city, price, propertyType } = filterRef.current || {}
@@ -67,6 +69,7 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, country }) => {
       <Box sx={{ backgroundColor: "dark", paddingY: 5 }}>
         <Wrapper>
           <Filter
+            purposes={purposes}
             propertyTypes={propertyTypes}
             initialValues={filter}
             isTurkey={country.isTurkey}

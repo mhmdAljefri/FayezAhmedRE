@@ -7,8 +7,8 @@ import { handshakeO } from "react-icons-kit/fa/handshakeO"
 import { industry } from "react-icons-kit/fa/industry"
 import { newspaperO } from "react-icons-kit/fa/newspaperO"
 import { flagO } from "react-icons-kit/fa/flagO"
-import { certificate } from "react-icons-kit/fa/certificate"
-import { bed } from "react-icons-kit/fa/bed"
+// import { certificate } from "react-icons-kit/fa/certificate"
+// import { bed } from "react-icons-kit/fa/bed"
 import { image } from "react-icons-kit/fa/image"
 import LogoWithText from "../LogoWithText"
 
@@ -16,12 +16,13 @@ const links = [
   { icon: star, name: "الخدمات", url: "/admin/features" },
   { icon: handshakeO, name: "الشركاء", url: "/admin/partners" },
   { icon: industry, name: "المشاريع", url: "/admin/projects" },
-  { icon: industry, name: "انواع العقارات", url: "/admin/propert-types" },
   { icon: newspaperO, name: "العروض", url: "/admin/offers" },
   { icon: flagO, name: "الدول", url: "/admin/countries" },
-  { icon: certificate, name: "انواع المفروشات", url: "/admin/furnish-categories" },
-  { icon: bed, name: "المفروشات", url: "/admin/furnishes" },
+  // { icon: certificate, name: "انواع المفروشات", url: "/admin/furnish-categories" },
+  // { icon: bed, name: "المفروشات", url: "/admin/furnishes" },
   { icon: image, name: "المعرض", url: "/admin/carousels" },
+  { icon: industry, name: "انواع العقارات", url: "/admin/propert-types" },
+  { icon: industry, name: "الغرض من العقار", url: "/admin/purposes" },
 ]
 
 type ActiveLinkProps = {

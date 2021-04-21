@@ -30,6 +30,7 @@ import AboutUSSection from "app/components/AboutUSSection"
 import getCurrencyRate from "app/utils/getCurrencyRate"
 import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
 import getExplores from "app/public/explores/queries/getExplores"
+import getPurposes from "app/public/purposes/queries/getPurposes"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -64,33 +65,34 @@ export async function getStaticProps(context) {
     where: { suspend: false },
   })
 
-  const projects: any = []
   // find projects per city
-  country.cities.forEach(async (city) => {
-    const { projects: cityProjects } = await getProjects({
-      include: {
-        country: {
-          select: {
-            name: true,
-            isTurkey: true,
-            id: true,
+  const projects = await Promise.all(
+    country.cities.map(async (city) => {
+      const { projects: cityProjects } = await getProjects({
+        include: {
+          country: {
+            select: {
+              name: true,
+              isTurkey: true,
+              id: true,
+            },
           },
+          roomsWithPrices: true,
+          city: true,
         },
-        roomsWithPrices: true,
-        city: true,
-      },
 
-      where: {
-        cityId: city.id,
-      },
-      take: 3,
-      orderBy: {
-        createdAt: "desc",
-      },
+        where: {
+          cityId: city.id,
+        },
+        take: 3,
+        orderBy: {
+          createdAt: "desc",
+        },
+      })
+
+      return cityProjects
     })
-
-    projects.push(...cityProjects)
-  })
+  )
 
   /**
    * start add all explore types to country instance
@@ -109,6 +111,7 @@ export async function getStaticProps(context) {
    */
 
   const { propertyTypes } = await getPropertyTypes({})
+  const { purposes } = await getPurposes({})
   const { furnishCategories } = await getFurnishCategories({
     select: { name: true, image: true, id: true },
   })
@@ -120,7 +123,8 @@ export async function getStaticProps(context) {
       country,
       offers,
       mostViewedProjects: qatarMostViewd,
-      projects,
+      projects: projects.flat(),
+      purposes,
       carousels,
       carouselVideo,
       rates,
@@ -138,8 +142,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   propertyTypes,
   carousels,
   mostViewedProjects,
-  furnishCategories,
-  rates,
+  purposes,
 }) => {
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
 
@@ -174,7 +177,12 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             zIndex: 1,
           }}
         >
-          <Filter {...country} propertyTypes={propertyTypes} onFilter={handleFilter} />
+          <Filter
+            {...country}
+            purposes={purposes}
+            propertyTypes={propertyTypes}
+            onFilter={handleFilter}
+          />
         </Wrapper>
       </Box>
 
@@ -199,11 +207,10 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         />
         {typeof selected.id === "string" ? (
           // all projects
-          <ProjectSlider key={selected.id} projects={projects as any} />
+          <ProjectSlider projects={projects as any} />
         ) : (
           // projects by city
           <ProjectSlider
-            key={selected.id}
             projects={projects.filter((project) => project.cityId === selected.id) as any}
           />
         )}

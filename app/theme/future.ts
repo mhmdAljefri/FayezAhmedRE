@@ -1,7 +1,7 @@
 const future = {
   space: [0, 4, 8, 16, 32, 80, 128, 512],
   fonts: {
-    body: 'Tajawal, Helvetica, Arial, "sans-serif"',
+    body: 'Tajawal, "sans-serif"',
     heading: "inherit",
     monospace: "Menlo, monospace",
   },

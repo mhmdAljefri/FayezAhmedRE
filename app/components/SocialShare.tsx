@@ -38,6 +38,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
   const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
   const [baseUrl, setBaseUrl] = useState<string>()
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "bottom-end",
     modifiers: [
       { name: "arrow", options: { element: arrowElement } },
       {
@@ -77,17 +78,19 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           ...styles.popper,
           backgroundColor: "background",
           justifyContent: "center",
+          flexDirection: ["column", null, "row"],
+          alignItems: "center",
           p: 2,
           borderRadius: 15,
           mt: 0,
           opacity: open ? 1 : 0,
-          width: ["80vw", 200, 300, 350],
+          width: ["auto", 200, 300, 350],
           display: "flex",
         }}
         {...attributes.popper}
       >
         <Link
-          sx={{ textDecoration: "none", color: "text" }}
+          sx={{ textDecoration: "none", color: "text", my: 1 }}
           target="blank"
           rel="noreferrer noopener"
           href={whatsappLink}
@@ -95,7 +98,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           <IconWithText icon={whatsapp} text="وتساب" />
         </Link>
         <Link
-          sx={{ textDecoration: "none", color: "text" }}
+          sx={{ textDecoration: "none", color: "text", my: 1 }}
           target="blank"
           rel="noreferrer noopener"
           href={telegramLink}

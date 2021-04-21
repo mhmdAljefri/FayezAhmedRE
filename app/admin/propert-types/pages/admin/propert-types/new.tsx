@@ -18,10 +18,10 @@ const NewPropertyTypePage: BlitzPage = () => {
             const furnishCategory = await createPropertyTypeMutation({
               data,
             })
-            alert("Success!" + JSON.stringify(furnishCategory))
+            alert("تمت الاضافة!" + JSON.stringify(furnishCategory))
             router.push(`/admin/propert-types/`)
           } catch (error) {
-            alert("Error creating furnishCategory " + JSON.stringify(error, null, 2))
+            alert("فشل في الاضافة")
           }
         }}
       />

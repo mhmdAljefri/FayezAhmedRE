@@ -5,7 +5,7 @@ import Form from "../Form"
 import { MenuField } from "app/admin/components/LabeledMenuField"
 import SubmitButton from "../SubmitButton"
 import DomainSlider from "../DomainSlider"
-import { City, Country, PropertyType } from "@prisma/client"
+import { City, Country, PropertyType, Purpose } from "@prisma/client"
 import { PROJECT_STATUS, PRICE_RANG, PRICE_RANG_QATAR } from "app/constants"
 import useOnClickout from "app/hooks/useOnClickout"
 import useScreenSize from "app/hooks/useScreenSize"
@@ -29,6 +29,7 @@ type filterProps = Pick<Country, "isTurkey" | "rooms"> & {
   initialValues?: filterValues
   cities: City[]
   propertyTypes: PropertyType[]
+  purposes: Purpose[]
 }
 
 export default function Filter({
@@ -37,6 +38,7 @@ export default function Filter({
   initialValues,
   rooms,
   isTurkey,
+  purposes,
   onFilter,
 }: filterProps) {
   const { open, setOpen, ref } = useOnClickout()
@@ -89,7 +91,9 @@ export default function Filter({
               name="city"
             />
             <MenuField
-              options={["شراء", "تاجير", "تجاري للبيع", "تجاري للايجار"]}
+              getLabel={(i) => i.name}
+              getValue={(i) => i.id}
+              options={purposes || []}
               emptyOptionText="الغرض"
               name="purpose"
             />
