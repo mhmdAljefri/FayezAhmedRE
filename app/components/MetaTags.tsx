@@ -1,20 +1,7 @@
 import { Head } from "blitz"
 import React from "react"
 
-let hydrated = false
-
 export default function MetaTags({ title }) {
-  const hydratedRef = React.useRef(false)
-  const [, rerender] = React.useState(false)
-
-  React.useEffect(() => {
-    if (!hydratedRef.current) {
-      hydrated = true
-      hydratedRef.current = true
-      rerender(true)
-    }
-  }, [])
-
   return (
     <Head>
       <meta charSet="utf-8" />
@@ -27,13 +14,6 @@ export default function MetaTags({ title }) {
       <title>{title}</title>
       {/* <!-- Manifest  --> */}
       <link rel="manifest" href="/manifest.json" />
-      {/* Google fonts preload */}
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500&display=swap"
-        rel="stylesheet"
-      ></link>
-      {/* End Google fonts */}
       <meta name="description" content="الموقع الرسمي لشركة فايز احمد العقارية" />
       <meta
         name="keywords"

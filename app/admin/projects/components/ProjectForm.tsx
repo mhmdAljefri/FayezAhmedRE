@@ -20,6 +20,7 @@ import UploadMainVideo from "./UploadMainVideo"
 import { PROJECT_STATUS, TURKEY_PROJECT_STATUS } from "app/constants"
 import PropertyTypesField from "./PropertyTypesField"
 import MapField from "app/admin/components/MapField"
+import PurposeField from "./PurposeField"
 
 type ProjectFormProps = {
   initialValues: any
@@ -173,6 +174,7 @@ const ProjectForm = ({ initialValues, onSubmit }: ProjectFormProps) => {
             </>
           )}
         />
+        <PurposeField />
         <SeaViewAndGrantedByGoveChekBoxs countries={countries} />
         <Field
           name="isHousingComplex"

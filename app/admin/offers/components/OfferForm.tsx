@@ -16,6 +16,7 @@ import UploadVideo from "./UploadVideo"
 import MapField from "app/admin/components/MapField"
 import UploadMainVideo from "./UploadMainVideo"
 import { CitiesListField } from "app/admin/projects/components/ProjectForm"
+import PurposeField from "./PurposeField"
 
 type OfferFormProps = {
   initialValues: any
@@ -93,6 +94,7 @@ const OfferForm = ({ initialValues, onSubmit }: OfferFormProps) => {
           label="الدولة"
           required
         />
+        <PurposeField />
         <CitiesListField />
         <ProjectsListField />
 

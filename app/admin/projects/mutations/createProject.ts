@@ -15,8 +15,10 @@ export default async function createProject(
 
   const cityId = (data as any).cityId
   const propertyTypeId = (data as any).propertyTypeId
+  const purposeId = (data as any).purposeId
   delete (data as any).cityId
   delete (data as any).propertyTypeId
+  delete (data as any).purposeId
 
   const project = await db.project.create({
     data: {
@@ -41,6 +43,11 @@ export default async function createProject(
       city: {
         connect: {
           id: parseInt(cityId),
+        },
+      },
+      purpose: {
+        connect: {
+          id: purposeId,
         },
       },
     },

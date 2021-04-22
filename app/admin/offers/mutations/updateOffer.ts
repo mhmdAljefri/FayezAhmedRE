@@ -10,8 +10,11 @@ export default async function updateOffer({ where, data, countryId }: UpdateOffe
 
   const projectId = parseInt((data as any).projectId)
   const cityId = parseInt((data as any).cityId)
+  const purposeId = parseInt((data as any).purposeId)
   delete (data as any).projectId
   delete (data as any).cityId
+  delete (data as any).purposeId
+
   if (projectId)
     data.project = {
       connect: { id: projectId },
@@ -31,6 +34,11 @@ export default async function updateOffer({ where, data, countryId }: UpdateOffe
       city: {
         connect: {
           id: cityId,
+        },
+      },
+      purpose: {
+        connect: {
+          id: purposeId,
         },
       },
     },

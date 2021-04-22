@@ -10,18 +10,6 @@ type CarouselFormProps = {
   onSubmit: (data: CarouselCreateInput) => Promise<any>
 }
 
-// model Carousel {
-//   id        Int      @default(autoincrement()) @id
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   position  Int      @unique @default(autoincrement())
-//   title     String
-//   text      String
-//   url       String
-//   image     String
-// }
-
 const CarouselForm = ({ initialValues, onSubmit }: CarouselFormProps) => {
   return (
     <Form initialValues={initialValues} onSubmit={onSubmit}>

@@ -16,8 +16,11 @@ export default async function updateProject(
   // todo fide new room and create it with relation
   const cityId = (data as any).cityId
   const propertyTypeId = (data as any).propertyTypeId
+  const purposeId = (data as any).purposeId
+
   delete (data as any).cityId
   delete (data as any).propertyTypeId
+  delete (data as any).purposeId
 
   const oldProject = await db.project.findFirst({ where, select: { roomsWithPrices: true } })
 
@@ -75,6 +78,11 @@ export default async function updateProject(
       },
       city: {
         connect: { id: parseInt(cityId) },
+      },
+      purpose: {
+        connect: {
+          id: purposeId,
+        },
       },
     },
   })
