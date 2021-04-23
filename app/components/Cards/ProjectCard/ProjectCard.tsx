@@ -135,11 +135,11 @@ function ProjectCard({
   roomsWithPrices,
   hasFav,
 }: ProjectCardProps) {
-  const { priceType, priceTypeSign } = usePriceType()
+  const { priceTypeSign } = usePriceType()
   const [selected, setSelected] = useState(roomsWithPrices[0])
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
 
-  const price = selected?.[priceType]
+  const price = selected?.priceQatar
   const projectPath = `/countries/${countryId}/projects/${id}`
   return (
     <Box

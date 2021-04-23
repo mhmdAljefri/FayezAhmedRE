@@ -40,6 +40,7 @@ import Skeleton from "react-loading-skeleton"
 import LazyLoad from "react-lazyload"
 import { AddProjectToFav } from "app/components/AddToFav"
 import SocialShare from "app/components/SocialShare"
+import CurrencyPrice from "app/components/CurrencyPrice"
 
 const GalleryViewSlider = dynamic(() => import("app/components/Sliders/GalleryViewSlider"), {
   ssr: false,
@@ -211,8 +212,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project: ssProject }) => {
                 {priceTypeSuffix}
               </Text>
               <Text sx={{ paddingY: 3, fontSize: 3 }}>
-                السعر يبداء من{" "}
-                <span>{numberFormat(parseInt(roomWithPrice?.[priceType] || ""))}</span>
+                السعر يبداء من <CurrencyPrice price={parseInt(roomWithPrice?.priceQatar)} />
               </Text>
             </Box>
             <Box sx={{ marginInlineEnd: 30, width: 250 }}>
