@@ -38,7 +38,6 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
   const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
   const [baseUrl, setBaseUrl] = useState<string>()
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "bottom-end",
     modifiers: [
       { name: "arrow", options: { element: arrowElement } },
       {

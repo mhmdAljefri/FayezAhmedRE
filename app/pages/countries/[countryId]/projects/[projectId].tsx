@@ -23,7 +23,6 @@ import Layout from "app/layouts/Layout"
 import { Box, Flex, Grid, Heading, Text, Link as ThemeLink } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 import Image from "app/components/Image"
-import { numberFormat } from "app/utils"
 import HTMLBox from "app/components/HTMLBox"
 import BigIconText from "app/components/BigIconBox"
 import { Swiper, SwiperSlide } from "app/components/Sliders/Swiper"
@@ -91,7 +90,7 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project: ssProject }) => {
     { initialData: ssProject }
   )
   const router = useRouter()
-  const { priceType, priceTypeSuffix } = usePriceType()
+  const { priceTypeSuffix } = usePriceType()
 
   useEffect(() => {
     if (project) updateProjectMutation({ where: { id: project.id } })
