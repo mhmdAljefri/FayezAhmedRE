@@ -81,7 +81,7 @@ export default async function updateProject(
       },
       purpose: {
         connect: {
-          id: purposeId,
+          id: parseInt(purposeId),
         },
       },
     },
