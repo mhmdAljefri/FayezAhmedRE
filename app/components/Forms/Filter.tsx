@@ -18,6 +18,7 @@ export type filterValues = {
   price?: number[]
   room?: number[] | string[]
   propertyType?: string
+  purpose?: number
   status?: string
   isHousingComplex?: "true" | "false"
   isGrantedByGov?: "true" | "false"
