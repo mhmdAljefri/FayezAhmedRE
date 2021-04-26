@@ -36,7 +36,12 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
   const [{ offers }] = useQuery(getOffers, {
     where: {
       OR: getSearchQuery(search, ["name", "subTitle"]),
-      purposeId: purpose,
+
+      purpose: {
+        id: {
+          equals: purpose ? parseInt(purpose) : undefined,
+        },
+      },
     },
   })
 
@@ -50,7 +55,12 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
       },
       // status: status!,
       city: { id: parseInt(city || "") || undefined },
-      purposeId: purpose,
+
+      purpose: {
+        id: {
+          equals: purpose ? parseInt(purpose) : undefined,
+        },
+      },
       roomsWithPrices: {
         some: {
           price: {

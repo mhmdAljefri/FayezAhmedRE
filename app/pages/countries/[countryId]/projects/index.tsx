@@ -90,7 +90,11 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             equals: propertyType ? parseInt(propertyType) : undefined,
           },
         },
-        purposeId: purpose,
+        purpose: {
+          id: {
+            equals: purpose ? parseInt(purpose) : undefined,
+          },
+        },
 
         status: status,
         //         propertyType
