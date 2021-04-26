@@ -84,7 +84,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           mt: 0,
           opacity: open ? 1 : 0,
           width: ["auto", 200, 300, 350],
-          display: "flex",
+          display: open ? "flex" : "none",
         }}
         {...attributes.popper}
       >
