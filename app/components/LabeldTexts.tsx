@@ -1,12 +1,11 @@
 import React from "react"
-import { Grid } from "theme-ui"
+import { Grid, Image } from "theme-ui"
 import OfferIconText from "app/components/OfferLabeldText"
 import { IoBed } from "@react-icons/all-files/io5/IoBed"
 
 import { FaHome } from "@react-icons/all-files/fa/FaHome"
 import { FaBath } from "@react-icons/all-files/fa/FaBath"
 import { ImFlag } from "@react-icons/all-files/im/ImFlag"
-import { BiArea } from "@react-icons/all-files/bi/BiArea"
 
 type Props = {
   propertyType?: null | string
@@ -60,7 +59,7 @@ export default function LabeldTexts({
         small={small}
         heading="مساحة العقار"
         text={areaSize}
-        icon={<BiArea size={size} />}
+        icon={<Image src="/icons/area.png" width={size} />}
       />
     </Grid>
   )

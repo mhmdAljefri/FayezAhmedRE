@@ -159,7 +159,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   while (exploresArray.length) explores.push(exploresArray.splice(0, 3))
 
   const handleFilter = (filter) => {
-    push({ pathname: `${asPath}/projects`, query: filter })
+    push({ pathname: `/search`, query: filter })
   }
 
   return (

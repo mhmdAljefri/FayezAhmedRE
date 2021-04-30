@@ -63,11 +63,11 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
       },
       roomsWithPrices: {
         some: {
-          price: {
+          priceQatar: {
             lt: price?.[1]?.toString() || undefined,
           },
           OR: {
-            price: {
+            priceQatar: {
               gt: price?.[0]?.toString() || undefined,
             },
           },

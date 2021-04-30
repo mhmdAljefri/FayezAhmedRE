@@ -260,71 +260,75 @@ const ProjectPage: BlitzPage<ProjectProps> = ({ project: ssProject }) => {
             </Grid>
           </Box>
         </Wrapper>
+
+        <GalleryViewSlider gallery={gallery} />
+
         <LazyLoad once offset={200}>
-          <GalleryViewSlider gallery={gallery} />
-        </LazyLoad>
-        <ConstractiongVideo
-          heading="فيديو المشروع"
-          constructingUpdatePrview={mainVideoPreview}
-          constructingUpdateVideo={mainVideo}
-        />
-        {[...floorplan].length > 0 && (
-          <Wrapper sx={{ marginY: 6 }}>
-            <Flex
-              sx={{ alignItems: "center", justifyContent: ["space-between", null, "flex-start"] }}
-            >
-              <Heading sx={{ fontSize: [5, null, 6] }}>المخططات</Heading>
+          <ConstractiongVideo
+            heading="فيديو المشروع"
+            constructingUpdatePrview={mainVideoPreview}
+            constructingUpdateVideo={mainVideo}
+          />
+
+          {[...floorplan].length > 0 && (
+            <Wrapper sx={{ marginY: 6 }}>
+              <Flex
+                sx={{ alignItems: "center", justifyContent: ["space-between", null, "flex-start"] }}
+              >
+                <Heading sx={{ fontSize: [5, null, 6] }}>المخططات</Heading>
+                <Box
+                  sx={{
+                    position: "relative",
+                    zIndex: 10,
+                    display: "flex",
+                    width: 150,
+                    pb: 4,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <ArrowRight className="floorplanArrowRight" />
+                  <ArrowLeft className="floorplanArrowLeft" />
+                </Box>
+              </Flex>
               <Box
                 sx={{
-                  position: "relative",
-                  zIndex: 10,
-                  display: "flex",
-                  width: 150,
-                  pb: 4,
-                  justifyContent: "space-between",
+                  ".swiper-slide": {
+                    width: "auto !important",
+                    marginInlineEnd: 10,
+                  },
                 }}
               >
-                <ArrowRight className="floorplanArrowRight" />
-                <ArrowLeft className="floorplanArrowLeft" />
+                <Swiper
+                  slidesPerView="auto"
+                  navigation={{
+                    nextEl: ".floorplanArrowRight",
+                    prevEl: ".floorplanArrowLeft",
+                  }}
+                >
+                  {floorplan.map((item, index) => (
+                    <SwiperSlide virtualIndex={index} key={item + "_" + index}>
+                      <Image
+                        imageMaxWidth={350}
+                        sx={{
+                          borderColor: "primary",
+                          objectFit: "cover",
+                          marginX: 2,
+                          borderWidth: 2,
+                          borderStyle: "solid",
+                          borderRadius: 15,
+                          boxShadow: "default",
+                          height: [200, 250],
+                        }}
+                        src={item}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </Box>
-            </Flex>
-            <Box
-              sx={{
-                ".swiper-slide": {
-                  width: "auto !important",
-                  marginInlineEnd: 10,
-                },
-              }}
-            >
-              <Swiper
-                slidesPerView="auto"
-                navigation={{
-                  nextEl: ".floorplanArrowRight",
-                  prevEl: ".floorplanArrowLeft",
-                }}
-              >
-                {floorplan.map((item, index) => (
-                  <SwiperSlide virtualIndex={index} key={item + "_" + index}>
-                    <Image
-                      imageMaxWidth={350}
-                      sx={{
-                        borderColor: "primary",
-                        objectFit: "cover",
-                        marginX: 2,
-                        borderWidth: 2,
-                        borderStyle: "solid",
-                        borderRadius: 15,
-                        boxShadow: "default",
-                        height: [200, 250],
-                      }}
-                      src={item}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
-          </Wrapper>
-        )}
+            </Wrapper>
+          )}
+        </LazyLoad>
+
         <Box sx={{ backgroundColor: "light", paddingY: 5 }}>
           {features?.length > 0 && (
             <Wrapper>

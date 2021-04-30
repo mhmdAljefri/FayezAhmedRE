@@ -92,10 +92,7 @@ export default function Footer() {
         <Box>
           <Heading sx={{ paddingBottom: 1 }}>تابعنا</Heading>
           <Flex sx={{ color: "primary", flexWrap: "wrap" }}>
-            <Icon
-              href="https://instagram.com/fayez_projects?igshid=1joclb832c6qt"
-              icon={instagram}
-            />
+            <Icon href="https://instagram.com/faa_grup" icon={instagram} />
             <Icon href="https://www.youtube.com/channel/UCtDgEC5W-5Rs8Wk8ecYs8NA" icon={youtube} />
             <Icon href="https://www.facebook.com/profile.php?id=100011271579057" icon={facebook} />
             <Icon href="https://twitter.com/fayez_projects" icon={twitter} />

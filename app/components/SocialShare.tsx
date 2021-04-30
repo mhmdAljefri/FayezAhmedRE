@@ -38,15 +38,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
   const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
   const [baseUrl, setBaseUrl] = useState<string>()
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [
-      { name: "arrow", options: { element: arrowElement } },
-      {
-        name: "preventOverflow",
-        options: {
-          padding: 20,
-        },
-      },
-    ],
+    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
   })
 
   const url = baseUrl + pathname
@@ -84,7 +76,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           mt: 0,
           opacity: open ? 1 : 0,
           width: ["auto", 200, 300, 350],
-          display: open ? "flex" : "none",
+          visibility: open ? "visible" : "hidden",
         }}
         {...attributes.popper}
       >
