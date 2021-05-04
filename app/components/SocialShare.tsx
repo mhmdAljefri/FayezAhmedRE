@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { shareSquareO } from "react-icons-kit/fa/shareSquareO"
 import { telegram } from "react-icons-kit/fa/telegram"
 import { whatsapp } from "react-icons-kit/fa/whatsapp"
-import { Button, Flex, Link } from "theme-ui"
-import { usePopper } from "react-popper"
+import { Button, Flex, Link, Box } from "theme-ui"
 import IconWithText from "app/components/IconWithText"
 import CopyToClipboard from "app/components/CopyToClipboard"
 import useOnClickOutside from "app/hooks/useOnClickout"
@@ -33,19 +32,7 @@ type Props = {
 
 export default function SocialShare({ url: pathname, title, sx }: Props) {
   const { ref, open, setOpen } = useOnClickOutside(false)
-  const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
-  const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
   const [baseUrl, setBaseUrl] = useState<string>()
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "bottom-end",
-    modifiers: [
-      {
-        name: "preventOverflow",
-      },
-      { name: "arrow", options: { element: arrowElement } },
-    ],
-  })
 
   const url = baseUrl + pathname
   const whatsappLink = useMemo(() => whatsappPreFilledLinkGenerator(url), [url])
@@ -59,20 +46,17 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
   }, [])
 
   return (
-    <>
+    <Box ref={ref} sx={{ position: "relative", display: "inline-block" }}>
       <Button
         sx={{ ...sx, backgroundColor: "background", color: "text", boxShadow: "default" }}
         onClick={togglePopper}
-        ref={setReferenceElement}
       >
-        <span ref={ref}>
-          <Icon size={18} icon={shareSquareO} />
-        </span>
+        <Icon size={18} icon={shareSquareO} />
       </Button>
       <Flex
-        ref={setPopperElement}
         sx={{
-          ...styles.popper,
+          position: "absolute",
+          top: 50,
           backgroundColor: "background",
           justifyContent: "center",
           flexDirection: ["column", null, "row"],
@@ -84,7 +68,6 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           width: ["auto", 200, 300, 350],
           visibility: open ? "visible" : "hidden",
         }}
-        {...attributes.popper}
       >
         <Link
           sx={{ textDecoration: "none", color: "text", my: 1 }}
@@ -103,9 +86,7 @@ export default function SocialShare({ url: pathname, title, sx }: Props) {
           <IconWithText icon={telegram} text="تليجرام" />
         </Link>
         <CopyToClipboard text={url} />
-
-        <div ref={setArrowElement} style={styles.arrow} />
       </Flex>
-    </>
+    </Box>
   )
 }
