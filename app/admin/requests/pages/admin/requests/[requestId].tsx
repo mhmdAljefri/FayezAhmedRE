@@ -48,6 +48,11 @@ export const Request = () => {
         label="تاريخ الطلب"
         text={new Intl.DateTimeFormat("en-US").format(request.createdAt)}
       />
+      {request.type === "enquire" && (
+        <>
+          <TextWithLabel label="التفاصيل" text={data.description} />
+        </>
+      )}
       {request.type === "consultings" && (
         <>
           <TextWithLabel label="التفاصيل" text={data.description} />

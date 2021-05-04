@@ -21,7 +21,7 @@ import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
 import Filter, { filterValues } from "app/components/Forms/Filter"
 import FetchMoreButton from "app/components/FetchMoreButton"
 import getProjectsInfinite from "app/public/projects/queries/getInfiniteProjects"
-import { getSearchQuery, getListOfPrice } from "app/utils"
+import { getSearchQuery } from "app/utils"
 
 export async function getStaticPaths() {
   const { countries } = await getCountries({})
@@ -87,7 +87,10 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         OR: getSearchQuery(search, ["name", "subTitle"]),
         propertyType: {
           id: {
-            equals: propertyType ? parseInt(propertyType) : undefined,
+            equals:
+              propertyType && !Number.isNaN(parseInt(propertyType))
+                ? parseInt(propertyType)
+                : undefined,
           },
         },
         purpose: {
@@ -157,13 +160,7 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           rooms={country.rooms}
           cities={country.cities}
           onFilter={(data) => {
-            const getList = getListOfPrice(data.price) // wtf
-            const newData = {
-              ...data,
-              price: getList,
-            }
-
-            filterRef.current = newData
+            filterRef.current = data
             refetch()
           }}
         />

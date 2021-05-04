@@ -157,8 +157,10 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             </Heading>
           )}
 
-          <LabeldTexts small={false} {...offer} city={offer.city?.name} />
-          <Heading sx={{ mt: 4 }}>الوصف</Heading>
+          <Box mt={4}>
+            <LabeldTexts small={false} {...offer} city={offer.city?.name} />
+          </Box>
+          <Heading sx={{ mt: 5 }}>الوصف</Heading>
           <HTMLBox html={offer.details} />
         </Wrapper>
       </Box>

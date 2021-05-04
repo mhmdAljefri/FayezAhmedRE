@@ -59,7 +59,7 @@ export default function LabeldTexts({
         small={small}
         heading="مساحة العقار"
         text={areaSize}
-        icon={<Image src="/icons/area.png" width={size} />}
+        icon={<Image src="/icons/area.png" sx={{ maxHeight: size }} width={size} />}
       />
     </Grid>
   )

@@ -1,10 +1,11 @@
 import { Suspense, useState } from "react"
 import AdminLayout from "app/layouts/AdminLayout"
-import { usePaginatedQuery, useRouter, BlitzPage, Link } from "blitz"
+import { usePaginatedQuery, useRouter, BlitzPage, Link, useMutation } from "blitz"
 import getRequests from "app/admin/requests/queries/getRequests"
 import DynamicTable from "app/components/Tables/DynamicTable"
 import { Request } from "@prisma/client"
 import { Badge, Box, Button, Flex, Text } from "theme-ui"
+import deleteRequest from "app/admin/requests/mutations/deleteRequest"
 
 const ITEMS_PER_PAGE = 100
 
@@ -13,24 +14,27 @@ const translations = {
   consultings: "الاستشارات",
   flights: "الطيران",
   hotels: "الفنادق",
+  enquire: "التواصل",
 }
 
 export const RequestsList = () => {
   const router = useRouter()
   const [type, setType] = useState<Request["type"]>("consultings")
   const page = Number(router.query.page) || 0
-  const [{ requests, hasMore }] = usePaginatedQuery(getRequests, {
+  const [{ requests, hasMore }, { refetch }] = usePaginatedQuery(getRequests, {
     orderBy: { id: "desc" },
     where: { type },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
   })
+  const [deleteRequestMutation] = useMutation(deleteRequest)
 
   const [{ requests: allRequests }] = usePaginatedQuery(getRequests, {
     orderBy: { id: "desc" },
   })
 
-  const types: Request["type"][] = ["cars", "consultings", "flights", "hotels"]
+  const types: Request["type"][] = ["consultings", "enquire"]
+  const handleDelete = (id) => deleteRequestMutation({ where: { id } }).then(() => refetch())
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
@@ -82,6 +86,9 @@ export const RequestsList = () => {
                 <Link href={`${router.asPath}/${id}`}>
                   <Button variant="link">التفاصيل</Button>
                 </Link>
+                <Button sx={{ cursor: "pointer" }} onClick={() => handleDelete(id)} variant="link">
+                  حذف
+                </Button>
               </Flex>
             ),
           },

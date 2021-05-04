@@ -32,8 +32,8 @@ export function getSearchQuery(search: string | undefined, keys: string[]) {
 
 export const getListOfPrice = (price?: number[]): number[] => {
   if (!price) return []
-  const arr = price.toString().split(",") // wtf
-  const firstPrice = parseInt(arr[0], 10)
-  const lastPrice = parseInt(arr[0], 10)
-  return [firstPrice, lastPrice]
+  const [firstPrice, lastPrice] = price.toString().split(",") // wtf
+  if (isNaN(parseInt(firstPrice, 10))) return []
+
+  return [parseInt(firstPrice, 10), parseInt(lastPrice, 10)]
 }

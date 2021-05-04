@@ -31,8 +31,13 @@ type SearchProps = InferGetStaticPropsType<typeof getStaticProps>
 const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) => {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
-  const { search, city, price, propertyType, purpose } = filterRef.current || {}
+  const { search, room, city, price, propertyType, purpose } = filterRef.current || {}
 
+  console.log({
+    ...room?.map((roomSize) => ({
+      room: `${roomSize}`,
+    })),
+  })
   const [{ offers }] = useQuery(getOffers, {
     where: {
       OR: getSearchQuery(search, ["name", "subTitle"]),
@@ -65,12 +70,9 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
         some: {
           priceQatar: {
             lt: price?.[1]?.toString() || undefined,
+            gte: price?.[0]?.toString() || undefined,
           },
-          OR: {
-            priceQatar: {
-              gt: price?.[0]?.toString() || undefined,
-            },
-          },
+          OR: getSearchQuery(room?.join(" "), ["room"]),
         },
       },
     },

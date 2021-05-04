@@ -10,6 +10,7 @@ import { PROJECT_STATUS, PRICE_RANG, PRICE_RANG_QATAR } from "app/constants"
 import useOnClickout from "app/hooks/useOnClickout"
 import useScreenSize from "app/hooks/useScreenSize"
 import Burger from "../Burger"
+import { getListOfPrice } from "app/utils"
 
 export type filterValues = {
   search?: string
@@ -46,9 +47,24 @@ export default function Filter({
   const screenSize = useScreenSize()
   const isSmall = screenSize <= 800
 
-  const sortedRooms = isTurkey ? [] : rooms?.map((item) => parseInt(item)).sort()
-
   if (!rooms) return null
+
+  const sortedRooms = isTurkey ? [] : rooms?.map((item) => parseInt(item, 10)).sort((a, b) => a - b)
+
+  // handlers
+  const handleSubmit = (data) => {
+    const listofPrices = getListOfPrice(data.price) // wtf
+    const roomsRange = getRoomsRange(data.room, sortedRooms)
+
+    const newData = {
+      ...data,
+      price: listofPrices,
+      room: roomsRange,
+    }
+
+    onFilter(newData)
+  }
+
   return (
     <Box
       className="animate__animated animate__fadeInUp animate__slow"
@@ -75,7 +91,7 @@ export default function Filter({
         )}
       </Flex>
 
-      <Form initialValues={initialValues} onSubmit={onFilter}>
+      <Form initialValues={initialValues} onSubmit={handleSubmit}>
         <Box sx={{ display: isSmall && !open ? "none" : "block" }}>
           <Grid columns={[1, null, 3]}>
             <Field
@@ -113,7 +129,7 @@ export default function Filter({
                 <Field
                   name="room"
                   sx={{ backgroundColor: "white" }}
-                  defaultValue={[sortedRooms[0], sortedRooms[sortedRooms.length - 1]]}
+                  defaultValue={[sortedRooms[0], sortedRooms[sortedRooms.length - 1]].reverse()}
                   render={({ input }) => (
                     <DomainSlider
                       {...input}
@@ -123,7 +139,7 @@ export default function Filter({
                   )}
                 />
               </Box>
-            )}{" "}
+            )}
             <MenuField
               emptyOptionText="السعر بالريال القطري"
               getLabel={(i) => i.name}
@@ -156,4 +172,14 @@ export default function Filter({
       </Form>
     </Box>
   )
+}
+
+const getRoomsRange = (filterRooms: number[], dbRooms: number[]) => {
+  // array revers from domain comp..
+  const startIndex = dbRooms.findIndex((i) => i === filterRooms[1])
+  const endIndex = dbRooms.findIndex((i) => i === filterRooms[0])
+
+  const filteredRooms = dbRooms.slice(startIndex, endIndex + 1)
+
+  return filteredRooms
 }
