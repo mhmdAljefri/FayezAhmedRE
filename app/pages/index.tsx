@@ -199,7 +199,7 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           href={`${asPath}/projects`}
           heading="مشاريعنا"
         />
-        <Text sx={{ mb: 3, pb: 4, fontSize: 2 }}>منزلك الجديد بانتظارك</Text>
+        <Heading sx={{ mb: 3, pb: 4, fontSize: 2 }}>منزلك الجديد بانتظارك</Heading>
         <CitiesFilter
           selected={selected}
           onClick={(city) => setSelected({ name: city.name, id: city.id })}
