@@ -18,6 +18,7 @@ export type filterValues = {
   type?: string
   price?: number[]
   room?: number[] | string[]
+  rooms?: number[] | string[] // progrmatically add on submit
   propertyType?: string
   purpose?: string
   status?: string
@@ -59,7 +60,7 @@ export default function Filter({
     const newData = {
       ...data,
       price: listofPrices,
-      room: roomsRange,
+      rooms: roomsRange,
     }
 
     onFilter(newData)

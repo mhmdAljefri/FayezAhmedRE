@@ -69,7 +69,7 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const countryId = parseInt(useParam("countryId") as string)
-  const { search, city, price, purpose, propertyType, status } = filterRef.current || {}
+  const { search, city, rooms, price, purpose, propertyType, status } = filterRef.current || {}
   const [{ propertyTypes }] = useQuery(getPropertyTypes, {})
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
   const [
@@ -113,11 +113,14 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             priceQatar: {
               lt: price?.[1]?.toString() || undefined,
             },
-            OR: {
-              priceQatar: {
-                gt: price?.[0]?.toString() || undefined,
+            OR: [
+              ...getSearchQuery(rooms?.join(" "), ["room"]),
+              {
+                priceQatar: {
+                  gte: price?.[0]?.toString() || undefined,
+                },
               },
-            },
+            ],
           },
         },
       },
