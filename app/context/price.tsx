@@ -3,7 +3,7 @@ import { prices } from "../components/PriceType"
 
 export type priceTypes =
   | "price"
-  | "priceQatar"
+  | "roomPrice"
   | "priceTurkey"
   | "priceKSA"
   | "priceKuwait"
@@ -21,7 +21,7 @@ export const PriceContext = React.createContext<{
   changePriceType: (priceTypeValue: priceTypes) => any
   changeRates?: (arg: Rates) => any
 }>({
-  priceType: "priceQatar",
+  priceType: "roomPrice",
   priceTypeSign: "$",
   priceTypeSuffix: "ريال قطري",
   changePriceType: (arg: priceTypes) => {},
@@ -30,7 +30,7 @@ export const PriceContext = React.createContext<{
 
 function getPriceTypeSuffix(priceType: priceTypes) {
   switch (priceType) {
-    case "priceQatar":
+    case "roomPrice":
       return "ريال قطري"
     case "priceKSA":
       return "ريال سعودي"
@@ -57,7 +57,7 @@ type Props = {
   price: priceTypes
   children: ReactNode
 }
-export default function PriceProvider({ price = "priceQatar", ...props }: Props) {
+export default function PriceProvider({ price = "roomPrice", ...props }: Props) {
   const [priceType, setPriceType] = useState<priceTypes>(price)
   const [rates, setRates] = useState<Rates | undefined>()
 

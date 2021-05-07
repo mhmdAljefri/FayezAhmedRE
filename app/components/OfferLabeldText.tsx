@@ -15,7 +15,7 @@ const OfferIconText = ({ small = false, icon, heading, text }: OfferIconTextProp
       {icon}
       <Box sx={{ px: 2, mt: 1 }}>
         {!small && <Heading sx={{ fontSize: 3 }}>{heading}</Heading>}
-        <Text>{text}</Text>
+        <Text sx={{ textAlign: small ? "center" : "start" }}>{text}</Text>
       </Box>
     </Flex>
   ) : null

@@ -139,7 +139,7 @@ function ProjectCard({
   const [selected, setSelected] = useState(roomsWithPrices[0])
   const statusText = TURKEY_PROJECT_STATUS.find(({ id }) => id === status)?.name
 
-  const price = selected?.priceQatar
+  const price = selected?.roomPrice
   const projectPath = `/countries/${countryId}/projects/${id}`
   return (
     <Box
@@ -182,9 +182,7 @@ function ProjectCard({
           )}
           <ProjectCardIconsText
             sx={{ color: "primary", fontSize: [2], fontWeight: 700 }}
-            text={
-              <span>تبدا من {price ? <CurrencyPrice price={parseInt(price, 10)} /> : "-"}</span>
-            }
+            text={<span>تبدا من {price ? <CurrencyPrice price={price} /> : "-"}</span>}
             prefix={priceTypeSign}
           />
         </Flex>

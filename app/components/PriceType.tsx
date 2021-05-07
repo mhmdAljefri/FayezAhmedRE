@@ -10,7 +10,7 @@ type PriceTypeProps = {
 
 export const prices = [
   ["price", "/icons/united-states.png", "دولار امريكي", "$"],
-  ["priceQatar", "/icons/qatar.png", "ريال قطري", "QAR"],
+  ["roomPrice", "/icons/qatar.png", "ريال قطري", "QAR"],
   ["priceTurkey", "/icons/turkey.png", "ليرة تركية", "LT"],
   ["priceKSA", "/icons/saudi-arabia.png", "ريال سعودي", "SAR"],
   ["priceKuwait", "/icons/kuwait.png", "دينار كويتي", "KWD"],

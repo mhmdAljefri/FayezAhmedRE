@@ -1,4 +1,4 @@
-import db from "./index"
+import prisma from "db"
 
 /*
  * This seed function is executed when you run `blitz db seed`.
@@ -8,63 +8,16 @@ import db from "./index"
  * realistic data.
  */
 
-const COUNTRIES = [
-  {
-    name: "تركيا",
-    nameEN: "turkey",
-    rooms: [
-      "0 + 1",
-      "1 + 1",
-      "2 + 1",
-      "3 + 1",
-      "4 + 1",
-      "5 + 1",
-      "3 + 2",
-      "4 + 2",
-      "5 + 2",
-      "6 + 2",
-    ],
-    image: "https://res.cloudinary.com/dco7dcmbq/image/upload/v1606724914/istanbul_r7phsu.jpg",
-    isTurkey: true,
-  },
-  {
-    name: "قطر",
-    nameEN: "qatar",
-    isTurkey: false,
-    image:
-      "https://res.cloudinary.com/dco7dcmbq/image/upload/v1606724974/http_3A_2F_2Fcom.ft.imagepublish.upp-prod-us.s3.amazonaws_zof7jm.jpg",
-    rooms: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  },
-]
 const seed = async () => {
-  for (let i = 0; i < COUNTRIES.length; i++) {
-    const { name, nameEN, image, rooms, isTurkey } = COUNTRIES[i]
-    try {
-      await db.country.create({
-        data: {
-          isTurkey,
-          nameEN,
-          name,
-          image,
-          rooms,
-        },
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  const rooms = await prisma.roomWithPrice.findMany({})
+  console.log(rooms.length)
 
-  const countries = await db.country.findMany({})
-  countries.forEach(async ({ id, carouselImages }) => {
-    await db.country.update({
-      where: {
-        id,
-      },
+  rooms.forEach(async (room) => {
+    console.log(typeof room.priceQatar, typeof room.roomPrice)
+    await prisma.roomWithPrice.update({
+      where: { id: room.id },
       data: {
-        carousel: carouselImages.map((image) => ({
-          image: image,
-          url: image,
-        })),
+        roomPrice: parseInt(room.priceQatar || "0", 10),
       },
     })
   })

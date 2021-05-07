@@ -28,7 +28,7 @@ export default function RoomsField(props) {
                   <LabeledTextField
                     type="number"
                     required
-                    name={`${name}.priceQatar`}
+                    name={`${name}.roomPrice`}
                     label="القيمة المبدئية ريال قطري"
                   />
                 </Grid>

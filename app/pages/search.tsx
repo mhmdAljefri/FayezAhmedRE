@@ -31,7 +31,7 @@ type SearchProps = InferGetStaticPropsType<typeof getStaticProps>
 const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) => {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
-  const { search, rooms, city, price, propertyType, purpose } = filterRef.current || {}
+  const { search, city, price, propertyType, purpose } = filterRef.current || {}
 
   const [{ offers }] = useQuery(getOffers, {
     where: {
@@ -63,9 +63,9 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
       },
       roomsWithPrices: {
         some: {
-          priceQatar: {
-            lt: price?.[1]?.toString() || undefined,
-            gte: price?.[0]?.toString() || undefined,
+          roomPrice: {
+            lte: price?.[1] || undefined,
+            gte: price?.[0] || undefined,
           },
         },
       },

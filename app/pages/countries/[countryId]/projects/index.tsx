@@ -110,9 +110,9 @@ const Projects: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         },
         roomsWithPrices: {
           some: {
-            priceQatar: {
-              lt: price?.[1]?.toString() || undefined,
-              gte: price?.[0]?.toString() || undefined,
+            roomPrice: {
+              gte: price?.[0] || undefined,
+              lte: price?.[1] || undefined,
             },
           },
         },

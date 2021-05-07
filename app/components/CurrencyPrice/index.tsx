@@ -10,7 +10,7 @@ type Props = {
 export default function CurrencyPrice({ price }: Props) {
   const { priceType, rates } = usePriceType()
   const priceTypeRate: Record<priceTypes, RateKeys> = {
-    priceQatar: "QAR",
+    roomPrice: "QAR",
     price: "USD",
     priceOman: "OMR",
     priceKuwait: "KWD",

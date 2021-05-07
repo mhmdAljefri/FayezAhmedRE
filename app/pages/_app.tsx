@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <Suspense fallback={<FullpageLoader />}>
-        <PriceProvider price={"priceQatar"}>
+        <PriceProvider price={"roomPrice"}>
           <>
             <ToastContainer />
 
