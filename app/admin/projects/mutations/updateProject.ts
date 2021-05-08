@@ -67,9 +67,9 @@ export default async function updateProject(
       },
       roomsWithPrices: {
         delete: removableOldRoomsIds.map((id) => ({ id })),
-        update: oldRooms.map(({ id, projectId: _unusedParamater, ...rest }) => ({
+        update: oldRooms.map(({ id, projectId: _unusedParamater, roomPrice, ...rest }) => ({
           where: { id },
-          data: { ...rest },
+          data: { ...rest, roomPrice: parseFloat(roomPrice as any) },
         })),
         create: newRooms,
       },

@@ -33,7 +33,10 @@ export default async function createProject(
         },
       },
       roomsWithPrices: {
-        create: roomsWithPrices,
+        create: roomsWithPrices?.map(({ roomPrice, ...rest }) => ({
+          roomPrice: parseFloat(roomPrice as any),
+          ...rest,
+        })),
       },
       country: {
         connect: {

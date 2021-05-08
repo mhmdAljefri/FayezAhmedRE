@@ -7,7 +7,7 @@ type GetProjectsInfiniteInput = Pick<
 >
 
 export default async function getInfiniteOffersI(
-  { where, orderBy, take, skip }: GetProjectsInfiniteInput,
+  { where, orderBy = { createdAt: "desc" }, take, skip }: GetProjectsInfiniteInput,
   ctx: Ctx
 ) {
   const userId = ctx?.session?.userId
