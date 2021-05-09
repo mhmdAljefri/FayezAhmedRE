@@ -18,7 +18,11 @@ export default async function getProjectsInfinite(
     take,
     skip,
     include: {
-      roomsWithPrices: true,
+      roomsWithPrices: {
+        orderBy: {
+          roomPrice: "asc",
+        },
+      },
       users: true,
     },
   })

@@ -202,7 +202,8 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             <ThemeLink
               sx={{
                 variant: "links.outline",
-                marginY: 4,
+                marginBottom: 4,
+                marginTop: 2,
                 marginX: "auto",
                 textDecoration: "none",
                 fontWeight: 700,

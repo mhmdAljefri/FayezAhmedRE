@@ -26,6 +26,11 @@ export default async function getProjects(
     take,
     include: {
       users: true,
+      roomsWithPrices: {
+        orderBy: {
+          roomPrice: "asc",
+        },
+      },
       ...include,
     },
     skip,
