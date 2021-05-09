@@ -17,6 +17,7 @@ export default async function getInfiniteOffersI(
     take,
     include: {
       users: true,
+      city: true,
     },
     skip,
   })

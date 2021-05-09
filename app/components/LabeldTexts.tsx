@@ -59,6 +59,7 @@ export default function LabeldTexts({
         small={small}
         heading="مساحة العقار"
         text={areaSize}
+        keepWord
         icon={<Image src="/icons/area.png" sx={{ maxHeight: size }} width={size} />}
       />
     </Grid>

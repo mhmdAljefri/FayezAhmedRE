@@ -144,7 +144,7 @@ const WhatsNew: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ o
             )}
           </Box>
         </Wrapper>
-        <Wrapper sx={{ paddingY: 5 }}>
+        <Wrapper sx={{ paddingTop: 5, paddingBottom: 3 }}>
           <Heading as="h1" sx={{ fontSize: [5, 6], fontWeight: 700, textAlign: "center" }}>
             {offer.name}
           </Heading>

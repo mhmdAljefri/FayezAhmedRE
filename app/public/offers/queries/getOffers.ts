@@ -7,7 +7,7 @@ type GetOffersInput = Pick<
 >
 
 export default async function getOffers(
-  { where, include, orderBy, skip = 0, take }: GetOffersInput,
+  { where, include, orderBy = { createdAt: "desc" }, skip = 0, take }: GetOffersInput,
   ctx?: Ctx
 ) {
   const userId = ctx?.session?.userId

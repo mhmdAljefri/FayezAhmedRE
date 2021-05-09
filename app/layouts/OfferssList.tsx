@@ -59,7 +59,7 @@ export default function OffersList({ name, details, country, offers }: OfferList
             {groupedOffers.map((group, i) => (
               <React.Fragment key={i}>
                 {group.offers.map((offer) => (
-                  <OfferCard hideOfferLabel {...offer} key={offer.id} />
+                  <OfferCard hideOfferLabel {...offer} city={offer.city!} key={offer.id} />
                 ))}
               </React.Fragment>
             ))}
