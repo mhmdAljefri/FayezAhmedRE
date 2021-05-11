@@ -39,7 +39,22 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
 
       purpose: {
         id: {
-          equals: purpose ? parseInt(purpose) : undefined,
+          equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
+        },
+      },
+      project: {
+        propertyType: {
+          id: {
+            equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
+          },
+        },
+        roomsWithPrices: {
+          some: {
+            roomPrice: {
+              lte: price?.[1] || undefined,
+              gte: price?.[0] || undefined,
+            },
+          },
         },
       },
     },
@@ -50,7 +65,7 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
       OR: getSearchQuery(search, ["name", "subTitle"]),
       propertyType: {
         id: {
-          equals: propertyType ? parseInt(propertyType) : undefined,
+          equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
         },
       },
       // status: status!,
