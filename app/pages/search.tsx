@@ -12,6 +12,7 @@ import getCountry from "app/public/countries/queries/getCountry"
 import getOffers from "app/public/offers/queries/getOffers"
 import { getSearchQuery, getListOfPrice } from "app/utils"
 import getPurposes from "app/public/purposes/queries/getPurposes"
+import { STATUS } from "db"
 
 export const getStaticProps = async (context) => {
   const { propertyTypes } = await getPropertyTypes({})
@@ -31,30 +32,35 @@ type SearchProps = InferGetStaticPropsType<typeof getStaticProps>
 const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) => {
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
-  const { search, city, price, propertyType, purpose } = filterRef.current || {}
+  const { search, city, status, price, propertyType, purpose } = filterRef.current || {}
 
   const [{ offers }] = useQuery(getOffers, {
     where: {
-      OR: getSearchQuery(search, ["name", "subTitle"]),
+      OR: [...getSearchQuery(search, ["name", "subTitle"])],
 
-      purpose: {
-        id: {
-          equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
-        },
-      },
+      city: { id: parseInt(city || "") || undefined },
       project: {
         propertyType: {
           id: {
             equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
           },
         },
+        city: { id: parseInt(city || "") || undefined },
         roomsWithPrices: {
           some: {
             roomPrice: {
-              lte: price?.[1] || undefined,
-              gte: price?.[0] || undefined,
+              lte: parseInt(`${price?.[1]}`) || undefined,
+              gte: parseInt(`${price?.[0]}`) || undefined,
             },
           },
+        },
+      },
+      status: {
+        equals: status! as STATUS,
+      },
+      purpose: {
+        id: {
+          equals: purpose && parseInt(purpose) ? parseInt(purpose) : undefined,
         },
       },
     },
@@ -68,19 +74,21 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
           equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
         },
       },
-      // status: status!,
+      status: {
+        equals: status! as STATUS,
+      },
       city: { id: parseInt(city || "") || undefined },
 
       purpose: {
         id: {
-          equals: purpose ? parseInt(purpose) : undefined,
+          equals: purpose && parseInt(purpose) ? parseInt(purpose) : undefined,
         },
       },
       roomsWithPrices: {
         some: {
           roomPrice: {
-            lte: price?.[1] || undefined,
-            gte: price?.[0] || undefined,
+            lte: parseFloat(`${price?.[1]}`) || undefined,
+            gte: parseFloat(`${price?.[0]}`) || undefined,
           },
         },
       },
@@ -125,13 +133,15 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
                 sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}
               >
                 <Box sx={{ width: ["100%", 200], boxShadow: "card" }}>
-                  <Image
-                    sx={{
-                      objectFit: "cover",
-                    }}
-                    src={item.image as string}
-                    alt={item.name}
-                  />
+                  {item.image && (
+                    <Image
+                      sx={{
+                        objectFit: "cover",
+                      }}
+                      src={item.image as string}
+                      alt={item.name}
+                    />
+                  )}
                 </Box>
                 <Flex
                   sx={{
