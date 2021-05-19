@@ -35,6 +35,7 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
   const filter = useRouterQuery()
   const filterRef = useRef<filterValues>(filter)
   const { search, city, status, price, propertyType, purpose } = filterRef.current || {}
+  const propertyTypeObj = propertyTypes.find(({ id }) => id === parseInt(propertyType || ""))
 
   const canFilterWithProject = price?.[1] && price?.[0]
 
@@ -61,6 +62,9 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
 
       status: {
         equals: status! as STATUS,
+      },
+      propertyType: {
+        contains: propertyTypeObj?.name,
       },
       purpose: {
         id: {
@@ -135,7 +139,14 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
               return <ProjectCard key={`proj-${item.id}`} {...item} />
             })}
             {offers.map((item) => {
-              return <OfferCard key={`offer-${item.id}`} {...item} city={item.city!} />
+              return (
+                <OfferCard
+                  prefixPath={`countries/2/offers/`}
+                  key={`offer-${item.id}`}
+                  {...item}
+                  city={item.city!}
+                />
+              )
             })}
           </Grid>
         </Box>
