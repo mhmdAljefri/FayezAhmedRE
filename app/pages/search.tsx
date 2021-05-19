@@ -36,8 +36,7 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
   const filterRef = useRef<filterValues>(filter)
   const { search, city, status, price, propertyType, purpose } = filterRef.current || {}
 
-  const canFilterWithProject =
-    (propertyType && parseInt(propertyType)) || (price?.[1] && price?.[0])
+  const canFilterWithProject = price?.[1] && price?.[0]
 
   const [{ offers }] = useQuery(getOffers, {
     include: {
@@ -49,11 +48,6 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
       city: { id: parseInt(city || "") || undefined },
       project: canFilterWithProject
         ? {
-            propertyType: {
-              id: {
-                equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
-              },
-            },
             roomsWithPrices: {
               some: {
                 roomPrice: {
@@ -64,6 +58,7 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
             },
           }
         : undefined,
+
       status: {
         equals: status! as STATUS,
       },
