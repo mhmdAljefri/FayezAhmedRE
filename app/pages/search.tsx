@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import Wrapper from "app/components/Wrapper"
 import Layout from "app/layouts/Layout"
 import { BlitzPage, Link, useQuery, useRouterQuery, InferGetStaticPropsType } from "blitz"
-import { Box, Flex, Link as ThemeLink, Heading, Text } from "theme-ui"
+import { Box, Flex, Link as ThemeLink, Heading, Text, Grid } from "theme-ui"
 import getProjects from "app/public/projects/queries/getProjects"
 import ArrowIcon from "app/components/ArrowIcon"
 import Image from "app/components/Image"
@@ -13,6 +13,8 @@ import getOffers from "app/public/offers/queries/getOffers"
 import { getSearchQuery, getListOfPrice } from "app/utils"
 import getPurposes from "app/public/purposes/queries/getPurposes"
 import { STATUS } from "db"
+import ProjectCard from "app/components/Cards/ProjectCard"
+import OfferCard from "app/components/Cards/OfferCard"
 
 export const getStaticProps = async (context) => {
   const { propertyTypes } = await getPropertyTypes({})
@@ -34,27 +36,34 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
   const filterRef = useRef<filterValues>(filter)
   const { search, city, status, price, propertyType, purpose } = filterRef.current || {}
 
+  const canFilterWithProject =
+    (propertyType && parseInt(propertyType)) || (price?.[1] && price?.[0])
+
   const [{ offers }] = useQuery(getOffers, {
+    include: {
+      city: true,
+    },
     where: {
-      OR: [...getSearchQuery(search, ["name", "subTitle"])],
+      OR: getSearchQuery(search, ["name", "subTitle"]),
 
       city: { id: parseInt(city || "") || undefined },
-      project: {
-        propertyType: {
-          id: {
-            equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
-          },
-        },
-        city: { id: parseInt(city || "") || undefined },
-        roomsWithPrices: {
-          some: {
-            roomPrice: {
-              lte: parseInt(`${price?.[1]}`) || undefined,
-              gte: parseInt(`${price?.[0]}`) || undefined,
+      project: canFilterWithProject
+        ? {
+            propertyType: {
+              id: {
+                equals: propertyType && parseInt(propertyType) ? parseInt(propertyType) : undefined,
+              },
             },
-          },
-        },
-      },
+            roomsWithPrices: {
+              some: {
+                roomPrice: {
+                  lte: parseInt(`${price?.[1]}`) || undefined,
+                  gte: parseInt(`${price?.[0]}`) || undefined,
+                },
+              },
+            },
+          }
+        : undefined,
       status: {
         equals: status! as STATUS,
       },
@@ -126,66 +135,14 @@ const Search: BlitzPage<SearchProps> = ({ propertyTypes, purposes, country }) =>
               <Text sx={{ fontSize: 5, paddingY: 5 }}>لا توجد بيانات مطابقة لعملية البحث!</Text>
             </Box>
           )}
-          {[...projects, ...offers].map((item) => {
-            return (
-              <Flex
-                key={item.id}
-                sx={{ maxWidth: 500, margin: 3, flexWrap: "wrap", alignItems: "flex-start" }}
-              >
-                <Box sx={{ width: ["100%", 200], boxShadow: "card" }}>
-                  {item.image && (
-                    <Image
-                      sx={{
-                        objectFit: "cover",
-                      }}
-                      src={item.image as string}
-                      alt={item.name}
-                    />
-                  )}
-                </Box>
-                <Flex
-                  sx={{
-                    width: ["100%", 300],
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    padding: 3,
-                  }}
-                >
-                  <Box>
-                    <Heading sx={{ fontSize: [4, 6] }}>{item.name}</Heading>
-                  </Box>
-                  <Link
-                    passHref
-                    href={
-                      /**
-                       * project has isDelux field which can be true or false
-                       */
-
-                      `/countries/${item.countryId}/${
-                        typeof item.isDelux === "undefined" ? "offers" : "projects"
-                      }/${item.id}`
-                    }
-                  >
-                    <ThemeLink>
-                      {console.log(item)}
-                      <Flex
-                        sx={{
-                          fontWeight: 700,
-                          fontSize: [3, 4],
-                          alignItems: "center",
-                          textDecoration: "none",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <span>اعرف لمزيد</span>
-                        <ArrowIcon sx={{ width: 30 }} />
-                      </Flex>
-                    </ThemeLink>
-                  </Link>
-                </Flex>
-              </Flex>
-            )
-          })}
+          <Grid columns={[1, 1, 2, 3]}>
+            {projects.map((item) => {
+              return <ProjectCard key={`proj-${item.id}`} {...item} />
+            })}
+            {offers.map((item) => {
+              return <OfferCard key={`offer-${item.id}`} {...item} city={item.city!} />
+            })}
+          </Grid>
         </Box>
       </Wrapper>
     </div>

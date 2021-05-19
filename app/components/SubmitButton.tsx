@@ -28,10 +28,11 @@ export default function SubmitButton({ fetching, sx }: SubmitButtonProps) {
         justifyContent: "space-between",
         alignItems: "center",
         ...sx,
+        pt: 2,
       }}
       type="submit"
     >
-      <span style={{ marginLeft: 20 }}>ارسال</span>
+      <span style={{ marginLeft: 20, marginRight: 10 }}>ارسال</span>
       <ArrowIcon />
     </Button>
   )

@@ -71,7 +71,7 @@ export default function Filter({
         borderRadius: "lg",
         boxShadow: "default",
         paddingX: [2, 4],
-        paddingBottom: open ? 5 : 0,
+        paddingBottom: open ? 1 : 0,
       }}
       ref={ref}
     >
@@ -138,7 +138,7 @@ export default function Filter({
             />
           </Grid>
 
-          <Flex sx={{ justifyContent: "flex-end", flexWrap: ["wrap", "nowrap"], marginTop: 3 }}>
+          <Flex sx={{ justifyContent: "center", flexWrap: ["wrap", "nowrap"], marginTop: 3 }}>
             <SubmitButton sx={{ width: 200, marginX: 2 }} fetching={false} />
           </Flex>
         </Box>
