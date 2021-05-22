@@ -2,7 +2,7 @@ import { BlitzPage, useRouter, InferGetStaticPropsType } from "blitz"
 import dynamic from "next/dynamic"
 import Layout from "app/layouts/Layout"
 import { SyncLoader } from "react-spinners"
-import { Box, Grid, Heading, Flex, Text } from "theme-ui"
+import { Box, Grid, Heading, Flex } from "theme-ui"
 import Wrapper from "app/components/Wrapper"
 
 import getCarousels from "app/public/carousels/queries/getCarousels"
@@ -20,17 +20,14 @@ import getCountry from "app/public/countries/queries/getCountry"
 import getPropertyTypes from "app/public/propertyTypes/queries/getPropertyTypes"
 import { useState } from "react"
 import ExploreToggleButton from "app/components/Buttons/ExploreToggleButton"
-import HeadingWithMoreLink from "app/components/HeadingWithMoreLink"
 import getFurnishCategories from "app/public/furnishCategories/queries/getFurnishCategories"
 import ExploreCard from "app/components/ExploreCard"
 import { Explore } from "@prisma/client"
-import ProjectSlider from "app/components/Sliders/ProjectSlider"
-import ShowMoreButton from "app/components/ShowMoreButton"
 import AboutUSSection from "app/components/AboutUSSection"
 import getCurrencyRate from "app/utils/getCurrencyRate"
-import CitiesFilter, { SelectedCity } from "app/components/CitiesFilter"
 import getExplores from "app/public/explores/queries/getExplores"
 import getPurposes from "app/public/purposes/queries/getPurposes"
+import ProjectsSection from "app/components/ProjectsSection"
 
 const Contact = dynamic(() => import("app/components/Forms/Contact"), {
   ssr: false,
@@ -144,8 +141,6 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   mostViewedProjects,
   purposes,
 }) => {
-  const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
-
   const { push } = useRouter()
   const asPath = `/countries/${country.id}`
 
@@ -187,35 +182,12 @@ const Home: BlitzPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Box>
 
       <LatestOffersSection offers={offers} />
-      <Wrapper
-        sx={{
-          my: 4,
-        }}
-      >
-        <HeadingWithMoreLink
-          sx={{
-            display: ["none", "none", "unset"],
-          }}
-          href={`${asPath}/projects`}
-          heading="مشاريعنا"
-        />
-        <Heading sx={{ mb: 3, pb: 4, fontSize: 2 }}>منزلك الجديد بانتظارك</Heading>
-        <CitiesFilter
-          selected={selected}
-          onClick={(city) => setSelected({ name: city.name, id: city.id })}
-          cities={country.cities}
-        />
-        {typeof selected.id === "string" ? (
-          // all projects
-          <ProjectSlider projects={projects as any} />
-        ) : (
-          // projects by city
-          <ProjectSlider
-            projects={projects.filter((project) => project.cityId === selected.id) as any}
-          />
-        )}
-        <ShowMoreButton href={`${asPath}/projects`} />
-      </Wrapper>
+
+      <ProjectsSection
+        projects={projects}
+        cities={country.cities}
+        projectsPagePath={`${asPath}/projects`}
+      />
 
       <Box
         sx={{

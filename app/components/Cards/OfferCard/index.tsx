@@ -28,6 +28,7 @@ type OfferCardProps = Pick<
   hideOfferLabel?: boolean
   hasFav?: boolean
   city?: City
+  onFavSuccess?: ({ id, hasFav }: { id: number; hasFav: boolean }) => void
 }
 export default function OfferCard({
   image,
@@ -38,6 +39,7 @@ export default function OfferCard({
   name,
   prefixPath = "/",
   hasFav = false,
+  onFavSuccess,
   ...offer
 }: OfferCardProps) {
   const { asPath } = useRouter()
@@ -67,7 +69,7 @@ export default function OfferCard({
         }}
       >
         <SocialShare url={href} />
-        <AddOfferToFav isActive={hasFav} offerId={id} />
+        <AddOfferToFav onSuccess={onFavSuccess} isActive={hasFav} offerId={id} />
       </Box>
       <Link href={href}>
         <a>

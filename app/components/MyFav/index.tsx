@@ -11,7 +11,16 @@ function MyFavFetcher({ onClose, open }: Props) {
   return (
     <div>
       <Drawer handler={false} onClose={onClose} open={open}>
-        <Box sx={{ py: 4, px: 3, width: [250, 350, 450], maxWidth: "80vw" }}>
+        <Box
+          sx={{
+            width: ["calc(90vw - 50px)", 400, 500],
+            minHeight: "100vh",
+            backgroundColor: "dark",
+            px: 4,
+            marginInlineStart: 50,
+            py: 4,
+          }}
+        >
           <Heading>المفضليات</Heading>
           <Box>
             {offers.map(({ id, subTitle, image, countryId }) => (
