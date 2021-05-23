@@ -107,7 +107,7 @@ export function PaymentPlan({ installmentPlan }) {
           </Flex>
         </Button>
       </Flex>
-      <Drawer handler={false} onClose={() => setOpen(false)} open={open}>
+      <Drawer onClose={() => setOpen(false)} open={open}>
         <Box
           sx={{
             width: ["calc(90vw - 50px)", 400, 500],

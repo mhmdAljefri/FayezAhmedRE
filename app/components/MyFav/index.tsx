@@ -1,27 +1,35 @@
 import React, { Suspense } from "react"
-import { Box, Heading } from "theme-ui"
+import { Box, Flex, Heading } from "theme-ui"
 import Drawer from "../Drawer"
 import { useQuery } from "blitz"
 import getMyFav from "app/public/fav/queries/getMyFav"
 import FavCard from "../Cards/FavCard"
+
+import { arrows_remove } from "react-icons-kit/linea/arrows_remove"
+import Icon from "react-icons-kit"
+
 type Props = { onClose: () => any; open: boolean }
 function MyFavFetcher({ onClose, open }: Props) {
   const [{ offers, projects }] = useQuery(getMyFav, {})
 
   return (
     <div>
-      <Drawer handler={false} onClose={onClose} open={open}>
+      <Drawer onClose={onClose} open={open}>
         <Box
           sx={{
             width: ["calc(90vw - 50px)", 400, 500],
             minHeight: "100vh",
             backgroundColor: "dark",
             px: 4,
-            marginInlineStart: 50,
+            marginInlineStart: 30,
             py: 4,
           }}
         >
-          <Heading>المفضليات</Heading>
+          <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
+            <Heading>المفضليات</Heading>
+
+            <Icon size={36} style={{ color: "heading" }} onClick={onClose} icon={arrows_remove} />
+          </Flex>
           <Box>
             {offers.map(({ id, subTitle, image, countryId }) => (
               <FavCard
