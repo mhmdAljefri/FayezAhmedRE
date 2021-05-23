@@ -7,9 +7,11 @@ import { Link } from "blitz"
 
 type ProjectWithRooms = Project & { roomsWithPrices: RoomWithPrice[] }
 type Props = {
+  onFavSuccess?: ({ id, hasFav }: { id: number; hasFav: boolean }) => void
   projects: ProjectWithRooms[]
 }
-export default function ProjectSlider({ projects }: Props) {
+
+export default function ProjectSlider({ projects, onFavSuccess }: Props) {
   return (
     <Swiper
       loop
@@ -39,7 +41,11 @@ export default function ProjectSlider({ projects }: Props) {
         projects.map((project) => (
           <SwiperSlide key={project.id} virtualIndex={project.id}>
             <Box sx={{ mb: [4, 4, 0] }}>
-              <ProjectCard {...project} roomsWithPrices={project.roomsWithPrices} />
+              <ProjectCard
+                {...project}
+                onFavSuccess={onFavSuccess}
+                roomsWithPrices={project.roomsWithPrices}
+              />
             </Box>
           </SwiperSlide>
         ))

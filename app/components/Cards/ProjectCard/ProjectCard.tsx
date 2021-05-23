@@ -39,6 +39,7 @@ export type ProjectCardProps = Pick<
 > & {
   roomsWithPrices: RoomWithPrice[]
   hasFav?: boolean
+  onFavSuccess?: ({ id, hasFav }: { id: number; hasFav: boolean }) => void
 }
 
 function ProjectCardIconsText({ prefix, reactIcon, icon, text, sx }: ProjectCardIconsTextProps) {
@@ -133,6 +134,7 @@ function ProjectCard({
   status,
   paymentType,
   roomsWithPrices,
+  onFavSuccess,
   hasFav,
 }: ProjectCardProps) {
   const { priceTypeSign } = usePriceType()
@@ -162,7 +164,7 @@ function ProjectCard({
         }}
       >
         <SocialShare url={projectPath} />
-        <AddProjectToFav isActive={hasFav} projectId={id} />
+        <AddProjectToFav isActive={hasFav} onSuccess={onFavSuccess} projectId={id} />
       </Box>
       <Box>
         <Link passHref href={projectPath}>

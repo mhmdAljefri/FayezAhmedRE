@@ -12,8 +12,24 @@ type Props = {
   projects: Project[]
   projectsPagePath: string
 }
-const ProjectsSection = ({ projectsPagePath, projects, cities }: Props) => {
+const ProjectsSection = ({ projectsPagePath, projects: initialProject, cities }: Props) => {
   const [selected, setSelected] = useState<SelectedCity>({ id: "اظهار الكل", name: "اظهار الكل" })
+  const [projects, setProjects] = useState<any[]>(initialProject)
+
+  const updateProjects = ({ id, hasFav }) => {
+    const updateProjects = projects.map((project) => {
+      if (project.id === id) {
+        console.log({ project })
+        return { ...project, hasFav }
+      }
+
+      console.log(project)
+
+      return project
+    })
+
+    setProjects(updateProjects)
+  }
 
   return (
     <Wrapper
@@ -36,10 +52,11 @@ const ProjectsSection = ({ projectsPagePath, projects, cities }: Props) => {
       />
       {typeof selected.id === "string" ? (
         // all projects
-        <ProjectSlider projects={projects as any} />
+        <ProjectSlider projects={projects as any} onFavSuccess={updateProjects} />
       ) : (
         // projects by city
         <ProjectSlider
+          onFavSuccess={updateProjects}
           projects={projects.filter((project) => project.cityId === selected.id) as any}
         />
       )}
