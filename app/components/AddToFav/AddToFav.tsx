@@ -24,7 +24,9 @@ export const AddToFav = ({
     if (!session.userId) {
       return setOpen(true)
     }
-    return onClick().then(() => toast.success("تمت الاضافة الى المفضليات"))
+    return onClick().then(() =>
+      toast.success(isActive ? "تمت الازالة من المفضليات" : "تمت الاضافة الى المفضليات")
+    )
   }
 
   if (session.isLoading) return <span />
