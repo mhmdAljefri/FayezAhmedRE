@@ -11,3 +11,10 @@
 *:focus {
   outline: none !important;
 }
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast {
+    margin: 20px;
+    max-width: 80vw;
+  }
+}
